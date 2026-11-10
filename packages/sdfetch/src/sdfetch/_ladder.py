@@ -13,6 +13,11 @@ BROWSER_RUNGS = LADDER[2:]
 RECHECK_DAYS = 7  # how often a host on a higher rung tries the one below again
 
 
+class RungUnavailable(Exception):
+    """A rung that can't be used here: its package isn't installed or its browser won't start.
+    Auto mode skips it and climbs on."""
+
+
 def cache_dir() -> Path:
     return Path(os.environ.get("SDFETCH_CACHE") or "~/.cache/sdfetch").expanduser()
 

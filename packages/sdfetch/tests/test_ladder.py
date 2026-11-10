@@ -134,3 +134,34 @@ def test_impersonate_for_real(tmp_path):
         httpd.shutdown()
         httpd.server_close()
     assert ua.startswith("Mozilla/5.0 (Macintosh") and "Chrome/" in ua
+
+
+def test_unavailable_rungs_are_skipped_in_auto(tmp_path):
+    rungs = Rungs(blocked={"http"})
+
+    def missing(method, url, **kwargs):
+        raise sdfetch.RungUnavailable("impersonate: curl_cffi isn't installed")
+
+    f = fetcher(rungs, tmp_path)
+    f.clients["impersonate"] = missing
+    assert f.request("GET", URL).content == b"content via stealth"
+    pinned = fetcher(rungs, tmp_path, strategy="impersonate")
+    pinned.clients["impersonate"] = missing
+    with pytest.raises(sdfetch.RungUnavailable):
+        pinned.request("GET", URL)
+
+
+def test_blocked_is_a_requests_exception():
+    import requests
+
+    assert issubclass(sdfetch.Blocked, requests.RequestException)
+
+
+def test_browser_response_like_requests():
+    import requests
+
+    ok = BrowserResponse(URL, 200, b'{"a": 1}')
+    assert ok.json() == {"a": 1} and ok.ok
+    ok.raise_for_status()
+    with pytest.raises(requests.HTTPError):
+        BrowserResponse(URL, 404, b"").raise_for_status()

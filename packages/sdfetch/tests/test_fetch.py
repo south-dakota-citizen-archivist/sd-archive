@@ -202,3 +202,17 @@ def test_disk_guard(tmp_path):
     assert sdfetch.ensure_free(tmp_path / "not" / "yet", gb=0) > 0
     with pytest.raises(sdfetch.DiskSpaceLow, match="GB free"):
         sdfetch.ensure_free(tmp_path, gb=10**9)
+
+
+def test_raise_errors_false_returns_the_response(tmp_path, server, waits):
+    Handler.hits = {}
+    f = sdfetch.Fetcher(tmp_path, strategy="http", delay=0, retries=2, raise_errors=False,
+                        sleep=waits.append)  # fmt: skip
+    assert f.request("GET", f"{server}/missing").status_code == 404
+    assert f.request("GET", f"{server}/flaky").status_code == 503  # after its retries
+    assert Handler.hits["/flaky"] == 2
+    with pytest.raises(requests.HTTPError):  # fetch() never stores an error page
+        f.fetch(f"{server}/missing", "missing.html")
+    assert not f.store.has("missing.html")
+    with pytest.raises(requests.HTTPError):
+        f.request("GET", f"{server}/missing", raise_errors=True)

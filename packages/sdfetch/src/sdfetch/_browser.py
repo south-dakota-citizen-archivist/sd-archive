@@ -45,6 +45,21 @@ class BrowserResponse:
     def ok(self) -> bool:
         return self.status_code < 400
 
+    @property
+    def reason(self) -> str:
+        return "OK" if self.ok else ""
+
+    def json(self, **kwargs):
+        import json
+
+        return json.loads(self.content, **kwargs)
+
+    def raise_for_status(self) -> None:
+        if not self.ok:
+            import requests
+
+            raise requests.HTTPError(f"HTTP {self.status_code} for {self.url}", response=self)
+
 
 def _challenged(html: str) -> bool:
     return any(p.search(html[:65536]) for _, p in BLOCK_PATTERNS)
@@ -95,7 +110,10 @@ class Browser:
     # Starting -------------------------------------------------------------
 
     def _chrome_context(self, p, *, stealth: bool) -> None:
-        browser = p.chromium.launch(channel="chrome", headless=self.headless)
+        try:
+            browser = p.chromium.launch(channel="chrome", headless=self.headless)
+        except Exception:  # no Google Chrome here (a CI runner): Playwright's own Chromium
+            browser = p.chromium.launch(headless=self.headless)
         self._stack.append(browser.close)
         probe = browser.new_page()
         ua = _native_ua(probe.evaluate("navigator.userAgent"))

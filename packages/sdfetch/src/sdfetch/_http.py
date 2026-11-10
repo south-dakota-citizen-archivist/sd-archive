@@ -16,7 +16,7 @@ from urllib.parse import urlsplit
 import requests
 from tenacity import RetryCallState, Retrying, retry_if_exception, stop_after_attempt
 
-from ._ladder import BROWSER_RUNGS, LADDER, HostMemory
+from ._ladder import BROWSER_RUNGS, LADDER, HostMemory, RungUnavailable
 from ._store import Store
 
 logger = logging.getLogger(__name__)
@@ -56,7 +56,7 @@ _hosts_lock = threading.Lock()
 _host_next: dict[str, float] = {}  # host → earliest time for its next request (all Fetchers)
 
 
-class Blocked(Exception):
+class Blocked(requests.RequestException):
     """The site answered with a challenge or block page instead of the content."""
 
     def __init__(self, url: str, reason: str, status: int | None = None):
@@ -142,6 +142,7 @@ class Fetcher:
         retries: int = 4,
         backoff: float = 5,
         block_phrases: Iterable[str] = (),
+        raise_errors: bool = True,
         session: requests.Session | None = None,
         clients: dict[str, Callable] | None = None,
         warc: bool | str | Path = False,
@@ -163,6 +164,7 @@ class Fetcher:
         self.delay, self.delays = delay, delays or {}
         self.timeout, self.retries, self.backoff = timeout, retries, backoff
         self.block_phrases = list(block_phrases)
+        self.raise_errors = raise_errors
         self.sleep = sleep
         self.session = session or requests.Session()
         self.session.headers.update(BROWSER_HEADERS)
@@ -240,8 +242,13 @@ class Fetcher:
         return self._browser(rung).get(url)
 
     def _send_impersonate(self, method: str, url: str, **kwargs):
-        from curl_cffi import requests as curl
-        from curl_cffi.requests.exceptions import RequestException, Timeout
+        try:
+            from curl_cffi import requests as curl
+            from curl_cffi.requests.exceptions import RequestException, Timeout
+        except ImportError as exc:
+            raise RungUnavailable(
+                "impersonate: curl_cffi isn't installed (sdfetch[impersonate])"
+            ) from exc
 
         if self._impersonate is None:
             # The newest Chrome-on-macOS fingerprint curl_cffi has. Its own headers match
@@ -269,9 +276,14 @@ class Fetcher:
             if self.har_dir and rung != "nodriver":  # nodriver has no HAR recorder
                 stamp = datetime.now(UTC).strftime("%Y%m%d%H%M%S")
                 har = self.har_dir / f"{stamp}-{rung}.har"
-            self._browsers[rung] = Browser(
-                rung, headless=self.headless, timeout=self.timeout, har=har
-            )
+            try:
+                self._browsers[rung] = Browser(
+                    rung, headless=self.headless, timeout=self.timeout, har=har
+                )
+            except ImportError as exc:
+                raise RungUnavailable(f"{rung}: not installed (sdfetch[browser]): {exc}") from exc
+            except Exception as exc:  # the browser itself didn't start
+                raise RungUnavailable(f"{rung}: couldn't start: {exc}") from exc
         return self._browsers[rung]
 
     # Requests ------------------------------------------------------------
@@ -285,7 +297,8 @@ class Fetcher:
             return base * 4
         return base
 
-    def _once(self, rung: str, method: str, url: str, check_blocked: bool, **kwargs):
+    def _once(self, rung: str, method: str, url: str, check_blocked: bool, raise_errors: bool,
+              **kwargs):  # fmt: skip
         self._pause(url)
         self.requests += 1
         if rung in ("http", "impersonate"):
@@ -295,12 +308,12 @@ class Fetcher:
             raise Blocked(url, f"{reason} ({rung})", resp.status_code)
         if resp.status_code in RETRY_STATUSES:
             raise RetryableStatus(resp)
-        if resp.status_code >= 400:
+        if resp.status_code >= 400 and raise_errors:
             raise http_error(resp)
         return resp
 
     def _on_rung(self, rung: str, method: str, url: str, check_blocked: bool, retry_blocked: bool,
-                 **kwargs):  # fmt: skip
+                 raise_errors: bool, **kwargs):  # fmt: skip
         retryable = (requests.ConnectionError, requests.Timeout, RetryableStatus)
         if retry_blocked:
             retryable += (Blocked,)
@@ -316,28 +329,47 @@ class Fetcher:
                 reraise=True,
             ):
                 with attempt:
-                    return self._once(rung, method, url, check_blocked, **kwargs)
+                    return self._once(rung, method, url, check_blocked, raise_errors, **kwargs)
         except RetryableStatus as exc:
+            if not raise_errors:
+                return exc.response  # still failing after the retries; the caller decides
             raise http_error(exc.response) from exc
         raise AssertionError("unreachable")
 
-    def request(self, method: str, url: str, *, check_blocked: bool = True, **kwargs):
+    def request(
+        self,
+        method: str,
+        url: str,
+        *,
+        check_blocked: bool = True,
+        raise_errors: bool | None = None,
+        **kwargs,
+    ):
         """One request, with the pause, retries and escalation, not stored. Returns a
         requests-like response (requests, curl_cffi, or a browser's). Raises Blocked when the
-        last rung tried is blocked too, or requests.HTTPError for a status that isn't retried
-        or still fails."""
+        last rung tried is blocked too. A status that isn't retried, or still fails after the
+        retries, raises requests.HTTPError, or with raise_errors=False is returned for the
+        caller to check. Rungs that aren't installed or won't start are skipped (auto only)."""
+        raise_errors = self.raise_errors if raise_errors is None else raise_errors
         rungs = self._rungs(method, url)
         host = urlsplit(url).hostname or ""
-        last: Blocked | None = None
+        last: Exception | None = None
         for i, rung in enumerate(rungs):
+            following = f"; trying {rungs[i + 1]}" if i + 1 < len(rungs) else ""
             try:
                 resp = self._on_rung(
-                    rung, method, url, check_blocked, retry_blocked=len(rungs) == 1, **kwargs
-                )
+                    rung, method, url, check_blocked, retry_blocked=len(rungs) == 1,
+                    raise_errors=raise_errors, **kwargs,
+                )  # fmt: skip
             except Blocked as exc:
                 last = exc
-                if i + 1 < len(rungs):
-                    logger.info("%s: blocked on %s; trying %s", url, rung, rungs[i + 1])
+                logger.info("%s: blocked on %s%s", url, rung, following)
+                continue
+            except RungUnavailable as exc:
+                if self.strategy != "auto":
+                    raise
+                logger.warning("%s: %s%s", url, exc, following)
+                last = last if isinstance(last, Blocked) else exc
                 continue
             self.last_via = rung
             if self.strategy == "auto" and self.memory:
@@ -375,7 +407,7 @@ class Fetcher:
         method = "GET" if data is None else "POST"
         if data is not None:
             kwargs["data"] = data
-        resp = self.request(method, url, **kwargs)
+        resp = self.request(method, url, raise_errors=True, **kwargs)  # never store an error page
         where = {"via": self.last_via}
         if self.last_warc:
             path, offset = self.last_warc
