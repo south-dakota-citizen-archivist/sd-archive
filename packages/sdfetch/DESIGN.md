@@ -75,7 +75,7 @@ Per-host settings: `sdfetch.Fetcher(store, delays={"sdsos.gov": 3.0})`. Block ch
 ## 3. Steps
 
 1. **Core** (`Fetcher`, `Store`, `Blocked`, `checkpoint`, `ensure_free`) with tests against a local test server, and the elections pipeline switched to it.
-2. **Looking like a browser, and escalation (§1a):** the `impersonate` rung through curl_cffi, the browser rungs behind `browser(strategy=…)`, `strategy="auto"` climbing on `Blocked`, the per-host memory, and `via` in the manifest. Port the five playwright-stealth scrapers' setup.
+2. ✅ 2026-11-10. **Looking like a browser, and escalation (§1a):** the `impersonate` rung through curl_cffi, the browser rungs behind `browser(strategy=…)`, `strategy="auto"` climbing on `Blocked`, the per-host memory, and `via` in the manifest. The five playwright-stealth scrapers (Spearfish, the liberator) switch over when their repos move onto sdfetch (step 5). A live check: plain HTTP with Chrome's headers got the Spearfish library's Cloudflare-fronted reports from the laptop, so that scraper may not need its browser at all.
 3. **WARC and HAR.**
 4. **Wayback:** CDX, snapshots, Save Page Now. Port the pistol permit code.
 5. **First release** (`sdfetch-v0.1.0`). Spearfish switches from `scrapers/net.py`, and spillarchive from its `net.py`, through git dependencies.

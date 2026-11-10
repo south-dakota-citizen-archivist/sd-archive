@@ -56,12 +56,15 @@ def server():
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
     yield f"http://127.0.0.1:{httpd.server_address[1]}"
     httpd.shutdown()
+    httpd.server_close()
 
 
 @pytest.fixture(autouse=True)
-def fresh_hosts():
-    """The per-host pause is shared across the process; start each test without one."""
+def fresh_hosts(tmp_path, monkeypatch):
+    """The per-host pause is shared across the process; start each test without one, and
+    with its own host memory (hosts.json)."""
     sdfetch._http._host_next.clear()
+    monkeypatch.setenv("SDFETCH_CACHE", str(tmp_path / "sdfetch-cache"))
 
 
 @pytest.fixture
@@ -72,7 +75,7 @@ def waits():
 @pytest.fixture
 def fetcher(tmp_path, waits):
     Handler.hits = {}
-    return sdfetch.Fetcher(sdfetch.Store(tmp_path), delay=0, sleep=waits.append)
+    return sdfetch.Fetcher(sdfetch.Store(tmp_path), strategy="http", delay=0, sleep=waits.append)
 
 
 def test_fetch_stores_and_reuses(fetcher, server, tmp_path):
@@ -83,11 +86,12 @@ def test_fetch_stores_and_reuses(fetcher, server, tmp_path):
     assert not list(tmp_path.rglob("*.partial"))
     [entry] = fetcher.store.manifest()
     assert entry["url"] == f"{server}/ok"
-    assert (entry["path"], entry["method"], entry["status"], entry["bytes"]) == (
+    assert (entry["path"], entry["method"], entry["status"], entry["bytes"], entry["via"]) == (
         "pages/ok.html",
         "GET",
         200,
         6,
+        "http",
     )
     assert fetcher.fetch(f"{server}/ok", "pages/ok.html", refresh=True) == b"page 2"
     assert len(fetcher.store.manifest()) == 2
@@ -127,12 +131,14 @@ def test_gives_up_with_http_error(tmp_path, server, waits):
 def test_block_pages(fetcher, server, waits, tmp_path):
     with pytest.raises(sdfetch.Blocked) as e:
         fetcher.fetch(f"{server}/challenge", "pages/c.html")
-    assert e.value.reason == "Cloudflare challenge"
+    assert e.value.reason == "Cloudflare challenge (http)"
     assert Handler.hits["/challenge"] == 4
     assert waits == [20, 40, 80]  # four times the usual backoff
     assert not (tmp_path / "pages" / "c.html").exists()
     # Per-source phrases, like the SOS server's "we're sorry" page
-    f = sdfetch.Fetcher(tmp_path, delay=0, retries=1, block_phrases=["we're sorry"])
+    f = sdfetch.Fetcher(
+        tmp_path, strategy="http", delay=0, retries=1, block_phrases=["we're sorry"]
+    )
     with pytest.raises(sdfetch.Blocked):
         f.request("GET", f"{server}/sorry")
     assert fetcher.request("GET", f"{server}/sorry").ok  # not a block page by default
