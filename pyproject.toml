@@ -7,6 +7,9 @@ members = ["app", "packages/*"]
 
 [dependency-groups]
 dev = [
+    # every package with all its extras, so every test can run
+    "sdgis",
+    "sdplaces[pandas,geo,address,geocode]",
     "pre-commit>=4.7.0",
     "pytest>=8.3",
     "pytest-cov>=6.0",
@@ -22,6 +25,11 @@ analysis = [
 
 [tool.uv]
 default-groups = ["dev"]
+
+[tool.uv.sources]
+sdgis = { workspace = true }
+sdplaces = { workspace = true }
+
 
 [tool.ruff]
 line-length = 100

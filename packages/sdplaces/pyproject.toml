@@ -13,6 +13,10 @@ dependencies = [
 pandas = ["pandas>=2.2"]
 # boundaries and point-in-place lookups; also needed to rebuild data/places.csv
 geo = ["geopandas>=1.2.0"]
+# sdplaces.address
+address = ["usaddress>=0.5.11", "usaddress-scourgify>=0.7.1"]
+# sdplaces.geocode (Census batch geocoder, OpenStreetMap Nominatim)
+geocode = ["requests>=2.32", "usaddress>=0.5.11", "usaddress-scourgify>=0.7.1"]
 
 [build-system]
 requires = ["uv_build>=0.13.7,<0.14.0"]
