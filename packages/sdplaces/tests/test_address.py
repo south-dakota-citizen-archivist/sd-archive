@@ -146,3 +146,68 @@ def test_streets_named_for_towns_keep_their_names(text, street_key):
 def test_city_state_and_zip_kept_outside_the_key(text, street_key, city, state, zip_code):
     (a,) = address.parse(text)
     assert (a.key(), a.city, a.state, a.zip) == (street_key, city, state, zip_code)
+
+
+# --- Found by comparing against libpostal (sdplaces step 6, 2026-11-10) ----------------------
+
+
+@pytest.mark.parametrize(
+    "text, keys",
+    [
+        # a name before the address
+        ("City Hall, 625 N 5th St, Spearfish, SD 57783", ["625 N 5TH ST"]),
+        ("Spearfish Senior Center 1306 N 10th St Spearfish, SD 57783", ["1306 N 10TH ST"]),
+        ("The Living Room 810 N Yale St. Spearfish SD", ["810 N YALE ST"]),
+        (
+            "Mountain View Baptist Church Tract NW¼NE¼, Spearfish Prairie Addtn 10959 Kellem Lane",
+            ["10959 KELLEM LN"],
+        ),  # fmt: skip
+        # the address after a semicolon, when what's before isn't one
+        ("9t9 Studios; 329 W Grant St, Spearfish, SD 57783", ["329 W GRANT ST"]),
+        ("44.053575; Grandview Elementary, 3301 Grandview Dr", ["3301 GRANDVIEW DR"]),
+        ("Hot Springs VAMC; 500 N. 5th Street; Hot Springs, SD; 57747", ["500 N 5TH ST"]),
+        # coordinates after it
+        ("approx: 13066 Fall River Road, 43.413341, -103.447083", ["13066 FALL RIVER RD"]),
+        ("832 Harmon St, Sturgis US-SD 44.40171, -103.50754", ["832 HARMON ST"]),
+        # three or more house numbers
+        (
+            "218,220,222 & 224 POWDERHORN CT, SPEARFISH, SD 57783",
+            ["218 POWDERHORN CT", "220 POWDERHORN CT", "222 POWDERHORN CT", "224 POWDERHORN CT"],
+        ),  # fmt: skip
+        ("612, 616, 618 Harvard", ["612 HARVARD", "616 HARVARD", "618 HARVARD"]),
+        # a unit after the street
+        ("608 TRIPLE L LOOP 29", ["608 TRIPLE L LOOP"]),
+        ("1420 North Avenue, 4B", ["1420 NORTH AVE"]),
+        ("353 HILLSVIEW ROAD 12", ["353 HILLSVIEW RD"]),
+        ("338 EVANS 31", ["338 EVANS"]),
+        ("125 Colorado Blvd E, 1A", ["125 E COLORADO BLVD"]),  # the direction is kept
+        # route numbers aren't units
+        ("10969 Hwy 34", ["10969 HWY 34"]),
+        ("12998 SD Highway 34", ["12998 SD HIGHWAY 34"]),
+        ("123 County Rd 7", ["123 COUNTY RD 7"]),
+        ("622 CANYON ST-STATION 1", ["622 CANYON ST"]),
+    ],
+)
+def test_found_by_libpostal_comparison(text, keys):
+    assert address.keys(text) == keys
+
+
+def test_trailing_unit_is_kept_as_the_unit():
+    assert address.parse("608 TRIPLE L LOOP 29")[0].unit == "29"
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "1330 feet south of Colorado Boulevard; west of Maitland Road",
+        "293 +/- acres West of Christensen Drive and South of Colorado Blvd.",
+        "Lot 1 Block 9 Sandstone Hills Addition",
+        "Lot 1 of the Sanctuary Subdivision 412 Hillsview Road",
+        "Approximately ¾ of a mile north of the intersection of St. Onge Road and Interstate 90 "
+        "on the east side of St. Onge Road; Within the Extraterritorial Jurisdiction",
+        "Hwy 18 near MM 2",
+        "Jonas 110",
+    ],
+)
+def test_descriptions_still_rejected(text):
+    assert address.keys(text) == []

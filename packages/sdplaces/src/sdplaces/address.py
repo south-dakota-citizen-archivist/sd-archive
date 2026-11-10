@@ -101,7 +101,7 @@ STATES = [
 # ", SD 57783", " S.D.", ", South Dakota", ", MN 55401-1234" at the very end
 _ZIP = r"(?P<zip>\d{5}(?:-\d{4})?)"
 # ", SD 57783", " SD", " S D", ", South Dakota" at the very end
-_SD_TAIL = re.compile(r",?\s*\b(?P<state>SD|S\s?D|SOUTH DAKOTA)\b\s*" + _ZIP + r"?\s*$")
+_SD_TAIL = re.compile(r",?\s*\b(?:US-)?(?P<state>SD|S\s?D|SOUTH DAKOTA)\b\s*" + _ZIP + r"?\s*$")
 # Another state only with a ZIP after it ("WA 98122") or a comma before it (", MN"): many state
 # codes are also street words (CT = court, MT = mount, LA, NE…), so "1103 QUAIL CT" stays a street
 _OTHER_STATE_TAIL = re.compile(
@@ -109,6 +109,27 @@ _OTHER_STATE_TAIL = re.compile(
     r"|\s(?P<state2>" + "|".join(STATES) + r")\s+" + _ZIP.replace("zip", "zip2") + r")\s*$"
 )
 _ZIP_TAIL = re.compile(r",?\s*(?P<zip>\d{5}(?:-\d{4})?)\s*$")
+# Coordinates after an address: "13066 FALL RIVER ROAD, 43.413341, -103.447083"
+_COORDS_TAIL = re.compile(r",?\s*-?\d{2,3}\.\d{3,}\s*,\s*-?\d{2,3}\.\d{3,}\s*$")
+# A distance, not a house number: "1330 FEET SOUTH OF …", "293 +/- ACRES WEST OF …"
+_DISTANCE = re.compile(r"^\d+[\s/+-]*(FEET|FOOT|ACRES?|MILES?|YARDS?)\b")
+# A unit after a complete street: "608 TRIPLE L LOOP 29", "125 COLORADO BLVD E 1A"
+_TRAILING_UNIT = re.compile(
+    r"^(?P<head>\d\S*\s+(?:\S+\s+)*?(?P<before>\S+)\s+(?P<type>\S+)(?:\s+(?:N|S|E|W|NE|NW|SE|SW))?)"
+    r"\s+(?P<unit>\d+[A-Z]?)$"
+)
+# Street types a route number follows: "10969 HWY 34", "123 COUNTY RD 7"
+_ROUTE_TYPES = {"HWY", "HIGHWAY", "ROUTE", "RTE", "RT", "INTERSTATE", "I", "US"}
+_ROUTE_PREFIXES = {"COUNTY", "STATE", "FOREST", "FS", "US", "SD", "CO", "TOWNSHIP", "TWP"}
+# A leading name to skip: "CITY HALL, 625 N 5TH ST", "SPEARFISH SENIOR CENTER 1306 N 10TH ST"
+_NUMBER_START = re.compile(r"(?:^|(?<=[\s,]))\d+[A-Z]?\s+[A-Z]")
+# A number after these words isn't a house number: "LOT 1 BLOCK 9", "INTERSTATE 90 ON THE …"
+_NOT_BEFORE_NUMBER = {
+    "LOT", "LOTS", "BLOCK", "BLK", "TRACT", "SECTION", "SEC", "PARCEL", "UNIT", "SUITE", "STE",
+    "BLDG", "BUILDING", "EXIT", "MILE", "MM", "OF", "#", *_ROUTE_TYPES,
+}  # fmt: skip
+# Words in a street name that mean the text is a description: "90 ON THE EAST SIDE OF …"
+_DESCRIPTION_WORDS = {"OF", "THE", "ON", "SIDE", "NEAR", "BETWEEN", "BLOCK", "LOT", "LOTS"}
 # Misspellings seen in records, by the place they mean
 _KNOWN_MISSPELLINGS = {"SPEARISH": "SPEARFISH"}
 
@@ -156,9 +177,7 @@ def _sd_place_tail() -> re.Pattern:
 def _clean(text: str) -> tuple[str, str, str, str]:
     """(street part, city, state, zip) from free text."""
     s = " ".join((text or "").upper().replace("\n", " ").split())
-    s = s.split(";")[
-        0
-    ]  # "2515 SAPPHIRE LANE, SPEARFISH; LOCATED SOUTH OF …": a description follows
+    s = _COORDS_TAIL.sub("", s)
     s = " ".join(s.replace(".", " ").split())
     state = zip_code = city = ""
     if m := _SD_TAIL.search(s):
@@ -210,6 +229,10 @@ def _split_multiple(s: str) -> list[str]:
     m = re.match(r"^(\d+[A-Z]?)\s*(?:&|AND|/)\s*(\d+[A-Z]?)\s+(.+)$", s)
     if m:
         return [f"{m.group(1)} {m.group(3)}", f"{m.group(2)} {m.group(3)}"]
+    # Three or more, commas already gone: "218,220,222 & 224 POWDERHORN CT", "612 616 618 HARVARD"
+    m = re.match(r"^((?:\d+[A-Z]?\s+(?:(?:&|AND)\s+)?){2,}\d+[A-Z]?)\s+([A-Z].*)$", s)
+    if m:
+        return [f"{n} {m.group(2)}" for n in re.findall(r"\d+[A-Z]?", m.group(1))]
     return [s]
 
 
@@ -217,7 +240,25 @@ def _abbrev_type(word: str) -> str:
     return _TYPES.get(word, word)
 
 
+def _peel_unit(s: str) -> tuple[str, str]:
+    """'608 TRIPLE L LOOP 29' → ('608 TRIPLE L LOOP', '29'); route numbers stay ('10969 HWY 34')."""
+    m = _TRAILING_UNIT.match(s)
+    if (
+        m
+        and m["type"] in _STREET_WORDS
+        and m["type"] not in _ROUTE_TYPES
+        and m["before"] not in _ROUTE_PREFIXES
+        and not m["before"].isdigit()
+        and m["before"] not in _STREET_WORDS  # "622 CANYON ST STATION 1": STATION is the tag
+    ):
+        return m["head"], m["unit"]
+    return s, ""
+
+
 def _parse_one(s: str, city: str, state: str, zip_code: str) -> Address | None:
+    if _DISTANCE.match(s):
+        return None
+    s, peeled = _peel_unit(s)
     try:
         tags, _ = usaddress.tag(s)
     except usaddress.RepeatedLabelError:
@@ -228,6 +269,9 @@ def _parse_one(s: str, city: str, state: str, zip_code: str) -> Address | None:
     pre_type = tags.get("StreetNamePreType", "")
     name = tags.get("StreetName", "")
     # usaddress reads "US HWY 85-CAMPGROUND" as a pre-type plus a glued name; keep the route number
+    # "338 EVANS 31": usaddress calls EVANS a pre-type; it's the street, and 31 a unit
+    if pre_type and pre_type.split()[-1] not in _STREET_WORDS and re.fullmatch(r"\d+[A-Z]?", name):
+        pre_type, name, peeled = "", pre_type, peeled or name
     if pre_type:
         name = f"{_abbrev_type(pre_type)} {re.match(r'[A-Z0-9]+', name).group(0) if name else ''}"
         name = name.strip()
@@ -255,6 +299,7 @@ def _parse_one(s: str, city: str, state: str, zip_code: str) -> Address | None:
     )
     if not unit and post_type and (extra := tags.get("OccupancyIdentifier", "")):
         unit = extra
+    unit = unit or peeled
     return Address(
         number=number,
         street=name,
@@ -267,9 +312,7 @@ def _parse_one(s: str, city: str, state: str, zip_code: str) -> Address | None:
     )
 
 
-@lru_cache(maxsize=50_000)
-def parse(text: str) -> tuple[Address, ...]:
-    """Every street address in a field (usually one); () if there isn't one."""
+def _parse_text(text: str) -> tuple[Address, ...]:
     s, city, state, zip_code = _clean(text)
     if not s or not re.match(r"^\d", s):
         return ()
@@ -278,6 +321,43 @@ def parse(text: str) -> tuple[Address, ...]:
         if a := _parse_one(part, city, state, zip_code):
             out.append(a)
     return tuple(out)
+
+
+def _fallbacks(text: str):
+    """Other readings of a field whose start isn't an address, best first.
+
+    - the parts after semicolons: "9T9 STUDIOS; 329 W GRANT ST", "44.0535; SCHOOL, 3301 …"
+    - each part without a leading name, when the name has no numbers in it: "CITY HALL, 625 N
+      5TH ST". A name with numbers is usually a legal description ("LOTS 30 & 31, BLOCK 6 …
+      702 E GRANT ST"), so those are left alone, as is a number after "LOT", "INTERSTATE"…
+    """
+    parts = [p.strip() for p in (text or "").upper().split(";")]
+    for i, part in enumerate(parts):
+        if i:
+            yield part
+        if m := _NUMBER_START.search(part):
+            prefix = part[: m.start()]
+            words = re.sub(r"[^\w\s#]", " ", prefix).split()
+            if words and not re.search(r"\d", prefix) and words[-1] not in _NOT_BEFORE_NUMBER:
+                yield part[m.start() :]
+
+
+@lru_cache(maxsize=50_000)
+def parse(text: str) -> tuple[Address, ...]:
+    """Every street address in a field (usually one); () if there isn't one.
+
+    Text after a semicolon is a description ("2515 SAPPHIRE LANE; LOCATED SOUTH OF …"), unless
+    the text before it isn't an address. Then the other parts, and the text after a leading
+    name, are tried; those count only with a street type ("ST", "DR"), so "HWY 18 NEAR MM 2"
+    isn't read as 18 NEAR MM.
+    """
+    if out := _parse_text((text or "").split(";")[0]):
+        return out
+    for candidate in _fallbacks(text):
+        out = _parse_text(candidate)
+        if out and all(a.type and not _DESCRIPTION_WORDS & set(a.street.split()) for a in out):
+            return out
+    return ()
 
 
 def key(text: str) -> str:
