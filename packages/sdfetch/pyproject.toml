@@ -1,7 +1,7 @@
 [project]
 name = "sdfetch"
 version = "0.3.0"
-description = "Fetching with a raw store: HTTP with retries and per-host pauses, curl_cffi and browser fallbacks, a manifest, checkpoints, WARC/HAR and the Wayback Machine. No Django."
+description = "Fetching with a raw store: paced HTTP with retries, curl_cffi and browser fallbacks, routes, page watching, trusted timestamps, checkpoints, WARC/HAR and the Wayback Machine. No Django."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

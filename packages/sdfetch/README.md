@@ -129,9 +129,9 @@ event = w.check("https://example.gov/reports")  # {"kind": "changed", "blob": â€
 ```python
 from sdfetch import stamp
 
-entry = stamp.stamp_manifest(store)    # after a run
-stamp.verify(store, entry)             # the token covers the manifest's first entry["lines"] lines
-stamp.verify_signature(store, entry)   # the authority's signature and chain, with OpenSSL 3
+entry = stamp.stamp_manifest(store)  # after a run
+stamp.verify(store, entry)  # the token covers the manifest's first entry["lines"] lines
+stamp.verify_signature(store, entry)  # the authority's signature and chain, with OpenSSL 3
 ```
 
 `stamp_manifest()` gets an RFC 3161 timestamp on the SHA-256 of the store's manifest from a public timestamp authority (DigiCert, then Sectigo, then FreeTSA). Only the hash is sent.
