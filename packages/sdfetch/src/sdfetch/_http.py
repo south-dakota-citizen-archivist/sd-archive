@@ -8,6 +8,7 @@ import re
 import threading
 import time
 from collections.abc import Callable, Iterable
+from datetime import UTC, datetime
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -118,6 +119,9 @@ class Fetcher:
       strategy, a block page is retried the same way with a wait four times longer.
     - `fetch(url, name)` returns the stored copy when there is one; refresh=True fetches again.
       The manifest records the rung that fetched each file ("via").
+    - warc=True (or a folder): every successful response also goes into a WARC file, and the
+      manifest line says where (`warc`, `warc_offset`). har=True (or a folder): each browser
+      the Fetcher starts records a HAR, written when the Fetcher closes.
 
     Browsers start when first needed and stay open until close() (or the end of a `with`).
     """
@@ -140,6 +144,8 @@ class Fetcher:
         block_phrases: Iterable[str] = (),
         session: requests.Session | None = None,
         clients: dict[str, Callable] | None = None,
+        warc: bool | str | Path = False,
+        har: bool | str | Path = False,
         sleep: Callable[[float], None] = time.sleep,
     ):
         if strategy != "auto" and strategy not in LADDER:
@@ -166,8 +172,20 @@ class Fetcher:
         self.clients = dict(clients or {})  # rung → send(method, url, **kwargs), for tests
         self._impersonate = None
         self._browsers: dict = {}
+        # WARC and HAR folders: True puts them in the store ("warc/", "har/")
+        self.warc_dir = self._folder(warc, "warc")
+        self.har_dir = self._folder(har, "har")
+        self._warc = None
         self.requests = 0  # sent, including retries
         self.last_via: str | None = None  # the rung that answered the last request
+        self.last_warc: tuple[Path, int] | None = None  # (file, offset) of its WARC record
+
+    def _folder(self, value, name: str) -> Path | None:
+        if value is True:
+            if self.store is None:
+                raise ValueError(f"{name}=True needs a store; give a folder instead")
+            return self.store.root / name
+        return Path(value) if value else None
 
     def __enter__(self) -> Fetcher:
         return self
@@ -176,10 +194,13 @@ class Fetcher:
         self.close()
 
     def close(self) -> None:
-        """Close any browsers this Fetcher started."""
+        """Close any browsers this Fetcher started (writing their HARs) and its WARC file."""
         for b in self._browsers.values():
             b.close()
         self._browsers.clear()
+        if self._warc:
+            self._warc.close()
+            self._warc = None
 
     # Pause ---------------------------------------------------------------
 
@@ -244,7 +265,13 @@ class Fetcher:
 
             if not self._browsers:
                 atexit.register(self.close)
-            self._browsers[rung] = Browser(rung, headless=self.headless, timeout=self.timeout)
+            har = None
+            if self.har_dir and rung != "nodriver":  # nodriver has no HAR recorder
+                stamp = datetime.now(UTC).strftime("%Y%m%d%H%M%S")
+                har = self.har_dir / f"{stamp}-{rung}.har"
+            self._browsers[rung] = Browser(
+                rung, headless=self.headless, timeout=self.timeout, har=har
+            )
         return self._browsers[rung]
 
     # Requests ------------------------------------------------------------
@@ -315,6 +342,14 @@ class Fetcher:
             self.last_via = rung
             if self.strategy == "auto" and self.memory:
                 self.memory.record(host, rung)
+            self.last_warc = None
+            if self.warc_dir:
+                if self._warc is None:
+                    from ._warc import WarcWriter
+
+                    self._warc = WarcWriter(self.warc_dir)
+                    atexit.register(self.close)
+                self.last_warc = (self._warc.path, self._warc.write(method, url, resp, rung))
             return resp
         assert last is not None
         raise last
@@ -341,13 +376,20 @@ class Fetcher:
         if data is not None:
             kwargs["data"] = data
         resp = self.request(method, url, **kwargs)
+        where = {"via": self.last_via}
+        if self.last_warc:
+            path, offset = self.last_warc
+            root = self.store.root.resolve()
+            shown = path.resolve()
+            shown = shown.relative_to(root) if shown.is_relative_to(root) else shown
+            where |= {"warc": shown.as_posix(), "warc_offset": offset}
         self.store.save(
             name,
             resp.content,
             url,
             method=method,
             status=resp.status_code,
-            note={"via": self.last_via, **(note or {})},
+            note={**where, **(note or {})},
             allow_empty=allow_empty,
         )
         return resp.content

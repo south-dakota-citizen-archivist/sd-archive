@@ -32,7 +32,7 @@ dev = [
     { name = "pytest-cov", specifier = ">=6.0" },
     { name = "pytest-django", specifier = ">=4.11" },
     { name = "ruff", specifier = ">=0.11" },
-    { name = "sdfetch", extras = ["impersonate", "browser"], editable = "packages/sdfetch" },
+    { name = "sdfetch", extras = ["impersonate", "browser", "warc"], editable = "packages/sdfetch" },
     { name = "sdgis", editable = "packages/sdgis" },
     { name = "sdplaces", extras = ["pandas", "geo", "address", "geocode"], editable = "packages/sdplaces" },
 ]
@@ -3866,6 +3866,9 @@ browser = [
 impersonate = [
     { name = "curl-cffi" },
 ]
+warc = [
+    { name = "warcio" },
+]
 
 [package.metadata]
 requires-dist = [
@@ -3877,8 +3880,9 @@ requires-dist = [
     { name = "playwright-stealth", marker = "extra == 'browser'", specifier = ">=2.0" },
     { name = "requests", specifier = ">=2.32" },
     { name = "tenacity", specifier = ">=9.0" },
+    { name = "warcio", marker = "extra == 'warc'", specifier = ">=1.7" },
 ]
-provides-extras = ["impersonate", "browser"]
+provides-extras = ["impersonate", "browser", "warc"]
 
 [[package]]
 name = "sdgis"
@@ -4286,6 +4290,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/b3/bd/e40ad2df6a9efc1f859ea23d63fd7371cff68252833f182ca9af819bb4d3/virtualenv-21.15.6.tar.gz", hash = "sha256:c8b65c7d206ca6ef18de9352c160b3f04f66fff9f6b0ec8fd31f14688eba52c4", size = 5641659, upload-time = "2026-11-06T18:17:32.46Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/0a/63/fd514dee3159f74a96ac01beb8f460b65e4ef0b972f63f4fe9f0cd2aa0e3/virtualenv-21.15.6-py3-none-any.whl", hash = "sha256:4b99ab9b95ff11043939bb4cad2fa0449175fa5a478372864f62160cb6c1a7ed", size = 5680963, upload-time = "2026-11-06T18:17:30.128Z" },
+]
+
+[[package]]
+name = "warcio"
+version = "1.8.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "six" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/92/ba/15db78cf7c722376f1e8007a4f3d7b13ca0328576e0b94b2c80f05ff7cff/warcio-1.8.2.tar.gz", hash = "sha256:03e2b024c9d08523dbed7363e97abe8d56918626c00a1b94c2864b919c1927c8", size = 66566, upload-time = "2026-10-28T19:07:07.442Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d3/14/0dcbcc0080bc83304fc0c923965afda562fc6bcbd152d65f31b1872826e8/warcio-1.8.2-py2.py3-none-any.whl", hash = "sha256:4fc9c12ed7e846dcb51103074d0aa964ea52a739fb95dd9f6f8a7db8388b0f01", size = 41940, upload-time = "2026-10-28T19:07:06.238Z" },
 ]
 
 [[package]]

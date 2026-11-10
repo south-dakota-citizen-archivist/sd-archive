@@ -40,6 +40,13 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(
                 200, f"<html><body><pre>{json.dumps(seen)}</pre></body></html>".encode()
             )
+        if self.path == "/table":  # builds its table from an API call, as many search pages do
+            return self._send(
+                200,
+                b"<html><body><table id=t></table><script>"
+                b"fetch('/data.json').then(r => r.json()).then(d => "
+                b"document.getElementById('t').textContent = d.rows)</script></body></html>",
+            )
         if self.path == "/data.json":
             return self._send(200, b'{"rows": 3}', "application/json")
         self._send(404, b"no")
@@ -74,3 +81,20 @@ def test_fetcher_climbs_to_a_browser(server, tmp_path):
         body = f.fetch(f"{server}/page", "page.html")
     assert b"cf-chl" not in body
     assert f.store.manifest()[0]["via"] == "stealth"
+
+
+@pytest.mark.parametrize("strategy", ["stealth", "patchright", "camoufox"])
+def test_har_finds_the_api_behind_a_page(strategy, server, tmp_path):
+    har = tmp_path / f"{strategy}.har"
+    with sdfetch.browser(strategy, har=har) as b:
+        b.get(f"{server}/table")
+        b.page.wait_for_function("document.getElementById('t').textContent === '3'")
+    found = sdfetch.har_requests(har)
+    assert [r["url"] for r in found] == [f"{server}/data.json"], found
+
+
+def test_fetcher_har_folder(server, tmp_path):
+    with sdfetch.Fetcher(tmp_path, strategy="stealth", delay=0, memory=False, har=True) as f:
+        f.fetch(f"{server}/table", "table.html")
+    [har] = (tmp_path / "har").glob("*-stealth.har")
+    assert any(r["url"].endswith("/data.json") for r in sdfetch.har_requests(har))

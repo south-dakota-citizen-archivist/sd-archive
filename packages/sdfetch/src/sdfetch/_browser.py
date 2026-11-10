@@ -21,6 +21,7 @@ from __future__ import annotations
 import time
 from contextlib import contextmanager, suppress
 from dataclasses import dataclass, field
+from pathlib import Path
 
 from ._http import BLOCK_PATTERNS
 
@@ -69,10 +70,24 @@ def _native_ua(ua: str) -> str:
 class Browser:
     """One running browser. get() navigates and returns the page (or file) it ends on."""
 
-    def __init__(self, strategy: str = "stealth", *, headless: bool = True, timeout: float = 60):
+    def __init__(
+        self,
+        strategy: str = "stealth",
+        *,
+        headless: bool = True,
+        timeout: float = 60,
+        har: str | Path | None = None,
+    ):
+        """har: record every request the browser makes to this HAR file, written on close()
+        (not nodriver, which has no recorder)."""
         if strategy not in STRATEGIES:
             raise ValueError(f"strategy must be one of {STRATEGIES}")
+        if har and strategy == "nodriver":
+            raise ValueError("nodriver can't record a HAR; use stealth, patchright or camoufox")
         self.strategy, self.headless, self.timeout = strategy, headless, timeout
+        self.har = Path(har) if har else None
+        if self.har:
+            self.har.parent.mkdir(parents=True, exist_ok=True)
         self.page = None  # the Playwright page (None for nodriver)
         self._stack: list = []  # things to close, last first
         getattr(self, f"_start_{strategy}")()
@@ -85,7 +100,7 @@ class Browser:
         probe = browser.new_page()
         ua = _native_ua(probe.evaluate("navigator.userAgent"))
         probe.close()
-        kwargs = {"user_agent": ua, "locale": "en-US"}
+        kwargs = {"user_agent": ua, "locale": "en-US", **self._har_kwargs()}
         if stealth:
             from playwright_stealth import Stealth
 
@@ -113,11 +128,17 @@ class Browser:
     def _start_camoufox(self) -> None:
         from camoufox.sync_api import Camoufox
 
-        cm = Camoufox(headless=self.headless, locale="en-US", humanize=True)
+        # Claim this machine's OS, so canvas and WebGL can show the real ones; otherwise
+        # Camoufox randomizes them, which reads as a privacy-hardened Firefox, not a stock one
+        cm = Camoufox(headless=self.headless, locale="en-US", humanize=True, os="macos")
         browser = cm.__enter__()
         self._stack.append(lambda: cm.__exit__(None, None, None))
-        self.context = browser.new_context()
+        self.context = browser.new_context(**self._har_kwargs())
+        self._stack.append(self.context.close)  # closing it writes the HAR
         self.page = self.context.new_page()
+
+    def _har_kwargs(self) -> dict:
+        return {"record_har_path": str(self.har), "record_har_content": "embed"} if self.har else {}
 
     def _start_nodriver(self) -> None:
         import logging
@@ -207,9 +228,15 @@ class Browser:
 
 
 @contextmanager
-def browser(strategy: str = "stealth", *, headless: bool = True, timeout: float = 60):
-    """A running browser for one block of work, closed afterwards."""
-    b = Browser(strategy, headless=headless, timeout=timeout)
+def browser(
+    strategy: str = "stealth",
+    *,
+    headless: bool = True,
+    timeout: float = 60,
+    har: str | Path | None = None,
+):
+    """A running browser for one block of work, closed afterwards (writing the HAR, if any)."""
+    b = Browser(strategy, headless=headless, timeout=timeout, har=har)
     try:
         yield b
     finally:

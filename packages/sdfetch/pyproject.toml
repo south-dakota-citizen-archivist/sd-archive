@@ -20,6 +20,9 @@ browser = [
     "playwright>=1.55",
     "playwright-stealth>=2.0",
 ]
+warc = [
+    "warcio>=1.7",
+]
 
 [build-system]
 requires = ["uv_build>=0.13.7,<0.14.0"]
