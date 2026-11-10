@@ -189,12 +189,17 @@ def test_every_crosswalk_row_points_at_a_real_place():
     import csv
     from importlib import resources
 
+    from sdplaces._places import CROSSWALK_KINDS
+
     folder = resources.files("sdplaces").joinpath("data/crosswalks")
+    systems = {f.name.removesuffix(".csv") for f in folder.iterdir() if f.name.endswith(".csv")}
+    assert systems == set(CROSSWALK_KINDS)  # every crosswalk declares the kind it maps to
     for f in folder.iterdir():
         if f.name.endswith(".csv"):
+            kind = CROSSWALK_KINDS[f.name.removesuffix(".csv")]
             with f.open(newline="") as fh:
                 for row in csv.DictReader(fh):
-                    assert sdplaces.get(row["geoid"]), (f.name, row)
+                    assert sdplaces.get(row["geoid"], kind), (f.name, row)
                     assert row["evidence"], (f.name, row)
 
 
@@ -206,3 +211,62 @@ def test_election_crosswalk_covers_every_county():
 def test_unknown_crosswalk_system():
     with pytest.raises(ValueError):
         sdplaces.from_id("nope", 1)
+
+
+# --- School and legislative districts -----------------------------------------------------------
+
+
+def test_district_counts():
+    current = [p for p in sdplaces.all_places("school_district") if not p.historical]
+    assert len(current) == 148
+    assert len(sdplaces.all_places("sldu")) == 35
+    assert len(sdplaces.all_places("sldl")) == 37  # 26 and 28 are split into A and B
+
+
+def test_school_districts_by_name_and_doe_number():
+    spearfish = sdplaces.school_district("Spearfish 40-2")
+    assert spearfish.geoid == "4666930"  # the NCES LEAID
+    assert sdplaces.school_district("Spearfish School District 40-2") == spearfish
+    assert sdplaces.from_id("doe_district", "40002") == spearfish
+    assert spearfish.parent == "46081"  # Lawrence County
+
+
+def test_merged_school_districts():
+    rutland = sdplaces.from_id("doe_district", "39004")
+    assert rutland.valid_to == date(2023, 7, 1)
+    merged = sdplaces.current(rutland)
+    assert merged.name == "Oldham-Ramona-Rutland 39-6"
+    assert merged.valid_from == date(2023, 7, 1)  # a new district, created by the merger
+    assert sdplaces.current(sdplaces.from_id("doe_district", "39005")) == merged
+    grant_deuel = sdplaces.from_id("doe_district", "25003")
+    assert (grant_deuel.valid_to, grant_deuel.successor) == (date(2017, 7, 1), "")  # dissolved
+
+
+def test_legislative_districts():
+    assert sdplaces.senate_district(1).name == "State Senate District 1"
+    assert sdplaces.house_district("26A").geoid == "4626A"
+    assert sdplaces.house_district("District 26a") == sdplaces.house_district("026A")
+    with pytest.raises(UnknownPlace):
+        sdplaces.house_district(36)
+
+
+def test_geoids_shared_across_kinds_need_a_kind():
+    with pytest.raises(AmbiguousPlace):
+        sdplaces.get("46003")  # Aurora County, Senate District 3 and House District 3
+    assert sdplaces.get("46003", kind="county").name == "Aurora County"
+    assert sdplaces.get("46003", kind="sldu").name == "State Senate District 3"
+
+
+def test_geographic_places_never_share_a_geoid():
+    """So /place/<geoid> pages work for the state, counties, cities, CDPs and tribal areas."""
+    geographic = ("state", "county", "place", "cdp", "tribal")
+    seen = Counter(p.geoid for k in geographic for p in sdplaces.all_places(k))
+    assert [g for g, n in seen.items() if n > 1] == []
+
+
+def test_ocd_ids():
+    assert sdplaces.county("Lawrence").ocd_id == "ocd-division/country:us/state:sd/county:lawrence"
+    assert sdplaces.place("Spearfish").ocd_id == "ocd-division/country:us/state:sd/place:spearfish"
+    assert sdplaces.county("Oglala Lakota").ocd_id.endswith("/county:oglala_lakota")
+    assert sdplaces.senate_district(1).ocd_id.endswith("/sldu:1")
+    assert sdplaces.house_district("26A").ocd_id.endswith("/sldl:26a")

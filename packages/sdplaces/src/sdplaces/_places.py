@@ -14,7 +14,7 @@ from rapidfuzz import process
 from ._names import compact_key, spaced_key
 
 STATE = "46"
-KINDS = ("state", "county", "place", "cdp", "tribal")
+KINDS = ("state", "county", "place", "cdp", "tribal", "school_district", "sldu", "sldl")
 
 
 @dataclass(frozen=True)
@@ -227,6 +227,23 @@ def tribal(name: str, **kwargs) -> Place:
     return lookup("tribal", name, **kwargs)
 
 
+def school_district(name: str, **kwargs) -> Place:
+    """By name: "Spearfish 40-2" or "Spearfish School District 40-2".
+
+    By DOE district number: from_id("doe_district", "40002").
+    """
+    return lookup("school_district", name, **kwargs)
+
+
+def senate_district(number: str | int, **kwargs) -> Place:
+    return lookup("sldu", str(number), **kwargs)
+
+
+def house_district(number: str | int, **kwargs) -> Place:
+    """House districts are numbered like senate districts, except 26A/26B and 28A/28B."""
+    return lookup("sldl", str(number), **kwargs)
+
+
 def counties(as_of: date | str | None = None, *, include_historical: bool = False) -> list[Place]:
     """Counties in force on a date (default today). include_historical: every county ever."""
     if include_historical:
@@ -244,6 +261,9 @@ def children(parent: str | Place, kind: str | None = None) -> list[Place]:
 # --- Crosswalks ----------------------------------------------------------------------------
 
 CROSSWALK_FIELDS = ("system_id", "geoid", "name_in_source", "evidence", "note")
+# The kind of place each crosswalk maps to. GEOIDs are only unique within a kind (Grant-Deuel
+# School District 25-3's NCES ID, 4629340, is also Hillsview town's GEOID).
+CROSSWALK_KINDS = {"sos_election_county": "county", "doe_district": "school_district"}
 
 
 @cache
@@ -283,10 +303,11 @@ def from_id(system: str, system_id: str | int, *, as_of: date | str | None = Non
         ]
     if not rows:
         raise UnknownPlace(f"No {system} ID {system_id!r}" + (f" in force on {on}" if on else ""))
+    kind = CROSSWALK_KINDS[system]
     geoids = {r["geoid"] for r in rows}
     if len(geoids) > 1:
         raise AmbiguousPlace(
             f"{system} ID {system_id!r} maps to several places; pass as_of=",
-            [get(g) for g in sorted(geoids)],
+            [get(g, kind) for g in sorted(geoids)],
         )
-    return get(geoids.pop())
+    return get(geoids.pop(), kind)

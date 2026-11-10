@@ -23,8 +23,11 @@ from ._places import (
     current,
     from_id,
     get,
+    house_district,
     lookup,
     place,
+    school_district,
+    senate_district,
     tribal,
 )
 
@@ -43,7 +46,10 @@ __all__ = [
     "current",
     "from_id",
     "get",
+    "house_district",
     "lookup",
     "place",
+    "school_district",
+    "senate_district",
     "tribal",
 ]

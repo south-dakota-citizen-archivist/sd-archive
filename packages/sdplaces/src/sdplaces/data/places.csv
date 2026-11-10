@@ -1,383 +1,383 @@
 kind,geoid,geoidfq,name,short_name,slug,parent,lat,lon,ocd_id,valid_from,valid_to,successor,source
-state,46,0400000US46,South Dakota,South Dakota,south-dakota,,44.21015,-100.25386,,,,,Census cartographic boundary files 2024
-county,46003,0500000US46003,Aurora County,Aurora,aurora-county,46,43.71305,-98.56029,,,,,Census cartographic boundary files 2024
-county,46005,0500000US46005,Beadle County,Beadle,beadle-county,46,44.40319,-98.27728,,,,,Census cartographic boundary files 2024
-county,46007,0500000US46007,Bennett County,Bennett,bennett-county,46,43.18539,-101.66868,,,,,Census cartographic boundary files 2024
-county,46009,0500000US46009,Bon Homme County,Bon Homme,bon-homme-county,46,42.96579,-97.86544,,,,,Census cartographic boundary files 2024
-county,46011,0500000US46011,Brookings County,Brookings,brookings-county,46,44.36991,-96.79045,,,,,Census cartographic boundary files 2024
-county,46013,0500000US46013,Brown County,Brown,brown-county,46,45.58986,-98.35088,,,,,Census cartographic boundary files 2024
-county,46015,0500000US46015,Brule County,Brule,brule-county,46,43.71820,-99.10100,,,,,Census cartographic boundary files 2024
-county,46017,0500000US46017,Buffalo County,Buffalo,buffalo-county,46,44.06512,-99.22648,,,,,Census cartographic boundary files 2024
-county,46019,0500000US46019,Butte County,Butte,butte-county,46,44.90446,-103.50745,,,,,Census cartographic boundary files 2024
-county,46021,0500000US46021,Campbell County,Campbell,campbell-county,46,45.76956,-100.03379,,,,,Census cartographic boundary files 2024
-county,46023,0500000US46023,Charles Mix County,Charles Mix,charles-mix-county,46,43.17095,-98.47493,,,,,Census cartographic boundary files 2024
-county,46025,0500000US46025,Clark County,Clark,clark-county,46,44.84102,-97.73418,,,,,Census cartographic boundary files 2024
-county,46027,0500000US46027,Clay County,Clay,clay-county,46,42.90023,-96.98320,,,,,Census cartographic boundary files 2024
-county,46029,0500000US46029,Codington County,Codington,codington-county,46,44.97753,-97.18833,,,,,Census cartographic boundary files 2024
-county,46031,0500000US46031,Corson County,Corson,corson-county,46,45.71616,-101.15725,,,,,Census cartographic boundary files 2024
-county,46033,0500000US46033,Custer County,Custer,custer-county,46,43.66661,-103.48183,,,,,Census cartographic boundary files 2024
-county,46035,0500000US46035,Davison County,Davison,davison-county,46,43.67785,-98.14620,,,,,Census cartographic boundary files 2024
-county,46037,0500000US46037,Day County,Day,day-county,46,45.36314,-97.60366,,,,,Census cartographic boundary files 2024
-county,46039,0500000US46039,Deuel County,Deuel,deuel-county,46,44.76074,-96.66802,,,,,Census cartographic boundary files 2024
-county,46041,0500000US46041,Dewey County,Dewey,dewey-county,46,45.09510,-100.90619,,,,,Census cartographic boundary files 2024
-county,46043,0500000US46043,Douglas County,Douglas,douglas-county,46,43.34687,-98.35268,,,,,Census cartographic boundary files 2024
-county,46045,0500000US46045,Edmunds County,Edmunds,edmunds-county,46,45.41864,-99.21520,,,,,Census cartographic boundary files 2024
-county,46047,0500000US46047,Fall River County,Fall River,fall-river-county,46,43.26291,-103.52739,,,,,Census cartographic boundary files 2024
-county,46049,0500000US46049,Faulk County,Faulk,faulk-county,46,45.07534,-99.14513,,,,,Census cartographic boundary files 2024
-county,46051,0500000US46051,Grant County,Grant,grant-county,46,45.15148,-96.77372,,,,,Census cartographic boundary files 2024
-county,46053,0500000US46053,Gregory County,Gregory,gregory-county,46,43.24942,-99.24294,,,,,Census cartographic boundary files 2024
-county,46055,0500000US46055,Haakon County,Haakon,haakon-county,46,44.36388,-101.57810,,,,,Census cartographic boundary files 2024
-county,46057,0500000US46057,Hamlin County,Hamlin,hamlin-county,46,44.65400,-97.18849,,,,,Census cartographic boundary files 2024
-county,46059,0500000US46059,Hand County,Hand,hand-county,46,44.54267,-99.00093,,,,,Census cartographic boundary files 2024
-county,46061,0500000US46061,Hanson County,Hanson,hanson-county,46,43.68358,-97.78660,,,,,Census cartographic boundary files 2024
-county,46063,0500000US46063,Harding County,Harding,harding-county,46,45.60653,-103.49632,,,,,Census cartographic boundary files 2024
-county,46065,0500000US46065,Hughes County,Hughes,hughes-county,46,44.32311,-99.91028,,,,,Census cartographic boundary files 2024
-county,46067,0500000US46067,Hutchinson County,Hutchinson,hutchinson-county,46,43.33451,-97.75578,,,,,Census cartographic boundary files 2024
-county,46069,0500000US46069,Hyde County,Hyde,hyde-county,46,44.53795,-99.48211,,,,,Census cartographic boundary files 2024
-county,46071,0500000US46071,Jackson County,Jackson,jackson-county,46,43.69190,-101.63128,,,,,Census cartographic boundary files 2024
-county,46073,0500000US46073,Jerauld County,Jerauld,jerauld-county,46,44.05748,-98.62920,,,,,Census cartographic boundary files 2024
-county,46075,0500000US46075,Jones County,Jones,jones-county,46,43.96624,-100.71551,,,,,Census cartographic boundary files 2024
-county,46077,0500000US46077,Kingsbury County,Kingsbury,kingsbury-county,46,44.36991,-97.49098,,,,,Census cartographic boundary files 2024
-county,46079,0500000US46079,Lake County,Lake,lake-county,46,44.01864,-97.12937,,,,,Census cartographic boundary files 2024
-county,46081,0500000US46081,Lawrence County,Lawrence,lawrence-county,46,44.38484,-103.81231,,,,,Census cartographic boundary files 2024
-county,46083,0500000US46083,Lincoln County,Lincoln,lincoln-county,46,43.29233,-96.75604,,,,,Census cartographic boundary files 2024
-county,46085,0500000US46085,Lyman County,Lyman,lyman-county,46,43.85704,-99.83793,,,,,Census cartographic boundary files 2024
-county,46091,0500000US46091,Marshall County,Marshall,marshall-county,46,45.74793,-97.60340,,,,,Census cartographic boundary files 2024
-county,46087,0500000US46087,McCook County,McCook,mccook-county,46,43.67441,-97.36797,,,,,Census cartographic boundary files 2024
-county,46089,0500000US46089,McPherson County,McPherson,mcpherson-county,46,45.76625,-99.22135,,,,,Census cartographic boundary files 2024
-county,46093,0500000US46093,Meade County,Meade,meade-county,46,44.56182,-102.78430,,,,,Census cartographic boundary files 2024
-county,46095,0500000US46095,Mellette County,Mellette,mellette-county,46,43.62372,-100.72953,,,,,Census cartographic boundary files 2024
-county,46097,0500000US46097,Miner County,Miner,miner-county,46,44.01596,-97.61045,,,,,Census cartographic boundary files 2024
-county,46099,0500000US46099,Minnehaha County,Minnehaha,minnehaha-county,46,43.67441,-96.79143,,,,,Census cartographic boundary files 2024
-county,46101,0500000US46101,Moody County,Moody,moody-county,46,44.02215,-96.67102,,,,,Census cartographic boundary files 2024
-county,46102,0500000US46102,Oglala Lakota County,Oglala Lakota,oglala-lakota-county,46,43.33588,-102.55551,,2015-05-01,,,Census cartographic boundary files 2024
-county,46103,0500000US46103,Pennington County,Pennington,pennington-county,46,44.10260,-103.03104,,,,,Census cartographic boundary files 2024
-county,46105,0500000US46105,Perkins County,Perkins,perkins-county,46,45.48754,-102.47526,,,,,Census cartographic boundary files 2024
-county,46107,0500000US46107,Potter County,Potter,potter-county,46,45.06849,-99.94709,,,,,Census cartographic boundary files 2024
-county,46109,0500000US46109,Roberts County,Roberts,roberts-county,46,45.61713,-97.03957,,,,,Census cartographic boundary files 2024
-county,46111,0500000US46111,Sanborn County,Sanborn,sanborn-county,46,44.01708,-98.09129,,,,,Census cartographic boundary files 2024
+state,46,0400000US46,South Dakota,South Dakota,south-dakota,,44.21015,-100.25386,ocd-division/country:us/state:sd,,,,Census cartographic boundary files 2024
+county,46003,0500000US46003,Aurora County,Aurora,aurora-county,46,43.71305,-98.56029,ocd-division/country:us/state:sd/county:aurora,,,,Census cartographic boundary files 2024
+county,46005,0500000US46005,Beadle County,Beadle,beadle-county,46,44.40319,-98.27728,ocd-division/country:us/state:sd/county:beadle,,,,Census cartographic boundary files 2024
+county,46007,0500000US46007,Bennett County,Bennett,bennett-county,46,43.18539,-101.66868,ocd-division/country:us/state:sd/county:bennett,,,,Census cartographic boundary files 2024
+county,46009,0500000US46009,Bon Homme County,Bon Homme,bon-homme-county,46,42.96579,-97.86544,ocd-division/country:us/state:sd/county:bon_homme,,,,Census cartographic boundary files 2024
+county,46011,0500000US46011,Brookings County,Brookings,brookings-county,46,44.36991,-96.79045,ocd-division/country:us/state:sd/county:brookings,,,,Census cartographic boundary files 2024
+county,46013,0500000US46013,Brown County,Brown,brown-county,46,45.58986,-98.35088,ocd-division/country:us/state:sd/county:brown,,,,Census cartographic boundary files 2024
+county,46015,0500000US46015,Brule County,Brule,brule-county,46,43.71820,-99.10100,ocd-division/country:us/state:sd/county:brule,,,,Census cartographic boundary files 2024
+county,46017,0500000US46017,Buffalo County,Buffalo,buffalo-county,46,44.06512,-99.22648,ocd-division/country:us/state:sd/county:buffalo,,,,Census cartographic boundary files 2024
+county,46019,0500000US46019,Butte County,Butte,butte-county,46,44.90446,-103.50745,ocd-division/country:us/state:sd/county:butte,,,,Census cartographic boundary files 2024
+county,46021,0500000US46021,Campbell County,Campbell,campbell-county,46,45.76956,-100.03379,ocd-division/country:us/state:sd/county:campbell,,,,Census cartographic boundary files 2024
+county,46023,0500000US46023,Charles Mix County,Charles Mix,charles-mix-county,46,43.17095,-98.47493,ocd-division/country:us/state:sd/county:charles_mix,,,,Census cartographic boundary files 2024
+county,46025,0500000US46025,Clark County,Clark,clark-county,46,44.84102,-97.73418,ocd-division/country:us/state:sd/county:clark,,,,Census cartographic boundary files 2024
+county,46027,0500000US46027,Clay County,Clay,clay-county,46,42.90023,-96.98320,ocd-division/country:us/state:sd/county:clay,,,,Census cartographic boundary files 2024
+county,46029,0500000US46029,Codington County,Codington,codington-county,46,44.97753,-97.18833,ocd-division/country:us/state:sd/county:codington,,,,Census cartographic boundary files 2024
+county,46031,0500000US46031,Corson County,Corson,corson-county,46,45.71616,-101.15725,ocd-division/country:us/state:sd/county:corson,,,,Census cartographic boundary files 2024
+county,46033,0500000US46033,Custer County,Custer,custer-county,46,43.66661,-103.48183,ocd-division/country:us/state:sd/county:custer,,,,Census cartographic boundary files 2024
+county,46035,0500000US46035,Davison County,Davison,davison-county,46,43.67785,-98.14620,ocd-division/country:us/state:sd/county:davison,,,,Census cartographic boundary files 2024
+county,46037,0500000US46037,Day County,Day,day-county,46,45.36314,-97.60366,ocd-division/country:us/state:sd/county:day,,,,Census cartographic boundary files 2024
+county,46039,0500000US46039,Deuel County,Deuel,deuel-county,46,44.76074,-96.66802,ocd-division/country:us/state:sd/county:deuel,,,,Census cartographic boundary files 2024
+county,46041,0500000US46041,Dewey County,Dewey,dewey-county,46,45.09510,-100.90619,ocd-division/country:us/state:sd/county:dewey,,,,Census cartographic boundary files 2024
+county,46043,0500000US46043,Douglas County,Douglas,douglas-county,46,43.34687,-98.35268,ocd-division/country:us/state:sd/county:douglas,,,,Census cartographic boundary files 2024
+county,46045,0500000US46045,Edmunds County,Edmunds,edmunds-county,46,45.41864,-99.21520,ocd-division/country:us/state:sd/county:edmunds,,,,Census cartographic boundary files 2024
+county,46047,0500000US46047,Fall River County,Fall River,fall-river-county,46,43.26291,-103.52739,ocd-division/country:us/state:sd/county:fall_river,,,,Census cartographic boundary files 2024
+county,46049,0500000US46049,Faulk County,Faulk,faulk-county,46,45.07534,-99.14513,ocd-division/country:us/state:sd/county:faulk,,,,Census cartographic boundary files 2024
+county,46051,0500000US46051,Grant County,Grant,grant-county,46,45.15148,-96.77372,ocd-division/country:us/state:sd/county:grant,,,,Census cartographic boundary files 2024
+county,46053,0500000US46053,Gregory County,Gregory,gregory-county,46,43.24942,-99.24294,ocd-division/country:us/state:sd/county:gregory,,,,Census cartographic boundary files 2024
+county,46055,0500000US46055,Haakon County,Haakon,haakon-county,46,44.36388,-101.57810,ocd-division/country:us/state:sd/county:haakon,,,,Census cartographic boundary files 2024
+county,46057,0500000US46057,Hamlin County,Hamlin,hamlin-county,46,44.65400,-97.18849,ocd-division/country:us/state:sd/county:hamlin,,,,Census cartographic boundary files 2024
+county,46059,0500000US46059,Hand County,Hand,hand-county,46,44.54267,-99.00093,ocd-division/country:us/state:sd/county:hand,,,,Census cartographic boundary files 2024
+county,46061,0500000US46061,Hanson County,Hanson,hanson-county,46,43.68358,-97.78660,ocd-division/country:us/state:sd/county:hanson,,,,Census cartographic boundary files 2024
+county,46063,0500000US46063,Harding County,Harding,harding-county,46,45.60653,-103.49632,ocd-division/country:us/state:sd/county:harding,,,,Census cartographic boundary files 2024
+county,46065,0500000US46065,Hughes County,Hughes,hughes-county,46,44.32311,-99.91028,ocd-division/country:us/state:sd/county:hughes,,,,Census cartographic boundary files 2024
+county,46067,0500000US46067,Hutchinson County,Hutchinson,hutchinson-county,46,43.33451,-97.75578,ocd-division/country:us/state:sd/county:hutchinson,,,,Census cartographic boundary files 2024
+county,46069,0500000US46069,Hyde County,Hyde,hyde-county,46,44.53795,-99.48211,ocd-division/country:us/state:sd/county:hyde,,,,Census cartographic boundary files 2024
+county,46071,0500000US46071,Jackson County,Jackson,jackson-county,46,43.69190,-101.63128,ocd-division/country:us/state:sd/county:jackson,,,,Census cartographic boundary files 2024
+county,46073,0500000US46073,Jerauld County,Jerauld,jerauld-county,46,44.05748,-98.62920,ocd-division/country:us/state:sd/county:jerauld,,,,Census cartographic boundary files 2024
+county,46075,0500000US46075,Jones County,Jones,jones-county,46,43.96624,-100.71551,ocd-division/country:us/state:sd/county:jones,,,,Census cartographic boundary files 2024
+county,46077,0500000US46077,Kingsbury County,Kingsbury,kingsbury-county,46,44.36991,-97.49098,ocd-division/country:us/state:sd/county:kingsbury,,,,Census cartographic boundary files 2024
+county,46079,0500000US46079,Lake County,Lake,lake-county,46,44.01864,-97.12937,ocd-division/country:us/state:sd/county:lake,,,,Census cartographic boundary files 2024
+county,46081,0500000US46081,Lawrence County,Lawrence,lawrence-county,46,44.38484,-103.81231,ocd-division/country:us/state:sd/county:lawrence,,,,Census cartographic boundary files 2024
+county,46083,0500000US46083,Lincoln County,Lincoln,lincoln-county,46,43.29233,-96.75604,ocd-division/country:us/state:sd/county:lincoln,,,,Census cartographic boundary files 2024
+county,46085,0500000US46085,Lyman County,Lyman,lyman-county,46,43.85704,-99.83793,ocd-division/country:us/state:sd/county:lyman,,,,Census cartographic boundary files 2024
+county,46091,0500000US46091,Marshall County,Marshall,marshall-county,46,45.74793,-97.60340,ocd-division/country:us/state:sd/county:marshall,,,,Census cartographic boundary files 2024
+county,46087,0500000US46087,McCook County,McCook,mccook-county,46,43.67441,-97.36797,ocd-division/country:us/state:sd/county:mccook,,,,Census cartographic boundary files 2024
+county,46089,0500000US46089,McPherson County,McPherson,mcpherson-county,46,45.76625,-99.22135,ocd-division/country:us/state:sd/county:mcpherson,,,,Census cartographic boundary files 2024
+county,46093,0500000US46093,Meade County,Meade,meade-county,46,44.56182,-102.78430,ocd-division/country:us/state:sd/county:meade,,,,Census cartographic boundary files 2024
+county,46095,0500000US46095,Mellette County,Mellette,mellette-county,46,43.62372,-100.72953,ocd-division/country:us/state:sd/county:mellette,,,,Census cartographic boundary files 2024
+county,46097,0500000US46097,Miner County,Miner,miner-county,46,44.01596,-97.61045,ocd-division/country:us/state:sd/county:miner,,,,Census cartographic boundary files 2024
+county,46099,0500000US46099,Minnehaha County,Minnehaha,minnehaha-county,46,43.67441,-96.79143,ocd-division/country:us/state:sd/county:minnehaha,,,,Census cartographic boundary files 2024
+county,46101,0500000US46101,Moody County,Moody,moody-county,46,44.02215,-96.67102,ocd-division/country:us/state:sd/county:moody,,,,Census cartographic boundary files 2024
+county,46102,0500000US46102,Oglala Lakota County,Oglala Lakota,oglala-lakota-county,46,43.33588,-102.55551,ocd-division/country:us/state:sd/county:oglala_lakota,2015-05-01,,,Census cartographic boundary files 2024
+county,46103,0500000US46103,Pennington County,Pennington,pennington-county,46,44.10260,-103.03104,ocd-division/country:us/state:sd/county:pennington,,,,Census cartographic boundary files 2024
+county,46105,0500000US46105,Perkins County,Perkins,perkins-county,46,45.48754,-102.47526,ocd-division/country:us/state:sd/county:perkins,,,,Census cartographic boundary files 2024
+county,46107,0500000US46107,Potter County,Potter,potter-county,46,45.06849,-99.94709,ocd-division/country:us/state:sd/county:potter,,,,Census cartographic boundary files 2024
+county,46109,0500000US46109,Roberts County,Roberts,roberts-county,46,45.61713,-97.03957,ocd-division/country:us/state:sd/county:roberts,,,,Census cartographic boundary files 2024
+county,46111,0500000US46111,Sanborn County,Sanborn,sanborn-county,46,44.01708,-98.09129,ocd-division/country:us/state:sd/county:sanborn,,,,Census cartographic boundary files 2024
 county,46113,0500000US46113,Shannon County,Shannon,shannon-county,46,,,,,2015-05-01,46102,"Renamed Oglala Lakota County, effective 2015-05-01, with the new code 46102 (Census Bureau, substantial changes to counties, 2015)"
-county,46115,0500000US46115,Spink County,Spink,spink-county,46,44.94535,-98.34967,,,,,Census cartographic boundary files 2024
-county,46117,0500000US46117,Stanley County,Stanley,stanley-county,46,44.47567,-100.86787,,,,,Census cartographic boundary files 2024
-county,46119,0500000US46119,Sully County,Sully,sully-county,46,44.72425,-100.14925,,,,,Census cartographic boundary files 2024
-county,46121,0500000US46121,Todd County,Todd,todd-county,46,43.19900,-100.72096,,,,,Census cartographic boundary files 2024
-county,46123,0500000US46123,Tripp County,Tripp,tripp-county,46,43.38224,-99.87395,,,,,Census cartographic boundary files 2024
-county,46125,0500000US46125,Turner County,Turner,turner-county,46,43.29316,-97.16230,,,,,Census cartographic boundary files 2024
-county,46127,0500000US46127,Union County,Union,union-county,46,42.78122,-96.71360,,,,,Census cartographic boundary files 2024
-county,46129,0500000US46129,Walworth County,Walworth,walworth-county,46,45.42035,-100.00612,,,,,Census cartographic boundary files 2024
+county,46115,0500000US46115,Spink County,Spink,spink-county,46,44.94535,-98.34967,ocd-division/country:us/state:sd/county:spink,,,,Census cartographic boundary files 2024
+county,46117,0500000US46117,Stanley County,Stanley,stanley-county,46,44.47567,-100.86787,ocd-division/country:us/state:sd/county:stanley,,,,Census cartographic boundary files 2024
+county,46119,0500000US46119,Sully County,Sully,sully-county,46,44.72425,-100.14925,ocd-division/country:us/state:sd/county:sully,,,,Census cartographic boundary files 2024
+county,46121,0500000US46121,Todd County,Todd,todd-county,46,43.19900,-100.72096,ocd-division/country:us/state:sd/county:todd,,,,Census cartographic boundary files 2024
+county,46123,0500000US46123,Tripp County,Tripp,tripp-county,46,43.38224,-99.87395,ocd-division/country:us/state:sd/county:tripp,,,,Census cartographic boundary files 2024
+county,46125,0500000US46125,Turner County,Turner,turner-county,46,43.29316,-97.16230,ocd-division/country:us/state:sd/county:turner,,,,Census cartographic boundary files 2024
+county,46127,0500000US46127,Union County,Union,union-county,46,42.78122,-96.71360,ocd-division/country:us/state:sd/county:union,,,,Census cartographic boundary files 2024
+county,46129,0500000US46129,Walworth County,Walworth,walworth-county,46,45.42035,-100.00612,ocd-division/country:us/state:sd/county:walworth,,,,Census cartographic boundary files 2024
 county,46131,0500000US46131,Washabaugh County,Washabaugh,washabaugh-county,46,,,,,1983-01-01,46071,"Annexed by Jackson County in 1983 (Census Bureau, substantial changes to counties). Exact effective date not verified; 1983-01-01 used"
-county,46135,0500000US46135,Yankton County,Yankton,yankton-county,46,42.98127,-97.39799,,,,,Census cartographic boundary files 2024
-county,46137,0500000US46137,Ziebach County,Ziebach,ziebach-county,46,44.97211,-101.56817,,,,,Census cartographic boundary files 2024
-place,4600100,1600000US4600100,Aberdeen city,Aberdeen,aberdeen,46013,45.46214,-98.46814,,,,,Census cartographic boundary files 2024
-place,4600460,1600000US4600460,Agar town,Agar,agar,46119,44.83930,-100.07276,,,,,Census cartographic boundary files 2024
-place,4600540,1600000US4600540,Akaska town,Akaska,akaska,46129,45.32958,-100.12087,,,,,Census cartographic boundary files 2024
-place,4600620,1600000US4600620,Albee town,Albee,albee,46051,45.05132,-96.55351,,,,,Census cartographic boundary files 2024
-place,4600700,1600000US4600700,Alcester city,Alcester,alcester,46127,43.03143,-96.62343,,,,,Census cartographic boundary files 2024
-place,4600820,1600000US4600820,Alexandria city,Alexandria,alexandria,46061,43.65686,-97.77944,,,,,Census cartographic boundary files 2024
-place,4601020,1600000US4601020,Alpena town,Alpena,alpena,46073,44.18128,-98.36988,,,,,Census cartographic boundary files 2024
-place,4601140,1600000US4601140,Altamont town,Altamont,altamont,46039,44.84077,-96.69013,,,,,Census cartographic boundary files 2024
-place,4601500,1600000US4601500,Andover town,Andover,andover,46037,45.41203,-97.90410,,,,,Census cartographic boundary files 2024
-place,4602180,1600000US4602180,Arlington city,Arlington,arlington,46077,44.36223,-97.13375,,,,,Census cartographic boundary files 2024
-place,4602260,1600000US4602260,Armour city,Armour,armour,46043,43.31908,-98.34487,,,,,Census cartographic boundary files 2024
-place,4602340,1600000US4602340,Artas town,Artas,artas,46021,45.88808,-99.80691,,,,,Census cartographic boundary files 2024
-place,4602380,1600000US4602380,Artesian town,Artesian,artesian,46111,44.00787,-97.92370,,,,,Census cartographic boundary files 2024
-place,4602540,1600000US4602540,Ashton city,Ashton,ashton,46115,44.99319,-98.50074,,,,,Census cartographic boundary files 2024
-place,4602580,1600000US4602580,Astoria town,Astoria,astoria,46039,44.55769,-96.54645,,,,,Census cartographic boundary files 2024
-place,4602780,1600000US4602780,Aurora town,Aurora,aurora,46011,44.28303,-96.68500,,,,,Census cartographic boundary files 2024
-place,4602900,1600000US4602900,Avon city,Avon,avon,46009,43.00461,-98.06028,,,,,Census cartographic boundary files 2024
-place,4603060,1600000US4603060,Badger town,Badger,badger,46077,44.48867,-97.20706,,,,,Census cartographic boundary files 2024
-place,4603380,1600000US4603380,Baltic city,Baltic,baltic,46099,43.76069,-96.73673,,,,,Census cartographic boundary files 2024
-place,4603420,1600000US4603420,Bancroft town,Bancroft,bancroft,46077,44.48965,-97.75048,,,,,Census cartographic boundary files 2024
-place,4603860,1600000US4603860,Batesland town,Batesland,batesland,46102,43.12681,-102.10210,,,,,Census cartographic boundary files 2024
-place,4604380,1600000US4604380,Belle Fourche city,Belle Fourche,belle-fourche,46019,44.65289,-103.85197,,,,,Census cartographic boundary files 2024
-place,4604620,1600000US4604620,Belvidere town,Belvidere,belvidere,46071,43.83072,-101.27110,,,,,Census cartographic boundary files 2024
-place,4604980,1600000US4604980,Beresford city,Beresford,beresford,46127,43.07979,-96.78135,,,,,Census cartographic boundary files 2024
-place,4605540,1600000US4605540,Big Stone City city,Big Stone City,big-stone-city,46051,45.30442,-96.46886,,,,,Census cartographic boundary files 2024
-place,4605620,1600000US4605620,Bison town,Bison,bison,46105,45.52358,-102.46774,,,,,Census cartographic boundary files 2024
-place,4606180,1600000US4606180,Blunt city,Blunt,blunt,46065,44.51808,-99.98714,,,,,Census cartographic boundary files 2024
-place,4606220,1600000US4606220,Bonesteel city,Bonesteel,bonesteel,46053,43.07670,-98.94714,,,,,Census cartographic boundary files 2024
-place,4606540,1600000US4606540,Bowdle city,Bowdle,bowdle,46045,45.45227,-99.65733,,,,,Census cartographic boundary files 2024
-place,4606620,1600000US4606620,Box Elder city,Box Elder,box-elder,46103,44.12393,-103.05922,,,,,Census cartographic boundary files 2024
-place,4606660,1600000US4606660,Bradley town,Bradley,bradley,46025,45.09048,-97.64197,,,,,Census cartographic boundary files 2024
-place,4606840,1600000US4606840,Brandon city,Brandon,brandon,46099,43.59231,-96.56706,,,,,Census cartographic boundary files 2024
-place,4606940,1600000US4606940,Brandt town,Brandt,brandt,46039,44.66691,-96.62520,,,,,Census cartographic boundary files 2024
+county,46135,0500000US46135,Yankton County,Yankton,yankton-county,46,42.98127,-97.39799,ocd-division/country:us/state:sd/county:yankton,,,,Census cartographic boundary files 2024
+county,46137,0500000US46137,Ziebach County,Ziebach,ziebach-county,46,44.97211,-101.56817,ocd-division/country:us/state:sd/county:ziebach,,,,Census cartographic boundary files 2024
+place,4600100,1600000US4600100,Aberdeen city,Aberdeen,aberdeen,46013,45.46214,-98.46814,ocd-division/country:us/state:sd/place:aberdeen,,,,Census cartographic boundary files 2024
+place,4600460,1600000US4600460,Agar town,Agar,agar,46119,44.83930,-100.07276,ocd-division/country:us/state:sd/place:agar,,,,Census cartographic boundary files 2024
+place,4600540,1600000US4600540,Akaska town,Akaska,akaska,46129,45.32958,-100.12087,ocd-division/country:us/state:sd/place:akaska,,,,Census cartographic boundary files 2024
+place,4600620,1600000US4600620,Albee town,Albee,albee,46051,45.05132,-96.55351,ocd-division/country:us/state:sd/place:albee,,,,Census cartographic boundary files 2024
+place,4600700,1600000US4600700,Alcester city,Alcester,alcester,46127,43.03143,-96.62343,ocd-division/country:us/state:sd/place:alcester,,,,Census cartographic boundary files 2024
+place,4600820,1600000US4600820,Alexandria city,Alexandria,alexandria,46061,43.65686,-97.77944,ocd-division/country:us/state:sd/place:alexandria,,,,Census cartographic boundary files 2024
+place,4601020,1600000US4601020,Alpena town,Alpena,alpena,46073,44.18128,-98.36988,ocd-division/country:us/state:sd/place:alpena,,,,Census cartographic boundary files 2024
+place,4601140,1600000US4601140,Altamont town,Altamont,altamont,46039,44.84077,-96.69013,ocd-division/country:us/state:sd/place:altamont,,,,Census cartographic boundary files 2024
+place,4601500,1600000US4601500,Andover town,Andover,andover,46037,45.41203,-97.90410,ocd-division/country:us/state:sd/place:andover,,,,Census cartographic boundary files 2024
+place,4602180,1600000US4602180,Arlington city,Arlington,arlington,46077,44.36223,-97.13375,ocd-division/country:us/state:sd/place:arlington,,,,Census cartographic boundary files 2024
+place,4602260,1600000US4602260,Armour city,Armour,armour,46043,43.31908,-98.34487,ocd-division/country:us/state:sd/place:armour,,,,Census cartographic boundary files 2024
+place,4602340,1600000US4602340,Artas town,Artas,artas,46021,45.88808,-99.80691,ocd-division/country:us/state:sd/place:artas,,,,Census cartographic boundary files 2024
+place,4602380,1600000US4602380,Artesian town,Artesian,artesian,46111,44.00787,-97.92370,ocd-division/country:us/state:sd/place:artesian,,,,Census cartographic boundary files 2024
+place,4602540,1600000US4602540,Ashton city,Ashton,ashton,46115,44.99319,-98.50074,ocd-division/country:us/state:sd/place:ashton,,,,Census cartographic boundary files 2024
+place,4602580,1600000US4602580,Astoria town,Astoria,astoria,46039,44.55769,-96.54645,ocd-division/country:us/state:sd/place:astoria,,,,Census cartographic boundary files 2024
+place,4602780,1600000US4602780,Aurora town,Aurora,aurora,46011,44.28303,-96.68500,ocd-division/country:us/state:sd/place:aurora,,,,Census cartographic boundary files 2024
+place,4602900,1600000US4602900,Avon city,Avon,avon,46009,43.00461,-98.06028,ocd-division/country:us/state:sd/place:avon,,,,Census cartographic boundary files 2024
+place,4603060,1600000US4603060,Badger town,Badger,badger,46077,44.48867,-97.20706,ocd-division/country:us/state:sd/place:badger,,,,Census cartographic boundary files 2024
+place,4603380,1600000US4603380,Baltic city,Baltic,baltic,46099,43.76069,-96.73673,ocd-division/country:us/state:sd/place:baltic,,,,Census cartographic boundary files 2024
+place,4603420,1600000US4603420,Bancroft town,Bancroft,bancroft,46077,44.48965,-97.75048,ocd-division/country:us/state:sd/place:bancroft,,,,Census cartographic boundary files 2024
+place,4603860,1600000US4603860,Batesland town,Batesland,batesland,46102,43.12681,-102.10210,ocd-division/country:us/state:sd/place:batesland,,,,Census cartographic boundary files 2024
+place,4604380,1600000US4604380,Belle Fourche city,Belle Fourche,belle-fourche,46019,44.65289,-103.85197,ocd-division/country:us/state:sd/place:belle_fourche,,,,Census cartographic boundary files 2024
+place,4604620,1600000US4604620,Belvidere town,Belvidere,belvidere,46071,43.83072,-101.27110,ocd-division/country:us/state:sd/place:belvidere,,,,Census cartographic boundary files 2024
+place,4604980,1600000US4604980,Beresford city,Beresford,beresford,46127,43.07979,-96.78135,ocd-division/country:us/state:sd/place:beresford,,,,Census cartographic boundary files 2024
+place,4605540,1600000US4605540,Big Stone City city,Big Stone City,big-stone-city,46051,45.30442,-96.46886,ocd-division/country:us/state:sd/place:big_stone_city,,,,Census cartographic boundary files 2024
+place,4605620,1600000US4605620,Bison town,Bison,bison,46105,45.52358,-102.46774,ocd-division/country:us/state:sd/place:bison,,,,Census cartographic boundary files 2024
+place,4606180,1600000US4606180,Blunt city,Blunt,blunt,46065,44.51808,-99.98714,ocd-division/country:us/state:sd/place:blunt,,,,Census cartographic boundary files 2024
+place,4606220,1600000US4606220,Bonesteel city,Bonesteel,bonesteel,46053,43.07670,-98.94714,ocd-division/country:us/state:sd/place:bonesteel,,,,Census cartographic boundary files 2024
+place,4606540,1600000US4606540,Bowdle city,Bowdle,bowdle,46045,45.45227,-99.65733,ocd-division/country:us/state:sd/place:bowdle,,,,Census cartographic boundary files 2024
+place,4606620,1600000US4606620,Box Elder city,Box Elder,box-elder,46103,44.12393,-103.05922,ocd-division/country:us/state:sd/place:box_elder,,,,Census cartographic boundary files 2024
+place,4606660,1600000US4606660,Bradley town,Bradley,bradley,46025,45.09048,-97.64197,ocd-division/country:us/state:sd/place:bradley,,,,Census cartographic boundary files 2024
+place,4606840,1600000US4606840,Brandon city,Brandon,brandon,46099,43.59231,-96.56706,ocd-division/country:us/state:sd/place:brandon,,,,Census cartographic boundary files 2024
+place,4606940,1600000US4606940,Brandt town,Brandt,brandt,46039,44.66691,-96.62520,ocd-division/country:us/state:sd/place:brandt,,,,Census cartographic boundary files 2024
 place,4607040,1600000US4607040,Brant Lake city,Brant Lake,brant-lake,46079,43.92929,-96.94203,,,,,Census cartographic boundary files 2024
-place,4607060,1600000US4607060,Brentford town,Brentford,brentford,46115,45.15873,-98.32259,,,,,Census cartographic boundary files 2024
-place,4607180,1600000US4607180,Bridgewater city,Bridgewater,bridgewater,46087,43.55058,-97.49842,,,,,Census cartographic boundary files 2024
-place,4607300,1600000US4607300,Bristol city,Bristol,bristol,46037,45.34655,-97.74846,,,,,Census cartographic boundary files 2024
-place,4607380,1600000US4607380,Britton city,Britton,britton,46091,45.79300,-97.75312,,,,,Census cartographic boundary files 2024
-place,4607420,1600000US4607420,Broadland town,Broadland,broadland,46005,44.49387,-98.34655,,,,,Census cartographic boundary files 2024
-place,4607580,1600000US4607580,Brookings city,Brookings,brookings,46011,44.30130,-96.78602,,,,,Census cartographic boundary files 2024
-place,4607740,1600000US4607740,Bruce city,Bruce,bruce,46011,44.43696,-96.89021,,,,,Census cartographic boundary files 2024
-place,4608060,1600000US4608060,Bryant city,Bryant,bryant,46057,44.58997,-97.46765,,,,,Census cartographic boundary files 2024
-place,4608340,1600000US4608340,Buffalo Gap town,Buffalo Gap,buffalo-gap,46033,43.49185,-103.31720,,,,,Census cartographic boundary files 2024
-place,4608140,1600000US4608140,Buffalo town,Buffalo,buffalo,46063,45.58523,-103.54416,,,,,Census cartographic boundary files 2024
-place,4608700,1600000US4608700,Burke city,Burke,burke,46053,43.18302,-99.29449,,,,,Census cartographic boundary files 2024
-place,4608820,1600000US4608820,Bushnell town,Bushnell,bushnell,46011,44.32742,-96.64236,,,,,Census cartographic boundary files 2024
-place,4608860,1600000US4608860,Butler town,Butler,butler,46037,45.26064,-97.71485,,,,,Census cartographic boundary files 2024
-place,4609260,1600000US4609260,Camp Crook town,Camp Crook,camp-crook,46063,45.55018,-103.97551,,,,,Census cartographic boundary files 2024
-place,4609300,1600000US4609300,Canistota city,Canistota,canistota,46087,43.59776,-97.29258,,,,,Census cartographic boundary files 2024
-place,4609420,1600000US4609420,Canova town,Canova,canova,46097,43.88125,-97.50396,,,,,Census cartographic boundary files 2024
-place,4609500,1600000US4609500,Canton city,Canton,canton,46083,43.30422,-96.57916,,,,,Census cartographic boundary files 2024
-place,4610220,1600000US4610220,Carthage city,Carthage,carthage,46097,44.16861,-97.71501,,,,,Census cartographic boundary files 2024
-place,4610500,1600000US4610500,Castlewood city,Castlewood,castlewood,46057,44.72273,-97.03473,,,,,Census cartographic boundary files 2024
-place,4610620,1600000US4610620,Cavour town,Cavour,cavour,46005,44.37130,-98.03859,,,,,Census cartographic boundary files 2024
-place,4611060,1600000US4611060,Centerville city,Centerville,centerville,46125,43.11763,-96.95987,,,,,Census cartographic boundary files 2024
-place,4611140,1600000US4611140,Central City city,Central City,central-city,46081,44.36858,-103.76920,,,,,Census cartographic boundary files 2024
-place,4611220,1600000US4611220,Chamberlain city,Chamberlain,chamberlain,46015,43.79200,-99.32618,,,,,Census cartographic boundary files 2024
-place,4611380,1600000US4611380,Chancellor town,Chancellor,chancellor,46125,43.37141,-96.98780,,,,,Census cartographic boundary files 2024
-place,4611500,1600000US4611500,Chelsea town,Chelsea,chelsea,46049,45.16831,-98.74338,,,,,Census cartographic boundary files 2024
-place,4612020,1600000US4612020,Claire City town,Claire City,claire-city,46109,45.85528,-97.10459,,,,,Census cartographic boundary files 2024
-place,4612100,1600000US4612100,Claremont town,Claremont,claremont,46013,45.67195,-98.01561,,,,,Census cartographic boundary files 2024
-place,4612180,1600000US4612180,Clark city,Clark,clark,46025,44.88025,-97.73675,,,,,Census cartographic boundary files 2024
-place,4612540,1600000US4612540,Clear Lake city,Clear Lake,clear-lake,46039,44.76645,-96.68260,,,,,Census cartographic boundary files 2024
-place,4613220,1600000US4613220,Colman city,Colman,colman,46101,43.98281,-96.81895,,,,,Census cartographic boundary files 2024
-place,4613300,1600000US4613300,Colome city,Colome,colome,46123,43.26044,-99.71693,,,,,Census cartographic boundary files 2024
-place,4613380,1600000US4613380,Colton city,Colton,colton,46099,43.78585,-96.92824,,,,,Census cartographic boundary files 2024
-place,4613420,1600000US4613420,Columbia city,Columbia,columbia,46013,45.61448,-98.31087,,,,,Census cartographic boundary files 2024
-place,4613700,1600000US4613700,Conde city,Conde,conde,46115,45.15602,-98.09578,,,,,Census cartographic boundary files 2024
-place,4613940,1600000US4613940,Corona town,Corona,corona,46109,45.33628,-96.76490,,,,,Census cartographic boundary files 2024
-place,4613980,1600000US4613980,Corsica city,Corsica,corsica,46043,43.42589,-98.40637,,,,,Census cartographic boundary files 2024
-place,4614220,1600000US4614220,Cottonwood town,Cottonwood,cottonwood,46071,43.96783,-101.90206,,,,,Census cartographic boundary files 2024
-place,4614580,1600000US4614580,Cresbard town,Cresbard,cresbard,46049,45.17075,-98.94740,,,,,Census cartographic boundary files 2024
-place,4614740,1600000US4614740,Crooks city,Crooks,crooks,46099,43.65973,-96.80721,,,,,Census cartographic boundary files 2024
-place,4615140,1600000US4615140,Custer city,Custer,custer,46033,43.76610,-103.59791,,,,,Census cartographic boundary files 2024
-place,4615300,1600000US4615300,Dallas town,Dallas,dallas,46053,43.23935,-99.51668,,,,,Census cartographic boundary files 2024
-place,4615420,1600000US4615420,Dante town,Dante,dante,46023,43.04310,-98.18737,,,,,Census cartographic boundary files 2024
-place,4615540,1600000US4615540,Davis town,Davis,davis,46125,43.25929,-96.99608,,,,,Census cartographic boundary files 2024
-place,4616260,1600000US4616260,De Smet city,De Smet,de-smet,46077,44.38682,-97.55112,,,,,Census cartographic boundary files 2024
-place,4615700,1600000US4615700,Deadwood city,Deadwood,deadwood,46081,44.38735,-103.71717,,,,,Census cartographic boundary files 2024
-place,4615980,1600000US4615980,Dell Rapids city,Dell Rapids,dell-rapids,46099,43.82272,-96.71413,,,,,Census cartographic boundary files 2024
-place,4616060,1600000US4616060,Delmont city,Delmont,delmont,46043,43.26439,-98.15892,,,,,Census cartographic boundary files 2024
-place,4616620,1600000US4616620,Dimock town,Dimock,dimock,46067,43.47352,-97.98580,,,,,Census cartographic boundary files 2024
-place,4616820,1600000US4616820,Doland city,Doland,doland,46115,44.89699,-98.10043,,,,,Census cartographic boundary files 2024
-place,4616860,1600000US4616860,Dolton town,Dolton,dolton,46125,43.49109,-97.38482,,,,,Census cartographic boundary files 2024
-place,4617020,1600000US4617020,Draper town,Draper,draper,46075,43.92432,-100.53696,,,,,Census cartographic boundary files 2024
-place,4617420,1600000US4617420,Dupree city,Dupree,dupree,46137,45.04927,-101.60131,,,,,Census cartographic boundary files 2024
-place,4617620,1600000US4617620,Eagle Butte city,Eagle Butte,eagle-butte,46041,44.99464,-101.23329,,,,,Census cartographic boundary files 2024
-place,4618180,1600000US4618180,Eden town,Eden,eden,46091,45.61735,-97.41965,,,,,Census cartographic boundary files 2024
-place,4618300,1600000US4618300,Edgemont city,Edgemont,edgemont,46047,43.29829,-103.82698,,,,,Census cartographic boundary files 2024
-place,4618460,1600000US4618460,Egan city,Egan,egan,46101,43.99795,-96.64842,,,,,Census cartographic boundary files 2024
-place,4618620,1600000US4618620,Elk Point city,Elk Point,elk-point,46127,42.68151,-96.68134,,,,,Census cartographic boundary files 2024
-place,4618700,1600000US4618700,Elkton city,Elkton,elkton,46011,44.23738,-96.48101,,,,,Census cartographic boundary files 2024
-place,4619420,1600000US4619420,Emery city,Emery,emery,46061,43.60137,-97.62049,,,,,Census cartographic boundary files 2024
-place,4619860,1600000US4619860,Erwin town,Erwin,erwin,46077,44.48795,-97.44078,,,,,Census cartographic boundary files 2024
-place,4619980,1600000US4619980,Estelline city,Estelline,estelline,46057,44.57752,-96.90034,,,,,Census cartographic boundary files 2024
-place,4620060,1600000US4620060,Ethan town,Ethan,ethan,46035,43.54492,-97.98322,,,,,Census cartographic boundary files 2024
-place,4620180,1600000US4620180,Eureka city,Eureka,eureka,46089,45.77085,-99.62228,,,,,Census cartographic boundary files 2024
-place,4620340,1600000US4620340,Fairburn town,Fairburn,fairburn,46033,43.68735,-103.21142,,,,,Census cartographic boundary files 2024
-place,4620380,1600000US4620380,Fairfax town,Fairfax,fairfax,46053,43.02783,-98.88919,,,,,Census cartographic boundary files 2024
-place,4620780,1600000US4620780,Fairview town,Fairview,fairview,46083,43.22301,-96.48813,,,,,Census cartographic boundary files 2024
-place,4620980,1600000US4620980,Faith city,Faith,faith,46093,45.02451,-102.03562,,,,,Census cartographic boundary files 2024
-place,4621060,1600000US4621060,Farmer town,Farmer,farmer,46061,43.72579,-97.68926,,,,,Census cartographic boundary files 2024
-place,4621260,1600000US4621260,Faulkton city,Faulkton,faulkton,46049,45.03841,-99.12684,,,,,Census cartographic boundary files 2024
-place,4621540,1600000US4621540,Flandreau city,Flandreau,flandreau,46101,44.04566,-96.59853,,,,,Census cartographic boundary files 2024
-place,4621820,1600000US4621820,Florence town,Florence,florence,46029,45.05591,-97.32838,,,,,Census cartographic boundary files 2024
-place,4622260,1600000US4622260,Fort Pierre city,Fort Pierre,fort-pierre,46117,44.36450,-100.38050,,,,,Census cartographic boundary files 2024
-place,4622580,1600000US4622580,Frankfort city,Frankfort,frankfort,46115,44.87678,-98.30808,,,,,Census cartographic boundary files 2024
-place,4622860,1600000US4622860,Frederick town,Frederick,frederick,46013,45.83590,-98.50720,,,,,Census cartographic boundary files 2024
-place,4623020,1600000US4623020,Freeman city,Freeman,freeman,46067,43.34570,-97.42897,,,,,Census cartographic boundary files 2024
-place,4623140,1600000US4623140,Fruitdale town,Fruitdale,fruitdale,46019,44.66788,-103.69641,,,,,Census cartographic boundary files 2024
-place,4623220,1600000US4623220,Fulton town,Fulton,fulton,46061,43.72793,-97.82333,,,,,Census cartographic boundary files 2024
-place,4623460,1600000US4623460,Garden City town,Garden City,garden-city,46025,44.95931,-97.58041,,,,,Census cartographic boundary files 2024
-place,4623820,1600000US4623820,Garretson city,Garretson,garretson,46099,43.71726,-96.50023,,,,,Census cartographic boundary files 2024
-place,4623860,1600000US4623860,Gary city,Gary,gary,46039,44.79497,-96.45843,,,,,Census cartographic boundary files 2024
-place,4623900,1600000US4623900,Gayville town,Gayville,gayville,46135,42.89052,-97.17393,,,,,Census cartographic boundary files 2024
-place,4623980,1600000US4623980,Geddes city,Geddes,geddes,46023,43.25187,-98.69773,,,,,Census cartographic boundary files 2024
-place,4624260,1600000US4624260,Gettysburg city,Gettysburg,gettysburg,46107,45.00271,-99.95502,,,,,Census cartographic boundary files 2024
-place,4624620,1600000US4624620,Glenham town,Glenham,glenham,46129,45.53358,-100.27074,,,,,Census cartographic boundary files 2024
-place,4624820,1600000US4624820,Goodwin town,Goodwin,goodwin,46039,44.87755,-96.84967,,,,,Census cartographic boundary files 2024
-place,4626180,1600000US4626180,Gregory city,Gregory,gregory,46053,43.23298,-99.42535,,,,,Census cartographic boundary files 2024
-place,4626220,1600000US4626220,Grenville town,Grenville,grenville,46037,45.46820,-97.39234,,,,,Census cartographic boundary files 2024
-place,4626340,1600000US4626340,Groton city,Groton,groton,46013,45.45193,-98.10163,,,,,Census cartographic boundary files 2024
-place,4627260,1600000US4627260,Harrisburg city,Harrisburg,harrisburg,46083,43.43154,-96.70266,,,,,Census cartographic boundary files 2024
-place,4627420,1600000US4627420,Harrold town,Harrold,harrold,46065,44.52387,-99.73867,,,,,Census cartographic boundary files 2024
-place,4627540,1600000US4627540,Hartford city,Hartford,hartford,46099,43.62631,-96.94020,,,,,Census cartographic boundary files 2024
-place,4627820,1600000US4627820,Hayti town,Hayti,hayti,46057,44.65936,-97.20399,,,,,Census cartographic boundary files 2024
-place,4627940,1600000US4627940,Hazel town,Hazel,hazel,46057,44.75878,-97.38057,,,,,Census cartographic boundary files 2024
-place,4627980,1600000US4627980,Hecla city,Hecla,hecla,46013,45.88195,-98.15141,,,,,Census cartographic boundary files 2024
-place,4628140,1600000US4628140,Henry town,Henry,henry,46029,44.88019,-97.46190,,,,,Census cartographic boundary files 2024
-place,4628300,1600000US4628300,Hermosa town,Hermosa,hermosa,46033,43.84944,-103.19970,,,,,Census cartographic boundary files 2024
-place,4628340,1600000US4628340,Herreid city,Herreid,herreid,46021,45.83751,-100.07046,,,,,Census cartographic boundary files 2024
-place,4628420,1600000US4628420,Herrick town,Herrick,herrick,46053,43.11486,-99.18825,,,,,Census cartographic boundary files 2024
-place,4628460,1600000US4628460,Hetland town,Hetland,hetland,46077,44.37660,-97.23407,,,,,Census cartographic boundary files 2024
-place,4628980,1600000US4628980,Highmore city,Highmore,highmore,46069,44.52405,-99.44160,,,,,Census cartographic boundary files 2024
-place,4629100,1600000US4629100,Hill City city,Hill City,hill-city,46103,43.93126,-103.57389,,,,,Census cartographic boundary files 2024
-place,4629340,1600000US4629340,Hillsview town,Hillsview,hillsview,46089,45.66207,-99.56065,,,,,Census cartographic boundary files 2024
-place,4629500,1600000US4629500,Hitchcock town,Hitchcock,hitchcock,46005,44.63033,-98.40840,,,,,Census cartographic boundary files 2024
-place,4630140,1600000US4630140,Hosmer city,Hosmer,hosmer,46045,45.58183,-99.47363,,,,,Census cartographic boundary files 2024
-place,4630220,1600000US4630220,Hot Springs city,Hot Springs,hot-springs,46047,43.43176,-103.48114,,,,,Census cartographic boundary files 2024
-place,4630300,1600000US4630300,Hoven town,Hoven,hoven,46107,45.24227,-99.77740,,,,,Census cartographic boundary files 2024
-place,4630460,1600000US4630460,Howard city,Howard,howard,46097,44.01040,-97.52512,,,,,Census cartographic boundary files 2024
-place,4630740,1600000US4630740,Hudson town,Hudson,hudson,46083,43.13057,-96.45533,,,,,Census cartographic boundary files 2024
-place,4630900,1600000US4630900,Humboldt town,Humboldt,humboldt,46099,43.64776,-97.07329,,,,,Census cartographic boundary files 2024
-place,4630980,1600000US4630980,Hurley city,Hurley,hurley,46125,43.27735,-97.09097,,,,,Census cartographic boundary files 2024
-place,4631060,1600000US4631060,Huron city,Huron,huron,46005,44.36330,-98.21739,,,,,Census cartographic boundary files 2024
-place,4631620,1600000US4631620,Interior town,Interior,interior,46071,43.72777,-101.97953,,,,,Census cartographic boundary files 2024
-place,4631860,1600000US4631860,Ipswich city,Ipswich,ipswich,46045,45.44033,-99.02975,,,,,Census cartographic boundary files 2024
-place,4631940,1600000US4631940,Irene city,Irene,irene,46125,43.08520,-97.15725,,,,,Census cartographic boundary files 2024
-place,4632020,1600000US4632020,Iroquois city,Iroquois,iroquois,46077,44.36800,-97.85052,,,,,Census cartographic boundary files 2024
-place,4632140,1600000US4632140,Isabel town,Isabel,isabel,46041,45.39209,-101.43037,,,,,Census cartographic boundary files 2024
-place,4632460,1600000US4632460,Java town,Java,java,46129,45.50383,-99.88390,,,,,Census cartographic boundary files 2024
-place,4632700,1600000US4632700,Jefferson city,Jefferson,jefferson,46127,42.60425,-96.56551,,,,,Census cartographic boundary files 2024
-place,4633180,1600000US4633180,Kadoka city,Kadoka,kadoka,46071,43.82866,-101.50748,,,,,Census cartographic boundary files 2024
-place,4633580,1600000US4633580,Kennebec town,Kennebec,kennebec,46085,43.90332,-99.86189,,,,,Census cartographic boundary files 2024
-place,4633820,1600000US4633820,Keystone town,Keystone,keystone,46103,43.88993,-103.42321,,,,,Census cartographic boundary files 2024
-place,4633980,1600000US4633980,Kimball city,Kimball,kimball,46015,43.74857,-98.95634,,,,,Census cartographic boundary files 2024
-place,4634340,1600000US4634340,Kranzburg town,Kranzburg,kranzburg,46029,44.89007,-96.91836,,,,,Census cartographic boundary files 2024
-place,4634540,1600000US4634540,La Bolt town,La Bolt,la-bolt,46051,45.04952,-96.67455,,,,,Census cartographic boundary files 2024
-place,4635100,1600000US4635100,Lake Andes city,Lake Andes,lake-andes,46023,43.15488,-98.53609,,,,,Census cartographic boundary files 2024
-place,4635220,1600000US4635220,Lake City town,Lake City,lake-city,46091,45.72258,-97.41236,,,,,Census cartographic boundary files 2024
-place,4635460,1600000US4635460,Lake Norden city,Lake Norden,lake-norden,46057,44.58135,-97.21045,,,,,Census cartographic boundary files 2024
-place,4635500,1600000US4635500,Lake Preston city,Lake Preston,lake-preston,46077,44.36115,-97.37588,,,,,Census cartographic boundary files 2024
-place,4635780,1600000US4635780,Lane town,Lane,lane,46073,44.06910,-98.42231,,,,,Census cartographic boundary files 2024
-place,4635820,1600000US4635820,Langford town,Langford,langford,46091,45.60187,-97.83054,,,,,Census cartographic boundary files 2024
-place,4636220,1600000US4636220,Lead city,Lead,lead,46081,44.35257,-103.76876,,,,,Census cartographic boundary files 2024
-place,4636260,1600000US4636260,Lebanon town,Lebanon,lebanon,46107,45.06912,-99.76679,,,,,Census cartographic boundary files 2024
-place,4636340,1600000US4636340,Lemmon city,Lemmon,lemmon,46105,45.93879,-102.15864,,,,,Census cartographic boundary files 2024
-place,4636380,1600000US4636380,Lennox city,Lennox,lennox,46083,43.34863,-96.89576,,,,,Census cartographic boundary files 2024
-place,4636460,1600000US4636460,Leola city,Leola,leola,46089,45.72191,-98.93934,,,,,Census cartographic boundary files 2024
-place,4636540,1600000US4636540,Lesterville town,Lesterville,lesterville,46135,43.03815,-97.59011,,,,,Census cartographic boundary files 2024
-place,4636620,1600000US4636620,Letcher town,Letcher,letcher,46111,43.90052,-98.14422,,,,,Census cartographic boundary files 2024
-place,4638860,1600000US4638860,Long Lake town,Long Lake,long-lake,46089,45.85596,-99.20565,,,,,Census cartographic boundary files 2024
-place,4639260,1600000US4639260,Lowry town,Lowry,lowry,46129,45.31543,-99.98125,,,,,Census cartographic boundary files 2024
-place,4640220,1600000US4640220,Madison city,Madison,madison,46079,44.00458,-97.11770,,,,,Census cartographic boundary files 2024
-place,4640860,1600000US4640860,Marion city,Marion,marion,46125,43.42473,-97.26057,,,,,Census cartographic boundary files 2024
-place,4641100,1600000US4641100,Martin city,Martin,martin,46007,43.17406,-101.73427,,,,,Census cartographic boundary files 2024
-place,4641220,1600000US4641220,Marvin town,Marvin,marvin,46051,45.25935,-96.91662,,,,,Census cartographic boundary files 2024
-place,4639940,1600000US4639940,McIntosh city,McIntosh,mcintosh,46031,45.92426,-101.34962,,,,,Census cartographic boundary files 2024
-place,4640020,1600000US4640020,McLaughlin city,McLaughlin,mclaughlin,46031,45.81380,-100.81114,,,,,Census cartographic boundary files 2024
-place,4641860,1600000US4641860,Mellette city,Mellette,mellette,46115,45.15461,-98.49837,,,,,Census cartographic boundary files 2024
-place,4641980,1600000US4641980,Menno city,Menno,menno,46067,43.23813,-97.57636,,,,,Census cartographic boundary files 2024
-place,4642140,1600000US4642140,Midland town,Midland,midland,46055,44.07214,-101.15695,,,,,Census cartographic boundary files 2024
-place,4642260,1600000US4642260,Milbank city,Milbank,milbank,46051,45.21788,-96.63430,,,,,Census cartographic boundary files 2024
-place,4642460,1600000US4642460,Miller city,Miller,miller,46059,44.52223,-98.98844,,,,,Census cartographic boundary files 2024
-place,4642980,1600000US4642980,Mission Hill town,Mission Hill,mission-hill,46135,42.91985,-97.27904,,,,,Census cartographic boundary files 2024
-place,4642940,1600000US4642940,Mission city,Mission,mission,46121,43.30564,-100.66142,,,,,Census cartographic boundary files 2024
-place,4643100,1600000US4643100,Mitchell city,Mitchell,mitchell,46035,43.73134,-98.03293,,,,,Census cartographic boundary files 2024
-place,4643180,1600000US4643180,Mobridge city,Mobridge,mobridge,46129,45.54110,-100.43300,,,,,Census cartographic boundary files 2024
-place,4643380,1600000US4643380,Monroe town,Monroe,monroe,46125,43.48916,-97.21663,,,,,Census cartographic boundary files 2024
-place,4643500,1600000US4643500,Montrose city,Montrose,montrose,46087,43.70097,-97.18401,,,,,Census cartographic boundary files 2024
-place,4643860,1600000US4643860,Morristown town,Morristown,morristown,46031,45.93967,-101.71882,,,,,Census cartographic boundary files 2024
-place,4644020,1600000US4644020,Mound City town,Mound City,mound-city,46021,45.72618,-100.06882,,,,,Census cartographic boundary files 2024
-place,4644100,1600000US4644100,Mount Vernon city,Mount Vernon,mount-vernon,46035,43.71464,-98.26085,,,,,Census cartographic boundary files 2024
-place,4644260,1600000US4644260,Murdo city,Murdo,murdo,46075,43.88852,-100.71394,,,,,Census cartographic boundary files 2024
-place,4644620,1600000US4644620,Naples town,Naples,naples,46025,44.77166,-97.51306,,,,,Census cartographic boundary files 2024
-place,4644820,1600000US4644820,New Effington town,New Effington,new-effington,46109,45.85587,-96.91730,,,,,Census cartographic boundary files 2024
-place,4645060,1600000US4645060,New Underwood city,New Underwood,new-underwood,46103,44.09295,-102.83337,,,,,Census cartographic boundary files 2024
-place,4645100,1600000US4645100,New Witten town,New Witten,new-witten,46123,43.44053,-100.08218,,,,,Census cartographic boundary files 2024
-place,4644860,1600000US4644860,Newell city,Newell,newell,46019,44.71618,-103.41798,,,,,Census cartographic boundary files 2024
-place,4645180,1600000US4645180,Nisland town,Nisland,nisland,46019,44.67367,-103.55535,,,,,Census cartographic boundary files 2024
-place,4645700,1600000US4645700,North Sioux City city,North Sioux City,north-sioux-city,46127,42.53381,-96.49186,,,,,Census cartographic boundary files 2024
-place,4645740,1600000US4645740,Northville town,Northville,northville,46115,45.15535,-98.57930,,,,,Census cartographic boundary files 2024
-place,4646060,1600000US4646060,Nunda town,Nunda,nunda,46079,44.15985,-97.01940,,,,,Census cartographic boundary files 2024
-place,4646180,1600000US4646180,Oacoma town,Oacoma,oacoma,46085,43.80830,-99.35865,,,,,Census cartographic boundary files 2024
-place,4646500,1600000US4646500,Oelrichs town,Oelrichs,oelrichs,46047,43.18201,-103.23343,,,,,Census cartographic boundary files 2024
-place,4646780,1600000US4646780,Oldham city,Oldham,oldham,46077,44.22845,-97.30977,,,,,Census cartographic boundary files 2024
-place,4646900,1600000US4646900,Olivet town,Olivet,olivet,46067,43.24262,-97.67474,,,,,Census cartographic boundary files 2024
-place,4646980,1600000US4646980,Onaka town,Onaka,onaka,46049,45.19295,-99.46578,,,,,Census cartographic boundary files 2024
-place,4647180,1600000US4647180,Onida city,Onida,onida,46119,44.70567,-100.07036,,,,,Census cartographic boundary files 2024
-place,4647460,1600000US4647460,Orient town,Orient,orient,46049,44.90080,-99.08843,,,,,Census cartographic boundary files 2024
-place,4647660,1600000US4647660,Ortley town,Ortley,ortley,46109,45.33774,-97.20607,,,,,Census cartographic boundary files 2024
-place,4648380,1600000US4648380,Parker city,Parker,parker,46125,43.39830,-97.13280,,,,,Census cartographic boundary files 2024
-place,4648460,1600000US4648460,Parkston city,Parkston,parkston,46067,43.39367,-97.98437,,,,,Census cartographic boundary files 2024
-place,4648940,1600000US4648940,Peever town,Peever,peever,46109,45.54192,-96.95606,,,,,Census cartographic boundary files 2024
-place,4649300,1600000US4649300,Philip city,Philip,philip,46055,44.04067,-101.66445,,,,,Census cartographic boundary files 2024
-place,4649460,1600000US4649460,Pickstown town,Pickstown,pickstown,46023,43.06568,-98.53185,,,,,Census cartographic boundary files 2024
-place,4649500,1600000US4649500,Piedmont city,Piedmont,piedmont,46093,44.21872,-103.37382,,,,,Census cartographic boundary files 2024
-place,4649540,1600000US4649540,Pierpont town,Pierpont,pierpont,46037,45.49565,-97.83215,,,,,Census cartographic boundary files 2024
-place,4649600,1600000US4649600,Pierre city,Pierre,pierre,46065,44.36979,-100.33255,,,,,Census cartographic boundary files 2024
-place,4650020,1600000US4650020,Plankinton city,Plankinton,plankinton,46003,43.71434,-98.48199,,,,,Census cartographic boundary files 2024
-place,4650260,1600000US4650260,Platte city,Platte,platte,46023,43.38509,-98.84281,,,,,Census cartographic boundary files 2024
-place,4651260,1600000US4651260,Pollock town,Pollock,pollock,46021,45.90020,-100.28998,,,,,Census cartographic boundary files 2024
-place,4651820,1600000US4651820,Presho city,Presho,presho,46085,43.90710,-100.05839,,,,,Census cartographic boundary files 2024
-place,4651940,1600000US4651940,Pringle town,Pringle,pringle,46033,43.61091,-103.59439,,,,,Census cartographic boundary files 2024
-place,4652220,1600000US4652220,Pukwana town,Pukwana,pukwana,46015,43.77636,-99.18305,,,,,Census cartographic boundary files 2024
-place,4652500,1600000US4652500,Quinn town,Quinn,quinn,46103,43.99077,-102.12913,,,,,Census cartographic boundary files 2024
-place,4652860,1600000US4652860,Ramona town,Ramona,ramona,46079,44.12005,-97.21524,,,,,Census cartographic boundary files 2024
-place,4652980,1600000US4652980,Rapid City city,Rapid City,rapid-city,46103,44.06595,-103.22538,,,,,Census cartographic boundary files 2024
-place,4653220,1600000US4653220,Ravinia town,Ravinia,ravinia,46023,43.13649,-98.42686,,,,,Census cartographic boundary files 2024
-place,4653260,1600000US4653260,Raymond town,Raymond,raymond,46025,44.91037,-97.93714,,,,,Census cartographic boundary files 2024
-place,4653460,1600000US4653460,Redfield city,Redfield,redfield,46115,44.86971,-98.52137,,,,,Census cartographic boundary files 2024
-place,4653940,1600000US4653940,Ree Heights town,Ree Heights,ree-heights,46059,44.51584,-99.20052,,,,,Census cartographic boundary files 2024
-place,4654020,1600000US4654020,Reliance town,Reliance,reliance,46085,43.88193,-99.60175,,,,,Census cartographic boundary files 2024
-place,4654220,1600000US4654220,Revillo town,Revillo,revillo,46051,45.01529,-96.57066,,,,,Census cartographic boundary files 2024
-place,4655540,1600000US4655540,Rockham town,Rockham,rockham,46049,44.90430,-98.82340,,,,,Census cartographic boundary files 2024
-place,4655820,1600000US4655820,Roscoe city,Roscoe,roscoe,46045,45.45078,-99.33494,,,,,Census cartographic boundary files 2024
-place,4656340,1600000US4656340,Rosholt town,Rosholt,rosholt,46109,45.86707,-96.73068,,,,,Census cartographic boundary files 2024
-place,4656380,1600000US4656380,Roslyn town,Roslyn,roslyn,46037,45.49690,-97.49320,,,,,Census cartographic boundary files 2024
-place,4657340,1600000US4657340,Salem city,Salem,salem,46087,43.72172,-97.38891,,,,,Census cartographic boundary files 2024
-place,4657940,1600000US4657940,Scotland city,Scotland,scotland,46009,43.14762,-97.71977,,,,,Census cartographic boundary files 2024
-place,4658140,1600000US4658140,Selby city,Selby,selby,46129,45.50778,-100.03189,,,,,Census cartographic boundary files 2024
-place,4658180,1600000US4658180,Seneca town,Seneca,seneca,46049,45.06053,-99.50917,,,,,Census cartographic boundary files 2024
-place,4658580,1600000US4658580,Sherman town,Sherman,sherman,46099,43.75773,-96.47624,,,,,Census cartographic boundary files 2024
-place,4658900,1600000US4658900,Sinai town,Sinai,sinai,46011,44.24451,-97.04399,,,,,Census cartographic boundary files 2024
-place,4659020,1600000US4659020,Sioux Falls city,Sioux Falls,sioux-falls,46099,43.55257,-96.72859,,,,,Census cartographic boundary files 2024
-place,4659260,1600000US4659260,Sisseton city,Sisseton,sisseton,46109,45.66197,-97.04071,,,,,Census cartographic boundary files 2024
-place,4659940,1600000US4659940,South Shore town,South Shore,south-shore,46029,45.10073,-96.92939,,,,,Census cartographic boundary files 2024
-place,4660020,1600000US4660020,Spearfish city,Spearfish,spearfish,46081,44.50855,-103.85725,,,,,Census cartographic boundary files 2024
-place,4660060,1600000US4660060,Spencer city,Spencer,spencer,46087,43.72762,-97.59087,,,,,Census cartographic boundary files 2024
-place,4660660,1600000US4660660,Springfield city,Springfield,springfield,46009,42.85344,-97.89463,,,,,Census cartographic boundary files 2024
-place,4657140,1600000US4657140,St. Francis town,St. Francis,st-francis,46121,43.14145,-100.90284,,,,,Census cartographic boundary files 2024
-place,4657180,1600000US4657180,St. Lawrence town,St. Lawrence,st-lawrence,46059,44.51648,-98.93726,,,,,Census cartographic boundary files 2024
-place,4661700,1600000US4661700,Stickney town,Stickney,stickney,46003,43.59095,-98.43731,,,,,Census cartographic boundary files 2024
-place,4661740,1600000US4661740,Stockholm town,Stockholm,stockholm,46051,45.10225,-96.79977,,,,,Census cartographic boundary files 2024
-place,4661980,1600000US4661980,Strandburg town,Strandburg,strandburg,46051,45.04374,-96.76081,,,,,Census cartographic boundary files 2024
-place,4662020,1600000US4662020,Stratford town,Stratford,stratford,46013,45.31747,-98.30433,,,,,Census cartographic boundary files 2024
-place,4662100,1600000US4662100,Sturgis city,Sturgis,sturgis,46093,44.40518,-103.51928,,,,,Census cartographic boundary files 2024
-place,4662155,1600000US4662155,Summerset city,Summerset,summerset,46093,44.19009,-103.34059,,,,,Census cartographic boundary files 2024
-place,4662220,1600000US4662220,Summit town,Summit,summit,46109,45.30587,-97.03592,,,,,Census cartographic boundary files 2024
-place,4662820,1600000US4662820,Tabor town,Tabor,tabor,46009,42.94551,-97.65988,,,,,Census cartographic boundary files 2024
-place,4663100,1600000US4663100,Tea city,Tea,tea,46083,43.45603,-96.83129,,,,,Census cartographic boundary files 2024
-place,4663620,1600000US4663620,Timber Lake city,Timber Lake,timber-lake,46041,45.42564,-101.07462,,,,,Census cartographic boundary files 2024
-place,4663700,1600000US4663700,Tolstoy town,Tolstoy,tolstoy,46107,45.20826,-99.61394,,,,,Census cartographic boundary files 2024
-place,4663740,1600000US4663740,Toronto town,Toronto,toronto,46039,44.57283,-96.64229,,,,,Census cartographic boundary files 2024
-place,4663940,1600000US4663940,Trent town,Trent,trent,46101,43.90983,-96.65819,,,,,Census cartographic boundary files 2024
-place,4664020,1600000US4664020,Tripp city,Tripp,tripp,46067,43.22529,-97.96563,,,,,Census cartographic boundary files 2024
-place,4664300,1600000US4664300,Tulare town,Tulare,tulare,46115,44.73821,-98.50893,,,,,Census cartographic boundary files 2024
-place,4664540,1600000US4664540,Turton town,Turton,turton,46115,45.04901,-98.09746,,,,,Census cartographic boundary files 2024
-place,4664700,1600000US4664700,Twin Brooks town,Twin Brooks,twin-brooks,46051,45.20709,-96.78516,,,,,Census cartographic boundary files 2024
-place,4664860,1600000US4664860,Tyndall city,Tyndall,tyndall,46009,42.99253,-97.86507,,,,,Census cartographic boundary files 2024
-place,4665780,1600000US4665780,Utica town,Utica,utica,46135,42.98063,-97.49674,,,,,Census cartographic boundary files 2024
-place,4666260,1600000US4666260,Valley Springs city,Valley Springs,valley-springs,46099,43.58178,-96.46638,,,,,Census cartographic boundary files 2024
-place,4666540,1600000US4666540,Veblen city,Veblen,veblen,46091,45.86106,-97.28549,,,,,Census cartographic boundary files 2024
-place,4666660,1600000US4666660,Verdon town,Verdon,verdon,46013,45.24418,-98.09918,,,,,Census cartographic boundary files 2024
-place,4666700,1600000US4666700,Vermillion city,Vermillion,vermillion,46027,42.78536,-96.93108,,,,,Census cartographic boundary files 2024
-place,4667020,1600000US4667020,Viborg city,Viborg,viborg,46125,43.17165,-97.08124,,,,,Census cartographic boundary files 2024
-place,4667220,1600000US4667220,Vienna town,Vienna,vienna,46025,44.70679,-97.50002,,,,,Census cartographic boundary files 2024
-place,4667340,1600000US4667340,Vilas town,Vilas,vilas,46097,44.01560,-97.59565,,,,,Census cartographic boundary files 2024
-place,4667500,1600000US4667500,Virgil town,Virgil,virgil,46005,44.29088,-98.42761,,,,,Census cartographic boundary files 2024
-place,4667700,1600000US4667700,Volga city,Volga,volga,46011,44.32175,-96.92058,,,,,Census cartographic boundary files 2024
-place,4667780,1600000US4667780,Volin town,Volin,volin,46135,42.95678,-97.18170,,,,,Census cartographic boundary files 2024
-place,4668020,1600000US4668020,Wagner city,Wagner,wagner,46023,43.07672,-98.29316,,,,,Census cartographic boundary files 2024
-place,4668100,1600000US4668100,Wakonda town,Wakonda,wakonda,46027,43.00735,-97.10565,,,,,Census cartographic boundary files 2024
-place,4668380,1600000US4668380,Wall town,Wall,wall,46103,43.98995,-102.24272,,,,,Census cartographic boundary files 2024
-place,4668420,1600000US4668420,Wallace town,Wallace,wallace,46029,45.08437,-97.47823,,,,,Census cartographic boundary files 2024
-place,4668660,1600000US4668660,Ward town,Ward,ward,46101,44.15321,-96.46264,,,,,Census cartographic boundary files 2024
-place,4668740,1600000US4668740,Warner town,Warner,warner,46013,45.32346,-98.49521,,,,,Census cartographic boundary files 2024
-place,4669140,1600000US4669140,Wasta town,Wasta,wasta,46103,44.06973,-102.44561,,,,,Census cartographic boundary files 2024
-place,4669300,1600000US4669300,Watertown city,Watertown,watertown,46029,44.91008,-97.12633,,,,,Census cartographic boundary files 2024
-place,4669340,1600000US4669340,Waubay city,Waubay,waubay,46037,45.33773,-97.30717,,,,,Census cartographic boundary files 2024
-place,4669780,1600000US4669780,Webster city,Webster,webster,46037,45.33905,-97.52087,,,,,Census cartographic boundary files 2024
-place,4670020,1600000US4670020,Wentworth village,Wentworth,wentworth,46079,43.99692,-96.96456,,,,,Census cartographic boundary files 2024
-place,4670220,1600000US4670220,Wessington Springs city,Wessington Springs,wessington-springs,46073,44.08327,-98.56871,,,,,Census cartographic boundary files 2024
-place,4670140,1600000US4670140,Wessington city,Wessington,wessington,46005,44.45525,-98.69523,,,,,Census cartographic boundary files 2024
-place,4670540,1600000US4670540,Westport town,Westport,westport,46013,45.64889,-98.49855,,,,,Census cartographic boundary files 2024
-place,4670740,1600000US4670740,Wetonka town,Wetonka,wetonka,46089,45.62421,-98.77176,,,,,Census cartographic boundary files 2024
-place,4671180,1600000US4671180,White Lake city,White Lake,white-lake,46003,43.72798,-98.71246,,,,,Census cartographic boundary files 2024
-place,4671340,1600000US4671340,White River city,White River,white-river,46095,43.56857,-100.74512,,,,,Census cartographic boundary files 2024
-place,4671380,1600000US4671380,White Rock town,White Rock,white-rock,46109,45.92366,-96.57571,,,,,Census cartographic boundary files 2024
-place,4670940,1600000US4670940,White city,White,white,46011,44.43621,-96.64637,,,,,Census cartographic boundary files 2024
-place,4671580,1600000US4671580,Whitewood city,Whitewood,whitewood,46081,44.46224,-103.64192,,,,,Census cartographic boundary files 2024
-place,4671940,1600000US4671940,Willow Lake city,Willow Lake,willow-lake,46025,44.62776,-97.63897,,,,,Census cartographic boundary files 2024
-place,4671980,1600000US4671980,Wilmot city,Wilmot,wilmot,46109,45.40906,-96.85388,,,,,Census cartographic boundary files 2024
-place,4672180,1600000US4672180,Winner city,Winner,winner,46123,43.37569,-99.85592,,,,,Census cartographic boundary files 2024
-place,4672540,1600000US4672540,Wolsey town,Wolsey,wolsey,46005,44.41045,-98.47376,,,,,Census cartographic boundary files 2024
-place,4672620,1600000US4672620,Wood town,Wood,wood,46095,43.49711,-100.48019,,,,,Census cartographic boundary files 2024
-place,4672700,1600000US4672700,Woonsocket city,Woonsocket,woonsocket,46111,44.05345,-98.26851,,,,,Census cartographic boundary files 2024
-place,4672820,1600000US4672820,Worthing city,Worthing,worthing,46083,43.32945,-96.76824,,,,,Census cartographic boundary files 2024
-place,4673020,1600000US4673020,Yale town,Yale,yale,46005,44.43341,-97.99041,,,,,Census cartographic boundary files 2024
-place,4673060,1600000US4673060,Yankton city,Yankton,yankton,46135,42.89692,-97.39965,,,,,Census cartographic boundary files 2024
+place,4607060,1600000US4607060,Brentford town,Brentford,brentford,46115,45.15873,-98.32259,ocd-division/country:us/state:sd/place:brentford,,,,Census cartographic boundary files 2024
+place,4607180,1600000US4607180,Bridgewater city,Bridgewater,bridgewater,46087,43.55058,-97.49842,ocd-division/country:us/state:sd/place:bridgewater,,,,Census cartographic boundary files 2024
+place,4607300,1600000US4607300,Bristol city,Bristol,bristol,46037,45.34655,-97.74846,ocd-division/country:us/state:sd/place:bristol,,,,Census cartographic boundary files 2024
+place,4607380,1600000US4607380,Britton city,Britton,britton,46091,45.79300,-97.75312,ocd-division/country:us/state:sd/place:britton,,,,Census cartographic boundary files 2024
+place,4607420,1600000US4607420,Broadland town,Broadland,broadland,46005,44.49387,-98.34655,ocd-division/country:us/state:sd/place:broadland,,,,Census cartographic boundary files 2024
+place,4607580,1600000US4607580,Brookings city,Brookings,brookings,46011,44.30130,-96.78602,ocd-division/country:us/state:sd/place:brookings,,,,Census cartographic boundary files 2024
+place,4607740,1600000US4607740,Bruce city,Bruce,bruce,46011,44.43696,-96.89021,ocd-division/country:us/state:sd/place:bruce,,,,Census cartographic boundary files 2024
+place,4608060,1600000US4608060,Bryant city,Bryant,bryant,46057,44.58997,-97.46765,ocd-division/country:us/state:sd/place:bryant,,,,Census cartographic boundary files 2024
+place,4608340,1600000US4608340,Buffalo Gap town,Buffalo Gap,buffalo-gap,46033,43.49185,-103.31720,ocd-division/country:us/state:sd/place:buffalo_gap,,,,Census cartographic boundary files 2024
+place,4608140,1600000US4608140,Buffalo town,Buffalo,buffalo,46063,45.58523,-103.54416,ocd-division/country:us/state:sd/place:buffalo,,,,Census cartographic boundary files 2024
+place,4608700,1600000US4608700,Burke city,Burke,burke,46053,43.18302,-99.29449,ocd-division/country:us/state:sd/place:burke,,,,Census cartographic boundary files 2024
+place,4608820,1600000US4608820,Bushnell town,Bushnell,bushnell,46011,44.32742,-96.64236,ocd-division/country:us/state:sd/place:bushnell,,,,Census cartographic boundary files 2024
+place,4608860,1600000US4608860,Butler town,Butler,butler,46037,45.26064,-97.71485,ocd-division/country:us/state:sd/place:butler,,,,Census cartographic boundary files 2024
+place,4609260,1600000US4609260,Camp Crook town,Camp Crook,camp-crook,46063,45.55018,-103.97551,ocd-division/country:us/state:sd/place:camp_crook,,,,Census cartographic boundary files 2024
+place,4609300,1600000US4609300,Canistota city,Canistota,canistota,46087,43.59776,-97.29258,ocd-division/country:us/state:sd/place:canistota,,,,Census cartographic boundary files 2024
+place,4609420,1600000US4609420,Canova town,Canova,canova,46097,43.88125,-97.50396,ocd-division/country:us/state:sd/place:canova,,,,Census cartographic boundary files 2024
+place,4609500,1600000US4609500,Canton city,Canton,canton,46083,43.30422,-96.57916,ocd-division/country:us/state:sd/place:canton,,,,Census cartographic boundary files 2024
+place,4610220,1600000US4610220,Carthage city,Carthage,carthage,46097,44.16861,-97.71501,ocd-division/country:us/state:sd/place:carthage,,,,Census cartographic boundary files 2024
+place,4610500,1600000US4610500,Castlewood city,Castlewood,castlewood,46057,44.72273,-97.03473,ocd-division/country:us/state:sd/place:castlewood,,,,Census cartographic boundary files 2024
+place,4610620,1600000US4610620,Cavour town,Cavour,cavour,46005,44.37130,-98.03859,ocd-division/country:us/state:sd/place:cavour,,,,Census cartographic boundary files 2024
+place,4611060,1600000US4611060,Centerville city,Centerville,centerville,46125,43.11763,-96.95987,ocd-division/country:us/state:sd/place:centerville,,,,Census cartographic boundary files 2024
+place,4611140,1600000US4611140,Central City city,Central City,central-city,46081,44.36858,-103.76920,ocd-division/country:us/state:sd/place:central_city,,,,Census cartographic boundary files 2024
+place,4611220,1600000US4611220,Chamberlain city,Chamberlain,chamberlain,46015,43.79200,-99.32618,ocd-division/country:us/state:sd/place:chamberlain,,,,Census cartographic boundary files 2024
+place,4611380,1600000US4611380,Chancellor town,Chancellor,chancellor,46125,43.37141,-96.98780,ocd-division/country:us/state:sd/place:chancellor,,,,Census cartographic boundary files 2024
+place,4611500,1600000US4611500,Chelsea town,Chelsea,chelsea,46049,45.16831,-98.74338,ocd-division/country:us/state:sd/place:chelsea,,,,Census cartographic boundary files 2024
+place,4612020,1600000US4612020,Claire City town,Claire City,claire-city,46109,45.85528,-97.10459,ocd-division/country:us/state:sd/place:claire_city,,,,Census cartographic boundary files 2024
+place,4612100,1600000US4612100,Claremont town,Claremont,claremont,46013,45.67195,-98.01561,ocd-division/country:us/state:sd/place:claremont,,,,Census cartographic boundary files 2024
+place,4612180,1600000US4612180,Clark city,Clark,clark,46025,44.88025,-97.73675,ocd-division/country:us/state:sd/place:clark,,,,Census cartographic boundary files 2024
+place,4612540,1600000US4612540,Clear Lake city,Clear Lake,clear-lake,46039,44.76645,-96.68260,ocd-division/country:us/state:sd/place:clear_lake,,,,Census cartographic boundary files 2024
+place,4613220,1600000US4613220,Colman city,Colman,colman,46101,43.98281,-96.81895,ocd-division/country:us/state:sd/place:colman,,,,Census cartographic boundary files 2024
+place,4613300,1600000US4613300,Colome city,Colome,colome,46123,43.26044,-99.71693,ocd-division/country:us/state:sd/place:colome,,,,Census cartographic boundary files 2024
+place,4613380,1600000US4613380,Colton city,Colton,colton,46099,43.78585,-96.92824,ocd-division/country:us/state:sd/place:colton,,,,Census cartographic boundary files 2024
+place,4613420,1600000US4613420,Columbia city,Columbia,columbia,46013,45.61448,-98.31087,ocd-division/country:us/state:sd/place:columbia,,,,Census cartographic boundary files 2024
+place,4613700,1600000US4613700,Conde city,Conde,conde,46115,45.15602,-98.09578,ocd-division/country:us/state:sd/place:conde,,,,Census cartographic boundary files 2024
+place,4613940,1600000US4613940,Corona town,Corona,corona,46109,45.33628,-96.76490,ocd-division/country:us/state:sd/place:corona,,,,Census cartographic boundary files 2024
+place,4613980,1600000US4613980,Corsica city,Corsica,corsica,46043,43.42589,-98.40637,ocd-division/country:us/state:sd/place:corsica,,,,Census cartographic boundary files 2024
+place,4614220,1600000US4614220,Cottonwood town,Cottonwood,cottonwood,46071,43.96783,-101.90206,ocd-division/country:us/state:sd/place:cottonwood,,,,Census cartographic boundary files 2024
+place,4614580,1600000US4614580,Cresbard town,Cresbard,cresbard,46049,45.17075,-98.94740,ocd-division/country:us/state:sd/place:cresbard,,,,Census cartographic boundary files 2024
+place,4614740,1600000US4614740,Crooks city,Crooks,crooks,46099,43.65973,-96.80721,ocd-division/country:us/state:sd/place:crooks,,,,Census cartographic boundary files 2024
+place,4615140,1600000US4615140,Custer city,Custer,custer,46033,43.76610,-103.59791,ocd-division/country:us/state:sd/place:custer,,,,Census cartographic boundary files 2024
+place,4615300,1600000US4615300,Dallas town,Dallas,dallas,46053,43.23935,-99.51668,ocd-division/country:us/state:sd/place:dallas,,,,Census cartographic boundary files 2024
+place,4615420,1600000US4615420,Dante town,Dante,dante,46023,43.04310,-98.18737,ocd-division/country:us/state:sd/place:dante,,,,Census cartographic boundary files 2024
+place,4615540,1600000US4615540,Davis town,Davis,davis,46125,43.25929,-96.99608,ocd-division/country:us/state:sd/place:davis,,,,Census cartographic boundary files 2024
+place,4616260,1600000US4616260,De Smet city,De Smet,de-smet,46077,44.38682,-97.55112,ocd-division/country:us/state:sd/place:de_smet,,,,Census cartographic boundary files 2024
+place,4615700,1600000US4615700,Deadwood city,Deadwood,deadwood,46081,44.38735,-103.71717,ocd-division/country:us/state:sd/place:deadwood,,,,Census cartographic boundary files 2024
+place,4615980,1600000US4615980,Dell Rapids city,Dell Rapids,dell-rapids,46099,43.82272,-96.71413,ocd-division/country:us/state:sd/place:dell_rapids,,,,Census cartographic boundary files 2024
+place,4616060,1600000US4616060,Delmont city,Delmont,delmont,46043,43.26439,-98.15892,ocd-division/country:us/state:sd/place:delmont,,,,Census cartographic boundary files 2024
+place,4616620,1600000US4616620,Dimock town,Dimock,dimock,46067,43.47352,-97.98580,ocd-division/country:us/state:sd/place:dimock,,,,Census cartographic boundary files 2024
+place,4616820,1600000US4616820,Doland city,Doland,doland,46115,44.89699,-98.10043,ocd-division/country:us/state:sd/place:doland,,,,Census cartographic boundary files 2024
+place,4616860,1600000US4616860,Dolton town,Dolton,dolton,46125,43.49109,-97.38482,ocd-division/country:us/state:sd/place:dolton,,,,Census cartographic boundary files 2024
+place,4617020,1600000US4617020,Draper town,Draper,draper,46075,43.92432,-100.53696,ocd-division/country:us/state:sd/place:draper,,,,Census cartographic boundary files 2024
+place,4617420,1600000US4617420,Dupree city,Dupree,dupree,46137,45.04927,-101.60131,ocd-division/country:us/state:sd/place:dupree,,,,Census cartographic boundary files 2024
+place,4617620,1600000US4617620,Eagle Butte city,Eagle Butte,eagle-butte,46041,44.99464,-101.23329,ocd-division/country:us/state:sd/place:eagle_butte,,,,Census cartographic boundary files 2024
+place,4618180,1600000US4618180,Eden town,Eden,eden,46091,45.61735,-97.41965,ocd-division/country:us/state:sd/place:eden,,,,Census cartographic boundary files 2024
+place,4618300,1600000US4618300,Edgemont city,Edgemont,edgemont,46047,43.29829,-103.82698,ocd-division/country:us/state:sd/place:edgemont,,,,Census cartographic boundary files 2024
+place,4618460,1600000US4618460,Egan city,Egan,egan,46101,43.99795,-96.64842,ocd-division/country:us/state:sd/place:egan,,,,Census cartographic boundary files 2024
+place,4618620,1600000US4618620,Elk Point city,Elk Point,elk-point,46127,42.68151,-96.68134,ocd-division/country:us/state:sd/place:elk_point,,,,Census cartographic boundary files 2024
+place,4618700,1600000US4618700,Elkton city,Elkton,elkton,46011,44.23738,-96.48101,ocd-division/country:us/state:sd/place:elkton,,,,Census cartographic boundary files 2024
+place,4619420,1600000US4619420,Emery city,Emery,emery,46061,43.60137,-97.62049,ocd-division/country:us/state:sd/place:emery,,,,Census cartographic boundary files 2024
+place,4619860,1600000US4619860,Erwin town,Erwin,erwin,46077,44.48795,-97.44078,ocd-division/country:us/state:sd/place:erwin,,,,Census cartographic boundary files 2024
+place,4619980,1600000US4619980,Estelline city,Estelline,estelline,46057,44.57752,-96.90034,ocd-division/country:us/state:sd/place:estelline,,,,Census cartographic boundary files 2024
+place,4620060,1600000US4620060,Ethan town,Ethan,ethan,46035,43.54492,-97.98322,ocd-division/country:us/state:sd/place:ethan,,,,Census cartographic boundary files 2024
+place,4620180,1600000US4620180,Eureka city,Eureka,eureka,46089,45.77085,-99.62228,ocd-division/country:us/state:sd/place:eureka,,,,Census cartographic boundary files 2024
+place,4620340,1600000US4620340,Fairburn town,Fairburn,fairburn,46033,43.68735,-103.21142,ocd-division/country:us/state:sd/place:fairburn,,,,Census cartographic boundary files 2024
+place,4620380,1600000US4620380,Fairfax town,Fairfax,fairfax,46053,43.02783,-98.88919,ocd-division/country:us/state:sd/place:fairfax,,,,Census cartographic boundary files 2024
+place,4620780,1600000US4620780,Fairview town,Fairview,fairview,46083,43.22301,-96.48813,ocd-division/country:us/state:sd/place:fairview,,,,Census cartographic boundary files 2024
+place,4620980,1600000US4620980,Faith city,Faith,faith,46093,45.02451,-102.03562,ocd-division/country:us/state:sd/place:faith,,,,Census cartographic boundary files 2024
+place,4621060,1600000US4621060,Farmer town,Farmer,farmer,46061,43.72579,-97.68926,ocd-division/country:us/state:sd/place:farmer,,,,Census cartographic boundary files 2024
+place,4621260,1600000US4621260,Faulkton city,Faulkton,faulkton,46049,45.03841,-99.12684,ocd-division/country:us/state:sd/place:faulkton,,,,Census cartographic boundary files 2024
+place,4621540,1600000US4621540,Flandreau city,Flandreau,flandreau,46101,44.04566,-96.59853,ocd-division/country:us/state:sd/place:flandreau,,,,Census cartographic boundary files 2024
+place,4621820,1600000US4621820,Florence town,Florence,florence,46029,45.05591,-97.32838,ocd-division/country:us/state:sd/place:florence,,,,Census cartographic boundary files 2024
+place,4622260,1600000US4622260,Fort Pierre city,Fort Pierre,fort-pierre,46117,44.36450,-100.38050,ocd-division/country:us/state:sd/place:fort_pierre,,,,Census cartographic boundary files 2024
+place,4622580,1600000US4622580,Frankfort city,Frankfort,frankfort,46115,44.87678,-98.30808,ocd-division/country:us/state:sd/place:frankfort,,,,Census cartographic boundary files 2024
+place,4622860,1600000US4622860,Frederick town,Frederick,frederick,46013,45.83590,-98.50720,ocd-division/country:us/state:sd/place:frederick,,,,Census cartographic boundary files 2024
+place,4623020,1600000US4623020,Freeman city,Freeman,freeman,46067,43.34570,-97.42897,ocd-division/country:us/state:sd/place:freeman,,,,Census cartographic boundary files 2024
+place,4623140,1600000US4623140,Fruitdale town,Fruitdale,fruitdale,46019,44.66788,-103.69641,ocd-division/country:us/state:sd/place:fruitdale,,,,Census cartographic boundary files 2024
+place,4623220,1600000US4623220,Fulton town,Fulton,fulton,46061,43.72793,-97.82333,ocd-division/country:us/state:sd/place:fulton,,,,Census cartographic boundary files 2024
+place,4623460,1600000US4623460,Garden City town,Garden City,garden-city,46025,44.95931,-97.58041,ocd-division/country:us/state:sd/place:garden_city,,,,Census cartographic boundary files 2024
+place,4623820,1600000US4623820,Garretson city,Garretson,garretson,46099,43.71726,-96.50023,ocd-division/country:us/state:sd/place:garretson,,,,Census cartographic boundary files 2024
+place,4623860,1600000US4623860,Gary city,Gary,gary,46039,44.79497,-96.45843,ocd-division/country:us/state:sd/place:gary,,,,Census cartographic boundary files 2024
+place,4623900,1600000US4623900,Gayville town,Gayville,gayville,46135,42.89052,-97.17393,ocd-division/country:us/state:sd/place:gayville,,,,Census cartographic boundary files 2024
+place,4623980,1600000US4623980,Geddes city,Geddes,geddes,46023,43.25187,-98.69773,ocd-division/country:us/state:sd/place:geddes,,,,Census cartographic boundary files 2024
+place,4624260,1600000US4624260,Gettysburg city,Gettysburg,gettysburg,46107,45.00271,-99.95502,ocd-division/country:us/state:sd/place:gettysburg,,,,Census cartographic boundary files 2024
+place,4624620,1600000US4624620,Glenham town,Glenham,glenham,46129,45.53358,-100.27074,ocd-division/country:us/state:sd/place:glenham,,,,Census cartographic boundary files 2024
+place,4624820,1600000US4624820,Goodwin town,Goodwin,goodwin,46039,44.87755,-96.84967,ocd-division/country:us/state:sd/place:goodwin,,,,Census cartographic boundary files 2024
+place,4626180,1600000US4626180,Gregory city,Gregory,gregory,46053,43.23298,-99.42535,ocd-division/country:us/state:sd/place:gregory,,,,Census cartographic boundary files 2024
+place,4626220,1600000US4626220,Grenville town,Grenville,grenville,46037,45.46820,-97.39234,ocd-division/country:us/state:sd/place:grenville,,,,Census cartographic boundary files 2024
+place,4626340,1600000US4626340,Groton city,Groton,groton,46013,45.45193,-98.10163,ocd-division/country:us/state:sd/place:groton,,,,Census cartographic boundary files 2024
+place,4627260,1600000US4627260,Harrisburg city,Harrisburg,harrisburg,46083,43.43154,-96.70266,ocd-division/country:us/state:sd/place:harrisburg,,,,Census cartographic boundary files 2024
+place,4627420,1600000US4627420,Harrold town,Harrold,harrold,46065,44.52387,-99.73867,ocd-division/country:us/state:sd/place:harrold,,,,Census cartographic boundary files 2024
+place,4627540,1600000US4627540,Hartford city,Hartford,hartford,46099,43.62631,-96.94020,ocd-division/country:us/state:sd/place:hartford,,,,Census cartographic boundary files 2024
+place,4627820,1600000US4627820,Hayti town,Hayti,hayti,46057,44.65936,-97.20399,ocd-division/country:us/state:sd/place:hayti,,,,Census cartographic boundary files 2024
+place,4627940,1600000US4627940,Hazel town,Hazel,hazel,46057,44.75878,-97.38057,ocd-division/country:us/state:sd/place:hazel,,,,Census cartographic boundary files 2024
+place,4627980,1600000US4627980,Hecla city,Hecla,hecla,46013,45.88195,-98.15141,ocd-division/country:us/state:sd/place:hecla,,,,Census cartographic boundary files 2024
+place,4628140,1600000US4628140,Henry town,Henry,henry,46029,44.88019,-97.46190,ocd-division/country:us/state:sd/place:henry,,,,Census cartographic boundary files 2024
+place,4628300,1600000US4628300,Hermosa town,Hermosa,hermosa,46033,43.84944,-103.19970,ocd-division/country:us/state:sd/place:hermosa,,,,Census cartographic boundary files 2024
+place,4628340,1600000US4628340,Herreid city,Herreid,herreid,46021,45.83751,-100.07046,ocd-division/country:us/state:sd/place:herreid,,,,Census cartographic boundary files 2024
+place,4628420,1600000US4628420,Herrick town,Herrick,herrick,46053,43.11486,-99.18825,ocd-division/country:us/state:sd/place:herrick,,,,Census cartographic boundary files 2024
+place,4628460,1600000US4628460,Hetland town,Hetland,hetland,46077,44.37660,-97.23407,ocd-division/country:us/state:sd/place:hetland,,,,Census cartographic boundary files 2024
+place,4628980,1600000US4628980,Highmore city,Highmore,highmore,46069,44.52405,-99.44160,ocd-division/country:us/state:sd/place:highmore,,,,Census cartographic boundary files 2024
+place,4629100,1600000US4629100,Hill City city,Hill City,hill-city,46103,43.93126,-103.57389,ocd-division/country:us/state:sd/place:hill_city,,,,Census cartographic boundary files 2024
+place,4629340,1600000US4629340,Hillsview town,Hillsview,hillsview,46089,45.66207,-99.56065,ocd-division/country:us/state:sd/place:hillsview,,,,Census cartographic boundary files 2024
+place,4629500,1600000US4629500,Hitchcock town,Hitchcock,hitchcock,46005,44.63033,-98.40840,ocd-division/country:us/state:sd/place:hitchcock,,,,Census cartographic boundary files 2024
+place,4630140,1600000US4630140,Hosmer city,Hosmer,hosmer,46045,45.58183,-99.47363,ocd-division/country:us/state:sd/place:hosmer,,,,Census cartographic boundary files 2024
+place,4630220,1600000US4630220,Hot Springs city,Hot Springs,hot-springs,46047,43.43176,-103.48114,ocd-division/country:us/state:sd/place:hot_springs,,,,Census cartographic boundary files 2024
+place,4630300,1600000US4630300,Hoven town,Hoven,hoven,46107,45.24227,-99.77740,ocd-division/country:us/state:sd/place:hoven,,,,Census cartographic boundary files 2024
+place,4630460,1600000US4630460,Howard city,Howard,howard,46097,44.01040,-97.52512,ocd-division/country:us/state:sd/place:howard,,,,Census cartographic boundary files 2024
+place,4630740,1600000US4630740,Hudson town,Hudson,hudson,46083,43.13057,-96.45533,ocd-division/country:us/state:sd/place:hudson,,,,Census cartographic boundary files 2024
+place,4630900,1600000US4630900,Humboldt town,Humboldt,humboldt,46099,43.64776,-97.07329,ocd-division/country:us/state:sd/place:humboldt,,,,Census cartographic boundary files 2024
+place,4630980,1600000US4630980,Hurley city,Hurley,hurley,46125,43.27735,-97.09097,ocd-division/country:us/state:sd/place:hurley,,,,Census cartographic boundary files 2024
+place,4631060,1600000US4631060,Huron city,Huron,huron,46005,44.36330,-98.21739,ocd-division/country:us/state:sd/place:huron,,,,Census cartographic boundary files 2024
+place,4631620,1600000US4631620,Interior town,Interior,interior,46071,43.72777,-101.97953,ocd-division/country:us/state:sd/place:interior,,,,Census cartographic boundary files 2024
+place,4631860,1600000US4631860,Ipswich city,Ipswich,ipswich,46045,45.44033,-99.02975,ocd-division/country:us/state:sd/place:ipswich,,,,Census cartographic boundary files 2024
+place,4631940,1600000US4631940,Irene city,Irene,irene,46125,43.08520,-97.15725,ocd-division/country:us/state:sd/place:irene,,,,Census cartographic boundary files 2024
+place,4632020,1600000US4632020,Iroquois city,Iroquois,iroquois,46077,44.36800,-97.85052,ocd-division/country:us/state:sd/place:iroquois,,,,Census cartographic boundary files 2024
+place,4632140,1600000US4632140,Isabel town,Isabel,isabel,46041,45.39209,-101.43037,ocd-division/country:us/state:sd/place:isabel,,,,Census cartographic boundary files 2024
+place,4632460,1600000US4632460,Java town,Java,java,46129,45.50383,-99.88390,ocd-division/country:us/state:sd/place:java,,,,Census cartographic boundary files 2024
+place,4632700,1600000US4632700,Jefferson city,Jefferson,jefferson,46127,42.60425,-96.56551,ocd-division/country:us/state:sd/place:jefferson,,,,Census cartographic boundary files 2024
+place,4633180,1600000US4633180,Kadoka city,Kadoka,kadoka,46071,43.82866,-101.50748,ocd-division/country:us/state:sd/place:kadoka,,,,Census cartographic boundary files 2024
+place,4633580,1600000US4633580,Kennebec town,Kennebec,kennebec,46085,43.90332,-99.86189,ocd-division/country:us/state:sd/place:kennebec,,,,Census cartographic boundary files 2024
+place,4633820,1600000US4633820,Keystone town,Keystone,keystone,46103,43.88993,-103.42321,ocd-division/country:us/state:sd/place:keystone,,,,Census cartographic boundary files 2024
+place,4633980,1600000US4633980,Kimball city,Kimball,kimball,46015,43.74857,-98.95634,ocd-division/country:us/state:sd/place:kimball,,,,Census cartographic boundary files 2024
+place,4634340,1600000US4634340,Kranzburg town,Kranzburg,kranzburg,46029,44.89007,-96.91836,ocd-division/country:us/state:sd/place:kranzburg,,,,Census cartographic boundary files 2024
+place,4634540,1600000US4634540,La Bolt town,La Bolt,la-bolt,46051,45.04952,-96.67455,ocd-division/country:us/state:sd/place:la_bolt,,,,Census cartographic boundary files 2024
+place,4635100,1600000US4635100,Lake Andes city,Lake Andes,lake-andes,46023,43.15488,-98.53609,ocd-division/country:us/state:sd/place:lake_andes,,,,Census cartographic boundary files 2024
+place,4635220,1600000US4635220,Lake City town,Lake City,lake-city,46091,45.72258,-97.41236,ocd-division/country:us/state:sd/place:lake_city,,,,Census cartographic boundary files 2024
+place,4635460,1600000US4635460,Lake Norden city,Lake Norden,lake-norden,46057,44.58135,-97.21045,ocd-division/country:us/state:sd/place:lake_norden,,,,Census cartographic boundary files 2024
+place,4635500,1600000US4635500,Lake Preston city,Lake Preston,lake-preston,46077,44.36115,-97.37588,ocd-division/country:us/state:sd/place:lake_preston,,,,Census cartographic boundary files 2024
+place,4635780,1600000US4635780,Lane town,Lane,lane,46073,44.06910,-98.42231,ocd-division/country:us/state:sd/place:lane,,,,Census cartographic boundary files 2024
+place,4635820,1600000US4635820,Langford town,Langford,langford,46091,45.60187,-97.83054,ocd-division/country:us/state:sd/place:langford,,,,Census cartographic boundary files 2024
+place,4636220,1600000US4636220,Lead city,Lead,lead,46081,44.35257,-103.76876,ocd-division/country:us/state:sd/place:lead,,,,Census cartographic boundary files 2024
+place,4636260,1600000US4636260,Lebanon town,Lebanon,lebanon,46107,45.06912,-99.76679,ocd-division/country:us/state:sd/place:lebanon,,,,Census cartographic boundary files 2024
+place,4636340,1600000US4636340,Lemmon city,Lemmon,lemmon,46105,45.93879,-102.15864,ocd-division/country:us/state:sd/place:lemmon,,,,Census cartographic boundary files 2024
+place,4636380,1600000US4636380,Lennox city,Lennox,lennox,46083,43.34863,-96.89576,ocd-division/country:us/state:sd/place:lennox,,,,Census cartographic boundary files 2024
+place,4636460,1600000US4636460,Leola city,Leola,leola,46089,45.72191,-98.93934,ocd-division/country:us/state:sd/place:leola,,,,Census cartographic boundary files 2024
+place,4636540,1600000US4636540,Lesterville town,Lesterville,lesterville,46135,43.03815,-97.59011,ocd-division/country:us/state:sd/place:lesterville,,,,Census cartographic boundary files 2024
+place,4636620,1600000US4636620,Letcher town,Letcher,letcher,46111,43.90052,-98.14422,ocd-division/country:us/state:sd/place:letcher,,,,Census cartographic boundary files 2024
+place,4638860,1600000US4638860,Long Lake town,Long Lake,long-lake,46089,45.85596,-99.20565,ocd-division/country:us/state:sd/place:long_lake,,,,Census cartographic boundary files 2024
+place,4639260,1600000US4639260,Lowry town,Lowry,lowry,46129,45.31543,-99.98125,ocd-division/country:us/state:sd/place:lowry,,,,Census cartographic boundary files 2024
+place,4640220,1600000US4640220,Madison city,Madison,madison,46079,44.00458,-97.11770,ocd-division/country:us/state:sd/place:madison,,,,Census cartographic boundary files 2024
+place,4640860,1600000US4640860,Marion city,Marion,marion,46125,43.42473,-97.26057,ocd-division/country:us/state:sd/place:marion,,,,Census cartographic boundary files 2024
+place,4641100,1600000US4641100,Martin city,Martin,martin,46007,43.17406,-101.73427,ocd-division/country:us/state:sd/place:martin,,,,Census cartographic boundary files 2024
+place,4641220,1600000US4641220,Marvin town,Marvin,marvin,46051,45.25935,-96.91662,ocd-division/country:us/state:sd/place:marvin,,,,Census cartographic boundary files 2024
+place,4639940,1600000US4639940,McIntosh city,McIntosh,mcintosh,46031,45.92426,-101.34962,ocd-division/country:us/state:sd/place:mcintosh,,,,Census cartographic boundary files 2024
+place,4640020,1600000US4640020,McLaughlin city,McLaughlin,mclaughlin,46031,45.81380,-100.81114,ocd-division/country:us/state:sd/place:mclaughlin,,,,Census cartographic boundary files 2024
+place,4641860,1600000US4641860,Mellette city,Mellette,mellette,46115,45.15461,-98.49837,ocd-division/country:us/state:sd/place:mellette,,,,Census cartographic boundary files 2024
+place,4641980,1600000US4641980,Menno city,Menno,menno,46067,43.23813,-97.57636,ocd-division/country:us/state:sd/place:menno,,,,Census cartographic boundary files 2024
+place,4642140,1600000US4642140,Midland town,Midland,midland,46055,44.07214,-101.15695,ocd-division/country:us/state:sd/place:midland,,,,Census cartographic boundary files 2024
+place,4642260,1600000US4642260,Milbank city,Milbank,milbank,46051,45.21788,-96.63430,ocd-division/country:us/state:sd/place:milbank,,,,Census cartographic boundary files 2024
+place,4642460,1600000US4642460,Miller city,Miller,miller,46059,44.52223,-98.98844,ocd-division/country:us/state:sd/place:miller,,,,Census cartographic boundary files 2024
+place,4642980,1600000US4642980,Mission Hill town,Mission Hill,mission-hill,46135,42.91985,-97.27904,ocd-division/country:us/state:sd/place:mission_hill,,,,Census cartographic boundary files 2024
+place,4642940,1600000US4642940,Mission city,Mission,mission,46121,43.30564,-100.66142,ocd-division/country:us/state:sd/place:mission,,,,Census cartographic boundary files 2024
+place,4643100,1600000US4643100,Mitchell city,Mitchell,mitchell,46035,43.73134,-98.03293,ocd-division/country:us/state:sd/place:mitchell,,,,Census cartographic boundary files 2024
+place,4643180,1600000US4643180,Mobridge city,Mobridge,mobridge,46129,45.54110,-100.43300,ocd-division/country:us/state:sd/place:mobridge,,,,Census cartographic boundary files 2024
+place,4643380,1600000US4643380,Monroe town,Monroe,monroe,46125,43.48916,-97.21663,ocd-division/country:us/state:sd/place:monroe,,,,Census cartographic boundary files 2024
+place,4643500,1600000US4643500,Montrose city,Montrose,montrose,46087,43.70097,-97.18401,ocd-division/country:us/state:sd/place:montrose,,,,Census cartographic boundary files 2024
+place,4643860,1600000US4643860,Morristown town,Morristown,morristown,46031,45.93967,-101.71882,ocd-division/country:us/state:sd/place:morristown,,,,Census cartographic boundary files 2024
+place,4644020,1600000US4644020,Mound City town,Mound City,mound-city,46021,45.72618,-100.06882,ocd-division/country:us/state:sd/place:mound_city,,,,Census cartographic boundary files 2024
+place,4644100,1600000US4644100,Mount Vernon city,Mount Vernon,mount-vernon,46035,43.71464,-98.26085,ocd-division/country:us/state:sd/place:mount_vernon,,,,Census cartographic boundary files 2024
+place,4644260,1600000US4644260,Murdo city,Murdo,murdo,46075,43.88852,-100.71394,ocd-division/country:us/state:sd/place:murdo,,,,Census cartographic boundary files 2024
+place,4644620,1600000US4644620,Naples town,Naples,naples,46025,44.77166,-97.51306,ocd-division/country:us/state:sd/place:naples,,,,Census cartographic boundary files 2024
+place,4644820,1600000US4644820,New Effington town,New Effington,new-effington,46109,45.85587,-96.91730,ocd-division/country:us/state:sd/place:new_effington,,,,Census cartographic boundary files 2024
+place,4645060,1600000US4645060,New Underwood city,New Underwood,new-underwood,46103,44.09295,-102.83337,ocd-division/country:us/state:sd/place:new_underwood,,,,Census cartographic boundary files 2024
+place,4645100,1600000US4645100,New Witten town,New Witten,new-witten,46123,43.44053,-100.08218,ocd-division/country:us/state:sd/place:new_witten,,,,Census cartographic boundary files 2024
+place,4644860,1600000US4644860,Newell city,Newell,newell,46019,44.71618,-103.41798,ocd-division/country:us/state:sd/place:newell,,,,Census cartographic boundary files 2024
+place,4645180,1600000US4645180,Nisland town,Nisland,nisland,46019,44.67367,-103.55535,ocd-division/country:us/state:sd/place:nisland,,,,Census cartographic boundary files 2024
+place,4645700,1600000US4645700,North Sioux City city,North Sioux City,north-sioux-city,46127,42.53381,-96.49186,ocd-division/country:us/state:sd/place:north_sioux_city,,,,Census cartographic boundary files 2024
+place,4645740,1600000US4645740,Northville town,Northville,northville,46115,45.15535,-98.57930,ocd-division/country:us/state:sd/place:northville,,,,Census cartographic boundary files 2024
+place,4646060,1600000US4646060,Nunda town,Nunda,nunda,46079,44.15985,-97.01940,ocd-division/country:us/state:sd/place:nunda,,,,Census cartographic boundary files 2024
+place,4646180,1600000US4646180,Oacoma town,Oacoma,oacoma,46085,43.80830,-99.35865,ocd-division/country:us/state:sd/place:oacoma,,,,Census cartographic boundary files 2024
+place,4646500,1600000US4646500,Oelrichs town,Oelrichs,oelrichs,46047,43.18201,-103.23343,ocd-division/country:us/state:sd/place:oelrichs,,,,Census cartographic boundary files 2024
+place,4646780,1600000US4646780,Oldham city,Oldham,oldham,46077,44.22845,-97.30977,ocd-division/country:us/state:sd/place:oldham,,,,Census cartographic boundary files 2024
+place,4646900,1600000US4646900,Olivet town,Olivet,olivet,46067,43.24262,-97.67474,ocd-division/country:us/state:sd/place:olivet,,,,Census cartographic boundary files 2024
+place,4646980,1600000US4646980,Onaka town,Onaka,onaka,46049,45.19295,-99.46578,ocd-division/country:us/state:sd/place:onaka,,,,Census cartographic boundary files 2024
+place,4647180,1600000US4647180,Onida city,Onida,onida,46119,44.70567,-100.07036,ocd-division/country:us/state:sd/place:onida,,,,Census cartographic boundary files 2024
+place,4647460,1600000US4647460,Orient town,Orient,orient,46049,44.90080,-99.08843,ocd-division/country:us/state:sd/place:orient,,,,Census cartographic boundary files 2024
+place,4647660,1600000US4647660,Ortley town,Ortley,ortley,46109,45.33774,-97.20607,ocd-division/country:us/state:sd/place:ortley,,,,Census cartographic boundary files 2024
+place,4648380,1600000US4648380,Parker city,Parker,parker,46125,43.39830,-97.13280,ocd-division/country:us/state:sd/place:parker,,,,Census cartographic boundary files 2024
+place,4648460,1600000US4648460,Parkston city,Parkston,parkston,46067,43.39367,-97.98437,ocd-division/country:us/state:sd/place:parkston,,,,Census cartographic boundary files 2024
+place,4648940,1600000US4648940,Peever town,Peever,peever,46109,45.54192,-96.95606,ocd-division/country:us/state:sd/place:peever,,,,Census cartographic boundary files 2024
+place,4649300,1600000US4649300,Philip city,Philip,philip,46055,44.04067,-101.66445,ocd-division/country:us/state:sd/place:philip,,,,Census cartographic boundary files 2024
+place,4649460,1600000US4649460,Pickstown town,Pickstown,pickstown,46023,43.06568,-98.53185,ocd-division/country:us/state:sd/place:pickstown,,,,Census cartographic boundary files 2024
+place,4649500,1600000US4649500,Piedmont city,Piedmont,piedmont,46093,44.21872,-103.37382,ocd-division/country:us/state:sd/place:piedmont,,,,Census cartographic boundary files 2024
+place,4649540,1600000US4649540,Pierpont town,Pierpont,pierpont,46037,45.49565,-97.83215,ocd-division/country:us/state:sd/place:pierpont,,,,Census cartographic boundary files 2024
+place,4649600,1600000US4649600,Pierre city,Pierre,pierre,46065,44.36979,-100.33255,ocd-division/country:us/state:sd/place:pierre,,,,Census cartographic boundary files 2024
+place,4650020,1600000US4650020,Plankinton city,Plankinton,plankinton,46003,43.71434,-98.48199,ocd-division/country:us/state:sd/place:plankinton,,,,Census cartographic boundary files 2024
+place,4650260,1600000US4650260,Platte city,Platte,platte,46023,43.38509,-98.84281,ocd-division/country:us/state:sd/place:platte,,,,Census cartographic boundary files 2024
+place,4651260,1600000US4651260,Pollock town,Pollock,pollock,46021,45.90020,-100.28998,ocd-division/country:us/state:sd/place:pollock,,,,Census cartographic boundary files 2024
+place,4651820,1600000US4651820,Presho city,Presho,presho,46085,43.90710,-100.05839,ocd-division/country:us/state:sd/place:presho,,,,Census cartographic boundary files 2024
+place,4651940,1600000US4651940,Pringle town,Pringle,pringle,46033,43.61091,-103.59439,ocd-division/country:us/state:sd/place:pringle,,,,Census cartographic boundary files 2024
+place,4652220,1600000US4652220,Pukwana town,Pukwana,pukwana,46015,43.77636,-99.18305,ocd-division/country:us/state:sd/place:pukwana,,,,Census cartographic boundary files 2024
+place,4652500,1600000US4652500,Quinn town,Quinn,quinn,46103,43.99077,-102.12913,ocd-division/country:us/state:sd/place:quinn,,,,Census cartographic boundary files 2024
+place,4652860,1600000US4652860,Ramona town,Ramona,ramona,46079,44.12005,-97.21524,ocd-division/country:us/state:sd/place:ramona,,,,Census cartographic boundary files 2024
+place,4652980,1600000US4652980,Rapid City city,Rapid City,rapid-city,46103,44.06595,-103.22538,ocd-division/country:us/state:sd/place:rapid_city,,,,Census cartographic boundary files 2024
+place,4653220,1600000US4653220,Ravinia town,Ravinia,ravinia,46023,43.13649,-98.42686,ocd-division/country:us/state:sd/place:ravinia,,,,Census cartographic boundary files 2024
+place,4653260,1600000US4653260,Raymond town,Raymond,raymond,46025,44.91037,-97.93714,ocd-division/country:us/state:sd/place:raymond,,,,Census cartographic boundary files 2024
+place,4653460,1600000US4653460,Redfield city,Redfield,redfield,46115,44.86971,-98.52137,ocd-division/country:us/state:sd/place:redfield,,,,Census cartographic boundary files 2024
+place,4653940,1600000US4653940,Ree Heights town,Ree Heights,ree-heights,46059,44.51584,-99.20052,ocd-division/country:us/state:sd/place:ree_heights,,,,Census cartographic boundary files 2024
+place,4654020,1600000US4654020,Reliance town,Reliance,reliance,46085,43.88193,-99.60175,ocd-division/country:us/state:sd/place:reliance,,,,Census cartographic boundary files 2024
+place,4654220,1600000US4654220,Revillo town,Revillo,revillo,46051,45.01529,-96.57066,ocd-division/country:us/state:sd/place:revillo,,,,Census cartographic boundary files 2024
+place,4655540,1600000US4655540,Rockham town,Rockham,rockham,46049,44.90430,-98.82340,ocd-division/country:us/state:sd/place:rockham,,,,Census cartographic boundary files 2024
+place,4655820,1600000US4655820,Roscoe city,Roscoe,roscoe,46045,45.45078,-99.33494,ocd-division/country:us/state:sd/place:roscoe,,,,Census cartographic boundary files 2024
+place,4656340,1600000US4656340,Rosholt town,Rosholt,rosholt,46109,45.86707,-96.73068,ocd-division/country:us/state:sd/place:rosholt,,,,Census cartographic boundary files 2024
+place,4656380,1600000US4656380,Roslyn town,Roslyn,roslyn,46037,45.49690,-97.49320,ocd-division/country:us/state:sd/place:roslyn,,,,Census cartographic boundary files 2024
+place,4657340,1600000US4657340,Salem city,Salem,salem,46087,43.72172,-97.38891,ocd-division/country:us/state:sd/place:salem,,,,Census cartographic boundary files 2024
+place,4657940,1600000US4657940,Scotland city,Scotland,scotland,46009,43.14762,-97.71977,ocd-division/country:us/state:sd/place:scotland,,,,Census cartographic boundary files 2024
+place,4658140,1600000US4658140,Selby city,Selby,selby,46129,45.50778,-100.03189,ocd-division/country:us/state:sd/place:selby,,,,Census cartographic boundary files 2024
+place,4658180,1600000US4658180,Seneca town,Seneca,seneca,46049,45.06053,-99.50917,ocd-division/country:us/state:sd/place:seneca,,,,Census cartographic boundary files 2024
+place,4658580,1600000US4658580,Sherman town,Sherman,sherman,46099,43.75773,-96.47624,ocd-division/country:us/state:sd/place:sherman,,,,Census cartographic boundary files 2024
+place,4658900,1600000US4658900,Sinai town,Sinai,sinai,46011,44.24451,-97.04399,ocd-division/country:us/state:sd/place:sinai,,,,Census cartographic boundary files 2024
+place,4659020,1600000US4659020,Sioux Falls city,Sioux Falls,sioux-falls,46099,43.55257,-96.72859,ocd-division/country:us/state:sd/place:sioux_falls,,,,Census cartographic boundary files 2024
+place,4659260,1600000US4659260,Sisseton city,Sisseton,sisseton,46109,45.66197,-97.04071,ocd-division/country:us/state:sd/place:sisseton,,,,Census cartographic boundary files 2024
+place,4659940,1600000US4659940,South Shore town,South Shore,south-shore,46029,45.10073,-96.92939,ocd-division/country:us/state:sd/place:south_shore,,,,Census cartographic boundary files 2024
+place,4660020,1600000US4660020,Spearfish city,Spearfish,spearfish,46081,44.50855,-103.85725,ocd-division/country:us/state:sd/place:spearfish,,,,Census cartographic boundary files 2024
+place,4660060,1600000US4660060,Spencer city,Spencer,spencer,46087,43.72762,-97.59087,ocd-division/country:us/state:sd/place:spencer,,,,Census cartographic boundary files 2024
+place,4660660,1600000US4660660,Springfield city,Springfield,springfield,46009,42.85344,-97.89463,ocd-division/country:us/state:sd/place:springfield,,,,Census cartographic boundary files 2024
+place,4657140,1600000US4657140,St. Francis town,St. Francis,st-francis,46121,43.14145,-100.90284,ocd-division/country:us/state:sd/place:st_francis,,,,Census cartographic boundary files 2024
+place,4657180,1600000US4657180,St. Lawrence town,St. Lawrence,st-lawrence,46059,44.51648,-98.93726,ocd-division/country:us/state:sd/place:st_lawrence,,,,Census cartographic boundary files 2024
+place,4661700,1600000US4661700,Stickney town,Stickney,stickney,46003,43.59095,-98.43731,ocd-division/country:us/state:sd/place:stickney,,,,Census cartographic boundary files 2024
+place,4661740,1600000US4661740,Stockholm town,Stockholm,stockholm,46051,45.10225,-96.79977,ocd-division/country:us/state:sd/place:stockholm,,,,Census cartographic boundary files 2024
+place,4661980,1600000US4661980,Strandburg town,Strandburg,strandburg,46051,45.04374,-96.76081,ocd-division/country:us/state:sd/place:strandburg,,,,Census cartographic boundary files 2024
+place,4662020,1600000US4662020,Stratford town,Stratford,stratford,46013,45.31747,-98.30433,ocd-division/country:us/state:sd/place:stratford,,,,Census cartographic boundary files 2024
+place,4662100,1600000US4662100,Sturgis city,Sturgis,sturgis,46093,44.40518,-103.51928,ocd-division/country:us/state:sd/place:sturgis,,,,Census cartographic boundary files 2024
+place,4662155,1600000US4662155,Summerset city,Summerset,summerset,46093,44.19009,-103.34059,ocd-division/country:us/state:sd/place:summerset,,,,Census cartographic boundary files 2024
+place,4662220,1600000US4662220,Summit town,Summit,summit,46109,45.30587,-97.03592,ocd-division/country:us/state:sd/place:summit,,,,Census cartographic boundary files 2024
+place,4662820,1600000US4662820,Tabor town,Tabor,tabor,46009,42.94551,-97.65988,ocd-division/country:us/state:sd/place:tabor,,,,Census cartographic boundary files 2024
+place,4663100,1600000US4663100,Tea city,Tea,tea,46083,43.45603,-96.83129,ocd-division/country:us/state:sd/place:tea,,,,Census cartographic boundary files 2024
+place,4663620,1600000US4663620,Timber Lake city,Timber Lake,timber-lake,46041,45.42564,-101.07462,ocd-division/country:us/state:sd/place:timber_lake,,,,Census cartographic boundary files 2024
+place,4663700,1600000US4663700,Tolstoy town,Tolstoy,tolstoy,46107,45.20826,-99.61394,ocd-division/country:us/state:sd/place:tolstoy,,,,Census cartographic boundary files 2024
+place,4663740,1600000US4663740,Toronto town,Toronto,toronto,46039,44.57283,-96.64229,ocd-division/country:us/state:sd/place:toronto,,,,Census cartographic boundary files 2024
+place,4663940,1600000US4663940,Trent town,Trent,trent,46101,43.90983,-96.65819,ocd-division/country:us/state:sd/place:trent,,,,Census cartographic boundary files 2024
+place,4664020,1600000US4664020,Tripp city,Tripp,tripp,46067,43.22529,-97.96563,ocd-division/country:us/state:sd/place:tripp,,,,Census cartographic boundary files 2024
+place,4664300,1600000US4664300,Tulare town,Tulare,tulare,46115,44.73821,-98.50893,ocd-division/country:us/state:sd/place:tulare,,,,Census cartographic boundary files 2024
+place,4664540,1600000US4664540,Turton town,Turton,turton,46115,45.04901,-98.09746,ocd-division/country:us/state:sd/place:turton,,,,Census cartographic boundary files 2024
+place,4664700,1600000US4664700,Twin Brooks town,Twin Brooks,twin-brooks,46051,45.20709,-96.78516,ocd-division/country:us/state:sd/place:twin_brooks,,,,Census cartographic boundary files 2024
+place,4664860,1600000US4664860,Tyndall city,Tyndall,tyndall,46009,42.99253,-97.86507,ocd-division/country:us/state:sd/place:tyndall,,,,Census cartographic boundary files 2024
+place,4665780,1600000US4665780,Utica town,Utica,utica,46135,42.98063,-97.49674,ocd-division/country:us/state:sd/place:utica,,,,Census cartographic boundary files 2024
+place,4666260,1600000US4666260,Valley Springs city,Valley Springs,valley-springs,46099,43.58178,-96.46638,ocd-division/country:us/state:sd/place:valley_springs,,,,Census cartographic boundary files 2024
+place,4666540,1600000US4666540,Veblen city,Veblen,veblen,46091,45.86106,-97.28549,ocd-division/country:us/state:sd/place:veblen,,,,Census cartographic boundary files 2024
+place,4666660,1600000US4666660,Verdon town,Verdon,verdon,46013,45.24418,-98.09918,ocd-division/country:us/state:sd/place:verdon,,,,Census cartographic boundary files 2024
+place,4666700,1600000US4666700,Vermillion city,Vermillion,vermillion,46027,42.78536,-96.93108,ocd-division/country:us/state:sd/place:vermillion,,,,Census cartographic boundary files 2024
+place,4667020,1600000US4667020,Viborg city,Viborg,viborg,46125,43.17165,-97.08124,ocd-division/country:us/state:sd/place:viborg,,,,Census cartographic boundary files 2024
+place,4667220,1600000US4667220,Vienna town,Vienna,vienna,46025,44.70679,-97.50002,ocd-division/country:us/state:sd/place:vienna,,,,Census cartographic boundary files 2024
+place,4667340,1600000US4667340,Vilas town,Vilas,vilas,46097,44.01560,-97.59565,ocd-division/country:us/state:sd/place:vilas,,,,Census cartographic boundary files 2024
+place,4667500,1600000US4667500,Virgil town,Virgil,virgil,46005,44.29088,-98.42761,ocd-division/country:us/state:sd/place:virgil,,,,Census cartographic boundary files 2024
+place,4667700,1600000US4667700,Volga city,Volga,volga,46011,44.32175,-96.92058,ocd-division/country:us/state:sd/place:volga,,,,Census cartographic boundary files 2024
+place,4667780,1600000US4667780,Volin town,Volin,volin,46135,42.95678,-97.18170,ocd-division/country:us/state:sd/place:volin,,,,Census cartographic boundary files 2024
+place,4668020,1600000US4668020,Wagner city,Wagner,wagner,46023,43.07672,-98.29316,ocd-division/country:us/state:sd/place:wagner,,,,Census cartographic boundary files 2024
+place,4668100,1600000US4668100,Wakonda town,Wakonda,wakonda,46027,43.00735,-97.10565,ocd-division/country:us/state:sd/place:wakonda,,,,Census cartographic boundary files 2024
+place,4668380,1600000US4668380,Wall town,Wall,wall,46103,43.98995,-102.24272,ocd-division/country:us/state:sd/place:wall,,,,Census cartographic boundary files 2024
+place,4668420,1600000US4668420,Wallace town,Wallace,wallace,46029,45.08437,-97.47823,ocd-division/country:us/state:sd/place:wallace,,,,Census cartographic boundary files 2024
+place,4668660,1600000US4668660,Ward town,Ward,ward,46101,44.15321,-96.46264,ocd-division/country:us/state:sd/place:ward,,,,Census cartographic boundary files 2024
+place,4668740,1600000US4668740,Warner town,Warner,warner,46013,45.32346,-98.49521,ocd-division/country:us/state:sd/place:warner,,,,Census cartographic boundary files 2024
+place,4669140,1600000US4669140,Wasta town,Wasta,wasta,46103,44.06973,-102.44561,ocd-division/country:us/state:sd/place:wasta,,,,Census cartographic boundary files 2024
+place,4669300,1600000US4669300,Watertown city,Watertown,watertown,46029,44.91008,-97.12633,ocd-division/country:us/state:sd/place:watertown,,,,Census cartographic boundary files 2024
+place,4669340,1600000US4669340,Waubay city,Waubay,waubay,46037,45.33773,-97.30717,ocd-division/country:us/state:sd/place:waubay,,,,Census cartographic boundary files 2024
+place,4669780,1600000US4669780,Webster city,Webster,webster,46037,45.33905,-97.52087,ocd-division/country:us/state:sd/place:webster,,,,Census cartographic boundary files 2024
+place,4670020,1600000US4670020,Wentworth village,Wentworth,wentworth,46079,43.99692,-96.96456,ocd-division/country:us/state:sd/place:wentworth,,,,Census cartographic boundary files 2024
+place,4670220,1600000US4670220,Wessington Springs city,Wessington Springs,wessington-springs,46073,44.08327,-98.56871,ocd-division/country:us/state:sd/place:wessington_springs,,,,Census cartographic boundary files 2024
+place,4670140,1600000US4670140,Wessington city,Wessington,wessington,46005,44.45525,-98.69523,ocd-division/country:us/state:sd/place:wessington,,,,Census cartographic boundary files 2024
+place,4670540,1600000US4670540,Westport town,Westport,westport,46013,45.64889,-98.49855,ocd-division/country:us/state:sd/place:westport,,,,Census cartographic boundary files 2024
+place,4670740,1600000US4670740,Wetonka town,Wetonka,wetonka,46089,45.62421,-98.77176,ocd-division/country:us/state:sd/place:wetonka,,,,Census cartographic boundary files 2024
+place,4671180,1600000US4671180,White Lake city,White Lake,white-lake,46003,43.72798,-98.71246,ocd-division/country:us/state:sd/place:white_lake,,,,Census cartographic boundary files 2024
+place,4671340,1600000US4671340,White River city,White River,white-river,46095,43.56857,-100.74512,ocd-division/country:us/state:sd/place:white_river,,,,Census cartographic boundary files 2024
+place,4671380,1600000US4671380,White Rock town,White Rock,white-rock,46109,45.92366,-96.57571,ocd-division/country:us/state:sd/place:white_rock,,,,Census cartographic boundary files 2024
+place,4670940,1600000US4670940,White city,White,white,46011,44.43621,-96.64637,ocd-division/country:us/state:sd/place:white,,,,Census cartographic boundary files 2024
+place,4671580,1600000US4671580,Whitewood city,Whitewood,whitewood,46081,44.46224,-103.64192,ocd-division/country:us/state:sd/place:whitewood,,,,Census cartographic boundary files 2024
+place,4671940,1600000US4671940,Willow Lake city,Willow Lake,willow-lake,46025,44.62776,-97.63897,ocd-division/country:us/state:sd/place:willow_lake,,,,Census cartographic boundary files 2024
+place,4671980,1600000US4671980,Wilmot city,Wilmot,wilmot,46109,45.40906,-96.85388,ocd-division/country:us/state:sd/place:wilmot,,,,Census cartographic boundary files 2024
+place,4672180,1600000US4672180,Winner city,Winner,winner,46123,43.37569,-99.85592,ocd-division/country:us/state:sd/place:winner,,,,Census cartographic boundary files 2024
+place,4672540,1600000US4672540,Wolsey town,Wolsey,wolsey,46005,44.41045,-98.47376,ocd-division/country:us/state:sd/place:wolsey,,,,Census cartographic boundary files 2024
+place,4672620,1600000US4672620,Wood town,Wood,wood,46095,43.49711,-100.48019,ocd-division/country:us/state:sd/place:wood,,,,Census cartographic boundary files 2024
+place,4672700,1600000US4672700,Woonsocket city,Woonsocket,woonsocket,46111,44.05345,-98.26851,ocd-division/country:us/state:sd/place:woonsocket,,,,Census cartographic boundary files 2024
+place,4672820,1600000US4672820,Worthing city,Worthing,worthing,46083,43.32945,-96.76824,ocd-division/country:us/state:sd/place:worthing,,,,Census cartographic boundary files 2024
+place,4673020,1600000US4673020,Yale town,Yale,yale,46005,44.43341,-97.99041,ocd-division/country:us/state:sd/place:yale,,,,Census cartographic boundary files 2024
+place,4673060,1600000US4673060,Yankton city,Yankton,yankton,46135,42.89692,-97.39965,ocd-division/country:us/state:sd/place:yankton,,,,Census cartographic boundary files 2024
 cdp,4600520,1600000US4600520,Agency Village CDP,Agency Village,agency-village-cdp,46109,45.57770,-97.07711,,,,,Census cartographic boundary files 2024
 cdp,4600900,1600000US4600900,Allen CDP,Allen,allen-cdp,46007,43.27712,-101.92545,,,,,Census cartographic boundary files 2024
 cdp,4601450,1600000US4601450,Anderson CDP,Anderson,anderson-cdp,46099,43.52241,-96.61592,,,,,Census cartographic boundary files 2024
@@ -565,3 +565,226 @@ tribal,3680,2500000US3680,Shakopee Mdewakanton Sioux Community and Off-Reservati
 tribal,3970,2500000US3970,Standing Rock Reservation,Standing Rock,standing-rock-reservation,46,45.95008,-101.25452,,,,,Census cartographic boundary files 2024
 tribal,4345,2500000US4345,Turtle Mountain Reservation and Off-Reservation Trust Land,Turtle Mountain,turtle-mountain-reservation-and-off-reservation-trust-land,46,48.87608,-99.78850,,,,,Census cartographic boundary files 2024
 tribal,4700,2500000US4700,Yankton Reservation,Yankton,yankton-reservation,46,43.10462,-98.39149,,,,,Census cartographic boundary files 2024
+school_district,4602070,9700000US4602070,Aberdeen School District 06-1,Aberdeen 06-1,aberdeen-school-district-06-1,46013,45.50341,-98.53666,ocd-division/country:us/state:sd/county:brown/school_district:aberdeen_school_district_06-1,,,,Census cartographic boundary files 2024
+school_district,4600042,9700000US4600042,Agar-Blunt-Onida School District 58-3,Agar-Blunt-Onida 58-3,agar-blunt-onida-school-district-58-3,46119,44.63321,-100.24085,ocd-division/country:us/state:sd/county:sully/school_district:agar-blunt-onida_school_district_58-3,,,,Census cartographic boundary files 2024
+school_district,4600028,9700000US4600028,Alcester-Hudson School District 61-1,Alcester-Hudson 61-1,alcester-hudson-school-district-61-1,46127,43.02525,-96.61474,ocd-division/country:us/state:sd/county:union/school_district:alcester-hudson_school_district_61-1,,,,Census cartographic boundary files 2024
+school_district,4639540,9700000US4639540,Andes Central School District 11-1,Andes Central 11-1,andes-central-school-district-11-1,46023,43.16605,-98.53762,ocd-division/country:us/state:sd/county:charles_mix/school_district:andes_central_school_district_11-1,,,,Census cartographic boundary files 2024
+school_district,4603720,9700000US4603720,Arlington School District 38-1,Arlington 38-1,arlington-school-district-38-1,46011,44.37147,-97.12824,ocd-division/country:us/state:sd/county:kingsbury/school_district:arlington_school_district_38-1,,,,Census cartographic boundary files 2024
+school_district,4603780,9700000US4603780,Armour School District 21-1,Armour 21-1,armour-school-district-21-1,46043,43.31566,-98.35862,ocd-division/country:us/state:sd/county:douglas/school_district:armour_school_district_21-1,,,,Census cartographic boundary files 2024
+school_district,4604270,9700000US4604270,Avon School District 04-1,Avon 04-1,avon-school-district-04-1,46009,42.97652,-98.07971,ocd-division/country:us/state:sd/county:bon_homme/school_district:avon_school_district_04-1,,,,Census cartographic boundary files 2024
+school_district,4604680,9700000US4604680,Baltic School District 49-1,Baltic 49-1,baltic-school-district-49-1,46099,43.73575,-96.71651,ocd-division/country:us/state:sd/county:minnehaha/school_district:baltic_school_district_49-1,,,,Census cartographic boundary files 2024
+school_district,4605610,9700000US4605610,Belle Fourche School District 09-1,Belle Fourche 09-1,belle-fourche-school-district-09-1,46019,44.90446,-103.87368,ocd-division/country:us/state:sd/county:butte/school_district:belle_fourche_school_district_09-1,,,,Census cartographic boundary files 2024
+school_district,4606240,9700000US4606240,Bennett County School District 03-1,Bennett County 03-1,bennett-county-school-district-03-1,46007,43.18539,-101.66868,ocd-division/country:us/state:sd/county:bennett/school_district:bennett_county_school_district_03-1,,,,Census cartographic boundary files 2024
+school_district,4606360,9700000US4606360,Beresford School District 61-2,Beresford 61-2,beresford-school-district-61-2,46127,43.05799,-96.78591,ocd-division/country:us/state:sd/county:union/school_district:beresford_school_district_61-2,,,,Census cartographic boundary files 2024
+school_district,4606960,9700000US4606960,Big Stone City School District 25-1,Big Stone City 25-1,big-stone-city-school-district-25-1,46109,45.33010,-96.49871,ocd-division/country:us/state:sd/county:grant/school_district:big_stone_city_school_district_25-1,,,,Census cartographic boundary files 2024
+school_district,4607050,9700000US4607050,Bison School District 52-1,Bison 52-1,bison-school-district-52-1,46105,45.42933,-102.61122,ocd-division/country:us/state:sd/county:perkins/school_district:bison_school_district_52-1,,,,Census cartographic boundary files 2024
+school_district,4607400,9700000US4607400,Bon Homme School District 04-2,Bon Homme 04-2,bon-homme-school-district-04-2,46009,42.94325,-97.80800,ocd-division/country:us/state:sd/county:bon_homme/school_district:bon_homme_school_district_04-2,,,,Census cartographic boundary files 2024
+school_district,4607800,9700000US4607800,Bowdle School District 22-1,Bowdle 22-1,bowdle-school-district-22-1,46045,45.43014,-99.66770,ocd-division/country:us/state:sd/county:edmunds/school_district:bowdle_school_district_22-1,,,,Census cartographic boundary files 2024
+school_district,4607950,9700000US4607950,Brandon Valley School District 49-2,Brandon Valley 49-2,brandon-valley-school-district-49-2,46099,43.59275,-96.55251,ocd-division/country:us/state:sd/county:minnehaha/school_district:brandon_valley_school_district_49-2,,,,Census cartographic boundary files 2024
+school_district,4621420,9700000US4621420,Bridgewater-Emery School District 30-3,Bridgewater-Emery 30-3,bridgewater-emery-school-district-30-3,46087,43.55433,-97.53723,ocd-division/country:us/state:sd/county:mccook/school_district:bridgewater-emery_30-3,,,,Census cartographic boundary files 2024
+school_district,4600041,9700000US4600041,Britton-Hecla School District 45-4,Britton-Hecla 45-4,britton-hecla-school-district-45-4,46091,45.76191,-97.73668,ocd-division/country:us/state:sd/county:marshall/school_district:britton-hecla_school_district_45-4,,,,Census cartographic boundary files 2024
+school_district,4608520,9700000US4608520,Brookings School District 05-1,Brookings 05-1,brookings-school-district-05-1,46011,44.34368,-96.74783,ocd-division/country:us/state:sd/county:brookings/school_district:brookings_school_district_05-1,,,,Census cartographic boundary files 2024
+school_district,4609512,9700000US4609512,Burke School District 26-2,Burke 26-2,burke-school-district-26-2,46053,43.22688,-99.19337,ocd-division/country:us/state:sd/county:gregory/school_district:burke_school_district_26-2,,,,Census cartographic boundary files 2024
+school_district,4610320,9700000US4610320,Canistota School District 43-1,Canistota 43-1,canistota-school-district-43-1,46087,43.58291,-97.27345,ocd-division/country:us/state:sd/county:mccook/school_district:canistota_school_district_43-1,,,,Census cartographic boundary files 2024
+school_district,4610560,9700000US4610560,Canton School District 41-1,Canton 41-1,canton-school-district-41-1,46083,43.27848,-96.66774,ocd-division/country:us/state:sd/county:lincoln/school_district:canton_school_district_41-1,,,,Census cartographic boundary files 2024
+school_district,4611280,9700000US4611280,Castlewood School District 28-1,Castlewood 28-1,castlewood-school-district-28-1,46057,44.72068,-97.03650,ocd-division/country:us/state:sd/county:hamlin/school_district:castlewood_school_district_28-1,,,,Census cartographic boundary files 2024
+school_district,4611760,9700000US4611760,Centerville School District 60-1,Centerville 60-1,centerville-school-district-60-1,46125,43.11414,-96.95389,ocd-division/country:us/state:sd/county:turner/school_district:centerville_school_district_60-1,,,,Census cartographic boundary files 2024
+school_district,4612000,9700000US4612000,Chamberlain School District 07-1,Chamberlain 07-1,chamberlain-school-district-07-1,46085,43.84802,-99.32112,ocd-division/country:us/state:sd/county:brule/school_district:chamberlain_school_district_07-1,,,,Census cartographic boundary files 2024
+school_district,4612300,9700000US4612300,Chester School District 39-1,Chester 39-1,chester-school-district-39-1,46079,43.90839,-96.98405,ocd-division/country:us/state:sd/county:lake/school_district:chester_area_school_district_39-1,,,,Census cartographic boundary files 2024
+school_district,4612940,9700000US4612940,Clark School District 12-2,Clark 12-2,clark-school-district-12-2,46025,44.93524,-97.73875,ocd-division/country:us/state:sd/county:clark/school_district:clark_school_district_12-2,,,,Census cartographic boundary files 2024
+school_district,4614100,9700000US4614100,Colman-Egan School District 50-5,Colman-Egan 50-5,colman-egan-school-district-50-5,46101,44.03680,-96.82378,ocd-division/country:us/state:sd/county:moody/school_district:colman-egan_school_district_50-5,,,,Census cartographic boundary files 2024
+school_district,4614130,9700000US4614130,Colome Consolidated School District 59-3,Colome Consolidated 59-3,colome-consolidated-school-district-59-3,46095,43.56890,-100.39017,ocd-division/country:us/state:sd/county:tripp/school_district:colome_consolidated_59-3,,,,Census cartographic boundary files 2024
+school_district,4680445,9700000US4680445,Corsica-Stickney School District 21-3,Corsica-Stickney 21-3,corsica-stickney-school-district-21-3,46003,43.50979,-98.46942,,,,,Census cartographic boundary files 2024
+school_district,4616950,9700000US4616950,Custer School District 16-1,Custer 16-1,custer-school-district-16-1,46033,43.70122,-103.30874,ocd-division/country:us/state:sd/county:custer/school_district:custer_school_district_16-1,,,,Census cartographic boundary files 2024
+school_district,4636990,9700000US4636990,Dakota Valley School District 61-8,Dakota Valley 61-8,dakota-valley-school-district-61-8,46127,42.53425,-96.51286,ocd-division/country:us/state:sd/county:union/school_district:dakota_valley_school_district_61-8,,,,Census cartographic boundary files 2024
+school_district,4617850,9700000US4617850,De Smet School District 38-2,De Smet 38-2,de-smet-school-district-38-2,46077,44.37291,-97.57195,ocd-division/country:us/state:sd/county:kingsbury/school_district:de_smet_school_district_38-2,,,,Census cartographic boundary files 2024
+school_district,4618120,9700000US4618120,Dell Rapids School District 49-3,Dell Rapids 49-3,dell-rapids-school-district-49-3,46099,43.84829,-96.65975,ocd-division/country:us/state:sd/county:minnehaha/school_district:dell_rapids_school_district_49-3,,,,Census cartographic boundary files 2024
+school_district,4678300,9700000US4678300,Deubrook School District 05-6,Deubrook 05-6,deubrook-school-district-05-6,46011,44.53520,-96.60452,ocd-division/country:us/state:sd/county:brookings/school_district:deubrook_area_school_district_05-6,,,,Census cartographic boundary files 2024
+school_district,4600036,9700000US4600036,Deuel School District 19-4,Deuel 19-4,deuel-school-district-19-4,46039,44.78684,-96.66816,ocd-division/country:us/state:sd/county:deuel/school_district:deuel_school_district_19-4,,,,Census cartographic boundary files 2024
+school_district,4619170,9700000US4619170,Doland School District 56-2,Doland 56-2,doland-school-district-56-2,46115,44.86062,-98.11937,ocd-division/country:us/state:sd/county:spink/school_district:doland_school_district_56-2,,,,Census cartographic boundary files 2024
+school_district,4619410,9700000US4619410,Douglas School District 51-1,Douglas 51-1,douglas-school-district-51-1,46093,44.16911,-103.02019,ocd-division/country:us/state:sd/county:pennington/school_district:douglas_school_district_51-1,,,,Census cartographic boundary files 2024
+school_district,4619450,9700000US4619450,Dupree School District 64-2,Dupree 64-2,dupree-school-district-64-2,46137,44.99182,-101.64353,ocd-division/country:us/state:sd/county:ziebach/school_district:dupree_school_district_64-2,,,,Census cartographic boundary files 2024
+school_district,4620100,9700000US4620100,Eagle Butte School District 20-1,Eagle Butte 20-1,eagle-butte-school-district-20-1,46041,44.94058,-100.89899,ocd-division/country:us/state:sd/county:dewey/school_district:eagle_butte_school_district_20-1,,,,Census cartographic boundary files 2024
+school_district,4620850,9700000US4620850,Edgemont School District 23-1,Edgemont 23-1,edgemont-school-district-23-1,46047,43.24950,-103.84810,ocd-division/country:us/state:sd/county:fall_river/school_district:edgemont_school_district_23-1,,,,Census cartographic boundary files 2024
+school_district,4634440,9700000US4634440,Edmunds Central School District 22-5,Edmunds Central 22-5,edmunds-central-school-district-22-5,46045,45.46997,-99.33870,ocd-division/country:us/state:sd/county:edmunds/school_district:edmunds_central_school_district_22-5,,,,Census cartographic boundary files 2024
+school_district,4621300,9700000US4621300,Elk Mountain School District 16-2,Elk Mountain 16-2,elk-mountain-school-district-16-2,46033,43.62869,-103.93540,ocd-division/country:us/state:sd/county:custer/school_district:elk_mountain_school_district_16-2,,,,Census cartographic boundary files 2024
+school_district,4621340,9700000US4621340,Elk Point-Jefferson School District 61-7,Elk Point-Jefferson 61-7,elk-point-jefferson-school-district-61-7,46127,42.73242,-96.72049,ocd-division/country:us/state:sd/county:union/school_district:elk_point-jefferson_school_district_61-7,,,,Census cartographic boundary files 2024
+school_district,4621390,9700000US4621390,Elkton School District 05-3,Elkton 05-3,elkton-school-district-05-3,46011,44.28347,-96.53764,ocd-division/country:us/state:sd/county:brookings/school_district:elkton_school_district_05-3,,,,Census cartographic boundary files 2024
+school_district,4622410,9700000US4622410,Estelline School District 28-2,Estelline 28-2,estelline-school-district-28-2,46057,44.57244,-96.90806,ocd-division/country:us/state:sd/county:hamlin/school_district:estelline_school_district_28-2,,,,Census cartographic boundary files 2024
+school_district,4622500,9700000US4622500,Ethan School District 17-1,Ethan 17-1,ethan-school-district-17-1,46061,43.56094,-97.94599,ocd-division/country:us/state:sd/county:davison/school_district:ethan_school_district_17-1,,,,Census cartographic boundary files 2024
+school_district,4622560,9700000US4622560,Eureka School District 44-1,Eureka 44-1,eureka-school-district-44-1,46089,45.75974,-99.56239,ocd-division/country:us/state:sd/county:mcpherson/school_district:eureka_school_district_44-1,,,,Census cartographic boundary files 2024
+school_district,4622940,9700000US4622940,Faith School District 46-2,Faith 46-2,faith-school-district-46-2,46137,44.90005,-101.95353,ocd-division/country:us/state:sd/county:meade/school_district:faith_school_district_46-2,,,,Census cartographic boundary files 2024
+school_district,4624030,9700000US4624030,Faulkton School District 24-4,Faulkton 24-4,faulkton-school-district-24-4,46049,44.99489,-99.18540,ocd-division/country:us/state:sd/county:faulk/school_district:faulkton_area_schools_24-4,,,,Census cartographic boundary files 2024
+school_district,4624390,9700000US4624390,Flandreau School District 50-3,Flandreau 50-3,flandreau-school-district-50-3,46101,44.03309,-96.55097,ocd-division/country:us/state:sd/county:moody/school_district:flandreau_school_district_50-3,,,,Census cartographic boundary files 2024
+school_district,4624540,9700000US4624540,Florence School District 14-1,Florence 14-1,florence-school-district-14-1,46029,45.05362,-97.35619,ocd-division/country:us/state:sd/county:codington/school_district:florence_school_district_14-1,,,,Census cartographic boundary files 2024
+school_district,4621400,9700000US4621400,Frederick Area School District 06-2,Frederick Area 06-2,frederick-area-school-district-06-2,46013,45.81020,-98.53856,ocd-division/country:us/state:sd/county:brown/school_district:frederick_area_school_district_06-2,,,,Census cartographic boundary files 2024
+school_district,4625500,9700000US4625500,Freeman School District 33-1,Freeman 33-1,freeman-school-district-33-1,46067,43.35377,-97.47209,ocd-division/country:us/state:sd/county:hutchinson/school_district:freeman_school_district_33-1,,,,Census cartographic boundary files 2024
+school_district,4626370,9700000US4626370,Garretson School District 49-4,Garretson 49-4,garretson-school-district-49-4,46099,43.72697,-96.55223,ocd-division/country:us/state:sd/county:minnehaha/school_district:garretson_school_district_49-4,,,,Census cartographic boundary files 2024
+school_district,4626490,9700000US4626490,Gayville-Volin School District 63-1,Gayville-Volin 63-1,gayville-volin-school-district-63-1,46135,42.91281,-97.19618,ocd-division/country:us/state:sd/county:yankton/school_district:gayville-volin_school_district_63-1,,,,Census cartographic boundary files 2024
+school_district,4626970,9700000US4626970,Gettysburg School District 53-1,Gettysburg 53-1,gettysburg-school-district-53-1,46107,44.97043,-100.18533,ocd-division/country:us/state:sd/county:potter/school_district:gettysburg_school_district_53-1,,,,Census cartographic boundary files 2024
+school_district,4629340,9700000US4629340,Grant-Deuel School District 25-3,Grant-Deuel 25-3,grant-deuel-school-district-25-3,46051,,,ocd-division/country:us/state:sd/county:grant/school_district:grant-deuel_school_district_25-3,,2017-07-01,,"Last school year 2016-17 in the DOE Statistical Digest; not in the 2022 CCD. NCES LEAID from the CCD directory (2016). Dissolved rather than merged into one district, so no successor. Effective date taken as the 2017-18 school year's start"
+school_district,4629880,9700000US4629880,Gregory School District 26-4,Gregory 26-4,gregory-school-district-26-4,46053,43.33167,-99.46507,ocd-division/country:us/state:sd/county:gregory/school_district:gregory_school_district_26-4,,,,Census cartographic boundary files 2024
+school_district,4600045,9700000US4600045,Groton Area School District 06-6,Groton Area 06-6,groton-area-school-district-06-6,46037,45.41407,-97.94273,ocd-division/country:us/state:sd/county:brown/school_district:groton_area_school_district_06-6,,,,Census cartographic boundary files 2024
+school_district,4630490,9700000US4630490,Haakon School District 27-1,Haakon 27-1,haakon-school-district-27-1,46055,44.27768,-101.64701,ocd-division/country:us/state:sd/county:haakon/school_district:haakon_school_district_27-1,,,,Census cartographic boundary files 2024
+school_district,4630800,9700000US4630800,Hamlin School District 28-3,Hamlin 28-3,hamlin-school-district-28-3,46057,44.67356,-97.30983,ocd-division/country:us/state:sd/county:hamlin/school_district:hamlin_school_district_28-3,,,,Census cartographic boundary files 2024
+school_district,4602640,9700000US4602640,Hanson School District 30-1,Hanson 30-1,hanson-school-district-30-1,46061,43.69884,-97.74288,ocd-division/country:us/state:sd/county:hanson/school_district:hanson_school_district_30-1,,,,Census cartographic boundary files 2024
+school_district,4609300,9700000US4609300,Harding County School District 31-1,Harding County 31-1,harding-county-school-district-31-1,46063,45.60653,-103.49632,ocd-division/country:us/state:sd/county:harding/school_district:harding_county_school_district_31-1,,,,Census cartographic boundary files 2024
+school_district,4631350,9700000US4631350,Harrisburg School District 41-2,Harrisburg 41-2,harrisburg-school-district-41-2,46083,43.43589,-96.70782,ocd-division/country:us/state:sd/county:lincoln/school_district:harrisburg_school_district_41-2,,,,Census cartographic boundary files 2024
+school_district,4632340,9700000US4632340,Henry School District 14-2,Henry 14-2,henry-school-district-14-2,46029,44.91622,-97.41683,ocd-division/country:us/state:sd/county:codington/school_district:henry_school_district_14-2,,,,Census cartographic boundary files 2024
+school_district,4632430,9700000US4632430,Herreid School District 10-1,Herreid 10-1,herreid-school-district-10-1,46021,45.79669,-100.03709,ocd-division/country:us/state:sd/county:campbell/school_district:herreid_school_district_10-1,,,,Census cartographic boundary files 2024
+school_district,4680440,9700000US4680440,Highmore-Harrold School District 34-2,Highmore-Harrold 34-2,highmore-harrold-school-district-34-2,46069,44.49594,-99.51254,ocd-division/country:us/state:sd/county:hyde/school_district:highmore-harrold_34-2,,,,Census cartographic boundary files 2024
+school_district,4633360,9700000US4633360,Hill City School District 51-2,Hill City 51-2,hill-city-school-district-51-2,46103,43.99822,-103.75385,ocd-division/country:us/state:sd/county:pennington/school_district:hill_city_school_district_51-2,,,,Census cartographic boundary files 2024
+school_district,4600046,9700000US4600046,Hitchcock-Tulare School District 56-6,Hitchcock-Tulare 56-6,hitchcock-tulare-school-district-56-6,46115,44.63772,-98.43284,ocd-division/country:us/state:sd/county:spink/school_district:hitchcock_tulare_school_district_56-6,,,,Census cartographic boundary files 2024
+school_district,4634480,9700000US4634480,Hot Springs School District 23-2,Hot Springs 23-2,hot-springs-school-district-23-2,46047,43.37593,-103.40155,ocd-division/country:us/state:sd/county:fall_river/school_district:hot_springs_school_district_23-2,,,,Census cartographic boundary files 2024
+school_district,4634600,9700000US4634600,Hoven School District 53-2,Hoven 53-2,hoven-school-district-53-2,46107,45.12828,-100.07930,ocd-division/country:us/state:sd/county:potter/school_district:hoven_school_district_53-2,,,,Census cartographic boundary files 2024
+school_district,4600025,9700000US4600025,Howard School District 48-3,Howard 48-3,howard-school-district-48-3,46097,44.00087,-97.61048,ocd-division/country:us/state:sd/county:miner/school_district:howard_school_district_48-3,,,,Census cartographic boundary files 2024
+school_district,4635480,9700000US4635480,Huron School District 02-2,Huron 02-2,huron-school-district-02-2,46005,44.39777,-98.17388,ocd-division/country:us/state:sd/county:beadle/school_district:huron_school_district_02-2,,,,Census cartographic boundary files 2024
+school_district,4636060,9700000US4636060,Ipswich School District 22-6,Ipswich 22-6,ipswich-school-district-22-6,46045,45.40305,-98.94851,ocd-division/country:us/state:sd/county:edmunds/school_district:ipswich_public_school_district_22-6,,,,Census cartographic boundary files 2024
+school_district,4680439,9700000US4680439,Irene-Wakonda School District 13-3,Irene-Wakonda 13-3,irene-wakonda-school-district-13-3,46027,42.97813,-97.05217,ocd-division/country:us/state:sd/county:turner/school_district:irene_-_wakonda_school_district_13-3,,,,Census cartographic boundary files 2024
+school_district,4636150,9700000US4636150,Iroquois School District 02-3,Iroquois 02-3,iroquois-school-district-02-3,46005,44.39810,-97.87762,ocd-division/country:us/state:sd/county:kingsbury/school_district:iroquois_school_district_02-3,,,,Census cartographic boundary files 2024
+school_district,4619580,9700000US4619580,Jones County School District 37-3,Jones County 37-3,jones-county-school-district-37-3,46075,43.92249,-100.71551,ocd-division/country:us/state:sd/county:jones/school_district:jones_county_school_district_37-3,,,,Census cartographic boundary files 2024
+school_district,4680437,9700000US4680437,Kadoka School District 35-2,Kadoka 35-2,kadoka-school-district-35-2,46071,43.94185,-101.29330,ocd-division/country:us/state:sd/county:jackson/school_district:kadoka_area_school_district_35-2,,,,Census cartographic boundary files 2024
+school_district,4638220,9700000US4638220,Kimball School District 07-2,Kimball 07-2,kimball-school-district-07-2,46015,43.76680,-98.95430,ocd-division/country:us/state:sd/county:brule/school_district:kimball_school_district_07-2,,,,Census cartographic boundary files 2024
+school_district,4639990,9700000US4639990,Lake Preston School District 38-3,Lake Preston 38-3,lake-preston-school-district-38-3,46077,44.39405,-97.35261,ocd-division/country:us/state:sd/county:kingsbury/school_district:lake_preston_school_district_38-3,,,,Census cartographic boundary files 2024
+school_district,4640860,9700000US4640860,Langford School District 45-5,Langford 45-5,langford-school-district-45-5,46091,45.61969,-97.75762,ocd-division/country:us/state:sd/county:marshall/school_district:langford_area_45-5,,,,Census cartographic boundary files 2024
+school_district,4641300,9700000US4641300,Lead-Deadwood School District 40-1,Lead-Deadwood 40-1,lead-deadwood-school-district-40-1,46081,44.28592,-103.81486,ocd-division/country:us/state:sd/county:lawrence/school_district:lead-deadwood_school_district_40-1,,,,Census cartographic boundary files 2024
+school_district,4641520,9700000US4641520,Lemmon School District 52-4,Lemmon 52-4,lemmon-school-district-52-4,46031,45.62187,-101.96370,ocd-division/country:us/state:sd/county:perkins/school_district:lemmon_school_district_52-4,,,,Census cartographic boundary files 2024
+school_district,4641550,9700000US4641550,Lennox School District 41-4,Lennox 41-4,lennox-school-district-41-4,46083,43.36265,-96.90003,ocd-division/country:us/state:sd/county:lincoln/school_district:lennox_school_district_41-4,,,,Census cartographic boundary files 2024
+school_district,4641640,9700000US4641640,Leola School District 44-2,Leola 44-2,leola-school-district-44-2,46089,45.78772,-98.97326,ocd-division/country:us/state:sd/county:mcpherson/school_district:leola_school_district_44-2,,,,Census cartographic boundary files 2024
+school_district,4644770,9700000US4644770,Lyman School District 42-1,Lyman 42-1,lyman-school-district-42-1,46085,43.94440,-100.00202,ocd-division/country:us/state:sd/county:lyman/school_district:lyman_school_district_42-1,,,,Census cartographic boundary files 2024
+school_district,4639600,9700000US4639600,Madison Central School District 39-2,Madison Central 39-2,madison-central-school-district-39-2,46079,43.96729,-97.18228,ocd-division/country:us/state:sd/county:lake/school_district:madison_central_school_district_39-2,,,,Census cartographic boundary files 2024
+school_district,4645450,9700000US4645450,Marion School District 60-3,Marion 60-3,marion-school-district-60-3,46125,43.42064,-97.27558,ocd-division/country:us/state:sd/county:turner/school_district:marion_school_district_60-3,,,,Census cartographic boundary files 2024
+school_district,4601026,9700000US4601026,McCook Central School District 43-7,McCook Central 43-7,mccook-central-school-district-43-7,46087,43.76396,-97.44424,ocd-division/country:us/state:sd/county:mccook/school_district:mccook_central_school_district_43-7,,,,Census cartographic boundary files 2024
+school_district,4646260,9700000US4646260,McIntosh School District 15-1,McIntosh 15-1,mcintosh-school-district-15-1,46031,45.70427,-101.40867,ocd-division/country:us/state:sd/county:corson/school_district:mcintosh_school_district_15-1,,,,Census cartographic boundary files 2024
+school_district,4646380,9700000US4646380,McLaughlin School District 15-2,McLaughlin 15-2,mclaughlin-school-district-15-2,46031,45.66417,-100.91511,ocd-division/country:us/state:sd/county:corson/school_district:mclaughlin_school_district_15-2,,,,Census cartographic boundary files 2024
+school_district,4669930,9700000US4669930,Meade School District 46-1,Meade 46-1,meade-school-district-46-1,46093,44.59179,-102.93720,ocd-division/country:us/state:sd/county:meade/school_district:meade_school_district_46-1,,,,Census cartographic boundary files 2024
+school_district,4647100,9700000US4647100,Menno School District 33-2,Menno 33-2,menno-school-district-33-2,46067,43.22293,-97.55783,ocd-division/country:us/state:sd/county:hutchinson/school_district:menno_school_district_33-2,,,,Census cartographic boundary files 2024
+school_district,4600002,9700000US4600002,Milbank School District 25-4,Milbank 25-4,milbank-school-district-25-4,46051,45.18318,-96.63756,ocd-division/country:us/state:sd/county:grant/school_district:milbank_school_district_25-4,,,,Census cartographic boundary files 2024
+school_district,4647942,9700000US4647942,Miller Area School District 29-4,Miller Area 29-4,miller-area-school-district-29-4,46059,44.53406,-99.02115,ocd-division/country:us/state:sd/county:hand/school_district:miller_29-4,,,,Census cartographic boundary files 2024
+school_district,4648390,9700000US4648390,Mitchell School District 17-2,Mitchell 17-2,mitchell-school-district-17-2,46035,43.71131,-98.02733,ocd-division/country:us/state:sd/county:davison/school_district:mitchell_school_district_17-2,,,,Census cartographic boundary files 2024
+school_district,4680441,9700000US4680441,Mobridge-Pollock School District 62-6,Mobridge-Pollock 62-6,mobridge-pollock-school-district-62-6,46129,45.57567,-100.34465,ocd-division/country:us/state:sd/county:walworth/school_district:mobridge-pollock_62-6,,,,Census cartographic boundary files 2024
+school_district,4648780,9700000US4648780,Montrose School District 43-2,Montrose 43-2,montrose-school-district-43-2,46087,43.73914,-97.16929,ocd-division/country:us/state:sd/county:mccook/school_district:montrose_school_district_43-2,,,,Census cartographic boundary files 2024
+school_district,4649650,9700000US4649650,Mount Vernon School District 17-3,Mount Vernon 17-3,mount-vernon-school-district-17-3,46035,43.67785,-98.24576,ocd-division/country:us/state:sd/county:davison/school_district:mount_vernon_school_district_17-3,,,,Census cartographic boundary files 2024
+school_district,4650670,9700000US4650670,New Underwood School District 51-3,New Underwood 51-3,new-underwood-school-district-51-3,46103,44.00311,-102.74889,ocd-division/country:us/state:sd/county:pennington/school_district:new_underwood_school_district_51-3,,,,Census cartographic boundary files 2024
+school_district,4650850,9700000US4650850,Newell School District 09-2,Newell 09-2,newell-school-district-09-2,46019,44.90554,-103.32485,ocd-division/country:us/state:sd/county:butte/school_district:newell_school_district_09-2,,,,Census cartographic boundary files 2024
+school_district,4651750,9700000US4651750,Northwestern Area School District 56-7,Northwestern Area 56-7,northwestern-area-school-district-56-7,46115,45.12340,-98.52228,ocd-division/country:us/state:sd/county:spink/school_district:northwestern_area_school_district_56-7,,,,Census cartographic boundary files 2024
+school_district,4652770,9700000US4652770,Oelrichs School District 23-3,Oelrichs 23-3,oelrichs-school-district-23-3,46047,43.19535,-103.23227,ocd-division/country:us/state:sd/county:fall_river/school_district:oelrichs_school_district_23-3,,,,Census cartographic boundary files 2024
+school_district,4665460,9700000US4665460,Oglala Lakota County School District 65-1,Oglala Lakota County 65-1,oglala-lakota-county-school-district-65-1,46102,43.33588,-102.55551,ocd-division/country:us/state:sd/county:oglala_lakota/school_district:oglala_lakota_county_school_district_65-1,,,,Census cartographic boundary files 2024
+school_district,4601027,9700000US4601027,Oldham-Ramona School District 39-5,Oldham-Ramona 39-5,oldham-ramona-school-district-39-5,46079,,,ocd-division/country:us/state:sd/county:lake/school_district:oldham_-_ramona_school_district_39-5,,2023-07-01,4680447,"Merged with Rutland 39-4 into Oldham-Ramona-Rutland 39-6: last school year 2022-23 and 39-6 from 2023-24 in the DOE Statistical Digest; NCES LEAID from the CCD directory (2016, 2022). Effective date taken as the 2023-24 school year's start"
+school_district,4680447,9700000US4680447,Oldham-Ramona-Rutland 39-6,Oldham-Ramona-Rutland 39-6,oldham-ramona-rutland-39-6,46079,44.15668,-97.13565,,2023-07-01,,,Census cartographic boundary files 2024
+school_district,4654270,9700000US4654270,Parker School District 60-4,Parker 60-4,parker-school-district-60-4,46125,43.42721,-97.10238,ocd-division/country:us/state:sd/county:turner/school_district:parker_school_district_60-4,,,,Census cartographic boundary files 2024
+school_district,4654300,9700000US4654300,Parkston School District 33-3,Parkston 33-3,parkston-school-district-33-3,46067,43.41281,-97.95170,ocd-division/country:us/state:sd/county:hutchinson/school_district:parkston_school_district_33-3,,,,Census cartographic boundary files 2024
+school_district,4655260,9700000US4655260,Pierre School District 32-2,Pierre 32-2,pierre-school-district-32-2,46065,44.39281,-100.26257,ocd-division/country:us/state:sd/county:hughes/school_district:pierre_school_district_32-2,,,,Census cartographic boundary files 2024
+school_district,4655710,9700000US4655710,Plankinton School District 01-1,Plankinton 01-1,plankinton-school-district-01-1,46003,43.78174,-98.48526,ocd-division/country:us/state:sd/county:aurora/school_district:plankinton_school_district_01-1,,,,Census cartographic boundary files 2024
+school_district,4680438,9700000US4680438,Platte-Geddes School District 11-5,Platte-Geddes 11-5,platte-geddes-school-district-11-5,46023,43.32878,-98.81047,ocd-division/country:us/state:sd/county:charles_mix/school_district:platte_-_geddes_school_district_11-5,,,,Census cartographic boundary files 2024
+school_district,4659820,9700000US4659820,Rapid City School District 51-4,Rapid City 51-4,rapid-city-school-district-51-4,46103,44.02564,-103.27696,ocd-division/country:us/state:sd/county:pennington/school_district:rapid_city_area_school_district_51-4,,,,Census cartographic boundary files 2024
+school_district,4660450,9700000US4660450,Redfield School District 56-4,Redfield 56-4,redfield-school-district-56-4,46115,44.86219,-98.60981,ocd-division/country:us/state:sd/county:spink/school_district:redfield_school_district_56-4,,,,Census cartographic boundary files 2024
+school_district,4663360,9700000US4663360,Rosholt School District 54-4,Rosholt 54-4,rosholt-school-district-54-4,46109,45.81937,-96.70634,ocd-division/country:us/state:sd/county:roberts/school_district:rosholt_school_district_54-4,,,,Census cartographic boundary files 2024
+school_district,4664140,9700000US4664140,Rutland School District 39-4,Rutland 39-4,rutland-school-district-39-4,46079,,,ocd-division/country:us/state:sd/county:lake/school_district:rutland_school_district_39-4,,2023-07-01,4680447,"Merged with Oldham-Ramona 39-5 into Oldham-Ramona-Rutland 39-6: last school year 2022-23 and 39-6 from 2023-24 in the DOE Statistical Digest; NCES LEAID from the CCD directory (2016, 2022). Effective date taken as the 2023-24 school year's start"
+school_district,4603932,9700000US4603932,Sanborn Central School District 55-5,Sanborn Central 55-5,sanborn-central-school-district-55-5,46111,44.00639,-98.01129,ocd-division/country:us/state:sd/county:sanborn/school_district:sanborn_central_school_district_55-5,,,,Census cartographic boundary files 2024
+school_district,4665180,9700000US4665180,Scotland School District 04-3,Scotland 04-3,scotland-school-district-04-3,46009,43.14532,-97.75674,ocd-division/country:us/state:sd/county:bon_homme/school_district:scotland_school_district_04-3,,,,Census cartographic boundary files 2024
+school_district,4601028,9700000US4601028,Selby School District 62-5,Selby 62-5,selby-school-district-62-5,46129,45.47530,-100.08776,ocd-division/country:us/state:sd/county:walworth/school_district:selby_area_school_district_62-5,,,,Census cartographic boundary files 2024
+school_district,4666270,9700000US4666270,Sioux Falls School District 49-5,Sioux Falls 49-5,sioux-falls-school-district-49-5,46099,43.57717,-96.74376,ocd-division/country:us/state:sd/county:minnehaha/school_district:sioux_falls_school_district_49-5,,,,Census cartographic boundary files 2024
+school_district,4666300,9700000US4666300,Sioux Valley School District 05-5,Sioux Valley 05-5,sioux-valley-school-district-05-5,46011,44.34422,-96.95370,ocd-division/country:us/state:sd/county:brookings/school_district:sioux_valley_school_district_05-5,,,,Census cartographic boundary files 2024
+school_district,4600053,9700000US4600053,Sisseton School District 54-2,Sisseton 54-2,sisseton-school-district-54-2,46109,45.69349,-97.09241,ocd-division/country:us/state:sd/county:roberts/school_district:sisseton_school_district_54-2,,,,Census cartographic boundary files 2024
+school_district,4675600,9700000US4675600,Smee School District 15-3,Smee 15-3,smee-school-district-15-3,46031,45.64569,-100.57014,ocd-division/country:us/state:sd/county:corson/school_district:smee_school_district_15-3,,,,Census cartographic boundary files 2024
+school_district,4607670,9700000US4607670,South Central School District 26-5,South Central 26-5,south-central-school-district-26-5,46053,43.13428,-98.92793,ocd-division/country:us/state:sd/county:gregory/school_district:south_central_26-5,,,,Census cartographic boundary files 2024
+school_district,4666930,9700000US4666930,Spearfish School District 40-2,Spearfish 40-2,spearfish-school-district-40-2,46081,44.46290,-103.85716,ocd-division/country:us/state:sd/county:lawrence/school_district:spearfish_school_district_40-2,,,,Census cartographic boundary files 2024
+school_district,4624850,9700000US4624850,Stanley County School District 57-1,Stanley County 57-1,stanley-county-school-district-57-1,46117,44.47567,-100.86787,ocd-division/country:us/state:sd/county:stanley/school_district:stanley_county_school_district_57-1,,,,Census cartographic boundary files 2024
+school_district,4670140,9700000US4670140,Summit School District 54-6,Summit 54-6,summit-school-district-54-6,46109,45.30463,-97.05462,ocd-division/country:us/state:sd/county:roberts/school_district:summit_school_district_54-6,,,,Census cartographic boundary files 2024
+school_district,4600052,9700000US4600052,Tea Area School District 41-5,Tea Area 41-5,tea-area-school-district-41-5,46083,43.47248,-96.84126,ocd-division/country:us/state:sd/county:lincoln/school_district:tea_area_school_district_41-5,,,,Census cartographic boundary files 2024
+school_district,4671880,9700000US4671880,Timber Lake School District 20-3,Timber Lake 20-3,timber-lake-school-district-20-3,46041,45.38371,-100.86558,ocd-division/country:us/state:sd/county:dewey/school_district:timber_lake_school_district_20-3,,,,Census cartographic boundary files 2024
+school_district,4672090,9700000US4672090,Todd County School District 66-1,Todd County 66-1,todd-county-school-district-66-1,46121,43.19900,-100.72096,ocd-division/country:us/state:sd/county:todd/school_district:todd_county_school_district_66-1,,,,Census cartographic boundary files 2024
+school_district,4644940,9700000US4644940,Tri-Valley School District 49-6,Tri-Valley 49-6,tri-valley-school-district-49-6,46099,43.71409,-96.86604,ocd-division/country:us/state:sd/county:minnehaha/school_district:tri-valley_school_district_49-6,,,,Census cartographic boundary files 2024
+school_district,4672450,9700000US4672450,Tripp-Delmont School District 33-5,Tripp-Delmont 33-5,tripp-delmont-school-district-33-5,46067,43.22287,-98.04625,ocd-division/country:us/state:sd/county:hutchinson/school_district:tripp-delmont_school_district_33-5,,,,Census cartographic boundary files 2024
+school_district,4674370,9700000US4674370,Vermillion School District 13-1,Vermillion 13-1,vermillion-school-district-13-1,46027,42.81647,-96.90928,ocd-division/country:us/state:sd/county:clay/school_district:vermillion_school_district_13-1,,,,Census cartographic boundary files 2024
+school_district,4674520,9700000US4674520,Viborg Hurley School District 60-6,Viborg Hurley 60-6,viborg-hurley-school-district-60-6,46125,43.21619,-97.17093,ocd-division/country:us/state:sd/county:turner/school_district:viborg_school_district_60-5,,,,Census cartographic boundary files 2024
+school_district,4675420,9700000US4675420,Wagner School District 11-4,Wagner 11-4,wagner-school-district-11-4,46023,43.03759,-98.33801,ocd-division/country:us/state:sd/county:charles_mix/school_district:wagner_community_school_district_11-4,,,,Census cartographic boundary files 2024
+school_district,4675660,9700000US4675660,Wall School District 51-5,Wall 51-5,wall-school-district-51-5,46103,44.09782,-102.25785,ocd-division/country:us/state:sd/county:pennington/school_district:wall_school_district_51-5,,,,Census cartographic boundary files 2024
+school_district,4676020,9700000US4676020,Warner School District 06-5,Warner 06-5,warner-school-district-06-5,46013,45.32806,-98.57252,ocd-division/country:us/state:sd/county:brown/school_district:warner_school_district_06-5,,,,Census cartographic boundary files 2024
+school_district,4676620,9700000US4676620,Watertown School District 14-4,Watertown 14-4,watertown-school-district-14-4,46029,44.96919,-97.15231,ocd-division/country:us/state:sd/county:codington/school_district:watertown_school_district_14-4,,,,Census cartographic boundary files 2024
+school_district,4676680,9700000US4676680,Waubay School District 18-3,Waubay 18-3,waubay-school-district-18-3,46037,45.31583,-97.28097,ocd-division/country:us/state:sd/county:day/school_district:waubay_school_district_18-3,,,,Census cartographic boundary files 2024
+school_district,4676740,9700000US4676740,Waverly School District 14-5,Waverly 14-5,waverly-school-district-14-5,46029,45.01688,-96.97440,ocd-division/country:us/state:sd/county:codington/school_district:waverly_school_district_14-5,,,,Census cartographic boundary files 2024
+school_district,4676990,9700000US4676990,Webster School District 18-5,Webster 18-5,webster-school-district-18-5,46037,45.29051,-97.51988,ocd-division/country:us/state:sd/county:day/school_district:webster_area_18-5,,,,Census cartographic boundary files 2024
+school_district,4677460,9700000US4677460,Wessington Springs School District 36-2,Wessington Springs 36-2,wessington-springs-school-district-36-2,46073,44.06382,-98.81866,ocd-division/country:us/state:sd/county:jerauld/school_district:wessington_springs_school_district_36-2,,,,Census cartographic boundary files 2024
+school_district,4631710,9700000US4631710,West Central School District 49-7,West Central 49-7,west-central-school-district-49-7,46099,43.61611,-97.00961,ocd-division/country:us/state:sd/county:minnehaha/school_district:west_central_school_district_49-7,,,,Census cartographic boundary files 2024
+school_district,4678510,9700000US4678510,White Lake School District 01-3,White Lake 01-3,white-lake-school-district-01-3,46003,43.70443,-98.71424,ocd-division/country:us/state:sd/county:aurora/school_district:white_lake_school_district_01-3,,,,Census cartographic boundary files 2024
+school_district,4678570,9700000US4678570,White River School District 47-1,White River 47-1,white-river-school-district-47-1,46095,43.62054,-100.86915,ocd-division/country:us/state:sd/county:mellette/school_district:white_river_school_district_47-1,,,,Census cartographic boundary files 2024
+school_district,4679350,9700000US4679350,Willow Lake School District 12-3,Willow Lake 12-3,willow-lake-school-district-12-3,46025,44.66721,-97.73478,ocd-division/country:us/state:sd/county:clark/school_district:willow_lake_school_district_12-3,,,,Census cartographic boundary files 2024
+school_district,4600003,9700000US4600003,Wilmot School District 54-7,Wilmot 54-7,wilmot-school-district-54-7,46109,45.37924,-96.83920,ocd-division/country:us/state:sd/county:roberts/school_district:wilmot_school_district_54-7,,,,Census cartographic boundary files 2024
+school_district,4679710,9700000US4679710,Winner School District 59-2,Winner 59-2,winner-school-district-59-2,46123,43.38224,-99.87395,ocd-division/country:us/state:sd/county:tripp/school_district:winner_school_district_59-2,,,,Census cartographic boundary files 2024
+school_district,4680100,9700000US4680100,Wolsey-Wessington School District 02-6,Wolsey-Wessington 02-6,wolsey-wessington-school-district-02-6,46005,44.41814,-98.51863,ocd-division/country:us/state:sd/county:beadle/school_district:wolsey_wessington_school_district_02-6,,,,Census cartographic boundary files 2024
+school_district,4680190,9700000US4680190,Woonsocket School District 55-4,Woonsocket 55-4,woonsocket-school-district-55-4,46111,44.02402,-98.23572,ocd-division/country:us/state:sd/county:sanborn/school_district:woonsocket_school_district_55-4,,,,Census cartographic boundary files 2024
+school_district,4680430,9700000US4680430,Yankton School District 63-3,Yankton 63-3,yankton-school-district-63-3,46135,42.97261,-97.42755,ocd-division/country:us/state:sd/county:yankton/school_district:yankton_school_district_63-3,,,,Census cartographic boundary files 2024
+sldu,46001,610U900US46001,State Senate District 1,1,senate-district-1,46,45.53731,-97.80674,ocd-division/country:us/state:sd/sldu:1,,,,Census cartographic boundary files 2024
+sldu,46010,610U900US46010,State Senate District 10,10,senate-district-10,46,43.56071,-96.68073,ocd-division/country:us/state:sd/sldu:10,,,,Census cartographic boundary files 2024
+sldu,46011,610U900US46011,State Senate District 11,11,senate-district-11,46,43.51864,-96.80069,ocd-division/country:us/state:sd/sldu:11,,,,Census cartographic boundary files 2024
+sldu,46012,610U900US46012,State Senate District 12,12,senate-district-12,46,43.50191,-96.76789,ocd-division/country:us/state:sd/sldu:12,,,,Census cartographic boundary files 2024
+sldu,46013,610U900US46013,State Senate District 13,13,senate-district-13,46,43.49810,-96.68826,ocd-division/country:us/state:sd/sldu:13,,,,Census cartographic boundary files 2024
+sldu,46014,610U900US46014,State Senate District 14,14,senate-district-14,46,43.52022,-96.67720,ocd-division/country:us/state:sd/sldu:14,,,,Census cartographic boundary files 2024
+sldu,46015,610U900US46015,State Senate District 15,15,senate-district-15,46,43.57065,-96.74396,ocd-division/country:us/state:sd/sldu:15,,,,Census cartographic boundary files 2024
+sldu,46016,610U900US46016,State Senate District 16,16,senate-district-16,46,43.11738,-96.79923,ocd-division/country:us/state:sd/sldu:16,,,,Census cartographic boundary files 2024
+sldu,46017,610U900US46017,State Senate District 17,17,senate-district-17,46,42.78200,-96.97200,ocd-division/country:us/state:sd/sldu:17,,,,Census cartographic boundary files 2024
+sldu,46018,610U900US46018,State Senate District 18,18,senate-district-18,46,42.98127,-97.33879,ocd-division/country:us/state:sd/sldu:18,,,,Census cartographic boundary files 2024
+sldu,46019,610U900US46019,State Senate District 19,19,senate-district-19,46,43.31044,-97.69523,ocd-division/country:us/state:sd/sldu:19,,,,Census cartographic boundary files 2024
+sldu,46002,610U900US46002,State Senate District 2,2,senate-district-2,46,43.57217,-96.55001,ocd-division/country:us/state:sd/sldu:2,,,,Census cartographic boundary files 2024
+sldu,46020,610U900US46020,State Senate District 20,20,senate-district-20,46,43.83847,-98.14639,ocd-division/country:us/state:sd/sldu:20,,,,Census cartographic boundary files 2024
+sldu,46021,610U900US46021,State Senate District 21,21,senate-district-21,46,43.38833,-99.16296,ocd-division/country:us/state:sd/sldu:21,,,,Census cartographic boundary files 2024
+sldu,46022,610U900US46022,State Senate District 22,22,senate-district-22,46,44.71968,-98.28088,ocd-division/country:us/state:sd/sldu:22,,,,Census cartographic boundary files 2024
+sldu,46023,610U900US46023,State Senate District 23,23,senate-district-23,46,45.06675,-99.51879,ocd-division/country:us/state:sd/sldu:23,,,,Census cartographic boundary files 2024
+sldu,46024,610U900US46024,State Senate District 24,24,senate-district-24,46,44.44228,-100.65068,ocd-division/country:us/state:sd/sldu:24,,,,Census cartographic boundary files 2024
+sldu,46025,610U900US46025,State Senate District 25,25,senate-district-25,46,43.84827,-96.71775,ocd-division/country:us/state:sd/sldu:25,,,,Census cartographic boundary files 2024
+sldu,46026,610U900US46026,State Senate District 26,26,senate-district-26,46,43.64107,-100.72955,ocd-division/country:us/state:sd/sldu:26,,,,Census cartographic boundary files 2024
+sldu,46027,610U900US46027,State Senate District 27,27,senate-district-27,46,43.75399,-101.98893,ocd-division/country:us/state:sd/sldu:27,,,,Census cartographic boundary files 2024
+sldu,46028,610U900US46028,State Senate District 28,28,senate-district-28,46,45.22856,-102.14997,ocd-division/country:us/state:sd/sldu:28,,,,Census cartographic boundary files 2024
+sldu,46029,610U900US46029,State Senate District 29,29,senate-district-29,46,44.56182,-102.78430,ocd-division/country:us/state:sd/sldu:29,,,,Census cartographic boundary files 2024
+sldu,46003,610U900US46003,State Senate District 3,3,senate-district-3,46,45.46537,-98.45414,ocd-division/country:us/state:sd/sldu:3,,,,Census cartographic boundary files 2024
+sldu,46030,610U900US46030,State Senate District 30,30,senate-district-30,46,43.57081,-103.52797,ocd-division/country:us/state:sd/sldu:30,,,,Census cartographic boundary files 2024
+sldu,46031,610U900US46031,State Senate District 31,31,senate-district-31,46,44.38484,-103.81231,ocd-division/country:us/state:sd/sldu:31,,,,Census cartographic boundary files 2024
+sldu,46032,610U900US46032,State Senate District 32,32,senate-district-32,46,44.07411,-103.23184,ocd-division/country:us/state:sd/sldu:32,,,,Census cartographic boundary files 2024
+sldu,46033,610U900US46033,State Senate District 33,33,senate-district-33,46,44.07608,-103.46810,ocd-division/country:us/state:sd/sldu:33,,,,Census cartographic boundary files 2024
+sldu,46034,610U900US46034,State Senate District 34,34,senate-district-34,46,44.07408,-103.29037,ocd-division/country:us/state:sd/sldu:34,,,,Census cartographic boundary files 2024
+sldu,46035,610U900US46035,State Senate District 35,35,senate-district-35,46,44.08653,-103.15067,ocd-division/country:us/state:sd/sldu:35,,,,Census cartographic boundary files 2024
+sldu,46004,610U900US46004,State Senate District 4,4,senate-district-4,46,45.07755,-97.21715,ocd-division/country:us/state:sd/sldu:4,,,,Census cartographic boundary files 2024
+sldu,46005,610U900US46005,State Senate District 5,5,senate-district-5,46,44.89074,-97.12691,ocd-division/country:us/state:sd/sldu:5,,,,Census cartographic boundary files 2024
+sldu,46006,610U900US46006,State Senate District 6,6,senate-district-6,46,43.43990,-96.76108,ocd-division/country:us/state:sd/sldu:6,,,,Census cartographic boundary files 2024
+sldu,46007,610U900US46007,State Senate District 7,7,senate-district-7,46,44.28257,-96.76779,ocd-division/country:us/state:sd/sldu:7,,,,Census cartographic boundary files 2024
+sldu,46008,610U900US46008,State Senate District 8,8,senate-district-8,46,44.19628,-97.37143,ocd-division/country:us/state:sd/sldu:8,,,,Census cartographic boundary files 2024
+sldu,46009,610U900US46009,State Senate District 9,9,senate-district-9,46,43.57065,-96.89317,ocd-division/country:us/state:sd/sldu:9,,,,Census cartographic boundary files 2024
+sldl,46001,620L900US46001,State House District 1,1,house-district-1,46,45.53731,-97.80674,ocd-division/country:us/state:sd/sldl:1,,,,Census cartographic boundary files 2024
+sldl,46010,620L900US46010,State House District 10,10,house-district-10,46,43.56071,-96.68073,ocd-division/country:us/state:sd/sldl:10,,,,Census cartographic boundary files 2024
+sldl,46011,620L900US46011,State House District 11,11,house-district-11,46,43.51864,-96.80069,ocd-division/country:us/state:sd/sldl:11,,,,Census cartographic boundary files 2024
+sldl,46012,620L900US46012,State House District 12,12,house-district-12,46,43.50191,-96.76789,ocd-division/country:us/state:sd/sldl:12,,,,Census cartographic boundary files 2024
+sldl,46013,620L900US46013,State House District 13,13,house-district-13,46,43.49810,-96.68826,ocd-division/country:us/state:sd/sldl:13,,,,Census cartographic boundary files 2024
+sldl,46014,620L900US46014,State House District 14,14,house-district-14,46,43.52022,-96.67720,ocd-division/country:us/state:sd/sldl:14,,,,Census cartographic boundary files 2024
+sldl,46015,620L900US46015,State House District 15,15,house-district-15,46,43.57065,-96.74396,ocd-division/country:us/state:sd/sldl:15,,,,Census cartographic boundary files 2024
+sldl,46016,620L900US46016,State House District 16,16,house-district-16,46,43.11738,-96.79923,ocd-division/country:us/state:sd/sldl:16,,,,Census cartographic boundary files 2024
+sldl,46017,620L900US46017,State House District 17,17,house-district-17,46,42.78200,-96.97200,ocd-division/country:us/state:sd/sldl:17,,,,Census cartographic boundary files 2024
+sldl,46018,620L900US46018,State House District 18,18,house-district-18,46,42.98127,-97.33879,ocd-division/country:us/state:sd/sldl:18,,,,Census cartographic boundary files 2024
+sldl,46019,620L900US46019,State House District 19,19,house-district-19,46,43.31044,-97.69523,ocd-division/country:us/state:sd/sldl:19,,,,Census cartographic boundary files 2024
+sldl,46002,620L900US46002,State House District 2,2,house-district-2,46,43.57217,-96.55001,ocd-division/country:us/state:sd/sldl:2,,,,Census cartographic boundary files 2024
+sldl,46020,620L900US46020,State House District 20,20,house-district-20,46,43.83847,-98.14639,ocd-division/country:us/state:sd/sldl:20,,,,Census cartographic boundary files 2024
+sldl,46021,620L900US46021,State House District 21,21,house-district-21,46,43.38833,-99.16296,ocd-division/country:us/state:sd/sldl:21,,,,Census cartographic boundary files 2024
+sldl,46022,620L900US46022,State House District 22,22,house-district-22,46,44.71968,-98.28088,ocd-division/country:us/state:sd/sldl:22,,,,Census cartographic boundary files 2024
+sldl,46023,620L900US46023,State House District 23,23,house-district-23,46,45.06675,-99.51879,ocd-division/country:us/state:sd/sldl:23,,,,Census cartographic boundary files 2024
+sldl,46024,620L900US46024,State House District 24,24,house-district-24,46,44.44228,-100.65068,ocd-division/country:us/state:sd/sldl:24,,,,Census cartographic boundary files 2024
+sldl,46025,620L900US46025,State House District 25,25,house-district-25,46,43.84827,-96.71775,ocd-division/country:us/state:sd/sldl:25,,,,Census cartographic boundary files 2024
+sldl,4626A,620L900US4626A,State House District 26A,26A,house-district-26a,46,43.57567,-100.72946,ocd-division/country:us/state:sd/sldl:26a,,,,Census cartographic boundary files 2024
+sldl,4626B,620L900US4626B,State House District 26B,26B,house-district-26b,46,43.89033,-99.58694,ocd-division/country:us/state:sd/sldl:26b,,,,Census cartographic boundary files 2024
+sldl,46027,620L900US46027,State House District 27,27,house-district-27,46,43.75399,-101.98893,ocd-division/country:us/state:sd/sldl:27,,,,Census cartographic boundary files 2024
+sldl,4628A,620L900US4628A,State House District 28A,28A,house-district-28a,46,45.22856,-101.60856,ocd-division/country:us/state:sd/sldl:28a,,,,Census cartographic boundary files 2024
+sldl,4628B,620L900US4628B,State House District 28B,28B,house-district-28b,46,45.25471,-103.49858,ocd-division/country:us/state:sd/sldl:28b,,,,Census cartographic boundary files 2024
+sldl,46029,620L900US46029,State House District 29,29,house-district-29,46,44.56182,-102.78430,ocd-division/country:us/state:sd/sldl:29,,,,Census cartographic boundary files 2024
+sldl,46003,620L900US46003,State House District 3,3,house-district-3,46,45.46537,-98.45414,ocd-division/country:us/state:sd/sldl:3,,,,Census cartographic boundary files 2024
+sldl,46030,620L900US46030,State House District 30,30,house-district-30,46,43.57081,-103.52797,ocd-division/country:us/state:sd/sldl:30,,,,Census cartographic boundary files 2024
+sldl,46031,620L900US46031,State House District 31,31,house-district-31,46,44.38484,-103.81231,ocd-division/country:us/state:sd/sldl:31,,,,Census cartographic boundary files 2024
+sldl,46032,620L900US46032,State House District 32,32,house-district-32,46,44.07411,-103.23184,ocd-division/country:us/state:sd/sldl:32,,,,Census cartographic boundary files 2024
+sldl,46033,620L900US46033,State House District 33,33,house-district-33,46,44.07608,-103.46810,ocd-division/country:us/state:sd/sldl:33,,,,Census cartographic boundary files 2024
+sldl,46034,620L900US46034,State House District 34,34,house-district-34,46,44.07408,-103.29037,ocd-division/country:us/state:sd/sldl:34,,,,Census cartographic boundary files 2024
+sldl,46035,620L900US46035,State House District 35,35,house-district-35,46,44.08653,-103.15067,ocd-division/country:us/state:sd/sldl:35,,,,Census cartographic boundary files 2024
+sldl,46004,620L900US46004,State House District 4,4,house-district-4,46,45.07755,-97.21715,ocd-division/country:us/state:sd/sldl:4,,,,Census cartographic boundary files 2024
+sldl,46005,620L900US46005,State House District 5,5,house-district-5,46,44.89074,-97.12691,ocd-division/country:us/state:sd/sldl:5,,,,Census cartographic boundary files 2024
+sldl,46006,620L900US46006,State House District 6,6,house-district-6,46,43.43990,-96.76108,ocd-division/country:us/state:sd/sldl:6,,,,Census cartographic boundary files 2024
+sldl,46007,620L900US46007,State House District 7,7,house-district-7,46,44.28257,-96.76779,ocd-division/country:us/state:sd/sldl:7,,,,Census cartographic boundary files 2024
+sldl,46008,620L900US46008,State House District 8,8,house-district-8,46,44.19628,-97.37143,ocd-division/country:us/state:sd/sldl:8,,,,Census cartographic boundary files 2024
+sldl,46009,620L900US46009,State House District 9,9,house-district-9,46,43.57065,-96.89317,ocd-division/country:us/state:sd/sldl:9,,,,Census cartographic boundary files 2024
