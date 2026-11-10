@@ -8,6 +8,9 @@ Tools for obtaining, processing and publishing South Dakota public records: shar
 sd-archive/
 ├── packages/
 │   ├── sdfetch/     fetching with a raw store, fallbacks, checkpoints, WARC/HAR, Wayback
+│   ├── sddocs/      reading PDFs: form fields, text layers, OCR engines, forms by position, tables
+│   ├── sdllm/       language models for extraction and classification, quotes checked against the source
+│   ├── sdnames/     names: normalizing, kinds, owner strings split into parties, parsing, blocking keys
 │   ├── sdplaces/    places by Census GEOID, agency ID crosswalks, addresses, geocoding
 │   └── sdgis/       ArcGIS REST and Schneider Beacon clients
 ├── pipelines/

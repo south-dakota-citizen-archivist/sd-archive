@@ -10,6 +10,7 @@ dev = [
     "sdllm[local,claude]",
     "sdfetch[impersonate,browser,warc,keychain]",
     "sdgis",
+    "sdnames",
     "sdplaces[pandas,geo,address,geocode]",
     "pre-commit>=4.7.0",
     "pytest>=8.3",
@@ -33,6 +34,7 @@ sddocs = { workspace = true }
 sdllm = { workspace = true }
 sdfetch = { workspace = true }
 sdgis = { workspace = true }
+sdnames = { workspace = true }
 sdplaces = { workspace = true }
 
 

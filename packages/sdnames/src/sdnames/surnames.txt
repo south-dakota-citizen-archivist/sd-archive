@@ -1,0 +1,56 @@
+# Multi-word family names that aren't particle names, one per line, each seen as a family
+# name in a South Dakota record (election results, lobbyist registrations, parcel owners).
+# Particle names (VAN CAMP, MC PHERSON, LE BRUN, ST JOHN) and hyphenated names don't need
+# listing. Two ordinary surnames side by side (HERSETH SANDLIN) aren't listed: the first
+# could be a middle name.
+# New candidates: sdnames.surname_candidates(names), then a look at the records.
+BALD EAGLE
+BEAR RUNNER
+BEAUTIFUL BALD EAGLE
+BIG CROW
+BIG EAGLE
+BLACK BEAR
+BLACK BULL
+BLUE BIRD
+BRINGS PLENTY
+CHASING HAWK
+CRAZY BEAR
+CRAZY BULL
+EAGLE BULL
+EAGLE FEATHER
+FAST DOG
+FAST WOLF
+FOX BELLY
+GOOD VOICE EAGLE
+HER MANY HORSES
+HIGH BEAR
+HIGH ELK
+HIGH HORSE
+IRON CLOUD
+KILLS A HUNDRED
+LITTLE EAGLE
+LONE EAGLE
+LONE HILL
+NIGHT PIPE
+OLD HORSE
+POOR BEAR
+PUMPKIN SEED
+RED CLOUD
+RED EAGLE
+RED OWL
+RUNNING SHIELD
+SPOTTED EAGLE
+SPOTTED TAIL
+STANDING HIGH
+TAKES THE SHIELD
+THREE STARS
+TWO BULLS
+TWO CROW
+VOICE EAGLE
+WALKING EAGLE
+WHIRLWIND HORSE
+WHITE HAWK
+YELLOW BOY
+YELLOW BULL
+YELLOW CLOUD
+YELLOW EAGLE
