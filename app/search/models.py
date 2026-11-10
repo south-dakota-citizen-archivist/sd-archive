@@ -5,9 +5,9 @@ from django.db import models
 class NameEntry(models.Model):
     """A person or organization name found in a harvested dataset.
 
-    Rebuilt from harvest.Feature after each harvest: one row per (dataset, feature,
-    field, normalized name), with the dates that name was valid, so former owners stay
-    findable. The public.search_names view exposes these rows for cross-project search.
+    Rebuilt from harvest.Feature after each harvest: one row per (dataset, feature, field,
+    normalized name), as of the latest harvest. The search_names view exposes these rows for
+    cross-project search.
     """
 
     dataset = models.ForeignKey(
@@ -15,10 +15,8 @@ class NameEntry(models.Model):
     )
     feature_key = models.CharField(max_length=100)
     field = models.CharField(max_length=100)
-    name = models.TextField(help_text="As published (most recent spelling)")
+    name = models.TextField(help_text="As published")
     normalized = models.TextField(help_text="gis_hub_normalize_name(name)")
-    valid_from = models.DateTimeField()
-    valid_to = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         indexes = [
@@ -28,7 +26,3 @@ class NameEntry(models.Model):
 
     def __str__(self) -> str:
         return self.name
-
-    @property
-    def is_current(self) -> bool:
-        return self.valid_to is None

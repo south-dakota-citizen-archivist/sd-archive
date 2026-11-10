@@ -60,7 +60,7 @@ PARCEL_LAYERS = {
 SQL = """
 SELECT DISTINCT btrim(f.properties ->> %(field)s) AS pid
 FROM harvest_feature f JOIN census_dataset d ON d.id = f.dataset_id
-WHERE d.url = %(url)s AND f.valid_to IS NULL
+WHERE d.url = %(url)s
   AND btrim(f.properties ->> %(field)s) ~ '^[0-9][0-9A-Za-z.-]*$'
 ORDER BY pid
 """

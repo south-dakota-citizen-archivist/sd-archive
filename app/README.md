@@ -1,6 +1,6 @@
 # SD GIS Hub
 
-A local Django app that keeps a census of the public GIS data South Dakota governments publish, archives the datasets worth keeping with their full change history, and lets you search, map and download all of it, including a fuzzy search across every owner and taxpayer name in the archive.
+A local Django app that keeps a census of the public GIS data South Dakota governments publish, archives the datasets worth keeping (the latest data from each harvest), and lets you search, map and download all of it, including a fuzzy search across every owner and taxpayer name in the archive.
 
 Run the commands below from the repository root.
 
@@ -75,17 +75,17 @@ just status                    # what's running, stalled, failed or overdue; par
 
 | Page | What it's for |
 | --- | --- |
-| **Name search** `/search/` | Fuzzy search over owner, taxpayer and other name fields in harvested datasets, including former owners, grouped by name |
+| **Name search** `/search/` | Fuzzy search over owner, taxpayer and other name fields in harvested datasets, grouped by name |
 | **Datasets** `/datasets/` | The census: search names, descriptions and fields; filter by place, topic, source, status. |
-| Dataset page | **Overview** (fields, count history, schema changes) · **Map** (vector tiles from the archive, or a live sample from the source) · **Table** (sort and filter every record) · **Changes** (each harvest's added, changed and removed records) · **Download** (GeoParquet, GeoJSON, CSV). **Watch** a dataset to harvest it on a schedule |
-| Record page | One record's attributes, location and every past version, with what changed |
+| Dataset page | **Overview** (fields, count history, schema changes) · **Map** (vector tiles from the archive, or a live sample from the source) · **Table** (sort and filter every record) · **Changes** (each harvest's counts of added, changed and removed records) · **Download** (GeoParquet, GeoJSON, CSV). **Watch** a dataset to harvest it on a schedule |
+| Record page | One record's attributes and location, as of the latest harvest |
 | **Places** `/places/` | Every county, city, town and tribal area: what it publishes, by topic, and what's missing |
 | **Coverage** `/coverage/` | Counties × topics |
 | **Sources** `/sources/` | Each server: crawl history, services that errored, a **Crawl now** button |
 | **Changes** `/changes/` | New and removed datasets, and harvests that found changes |
 | **Jobs** `/jobs/` | Every crawl and harvest, live |
 | **Admin** `/admin/` | Edit sources, folder-to-place mappings, topics and their rules, name fields, schedules |
-| **API** `/api/v1/docs` | Datasets, features (with `bbox` and `as_of`), record history, places, name search |
+| **API** `/api/v1/docs` | Datasets, features (with `bbox`), places, name search |
 
 ## How it works
 
@@ -104,10 +104,10 @@ just status                    # what's running, stalled, failed or overdue; par
 - The download is checked against the server's count, for duplicate IDs, and against a sudden drop (`max_drop`, 10% by default; use force to override).
 - It's then compared with the archive:
   - unchanged records are left alone
-  - a changed record keeps its old version, closed, alongside the new one
-  - missing records are closed
-- Any date can be queried: "as of March 1" means the records valid on March 1.
-- Each harvest that changes something also writes a GeoParquet snapshot to `media/exports/`.
+  - a changed record is overwritten
+  - a record missing from the source is deleted
+- Only the latest data is kept: no earlier versions.
+- Each harvest that changes something also rewrites the dataset's GeoParquet file (`media/exports/<dataset>/latest.parquet`).
 - Hosted layers report when their data last changed. If that date and the count both match the last full harvest, the harvest is recorded as skipped instead of downloading again, with a full download at least weekly regardless. Most ArcGIS Server layers don't report the date, so they're always downloaded.
 - The archive stores raw codes. The table and record pages show each code's label next to it, and CSV downloads add a `FIELD_label` column.
 - The download is saved batch by batch (see "Stopping and starting again"); storing it commits or rolls back as one unit.
@@ -129,9 +129,7 @@ Paste any URL on the server into the box on the Sources page: the services direc
 ```python
 from harvest.frames import load_dataset
 
-parcels = load_dataset(641)  # current records
-then = load_dataset(641, as_of="2026-11-01")
-every_version = load_dataset(641, history=True)
+parcels = load_dataset(641)  # the records as of the latest harvest
 ```
 
 ## Development
@@ -148,7 +146,7 @@ Layout:
 - `entities/`: `Mention`, one name as a record gives it, typed with [Follow the Money](https://followthemoney.tech/) schemas (Person, Company, Organization, PublicBody, LegalEntity). An owner string with several people gives one mention each (`entities.mentions.from_text`, through sdnames), so each can be matched to a different entity. Every mention keeps its dataset, record key, field, role, the original string and a link to the primary source. `just manage load_legislator_gold <profiles folder>` loads legislators' session profiles with hand-checked identities (`entities/gold/legislators.csv`: each sdlegislature.gov session profile ID → the legislator's canonical ID), a gold set for scoring name matching.
 - `records/`: public records by record set (lobbyist registrations, executive orders, filings): a `Record` per item at the source (its fields, keyed by the source's own key, as of the latest run), its `Document`s (files, stored once by SHA-256), and `Extraction`s (fields read from a document by a model, with the quote for each, and their review). `just manage import_prl` imports an existing database of these.
 - `census/`: sources, datasets, crawls, topics
-- `harvest/`: harvests, records with history, tiles, exports
+- `harvest/`: harvests, the latest records, tiles, exports
 - `search/`: the name index
 - `core/`: jobs and scheduling
 - `config/`: settings, Celery, URLs and the API

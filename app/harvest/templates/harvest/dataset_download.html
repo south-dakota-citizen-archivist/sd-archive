@@ -7,7 +7,7 @@
 <div class="grid gap-4 md:grid-cols-3">
   <a class="card p-4 hover:border-blue-300 {% if not latest_export %}pointer-events-none opacity-50{% endif %}" href="{% url 'harvest:download' dataset.pk 'parquet' %}">
     <div class="font-medium">GeoParquet</div>
-    <p class="text-sm text-gray-600 mt-1">The snapshot from the latest harvest that changed anything{% if latest_export %} ({{ latest_export.started_at|date }}){% endif %}. Best for GeoPandas, DuckDB and QGIS.</p>
+    <p class="text-sm text-gray-600 mt-1">Every record as of the latest harvest{% if latest_export %} ({{ latest_export.started_at|date }}){% endif %}. Best for GeoPandas, DuckDB and QGIS.</p>
   </a>
   <a class="card p-4 hover:border-blue-300" href="{% url 'harvest:download' dataset.pk 'geojson' %}">
     <div class="font-medium">GeoJSON</div>
@@ -23,10 +23,10 @@
   <h2 class="font-medium mb-2">From code</h2>
   <pre class="bg-gray-50 rounded p-3 text-xs overflow-x-auto">import geopandas as gpd
 
-# Current records (or add as_of=2026-11-01T00:00:00 for a point in time)
+# The records, as GeoJSON
 gdf = gpd.read_file("http://localhost:8000/api/v1/datasets/{{ dataset.pk }}/features?limit=5000")
 
-# Or the full snapshot
+# Or all of them as GeoParquet
 gdf = gpd.read_parquet("http://localhost:8000{% url 'harvest:download' dataset.pk 'parquet' %}")</pre>
 </div>
 {% else %}

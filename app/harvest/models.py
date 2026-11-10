@@ -1,5 +1,4 @@
 from django.contrib.gis.db import models
-from django.db.models import Q
 
 
 class Harvest(models.Model):
@@ -27,7 +26,9 @@ class Harvest(models.Model):
     removed = models.PositiveIntegerField(default=0)
     unchanged = models.PositiveIntegerField(default=0)
     content_hash = models.CharField(max_length=64, blank=True)
-    export = models.FileField(upload_to="exports/", blank=True)
+    export = models.FileField(
+        upload_to="exports/", blank=True, help_text="Set on the harvest that wrote the latest file"
+    )
     checks = models.JSONField(default=dict, blank=True, help_text="Validation results")
     error = models.TextField(blank=True)
 
@@ -43,36 +44,23 @@ class Harvest(models.Model):
 
 
 class Feature(models.Model):
-    """One version of one record. The current version has valid_to = NULL.
-
-    A changed record keeps its old row (closed) and gets a new one, so history is
-    a query: what was true at time T is valid_from <= T < valid_to.
-    """
+    """One record of a watched dataset, as of the latest harvest (no history: a change
+    overwrites it, and a record gone from the source is deleted)."""
 
     dataset = models.ForeignKey("census.Dataset", on_delete=models.CASCADE, related_name="features")
     key = models.CharField(max_length=100, help_text="Source object ID, or a content hash")
     properties = models.JSONField()
     geometry = models.GeometryField(srid=4326, null=True, blank=True)
     content_hash = models.CharField(max_length=64)
-    valid_from = models.DateTimeField()
-    valid_to = models.DateTimeField(null=True, blank=True)
-    created_by = models.ForeignKey(Harvest, on_delete=models.CASCADE, related_name="created")
-    closed_by = models.ForeignKey(
-        Harvest, null=True, blank=True, on_delete=models.SET_NULL, related_name="closed"
-    )
+    first_seen = models.DateTimeField(help_text="When a harvest first found it")
+    harvest = models.ForeignKey(
+        Harvest, null=True, blank=True, on_delete=models.SET_NULL, related_name="features",
+        help_text="The harvest that last wrote it",
+    )  # fmt: skip
 
     class Meta:
-        ordering = ["dataset", "key", "-valid_from"]
-        indexes = [
-            models.Index(fields=["dataset", "key", "valid_from"]),
-            models.Index(
-                fields=["dataset", "key"], condition=Q(valid_to=None), name="feature_current"
-            ),
-        ]
+        ordering = ["dataset", "key"]
+        constraints = [models.UniqueConstraint(fields=["dataset", "key"], name="feature_key")]
 
     def __str__(self) -> str:
         return f"{self.dataset_id}:{self.key}"
-
-    @property
-    def is_current(self) -> bool:
-        return self.valid_to is None

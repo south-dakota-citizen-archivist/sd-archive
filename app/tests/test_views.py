@@ -58,10 +58,11 @@ def test_pages_render(client, harvested):
         assert response.status_code == 200, url
 
 
-def test_feature_history_page_shows_change(client, harvested):
+def test_feature_page_shows_the_latest_record(client, harvested):
     body = client.get(f"/datasets/{harvested.pk}/features/2/").content.decode()
-    assert "SMITH, JOHN 2" in body and "DOE, JANE" in body
-    assert "2 versions" in body
+    assert "DOE, JANE" in body and "SMITH, JOHN 2" not in body
+    assert "First seen" in body
+    assert client.get(f"/datasets/{harvested.pk}/features/999/").status_code == 404
 
 
 def test_harvest_page_lists_changed_records(client, harvested):
@@ -159,16 +160,10 @@ def test_api(client, harvested):
     boxed = client.get(f"/api/v1/datasets/{pk}/features?bbox=-103.04,44.0,-103.0,44.04").json()
     assert {f["id"] for f in boxed["features"]} == {"1", "2", "3"}
 
-    first = Harvest.objects.filter(dataset=harvested).last()
-    then = client.get(
-        f"/api/v1/datasets/{pk}/features",
-        {"as_of": first.started_at.isoformat(), "limit": 50},
-    ).json()
-    owner_then = next(f for f in then["features"] if f["id"] == "2")["properties"]["OWNER_NAM"]
-    assert owner_then == "SMITH, JOHN 2"
-
-    history = client.get(f"/api/v1/datasets/{pk}/features/2/history").json()
-    assert [h["properties"]["OWNER_NAM"] for h in history] == ["SMITH, JOHN 2", "DOE, JANE"]
+    two = next(f for f in client.get(f"/api/v1/datasets/{pk}/features?limit=50").json()["features"]
+               if f["id"] == "2")  # fmt: skip
+    assert two["properties"]["OWNER_NAM"] == "DOE, JANE"
+    assert client.get(f"/api/v1/datasets/{pk}/features/2/history").status_code == 404
 
     names = client.get("/api/v1/search/names?q=jane+doe").json()
     assert names[0]["name"] == "DOE, JANE" and names[0]["records"][0]["feature_key"] == "2"

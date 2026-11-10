@@ -6,7 +6,7 @@ from search.models import NameEntry
 
 @admin.register(NameEntry)
 class NameEntryAdmin(ModelAdmin):
-    list_display = ["name", "field", "dataset", "feature_key", "valid_from", "valid_to"]
+    list_display = ["name", "field", "dataset", "feature_key"]
     search_fields = ["normalized"]
     raw_id_fields = ["dataset"]
 

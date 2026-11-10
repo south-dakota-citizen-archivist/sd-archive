@@ -38,7 +38,7 @@ def test_crawl_command(source, monkeypatch):
 
 
 def test_load_dataset_frames(dataset, server):
-    first = service.harvest_dataset(dataset)
+    service.harvest_dataset(dataset)
     server.owners[2] = "DOE, JANE"
     service.harvest_dataset(dataset)
 
@@ -47,10 +47,6 @@ def test_load_dataset_frames(dataset, server):
     assert list(now["_key"][:3]) == ["1", "2", "3"], "numeric keys sort as numbers"
     assert now.crs.to_epsg() == 4326 and len(now) == 10
     assert now.set_index("_key").loc["2", "OWNER_NAM"] == "DOE, JANE"
-
-    then = load_dataset(dataset.pk, as_of=first.started_at)
-    assert then.set_index("_key").loc["2", "OWNER_NAM"] == "SMITH, JOHN 2"
-    assert len(load_dataset(dataset.pk, history=True)) == 11
 
 
 def test_build_readme(dataset, tmp_path):

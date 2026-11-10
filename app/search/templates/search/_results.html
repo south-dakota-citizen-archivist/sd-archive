@@ -8,7 +8,7 @@
       <div class="card">
         <div class="px-4 py-2 border-b border-gray-200 flex justify-between gap-3">
           <span class="font-medium">{{ g.name }}</span>
-          <span class="text-xs text-gray-500">{{ g.n_records }} record{{ g.n_records|pluralize }}{% if g.n_datasets > 1 %} in {{ g.n_datasets }} datasets{% endif %}{% if not g.has_current %} · <span class="text-amber-700">former only</span>{% endif %}</span>
+          <span class="text-xs text-gray-500">{{ g.n_records }} record{{ g.n_records|pluralize }}{% if g.n_datasets > 1 %} in {{ g.n_datasets }} datasets{% endif %}</span>
         </div>
         <ul class="divide-y divide-gray-100 text-sm">
           {% for r in g.records %}
@@ -17,9 +17,6 @@
               <a class="link font-mono" href="{% url 'harvest:feature_detail' r.dataset_id r.feature_key %}">{{ r.feature_key }}</a>
               <span class="text-gray-600">· <a class="hover:underline" href="{% url 'census:dataset_detail' r.dataset_id %}">{{ r.dataset_name }}</a>{% if r.jurisdiction_name %}, {{ r.jurisdiction_name }}{% endif %}</span>
               <span class="text-xs text-gray-400">({{ r.field }})</span>
-            </span>
-            <span class="text-xs {% if r.valid_to %}text-amber-700{% else %}text-gray-500{% endif %}">
-              {% if r.valid_to %}former: {{ r.valid_from|date:"M j, Y" }} – {{ r.valid_to|date:"M j, Y" }}{% else %}current since {{ r.valid_from|date:"M j, Y" }}{% endif %}
             </span>
           </li>
           {% endfor %}

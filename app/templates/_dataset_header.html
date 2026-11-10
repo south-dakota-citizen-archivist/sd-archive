@@ -18,7 +18,7 @@
         {% if dataset.is_watched %}
           <input type="hidden" name="watch" value="0"><button class="btn">★ Watching</button>
         {% else %}
-          <input type="hidden" name="watch" value="1"><button class="btn btn-primary" title="Harvest this dataset on a schedule and keep its history">☆ Watch</button>
+          <input type="hidden" name="watch" value="1"><button class="btn btn-primary" title="Harvest this dataset on a schedule">☆ Watch</button>
         {% endif %}
       </form>
       <form method="post" action="{% url 'census:dataset_harvest' dataset.pk %}">{% csrf_token %}

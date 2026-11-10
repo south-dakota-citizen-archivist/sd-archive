@@ -10,7 +10,7 @@ from tests.conftest import IDS
 
 
 def current(dataset) -> dict[str, Feature]:
-    return {f.key: f for f in Feature.objects.filter(dataset=dataset, valid_to=None)}
+    return {f.key: f for f in Feature.objects.filter(dataset=dataset)}
 
 
 def test_first_harvest(dataset, media_root):
@@ -44,7 +44,7 @@ def test_unchanged_harvest_writes_nothing(dataset):
     assert Feature.objects.filter(dataset=dataset).count() == 10
 
 
-def test_changes_keep_history(dataset, server):
+def test_changes_overwrite_and_removals_delete(dataset, server, media_root):
     first = service.harvest_dataset(dataset)
     server.owners[2] = "DOE, JANE"  # sold
     server.moved.add(3)  # reshaped
@@ -53,25 +53,20 @@ def test_changes_keep_history(dataset, server):
     second = service.harvest_dataset(dataset)
 
     assert (second.added, second.changed, second.removed, second.unchanged) == (1, 2, 1, 7)
-    assert second.export, "changed data gets a new snapshot"
+    features = current(dataset)
+    assert Feature.objects.filter(dataset=dataset).count() == len(features) == 10
+    assert features["2"].properties["OWNER_NAM"] == "DOE, JANE", "overwritten in place"
+    assert features["2"].harvest == second and features["2"].first_seen == first.started_at
+    assert "5" not in features, "gone from the source, gone from the archive"
+    assert features["144"].first_seen == second.started_at
 
-    versions = list(Feature.objects.filter(dataset=dataset, key="2").order_by("valid_from"))
-    assert [v.properties["OWNER_NAM"] for v in versions] == ["SMITH, JOHN 2", "DOE, JANE"]
-    assert versions[0].valid_to == second.started_at
-    assert versions[0].closed_by == second
-    assert versions[1].valid_to is None and versions[1].created_by == second
-
-    gone = Feature.objects.get(dataset=dataset, key="5")
-    assert gone.valid_to is not None and gone.closed_by == second
-    assert "144" in current(dataset)
-    assert len(current(dataset)) == 10
-
-    # Point in time: as of the first harvest, the old owner and record 5 were current
-    as_of = first.started_at
-    then = Feature.objects.filter(dataset=dataset, valid_from__lte=as_of).exclude(
-        valid_to__lte=as_of
-    )
-    assert {f.key for f in then} == {str(i) for i in IDS}
+    # one file per dataset: the latest
+    second.refresh_from_db()
+    first.refresh_from_db()
+    assert second.export.name == f"exports/{dataset.pk}/latest.parquet" and not first.export
+    assert list((Path(media_root) / "exports" / str(dataset.pk)).iterdir()) == [
+        Path(media_root) / second.export.name
+    ]
 
 
 def test_count_mismatch_fails_and_rolls_back(dataset, server, media_root):
@@ -140,17 +135,15 @@ def test_table_without_oid_keys_by_content(dataset, server):
     assert len(keys) == 10 and all(len(k) == 64 for k in keys)
 
 
-def test_names_indexed_with_history(dataset, server):
+def test_names_indexed_as_of_the_latest_harvest(dataset, server):
     service.harvest_dataset(dataset)
     assert NameEntry.objects.filter(dataset=dataset).count() == 10
 
     server.owners[2] = "DOE, JANE"
     service.harvest_dataset(dataset)
 
-    former = NameEntry.objects.get(dataset=dataset, normalized="SMITH JOHN 2")
-    assert former.valid_to is not None
-    now = NameEntry.objects.get(dataset=dataset, normalized="DOE JANE")
-    assert now.valid_to is None and now.feature_key == "2"
+    assert not NameEntry.objects.filter(dataset=dataset, normalized="SMITH JOHN 2").exists()
+    assert NameEntry.objects.get(dataset=dataset, normalized="DOE JANE").feature_key == "2"
 
 
 def test_a_failed_harvest_keeps_its_batches_and_the_next_reuses_them(dataset, server, monkeypatch):

@@ -1,8 +1,8 @@
-"""Write a download into harvest.Feature, keeping every past version.
+"""Write a download into harvest.Feature: the latest version of each record only.
 
-Each record is keyed by its object ID (or, without one, by its content hash). For each
-key, an unchanged record is left alone. A changed record has its current row closed
-(valid_to = now) and a new row inserted. A missing record is closed. A new key is inserted.
+Each record is keyed by its object ID (or, without one, by its content hash). For each key,
+an unchanged record is left alone, a changed one is overwritten, a new one is inserted, and
+one missing from the download is deleted.
 """
 
 import hashlib
@@ -56,7 +56,7 @@ def dataset_hash(rows: list[Row]) -> str:
 
 
 def current_count(dataset) -> int:
-    return Feature.objects.filter(dataset=dataset, valid_to=None).count()
+    return Feature.objects.filter(dataset=dataset).count()
 
 
 @transaction.atomic
@@ -65,34 +65,44 @@ def apply(dataset, harvest: Harvest, rows: list[Row]) -> dict[str, int]:
     incoming = {r.key: r for r in rows}  # identical rows without IDs collapse to one
     current = {
         key: (pk, content_hash)
-        for pk, key, content_hash in Feature.objects.filter(
-            dataset=dataset, valid_to=None
-        ).values_list("pk", "key", "content_hash")
+        for pk, key, content_hash in Feature.objects.filter(dataset=dataset).values_list(
+            "pk", "key", "content_hash"
+        )
     }
 
     added = [k for k in incoming if k not in current]
     changed = [k for k in incoming if k in current and current[k][1] != incoming[k].content_hash]
     removed = [k for k in current if k not in incoming]
 
-    to_close = [current[k][0] for k in changed + removed]
-    for chunk in batched(to_close, BATCH):
-        Feature.objects.filter(pk__in=chunk).update(valid_to=now, closed_by=harvest)
+    for chunk in batched([current[k][0] for k in removed], BATCH):
+        Feature.objects.filter(pk__in=chunk).delete()
 
-    new = []
-    for key in added + changed:
+    def geometry(r: Row):
+        return GEOSGeometry(memoryview(r.wkb), srid=4326) if r.wkb else None
+
+    updates = []
+    for key in changed:
         r = incoming[key]
-        new.append(
+        updates.append(Feature(pk=current[key][0], properties=r.properties, geometry=geometry(r),
+                               content_hash=r.content_hash, harvest=harvest))  # fmt: skip
+    Feature.objects.bulk_update(
+        updates, ["properties", "geometry", "content_hash", "harvest"], batch_size=BATCH
+    )
+    Feature.objects.bulk_create(
+        [
             Feature(
                 dataset=dataset,
                 key=key,
-                properties=r.properties,
-                geometry=GEOSGeometry(memoryview(r.wkb), srid=4326) if r.wkb else None,
-                content_hash=r.content_hash,
-                valid_from=now,
-                created_by=harvest,
-            )
-        )
-    Feature.objects.bulk_create(new, batch_size=BATCH)
+                properties=incoming[key].properties,
+                geometry=geometry(incoming[key]),
+                content_hash=incoming[key].content_hash,
+                first_seen=now,
+                harvest=harvest,
+            )  # fmt: skip
+            for key in added
+        ],
+        batch_size=BATCH,
+    )
 
     return {
         "added": len(added),

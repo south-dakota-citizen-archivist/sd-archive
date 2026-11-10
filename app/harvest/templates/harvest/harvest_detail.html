@@ -14,39 +14,17 @@
 </dl>
 {% if harvest.error %}<div class="mt-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">{{ harvest.error }}</div>{% endif %}
 
-{% if changed %}
-<div class="card mt-6">
-  <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Changed records ({{ harvest.changed|intcomma }}{% if harvest.changed > limit %}, first {{ limit }}{% endif %})</div>
-  <ul class="divide-y divide-gray-100 text-sm">
-    {% for c in changed %}
-    <li class="px-4 py-2">
-      <a class="link font-mono" href="{% url 'harvest:feature_detail' dataset.pk c.key %}">{{ c.key }}</a>
-      <table class="text-xs mt-1">{% for field, old, new in c.changes %}<tr><td class="pr-3 font-mono text-gray-500">{{ field }}</td><td class="pr-2 text-red-700 line-through">{{ old.0|default_if_none:"∅" }}{% if old.1 is not None %} ({{ old.1 }}){% endif %}</td><td class="text-green-800">{{ new.0|default_if_none:"∅" }}{% if new.1 is not None %} <span class="text-gray-400">{{ new.1 }}</span>{% endif %}</td></tr>{% empty %}<tr><td class="text-amber-700">Shape changed.</td></tr>{% endfor %}</table>
-    </li>
-    {% endfor %}
-  </ul>
-</div>
-{% endif %}
+{% if harvest.removed %}<p class="mt-4 text-sm text-gray-600">{{ harvest.removed|intcomma }} record{{ harvest.removed|pluralize }} left the source and {{ harvest.removed|pluralize:"was,were" }} removed.</p>{% endif %}
 
-{% if harvest.added %}
-  {% if first_harvest %}
-  <p class="mt-6 text-sm text-gray-600">This was the first harvest, so all {{ harvest.added|intcomma }} records were added.</p>
-  {% else %}
+{% for title, rows, total in sections %}
+  {% if rows %}
   <div class="card mt-6">
-    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Added records ({{ harvest.added|intcomma }}{% if harvest.added > limit %}, first {{ limit }}{% endif %})</div>
+    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">{{ title }} ({{ total|intcomma }}{% if total > limit %}, first {{ limit }}{% endif %}), as they are now</div>
     <ul class="divide-y divide-gray-100 text-sm max-h-[32rem] overflow-y-auto">
-      {% for key, label in added %}<li class="px-4 py-1.5"><a class="link font-mono" href="{% url 'harvest:feature_detail' dataset.pk key %}">{{ key }}</a> <span class="text-gray-600">{{ label }}</span></li>{% endfor %}
+      {% for key, label in rows %}<li class="px-4 py-1.5"><a class="link font-mono" href="{% url 'harvest:feature_detail' dataset.pk key %}">{{ key }}</a> <span class="text-gray-600">{{ label }}</span></li>{% endfor %}
     </ul>
   </div>
   {% endif %}
-{% endif %}
-
-{% if removed %}
-<div class="card mt-6">
-  <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Removed records ({{ harvest.removed|intcomma }}{% if harvest.removed > limit %}, first {{ limit }}{% endif %})</div>
-  <ul class="divide-y divide-gray-100 text-sm max-h-[32rem] overflow-y-auto">
-    {% for key, label in removed %}<li class="px-4 py-1.5"><a class="link font-mono" href="{% url 'harvest:feature_detail' dataset.pk key %}">{{ key }}</a> <span class="text-gray-600">{{ label }}</span></li>{% endfor %}
-  </ul>
-</div>
-{% endif %}
+{% endfor %}
+{% if first_harvest and harvest.added %}<p class="mt-6 text-sm text-gray-600">This was the first harvest, so all {{ harvest.added|intcomma }} records were added.</p>{% endif %}
 {% endblock %}

@@ -4,7 +4,6 @@ import json
 from datetime import date, datetime
 
 from django.contrib.gis.geos import Polygon
-from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI, Schema
 from ninja.pagination import LimitOffsetPagination, paginate
@@ -83,8 +82,6 @@ class NameRecord(Schema):
     dataset_id: int
     dataset_name: str
     jurisdiction_name: str | None
-    valid_from: datetime
-    valid_to: datetime | None
     url: str
 
 
@@ -93,7 +90,6 @@ class NameMatch(Schema):
     normalized: str
     n_records: int
     n_datasets: int
-    has_current: bool
     score: float
     records: list[NameRecord]
 
@@ -140,18 +136,13 @@ def dataset_features(
     request,
     dataset_id: int,
     bbox: str = "",
-    as_of: datetime | None = None,
     limit: int = 1000,
     offset: int = 0,
 ):
-    """Harvested features as GeoJSON. bbox is "minx,miny,maxx,maxy" (WGS84).
-    as_of returns the records as they were at that time."""
+    """Harvested features (as of the latest harvest) as GeoJSON. bbox is "minx,miny,maxx,maxy"
+    (WGS84)."""
     dataset = get_object_or_404(Dataset, pk=dataset_id)
     qs = Feature.objects.filter(dataset=dataset)
-    if as_of:
-        qs = qs.filter(valid_from__lte=as_of).filter(Q(valid_to=None) | Q(valid_to__gt=as_of))
-    else:
-        qs = qs.filter(valid_to=None)
     if bbox:
         minx, miny, maxx, maxy = (float(v) for v in bbox.split(","))
         qs = qs.filter(geometry__bboverlaps=Polygon.from_bbox((minx, miny, maxx, maxy)))
@@ -171,16 +162,7 @@ def dataset_features(
     }
 
 
-@api.get("/datasets/{dataset_id}/features/{key}/history", tags=["harvest"])
-def feature_history(request, dataset_id: int, key: str):
-    versions = Feature.objects.filter(dataset_id=dataset_id, key=key).order_by("valid_from")
-    return [
-        {"valid_from": v.valid_from, "valid_to": v.valid_to, "properties": v.properties}
-        for v in versions
-    ]
-
-
 @api.get("/search/names", response=list[NameMatch], tags=["search"])
-def search_names(request, q: str, current_only: bool = False, limit: int = 50):
+def search_names(request, q: str, limit: int = 50):
     """Best-matching names (fuzzy), each with up to 25 records it appears on."""
-    return index.search(q, limit=max(1, min(limit, 200)), current_only=current_only)
+    return index.search(q, limit=max(1, min(limit, 200)))

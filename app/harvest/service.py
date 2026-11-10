@@ -1,4 +1,4 @@
-"""Harvest a watched dataset: download, validate, store with history, export, index names."""
+"""Harvest a watched dataset: download, validate, store the latest records, export, index names."""
 
 import logging
 import shutil
@@ -46,6 +46,7 @@ def harvest_dataset(dataset: Dataset, job: Job | None = None, force: bool = Fals
         dataset.last_error = harvest.error
         dataset.save(update_fields=["last_error"])
         raise
+    export.promote(harvest)
     shutil.rmtree(staging_dir(dataset), ignore_errors=True)
     return harvest
 
@@ -126,7 +127,7 @@ def run(dataset: Dataset, harvest: Harvest, force: bool) -> None:
     for key, value in counts.items():
         setattr(harvest, key, value)
 
-    # A new snapshot only when something changed (or there's none yet)
+    # A new file only when something changed (or there's none yet)
     previous = dataset.harvests.exclude(pk=harvest.pk).exclude(export="").first()
     if harvest.has_changes or previous is None:
         harvest.export = export.write_parquet(df, harvest)

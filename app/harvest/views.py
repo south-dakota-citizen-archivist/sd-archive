@@ -63,7 +63,7 @@ def dataset_table(request: HttpRequest, pk: int) -> HttpResponse:
     q = request.GET.get("q", "").strip()
     sort = request.GET.get("sort", "")
     desc = request.GET.get("dir") == "desc"
-    features = Feature.objects.filter(dataset=dataset, valid_to=None).only("key", "properties")
+    features = Feature.objects.filter(dataset=dataset).only("key", "properties")
     if q:
         features = features.annotate(props_text=Cast("properties", TextField())).filter(
             props_text__icontains=q
@@ -134,7 +134,7 @@ def dataset_map(request: HttpRequest, pk: int) -> HttpResponse:
                 SELECT ST_XMin(e), ST_YMin(e), ST_XMax(e), ST_YMax(e)
                 FROM (
                     SELECT ST_Extent(geometry) AS e FROM harvest_feature
-                    WHERE dataset_id = %s AND valid_to IS NULL
+                    WHERE dataset_id = %s
                 ) x
                 """,
                 [dataset.pk],
@@ -209,49 +209,28 @@ def download(request: HttpRequest, pk: int, fmt: str) -> HttpResponse:
     return response
 
 
-def diff(old: dict, new: dict, labels: Labels) -> list[tuple[str, tuple, tuple]]:
-    """Changed fields as (name, old cell, new cell); see Labels.cell."""
-    keys = list(dict.fromkeys([*old, *new]))
-    return [(k, labels.cell(k, old), labels.cell(k, new)) for k in keys if old.get(k) != new.get(k)]
-
-
 def feature_detail(request: HttpRequest, pk: int, key: str) -> HttpResponse:
     dataset = get_dataset(pk)
-    versions = list(
-        Feature.objects.filter(dataset=dataset, key=key)
-        .select_related("created_by", "closed_by")
-        .order_by("valid_from")
-    )
-    if not versions:
-        raise Http404("no such feature")
+    feature = Feature.objects.filter(dataset=dataset, key=key).select_related("harvest").first()
+    if feature is None:
+        raise Http404("no such feature (it may have left the source)")
     labels = Labels(dataset.fields)
-    history = []
-    for i, v in enumerate(versions):
-        changes = diff(versions[i - 1].properties, v.properties, labels) if i else []
-        geometry_changed = bool(i) and versions[i - 1].geometry != v.geometry
-        history.append({"version": v, "changes": changes, "geometry_changed": geometry_changed})
-    latest = versions[-1]
-    names = [c["name"] for c in columns(dataset)] or list(latest.properties)
+    names = [c["name"] for c in columns(dataset)] or list(feature.properties)
     return render(
         request,
         "harvest/feature_detail.html",
         {
             "dataset": dataset,
             "key": key,
-            "latest": latest,
-            "attributes": [(n, *labels.cell(n, latest.properties)) for n in names],
-            "history": list(reversed(history)),
-            "geometry": latest.geometry.geojson if latest.geometry else "null",
+            "feature": feature,
+            "attributes": [(n, *labels.cell(n, feature.properties)) for n in names],
+            "geometry": feature.geometry.geojson if feature.geometry else "null",
         },
     )
 
 
 def feature_json(request: HttpRequest, pk: int, key: str) -> JsonResponse:
-    feature = (
-        Feature.objects.filter(dataset_id=pk, key=key, valid_to=None)
-        .only("key", "properties")
-        .first()
-    )
+    feature = Feature.objects.filter(dataset_id=pk, key=key).only("key", "properties").first()
     if not feature:
         raise Http404
     return JsonResponse({"key": feature.key, "properties": feature.properties})
@@ -262,19 +241,16 @@ def harvest_detail(request: HttpRequest, pk: int) -> HttpResponse:
     first_harvest = not harvest.dataset.harvests.filter(
         status=Harvest.Status.SUCCEEDED, started_at__lt=harvest.started_at
     ).exists()
-    # A first harvest adds everything; no need to load every record just to say so
-    created = (
-        {} if first_harvest else {f.key: f for f in harvest.created.all().only("key", "properties")}
+    # Records this harvest last wrote, as they are now (a later harvest may have rewritten
+    # some). A first harvest adds everything; no need to list every record to say so.
+    written = (
+        []
+        if first_harvest
+        else list(harvest.features.order_by("key").only("key", "properties", "first_seen"))
     )
-    closed = {f.key: f for f in harvest.closed.all().only("key", "properties")}
-    added = [created[k] for k in sorted(created) if k not in closed]
-    removed = [closed[k] for k in sorted(closed) if k not in created]
+    added = [f for f in written if f.first_seen == harvest.started_at]
+    changed = [f for f in written if f.first_seen != harvest.started_at]
     labels = Labels(harvest.dataset.fields)
-    changed = [
-        {"key": k, "changes": diff(closed[k].properties, created[k].properties, labels)}
-        for k in sorted(created)
-        if k in closed
-    ]
     limit = 500
     fields = label_fields(harvest.dataset)
 
@@ -295,9 +271,10 @@ def harvest_detail(request: HttpRequest, pk: int) -> HttpResponse:
         {
             "harvest": harvest,
             "dataset": harvest.dataset,
-            "added": labelled(added),
-            "removed": labelled(removed),
-            "changed": changed[:limit],
+            "sections": [
+                ("Changed records", labelled(changed), harvest.changed),
+                ("Added records", labelled(added), harvest.added),
+            ],
             "limit": limit,
             "first_harvest": first_harvest,
         },
@@ -325,7 +302,6 @@ mvtgeom AS (
            f.key
     FROM harvest_feature f, bounds
     WHERE f.dataset_id = %(dataset_id)s
-      AND f.valid_to IS NULL
       AND f.geometry && ST_Transform(bounds.geom, 4326)
 )
 SELECT ST_AsMVT(mvtgeom.*, 'features') FROM mvtgeom

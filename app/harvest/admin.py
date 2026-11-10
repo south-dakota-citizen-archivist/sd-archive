@@ -23,8 +23,8 @@ class HarvestAdmin(ModelAdmin):
 
 @admin.register(Feature)
 class FeatureAdmin(ModelAdmin):
-    list_display = ["key", "dataset", "valid_from", "valid_to"]
-    raw_id_fields = ["dataset", "created_by", "closed_by"]
+    list_display = ["key", "dataset", "first_seen", "harvest"]
+    raw_id_fields = ["dataset", "harvest"]
     search_fields = ["key"]
     exclude = ["geometry"]
 

@@ -71,8 +71,8 @@ def test_report_links(county, picker, dataset, capsys, monkeypatch):
             key=key,
             properties={"PIN": pin},
             content_hash=key,
-            created_by=harvest,
-            valid_from=harvest.started_at,
+            harvest=harvest,
+            first_seen=harvest.started_at,
         )
     monkeypatch.setattr(
         cmd,

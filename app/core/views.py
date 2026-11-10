@@ -26,7 +26,7 @@ def home(request: HttpRequest) -> HttpResponse:
         .distinct()
         .count(),
         "watched": live.filter(status=Dataset.Status.WATCHED).count(),
-        "features": Feature.objects.filter(valid_to=None).count(),
+        "features": Feature.objects.count(),
         "names": NameEntry.objects.count(),
     }
     top_topics = (

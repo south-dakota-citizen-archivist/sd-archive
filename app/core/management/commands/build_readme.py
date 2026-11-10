@@ -50,7 +50,7 @@ def render() -> str:
         "",
         f"{live.count():,} datasets from {len(sources)} sources, "
         f"covering {counties} of 66 counties. "
-        f"{Feature.objects.filter(valid_to=None).count():,} features archived; "
+        f"{Feature.objects.count():,} features archived; "
         f"{NameEntry.objects.count():,} names indexed.",
     ]
     beacon = Source.objects.filter(platform=Source.Platform.BEACON).order_by("name")

@@ -1,4 +1,4 @@
-"""Bulk download files: a GeoParquet snapshot per changed harvest, plus CSV/GeoJSON on demand."""
+"""Bulk download files: the latest GeoParquet file per dataset, plus CSV/GeoJSON on demand."""
 
 import csv
 import io
@@ -15,11 +15,17 @@ from harvest.models import Harvest
 
 
 def export_relpath(harvest: Harvest) -> str:
+    """Where a harvest writes its file while it runs."""
     return f"exports/{harvest.dataset_id}/harvest-{harvest.pk}.parquet"
 
 
+def latest_relpath(dataset_id: int) -> str:
+    return f"exports/{dataset_id}/latest.parquet"
+
+
 def write_parquet(df: gpd.GeoDataFrame, harvest: Harvest) -> str:
-    """Write a snapshot via a temp file and rename, so a failed write leaves nothing behind."""
+    """Write this harvest's file via a temp file and rename, so a failed write leaves nothing
+    behind. promote() makes it the dataset's file once the harvest is stored."""
     relpath = export_relpath(harvest)
     path = Path(settings.MEDIA_ROOT) / relpath
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -35,6 +41,19 @@ def write_parquet(df: gpd.GeoDataFrame, harvest: Harvest) -> str:
     return relpath
 
 
+def promote(harvest: Harvest) -> None:
+    """After a harvest is stored: its file becomes the dataset's only one (latest.parquet),
+    and no earlier harvest points at a file."""
+    if not harvest.export:
+        return
+    media = Path(settings.MEDIA_ROOT)
+    latest = latest_relpath(harvest.dataset_id)
+    (media / harvest.export.name).replace(media / latest)
+    Harvest.objects.filter(pk=harvest.pk).update(export=latest)
+    harvest.export.name = latest
+    Harvest.objects.filter(dataset_id=harvest.dataset_id).exclude(pk=harvest.pk).update(export="")
+
+
 def iter_current(dataset_id: int, chunk: int = 2000) -> Iterator[tuple[str, dict, str | None]]:
     """(key, properties, geometry as GeoJSON text) for current features, streamed."""
     with connection.cursor() as cur:
@@ -42,7 +61,7 @@ def iter_current(dataset_id: int, chunk: int = 2000) -> Iterator[tuple[str, dict
             """
             SELECT key, properties, ST_AsGeoJSON(geometry, 7)
             FROM harvest_feature
-            WHERE dataset_id = %s AND valid_to IS NULL
+            WHERE dataset_id = %s
             ORDER BY length(key), key
             """,
             [dataset_id],

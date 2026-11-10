@@ -10,7 +10,7 @@
   </form>
   <div id="table-body">{% include "harvest/_table_rows.html" %}</div>
 {% else %}
-  <p class="text-sm text-gray-600 mb-3">Not harvested yet. These are the first 100 rows straight from the source. <b>Watch</b> this dataset to archive it and get sorting, filtering and history.</p>
+  <p class="text-sm text-gray-600 mb-3">Not harvested yet. These are the first 100 rows straight from the source. <b>Watch</b> this dataset to archive it and get sorting and filtering.</p>
   <div hx-get="{% url 'harvest:dataset_preview_table' dataset.pk %}" hx-trigger="load">
     <div class="card p-4 text-sm text-gray-500">Loading from {{ dataset.source }}…</div>
   </div>

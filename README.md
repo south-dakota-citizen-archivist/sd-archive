@@ -16,7 +16,7 @@ sd-archive/
 ├── pipelines/
 │   └── elections/   precinct-level results from electionresults.sd.gov, 2008 on
 ├── catalog/         datasets.toml: every dataset, its kind (aggregate or records) and source
-└── app/             the GIS hub: a census of published GIS data, archived with history
+└── app/             the GIS hub: a census of published GIS data, with the latest records of watched datasets
 ```
 
 Every package works without Django. Each has its own README.

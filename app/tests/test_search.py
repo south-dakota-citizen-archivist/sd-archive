@@ -47,16 +47,12 @@ def test_all_words_rank_above_fuzzy(harvested):
     assert "JOHNSON, MARILYN" in names
 
 
-def test_former_owners_are_found(harvested, server):
+def test_a_sold_parcel_is_found_by_its_new_owner_only(harvested, server):
     server.owners[3] = "DOE, JANE"
     service.harvest_dataset(harvested)
 
-    [match] = [g for g in index.search("johnson mark") if g["name"] == "JOHNSON, MARK A"]
-    assert not match["has_current"]
-    assert match["records"][0]["valid_to"] is not None
-    assert not [
-        g for g in index.search("johnson mark", current_only=True) if g["name"] == "JOHNSON, MARK A"
-    ]
+    assert not [g for g in index.search("johnson mark") if g["name"] == "JOHNSON, MARK A"]
+    assert [r["feature_key"] for g in index.search("jane doe") for r in g["records"]] == ["3"]
 
 
 def test_short_queries_return_nothing(harvested):
