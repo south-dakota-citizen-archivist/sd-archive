@@ -14,6 +14,7 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urlsplit
 
+import certifi
 import requests
 from tenacity import RetryCallState, Retrying, retry_if_exception, stop_after_attempt
 
@@ -317,9 +318,12 @@ class Fetcher:
                 (t for t in targets if t.startswith("chrome")),
                 key=lambda t: int(t.removeprefix("chrome").removesuffix("_macos")),
             )
+            # certifi's CA list, the one requests uses: curl_cffi's own lacks some chains
+            # (Sectigo's DV R36), so a site the http rung reaches would fail here
             self._impersonate[name] = curl.Session(
-                impersonate=chrome[-1] if chrome else "chrome", proxy=proxy
-            )
+                impersonate=chrome[-1] if chrome else "chrome", proxy=proxy,
+                verify=certifi.where(),
+            )  # fmt: skip
             self.jar.to_jar(self._impersonate[name].cookies)
         try:
             return self._impersonate[name].request(method, url, **kwargs)

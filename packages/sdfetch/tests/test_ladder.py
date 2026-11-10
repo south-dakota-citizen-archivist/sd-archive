@@ -134,6 +134,18 @@ def test_impersonate_for_real(tmp_path):
         httpd.shutdown()
         httpd.server_close()
     assert ua.startswith("Mozilla/5.0 (Macintosh") and "Chrome/" in ua
+    # both rungs trust the same certificate authorities (certifi's, as requests does)
+    import certifi
+
+    assert all(s.verify == certifi.where() for s in f._impersonate.values())
+
+
+@pytest.mark.network  # curl_cffi can't be recorded
+def test_impersonate_trusts_a_sectigo_dv_chain(tmp_path):
+    """A server whose chain curl_cffi's own CA list can't build (seen 2026-11-10)."""
+    f = sdfetch.Fetcher(tmp_path, strategy="impersonate", delay=0, memory=False)
+    resp = f.request("GET", "https://www.1stdistrict.org/arcgis/rest/services?f=json")
+    assert resp.status_code == 200 and "folders" in resp.json()
 
 
 def test_unavailable_rungs_are_skipped_in_auto(tmp_path):

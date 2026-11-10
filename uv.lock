@@ -5798,10 +5798,11 @@ provides-extras = ["ocr", "text", "searchable", "macos"]
 
 [[package]]
 name = "sdfetch"
-version = "0.4.0"
+version = "0.4.1"
 source = { editable = "packages/sdfetch" }
 dependencies = [
     { name = "asn1crypto" },
+    { name = "certifi" },
     { name = "pysocks" },
     { name = "requests" },
     { name = "tenacity" },
@@ -5829,6 +5830,7 @@ warc = [
 requires-dist = [
     { name = "asn1crypto", specifier = ">=1.5" },
     { name = "camoufox", extras = ["geoip"], marker = "extra == 'browser'", specifier = ">=0.4" },
+    { name = "certifi", specifier = ">=2024.2" },
     { name = "curl-cffi", marker = "extra == 'impersonate'", specifier = ">=0.11" },
     { name = "keyring", marker = "extra == 'keychain'", specifier = ">=25" },
     { name = "nodriver", marker = "extra == 'browser'", specifier = ">=0.47" },
