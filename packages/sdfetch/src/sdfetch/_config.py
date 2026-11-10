@@ -16,6 +16,11 @@
     delay = 3.0
     headers = { Referer = "https://example.gov/" }
     block_phrases = ["temporarily unavailable"]
+    jitter = 0.4                   # pauses vary from 60% to 140% of delay
+    hours = "08:00-18:00"          # only make requests in these hours…
+    days = "mon-fri"               # …on these days…
+    tz = "America/Chicago"         # …in this time zone (default: this machine's)
+    budget = 400                   # at most this many requests a day
 
 For a matching host these override the Fetcher's own arguments. The most specific host entry
 wins. Route URLs can hold credentials, so the manifest records route names, never URLs; keep
@@ -35,7 +40,10 @@ from ._ladder import DIRECT
 
 logger = logging.getLogger(__name__)
 
-HOST_KEYS = {"strategy", "max_strategy", "routes", "delay", "headers", "block_phrases"}
+HOST_KEYS = {
+    "strategy", "max_strategy", "routes", "delay", "headers", "block_phrases",
+    "jitter", "hours", "days", "tz", "budget",
+}  # fmt: skip
 
 
 def config_path() -> Path:

@@ -173,6 +173,22 @@ def snapshots(
         page += 1
 
 
+def latest(
+    url: str, *, fetcher: Fetcher | None = None, status: str | None = "200"
+) -> Snapshot | None:
+    """The newest capture of url, or None if there isn't one."""
+    f = fetcher or _default_fetcher()
+    params: dict = {"url": url, "output": "json", "fl": ",".join(FIELDS), "limit": -1}
+    if status:
+        params["filter"] = [f"statuscode:{status}"]
+    rows = json.loads(f.request("GET", CDX, params=params).content or b"[]")
+    rows = [r for r in rows if r != FIELDS and len(r) == len(FIELDS)]
+    if not rows:
+        return None
+    ts, original, mime, code, digest, length = rows[-1]
+    return Snapshot(ts, original, mime, code, digest, int(length) if length.isdigit() else None)
+
+
 def fetch_snapshot(snap: Snapshot, fetcher: Fetcher, name: str | None = None, **kwargs) -> bytes:
     """The original bytes of a capture, stored at name (wayback/<host>/<timestamp>.<ext>).
     A capture never changes, so a stored one is never fetched again."""

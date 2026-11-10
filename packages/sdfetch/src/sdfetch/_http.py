@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import atexit
 import logging
+import random
 import re
 import threading
 import time
@@ -18,6 +19,7 @@ from tenacity import RetryCallState, Retrying, retry_if_exception, stop_after_at
 
 from ._config import Config, load_config
 from ._ladder import DIRECT, HostMemory, RungUnavailable, get_strategy, ladder
+from ._pacing import Budget, check_window, jittered
 from ._store import Store
 
 logger = logging.getLogger(__name__)
@@ -138,6 +140,12 @@ class Fetcher:
         memory: HostMemory | str | Path | bool | None = None,
         delay: float = 1.0,
         delays: dict[str, float] | None = None,
+        jitter: float = 0.0,
+        hours: str | None = None,
+        days: str | None = None,
+        tz: str | None = None,
+        budget: int | None = None,
+        budget_file: str | Path | None = None,
         user_agent: str | None = None,
         headers: dict[str, str] | None = None,
         timeout: float = 120,
@@ -150,6 +158,8 @@ class Fetcher:
         warc: bool | str | Path = False,
         har: bool | str | Path = False,
         sleep: Callable[[float], None] = time.sleep,
+        rng: random.Random | None = None,
+        clock: Callable[[], datetime] | None = None,
     ):
         if strategy != "auto":
             get_strategy(strategy)  # raises for an unknown name
@@ -166,6 +176,10 @@ class Fetcher:
         else:
             self.memory = HostMemory(memory)
         self.delay, self.delays = delay, delays or {}
+        self.jitter, self.hours, self.days, self.tz = jitter, hours, days, tz
+        self.budget, self._budget = budget, Budget(budget_file)
+        self.rng = rng or random.Random()
+        self.clock = clock or (lambda: datetime.now(UTC))
         self.timeout, self.retries, self.backoff = timeout, retries, backoff
         self.block_phrases = list(block_phrases)
         self.raise_errors = raise_errors
@@ -219,7 +233,9 @@ class Fetcher:
 
     def _pause(self, url: str) -> None:
         host = urlsplit(url).hostname or ""
-        gap = self._settings(url).get("delay", self.delays.get(host, self.delay))
+        settings = self._settings(url)
+        gap = settings.get("delay", self.delays.get(host, self.delay))
+        gap = jittered(gap, settings.get("jitter", self.jitter), self.rng)
         with _hosts_lock:
             t = time.monotonic()
             start = max(t, _host_next.get(host, 0.0))
@@ -337,9 +353,11 @@ class Fetcher:
 
     def _once(self, route: str, rung: str, method: str, url: str, check_blocked: bool,
               raise_errors: bool, **kwargs):  # fmt: skip
+        settings = self._settings(url)
+        if limit := settings.get("budget", self.budget):
+            self._budget.spend(urlsplit(url).hostname or "", int(limit))
         self._pause(url)
         self.requests += 1
-        settings = self._settings(url)
         if not get_strategy(rung).browser:
             kwargs.setdefault("timeout", self.timeout)
             if extra := settings.get("headers"):
@@ -396,6 +414,13 @@ class Fetcher:
         is returned for the caller to check. Strategies and routes that aren't available are
         skipped when there's something else to try."""
         raise_errors = self.raise_errors if raise_errors is None else raise_errors
+        settings = self._settings(url)
+        check_window(
+            self.clock(),
+            settings.get("hours", self.hours),
+            settings.get("days", self.days),
+            settings.get("tz", self.tz),
+        )
         attempts = self._attempts(method, url)
         host = urlsplit(url).hostname or ""
         routes_tried = list(dict.fromkeys(r for r, _ in attempts))

@@ -1,0 +1,2 @@
+{"url": "https://example.gov/a", "method": "GET", "path": "a.html", "bytes": 8, "sha256": "df5ddd75e1e0e3fee2eb4c4d7a160f2673560df8afb145ba651b43f100c0dc57", "fetched_at": "2026-11-10T17:09:50+00:00"}
+{"url": "https://example.gov/b", "method": "GET", "path": "b.html", "bytes": 8, "sha256": "b8fa62ed9cd18a7750d99bdde44597f4579cb8c049fa244291ab2686d6c72c6e", "fetched_at": "2026-11-10T17:09:50+00:00"}

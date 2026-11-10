@@ -1,6 +1,6 @@
 # sdfetch
 
-Fetching with a raw store: HTTP with retries and per-host pauses, curl_cffi and browser fallbacks, a manifest of everything fetched, checkpoints, WARC and HAR recording, and the Wayback Machine. Plain Python, no Django.
+Fetching with a raw store: HTTP with retries and paced requests, curl_cffi and browser fallbacks, routes, a manifest of everything fetched, page watching, trusted timestamps, checkpoints, WARC and HAR recording, and the Wayback Machine. Plain Python, no Django.
 
 ```python
 import sdfetch
@@ -29,6 +29,14 @@ A route is where requests leave from: `direct`, or a proxy (`http://`, `https://
 - **Memory:** what worked is remembered per host, as a route and a strategy.
 - **Coverage:** every strategy honors the route: requests, curl_cffi, the browsers, and registered strategies.
 - **Manifest:** it records the route's name, never its URL.
+
+## Pacing
+
+- `jitter=0.4` varies each pause from 60% to 140% of the delay.
+- `hours="08:00-18:00"`, `days="mon-fri"` and `tz="America/Chicago"` limit requests to a window (in the machine's time zone if `tz` isn't given; an overnight window belongs to the day it starts). Outside the window a request raises `OutsideHours` before sending anything.
+- `budget=400` caps requests per host per day, counted across runs in `~/.cache/sdfetch/budget.json`. Past the cap, a request raises `BudgetSpent`.
+
+Both are `NotNow` exceptions, with `.until` set to when to try again, so a scheduler can come back later instead of failing. All of these can also be set per site in the local config.
 
 ## Local config
 
@@ -102,6 +110,36 @@ for snap in wayback.snapshots(PAGE, start="2019"):
 - `fetch_snapshot()` stores a capture at `wayback/<host>/<timestamp>.<ext>`, with the capture time and original URL in the manifest.
 - `save_page(url)` requests a new capture (Save Page Now).
 
+## Watching pages
+
+```python
+w = sdfetch.Watch(sdfetch.Fetcher(".cache/watch"))
+event = w.check("https://example.gov/reports")  # {"kind": "changed", "blob": …, …}
+```
+
+`check()` fetches a page and compares it with the last time:
+- **Events:** `new`, `changed`, `redirected`, `gone` (404 or 410), `back`, or `unreachable`. Being blocked, a connection failure or a 5xx are recorded as `unreachable`, never as `gone`.
+- **Where they go:** events are appended to `watch/events.jsonl`, and state is kept in `watch/state.json`.
+- **Versions:** every distinct version is stored by SHA-256, so the last good copy survives.
+- **Gone pages:** the Wayback Machine's latest capture is fetched and stored as well.
+- **Noise:** `normalize=` strips parts that change on every load (tokens, timestamps) before comparing.
+
+## Trusted timestamps
+
+```python
+from sdfetch import stamp
+
+entry = stamp.stamp_manifest(store)    # after a run
+stamp.verify(store, entry)             # the token covers the manifest's first entry["lines"] lines
+stamp.verify_signature(store, entry)   # the authority's signature and chain, with OpenSSL 3
+```
+
+`stamp_manifest()` gets an RFC 3161 timestamp on the SHA-256 of the store's manifest from a public timestamp authority (DigiCert, then Sectigo, then FreeTSA). Only the hash is sent.
+- **What it covers:** every manifest line records a file's SHA-256, so one stamp covers every file fetched so far.
+- **As the manifest grows:** a stamp covers a fixed number of lines, so it stays valid when lines are added later.
+- **Where tokens go:** `stamps/` and `stamps.jsonl`.
+- **Checking one yourself:** `openssl ts -verify -data <first N lines> -in <token> -CAfile <CA bundle>`. This needs OpenSSL 3, since the LibreSSL that ships with macOS can't verify these.
+
 ## Also
 
 - `checkpoint(path)`: finished units and a cursor in a JSON file, rewritten after each `mark()`, so an interrupted run picks up where it stopped.
@@ -114,7 +152,7 @@ for snap in wayback.snapshots(PAGE, start="2019"):
 dependencies = ["sdfetch[impersonate]"]
 
 [tool.uv.sources]
-sdfetch = { git = "https://github.com/south-dakota-citizen-archivist/sd-archive", subdirectory = "packages/sdfetch", tag = "sdfetch-v0.2.0" }
+sdfetch = { git = "https://github.com/south-dakota-citizen-archivist/sd-archive", subdirectory = "packages/sdfetch", tag = "sdfetch-v0.3.0" }
 ```
 
 Extras: `impersonate` (curl_cffi), `browser` (Playwright and the other browser backends), `warc` (warcio).
