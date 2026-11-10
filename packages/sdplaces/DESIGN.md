@@ -46,9 +46,9 @@ One file per outside ID system, all with the same columns: `system_id, geoid, na
 
 > **Decided:** the legislator crosswalk moves to `sdnames`/`entities`.
 
-### Boundaries (not shipped)
+### Boundaries (downloaded, not shipped)
 
-Shapes are too big to ship in the package. `sdplaces.boundaries(kind, year=2024)` downloads the Census cartographic boundary file, caches it locally, and returns a GeoDataFrame. The GIS hub's `load_jurisdictions` uses it to fill PostGIS. This needs the optional `geo` extra (geopandas); everything else is standard library.
+Shapes are too big to ship in the package. `sdplaces.boundaries(kind, year=2024)` downloads the Census cartographic boundary file once into `$SDPLACES_CACHE` (default `~/.cache/sdplaces/GENZ<year>/`) and returns a GeoDataFrame in EPSG:4326. Its rows are sdplaces' own places (GEOID, name, short name, slug, parent, valid dates), so the file's other rows (CDPs in the place file, other states, tribal areas that only touch the border) are left out. For an older year, historical places come back too: `boundaries("county", 2014)` includes Shannon County. The GIS hub's `load_jurisdictions` uses it to fill PostGIS. This needs the optional `geo` extra (geopandas); everything else is standard library.
 
 ---
 
@@ -57,23 +57,25 @@ Shapes are too big to ship in the package. `sdplaces.boundaries(kind, year=2024)
 ```python
 import sdplaces
 
-sdplaces.county("Lawrence")                  # Place(kind='county', geoid='46081', name='Lawrence County', …)
-sdplaces.county("LAWRENCE COUNTY")           # same: case, " County" and punctuation don't matter
-sdplaces.county("Shannon")                   # Place(geoid='46113', valid_to=2015-05-01, successor='46102')
-sdplaces.county("Shannon", current=True)     # Oglala Lakota County, 46102
-sdplaces.place("Spearfish")                  # the city
-sdplaces.get("46081")                        # any place by GEOID
+sdplaces.county("Lawrence")  # Place(kind='county', geoid='46081', name='Lawrence County', …)
+sdplaces.county("LAWRENCE COUNTY")  # same: case, " County" and punctuation don't matter
+sdplaces.county("Shannon")  # Place(geoid='46113', valid_to=2015-05-01, successor='46102')
+sdplaces.county("Shannon", current=True)  # Oglala Lakota County, 46102
+sdplaces.place("Spearfish")  # the city
+sdplaces.get("46081")  # any place by GEOID
 sdplaces.from_id("sos_election_county", 57)  # Spink County
-sdplaces.from_id("doe_district", "06001")    # Aberdeen 06-1 school district
-sdplaces.counties(as_of="2010-01-01")        # the 66 counties in force on that date (Shannon, not Oglala Lakota)
-sdplaces.children("46081", kind="place")     # cities and towns in Lawrence County
+sdplaces.from_id("doe_district", "06001")  # Aberdeen 06-1 school district
+sdplaces.counties(
+    as_of="2010-01-01"
+)  # the 66 counties in force on that date (Shannon, not Oglala Lakota)
+sdplaces.children("46081", kind="place")  # cities and towns in Lawrence County
 
 # pandas helper for pipelines: adds county_geoid, and fails loudly on any name it can't place
 df = sdplaces.add_geoid(df, name_column="county", kind="county", date_column="date")
 
 # optional `geo` extra
-sdplaces.boundaries("county")                # GeoDataFrame of current boundaries
-sdplaces.locate(44.49, -103.86)              # [South Dakota, Lawrence County, Spearfish city, …]
+sdplaces.boundaries("county")  # GeoDataFrame of current boundaries
+sdplaces.locate(44.49, -103.86)  # [South Dakota, Lawrence County, Spearfish city, …]
 ```
 
 **Names are matched exactly, never guessed.** Matching uses the normalized name plus the aliases file. An unknown name raises `UnknownPlace` with near-miss suggestions, and is never mapped silently to the nearest match. That keeps every mapping auditable, in line with the primary-source rule.
@@ -89,9 +91,9 @@ These come from whats-up-in-spearfish's `address.py` and `geo.py`, made statewid
 ```python
 from sdplaces import address, geocode
 
-address.parse("2545 & 2555 CLEAR SPRING RD")    # two Address objects
-address.key("515 27th St N, Spearfish, SD")      # "515 N 27TH ST"
-address.loose("1440 N MAIN ST")                  # "1440 MAIN ST" (the fallback when directions disagree)
+address.parse("2545 & 2555 CLEAR SPRING RD")  # two Address objects
+address.key("515 27th St N, Spearfish, SD")  # "515 N 27TH ST"
+address.loose("1440 N MAIN ST")  # "1440 MAIN ST" (the fallback when directions disagree)
 
 geocode.batch(addresses, cache=JsonCache(path), within=sdplaces.get("46081"))
 ```
@@ -139,7 +141,7 @@ Tests check:
 2. Aliases and the `sos_election_county` crosswalk, seeded from the data you already have.
 3. `address` and `geocode` from Spearfish, with Spearfish's existing tests carried over.
 4. School districts with the DOE crosswalk, legislative districts, OCD IDs.
-5. The GIS hub's loader switched to `boundaries()`. Then fixes for the 46113 bug in polling places and motor vehicles, as PRs to those repos.
+5. The GIS hub's loader switched to `boundaries()` (2026-11-10): reloading changed none of its 389 rows (names, slugs, parents, and boundaries byte for byte). Left: fixes for the 46113 bug in polling places and motor vehicles, as PRs to those repos.
 6. **Try libpostal as a fallback parser** (agreed 2026-11-10). Run it on the address strings usaddress rejects in Spearfish's data (and, later, statewide records), and add it as an optional `postal` extra only if it clearly recovers more. Its `expand_address()` variants may also help entity matching. usaddress stays the main parser. The biggest accuracy gain is planned separately: matching keys against county E911 address points (Stage 4).
 
 **Progress:** step 4 done 2026-11-10: 148 current school districts plus 3 historical (Rutland 39-4 and Oldham-Ramona 39-5 merged into the new Oldham-Ramona-Rutland 39-6 for 2023-24; Grant-Deuel 25-3 dissolved after 2016-17), 35 Senate and 37 House districts, OCD IDs on 597 rows (missing only for the two historical counties, Brant Lake city, Corsica-Stickney 21-3 and 39-6, which OCD doesn't list), and the `doe_district` crosswalk (151 DOE numbers → NCES LEAIDs, from the CCD 2022 and 2016 directories). Every one of the education dashboard's 1,340 district-years resolves to a district in force that year. OCD's own Oglala Lakota row carries Shannon's retired code 46113, so OCD IDs are matched by name for counties.

@@ -17,10 +17,12 @@ dependencies = [
     "pyarrow>=26.0.0",
     "requests>=2.32",
     "sdgis",
+    "sdplaces[geo]",
 ]
 
 [tool.uv.sources]
 sdgis = { workspace = true }
+sdplaces = { workspace = true }
 
 [tool.uv]
 # A Django app, not an installable package. Lint and test settings live in the workspace root.

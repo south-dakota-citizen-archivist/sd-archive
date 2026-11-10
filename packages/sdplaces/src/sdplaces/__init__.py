@@ -6,8 +6,10 @@ Census designated places and tribal areas. See DESIGN.md.
     sdplaces.county("Shannon", current=True).name     # 'Oglala Lakota County'
     sdplaces.place("Spearfish").parent                # '46081'
     sdplaces.from_id("sos_election_county", 57).name # 'Spink County'
+    sdplaces.boundaries("county")                     # GeoDataFrame (the `geo` extra)
 """
 
+from ._boundaries import boundaries
 from ._pandas import add_geoid
 from ._places import (
     KINDS,
@@ -40,6 +42,7 @@ __all__ = [
     "UnknownPlace",
     "add_geoid",
     "all_places",
+    "boundaries",
     "children",
     "counties",
     "county",
