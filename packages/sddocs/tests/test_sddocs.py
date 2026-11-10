@@ -117,3 +117,12 @@ def test_compare_engines(tmp_path):
 def test_error_rate():
     assert ocr.error_rate("Jane  Smith\n", "Jane Smith") == 0
     assert ocr.error_rate("Jane Smlth", "Jane Smith") == 0.1
+
+
+def test_as_text_spacing():
+    pieces = [{"text": "Name:", "x0": 10, "x1": 40, "top": 0, "bottom": 10},
+              {"text": "Jane", "x0": 43, "x1": 60, "top": 0, "bottom": 10},
+              {"text": "Smith", "x0": 63, "x1": 90, "top": 0, "bottom": 10},
+              {"text": "Lead", "x0": 200, "x1": 220, "top": 1, "bottom": 11}]  # fmt: skip
+    assert ocr.as_text(pieces) == "Name: Jane Smith  Lead"
+    assert ocr.as_text(pieces, spacing="  ") == "Name:  Jane  Smith  Lead"

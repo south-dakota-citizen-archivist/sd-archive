@@ -188,10 +188,13 @@ def page_pieces(pdf: str | Path, index: int, engine: str = "rapidocr") -> list[d
     return _to_points(_engines[engine][0](render(pdf, index)))
 
 
-def as_text(pieces: list[dict], tolerance: float = 5) -> str:
-    """Positioned pieces as plain lines, top to bottom and left to right. Pieces close
-    together (less than a character's height apart, as words are) are joined by a space; a
-    wider gap, as between columns or a label and its answer, by two."""
+def as_text(pieces: list[dict], tolerance: float = 5, spacing: str = "auto") -> str:
+    """Positioned pieces as plain lines, top to bottom and left to right.
+
+    spacing="auto": pieces close together (less than a character's height apart, as words
+    are) are joined by a space, and a wider gap (between columns, or a label and its
+    answer) by two. Any other string joins every pair of pieces with it; parsers written
+    against two spaces between pieces pass "  "."""
     rows: list[list[dict]] = []
     for p in sorted(pieces, key=lambda p: ((p["top"] + p["bottom"]) / 2, p["x0"])):
         mid = (p["top"] + p["bottom"]) / 2
@@ -204,6 +207,9 @@ def as_text(pieces: list[dict], tolerance: float = 5) -> str:
         row = sorted(row, key=lambda p: p["x0"])
         text = row[0]["text"]
         for prev, p in zip(row, row[1:], strict=False):
+            if spacing != "auto":
+                text += spacing + p["text"]
+                continue
             gap = p["x0"] - prev["x1"]
             text += (" " if gap < (prev["bottom"] - prev["top"]) else "  ") + p["text"]
         lines.append(text)

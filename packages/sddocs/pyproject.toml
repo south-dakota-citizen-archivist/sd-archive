@@ -1,6 +1,6 @@
 [project]
 name = "sddocs"
-version = "0.1.0"
+version = "0.1.1"
 description = "Reading documents: each PDF page by its form fields, text layer or OCR, cached by page; fillable forms read by position; OCR engines; tables; text and date clean-up. No Django."
 readme = "README.md"
 requires-python = ">=3.12"
