@@ -13,6 +13,8 @@ import urllib.request
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from sdfetch import BROWSER_HEADERS
+
 from ._places import KINDS, all_places
 
 if TYPE_CHECKING:
@@ -52,7 +54,7 @@ def census_file(kind: str, year: int = YEAR) -> Path:
         return path
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".partial")
-    req = urllib.request.Request(url, headers={"User-Agent": "sdplaces"})
+    req = urllib.request.Request(url, headers=BROWSER_HEADERS)
     with urllib.request.urlopen(req, timeout=300) as resp, tmp.open("wb") as f:
         while chunk := resp.read(1 << 20):
             f.write(chunk)

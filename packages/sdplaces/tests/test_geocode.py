@@ -49,7 +49,8 @@ def test_census_batch_keeps_matches_inside_the_area_and_caches_misses(tmp_path):
     asked = []
 
     class Session:
-        def post(self, url, files=None, data=None, timeout=None):
+        def post(self, url, files=None, data=None, headers=None, timeout=None):
+            assert headers["User-Agent"].startswith("Mozilla/5.0 (Macintosh")
             rows = list(
                 __import__("csv").reader(__import__("io").StringIO(files["addressFile"][1]))
             )

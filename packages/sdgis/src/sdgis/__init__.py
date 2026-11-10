@@ -3,4 +3,5 @@
 Nothing in here imports Django, so adapters stay easy to test with fake servers.
 """
 
-USER_AGENT = "sd-gis-hub/0.1 (local research)"
+# Requests look like a desktop browser (sdfetch); nothing names the project
+from sdfetch import BROWSER_HEADERS, USER_AGENT  # noqa: F401

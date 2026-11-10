@@ -21,21 +21,16 @@ import argparse
 import csv
 import html
 import re
-import time
 from datetime import UTC, datetime
 from pathlib import Path
 
-import requests
+import sdfetch
 
 BASE = "https://electionresults.sd.gov/default.aspx?eid={eid}"
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 RAW = REPO / ".cache" / "elections" / "eid"
 CATALOG = HERE / "data" / "elections.csv"
-UA = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/130.0.0.0 Safari/537.36"
-)
 ERROR_MARK = "An error has occured"  # sic, the site's spelling
 MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
 TITLE = re.compile(rf"((?:Un)?[Oo]fficial) Results\s+(.+?)\s+((?:{MONTHS}) \d{{1,2}}, \d{{4}})")
@@ -70,23 +65,8 @@ def parse(eid: int, page: str) -> dict | None:
     }
 
 
-def fetch(session: requests.Session, eid: int, refresh: bool) -> str:
-    path = RAW / f"{eid}.html"
-    if path.exists() and not refresh:
-        return path.read_text()
-    for attempt in range(4):
-        try:
-            resp = session.get(BASE.format(eid=eid), timeout=30)
-            resp.raise_for_status()
-            break
-        except requests.RequestException:
-            if attempt == 3:
-                raise
-            time.sleep(5 * (attempt + 1))
-    tmp = path.with_suffix(".partial")
-    tmp.write_text(resp.text)
-    tmp.replace(path)  # a page is either fully saved or not at all
-    return resp.text
+def fetch(f: sdfetch.Fetcher, eid: int, refresh: bool) -> str:
+    return f.text(BASE.format(eid=eid), f"{eid}.html", refresh=refresh)
 
 
 def main() -> None:
@@ -102,8 +82,8 @@ def main() -> None:
 
     RAW.mkdir(parents=True, exist_ok=True)
     CATALOG.parent.mkdir(parents=True, exist_ok=True)
-    session = requests.Session()
-    session.headers["User-Agent"] = UA
+    # sdfetch pauses between requests and keeps each page with a manifest
+    f = sdfetch.Fetcher(RAW, delay=args.delay, timeout=60)
 
     found: dict[int, dict] = {}
     eid, last_hit = args.start, args.start - 1
@@ -112,8 +92,7 @@ def main() -> None:
             break
         if not args.to and eid - last_hit > args.gap:
             break
-        cached = (RAW / f"{eid}.html").exists() and not args.refresh
-        page = fetch(session, eid, args.refresh)
+        page = fetch(f, eid, args.refresh)
         row = parse(eid, page)
         if row:
             row["fetched_at"] = datetime.fromtimestamp(
@@ -122,8 +101,6 @@ def main() -> None:
             found[eid] = row
             last_hit = eid
             print(f"{eid:>5} {row['date']} {row['status']:<10} {row['title']}", flush=True)
-        if not cached:
-            time.sleep(args.delay)
         eid += 1
 
     with CATALOG.open("w", newline="") as f:

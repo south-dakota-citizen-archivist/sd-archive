@@ -45,6 +45,8 @@ from pathlib import Path
 
 import requests
 
+from sdfetch import BROWSER_HEADERS
+
 from . import address
 
 logger = logging.getLogger(__name__)
@@ -55,9 +57,9 @@ NOMINATIM = "https://nominatim.openstreetmap.org/search"
 NOMINATIM_DELAY = 1.1  # seconds between requests (their limit is one a second)
 MISS_RETRY_DAYS = 30
 STREET_LEVEL = {"road", "residential", "street", "highway"}
-USER_AGENT = (
-    "sdplaces/0.1 (South Dakota citizen archive; github.com/south-dakota-citizen-archivist)"
-)
+# Requests look like a desktop browser (sdfetch). Nominatim's usage policy asks for an
+# identifying User-Agent; this doesn't send one, so keep to its one-request-a-second limit.
+USER_AGENT = BROWSER_HEADERS["User-Agent"]
 
 
 @dataclass(frozen=True)
@@ -147,6 +149,7 @@ class Geocoder:
             CENSUS_BATCH,
             files={"addressFile": ("addresses.csv", buf.getvalue(), "text/csv")},
             data={"benchmark": "Public_AR_Current"},
+            headers={**BROWSER_HEADERS, "User-Agent": self.user_agent},
             timeout=600,
         )
         resp.raise_for_status()
@@ -185,7 +188,7 @@ class Geocoder:
                 "limit": 1,
                 "countrycodes": "us",
             },
-            headers={"User-Agent": self.user_agent},
+            headers={**BROWSER_HEADERS, "User-Agent": self.user_agent},
             timeout=30,
         )
         resp.raise_for_status()

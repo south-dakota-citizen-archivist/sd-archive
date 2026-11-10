@@ -14,12 +14,15 @@ import argparse
 import csv
 import io
 import json
+import os
 import re
 import unicodedata
 import urllib.request
 from pathlib import Path
 
 import geopandas as gpd
+
+from sdfetch import BROWSER_HEADERS
 
 STATE_FIPS = "46"
 DATA = Path(__file__).resolve().parents[1] / "src" / "sdplaces" / "data"
@@ -55,11 +58,13 @@ def slugify(text: str) -> str:
 
 
 def read(base: str, name: str) -> gpd.GeoDataFrame:
+    # GDAL fetches /vsicurl/ itself, and would otherwise send "GDAL/x.y"
+    os.environ["GDAL_HTTP_USERAGENT"] = BROWSER_HEADERS["User-Agent"]
     return gpd.read_file(f"/vsizip//vsicurl/{base}/{name}").to_crs(4326)
 
 
 def fetch(url: str) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": "sdplaces build_data.py"})
+    req = urllib.request.Request(url, headers=BROWSER_HEADERS)
     with urllib.request.urlopen(req, timeout=120) as resp:
         return resp.read()
 

@@ -1,0 +1,60 @@
+# sdfetch: design (2026-11-10)
+
+How every pipeline and source gets things from the web: plain HTTP, HTTP that looks like a browser, real browsers, and the Wayback Machine. Whatever it gets is kept raw, with a manifest saying where each file came from. Plain Python, no Django. It replaces the separate fetchers in Spearfish (`scrapers/net.py`), spillarchive (`net.py`), the public records liberator (`_helpers.py`'s SOS session and block check), the elections pipeline (`capture.py`'s `Fetcher`) and the pistol permit Wayback code. It also replaces the playwright-stealth setup copied into five scrapers.
+
+**Defaults:**
+1. The raw store keeps **named files** (`pages/default_eid=3.html`), as the pipelines do now, because a named file can be checked by eye against its source. Content-addressed blobs (`blobs/ab/cd/<sha256>`, plan §3) are a second mode of the same store, for documents whose names aren't meaningful.
+2. **All traffic looks native** (decided 2026-11-10): every request sends desktop Chrome's headers, with the version kept current, and never names the project, the org or a bot. That includes plain downloads, and GDAL's `/vsicurl/` reads (`GDAL_HTTP_USERAGENT`). `impersonate=` (curl_cffi, step 2) also matches Chrome's TLS fingerprint, and browsers run with stealth by default.
+3. **One request at a time per host**, with a pause (1 second by default, set per host). Fetches run in sequence unless a caller chooses otherwise.
+
+---
+
+## 1. What it contains
+
+| piece | what it does | step |
+|---|---|---|
+| `Fetcher` | GET and POST with retries and backoff (tenacity; honors `Retry-After` on 429 and 503), a per-host pause, and a block-page check. `fetch(url, name)` returns the stored copy if there is one, and otherwise fetches and stores it. | 1 |
+| `Store` | a folder of raw files plus `manifest.jsonl` (URL, method, status, bytes, SHA-256, time, and any note the caller adds). Writes are atomic (`.partial`, then rename). **A refresh never replaces a good file with an empty or blocked one.** | 1 |
+| `Blocked` | raised when a response is a challenge or block page (Cloudflare, Akamai, the SOS "we're sorry" page) instead of the content. It's retried with a longer wait, then raised for the caller to escalate, for example to a browser. | 1 |
+| `checkpoint(path)` | a small JSON file of finished units and a cursor, written atomically after each unit. The app's `SourceState` will offer the same interface (plan §5.4). | 1 |
+| `ensure_free(path, gb)` | refuses to start a big download when free disk space is below a threshold (plan §5.10). | 1 |
+| `impersonate=` | curl_cffi's browser TLS and HTTP/2 fingerprints, for sites that block Python's. | 2 |
+| `browser(strategy=…)` | one context manager around Playwright + playwright-stealth, patchright, Camoufox and nodriver/zendriver. Pages it saves go into the same store and manifest. | 2 |
+| WARC and HAR | `warcio` writes every response to a WARC file as well (opt-in per source). HAR recording in the browser is for finding hidden APIs. | 3 |
+| Wayback | CDX search for a URL's snapshots, fetching a snapshot's original bytes (`id_`), and Save Page Now. | 4 |
+
+## 2. The interface
+
+```python
+import sdfetch
+
+store = sdfetch.Store(".cache/elections/raw/3")
+f = sdfetch.Fetcher(store, delay=1.0)
+
+html = f.text("https://electionresults.sd.gov/default.aspx?eid=3", "pages/default_eid=3.html")
+xlsx = f.fetch(url, "exports/Aurora.xlsx", data=form, note={"label": "Aurora"})  # a POST
+f.fetch(
+    url, "pages/live.html", refresh=True
+)  # fetch again; the old copy stays if the new one is empty
+
+resp = f.request("GET", url)  # not stored, for probes
+
+cp = sdfetch.checkpoint(".cache/spills/checkpoint.json")
+for unit in units:
+    if cp.done(unit):
+        continue
+    ...
+    cp.mark(unit)  # written now, so an interruption loses at most this unit
+
+sdfetch.ensure_free(".cache", gb=50)
+```
+
+Per-host settings: `sdfetch.Fetcher(store, delays={"sdsos.gov": 3.0})`. Block checks can be extended per source: `Fetcher(store, block_phrases=[...])`.
+
+## 3. Steps
+
+1. **Core** (`Fetcher`, `Store`, `Blocked`, `checkpoint`, `ensure_free`) with tests against a local test server, and the elections pipeline switched to it.
+2. **Looking like a browser:** `impersonate=` through curl_cffi, and `browser(strategy=…)`. Port the five playwright-stealth scrapers' setup.
+3. **WARC and HAR.**
+4. **Wayback:** CDX, snapshots, Save Page Now. Port the pistol permit code.
+5. **First release** (`sdfetch-v0.1.0`). Spearfish switches from `scrapers/net.py`, and spillarchive from its `net.py`, through git dependencies.

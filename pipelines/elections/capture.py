@@ -29,16 +29,14 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 import html
 import json
 import re
-import time
 from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit
 
-import requests
+import sdfetch
 
 SITE = "https://electionresults.sd.gov/"
 API = "https://sdresws.azurewebsites.us/ResultsAjax.svc/GetMapDataArchive"
@@ -46,10 +44,6 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 RAW = REPO / ".cache" / "elections" / "raw"
 CATALOG = HERE / "data" / "elections.csv"
-UA = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/130.0.0.0 Safari/537.36"
-)
 API_LIVE = "https://sdresws.azurewebsites.us/ResultsAjax.svc/GetMapData"
 ERROR_MARK = "An error has occured"  # sic
 HIDDEN = re.compile(r'<input type="hidden" name="([^"]+)" id="[^"]*" value="([^"]*)"')
@@ -74,12 +68,17 @@ def turnout(page: str) -> dict:
 
 
 class Fetcher:
+    """sdfetch's Fetcher with this election's folder (raw/<eid>) as its store. Paths given to
+    get() and fetch() are inside that folder; refresh fetches them again."""
+
     def __init__(self, eid: int, delay: float, refresh: bool):
-        self.eid, self.delay, self.refresh = eid, delay, refresh
+        self.eid, self.refresh = eid, refresh
         self.root = RAW / str(eid)
-        self.session = requests.Session()
-        self.session.headers["User-Agent"] = UA
-        self.requests = 0
+        self.http = sdfetch.Fetcher(self.root, delay=delay, timeout=300)
+
+    @property
+    def requests(self) -> int:
+        return self.http.requests
 
     def get(self, url: str, path: Path) -> str:
         return self.fetch(url, path).decode("utf-8", "replace")
@@ -88,39 +87,8 @@ class Fetcher:
         self, url: str, path: Path, form: dict | None = None, note: dict | None = None
     ) -> bytes:
         """The response body, saved at path. A POST when form is given (the export postbacks)."""
-        if path.exists() and not self.refresh:
-            return path.read_bytes()
-        for attempt in range(4):
-            try:
-                if self.requests:
-                    time.sleep(self.delay)
-                self.requests += 1
-                if form is None:
-                    resp = self.session.get(url, timeout=120)
-                else:
-                    resp = self.session.post(url, data=form, timeout=300)
-                resp.raise_for_status()
-                break
-            except requests.RequestException:
-                if attempt == 3:
-                    raise
-                time.sleep(10 * (attempt + 1))
-        path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = path.with_suffix(path.suffix + ".partial")
-        tmp.write_bytes(resp.content)
-        tmp.replace(path)  # saved whole or not at all
-        entry = {
-            "url": url,
-            "method": "GET" if form is None else "POST",
-            **(note or {}),
-            "path": str(path.relative_to(self.root)),
-            "bytes": len(resp.content),
-            "sha256": hashlib.sha256(resp.content).hexdigest(),
-            "fetched_at": datetime.now(UTC).isoformat(timespec="seconds"),
-        }
-        with (self.root / "manifest.jsonl").open("a") as f:
-            f.write(json.dumps(entry) + "\n")
-        return resp.content
+        name = path.relative_to(self.root).as_posix()
+        return self.http.fetch(url, name, data=form, note=note, refresh=self.refresh)
 
 
 def page_name(url: str) -> str:

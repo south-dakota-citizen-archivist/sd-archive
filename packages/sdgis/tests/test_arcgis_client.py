@@ -124,7 +124,8 @@ def test_object_id_field(metadata, expected):
 
 def test_session_has_retries_and_user_agent():
     session = client.make_session(retries=2)
-    assert session.headers["User-Agent"].startswith("sd-gis-hub/")
+    assert session.headers["User-Agent"].startswith("Mozilla/5.0")
+    assert "sd-gis-hub" not in session.headers["User-Agent"]
     assert session.get_adapter("https://x").max_retries.total == 2
 
 

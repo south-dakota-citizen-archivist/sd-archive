@@ -13,6 +13,7 @@ resolution-markers = [
 [manifest]
 members = [
     "sd-archive-app",
+    "sdfetch",
     "sdgis",
     "sdplaces",
 ]
@@ -31,6 +32,7 @@ dev = [
     { name = "pytest-cov", specifier = ">=6.0" },
     { name = "pytest-django", specifier = ">=4.11" },
     { name = "ruff", specifier = ">=0.11" },
+    { name = "sdfetch", editable = "packages/sdfetch" },
     { name = "sdgis", editable = "packages/sdgis" },
     { name = "sdplaces", extras = ["pandas", "geo", "address", "geocode"], editable = "packages/sdplaces" },
 ]
@@ -3367,6 +3369,21 @@ requires-dist = [
 ]
 
 [[package]]
+name = "sdfetch"
+version = "0.1.0"
+source = { editable = "packages/sdfetch" }
+dependencies = [
+    { name = "requests" },
+    { name = "tenacity" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "requests", specifier = ">=2.32" },
+    { name = "tenacity", specifier = ">=9.0" },
+]
+
+[[package]]
 name = "sdgis"
 version = "0.1.0"
 source = { editable = "packages/sdgis" }
@@ -3374,6 +3391,7 @@ dependencies = [
     { name = "geopandas" },
     { name = "pandas" },
     { name = "requests" },
+    { name = "sdfetch" },
 ]
 
 [package.metadata]
@@ -3381,6 +3399,7 @@ requires-dist = [
     { name = "geopandas", specifier = ">=1.2.0" },
     { name = "pandas", specifier = ">=2.2" },
     { name = "requests", specifier = ">=2.32" },
+    { name = "sdfetch", editable = "packages/sdfetch" },
 ]
 
 [[package]]
@@ -3389,6 +3408,7 @@ version = "0.1.0"
 source = { editable = "packages/sdplaces" }
 dependencies = [
     { name = "rapidfuzz" },
+    { name = "sdfetch" },
 ]
 
 [package.optional-dependencies]
@@ -3414,6 +3434,7 @@ requires-dist = [
     { name = "pandas", marker = "extra == 'pandas'", specifier = ">=2.2" },
     { name = "rapidfuzz", specifier = ">=3.9" },
     { name = "requests", marker = "extra == 'geocode'", specifier = ">=2.32" },
+    { name = "sdfetch", editable = "packages/sdfetch" },
     { name = "usaddress", marker = "extra == 'address'", specifier = ">=0.5.11" },
     { name = "usaddress", marker = "extra == 'geocode'", specifier = ">=0.5.11" },
     { name = "usaddress-scourgify", marker = "extra == 'address'", specifier = ">=0.7.1" },
@@ -3534,6 +3555,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/28/e3/55dcc2cfbc3ca9c29519eb6884dd1415ecb53b0e934862d3559ddcb7e20b/stack_data-0.6.3.tar.gz", hash = "sha256:836a778de4fec4dcd1dcd89ed8abff8a221f58308462e1c4aa2a3cf30148f0b9", size = 44707, upload-time = "2023-09-30T13:58:05.479Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f1/7b/ce1eafaf1a76852e2ec9b22edecf1daa58175c090266e9f6c64afcd81d91/stack_data-0.6.3-py3-none-any.whl", hash = "sha256:d5558e0c25a4cb0853cddad3d77da9891a08cb85dd9f9f91b9f8cd66e511e695", size = 24521, upload-time = "2023-09-30T13:58:03.53Z" },
+]
+
+[[package]]
+name = "tenacity"
+version = "9.2.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/82/9e/497c1c8ebe5a5b5d1d4a7511aea22c0bb1a97e3170d98abdef0e1b34265a/tenacity-9.2.1.tar.gz", hash = "sha256:a606b5c808d0cded4a359d5b9932d867ff2a6a6b64d37350260fd01bbdf83839", size = 58261, upload-time = "2026-10-07T12:13:01.633Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d6/26/1ff2b0721ac66a3ec5b1402b333110b352ab0a8724052ac279a7b82d40c4/tenacity-9.2.1-py3-none-any.whl", hash = "sha256:9e56f17539296baab7beabb08b92f6ee3d7be92d8be72d763360677c2ad6580e", size = 32310, upload-time = "2026-10-07T12:13:00.102Z" },
 ]
 
 [[package]]

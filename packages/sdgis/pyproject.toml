@@ -8,7 +8,11 @@ dependencies = [
     "geopandas>=1.2.0",
     "pandas>=2.2",
     "requests>=2.32",
+    "sdfetch",
 ]
+
+[tool.uv.sources]
+sdfetch = { workspace = true }
 
 [build-system]
 requires = ["uv_build>=0.13.7,<0.14.0"]

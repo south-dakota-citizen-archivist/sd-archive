@@ -12,7 +12,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-from sdgis import USER_AGENT
+from sdgis import BROWSER_HEADERS
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +37,7 @@ def make_session(retries: int = RETRIES) -> requests.Session:
     )
     adapter = HTTPAdapter(max_retries=retry)
     session = requests.Session()
-    session.headers["User-Agent"] = USER_AGENT
+    session.headers.update(BROWSER_HEADERS)
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     return session
