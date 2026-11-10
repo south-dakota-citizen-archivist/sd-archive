@@ -145,8 +145,10 @@ just check                       # every pre-commit hook
 Layout:
 - `../packages/sdgis/`: plain-Python ArcGIS and Beacon clients, with no Django imports
 - `places/`: `Jurisdiction`, every place records are about, loaded from sdplaces with Census boundaries: the state, counties, cities and towns, census designated places, tribal areas, school districts and legislative districts. Former places stay, with the date they ended and what they became (Shannon County → Oglala Lakota County). Each has its GEOID, fully qualified GEOID (unique across kinds) and Open Civic Data ID.
+- `entities/`: `Mention`, one name as a record gives it, typed with [Follow the Money](https://followthemoney.tech/) schemas (Person, Company, Organization, PublicBody, LegalEntity). An owner string with several people gives one mention each (`entities.mentions.from_text`, through sdnames), so each can be matched to a different entity. Every mention keeps its dataset, record key, field, role, the original string and a link to the primary source. `just manage load_legislator_gold <profiles folder>` loads legislators' session profiles with hand-checked identities (`entities/gold/legislators.csv`: each sdlegislature.gov session profile ID → the legislator's canonical ID), a gold set for scoring name matching.
 - `census/`: sources, datasets, crawls, topics
 - `harvest/`: harvests, records with history, tiles, exports
 - `search/`: the name index
 - `core/`: jobs and scheduling
 - `config/`: settings, Celery, URLs and the API
+- The `published` database schema holds the views that define what can be exported (`published.places`, `published.gis_datasets`). The `sd_export` role can read those views and nothing else; mentions aren't in it.

@@ -5736,6 +5736,7 @@ dependencies = [
     { name = "pyarrow" },
     { name = "requests" },
     { name = "sdgis" },
+    { name = "sdnames" },
     { name = "sdplaces", extra = ["geo"] },
 ]
 
@@ -5753,6 +5754,7 @@ requires-dist = [
     { name = "pyarrow", specifier = ">=26.0.0" },
     { name = "requests", specifier = ">=2.32" },
     { name = "sdgis", editable = "packages/sdgis" },
+    { name = "sdnames", editable = "packages/sdnames" },
     { name = "sdplaces", extras = ["geo"], editable = "packages/sdplaces" },
 ]
 

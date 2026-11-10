@@ -17,11 +17,13 @@ dependencies = [
     "pyarrow>=26.0.0",
     "requests>=2.32",
     "sdgis",
+    "sdnames",
     "sdplaces[geo]",
 ]
 
 [tool.uv.sources]
 sdgis = { workspace = true }
+sdnames = { workspace = true }
 sdplaces = { workspace = true }
 
 [tool.uv]
