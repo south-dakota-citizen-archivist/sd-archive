@@ -16,6 +16,7 @@ import time
 from contextlib import contextmanager, suppress
 from dataclasses import dataclass, field
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 from ._http import BLOCK_PATTERNS
 
@@ -72,6 +73,20 @@ def _content(page, tries: int = 30) -> str:
     return page.content()
 
 
+def _playwright_proxy(url: str | None) -> dict | None:
+    """A proxy URL as Playwright's proxy setting: server, and username and password if any."""
+    if not url:
+        return None
+    parts = urlsplit(url)
+    port = f":{parts.port}" if parts.port else ""
+    out = {"server": f"{parts.scheme}://{parts.hostname}{port}"}
+    if parts.username:
+        out["username"] = unquote(parts.username)
+    if parts.password:
+        out["password"] = unquote(parts.password)
+    return out
+
+
 def _native_ua(ua: str) -> str:
     return ua.replace("HeadlessChrome", "Chrome")
 
@@ -86,13 +101,18 @@ class Browser:
         headless: bool = True,
         timeout: float = 60,
         har: str | Path | None = None,
+        proxy: str | None = None,
     ):
         """har: record every request the browser makes to this HAR file, written on close()
-        (not nodriver, which has no recorder)."""
+        (not nodriver, which has no recorder). proxy: a proxy URL (http, https or socks5)
+        for all of the browser's traffic."""
         if strategy not in STRATEGIES:
             raise ValueError(f"strategy must be one of {STRATEGIES}")
         if har and strategy == "nodriver":
             raise ValueError("nodriver can't record a HAR; use stealth, patchright or camoufox")
+        self.proxy = _playwright_proxy(proxy)
+        if self.proxy and strategy == "nodriver" and "username" in self.proxy:
+            raise ValueError("nodriver can't use a proxy that needs a username and password")
         self.strategy, self.headless, self.timeout = strategy, headless, timeout
         self.har = Path(har) if har else None
         if self.har:
@@ -105,9 +125,9 @@ class Browser:
 
     def _chrome_context(self, p, *, stealth: bool) -> None:
         try:
-            browser = p.chromium.launch(channel="chrome", headless=self.headless)
+            browser = p.chromium.launch(channel="chrome", headless=self.headless, proxy=self.proxy)
         except Exception:  # no Google Chrome here (a CI runner): Playwright's own Chromium
-            browser = p.chromium.launch(headless=self.headless)
+            browser = p.chromium.launch(headless=self.headless, proxy=self.proxy)
         self._stack.append(browser.close)
         probe = browser.new_page()
         ua = _native_ua(probe.evaluate("navigator.userAgent"))
@@ -141,7 +161,14 @@ class Browser:
         from camoufox.sync_api import Camoufox
 
         # The OS matches this machine's, so canvas and WebGL aren't randomized
-        cm = Camoufox(headless=self.headless, locale="en-US", humanize=True, os="macos")
+        cm = Camoufox(
+            headless=self.headless,
+            locale="en-US",
+            humanize=True,
+            os="macos",
+            proxy=self.proxy,
+            geoip=bool(self.proxy),  # timezone and locale to match the route's exit address
+        )
         browser = cm.__enter__()
         self._stack.append(lambda: cm.__exit__(None, None, None))
         self.context = browser.new_context(**self._har_kwargs())
@@ -158,7 +185,10 @@ class Browser:
 
         logging.getLogger("nodriver").setLevel(logging.WARNING)  # its INFO is process chatter
         self._loop = nodriver.loop()
-        self._nd = self._loop.run_until_complete(nodriver.start(headless=self.headless))
+        args = [f"--proxy-server={self.proxy['server']}"] if self.proxy else None
+        self._nd = self._loop.run_until_complete(
+            nodriver.start(headless=self.headless, browser_args=args)
+        )
 
         def stop():
             import atexit
@@ -245,9 +275,10 @@ def browser(
     headless: bool = True,
     timeout: float = 60,
     har: str | Path | None = None,
+    proxy: str | None = None,
 ):
     """A running browser for one block of work, closed afterwards (writing the HAR, if any)."""
-    b = Browser(strategy, headless=headless, timeout=timeout, har=har)
+    b = Browser(strategy, headless=headless, timeout=timeout, har=har, proxy=proxy)
     try:
         yield b
     finally:

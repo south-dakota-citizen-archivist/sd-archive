@@ -21,6 +21,48 @@ html = f.text("https://electionresults.sd.gov/default.aspx?eid=3", "pages/defaul
 - **Errors** raise `requests.HTTPError`, or come back as responses with `raise_errors=False`. `fetch()` never stores an error page.
 - Default headers are a desktop browser's (`BROWSER_HEADERS`). `user_agent=` and `headers=` override them.
 
+## Routes
+
+A route is where requests leave from: `direct`, or a proxy (`http://`, `https://`, `socks5://`). Give routes by name or URL with `Fetcher(routes=["direct", "vpn"])`, or per site in the local config.
+- **Order:** a request tries each strategy on the first route, then each on the next.
+- **Unreachable routes:** a route that can't connect at all is skipped.
+- **Memory:** what worked is remembered per host, as a route and a strategy.
+- **Coverage:** every strategy honors the route: requests, curl_cffi, the browsers, and registered strategies.
+- **Manifest:** it records the route's name, never its URL.
+
+## Local config
+
+`~/.config/sdfetch/hosts.toml`, or the file `$SDFETCH_CONFIG` names, sets named routes and per-site settings. For a matching host (or its subdomains) these override what the code passes to `Fetcher`, so they can change without editing code.
+
+```toml
+[routes]
+vpn = "socks5://127.0.0.1:1080"
+
+[defaults]
+routes = ["direct"]
+
+[hosts."example.gov"]
+strategy = "auto"            # or a strategy name
+max_strategy = "patchright"
+routes = ["direct", "vpn"]
+delay = 3.0
+headers = { Referer = "https://example.gov/" }
+block_phrases = ["temporarily unavailable"]
+```
+
+Keep it readable only by you (`chmod 600`), since route URLs can include credentials.
+
+## Adding a strategy
+
+```python
+def send(method, url, *, route, timeout, **kwargs):
+    ...  # return a requests-like response: status_code, headers, content, url
+
+sdfetch.register_strategy("relay", send, after="impersonate")  # browser=True if it only GETs
+```
+
+A registered strategy takes its place in `sdfetch.ladder()`, gets the route as a proxy URL (or `None` for direct), and is used like the built-in ones.
+
 ## Browsers (`browser` extra)
 
 ```python
@@ -70,7 +112,7 @@ for snap in wayback.snapshots(PAGE, start="2019"):
 dependencies = ["sdfetch[impersonate]"]
 
 [tool.uv.sources]
-sdfetch = { git = "https://github.com/south-dakota-citizen-archivist/sd-archive", subdirectory = "packages/sdfetch", tag = "sdfetch-v0.1.1" }
+sdfetch = { git = "https://github.com/south-dakota-citizen-archivist/sd-archive", subdirectory = "packages/sdfetch", tag = "sdfetch-v0.2.0" }
 ```
 
 Extras: `impersonate` (curl_cffi), `browser` (Playwright and the other browser backends), `warc` (warcio).

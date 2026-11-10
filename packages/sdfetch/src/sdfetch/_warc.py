@@ -22,7 +22,7 @@ from io import BytesIO
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from ._ladder import BROWSER_RUNGS
+from ._ladder import get_strategy
 
 DROP = {"content-encoding", "transfer-encoding", "content-length"}
 
@@ -49,7 +49,7 @@ class WarcWriter:
         offset = self._file.tell()
         headers = dict(resp.headers.items()) if resp.headers else {}
         via_header = {"sdfetch-via": via}
-        if via in BROWSER_RUNGS:
+        if get_strategy(via).browser:
             kind = headers.get("content-type") or headers.get("Content-Type") or "text/html"
             record = self._writer.create_warc_record(
                 url,

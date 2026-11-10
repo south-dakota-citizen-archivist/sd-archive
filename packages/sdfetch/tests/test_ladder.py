@@ -61,8 +61,8 @@ def test_tries_the_rung_below_once_a_week(tmp_path):
     memory = sdfetch.HostMemory(tmp_path / "hosts.json")
     week_ago = date.today() - timedelta(days=8)
     memory.record("records.example.gov", "patchright", today=week_ago)
-    assert memory.start("records.example.gov") == "stealth"
-    assert memory.start("records.example.gov") == "patchright"  # once, not every run
+    assert memory.start("records.example.gov") == ("direct", "stealth")
+    assert memory.start("records.example.gov") == ("direct", "patchright")  # once a week
     # The site relaxed: stealth works now, and becomes the remembered rung
     rungs = Rungs(blocked={"http", "impersonate"})
     memory.hosts["records.example.gov"]["checked_lower"] = week_ago.isoformat()

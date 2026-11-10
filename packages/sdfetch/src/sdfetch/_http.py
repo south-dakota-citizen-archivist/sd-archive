@@ -16,7 +16,8 @@ from urllib.parse import urlsplit
 import requests
 from tenacity import RetryCallState, Retrying, retry_if_exception, stop_after_attempt
 
-from ._ladder import BROWSER_RUNGS, LADDER, HostMemory, RungUnavailable
+from ._config import Config, load_config
+from ._ladder import DIRECT, HostMemory, RungUnavailable, get_strategy, ladder
 from ._store import Store
 
 logger = logging.getLogger(__name__)
@@ -130,7 +131,9 @@ class Fetcher:
         store: Store | str | Path | None = None,
         *,
         strategy: str = "auto",
-        max_strategy: str = LADDER[-1],
+        max_strategy: str | None = None,
+        routes: list[str] | None = None,
+        config: Config | dict | str | Path | bool | None = None,
         headless: bool = True,
         memory: HostMemory | str | Path | bool | None = None,
         delay: float = 1.0,
@@ -148,12 +151,14 @@ class Fetcher:
         har: bool | str | Path = False,
         sleep: Callable[[float], None] = time.sleep,
     ):
-        if strategy != "auto" and strategy not in LADDER:
-            raise ValueError(f"strategy must be 'auto' or one of {LADDER}")
-        if max_strategy not in LADDER:
-            raise ValueError(f"max_strategy must be one of {LADDER}")
+        if strategy != "auto":
+            get_strategy(strategy)  # raises for an unknown name
+        if max_strategy is not None:
+            get_strategy(max_strategy)
         self.store = Store(store) if isinstance(store, (str, Path)) else store
         self.strategy, self.max_strategy, self.headless = strategy, max_strategy, headless
+        self.routes = list(routes) if routes else None
+        self.config = load_config(config)
         if memory is False:
             self.memory = None
         elif isinstance(memory, HostMemory):
@@ -171,14 +176,15 @@ class Fetcher:
             self.session.headers["User-Agent"] = user_agent
         self.session.headers.update(headers or {})
         self.clients = dict(clients or {})  # rung → send(method, url, **kwargs), for tests
-        self._impersonate = None
-        self._browsers: dict = {}
+        self._impersonate: dict = {}  # route name → curl_cffi session
+        self._browsers: dict = {}  # (strategy, route name) → Browser
         # WARC and HAR folders: True puts them in the store ("warc/", "har/")
         self.warc_dir = self._folder(warc, "warc")
         self.har_dir = self._folder(har, "har")
         self._warc = None
         self.requests = 0  # sent, including retries
-        self.last_via: str | None = None  # the rung that answered the last request
+        self.last_via: str | None = None  # the strategy that answered the last request
+        self.last_route: str = DIRECT  # and the route it went out on
         self.last_warc: tuple[Path, int] | None = None  # (file, offset) of its WARC record
 
     def _folder(self, value, name: str) -> Path | None:
@@ -203,11 +209,17 @@ class Fetcher:
             self._warc.close()
             self._warc = None
 
+    # Settings ------------------------------------------------------------
+
+    def _settings(self, url: str) -> dict:
+        """The private config's settings for this URL's host (empty when there are none)."""
+        return self.config.for_host(urlsplit(url).hostname or "")
+
     # Pause ---------------------------------------------------------------
 
     def _pause(self, url: str) -> None:
         host = urlsplit(url).hostname or ""
-        gap = self.delays.get(host, self.delay)
+        gap = self._settings(url).get("delay", self.delays.get(host, self.delay))
         with _hosts_lock:
             t = time.monotonic()
             start = max(t, _host_next.get(host, 0.0))
@@ -215,32 +227,57 @@ class Fetcher:
         if start > t:
             self.sleep(start - t)
 
-    # Rungs ---------------------------------------------------------------
+    # Attempts ------------------------------------------------------------
 
-    def _rungs(self, method: str, url: str) -> list[str]:
-        if self.strategy != "auto":
-            if method != "GET" and self.strategy in BROWSER_RUNGS:
-                raise ValueError(f"{self.strategy} only navigates; use http or impersonate")
-            return [self.strategy]
-        top = LADDER.index(self.max_strategy)
-        if method != "GET":
-            top = min(top, LADDER.index("impersonate"))
+    def _attempts(self, method: str, url: str) -> list[tuple[str, str]]:
+        """(route, strategy) pairs to try in order: every strategy on a route, then the next
+        route. Auto mode starts where HostMemory says this host last succeeded."""
+        settings = self._settings(url)
+        strategy = settings.get("strategy", self.strategy)
+        routes = list(settings.get("routes") or self.routes or [DIRECT])
+        if strategy != "auto":
+            if method != "GET" and get_strategy(strategy).browser:
+                raise ValueError(f"{strategy} only navigates; use a strategy that can {method}")
+            return [(route, strategy) for route in routes]
+        order = ladder()
+        top = settings.get("max_strategy") or self.max_strategy or order[-1]
+        rungs = [
+            r for r in order[: order.index(top) + 1]
+            if method == "GET" or not get_strategy(r).browser
+        ]  # fmt: skip
         host = urlsplit(url).hostname or ""
-        start = self.memory.start(host) if self.memory else "http"
-        return list(LADDER[min(LADDER.index(start), top) : top + 1])
+        route0, rung0 = (
+            self.memory.start(host, rungs, routes) if self.memory else (routes[0], rungs[0])
+        )
+        out = []
+        for i, route in enumerate(routes[routes.index(route0) :]):
+            out += [(route, r) for r in (rungs[rungs.index(rung0) :] if i == 0 else rungs)]
+        return out
 
-    def _send(self, rung: str, method: str, url: str, **kwargs):
+    # Sending -------------------------------------------------------------
+
+    def _send(self, route: str, rung: str, method: str, url: str, **kwargs):
+        name, proxy = self.config.resolve_route(route)
         if rung in self.clients:
-            return self.clients[rung](method, url, **kwargs)
+            return self.clients[rung](method, url, route=name, **kwargs)
+        custom = get_strategy(rung).send
+        if custom is not None:
+            kwargs.setdefault("timeout", self.timeout)
+            return custom(method, url, route=proxy, **kwargs)
         if rung == "http":
-            return self.session.request(method, url, **kwargs)
+            if proxy:
+                kwargs["proxies"] = {"http": proxy, "https": proxy}
+            try:
+                return self.session.request(method, url, **kwargs)
+            except requests.exceptions.InvalidSchema as exc:  # e.g. socks5 without PySocks
+                raise RungUnavailable(f"route {name}: {exc}") from exc
         if rung == "impersonate":
-            return self._send_impersonate(method, url, **kwargs)
+            return self._send_impersonate(name, proxy, method, url, **kwargs)
         if kwargs.get("params"):
             url = requests.Request("GET", url, params=kwargs["params"]).prepare().url
-        return self._browser(rung).get(url)
+        return self._browser(rung, name, proxy).get(url)
 
-    def _send_impersonate(self, method: str, url: str, **kwargs):
+    def _send_impersonate(self, name: str, proxy: str | None, method: str, url: str, **kwargs):
         try:
             from curl_cffi import requests as curl
             from curl_cffi.requests.exceptions import RequestException, Timeout
@@ -249,24 +286,26 @@ class Fetcher:
                 "impersonate: curl_cffi isn't installed (sdfetch[impersonate])"
             ) from exc
 
-        if self._impersonate is None:
-            # The newest Chrome-on-macOS fingerprint curl_cffi has. Its own headers match
-            # that fingerprint's version, so they're used as they are.
+        if name not in self._impersonate:
+            # The newest Chrome-on-macOS profile curl_cffi has, with its own matching headers
             targets = [b.value for b in curl.BrowserType if b.value.endswith("_macos")]
             chrome = sorted(
                 (t for t in targets if t.startswith("chrome")),
                 key=lambda t: int(t.removeprefix("chrome").removesuffix("_macos")),
             )
-            self._impersonate = curl.Session(impersonate=chrome[-1] if chrome else "chrome")
+            self._impersonate[name] = curl.Session(
+                impersonate=chrome[-1] if chrome else "chrome", proxy=proxy
+            )
         try:
-            return self._impersonate.request(method, url, **kwargs)
+            return self._impersonate[name].request(method, url, **kwargs)
         except Timeout as exc:
             raise requests.Timeout(str(exc)) from exc
         except RequestException as exc:
             raise requests.ConnectionError(str(exc)) from exc
 
-    def _browser(self, rung: str):
-        if rung not in self._browsers:
+    def _browser(self, rung: str, name: str = DIRECT, proxy: str | None = None):
+        key = (rung, name)
+        if key not in self._browsers:
             from ._browser import Browser
 
             if not self._browsers:
@@ -276,14 +315,14 @@ class Fetcher:
                 stamp = datetime.now(UTC).strftime("%Y%m%d%H%M%S")
                 har = self.har_dir / f"{stamp}-{rung}.har"
             try:
-                self._browsers[rung] = Browser(
-                    rung, headless=self.headless, timeout=self.timeout, har=har
+                self._browsers[key] = Browser(
+                    rung, headless=self.headless, timeout=self.timeout, har=har, proxy=proxy
                 )
             except ImportError as exc:
                 raise RungUnavailable(f"{rung}: not installed (sdfetch[browser]): {exc}") from exc
             except Exception as exc:  # the browser itself didn't start
                 raise RungUnavailable(f"{rung}: couldn't start: {exc}") from exc
-        return self._browsers[rung]
+        return self._browsers[key]
 
     # Requests ------------------------------------------------------------
 
@@ -296,14 +335,18 @@ class Fetcher:
             return base * 4
         return base
 
-    def _once(self, rung: str, method: str, url: str, check_blocked: bool, raise_errors: bool,
-              **kwargs):  # fmt: skip
+    def _once(self, route: str, rung: str, method: str, url: str, check_blocked: bool,
+              raise_errors: bool, **kwargs):  # fmt: skip
         self._pause(url)
         self.requests += 1
-        if rung in ("http", "impersonate"):
+        settings = self._settings(url)
+        if not get_strategy(rung).browser:
             kwargs.setdefault("timeout", self.timeout)
-        resp = self._send(rung, method, url, **kwargs)
-        if check_blocked and (reason := blocked(resp, self.block_phrases)):
+            if extra := settings.get("headers"):
+                kwargs["headers"] = {**extra, **(kwargs.get("headers") or {})}
+        resp = self._send(route, rung, method, url, **kwargs)
+        phrases = [*self.block_phrases, *settings.get("block_phrases", [])]
+        if check_blocked and (reason := blocked(resp, phrases)):
             raise Blocked(url, f"{reason} ({rung})", resp.status_code)
         if resp.status_code in RETRY_STATUSES:
             raise RetryableStatus(resp)
@@ -311,8 +354,8 @@ class Fetcher:
             raise http_error(resp)
         return resp
 
-    def _on_rung(self, rung: str, method: str, url: str, check_blocked: bool, retry_blocked: bool,
-                 raise_errors: bool, **kwargs):  # fmt: skip
+    def _on_rung(self, route: str, rung: str, method: str, url: str, check_blocked: bool,
+                 retry_blocked: bool, raise_errors: bool, **kwargs):  # fmt: skip
         retryable = (requests.ConnectionError, requests.Timeout, RetryableStatus)
         if retry_blocked:
             retryable += (Blocked,)
@@ -328,7 +371,9 @@ class Fetcher:
                 reraise=True,
             ):
                 with attempt:
-                    return self._once(rung, method, url, check_blocked, raise_errors, **kwargs)
+                    return self._once(
+                        route, rung, method, url, check_blocked, raise_errors, **kwargs
+                    )
         except RetryableStatus as exc:
             if not raise_errors:
                 return exc.response  # still failing after the retries; the caller decides
@@ -344,35 +389,49 @@ class Fetcher:
         raise_errors: bool | None = None,
         **kwargs,
     ):
-        """One request, with the pause, retries and escalation, not stored. Returns a
-        requests-like response (requests, curl_cffi, or a browser's). Raises Blocked when the
-        last rung tried is blocked too. A status that isn't retried, or still fails after the
-        retries, raises requests.HTTPError, or with raise_errors=False is returned for the
-        caller to check. Rungs that aren't installed or won't start are skipped (auto only)."""
+        """One request, with the pause, retries and fallbacks, not stored. Returns a
+        requests-like response (requests, curl_cffi, a browser's or a registered strategy's).
+        Raises Blocked when the last attempt is blocked too. A status that isn't retried, or
+        still fails after the retries, raises requests.HTTPError, or with raise_errors=False
+        is returned for the caller to check. Strategies and routes that aren't available are
+        skipped when there's something else to try."""
         raise_errors = self.raise_errors if raise_errors is None else raise_errors
-        rungs = self._rungs(method, url)
+        attempts = self._attempts(method, url)
         host = urlsplit(url).hostname or ""
+        routes_tried = list(dict.fromkeys(r for r, _ in attempts))
         last: Exception | None = None
-        for i, rung in enumerate(rungs):
-            following = f"; trying {rungs[i + 1]}" if i + 1 < len(rungs) else ""
+        dead_route = None
+        for route, rung in attempts:
+            if route == dead_route:
+                continue
             try:
                 resp = self._on_rung(
-                    rung, method, url, check_blocked, retry_blocked=len(rungs) == 1,
+                    route, rung, method, url, check_blocked, retry_blocked=len(attempts) == 1,
                     raise_errors=raise_errors, **kwargs,
                 )  # fmt: skip
             except Blocked as exc:
                 last = exc
-                logger.info("%s: blocked on %s%s", url, rung, following)
+                logger.info("%s: blocked on %s via %s", url, rung, route)
                 continue
             except RungUnavailable as exc:
-                if self.strategy != "auto":
+                if len(attempts) == 1:
                     raise
-                logger.warning("%s: %s%s", url, exc, following)
+                logger.warning("%s: %s (via %s)", url, exc, route)
                 last = last if isinstance(last, Blocked) else exc
                 continue
-            self.last_via = rung
-            if self.strategy == "auto" and self.memory:
-                self.memory.record(host, rung)
+            except (requests.ConnectionError, requests.Timeout) as exc:
+                # The site or the route is unreachable after the retries: another strategy on
+                # the same route won't help, but another route might
+                if len(routes_tried) == 1:
+                    raise
+                logger.warning("%s: route %s failed: %s", url, route, exc)
+                last = last if isinstance(last, Blocked) else exc
+                dead_route = route
+                continue
+            name = self.config.resolve_route(route)[0]
+            self.last_via, self.last_route = rung, name
+            if self.memory and self._settings(url).get("strategy", self.strategy) == "auto":
+                self.memory.record(host, rung, route)
             self.last_warc = None
             if self.warc_dir:
                 if self._warc is None:
@@ -408,6 +467,8 @@ class Fetcher:
             kwargs["data"] = data
         resp = self.request(method, url, raise_errors=True, **kwargs)  # never store an error page
         where = {"via": self.last_via}
+        if self.last_route != DIRECT:
+            where["route"] = self.last_route  # a name from the config, never a proxy URL
         if self.last_warc:
             path, offset = self.last_warc
             root = self.store.root.resolve()
