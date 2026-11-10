@@ -56,7 +56,9 @@ Keep it readable only by you (`chmod 600`), since route URLs can include credent
 
 ```python
 def send(method, url, *, route, timeout, **kwargs):
-    ...  # return a requests-like response: status_code, headers, content, url
+    # return a requests-like response: status_code, headers, content, url
+    ...
+
 
 sdfetch.register_strategy("relay", send, after="impersonate")  # browser=True if it only GETs
 ```
