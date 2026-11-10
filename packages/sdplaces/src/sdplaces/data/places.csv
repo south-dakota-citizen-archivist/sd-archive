@@ -1,0 +1,567 @@
+kind,geoid,geoidfq,name,short_name,slug,parent,lat,lon,ocd_id,valid_from,valid_to,successor,source
+state,46,0400000US46,South Dakota,South Dakota,south-dakota,,44.21015,-100.25386,,,,,Census cartographic boundary files 2024
+county,46003,0500000US46003,Aurora County,Aurora,aurora-county,46,43.71305,-98.56029,,,,,Census cartographic boundary files 2024
+county,46005,0500000US46005,Beadle County,Beadle,beadle-county,46,44.40319,-98.27728,,,,,Census cartographic boundary files 2024
+county,46007,0500000US46007,Bennett County,Bennett,bennett-county,46,43.18539,-101.66868,,,,,Census cartographic boundary files 2024
+county,46009,0500000US46009,Bon Homme County,Bon Homme,bon-homme-county,46,42.96579,-97.86544,,,,,Census cartographic boundary files 2024
+county,46011,0500000US46011,Brookings County,Brookings,brookings-county,46,44.36991,-96.79045,,,,,Census cartographic boundary files 2024
+county,46013,0500000US46013,Brown County,Brown,brown-county,46,45.58986,-98.35088,,,,,Census cartographic boundary files 2024
+county,46015,0500000US46015,Brule County,Brule,brule-county,46,43.71820,-99.10100,,,,,Census cartographic boundary files 2024
+county,46017,0500000US46017,Buffalo County,Buffalo,buffalo-county,46,44.06512,-99.22648,,,,,Census cartographic boundary files 2024
+county,46019,0500000US46019,Butte County,Butte,butte-county,46,44.90446,-103.50745,,,,,Census cartographic boundary files 2024
+county,46021,0500000US46021,Campbell County,Campbell,campbell-county,46,45.76956,-100.03379,,,,,Census cartographic boundary files 2024
+county,46023,0500000US46023,Charles Mix County,Charles Mix,charles-mix-county,46,43.17095,-98.47493,,,,,Census cartographic boundary files 2024
+county,46025,0500000US46025,Clark County,Clark,clark-county,46,44.84102,-97.73418,,,,,Census cartographic boundary files 2024
+county,46027,0500000US46027,Clay County,Clay,clay-county,46,42.90023,-96.98320,,,,,Census cartographic boundary files 2024
+county,46029,0500000US46029,Codington County,Codington,codington-county,46,44.97753,-97.18833,,,,,Census cartographic boundary files 2024
+county,46031,0500000US46031,Corson County,Corson,corson-county,46,45.71616,-101.15725,,,,,Census cartographic boundary files 2024
+county,46033,0500000US46033,Custer County,Custer,custer-county,46,43.66661,-103.48183,,,,,Census cartographic boundary files 2024
+county,46035,0500000US46035,Davison County,Davison,davison-county,46,43.67785,-98.14620,,,,,Census cartographic boundary files 2024
+county,46037,0500000US46037,Day County,Day,day-county,46,45.36314,-97.60366,,,,,Census cartographic boundary files 2024
+county,46039,0500000US46039,Deuel County,Deuel,deuel-county,46,44.76074,-96.66802,,,,,Census cartographic boundary files 2024
+county,46041,0500000US46041,Dewey County,Dewey,dewey-county,46,45.09510,-100.90619,,,,,Census cartographic boundary files 2024
+county,46043,0500000US46043,Douglas County,Douglas,douglas-county,46,43.34687,-98.35268,,,,,Census cartographic boundary files 2024
+county,46045,0500000US46045,Edmunds County,Edmunds,edmunds-county,46,45.41864,-99.21520,,,,,Census cartographic boundary files 2024
+county,46047,0500000US46047,Fall River County,Fall River,fall-river-county,46,43.26291,-103.52739,,,,,Census cartographic boundary files 2024
+county,46049,0500000US46049,Faulk County,Faulk,faulk-county,46,45.07534,-99.14513,,,,,Census cartographic boundary files 2024
+county,46051,0500000US46051,Grant County,Grant,grant-county,46,45.15148,-96.77372,,,,,Census cartographic boundary files 2024
+county,46053,0500000US46053,Gregory County,Gregory,gregory-county,46,43.24942,-99.24294,,,,,Census cartographic boundary files 2024
+county,46055,0500000US46055,Haakon County,Haakon,haakon-county,46,44.36388,-101.57810,,,,,Census cartographic boundary files 2024
+county,46057,0500000US46057,Hamlin County,Hamlin,hamlin-county,46,44.65400,-97.18849,,,,,Census cartographic boundary files 2024
+county,46059,0500000US46059,Hand County,Hand,hand-county,46,44.54267,-99.00093,,,,,Census cartographic boundary files 2024
+county,46061,0500000US46061,Hanson County,Hanson,hanson-county,46,43.68358,-97.78660,,,,,Census cartographic boundary files 2024
+county,46063,0500000US46063,Harding County,Harding,harding-county,46,45.60653,-103.49632,,,,,Census cartographic boundary files 2024
+county,46065,0500000US46065,Hughes County,Hughes,hughes-county,46,44.32311,-99.91028,,,,,Census cartographic boundary files 2024
+county,46067,0500000US46067,Hutchinson County,Hutchinson,hutchinson-county,46,43.33451,-97.75578,,,,,Census cartographic boundary files 2024
+county,46069,0500000US46069,Hyde County,Hyde,hyde-county,46,44.53795,-99.48211,,,,,Census cartographic boundary files 2024
+county,46071,0500000US46071,Jackson County,Jackson,jackson-county,46,43.69190,-101.63128,,,,,Census cartographic boundary files 2024
+county,46073,0500000US46073,Jerauld County,Jerauld,jerauld-county,46,44.05748,-98.62920,,,,,Census cartographic boundary files 2024
+county,46075,0500000US46075,Jones County,Jones,jones-county,46,43.96624,-100.71551,,,,,Census cartographic boundary files 2024
+county,46077,0500000US46077,Kingsbury County,Kingsbury,kingsbury-county,46,44.36991,-97.49098,,,,,Census cartographic boundary files 2024
+county,46079,0500000US46079,Lake County,Lake,lake-county,46,44.01864,-97.12937,,,,,Census cartographic boundary files 2024
+county,46081,0500000US46081,Lawrence County,Lawrence,lawrence-county,46,44.38484,-103.81231,,,,,Census cartographic boundary files 2024
+county,46083,0500000US46083,Lincoln County,Lincoln,lincoln-county,46,43.29233,-96.75604,,,,,Census cartographic boundary files 2024
+county,46085,0500000US46085,Lyman County,Lyman,lyman-county,46,43.85704,-99.83793,,,,,Census cartographic boundary files 2024
+county,46091,0500000US46091,Marshall County,Marshall,marshall-county,46,45.74793,-97.60340,,,,,Census cartographic boundary files 2024
+county,46087,0500000US46087,McCook County,McCook,mccook-county,46,43.67441,-97.36797,,,,,Census cartographic boundary files 2024
+county,46089,0500000US46089,McPherson County,McPherson,mcpherson-county,46,45.76625,-99.22135,,,,,Census cartographic boundary files 2024
+county,46093,0500000US46093,Meade County,Meade,meade-county,46,44.56182,-102.78430,,,,,Census cartographic boundary files 2024
+county,46095,0500000US46095,Mellette County,Mellette,mellette-county,46,43.62372,-100.72953,,,,,Census cartographic boundary files 2024
+county,46097,0500000US46097,Miner County,Miner,miner-county,46,44.01596,-97.61045,,,,,Census cartographic boundary files 2024
+county,46099,0500000US46099,Minnehaha County,Minnehaha,minnehaha-county,46,43.67441,-96.79143,,,,,Census cartographic boundary files 2024
+county,46101,0500000US46101,Moody County,Moody,moody-county,46,44.02215,-96.67102,,,,,Census cartographic boundary files 2024
+county,46102,0500000US46102,Oglala Lakota County,Oglala Lakota,oglala-lakota-county,46,43.33588,-102.55551,,2015-05-01,,,Census cartographic boundary files 2024
+county,46103,0500000US46103,Pennington County,Pennington,pennington-county,46,44.10260,-103.03104,,,,,Census cartographic boundary files 2024
+county,46105,0500000US46105,Perkins County,Perkins,perkins-county,46,45.48754,-102.47526,,,,,Census cartographic boundary files 2024
+county,46107,0500000US46107,Potter County,Potter,potter-county,46,45.06849,-99.94709,,,,,Census cartographic boundary files 2024
+county,46109,0500000US46109,Roberts County,Roberts,roberts-county,46,45.61713,-97.03957,,,,,Census cartographic boundary files 2024
+county,46111,0500000US46111,Sanborn County,Sanborn,sanborn-county,46,44.01708,-98.09129,,,,,Census cartographic boundary files 2024
+county,46113,0500000US46113,Shannon County,Shannon,shannon-county,46,,,,,2015-05-01,46102,"Renamed Oglala Lakota County, effective 2015-05-01, with the new code 46102 (Census Bureau, substantial changes to counties, 2015)"
+county,46115,0500000US46115,Spink County,Spink,spink-county,46,44.94535,-98.34967,,,,,Census cartographic boundary files 2024
+county,46117,0500000US46117,Stanley County,Stanley,stanley-county,46,44.47567,-100.86787,,,,,Census cartographic boundary files 2024
+county,46119,0500000US46119,Sully County,Sully,sully-county,46,44.72425,-100.14925,,,,,Census cartographic boundary files 2024
+county,46121,0500000US46121,Todd County,Todd,todd-county,46,43.19900,-100.72096,,,,,Census cartographic boundary files 2024
+county,46123,0500000US46123,Tripp County,Tripp,tripp-county,46,43.38224,-99.87395,,,,,Census cartographic boundary files 2024
+county,46125,0500000US46125,Turner County,Turner,turner-county,46,43.29316,-97.16230,,,,,Census cartographic boundary files 2024
+county,46127,0500000US46127,Union County,Union,union-county,46,42.78122,-96.71360,,,,,Census cartographic boundary files 2024
+county,46129,0500000US46129,Walworth County,Walworth,walworth-county,46,45.42035,-100.00612,,,,,Census cartographic boundary files 2024
+county,46131,0500000US46131,Washabaugh County,Washabaugh,washabaugh-county,46,,,,,1983-01-01,46071,"Annexed by Jackson County in 1983 (Census Bureau, substantial changes to counties). Exact effective date not verified; 1983-01-01 used"
+county,46135,0500000US46135,Yankton County,Yankton,yankton-county,46,42.98127,-97.39799,,,,,Census cartographic boundary files 2024
+county,46137,0500000US46137,Ziebach County,Ziebach,ziebach-county,46,44.97211,-101.56817,,,,,Census cartographic boundary files 2024
+place,4600100,1600000US4600100,Aberdeen city,Aberdeen,aberdeen,46013,45.46214,-98.46814,,,,,Census cartographic boundary files 2024
+place,4600460,1600000US4600460,Agar town,Agar,agar,46119,44.83930,-100.07276,,,,,Census cartographic boundary files 2024
+place,4600540,1600000US4600540,Akaska town,Akaska,akaska,46129,45.32958,-100.12087,,,,,Census cartographic boundary files 2024
+place,4600620,1600000US4600620,Albee town,Albee,albee,46051,45.05132,-96.55351,,,,,Census cartographic boundary files 2024
+place,4600700,1600000US4600700,Alcester city,Alcester,alcester,46127,43.03143,-96.62343,,,,,Census cartographic boundary files 2024
+place,4600820,1600000US4600820,Alexandria city,Alexandria,alexandria,46061,43.65686,-97.77944,,,,,Census cartographic boundary files 2024
+place,4601020,1600000US4601020,Alpena town,Alpena,alpena,46073,44.18128,-98.36988,,,,,Census cartographic boundary files 2024
+place,4601140,1600000US4601140,Altamont town,Altamont,altamont,46039,44.84077,-96.69013,,,,,Census cartographic boundary files 2024
+place,4601500,1600000US4601500,Andover town,Andover,andover,46037,45.41203,-97.90410,,,,,Census cartographic boundary files 2024
+place,4602180,1600000US4602180,Arlington city,Arlington,arlington,46077,44.36223,-97.13375,,,,,Census cartographic boundary files 2024
+place,4602260,1600000US4602260,Armour city,Armour,armour,46043,43.31908,-98.34487,,,,,Census cartographic boundary files 2024
+place,4602340,1600000US4602340,Artas town,Artas,artas,46021,45.88808,-99.80691,,,,,Census cartographic boundary files 2024
+place,4602380,1600000US4602380,Artesian town,Artesian,artesian,46111,44.00787,-97.92370,,,,,Census cartographic boundary files 2024
+place,4602540,1600000US4602540,Ashton city,Ashton,ashton,46115,44.99319,-98.50074,,,,,Census cartographic boundary files 2024
+place,4602580,1600000US4602580,Astoria town,Astoria,astoria,46039,44.55769,-96.54645,,,,,Census cartographic boundary files 2024
+place,4602780,1600000US4602780,Aurora town,Aurora,aurora,46011,44.28303,-96.68500,,,,,Census cartographic boundary files 2024
+place,4602900,1600000US4602900,Avon city,Avon,avon,46009,43.00461,-98.06028,,,,,Census cartographic boundary files 2024
+place,4603060,1600000US4603060,Badger town,Badger,badger,46077,44.48867,-97.20706,,,,,Census cartographic boundary files 2024
+place,4603380,1600000US4603380,Baltic city,Baltic,baltic,46099,43.76069,-96.73673,,,,,Census cartographic boundary files 2024
+place,4603420,1600000US4603420,Bancroft town,Bancroft,bancroft,46077,44.48965,-97.75048,,,,,Census cartographic boundary files 2024
+place,4603860,1600000US4603860,Batesland town,Batesland,batesland,46102,43.12681,-102.10210,,,,,Census cartographic boundary files 2024
+place,4604380,1600000US4604380,Belle Fourche city,Belle Fourche,belle-fourche,46019,44.65289,-103.85197,,,,,Census cartographic boundary files 2024
+place,4604620,1600000US4604620,Belvidere town,Belvidere,belvidere,46071,43.83072,-101.27110,,,,,Census cartographic boundary files 2024
+place,4604980,1600000US4604980,Beresford city,Beresford,beresford,46127,43.07979,-96.78135,,,,,Census cartographic boundary files 2024
+place,4605540,1600000US4605540,Big Stone City city,Big Stone City,big-stone-city,46051,45.30442,-96.46886,,,,,Census cartographic boundary files 2024
+place,4605620,1600000US4605620,Bison town,Bison,bison,46105,45.52358,-102.46774,,,,,Census cartographic boundary files 2024
+place,4606180,1600000US4606180,Blunt city,Blunt,blunt,46065,44.51808,-99.98714,,,,,Census cartographic boundary files 2024
+place,4606220,1600000US4606220,Bonesteel city,Bonesteel,bonesteel,46053,43.07670,-98.94714,,,,,Census cartographic boundary files 2024
+place,4606540,1600000US4606540,Bowdle city,Bowdle,bowdle,46045,45.45227,-99.65733,,,,,Census cartographic boundary files 2024
+place,4606620,1600000US4606620,Box Elder city,Box Elder,box-elder,46103,44.12393,-103.05922,,,,,Census cartographic boundary files 2024
+place,4606660,1600000US4606660,Bradley town,Bradley,bradley,46025,45.09048,-97.64197,,,,,Census cartographic boundary files 2024
+place,4606840,1600000US4606840,Brandon city,Brandon,brandon,46099,43.59231,-96.56706,,,,,Census cartographic boundary files 2024
+place,4606940,1600000US4606940,Brandt town,Brandt,brandt,46039,44.66691,-96.62520,,,,,Census cartographic boundary files 2024
+place,4607040,1600000US4607040,Brant Lake city,Brant Lake,brant-lake,46079,43.92929,-96.94203,,,,,Census cartographic boundary files 2024
+place,4607060,1600000US4607060,Brentford town,Brentford,brentford,46115,45.15873,-98.32259,,,,,Census cartographic boundary files 2024
+place,4607180,1600000US4607180,Bridgewater city,Bridgewater,bridgewater,46087,43.55058,-97.49842,,,,,Census cartographic boundary files 2024
+place,4607300,1600000US4607300,Bristol city,Bristol,bristol,46037,45.34655,-97.74846,,,,,Census cartographic boundary files 2024
+place,4607380,1600000US4607380,Britton city,Britton,britton,46091,45.79300,-97.75312,,,,,Census cartographic boundary files 2024
+place,4607420,1600000US4607420,Broadland town,Broadland,broadland,46005,44.49387,-98.34655,,,,,Census cartographic boundary files 2024
+place,4607580,1600000US4607580,Brookings city,Brookings,brookings,46011,44.30130,-96.78602,,,,,Census cartographic boundary files 2024
+place,4607740,1600000US4607740,Bruce city,Bruce,bruce,46011,44.43696,-96.89021,,,,,Census cartographic boundary files 2024
+place,4608060,1600000US4608060,Bryant city,Bryant,bryant,46057,44.58997,-97.46765,,,,,Census cartographic boundary files 2024
+place,4608340,1600000US4608340,Buffalo Gap town,Buffalo Gap,buffalo-gap,46033,43.49185,-103.31720,,,,,Census cartographic boundary files 2024
+place,4608140,1600000US4608140,Buffalo town,Buffalo,buffalo,46063,45.58523,-103.54416,,,,,Census cartographic boundary files 2024
+place,4608700,1600000US4608700,Burke city,Burke,burke,46053,43.18302,-99.29449,,,,,Census cartographic boundary files 2024
+place,4608820,1600000US4608820,Bushnell town,Bushnell,bushnell,46011,44.32742,-96.64236,,,,,Census cartographic boundary files 2024
+place,4608860,1600000US4608860,Butler town,Butler,butler,46037,45.26064,-97.71485,,,,,Census cartographic boundary files 2024
+place,4609260,1600000US4609260,Camp Crook town,Camp Crook,camp-crook,46063,45.55018,-103.97551,,,,,Census cartographic boundary files 2024
+place,4609300,1600000US4609300,Canistota city,Canistota,canistota,46087,43.59776,-97.29258,,,,,Census cartographic boundary files 2024
+place,4609420,1600000US4609420,Canova town,Canova,canova,46097,43.88125,-97.50396,,,,,Census cartographic boundary files 2024
+place,4609500,1600000US4609500,Canton city,Canton,canton,46083,43.30422,-96.57916,,,,,Census cartographic boundary files 2024
+place,4610220,1600000US4610220,Carthage city,Carthage,carthage,46097,44.16861,-97.71501,,,,,Census cartographic boundary files 2024
+place,4610500,1600000US4610500,Castlewood city,Castlewood,castlewood,46057,44.72273,-97.03473,,,,,Census cartographic boundary files 2024
+place,4610620,1600000US4610620,Cavour town,Cavour,cavour,46005,44.37130,-98.03859,,,,,Census cartographic boundary files 2024
+place,4611060,1600000US4611060,Centerville city,Centerville,centerville,46125,43.11763,-96.95987,,,,,Census cartographic boundary files 2024
+place,4611140,1600000US4611140,Central City city,Central City,central-city,46081,44.36858,-103.76920,,,,,Census cartographic boundary files 2024
+place,4611220,1600000US4611220,Chamberlain city,Chamberlain,chamberlain,46015,43.79200,-99.32618,,,,,Census cartographic boundary files 2024
+place,4611380,1600000US4611380,Chancellor town,Chancellor,chancellor,46125,43.37141,-96.98780,,,,,Census cartographic boundary files 2024
+place,4611500,1600000US4611500,Chelsea town,Chelsea,chelsea,46049,45.16831,-98.74338,,,,,Census cartographic boundary files 2024
+place,4612020,1600000US4612020,Claire City town,Claire City,claire-city,46109,45.85528,-97.10459,,,,,Census cartographic boundary files 2024
+place,4612100,1600000US4612100,Claremont town,Claremont,claremont,46013,45.67195,-98.01561,,,,,Census cartographic boundary files 2024
+place,4612180,1600000US4612180,Clark city,Clark,clark,46025,44.88025,-97.73675,,,,,Census cartographic boundary files 2024
+place,4612540,1600000US4612540,Clear Lake city,Clear Lake,clear-lake,46039,44.76645,-96.68260,,,,,Census cartographic boundary files 2024
+place,4613220,1600000US4613220,Colman city,Colman,colman,46101,43.98281,-96.81895,,,,,Census cartographic boundary files 2024
+place,4613300,1600000US4613300,Colome city,Colome,colome,46123,43.26044,-99.71693,,,,,Census cartographic boundary files 2024
+place,4613380,1600000US4613380,Colton city,Colton,colton,46099,43.78585,-96.92824,,,,,Census cartographic boundary files 2024
+place,4613420,1600000US4613420,Columbia city,Columbia,columbia,46013,45.61448,-98.31087,,,,,Census cartographic boundary files 2024
+place,4613700,1600000US4613700,Conde city,Conde,conde,46115,45.15602,-98.09578,,,,,Census cartographic boundary files 2024
+place,4613940,1600000US4613940,Corona town,Corona,corona,46109,45.33628,-96.76490,,,,,Census cartographic boundary files 2024
+place,4613980,1600000US4613980,Corsica city,Corsica,corsica,46043,43.42589,-98.40637,,,,,Census cartographic boundary files 2024
+place,4614220,1600000US4614220,Cottonwood town,Cottonwood,cottonwood,46071,43.96783,-101.90206,,,,,Census cartographic boundary files 2024
+place,4614580,1600000US4614580,Cresbard town,Cresbard,cresbard,46049,45.17075,-98.94740,,,,,Census cartographic boundary files 2024
+place,4614740,1600000US4614740,Crooks city,Crooks,crooks,46099,43.65973,-96.80721,,,,,Census cartographic boundary files 2024
+place,4615140,1600000US4615140,Custer city,Custer,custer,46033,43.76610,-103.59791,,,,,Census cartographic boundary files 2024
+place,4615300,1600000US4615300,Dallas town,Dallas,dallas,46053,43.23935,-99.51668,,,,,Census cartographic boundary files 2024
+place,4615420,1600000US4615420,Dante town,Dante,dante,46023,43.04310,-98.18737,,,,,Census cartographic boundary files 2024
+place,4615540,1600000US4615540,Davis town,Davis,davis,46125,43.25929,-96.99608,,,,,Census cartographic boundary files 2024
+place,4616260,1600000US4616260,De Smet city,De Smet,de-smet,46077,44.38682,-97.55112,,,,,Census cartographic boundary files 2024
+place,4615700,1600000US4615700,Deadwood city,Deadwood,deadwood,46081,44.38735,-103.71717,,,,,Census cartographic boundary files 2024
+place,4615980,1600000US4615980,Dell Rapids city,Dell Rapids,dell-rapids,46099,43.82272,-96.71413,,,,,Census cartographic boundary files 2024
+place,4616060,1600000US4616060,Delmont city,Delmont,delmont,46043,43.26439,-98.15892,,,,,Census cartographic boundary files 2024
+place,4616620,1600000US4616620,Dimock town,Dimock,dimock,46067,43.47352,-97.98580,,,,,Census cartographic boundary files 2024
+place,4616820,1600000US4616820,Doland city,Doland,doland,46115,44.89699,-98.10043,,,,,Census cartographic boundary files 2024
+place,4616860,1600000US4616860,Dolton town,Dolton,dolton,46125,43.49109,-97.38482,,,,,Census cartographic boundary files 2024
+place,4617020,1600000US4617020,Draper town,Draper,draper,46075,43.92432,-100.53696,,,,,Census cartographic boundary files 2024
+place,4617420,1600000US4617420,Dupree city,Dupree,dupree,46137,45.04927,-101.60131,,,,,Census cartographic boundary files 2024
+place,4617620,1600000US4617620,Eagle Butte city,Eagle Butte,eagle-butte,46041,44.99464,-101.23329,,,,,Census cartographic boundary files 2024
+place,4618180,1600000US4618180,Eden town,Eden,eden,46091,45.61735,-97.41965,,,,,Census cartographic boundary files 2024
+place,4618300,1600000US4618300,Edgemont city,Edgemont,edgemont,46047,43.29829,-103.82698,,,,,Census cartographic boundary files 2024
+place,4618460,1600000US4618460,Egan city,Egan,egan,46101,43.99795,-96.64842,,,,,Census cartographic boundary files 2024
+place,4618620,1600000US4618620,Elk Point city,Elk Point,elk-point,46127,42.68151,-96.68134,,,,,Census cartographic boundary files 2024
+place,4618700,1600000US4618700,Elkton city,Elkton,elkton,46011,44.23738,-96.48101,,,,,Census cartographic boundary files 2024
+place,4619420,1600000US4619420,Emery city,Emery,emery,46061,43.60137,-97.62049,,,,,Census cartographic boundary files 2024
+place,4619860,1600000US4619860,Erwin town,Erwin,erwin,46077,44.48795,-97.44078,,,,,Census cartographic boundary files 2024
+place,4619980,1600000US4619980,Estelline city,Estelline,estelline,46057,44.57752,-96.90034,,,,,Census cartographic boundary files 2024
+place,4620060,1600000US4620060,Ethan town,Ethan,ethan,46035,43.54492,-97.98322,,,,,Census cartographic boundary files 2024
+place,4620180,1600000US4620180,Eureka city,Eureka,eureka,46089,45.77085,-99.62228,,,,,Census cartographic boundary files 2024
+place,4620340,1600000US4620340,Fairburn town,Fairburn,fairburn,46033,43.68735,-103.21142,,,,,Census cartographic boundary files 2024
+place,4620380,1600000US4620380,Fairfax town,Fairfax,fairfax,46053,43.02783,-98.88919,,,,,Census cartographic boundary files 2024
+place,4620780,1600000US4620780,Fairview town,Fairview,fairview,46083,43.22301,-96.48813,,,,,Census cartographic boundary files 2024
+place,4620980,1600000US4620980,Faith city,Faith,faith,46093,45.02451,-102.03562,,,,,Census cartographic boundary files 2024
+place,4621060,1600000US4621060,Farmer town,Farmer,farmer,46061,43.72579,-97.68926,,,,,Census cartographic boundary files 2024
+place,4621260,1600000US4621260,Faulkton city,Faulkton,faulkton,46049,45.03841,-99.12684,,,,,Census cartographic boundary files 2024
+place,4621540,1600000US4621540,Flandreau city,Flandreau,flandreau,46101,44.04566,-96.59853,,,,,Census cartographic boundary files 2024
+place,4621820,1600000US4621820,Florence town,Florence,florence,46029,45.05591,-97.32838,,,,,Census cartographic boundary files 2024
+place,4622260,1600000US4622260,Fort Pierre city,Fort Pierre,fort-pierre,46117,44.36450,-100.38050,,,,,Census cartographic boundary files 2024
+place,4622580,1600000US4622580,Frankfort city,Frankfort,frankfort,46115,44.87678,-98.30808,,,,,Census cartographic boundary files 2024
+place,4622860,1600000US4622860,Frederick town,Frederick,frederick,46013,45.83590,-98.50720,,,,,Census cartographic boundary files 2024
+place,4623020,1600000US4623020,Freeman city,Freeman,freeman,46067,43.34570,-97.42897,,,,,Census cartographic boundary files 2024
+place,4623140,1600000US4623140,Fruitdale town,Fruitdale,fruitdale,46019,44.66788,-103.69641,,,,,Census cartographic boundary files 2024
+place,4623220,1600000US4623220,Fulton town,Fulton,fulton,46061,43.72793,-97.82333,,,,,Census cartographic boundary files 2024
+place,4623460,1600000US4623460,Garden City town,Garden City,garden-city,46025,44.95931,-97.58041,,,,,Census cartographic boundary files 2024
+place,4623820,1600000US4623820,Garretson city,Garretson,garretson,46099,43.71726,-96.50023,,,,,Census cartographic boundary files 2024
+place,4623860,1600000US4623860,Gary city,Gary,gary,46039,44.79497,-96.45843,,,,,Census cartographic boundary files 2024
+place,4623900,1600000US4623900,Gayville town,Gayville,gayville,46135,42.89052,-97.17393,,,,,Census cartographic boundary files 2024
+place,4623980,1600000US4623980,Geddes city,Geddes,geddes,46023,43.25187,-98.69773,,,,,Census cartographic boundary files 2024
+place,4624260,1600000US4624260,Gettysburg city,Gettysburg,gettysburg,46107,45.00271,-99.95502,,,,,Census cartographic boundary files 2024
+place,4624620,1600000US4624620,Glenham town,Glenham,glenham,46129,45.53358,-100.27074,,,,,Census cartographic boundary files 2024
+place,4624820,1600000US4624820,Goodwin town,Goodwin,goodwin,46039,44.87755,-96.84967,,,,,Census cartographic boundary files 2024
+place,4626180,1600000US4626180,Gregory city,Gregory,gregory,46053,43.23298,-99.42535,,,,,Census cartographic boundary files 2024
+place,4626220,1600000US4626220,Grenville town,Grenville,grenville,46037,45.46820,-97.39234,,,,,Census cartographic boundary files 2024
+place,4626340,1600000US4626340,Groton city,Groton,groton,46013,45.45193,-98.10163,,,,,Census cartographic boundary files 2024
+place,4627260,1600000US4627260,Harrisburg city,Harrisburg,harrisburg,46083,43.43154,-96.70266,,,,,Census cartographic boundary files 2024
+place,4627420,1600000US4627420,Harrold town,Harrold,harrold,46065,44.52387,-99.73867,,,,,Census cartographic boundary files 2024
+place,4627540,1600000US4627540,Hartford city,Hartford,hartford,46099,43.62631,-96.94020,,,,,Census cartographic boundary files 2024
+place,4627820,1600000US4627820,Hayti town,Hayti,hayti,46057,44.65936,-97.20399,,,,,Census cartographic boundary files 2024
+place,4627940,1600000US4627940,Hazel town,Hazel,hazel,46057,44.75878,-97.38057,,,,,Census cartographic boundary files 2024
+place,4627980,1600000US4627980,Hecla city,Hecla,hecla,46013,45.88195,-98.15141,,,,,Census cartographic boundary files 2024
+place,4628140,1600000US4628140,Henry town,Henry,henry,46029,44.88019,-97.46190,,,,,Census cartographic boundary files 2024
+place,4628300,1600000US4628300,Hermosa town,Hermosa,hermosa,46033,43.84944,-103.19970,,,,,Census cartographic boundary files 2024
+place,4628340,1600000US4628340,Herreid city,Herreid,herreid,46021,45.83751,-100.07046,,,,,Census cartographic boundary files 2024
+place,4628420,1600000US4628420,Herrick town,Herrick,herrick,46053,43.11486,-99.18825,,,,,Census cartographic boundary files 2024
+place,4628460,1600000US4628460,Hetland town,Hetland,hetland,46077,44.37660,-97.23407,,,,,Census cartographic boundary files 2024
+place,4628980,1600000US4628980,Highmore city,Highmore,highmore,46069,44.52405,-99.44160,,,,,Census cartographic boundary files 2024
+place,4629100,1600000US4629100,Hill City city,Hill City,hill-city,46103,43.93126,-103.57389,,,,,Census cartographic boundary files 2024
+place,4629340,1600000US4629340,Hillsview town,Hillsview,hillsview,46089,45.66207,-99.56065,,,,,Census cartographic boundary files 2024
+place,4629500,1600000US4629500,Hitchcock town,Hitchcock,hitchcock,46005,44.63033,-98.40840,,,,,Census cartographic boundary files 2024
+place,4630140,1600000US4630140,Hosmer city,Hosmer,hosmer,46045,45.58183,-99.47363,,,,,Census cartographic boundary files 2024
+place,4630220,1600000US4630220,Hot Springs city,Hot Springs,hot-springs,46047,43.43176,-103.48114,,,,,Census cartographic boundary files 2024
+place,4630300,1600000US4630300,Hoven town,Hoven,hoven,46107,45.24227,-99.77740,,,,,Census cartographic boundary files 2024
+place,4630460,1600000US4630460,Howard city,Howard,howard,46097,44.01040,-97.52512,,,,,Census cartographic boundary files 2024
+place,4630740,1600000US4630740,Hudson town,Hudson,hudson,46083,43.13057,-96.45533,,,,,Census cartographic boundary files 2024
+place,4630900,1600000US4630900,Humboldt town,Humboldt,humboldt,46099,43.64776,-97.07329,,,,,Census cartographic boundary files 2024
+place,4630980,1600000US4630980,Hurley city,Hurley,hurley,46125,43.27735,-97.09097,,,,,Census cartographic boundary files 2024
+place,4631060,1600000US4631060,Huron city,Huron,huron,46005,44.36330,-98.21739,,,,,Census cartographic boundary files 2024
+place,4631620,1600000US4631620,Interior town,Interior,interior,46071,43.72777,-101.97953,,,,,Census cartographic boundary files 2024
+place,4631860,1600000US4631860,Ipswich city,Ipswich,ipswich,46045,45.44033,-99.02975,,,,,Census cartographic boundary files 2024
+place,4631940,1600000US4631940,Irene city,Irene,irene,46125,43.08520,-97.15725,,,,,Census cartographic boundary files 2024
+place,4632020,1600000US4632020,Iroquois city,Iroquois,iroquois,46077,44.36800,-97.85052,,,,,Census cartographic boundary files 2024
+place,4632140,1600000US4632140,Isabel town,Isabel,isabel,46041,45.39209,-101.43037,,,,,Census cartographic boundary files 2024
+place,4632460,1600000US4632460,Java town,Java,java,46129,45.50383,-99.88390,,,,,Census cartographic boundary files 2024
+place,4632700,1600000US4632700,Jefferson city,Jefferson,jefferson,46127,42.60425,-96.56551,,,,,Census cartographic boundary files 2024
+place,4633180,1600000US4633180,Kadoka city,Kadoka,kadoka,46071,43.82866,-101.50748,,,,,Census cartographic boundary files 2024
+place,4633580,1600000US4633580,Kennebec town,Kennebec,kennebec,46085,43.90332,-99.86189,,,,,Census cartographic boundary files 2024
+place,4633820,1600000US4633820,Keystone town,Keystone,keystone,46103,43.88993,-103.42321,,,,,Census cartographic boundary files 2024
+place,4633980,1600000US4633980,Kimball city,Kimball,kimball,46015,43.74857,-98.95634,,,,,Census cartographic boundary files 2024
+place,4634340,1600000US4634340,Kranzburg town,Kranzburg,kranzburg,46029,44.89007,-96.91836,,,,,Census cartographic boundary files 2024
+place,4634540,1600000US4634540,La Bolt town,La Bolt,la-bolt,46051,45.04952,-96.67455,,,,,Census cartographic boundary files 2024
+place,4635100,1600000US4635100,Lake Andes city,Lake Andes,lake-andes,46023,43.15488,-98.53609,,,,,Census cartographic boundary files 2024
+place,4635220,1600000US4635220,Lake City town,Lake City,lake-city,46091,45.72258,-97.41236,,,,,Census cartographic boundary files 2024
+place,4635460,1600000US4635460,Lake Norden city,Lake Norden,lake-norden,46057,44.58135,-97.21045,,,,,Census cartographic boundary files 2024
+place,4635500,1600000US4635500,Lake Preston city,Lake Preston,lake-preston,46077,44.36115,-97.37588,,,,,Census cartographic boundary files 2024
+place,4635780,1600000US4635780,Lane town,Lane,lane,46073,44.06910,-98.42231,,,,,Census cartographic boundary files 2024
+place,4635820,1600000US4635820,Langford town,Langford,langford,46091,45.60187,-97.83054,,,,,Census cartographic boundary files 2024
+place,4636220,1600000US4636220,Lead city,Lead,lead,46081,44.35257,-103.76876,,,,,Census cartographic boundary files 2024
+place,4636260,1600000US4636260,Lebanon town,Lebanon,lebanon,46107,45.06912,-99.76679,,,,,Census cartographic boundary files 2024
+place,4636340,1600000US4636340,Lemmon city,Lemmon,lemmon,46105,45.93879,-102.15864,,,,,Census cartographic boundary files 2024
+place,4636380,1600000US4636380,Lennox city,Lennox,lennox,46083,43.34863,-96.89576,,,,,Census cartographic boundary files 2024
+place,4636460,1600000US4636460,Leola city,Leola,leola,46089,45.72191,-98.93934,,,,,Census cartographic boundary files 2024
+place,4636540,1600000US4636540,Lesterville town,Lesterville,lesterville,46135,43.03815,-97.59011,,,,,Census cartographic boundary files 2024
+place,4636620,1600000US4636620,Letcher town,Letcher,letcher,46111,43.90052,-98.14422,,,,,Census cartographic boundary files 2024
+place,4638860,1600000US4638860,Long Lake town,Long Lake,long-lake,46089,45.85596,-99.20565,,,,,Census cartographic boundary files 2024
+place,4639260,1600000US4639260,Lowry town,Lowry,lowry,46129,45.31543,-99.98125,,,,,Census cartographic boundary files 2024
+place,4640220,1600000US4640220,Madison city,Madison,madison,46079,44.00458,-97.11770,,,,,Census cartographic boundary files 2024
+place,4640860,1600000US4640860,Marion city,Marion,marion,46125,43.42473,-97.26057,,,,,Census cartographic boundary files 2024
+place,4641100,1600000US4641100,Martin city,Martin,martin,46007,43.17406,-101.73427,,,,,Census cartographic boundary files 2024
+place,4641220,1600000US4641220,Marvin town,Marvin,marvin,46051,45.25935,-96.91662,,,,,Census cartographic boundary files 2024
+place,4639940,1600000US4639940,McIntosh city,McIntosh,mcintosh,46031,45.92426,-101.34962,,,,,Census cartographic boundary files 2024
+place,4640020,1600000US4640020,McLaughlin city,McLaughlin,mclaughlin,46031,45.81380,-100.81114,,,,,Census cartographic boundary files 2024
+place,4641860,1600000US4641860,Mellette city,Mellette,mellette,46115,45.15461,-98.49837,,,,,Census cartographic boundary files 2024
+place,4641980,1600000US4641980,Menno city,Menno,menno,46067,43.23813,-97.57636,,,,,Census cartographic boundary files 2024
+place,4642140,1600000US4642140,Midland town,Midland,midland,46055,44.07214,-101.15695,,,,,Census cartographic boundary files 2024
+place,4642260,1600000US4642260,Milbank city,Milbank,milbank,46051,45.21788,-96.63430,,,,,Census cartographic boundary files 2024
+place,4642460,1600000US4642460,Miller city,Miller,miller,46059,44.52223,-98.98844,,,,,Census cartographic boundary files 2024
+place,4642980,1600000US4642980,Mission Hill town,Mission Hill,mission-hill,46135,42.91985,-97.27904,,,,,Census cartographic boundary files 2024
+place,4642940,1600000US4642940,Mission city,Mission,mission,46121,43.30564,-100.66142,,,,,Census cartographic boundary files 2024
+place,4643100,1600000US4643100,Mitchell city,Mitchell,mitchell,46035,43.73134,-98.03293,,,,,Census cartographic boundary files 2024
+place,4643180,1600000US4643180,Mobridge city,Mobridge,mobridge,46129,45.54110,-100.43300,,,,,Census cartographic boundary files 2024
+place,4643380,1600000US4643380,Monroe town,Monroe,monroe,46125,43.48916,-97.21663,,,,,Census cartographic boundary files 2024
+place,4643500,1600000US4643500,Montrose city,Montrose,montrose,46087,43.70097,-97.18401,,,,,Census cartographic boundary files 2024
+place,4643860,1600000US4643860,Morristown town,Morristown,morristown,46031,45.93967,-101.71882,,,,,Census cartographic boundary files 2024
+place,4644020,1600000US4644020,Mound City town,Mound City,mound-city,46021,45.72618,-100.06882,,,,,Census cartographic boundary files 2024
+place,4644100,1600000US4644100,Mount Vernon city,Mount Vernon,mount-vernon,46035,43.71464,-98.26085,,,,,Census cartographic boundary files 2024
+place,4644260,1600000US4644260,Murdo city,Murdo,murdo,46075,43.88852,-100.71394,,,,,Census cartographic boundary files 2024
+place,4644620,1600000US4644620,Naples town,Naples,naples,46025,44.77166,-97.51306,,,,,Census cartographic boundary files 2024
+place,4644820,1600000US4644820,New Effington town,New Effington,new-effington,46109,45.85587,-96.91730,,,,,Census cartographic boundary files 2024
+place,4645060,1600000US4645060,New Underwood city,New Underwood,new-underwood,46103,44.09295,-102.83337,,,,,Census cartographic boundary files 2024
+place,4645100,1600000US4645100,New Witten town,New Witten,new-witten,46123,43.44053,-100.08218,,,,,Census cartographic boundary files 2024
+place,4644860,1600000US4644860,Newell city,Newell,newell,46019,44.71618,-103.41798,,,,,Census cartographic boundary files 2024
+place,4645180,1600000US4645180,Nisland town,Nisland,nisland,46019,44.67367,-103.55535,,,,,Census cartographic boundary files 2024
+place,4645700,1600000US4645700,North Sioux City city,North Sioux City,north-sioux-city,46127,42.53381,-96.49186,,,,,Census cartographic boundary files 2024
+place,4645740,1600000US4645740,Northville town,Northville,northville,46115,45.15535,-98.57930,,,,,Census cartographic boundary files 2024
+place,4646060,1600000US4646060,Nunda town,Nunda,nunda,46079,44.15985,-97.01940,,,,,Census cartographic boundary files 2024
+place,4646180,1600000US4646180,Oacoma town,Oacoma,oacoma,46085,43.80830,-99.35865,,,,,Census cartographic boundary files 2024
+place,4646500,1600000US4646500,Oelrichs town,Oelrichs,oelrichs,46047,43.18201,-103.23343,,,,,Census cartographic boundary files 2024
+place,4646780,1600000US4646780,Oldham city,Oldham,oldham,46077,44.22845,-97.30977,,,,,Census cartographic boundary files 2024
+place,4646900,1600000US4646900,Olivet town,Olivet,olivet,46067,43.24262,-97.67474,,,,,Census cartographic boundary files 2024
+place,4646980,1600000US4646980,Onaka town,Onaka,onaka,46049,45.19295,-99.46578,,,,,Census cartographic boundary files 2024
+place,4647180,1600000US4647180,Onida city,Onida,onida,46119,44.70567,-100.07036,,,,,Census cartographic boundary files 2024
+place,4647460,1600000US4647460,Orient town,Orient,orient,46049,44.90080,-99.08843,,,,,Census cartographic boundary files 2024
+place,4647660,1600000US4647660,Ortley town,Ortley,ortley,46109,45.33774,-97.20607,,,,,Census cartographic boundary files 2024
+place,4648380,1600000US4648380,Parker city,Parker,parker,46125,43.39830,-97.13280,,,,,Census cartographic boundary files 2024
+place,4648460,1600000US4648460,Parkston city,Parkston,parkston,46067,43.39367,-97.98437,,,,,Census cartographic boundary files 2024
+place,4648940,1600000US4648940,Peever town,Peever,peever,46109,45.54192,-96.95606,,,,,Census cartographic boundary files 2024
+place,4649300,1600000US4649300,Philip city,Philip,philip,46055,44.04067,-101.66445,,,,,Census cartographic boundary files 2024
+place,4649460,1600000US4649460,Pickstown town,Pickstown,pickstown,46023,43.06568,-98.53185,,,,,Census cartographic boundary files 2024
+place,4649500,1600000US4649500,Piedmont city,Piedmont,piedmont,46093,44.21872,-103.37382,,,,,Census cartographic boundary files 2024
+place,4649540,1600000US4649540,Pierpont town,Pierpont,pierpont,46037,45.49565,-97.83215,,,,,Census cartographic boundary files 2024
+place,4649600,1600000US4649600,Pierre city,Pierre,pierre,46065,44.36979,-100.33255,,,,,Census cartographic boundary files 2024
+place,4650020,1600000US4650020,Plankinton city,Plankinton,plankinton,46003,43.71434,-98.48199,,,,,Census cartographic boundary files 2024
+place,4650260,1600000US4650260,Platte city,Platte,platte,46023,43.38509,-98.84281,,,,,Census cartographic boundary files 2024
+place,4651260,1600000US4651260,Pollock town,Pollock,pollock,46021,45.90020,-100.28998,,,,,Census cartographic boundary files 2024
+place,4651820,1600000US4651820,Presho city,Presho,presho,46085,43.90710,-100.05839,,,,,Census cartographic boundary files 2024
+place,4651940,1600000US4651940,Pringle town,Pringle,pringle,46033,43.61091,-103.59439,,,,,Census cartographic boundary files 2024
+place,4652220,1600000US4652220,Pukwana town,Pukwana,pukwana,46015,43.77636,-99.18305,,,,,Census cartographic boundary files 2024
+place,4652500,1600000US4652500,Quinn town,Quinn,quinn,46103,43.99077,-102.12913,,,,,Census cartographic boundary files 2024
+place,4652860,1600000US4652860,Ramona town,Ramona,ramona,46079,44.12005,-97.21524,,,,,Census cartographic boundary files 2024
+place,4652980,1600000US4652980,Rapid City city,Rapid City,rapid-city,46103,44.06595,-103.22538,,,,,Census cartographic boundary files 2024
+place,4653220,1600000US4653220,Ravinia town,Ravinia,ravinia,46023,43.13649,-98.42686,,,,,Census cartographic boundary files 2024
+place,4653260,1600000US4653260,Raymond town,Raymond,raymond,46025,44.91037,-97.93714,,,,,Census cartographic boundary files 2024
+place,4653460,1600000US4653460,Redfield city,Redfield,redfield,46115,44.86971,-98.52137,,,,,Census cartographic boundary files 2024
+place,4653940,1600000US4653940,Ree Heights town,Ree Heights,ree-heights,46059,44.51584,-99.20052,,,,,Census cartographic boundary files 2024
+place,4654020,1600000US4654020,Reliance town,Reliance,reliance,46085,43.88193,-99.60175,,,,,Census cartographic boundary files 2024
+place,4654220,1600000US4654220,Revillo town,Revillo,revillo,46051,45.01529,-96.57066,,,,,Census cartographic boundary files 2024
+place,4655540,1600000US4655540,Rockham town,Rockham,rockham,46049,44.90430,-98.82340,,,,,Census cartographic boundary files 2024
+place,4655820,1600000US4655820,Roscoe city,Roscoe,roscoe,46045,45.45078,-99.33494,,,,,Census cartographic boundary files 2024
+place,4656340,1600000US4656340,Rosholt town,Rosholt,rosholt,46109,45.86707,-96.73068,,,,,Census cartographic boundary files 2024
+place,4656380,1600000US4656380,Roslyn town,Roslyn,roslyn,46037,45.49690,-97.49320,,,,,Census cartographic boundary files 2024
+place,4657340,1600000US4657340,Salem city,Salem,salem,46087,43.72172,-97.38891,,,,,Census cartographic boundary files 2024
+place,4657940,1600000US4657940,Scotland city,Scotland,scotland,46009,43.14762,-97.71977,,,,,Census cartographic boundary files 2024
+place,4658140,1600000US4658140,Selby city,Selby,selby,46129,45.50778,-100.03189,,,,,Census cartographic boundary files 2024
+place,4658180,1600000US4658180,Seneca town,Seneca,seneca,46049,45.06053,-99.50917,,,,,Census cartographic boundary files 2024
+place,4658580,1600000US4658580,Sherman town,Sherman,sherman,46099,43.75773,-96.47624,,,,,Census cartographic boundary files 2024
+place,4658900,1600000US4658900,Sinai town,Sinai,sinai,46011,44.24451,-97.04399,,,,,Census cartographic boundary files 2024
+place,4659020,1600000US4659020,Sioux Falls city,Sioux Falls,sioux-falls,46099,43.55257,-96.72859,,,,,Census cartographic boundary files 2024
+place,4659260,1600000US4659260,Sisseton city,Sisseton,sisseton,46109,45.66197,-97.04071,,,,,Census cartographic boundary files 2024
+place,4659940,1600000US4659940,South Shore town,South Shore,south-shore,46029,45.10073,-96.92939,,,,,Census cartographic boundary files 2024
+place,4660020,1600000US4660020,Spearfish city,Spearfish,spearfish,46081,44.50855,-103.85725,,,,,Census cartographic boundary files 2024
+place,4660060,1600000US4660060,Spencer city,Spencer,spencer,46087,43.72762,-97.59087,,,,,Census cartographic boundary files 2024
+place,4660660,1600000US4660660,Springfield city,Springfield,springfield,46009,42.85344,-97.89463,,,,,Census cartographic boundary files 2024
+place,4657140,1600000US4657140,St. Francis town,St. Francis,st-francis,46121,43.14145,-100.90284,,,,,Census cartographic boundary files 2024
+place,4657180,1600000US4657180,St. Lawrence town,St. Lawrence,st-lawrence,46059,44.51648,-98.93726,,,,,Census cartographic boundary files 2024
+place,4661700,1600000US4661700,Stickney town,Stickney,stickney,46003,43.59095,-98.43731,,,,,Census cartographic boundary files 2024
+place,4661740,1600000US4661740,Stockholm town,Stockholm,stockholm,46051,45.10225,-96.79977,,,,,Census cartographic boundary files 2024
+place,4661980,1600000US4661980,Strandburg town,Strandburg,strandburg,46051,45.04374,-96.76081,,,,,Census cartographic boundary files 2024
+place,4662020,1600000US4662020,Stratford town,Stratford,stratford,46013,45.31747,-98.30433,,,,,Census cartographic boundary files 2024
+place,4662100,1600000US4662100,Sturgis city,Sturgis,sturgis,46093,44.40518,-103.51928,,,,,Census cartographic boundary files 2024
+place,4662155,1600000US4662155,Summerset city,Summerset,summerset,46093,44.19009,-103.34059,,,,,Census cartographic boundary files 2024
+place,4662220,1600000US4662220,Summit town,Summit,summit,46109,45.30587,-97.03592,,,,,Census cartographic boundary files 2024
+place,4662820,1600000US4662820,Tabor town,Tabor,tabor,46009,42.94551,-97.65988,,,,,Census cartographic boundary files 2024
+place,4663100,1600000US4663100,Tea city,Tea,tea,46083,43.45603,-96.83129,,,,,Census cartographic boundary files 2024
+place,4663620,1600000US4663620,Timber Lake city,Timber Lake,timber-lake,46041,45.42564,-101.07462,,,,,Census cartographic boundary files 2024
+place,4663700,1600000US4663700,Tolstoy town,Tolstoy,tolstoy,46107,45.20826,-99.61394,,,,,Census cartographic boundary files 2024
+place,4663740,1600000US4663740,Toronto town,Toronto,toronto,46039,44.57283,-96.64229,,,,,Census cartographic boundary files 2024
+place,4663940,1600000US4663940,Trent town,Trent,trent,46101,43.90983,-96.65819,,,,,Census cartographic boundary files 2024
+place,4664020,1600000US4664020,Tripp city,Tripp,tripp,46067,43.22529,-97.96563,,,,,Census cartographic boundary files 2024
+place,4664300,1600000US4664300,Tulare town,Tulare,tulare,46115,44.73821,-98.50893,,,,,Census cartographic boundary files 2024
+place,4664540,1600000US4664540,Turton town,Turton,turton,46115,45.04901,-98.09746,,,,,Census cartographic boundary files 2024
+place,4664700,1600000US4664700,Twin Brooks town,Twin Brooks,twin-brooks,46051,45.20709,-96.78516,,,,,Census cartographic boundary files 2024
+place,4664860,1600000US4664860,Tyndall city,Tyndall,tyndall,46009,42.99253,-97.86507,,,,,Census cartographic boundary files 2024
+place,4665780,1600000US4665780,Utica town,Utica,utica,46135,42.98063,-97.49674,,,,,Census cartographic boundary files 2024
+place,4666260,1600000US4666260,Valley Springs city,Valley Springs,valley-springs,46099,43.58178,-96.46638,,,,,Census cartographic boundary files 2024
+place,4666540,1600000US4666540,Veblen city,Veblen,veblen,46091,45.86106,-97.28549,,,,,Census cartographic boundary files 2024
+place,4666660,1600000US4666660,Verdon town,Verdon,verdon,46013,45.24418,-98.09918,,,,,Census cartographic boundary files 2024
+place,4666700,1600000US4666700,Vermillion city,Vermillion,vermillion,46027,42.78536,-96.93108,,,,,Census cartographic boundary files 2024
+place,4667020,1600000US4667020,Viborg city,Viborg,viborg,46125,43.17165,-97.08124,,,,,Census cartographic boundary files 2024
+place,4667220,1600000US4667220,Vienna town,Vienna,vienna,46025,44.70679,-97.50002,,,,,Census cartographic boundary files 2024
+place,4667340,1600000US4667340,Vilas town,Vilas,vilas,46097,44.01560,-97.59565,,,,,Census cartographic boundary files 2024
+place,4667500,1600000US4667500,Virgil town,Virgil,virgil,46005,44.29088,-98.42761,,,,,Census cartographic boundary files 2024
+place,4667700,1600000US4667700,Volga city,Volga,volga,46011,44.32175,-96.92058,,,,,Census cartographic boundary files 2024
+place,4667780,1600000US4667780,Volin town,Volin,volin,46135,42.95678,-97.18170,,,,,Census cartographic boundary files 2024
+place,4668020,1600000US4668020,Wagner city,Wagner,wagner,46023,43.07672,-98.29316,,,,,Census cartographic boundary files 2024
+place,4668100,1600000US4668100,Wakonda town,Wakonda,wakonda,46027,43.00735,-97.10565,,,,,Census cartographic boundary files 2024
+place,4668380,1600000US4668380,Wall town,Wall,wall,46103,43.98995,-102.24272,,,,,Census cartographic boundary files 2024
+place,4668420,1600000US4668420,Wallace town,Wallace,wallace,46029,45.08437,-97.47823,,,,,Census cartographic boundary files 2024
+place,4668660,1600000US4668660,Ward town,Ward,ward,46101,44.15321,-96.46264,,,,,Census cartographic boundary files 2024
+place,4668740,1600000US4668740,Warner town,Warner,warner,46013,45.32346,-98.49521,,,,,Census cartographic boundary files 2024
+place,4669140,1600000US4669140,Wasta town,Wasta,wasta,46103,44.06973,-102.44561,,,,,Census cartographic boundary files 2024
+place,4669300,1600000US4669300,Watertown city,Watertown,watertown,46029,44.91008,-97.12633,,,,,Census cartographic boundary files 2024
+place,4669340,1600000US4669340,Waubay city,Waubay,waubay,46037,45.33773,-97.30717,,,,,Census cartographic boundary files 2024
+place,4669780,1600000US4669780,Webster city,Webster,webster,46037,45.33905,-97.52087,,,,,Census cartographic boundary files 2024
+place,4670020,1600000US4670020,Wentworth village,Wentworth,wentworth,46079,43.99692,-96.96456,,,,,Census cartographic boundary files 2024
+place,4670220,1600000US4670220,Wessington Springs city,Wessington Springs,wessington-springs,46073,44.08327,-98.56871,,,,,Census cartographic boundary files 2024
+place,4670140,1600000US4670140,Wessington city,Wessington,wessington,46005,44.45525,-98.69523,,,,,Census cartographic boundary files 2024
+place,4670540,1600000US4670540,Westport town,Westport,westport,46013,45.64889,-98.49855,,,,,Census cartographic boundary files 2024
+place,4670740,1600000US4670740,Wetonka town,Wetonka,wetonka,46089,45.62421,-98.77176,,,,,Census cartographic boundary files 2024
+place,4671180,1600000US4671180,White Lake city,White Lake,white-lake,46003,43.72798,-98.71246,,,,,Census cartographic boundary files 2024
+place,4671340,1600000US4671340,White River city,White River,white-river,46095,43.56857,-100.74512,,,,,Census cartographic boundary files 2024
+place,4671380,1600000US4671380,White Rock town,White Rock,white-rock,46109,45.92366,-96.57571,,,,,Census cartographic boundary files 2024
+place,4670940,1600000US4670940,White city,White,white,46011,44.43621,-96.64637,,,,,Census cartographic boundary files 2024
+place,4671580,1600000US4671580,Whitewood city,Whitewood,whitewood,46081,44.46224,-103.64192,,,,,Census cartographic boundary files 2024
+place,4671940,1600000US4671940,Willow Lake city,Willow Lake,willow-lake,46025,44.62776,-97.63897,,,,,Census cartographic boundary files 2024
+place,4671980,1600000US4671980,Wilmot city,Wilmot,wilmot,46109,45.40906,-96.85388,,,,,Census cartographic boundary files 2024
+place,4672180,1600000US4672180,Winner city,Winner,winner,46123,43.37569,-99.85592,,,,,Census cartographic boundary files 2024
+place,4672540,1600000US4672540,Wolsey town,Wolsey,wolsey,46005,44.41045,-98.47376,,,,,Census cartographic boundary files 2024
+place,4672620,1600000US4672620,Wood town,Wood,wood,46095,43.49711,-100.48019,,,,,Census cartographic boundary files 2024
+place,4672700,1600000US4672700,Woonsocket city,Woonsocket,woonsocket,46111,44.05345,-98.26851,,,,,Census cartographic boundary files 2024
+place,4672820,1600000US4672820,Worthing city,Worthing,worthing,46083,43.32945,-96.76824,,,,,Census cartographic boundary files 2024
+place,4673020,1600000US4673020,Yale town,Yale,yale,46005,44.43341,-97.99041,,,,,Census cartographic boundary files 2024
+place,4673060,1600000US4673060,Yankton city,Yankton,yankton,46135,42.89692,-97.39965,,,,,Census cartographic boundary files 2024
+cdp,4600520,1600000US4600520,Agency Village CDP,Agency Village,agency-village-cdp,46109,45.57770,-97.07711,,,,,Census cartographic boundary files 2024
+cdp,4600900,1600000US4600900,Allen CDP,Allen,allen-cdp,46007,43.27712,-101.92545,,,,,Census cartographic boundary files 2024
+cdp,4601450,1600000US4601450,Anderson CDP,Anderson,anderson-cdp,46099,43.52241,-96.61592,,,,,Census cartographic boundary files 2024
+cdp,4601560,1600000US4601560,Angostura CDP,Angostura,angostura-cdp,46047,43.31538,-103.38120,,,,,Census cartographic boundary files 2024
+cdp,4601740,1600000US4601740,Antelope CDP,Antelope,antelope-cdp,46121,43.30738,-100.63082,,,,,Census cartographic boundary files 2024
+cdp,4601980,1600000US4601980,Ardmore CDP,Ardmore,ardmore-cdp,46047,43.01917,-103.65367,,,,,Census cartographic boundary files 2024
+cdp,4602530,1600000US4602530,Ashland Heights CDP,Ashland Heights,ashland-heights-cdp,46103,44.12913,-103.13108,,,,,Census cartographic boundary files 2024
+cdp,4602860,1600000US4602860,Aurora Center CDP,Aurora Center,aurora-center-cdp,46003,43.52760,-98.58940,,,,,Census cartographic boundary files 2024
+cdp,4603900,1600000US4603900,Bath CDP,Bath,bath-cdp,46013,45.46809,-98.32313,,,,,Census cartographic boundary files 2024
+cdp,4603960,1600000US4603960,Bath Corner CDP,Bath Corner,bath-corner-cdp,46013,45.46317,-98.33300,,,,,Census cartographic boundary files 2024
+cdp,4605580,1600000US4605580,Bijou Hills CDP,Bijou Hills,bijou-hills-cdp,46015,43.52122,-99.14521,,,,,Census cartographic boundary files 2024
+cdp,4605780,1600000US4605780,Blackhawk CDP,Blackhawk,blackhawk-cdp,46093,44.15658,-103.33892,,,,,Census cartographic boundary files 2024
+cdp,4606120,1600000US4606120,Blucksberg Mountain CDP,Blucksberg Mountain,blucksberg-mountain-cdp,46093,44.36215,-103.45596,,,,,Census cartographic boundary files 2024
+cdp,4606140,1600000US4606140,Blumengard Colony CDP,Blumengard Colony,blumengard-colony-cdp,46049,45.24075,-99.16993,,,,,Census cartographic boundary files 2024
+cdp,4606300,1600000US4606300,Bon Homme Colony CDP,Bon Homme Colony,bon-homme-colony-cdp,46009,42.86525,-97.70798,,,,,Census cartographic boundary files 2024
+cdp,4606440,1600000US4606440,Boulder Canyon CDP,Boulder Canyon,boulder-canyon-cdp,46081,44.39809,-103.60691,,,,,Census cartographic boundary files 2024
+cdp,4607044,1600000US4607044,Brant Lake South CDP,Brant Lake South,brant-lake-south-cdp,46079,43.91549,-96.93775,,,,,Census cartographic boundary files 2024
+cdp,4607068,1600000US4607068,Brentwood Colony CDP,Brentwood Colony,brentwood-colony-cdp,46049,45.15124,-99.29844,,,,,Census cartographic boundary files 2024
+cdp,4607140,1600000US4607140,Bridger CDP,Bridger,bridger-cdp,46137,44.54062,-101.91371,,,,,Census cartographic boundary files 2024
+cdp,4608460,1600000US4608460,Bullhead CDP,Bullhead,bullhead-cdp,46031,45.76547,-101.07740,,,,,Census cartographic boundary files 2024
+cdp,4608500,1600000US4608500,Burbank CDP,Burbank,burbank-cdp,46027,42.74615,-96.83195,,,,,Census cartographic boundary files 2024
+cdp,4609204,1600000US4609204,Cameron Colony CDP,Cameron Colony,cameron-colony-cdp,46125,43.18780,-97.26271,,,,,Census cartographic boundary files 2024
+cdp,4609278,1600000US4609278,Camrose Colony CDP,Camrose Colony,camrose-colony-cdp,46115,44.93389,-98.21996,,,,,Census cartographic boundary files 2024
+cdp,4609780,1600000US4609780,Caputa CDP,Caputa,caputa-cdp,46103,43.99601,-102.98401,,,,,Census cartographic boundary files 2024
+cdp,4610835,1600000US4610835,Cedar Grove Colony CDP,Cedar Grove Colony,cedar-grove-colony-cdp,46015,43.53173,-98.80448,,,,,Census cartographic boundary files 2024
+cdp,4611540,1600000US4611540,Cherry Creek CDP,Cherry Creek,cherry-creek-cdp,46137,44.60403,-101.49867,,,,,Census cartographic boundary files 2024
+cdp,4611660,1600000US4611660,Chester CDP,Chester,chester-cdp,46079,43.89945,-96.92613,,,,,Census cartographic boundary files 2024
+cdp,4612148,1600000US4612148,Claremont Colony CDP,Claremont Colony,claremont-colony-cdp,46057,44.71352,-96.95082,,,,,Census cartographic boundary files 2024
+cdp,4612340,1600000US4612340,Clark Colony CDP,Clark Colony,clark-colony-cdp,46115,44.79000,-97.98139,,,,,Census cartographic boundary files 2024
+cdp,4612640,1600000US4612640,Clear Lake CDP,Clear Lake,clear-lake-cdp,46091,45.69775,-97.35949,,,,,Census cartographic boundary files 2024
+cdp,4612508,1600000US4612508,Clearfield Colony CDP,Clearfield Colony,clearfield-colony-cdp,46023,43.14409,-98.14212,,,,,Census cartographic boundary files 2024
+cdp,4613010,1600000US4613010,Cloverleaf Colony CDP,Cloverleaf Colony,cloverleaf-colony-cdp,46097,44.18369,-97.53861,,,,,Census cartographic boundary files 2024
+cdp,4613188,1600000US4613188,Collins Colony CDP,Collins Colony,collins-colony-cdp,46025,44.54724,-97.70136,,,,,Census cartographic boundary files 2024
+cdp,4613355,1600000US4613355,Colonial Pine Hills CDP,Colonial Pine Hills,colonial-pine-hills-cdp,46103,44.01910,-103.33868,,,,,Census cartographic boundary files 2024
+cdp,4613840,1600000US4613840,Corn Creek CDP,Corn Creek,corn-creek-cdp,46095,43.57465,-101.20687,,,,,Census cartographic boundary files 2024
+cdp,4614320,1600000US4614320,Cow Creek CDP,Cow Creek,cow-creek-cdp,46119,44.55574,-100.48579,,,,,Census cartographic boundary files 2024
+cdp,4614660,1600000US4614660,Crocker CDP,Crocker,crocker-cdp,46025,45.11022,-97.77967,,,,,Census cartographic boundary files 2024
+cdp,4614680,1600000US4614680,Crook City CDP,Crook City,crook-city-cdp,46081,44.43924,-103.64259,,,,,Census cartographic boundary files 2024
+cdp,4615256,1600000US4615256,Dakota Dunes CDP,Dakota Dunes,dakota-dunes-cdp,46127,42.49626,-96.49351,,,,,Census cartographic boundary files 2024
+cdp,4615774,1600000US4615774,Deerfield Colony CDP,Deerfield Colony,deerfield-colony-cdp,46045,45.58742,-98.89968,,,,,Census cartographic boundary files 2024
+cdp,4617215,1600000US4617215,Dudley CDP,Dudley,dudley-cdp,46047,43.30867,-103.81939,,,,,Census cartographic boundary files 2024
+cdp,4619556,1600000US4619556,Enemy Swim CDP,Enemy Swim,enemy-swim-cdp,46037,45.43530,-97.28897,,,,,Census cartographic boundary files 2024
+cdp,4620208,1600000US4620208,Evergreen Colony CDP,Evergreen Colony,evergreen-colony-cdp,46049,45.12173,-99.04253,,,,,Census cartographic boundary files 2024
+cdp,4621340,1600000US4621340,Fedora CDP,Fedora,fedora-cdp,46097,44.00975,-97.78654,,,,,Census cartographic boundary files 2024
+cdp,4621380,1600000US4621380,Ferney CDP,Ferney,ferney-cdp,46013,45.33458,-98.09387,,,,,Census cartographic boundary files 2024
+cdp,4622070,1600000US4622070,Fordham Colony CDP,Fordham Colony,fordham-colony-cdp,46025,44.76667,-97.90608,,,,,Census cartographic boundary files 2024
+cdp,4622100,1600000US4622100,Forestburg CDP,Forestburg,forestburg-cdp,46111,44.02127,-98.10312,,,,,Census cartographic boundary files 2024
+cdp,4622340,1600000US4622340,Fort Thompson CDP,Fort Thompson,fort-thompson-cdp,46017,44.04525,-99.40431,,,,,Census cartographic boundary files 2024
+cdp,4623421,1600000US4623421,Gann Valley CDP,Gann Valley,gann-valley-cdp,46017,44.03376,-98.98879,,,,,Census cartographic boundary files 2024
+cdp,4624540,1600000US4624540,Glendale Colony CDP,Glendale Colony,glendale-colony-cdp,46115,44.79901,-98.28648,,,,,Census cartographic boundary files 2024
+cdp,4624760,1600000US4624760,Golden View Colony CDP,Golden View Colony,golden-view-colony-cdp,46087,43.69542,-97.44866,,,,,Census cartographic boundary files 2024
+cdp,4625020,1600000US4625020,Graceville Colony CDP,Graceville Colony,graceville-colony-cdp,46079,43.92646,-97.28372,,,,,Census cartographic boundary files 2024
+cdp,4625743,1600000US4625743,Grass Ranch Colony CDP,Grass Ranch Colony,grass-ranch-colony-cdp,46015,43.65060,-98.88398,,,,,Census cartographic boundary files 2024
+cdp,4625741,1600000US4625741,Grassland Colony CDP,Grassland Colony,grassland-colony-cdp,46089,45.66755,-98.79501,,,,,Census cartographic boundary files 2024
+cdp,4625900,1600000US4625900,Green Grass CDP,Green Grass,green-grass-cdp,46041,45.17312,-101.22395,,,,,Census cartographic boundary files 2024
+cdp,4626035,1600000US4626035,Green Valley CDP,Green Valley,green-valley-cdp,46103,44.03829,-103.11111,,,,,Census cartographic boundary files 2024
+cdp,4626150,1600000US4626150,Greenwood Colony CDP,Greenwood Colony,greenwood-colony-cdp,46043,43.21493,-98.15378,,,,,Census cartographic boundary files 2024
+cdp,4626660,1600000US4626660,Hamill CDP,Hamill,hamill-cdp,46123,43.59275,-99.68969,,,,,Census cartographic boundary files 2024
+cdp,4627300,1600000US4627300,Harrison CDP,Harrison,harrison-cdp,46043,43.43078,-98.52673,,,,,Census cartographic boundary files 2024
+cdp,4629116,1600000US4629116,Hillcrest Colony CDP,Hillcrest Colony,hillcrest-colony-cdp,46025,44.94248,-97.66719,,,,,Census cartographic boundary files 2024
+cdp,4629300,1600000US4629300,Hillside Colony CDP,Hillside Colony,hillside-colony-cdp,46115,44.73675,-98.04736,,,,,Census cartographic boundary files 2024
+cdp,4630056,1600000US4630056,Horse Creek CDP,Horse Creek,horse-creek-cdp,46095,43.53218,-100.74026,,,,,Census cartographic boundary files 2024
+cdp,4631140,1600000US4631140,Huron Colony CDP,Huron Colony,huron-colony-cdp,46005,44.56424,-98.20567,,,,,Census cartographic boundary files 2024
+cdp,4631196,1600000US4631196,Hutterville Colony CDP,Hutterville Colony,hutterville-colony-cdp,46013,45.26597,-98.21151,,,,,Census cartographic boundary files 2024
+cdp,4631220,1600000US4631220,Ideal CDP,Ideal,ideal-cdp,46123,43.53985,-99.92171,,,,,Census cartographic boundary files 2024
+cdp,4632388,1600000US4632388,Jamesville Colony CDP,Jamesville Colony,jamesville-colony-cdp,46135,43.10238,-97.48079,,,,,Census cartographic boundary files 2024
+cdp,4632820,1600000US4632820,Johnson Siding CDP,Johnson Siding,johnson-siding-cdp,46103,44.08712,-103.43975,,,,,Census cartographic boundary files 2024
+cdp,4633380,1600000US4633380,Kaylor CDP,Kaylor,kaylor-cdp,46067,43.18841,-97.83693,,,,,Census cartographic boundary files 2024
+cdp,4633540,1600000US4633540,Kenel CDP,Kenel,kenel-cdp,46031,45.85445,-100.45918,,,,,Census cartographic boundary files 2024
+cdp,4633900,1600000US4633900,Kidder CDP,Kidder,kidder-cdp,46091,45.88203,-97.71385,,,,,Census cartographic boundary files 2024
+cdp,4634460,1600000US4634460,Kyle CDP,Kyle,kyle-cdp,46102,43.42547,-102.17966,,,,,Census cartographic boundary files 2024
+cdp,4635940,1600000US4635940,La Plant CDP,La Plant,la-plant-cdp,46041,45.13220,-100.66817,,,,,Census cartographic boundary files 2024
+cdp,4635430,1600000US4635430,Lake Madison CDP,Lake Madison,lake-madison-cdp,46079,43.95490,-97.01429,,,,,Census cartographic boundary files 2024
+cdp,4635480,1600000US4635480,Lake Poinsett CDP,Lake Poinsett,lake-poinsett-cdp,46057,44.56740,-97.07781,,,,,Census cartographic boundary files 2024
+cdp,4635671,1600000US4635671,Lakeview Colony CDP,Lakeview Colony,lakeview-colony-cdp,46023,43.22020,-98.45637,,,,,Census cartographic boundary files 2024
+cdp,4635900,1600000US4635900,Lantry CDP,Lantry,lantry-cdp,46041,45.01801,-101.43095,,,,,Census cartographic boundary files 2024
+cdp,4637900,1600000US4637900,Little Eagle CDP,Little Eagle,little-eagle-cdp,46031,45.68344,-100.79754,,,,,Census cartographic boundary files 2024
+cdp,4638760,1600000US4638760,Long Hollow CDP,Long Hollow,long-hollow-cdp,46109,45.68149,-97.15460,,,,,Census cartographic boundary files 2024
+cdp,4638900,1600000US4638900,Long Lake Colony CDP,Long Lake Colony,long-lake-colony-cdp,46089,45.60442,-98.82449,,,,,Census cartographic boundary files 2024
+cdp,4639020,1600000US4639020,Loomis CDP,Loomis,loomis-cdp,46035,43.79504,-98.10593,,,,,Census cartographic boundary files 2024
+cdp,4639180,1600000US4639180,Lower Brule CDP,Lower Brule,lower-brule-cdp,46085,44.07347,-99.58398,,,,,Census cartographic boundary files 2024
+cdp,4639740,1600000US4639740,Lyons CDP,Lyons,lyons-cdp,46099,43.72289,-96.86616,,,,,Census cartographic boundary files 2024
+cdp,4640550,1600000US4640550,Manderson-White Horse Creek CDP,Manderson-White Horse Creek,manderson-white-horse-creek-cdp,46102,43.23048,-102.48748,,,,,Census cartographic boundary files 2024
+cdp,4640580,1600000US4640580,Mansfield CDP,Mansfield,mansfield-cdp,46013,45.24386,-98.55757,,,,,Census cartographic boundary files 2024
+cdp,4641180,1600000US4641180,Marty CDP,Marty,marty-cdp,46023,42.99425,-98.42860,,,,,Census cartographic boundary files 2024
+cdp,4641398,1600000US4641398,Maverick Junction CDP,Maverick Junction,maverick-junction-cdp,46047,43.40994,-103.39487,,,,,Census cartographic boundary files 2024
+cdp,4641420,1600000US4641420,Maxwell Colony CDP,Maxwell Colony,maxwell-colony-cdp,46067,43.18221,-97.63482,,,,,Census cartographic boundary files 2024
+cdp,4641548,1600000US4641548,Mayfield Colony CDP,Mayfield Colony,mayfield-colony-cdp,46025,44.69348,-97.58080,,,,,Census cartographic boundary files 2024
+cdp,4641680,1600000US4641680,Meadow View Addition CDP,Meadow View Addition,meadow-view-addition-cdp,46099,43.62720,-96.70140,,,,,Census cartographic boundary files 2024
+cdp,4641700,1600000US4641700,Meckling CDP,Meckling,meckling-cdp,46027,42.83948,-97.06719,,,,,Census cartographic boundary files 2024
+cdp,4642440,1600000US4642440,Millbrook Colony CDP,Millbrook Colony,millbrook-colony-cdp,46061,43.66991,-97.87165,,,,,Census cartographic boundary files 2024
+cdp,4642579,1600000US4642579,Millerdale Colony CDP,Millerdale Colony,millerdale-colony-cdp,46059,44.40034,-99.11150,,,,,Census cartographic boundary files 2024
+cdp,4642620,1600000US4642620,Milltown CDP,Milltown,milltown-cdp,46067,43.42385,-97.80968,,,,,Census cartographic boundary files 2024
+cdp,4642700,1600000US4642700,Mina CDP,Mina,mina-cdp,46045,45.44999,-98.74280,,,,,Census cartographic boundary files 2024
+cdp,4643780,1600000US4643780,Morningside CDP,Morningside,morningside-cdp,46005,44.36809,-98.18318,,,,,Census cartographic boundary files 2024
+cdp,4644032,1600000US4644032,Mountain Plains CDP,Mountain Plains,mountain-plains-cdp,46081,44.46762,-103.86215,,,,,Census cartographic boundary files 2024
+cdp,4644900,1600000US4644900,New Elm Spring Colony CDP,New Elm Spring Colony,new-elm-spring-colony-cdp,46067,43.48763,-97.82840,,,,,Census cartographic boundary files 2024
+cdp,4644940,1600000US4644940,New Holland CDP,New Holland,new-holland-cdp,46043,43.42915,-98.60738,,,,,Census cartographic boundary files 2024
+cdp,4644800,1600000US4644800,Newdale Colony CDP,Newdale Colony,newdale-colony-cdp,46011,44.28975,-96.52362,,,,,Census cartographic boundary files 2024
+cdp,4645024,1600000US4645024,Newport Colony CDP,Newport Colony,newport-colony-cdp,46091,45.67907,-97.93279,,,,,Census cartographic boundary files 2024
+cdp,4645390,1600000US4645390,Norfeld Colony CDP,Norfeld Colony,norfeld-colony-cdp,46011,44.42462,-96.55592,,,,,Census cartographic boundary files 2024
+cdp,4645420,1600000US4645420,Norris CDP,Norris,norris-cdp,46095,43.47284,-101.19263,,,,,Census cartographic boundary files 2024
+cdp,4645548,1600000US4645548,North Eagle Butte CDP,North Eagle Butte,north-eagle-butte-cdp,46041,45.01551,-101.23656,,,,,Census cartographic boundary files 2024
+cdp,4645715,1600000US4645715,North Spearfish CDP,North Spearfish,north-spearfish-cdp,46081,44.50821,-103.92101,,,,,Census cartographic boundary files 2024
+cdp,4646240,1600000US4646240,Oahe Acres CDP,Oahe Acres,oahe-acres-cdp,46065,44.46505,-100.34545,,,,,Census cartographic boundary files 2024
+cdp,4646388,1600000US4646388,Oak Lane Colony CDP,Oak Lane Colony,oak-lane-colony-cdp,46061,43.51075,-97.74105,,,,,Census cartographic boundary files 2024
+cdp,4646540,1600000US4646540,Oglala CDP,Oglala,oglala-cdp,46102,43.17773,-102.72417,,,,,Census cartographic boundary files 2024
+cdp,4646620,1600000US4646620,Okaton CDP,Okaton,okaton-cdp,46075,43.85295,-100.90553,,,,,Census cartographic boundary files 2024
+cdp,4646660,1600000US4646660,Okreek CDP,Okreek,okreek-cdp,46121,43.35385,-100.38051,,,,,Census cartographic boundary files 2024
+cdp,4646700,1600000US4646700,Ola CDP,Ola,ola-cdp,46015,43.60048,-99.21137,,,,,Census cartographic boundary files 2024
+cdp,4646770,1600000US4646770,Old Elm Spring Colony CDP,Old Elm Spring Colony,old-elm-spring-colony-cdp,46067,43.49312,-97.79964,,,,,Census cartographic boundary files 2024
+cdp,4647340,1600000US4647340,Oral CDP,Oral,oral-cdp,46047,43.40671,-103.25752,,,,,Census cartographic boundary files 2024
+cdp,4647588,1600000US4647588,Orland Colony CDP,Orland Colony,orland-colony-cdp,46087,43.82158,-97.19898,,,,,Census cartographic boundary files 2024
+cdp,4648500,1600000US4648500,Parmelee CDP,Parmelee,parmelee-cdp,46121,43.32693,-101.04915,,,,,Census cartographic boundary files 2024
+cdp,4648820,1600000US4648820,Pearl Creek Colony CDP,Pearl Creek Colony,pearl-creek-colony-cdp,46005,44.32216,-97.92086,,,,,Census cartographic boundary files 2024
+cdp,4648948,1600000US4648948,Peever Flats CDP,Peever Flats,peever-flats-cdp,46109,45.52365,-96.93536,,,,,Census cartographic boundary files 2024
+cdp,4649028,1600000US4649028,Pembrook Colony CDP,Pembrook Colony,pembrook-colony-cdp,46045,45.37219,-98.99310,,,,,Census cartographic boundary files 2024
+cdp,4649640,1600000US4649640,Pine Lakes Addition CDP,Pine Lakes Addition,pine-lakes-addition-cdp,46099,43.55063,-96.63572,,,,,Census cartographic boundary files 2024
+cdp,4649660,1600000US4649660,Pine Ridge CDP,Pine Ridge,pine-ridge-cdp,46102,43.02623,-102.55584,,,,,Census cartographic boundary files 2024
+cdp,4649980,1600000US4649980,Plainview Colony CDP,Plainview Colony,plainview-colony-cdp,46045,45.58174,-99.00982,,,,,Census cartographic boundary files 2024
+cdp,4650310,1600000US4650310,Platte Colony CDP,Platte Colony,platte-colony-cdp,46023,43.46648,-99.12602,,,,,Census cartographic boundary files 2024
+cdp,4650988,1600000US4650988,Pleasant Valley Colony CDP,Pleasant Valley Colony,pleasant-valley-colony-cdp,46101,44.05841,-96.47063,,,,,Census cartographic boundary files 2024
+cdp,4651220,1600000US4651220,Poinsett Colony CDP,Poinsett Colony,poinsett-colony-cdp,46057,44.64140,-96.90026,,,,,Census cartographic boundary files 2024
+cdp,4651340,1600000US4651340,Porcupine CDP,Porcupine,porcupine-cdp,46102,43.27800,-102.34723,,,,,Census cartographic boundary files 2024
+cdp,4651660,1600000US4651660,Prairie City CDP,Prairie City,prairie-city-cdp,46105,45.52672,-102.81707,,,,,Census cartographic boundary files 2024
+cdp,4651724,1600000US4651724,Prairiewood Village CDP,Prairiewood Village,prairiewood-village-cdp,46013,45.50975,-98.41995,,,,,Census cartographic boundary files 2024
+cdp,4652140,1600000US4652140,Provo CDP,Provo,provo-cdp,46047,43.19446,-103.83347,,,,,Census cartographic boundary files 2024
+cdp,4653007,1600000US4653007,Rapid Valley CDP,Rapid Valley,rapid-valley-cdp,46103,44.06830,-103.12114,,,,,Census cartographic boundary files 2024
+cdp,4654145,1600000US4654145,Renner Corner CDP,Renner Corner,renner-corner-cdp,46099,43.65214,-96.70413,,,,,Census cartographic boundary files 2024
+cdp,4654750,1600000US4654750,Richland CDP,Richland,richland-cdp,46127,42.76399,-96.65002,,,,,Census cartographic boundary files 2024
+cdp,4655220,1600000US4655220,Riverside Colony CDP,Riverside Colony,riverside-colony-cdp,46005,44.48268,-98.13533,,,,,Census cartographic boundary files 2024
+cdp,4655620,1600000US4655620,Rockport Colony CDP,Rockport Colony,rockport-colony-cdp,46061,43.58370,-97.84273,,,,,Census cartographic boundary files 2024
+cdp,4655684,1600000US4655684,Rolland Colony CDP,Rolland Colony,rolland-colony-cdp,46011,44.34372,-96.59226,,,,,Census cartographic boundary files 2024
+cdp,4655940,1600000US4655940,Rosebud CDP,Rosebud,rosebud-cdp,46121,43.23902,-100.82913,,,,,Census cartographic boundary files 2024
+cdp,4656140,1600000US4656140,Rosedale Colony CDP,Rosedale Colony,rosedale-colony-cdp,46061,43.62696,-97.87576,,,,,Census cartographic boundary files 2024
+cdp,4656420,1600000US4656420,Roswell CDP,Roswell,roswell-cdp,46097,44.00515,-97.69798,,,,,Census cartographic boundary files 2024
+cdp,4656580,1600000US4656580,Rowena CDP,Rowena,rowena-cdp,46099,43.51709,-96.55579,,,,,Census cartographic boundary files 2024
+cdp,4656820,1600000US4656820,Running Water CDP,Running Water,running-water-cdp,46009,42.78310,-97.98104,,,,,Census cartographic boundary files 2024
+cdp,4656964,1600000US4656964,Rustic Acres Colony CDP,Rustic Acres Colony,rustic-acres-colony-cdp,46079,43.87224,-97.09896,,,,,Census cartographic boundary files 2024
+cdp,4658310,1600000US4658310,Shamrock Colony CDP,Shamrock Colony,shamrock-colony-cdp,46005,44.62114,-97.95937,,,,,Census cartographic boundary files 2024
+cdp,4658332,1600000US4658332,Shannon Colony CDP,Shannon Colony,shannon-colony-cdp,46097,43.98262,-97.42507,,,,,Census cartographic boundary files 2024
+cdp,4658590,1600000US4658590,Shindler CDP,Shindler,shindler-cdp,46083,43.46950,-96.63888,,,,,Census cartographic boundary files 2024
+cdp,4658680,1600000US4658680,Sicangu Village CDP,Sicangu Village,sicangu-village-cdp,46121,43.01321,-100.57542,,,,,Census cartographic boundary files 2024
+cdp,4658868,1600000US4658868,Silver Lake Colony CDP,Silver Lake Colony,silver-lake-colony-cdp,46025,44.86567,-97.60842,,,,,Census cartographic boundary files 2024
+cdp,4659620,1600000US4659620,Smithwick CDP,Smithwick,smithwick-cdp,46047,43.29706,-103.21624,,,,,Census cartographic boundary files 2024
+cdp,4659700,1600000US4659700,Soldier Creek CDP,Soldier Creek,soldier-creek-cdp,46121,43.32761,-100.89164,,,,,Census cartographic boundary files 2024
+cdp,4660180,1600000US4660180,Spink Colony CDP,Spink Colony,spink-colony-cdp,46115,44.74476,-98.28814,,,,,Census cartographic boundary files 2024
+cdp,4660500,1600000US4660500,Spring Creek CDP,Spring Creek,spring-creek-cdp,46121,43.11594,-101.03539,,,,,Census cartographic boundary files 2024
+cdp,4660540,1600000US4660540,Spring Creek Colony CDP,Spring Creek Colony,spring-creek-colony-cdp,46089,45.90768,-98.88063,,,,,Census cartographic boundary files 2024
+cdp,4660958,1600000US4660958,Spring Lake Colony CDP,Spring Lake Colony,spring-lake-colony-cdp,46077,44.23546,-97.17458,,,,,Census cartographic boundary files 2024
+cdp,4661180,1600000US4661180,Spring Valley Colony CDP,Spring Valley Colony,spring-valley-colony-cdp,46073,44.03961,-98.88023,,,,,Census cartographic boundary files 2024
+cdp,4657060,1600000US4657060,St. Charles CDP,St. Charles,st-charles-cdp,46053,43.08520,-99.09308,,,,,Census cartographic boundary files 2024
+cdp,4657260,1600000US4657260,St. Onge CDP,St. Onge,st-onge-cdp,46081,44.54703,-103.71851,,,,,Census cartographic boundary files 2024
+cdp,4661580,1600000US4661580,Stephan CDP,Stephan,stephan-cdp,46069,44.24672,-99.45762,,,,,Census cartographic boundary files 2024
+cdp,4661940,1600000US4661940,Storla CDP,Storla,storla-cdp,46003,43.86316,-98.35241,,,,,Census cartographic boundary files 2024
+cdp,4662434,1600000US4662434,Sunset Colony CDP,Sunset Colony,sunset-colony-cdp,46091,45.80592,-97.88569,,,,,Census cartographic boundary files 2024
+cdp,4662716,1600000US4662716,Swift Bird CDP,Swift Bird,swift-bird-cdp,46041,45.06082,-100.35566,,,,,Census cartographic boundary files 2024
+cdp,4663452,1600000US4663452,Thunderbird Colony CDP,Thunderbird Colony,thunderbird-colony-cdp,46049,45.19114,-99.26746,,,,,Census cartographic boundary files 2024
+cdp,4664260,1600000US4664260,Tschetter Colony CDP,Tschetter Colony,tschetter-colony-cdp,46067,43.36873,-97.68783,,,,,Census cartographic boundary files 2024
+cdp,4664840,1600000US4664840,Two Strike CDP,Two Strike,two-strike-cdp,46121,43.21177,-100.89385,,,,,Census cartographic boundary files 2024
+cdp,4665628,1600000US4665628,Upland Colony CDP,Upland Colony,upland-colony-cdp,46111,43.87759,-97.97653,,,,,Census cartographic boundary files 2024
+cdp,4665900,1600000US4665900,Vale CDP,Vale,vale-cdp,46019,44.61871,-103.39707,,,,,Census cartographic boundary files 2024
+cdp,4667620,1600000US4667620,Vivian CDP,Vivian,vivian-cdp,46085,43.92691,-100.30195,,,,,Census cartographic boundary files 2024
+cdp,4668140,1600000US4668140,Wakpala CDP,Wakpala,wakpala-cdp,46031,45.65973,-100.53530,,,,,Census cartographic boundary files 2024
+cdp,4668580,1600000US4668580,Wanblee CDP,Wanblee,wanblee-cdp,46071,43.56990,-101.66146,,,,,Census cartographic boundary files 2024
+cdp,4669420,1600000US4669420,Waverly CDP,Waverly,waverly-cdp,46029,44.99939,-96.97416,,,,,Census cartographic boundary files 2024
+cdp,4670284,1600000US4670284,West Brule CDP,West Brule,west-brule-cdp,46085,44.07009,-99.63559,,,,,Census cartographic boundary files 2024
+cdp,4670646,1600000US4670646,Westwood Colony CDP,Westwood Colony,westwood-colony-cdp,46091,45.89294,-97.78143,,,,,Census cartographic boundary files 2024
+cdp,4671150,1600000US4671150,White Horse CDP,White Horse,white-horse-cdp,46121,43.30629,-100.59317,,,,,Census cartographic boundary files 2024
+cdp,4671440,1600000US4671440,White Rock Colony CDP,White Rock Colony,white-rock-colony-cdp,46109,45.91223,-96.63118,,,,,Census cartographic boundary files 2024
+cdp,4671140,1600000US4671140,Whitehorse CDP,Whitehorse,whitehorse-cdp,46041,45.27520,-100.89871,,,,,Census cartographic boundary files 2024
+cdp,4672100,1600000US4672100,Winfred CDP,Winfred,winfred-cdp,46079,44.00079,-97.35974,,,,,Census cartographic boundary files 2024
+cdp,4672500,1600000US4672500,Wolf Creek Colony CDP,Wolf Creek Colony,wolf-creek-colony-cdp,46067,43.35312,-97.61573,,,,,Census cartographic boundary files 2024
+cdp,4672590,1600000US4672590,Wonderland Homes CDP,Wonderland Homes,wonderland-homes-cdp,46093,44.20168,-103.34164,,,,,Census cartographic boundary files 2024
+cdp,4672900,1600000US4672900,Wounded Knee CDP,Wounded Knee,wounded-knee-cdp,46102,43.14182,-102.36769,,,,,Census cartographic boundary files 2024
+tribal,0605,2500000US0605,Cheyenne River Reservation and Off-Reservation Trust Land,Cheyenne River,cheyenne-river-reservation-and-off-reservation-trust-land,46,44.99103,-101.21189,,,,,Census cartographic boundary files 2024
+tribal,0855,2500000US0855,Crow Creek Reservation,Crow Creek,crow-creek-reservation,46,44.10594,-99.40357,,,,,Census cartographic boundary files 2024
+tribal,1100,2500000US1100,Flandreau Reservation,Flandreau,flandreau-reservation,46,44.08427,-96.58719,,,,,Census cartographic boundary files 2024
+tribal,1860,2500000US1860,Lake Traverse Reservation and Off-Reservation Trust Land,Lake Traverse,lake-traverse-reservation-and-off-reservation-trust-land,46,45.49273,-97.12914,,,,,Census cartographic boundary files 2024
+tribal,2030,2500000US2030,Lower Brule Reservation and Off-Reservation Trust Land,Lower Brule,lower-brule-reservation-and-off-reservation-trust-land,46,44.09980,-99.85484,,,,,Census cartographic boundary files 2024
+tribal,2490,2500000US2490,Northern Cheyenne Indian Reservation and Off-Reservation Trust Land,Northern Cheyenne,northern-cheyenne-indian-reservation-and-off-reservation-trust-land,46,45.52091,-106.67183,,,,,Census cartographic boundary files 2024
+tribal,2810,2500000US2810,Pine Ridge Reservation,Pine Ridge,pine-ridge-reservation,46,43.41160,-102.11459,,,,,Census cartographic boundary files 2024
+tribal,3235,2500000US3235,Rosebud Indian Reservation and Off-Reservation Trust Land,Rosebud,rosebud-indian-reservation-and-off-reservation-trust-land,46,43.24296,-100.72097,,,,,Census cartographic boundary files 2024
+tribal,3680,2500000US3680,Shakopee Mdewakanton Sioux Community and Off-Reservation Trust Land,Shakopee Mdewakanton Sioux,shakopee-mdewakanton-sioux-community-and-off-reservation-trust-land,46,44.06256,-103.79749,,,,,Census cartographic boundary files 2024
+tribal,3970,2500000US3970,Standing Rock Reservation,Standing Rock,standing-rock-reservation,46,45.95008,-101.25452,,,,,Census cartographic boundary files 2024
+tribal,4345,2500000US4345,Turtle Mountain Reservation and Off-Reservation Trust Land,Turtle Mountain,turtle-mountain-reservation-and-off-reservation-trust-land,46,48.87608,-99.78850,,,,,Census cartographic boundary files 2024
+tribal,4700,2500000US4700,Yankton Reservation,Yankton,yankton-reservation,46,43.10462,-98.39149,,,,,Census cartographic boundary files 2024
