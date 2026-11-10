@@ -4,6 +4,8 @@ from django.contrib.gis.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
+from places.models import Jurisdiction
+
 DEFAULT_CRAWL_SCHEDULE = "0 3 * * 0"  # Sundays, 3 a.m.
 DEFAULT_HARVEST_SCHEDULE = "0 5 * * *"  # daily, 5 a.m.
 
@@ -14,38 +16,6 @@ def name_keys(name: str) -> list[str]:
     words = [w.rstrip("0123456789") for w in re.split(r"[\W_]+", name.lower())]
     words = [w for w in words if w]
     return ["_".join(words[:n]) for n in range(len(words), 0, -1)]
-
-
-class Jurisdiction(models.Model):
-    """A government area, with its Census boundary: the state, counties, places, tribal areas."""
-
-    class Kind(models.TextChoices):
-        STATE = "state"
-        COUNTY = "county"
-        PLACE = "place", "City or town"
-        TRIBAL = "tribal", "Tribal area"
-
-    kind = models.CharField(max_length=20, choices=Kind.choices, db_index=True)
-    geoid = models.CharField(max_length=20, help_text="Census GEOID")
-    name = models.CharField(max_length=255, help_text='Full name, e.g. "Lawrence County"')
-    short_name = models.CharField(max_length=255, help_text='e.g. "Lawrence"')
-    slug = models.SlugField(max_length=255, unique=True)
-    parent = models.ForeignKey(
-        "self", null=True, blank=True, on_delete=models.SET_NULL, related_name="children"
-    )
-    boundary = models.MultiPolygonField(srid=4326, null=True, blank=True)
-
-    class Meta:
-        ordering = ["kind", "name"]
-        constraints = [
-            models.UniqueConstraint(fields=["kind", "geoid"], name="unique_jurisdiction_geoid")
-        ]
-
-    def __str__(self) -> str:
-        return self.name
-
-    def get_absolute_url(self) -> str:
-        return reverse("census:place_detail", args=[self.slug])
 
 
 class Publisher(models.Model):

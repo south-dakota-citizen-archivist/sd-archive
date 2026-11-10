@@ -2,9 +2,10 @@ from django.db.models import Count, Q
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
-from census.models import Crawl, Dataset, Jurisdiction, Source
+from census.models import Crawl, Dataset, Source
 from core.models import Job
 from harvest.models import Feature, Harvest
+from places.models import Jurisdiction
 from search.models import NameEntry
 
 

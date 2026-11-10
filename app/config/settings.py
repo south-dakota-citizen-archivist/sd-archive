@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.gis",
     "django.contrib.postgres",
     "core",
+    "places",
     "census",
     "harvest",
     "search",

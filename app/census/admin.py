@@ -6,7 +6,6 @@ from census.models import (
     Crawl,
     Dataset,
     DatasetTopic,
-    Jurisdiction,
     Publisher,
     Service,
     Source,
@@ -14,15 +13,6 @@ from census.models import (
     Topic,
 )
 from core.tasks import start_crawl, start_harvest
-
-
-@admin.register(Jurisdiction)
-class JurisdictionAdmin(ModelAdmin):
-    list_display = ["name", "kind", "geoid", "parent"]
-    list_filter = ["kind"]
-    search_fields = ["name", "geoid", "slug"]
-    exclude = ["boundary"]
-    readonly_fields = ["kind", "geoid"]
 
 
 @admin.register(Publisher)

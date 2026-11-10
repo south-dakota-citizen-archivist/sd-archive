@@ -8,7 +8,8 @@ from urllib.parse import urlsplit
 from django.db.models import Q
 from django.utils.text import slugify
 
-from census.models import Jurisdiction, Source, name_keys
+from census.models import Source, name_keys
+from places.models import Jurisdiction
 from sdgis.arcgis import client, directory
 
 # Where ArcGIS Server and Enterprise usually put the services directory
@@ -126,7 +127,7 @@ def suggest_places(services: list[dict]) -> dict[str, tuple[Jurisdiction, int]]:
     AURORA_COUNTY_WEB_LAYERS share the key "aurora", while BON_HOMME1_FSA_2021 needs
     "bon_homme". The folder wins over the service name, as it does in a crawl.
     """
-    places = {j.slug: j for j in Jurisdiction.objects.all()}
+    places = {j.slug: j for j in Jurisdiction.objects.current().governments()}
     suggested: dict[str, tuple[Jurisdiction, int]] = {}
     for s in services:
         if s["type"] not in directory.SERVICE_TYPES:

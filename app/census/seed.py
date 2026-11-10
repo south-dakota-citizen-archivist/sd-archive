@@ -14,7 +14,8 @@ from django.conf import settings
 from django.db import connection, transaction
 from django.utils.text import slugify
 
-from census.models import Dataset, Jurisdiction, Publisher, Source
+from census.models import Dataset, Publisher, Source
+from places.models import Jurisdiction
 
 SEED_FILE = Path(settings.BASE_DIR) / "seeds" / "sources.toml"
 

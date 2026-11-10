@@ -6,12 +6,12 @@ from census.models import (
     Crawl,
     Dataset,
     DatasetTopic,
-    Jurisdiction,
     Publisher,
     Service,
     Source,
     Topic,
 )
+from places.models import Jurisdiction
 from sdgis.arcgis import client, directory
 from sdgis.testing import ROOT, ROUTES, FakeDirectory
 
@@ -21,7 +21,12 @@ def directory_source(county, monkeypatch):
     fake = FakeDirectory()
     monkeypatch.setattr(client, "make_session", lambda *a, **kw: fake)
     other = Jurisdiction.objects.create(
-        kind="county", geoid="46998", name="Other County", short_name="Other", slug="other-county"
+        kind="county",
+        geoid="46998",
+        geoidfq="0500000US46998",
+        name="Other County",
+        short_name="Other",
+        slug="other-county",
     )
     source = Source.objects.create(
         name="Example",

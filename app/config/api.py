@@ -1,7 +1,7 @@
 """REST API at /api/v1/ (docs at /api/v1/docs)."""
 
 import json
-from datetime import datetime
+from datetime import date, datetime
 
 from django.contrib.gis.geos import Polygon
 from django.db.models import Q
@@ -9,9 +9,10 @@ from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI, Schema
 from ninja.pagination import LimitOffsetPagination, paginate
 
-from census.models import Dataset, Jurisdiction, Source
+from census.models import Dataset, Source
 from census.views import filtered_datasets
 from harvest.models import Feature
+from places.models import Jurisdiction
 from search import index
 
 api = NinjaAPI(
@@ -25,7 +26,10 @@ class JurisdictionOut(Schema):
     slug: str
     kind: str
     geoid: str
+    geoidfq: str
+    ocd_id: str
     name: str
+    valid_to: date | None
 
 
 class SourceOut(Schema):
@@ -95,8 +99,10 @@ class NameMatch(Schema):
 
 
 @api.get("/jurisdictions", response=list[JurisdictionOut], tags=["census"])
-def list_jurisdictions(request, kind: str | None = None):
+def list_jurisdictions(request, kind: str | None = None, former: bool = False):
+    """Places in force today, or with former=true, former ones too (Shannon County)."""
     qs = Jurisdiction.objects.defer("boundary")
+    qs = qs if former else qs.current()
     return qs.filter(kind=kind) if kind else qs
 
 

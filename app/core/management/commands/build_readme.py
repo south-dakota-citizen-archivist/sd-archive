@@ -12,8 +12,9 @@ END = "<!-- sources-table:end -->"
 
 
 def render() -> str:
-    from census.models import Dataset, Jurisdiction, Source
+    from census.models import Dataset, Source
     from harvest.models import Feature
+    from places.models import Jurisdiction
     from search.models import NameEntry
 
     sources = (

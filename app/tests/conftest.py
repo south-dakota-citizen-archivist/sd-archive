@@ -40,11 +40,12 @@ SQUARE = "MULTIPOLYGON(((-104 44, -103 44, -103 45, -104 45, -104 44)))"
 
 @pytest.fixture
 def state(db):
-    from census.models import Jurisdiction
+    from places.models import Jurisdiction
 
     return Jurisdiction.objects.create(
         kind="state",
         geoid="46",
+        geoidfq="0400000US46",
         name="South Dakota",
         short_name="South Dakota",
         slug="south-dakota",
@@ -55,11 +56,12 @@ def state(db):
 def county(state):
     from django.contrib.gis.geos import GEOSGeometry
 
-    from census.models import Jurisdiction
+    from places.models import Jurisdiction
 
     return Jurisdiction.objects.create(
         kind="county",
         geoid="46999",
+        geoidfq="0500000US46999",
         name="Test County",
         short_name="Test",
         slug="test-county",

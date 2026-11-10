@@ -17,10 +17,11 @@ from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.utils.text import slugify
 
-from census.models import Dataset, Jurisdiction
+from census.models import Dataset
 from harvest import export
 from harvest.labels import Labels
 from harvest.models import Feature, Harvest
+from places.models import Jurisdiction
 from sdgis.arcgis import client
 
 NUMERIC_TYPES = {

@@ -1,7 +1,8 @@
 import pytest
 
 from census import crawl, sources, views
-from census.models import Dataset, Jurisdiction, Publisher, Source, name_keys
+from census.models import Dataset, Publisher, Source, name_keys
+from places.models import Jurisdiction
 from sdgis.arcgis import client as arcgis_client
 from sdgis.testing import ROOT, FakeDirectory
 
@@ -99,7 +100,11 @@ def test_discover_rejects_non_directory(new_server, db):
 
 def test_jurisdiction_for_matches_folders_and_service_names(source, county):
     other = Jurisdiction.objects.create(
-        kind="county", geoid="46998", name="Bon Homme County", slug="bon-homme-county"
+        kind="county",
+        geoid="46998",
+        geoidfq="0500000US46998",
+        name="Bon Homme County",
+        slug="bon-homme-county",
     )
     source.folder_jurisdictions = {"Bon_Homme": other.slug, "test_parcels": "missing"}
     assert source.jurisdiction_for("", "BON_HOMME1_FSA_2021") == other
@@ -110,7 +115,11 @@ def test_jurisdiction_for_matches_folders_and_service_names(source, county):
 def test_crawl_credits_service_name_prefix(county, monkeypatch):
     monkeypatch.setattr(arcgis_client, "make_session", lambda *a, **kw: FakeDirectory())
     other = Jurisdiction.objects.create(
-        kind="county", geoid="46998", name="Other County", slug="other-county"
+        kind="county",
+        geoid="46998",
+        geoidfq="0500000US46998",
+        name="Other County",
+        slug="other-county",
     )
     source = Source.objects.create(
         name="Example",

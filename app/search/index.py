@@ -62,7 +62,7 @@ SELECT
     j.name AS jurisdiction_name, j.slug AS jurisdiction_slug
 FROM search_nameentry n
 JOIN census_dataset d ON d.id = n.dataset_id
-LEFT JOIN census_jurisdiction j ON j.id = d.jurisdiction_id
+LEFT JOIN places_jurisdiction j ON j.id = d.jurisdiction_id
 WHERE n.normalized = ANY(%(names)s)
   AND (%(current_only)s IS FALSE OR n.valid_to IS NULL)
 ORDER BY n.normalized, n.valid_to DESC NULLS FIRST, d.name, n.feature_key

@@ -45,6 +45,8 @@ class Migration(migrations.Migration):
         ("search", "0001_initial"),
         ("census", "0001_initial"),
     ]
+    # The view's SQL names census_jurisdiction, which places 0002 renames (the view follows)
+    run_before = [("places", "0002_more_kinds_ids_and_dates")]
 
     operations = [
         migrations.RunSQL(

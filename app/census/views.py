@@ -15,12 +15,12 @@ from census.models import (
     Crawl,
     Dataset,
     DatasetObservation,
-    Jurisdiction,
     Publisher,
     Source,
     Topic,
 )
 from core.tasks import start_crawl, start_harvest
+from places.models import Jurisdiction
 from sdgis.arcgis import client
 
 PAGE_SIZE = 50
@@ -154,13 +154,16 @@ def dataset_harvest(request: HttpRequest, pk: int) -> HttpResponse:
 
 def place_list(request: HttpRequest) -> HttpResponse:
     places = (
-        Jurisdiction.objects.annotate(
+        Jurisdiction.objects.current()
+        .annotate(
             n_datasets=Count(
                 "datasets",
                 filter=Q(datasets__removed_at=None),
                 distinct=True,
             )
         )
+        # governments, plus any other place (a school district, a community) with datasets
+        .filter(Q(kind__in=["state", "county", "place", "tribal"]) | Q(n_datasets__gt=0))
         .order_by("kind", "name")
         .defer("boundary")
     )
@@ -205,7 +208,9 @@ def place_detail(request: HttpRequest, slug: str) -> HttpResponse:
 def coverage(request: HttpRequest) -> HttpResponse:
     """Counties x topics: how many datasets each county publishes on each subject."""
     topics = list(Topic.objects.all())
-    counties = list(Jurisdiction.objects.filter(kind="county").order_by("name").defer("boundary"))
+    counties = list(
+        Jurisdiction.objects.current().filter(kind="county").order_by("name").defer("boundary")
+    )
     counts = {
         (row["jurisdiction_id"], row["topics__id"]): row["n"]
         for row in Dataset.objects.filter(removed_at=None, jurisdiction__kind="county")
@@ -242,7 +247,8 @@ def counties_geojson(request: HttpRequest) -> JsonResponse:
     if topic:
         count_filter &= Q(datasets__topics__slug=topic)
     counties = (
-        Jurisdiction.objects.filter(kind="county")
+        Jurisdiction.objects.current()
+        .filter(kind="county")
         .annotate(
             n=Count("datasets", filter=count_filter, distinct=True),
             geom=AsGeoJSON("boundary", precision=4),
@@ -322,7 +328,10 @@ def source_add(request: HttpRequest) -> HttpResponse:
             "form": form,
             "rows": [(key, slug, counts.get(key)) for key, slug in rows if key or slug],
             "errors": errors,
-            "jurisdictions": Jurisdiction.objects.order_by("name").only("slug", "name"),
+            "jurisdictions": Jurisdiction.objects.current()
+            .governments()
+            .order_by("name")
+            .only("slug", "name"),
             "publishers": Publisher.objects.values_list("name", flat=True),
         },
     )

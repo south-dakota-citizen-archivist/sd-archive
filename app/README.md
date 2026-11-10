@@ -40,7 +40,7 @@ Requirements:
 just setup                            # uv sync, npm ci + Tailwind build, pre-commit hooks
 createdb sd_gis_hub
 just manage migrate
-just manage load_jurisdictions        # state, 66 counties, 310 cities and towns, 12 tribal areas
+just manage load_jurisdictions        # 789 places with boundaries, from sdplaces (see Layout)
 just manage seed                      # publishers, sources and watched datasets from seeds/sources.toml
 just manage import_beacon_clients     # South Dakota's Beacon apps, from seeds/beacon-clients.html
 just manage createsuperuser           # for /admin/
@@ -144,7 +144,8 @@ just check                       # every pre-commit hook
 
 Layout:
 - `../packages/sdgis/`: plain-Python ArcGIS and Beacon clients, with no Django imports
-- `census/`: places, sources, datasets, crawls, topics
+- `places/`: `Jurisdiction`, every place records are about, loaded from sdplaces with Census boundaries: the state, counties, cities and towns, census designated places, tribal areas, school districts and legislative districts. Former places stay, with the date they ended and what they became (Shannon County → Oglala Lakota County). Each has its GEOID, fully qualified GEOID (unique across kinds) and Open Civic Data ID.
+- `census/`: sources, datasets, crawls, topics
 - `harvest/`: harvests, records with history, tiles, exports
 - `search/`: the name index
 - `core/`: jobs and scheduling
