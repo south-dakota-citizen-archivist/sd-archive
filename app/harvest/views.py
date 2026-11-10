@@ -20,8 +20,8 @@ from django.utils.text import slugify
 from census.models import Dataset
 from harvest import export
 from harvest.labels import Labels
-from harvest.models import Feature, Harvest
 from places.models import Jurisdiction
+from records.models import Record, Run
 from sdgis.arcgis import client
 
 NUMERIC_TYPES = {
@@ -63,14 +63,14 @@ def dataset_table(request: HttpRequest, pk: int) -> HttpResponse:
     q = request.GET.get("q", "").strip()
     sort = request.GET.get("sort", "")
     desc = request.GET.get("dir") == "desc"
-    features = Feature.objects.filter(dataset=dataset).only("key", "properties")
+    features = dataset.features.only("key", "data")
     if q:
-        features = features.annotate(props_text=Cast("properties", TextField())).filter(
+        features = features.annotate(props_text=Cast("data", TextField())).filter(
             props_text__icontains=q
         )
     field_types = {f["name"]: f.get("type") for f in dataset.fields}
     if sort in field_types:
-        value = KeyTextTransform(sort, "properties")
+        value = KeyTextTransform(sort, "data")
         if field_types[sort] in NUMERIC_TYPES:
             value = Cast(value, FloatField())
         features = features.annotate(sort_value=value).order_by(
@@ -85,7 +85,7 @@ def dataset_table(request: HttpRequest, pk: int) -> HttpResponse:
     labels = Labels(dataset.fields)
     context |= {
         "page": page,
-        "rows": [(f.key, [labels.cell(n, f.properties) for n in names]) for f in page],
+        "rows": [(f.key, [labels.cell(n, f.data) for n in names]) for f in page],
         "q": q,
         "sort": sort,
         "dir": "desc" if desc else "asc",
@@ -133,8 +133,10 @@ def dataset_map(request: HttpRequest, pk: int) -> HttpResponse:
                 """
                 SELECT ST_XMin(e), ST_YMin(e), ST_XMax(e), ST_YMax(e)
                 FROM (
-                    SELECT ST_Extent(geometry) AS e FROM harvest_feature
-                    WHERE dataset_id = %s
+                    SELECT ST_Extent(f.geometry) AS e
+                    FROM records_record f
+                    JOIN records_recordset rs ON rs.id = f.recordset_id
+                    WHERE rs.gis_dataset_id = %s
                 ) x
                 """,
                 [dataset.pk],
@@ -211,11 +213,11 @@ def download(request: HttpRequest, pk: int, fmt: str) -> HttpResponse:
 
 def feature_detail(request: HttpRequest, pk: int, key: str) -> HttpResponse:
     dataset = get_dataset(pk)
-    feature = Feature.objects.filter(dataset=dataset, key=key).select_related("harvest").first()
+    feature = dataset.features.filter(key=key).select_related("run").first()
     if feature is None:
         raise Http404("no such feature (it may have left the source)")
     labels = Labels(dataset.fields)
-    names = [c["name"] for c in columns(dataset)] or list(feature.properties)
+    names = [c["name"] for c in columns(dataset)] or list(feature.data)
     return render(
         request,
         "harvest/feature_detail.html",
@@ -223,30 +225,36 @@ def feature_detail(request: HttpRequest, pk: int, key: str) -> HttpResponse:
             "dataset": dataset,
             "key": key,
             "feature": feature,
-            "attributes": [(n, *labels.cell(n, feature.properties)) for n in names],
+            "attributes": [(n, *labels.cell(n, feature.data)) for n in names],
             "geometry": feature.geometry.geojson if feature.geometry else "null",
         },
     )
 
 
 def feature_json(request: HttpRequest, pk: int, key: str) -> JsonResponse:
-    feature = Feature.objects.filter(dataset_id=pk, key=key).only("key", "properties").first()
+    feature = (
+        Record.objects.filter(recordset__gis_dataset_id=pk, key=key).only("key", "data").first()
+    )
     if not feature:
         raise Http404
-    return JsonResponse({"key": feature.key, "properties": feature.properties})
+    return JsonResponse({"key": feature.key, "properties": feature.data})
 
 
 def harvest_detail(request: HttpRequest, pk: int) -> HttpResponse:
-    harvest = get_object_or_404(Harvest.objects.select_related("dataset__jurisdiction"), pk=pk)
+    harvest = get_object_or_404(
+        Run.objects.select_related("recordset__gis_dataset__jurisdiction"),
+        pk=pk,
+        recordset__gis_dataset__isnull=False,
+    )
     first_harvest = not harvest.dataset.harvests.filter(
-        status=Harvest.Status.SUCCEEDED, started_at__lt=harvest.started_at
+        status=Run.Status.SUCCEEDED, started_at__lt=harvest.started_at
     ).exists()
     # Records this harvest last wrote, as they are now (a later harvest may have rewritten
     # some). A first harvest adds everything; no need to list every record to say so.
     written = (
         []
         if first_harvest
-        else list(harvest.features.order_by("key").only("key", "properties", "first_seen"))
+        else list(harvest.records.order_by("key").only("key", "data", "first_seen"))
     )
     added = [f for f in written if f.first_seen == harvest.started_at]
     changed = [f for f in written if f.first_seen != harvest.started_at]
@@ -258,9 +266,7 @@ def harvest_detail(request: HttpRequest, pk: int) -> HttpResponse:
         return [
             (
                 f.key,
-                " · ".join(
-                    str(labels.cell(n, f.properties)[0]) for n in fields if f.properties.get(n)
-                ),
+                " · ".join(str(labels.cell(n, f.data)[0]) for n in fields if f.data.get(n)),
             )
             for f in features[:limit]
         ]
@@ -300,8 +306,8 @@ WITH bounds AS (SELECT ST_TileEnvelope(%(z)s, %(x)s, %(y)s) AS geom),
 mvtgeom AS (
     SELECT ST_AsMVTGeom(ST_Transform(f.geometry, 3857), bounds.geom, 4096, 64, true) AS geom,
            f.key
-    FROM harvest_feature f, bounds
-    WHERE f.dataset_id = %(dataset_id)s
+    FROM records_record f JOIN records_recordset rs ON rs.id = f.recordset_id, bounds
+    WHERE rs.gis_dataset_id = %(dataset_id)s
       AND f.geometry && ST_Transform(bounds.geom, 4326)
 )
 SELECT ST_AsMVT(mvtgeom.*, 'features') FROM mvtgeom

@@ -5,7 +5,7 @@
 <p class="text-sm text-gray-500"><a class="link" href="{{ dataset.get_absolute_url }}">{{ dataset.name }}</a>{% if dataset.jurisdiction %} · {{ dataset.jurisdiction }}{% endif %}</p>
 <h1 class="text-xl font-semibold mt-1">Record {{ key }}</h1>
 <p class="text-sm text-gray-600">
-  First seen {{ feature.first_seen|date }}{% if feature.harvest_id %} · last written by <a class="link" href="{% url 'harvest:harvest_detail' feature.harvest_id %}">harvest #{{ feature.harvest_id }}</a>{% endif %}
+  First seen {{ feature.first_seen|date }}{% if feature.run_id %} · last written by <a class="link" href="{% url 'harvest:harvest_detail' feature.run_id %}">harvest #{{ feature.run_id }}</a>{% endif %}
 </p>
 
 <div class="grid gap-6 lg:grid-cols-3 mt-4">

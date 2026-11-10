@@ -13,8 +13,8 @@ END = "<!-- sources-table:end -->"
 
 def render() -> str:
     from census.models import Dataset, Source
-    from harvest.models import Feature
     from places.models import Jurisdiction
+    from records.models import Record
     from search.models import NameEntry
 
     sources = (
@@ -39,6 +39,7 @@ def render() -> str:
             f"| {s.n:,} | {s.watched or ''} | {crawled} |"
         )
     live = Dataset.objects.filter(removed_at=None)
+    features = Record.objects.filter(recordset__gis_dataset__isnull=False).count()
     counties = (
         Jurisdiction.objects.filter(
             kind="county", datasets__isnull=False, datasets__removed_at=None
@@ -50,7 +51,7 @@ def render() -> str:
         "",
         f"{live.count():,} datasets from {len(sources)} sources, "
         f"covering {counties} of 66 counties. "
-        f"{Feature.objects.count():,} features archived; "
+        f"{features:,} features archived; "
         f"{NameEntry.objects.count():,} names indexed.",
     ]
     beacon = Source.objects.filter(platform=Source.Platform.BEACON).order_by("name")

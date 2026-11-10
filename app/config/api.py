@@ -10,7 +10,6 @@ from ninja.pagination import LimitOffsetPagination, paginate
 
 from census.models import Dataset, Source
 from census.views import filtered_datasets
-from harvest.models import Feature
 from places.models import Jurisdiction
 from search import index
 
@@ -142,7 +141,7 @@ def dataset_features(
     """Harvested features (as of the latest harvest) as GeoJSON. bbox is "minx,miny,maxx,maxy"
     (WGS84)."""
     dataset = get_object_or_404(Dataset, pk=dataset_id)
-    qs = Feature.objects.filter(dataset=dataset)
+    qs = dataset.features
     if bbox:
         minx, miny, maxx, maxy = (float(v) for v in bbox.split(","))
         qs = qs.filter(geometry__bboverlaps=Polygon.from_bbox((minx, miny, maxx, maxy)))
@@ -154,7 +153,7 @@ def dataset_features(
             {
                 "type": "Feature",
                 "id": f.key,
-                "properties": f.properties,
+                "properties": f.data,
                 "geometry": json.loads(f.geometry.geojson) if f.geometry else None,
             }
             for f in features

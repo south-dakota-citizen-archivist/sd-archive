@@ -4,26 +4,26 @@ import geopandas as gpd
 import pytest
 
 from harvest import service, validate
-from harvest.models import Feature, Harvest
+from records.models import Record, Run
 from search.models import NameEntry
 from tests.conftest import IDS
 
 
-def current(dataset) -> dict[str, Feature]:
-    return {f.key: f for f in Feature.objects.filter(dataset=dataset)}
+def current(dataset) -> dict[str, Record]:
+    return {f.key: f for f in dataset.features}
 
 
 def test_first_harvest(dataset, media_root):
     harvest = service.harvest_dataset(dataset)
 
-    assert harvest.status == Harvest.Status.SUCCEEDED
+    assert harvest.status == Run.Status.SUCCEEDED
     assert (harvest.expected_count, harvest.fetched_count, harvest.added) == (10, 10, 10)
     assert harvest.checks["count_matches_server"] is True
 
     features = current(dataset)
     assert sorted(int(k) for k in features) == IDS
     first = features["1"]
-    assert first.properties == {"OBJECTID": 1, "NAME": "Town 1", "OWNER_NAM": "SMITH, JOHN 1"}
+    assert first.data == {"OBJECTID": 1, "NAME": "Town 1", "OWNER_NAM": "SMITH, JOHN 1"}
     assert first.geometry.geom_type == "Point"
     assert first.geometry.srid == 4326
 
@@ -41,7 +41,7 @@ def test_unchanged_harvest_writes_nothing(dataset):
 
     assert (second.added, second.changed, second.removed, second.unchanged) == (0, 0, 0, 10)
     assert not second.export, "no new snapshot when nothing changed"
-    assert Feature.objects.filter(dataset=dataset).count() == 10
+    assert dataset.features.count() == 10
 
 
 def test_changes_overwrite_and_removals_delete(dataset, server, media_root):
@@ -54,9 +54,9 @@ def test_changes_overwrite_and_removals_delete(dataset, server, media_root):
 
     assert (second.added, second.changed, second.removed, second.unchanged) == (1, 2, 1, 7)
     features = current(dataset)
-    assert Feature.objects.filter(dataset=dataset).count() == len(features) == 10
-    assert features["2"].properties["OWNER_NAM"] == "DOE, JANE", "overwritten in place"
-    assert features["2"].harvest == second and features["2"].first_seen == first.started_at
+    assert dataset.features.count() == len(features) == 10
+    assert features["2"].data["OWNER_NAM"] == "DOE, JANE", "overwritten in place"
+    assert features["2"].run == second and features["2"].first_seen == first.started_at
     assert "5" not in features, "gone from the source, gone from the archive"
     assert features["144"].first_seen == second.started_at
 
@@ -74,9 +74,9 @@ def test_count_mismatch_fails_and_rolls_back(dataset, server, media_root):
     with pytest.raises(validate.ValidationError, match="server reported 5000"):
         service.harvest_dataset(dataset)
 
-    harvest = Harvest.objects.get(dataset=dataset)
-    assert harvest.status == Harvest.Status.FAILED
-    assert Feature.objects.filter(dataset=dataset).count() == 0
+    harvest = dataset.harvests.get()
+    assert harvest.status == Run.Status.FAILED
+    assert dataset.features.count() == 0
     assert not list(Path(media_root).rglob("*.parquet"))
     dataset.refresh_from_db()
     assert "server reported 5000" in dataset.last_error
@@ -89,7 +89,7 @@ def test_failure_after_store_rolls_back_features(dataset, monkeypatch):
     monkeypatch.setattr(service.export, "write_parquet", broken_export)
     with pytest.raises(OSError):
         service.harvest_dataset(dataset)
-    assert Feature.objects.filter(dataset=dataset).count() == 0, "all or nothing"
+    assert dataset.features.count() == 0, "all or nothing"
 
 
 def test_drop_guard(dataset, server):
@@ -161,6 +161,6 @@ def test_a_failed_harvest_keeps_its_batches_and_the_next_reuses_them(dataset, se
     monkeypatch.setattr(service.export, "write_parquet", write_parquet)
     server.calls.clear()
     harvest = service.harvest_dataset(dataset)
-    assert harvest.status == Harvest.Status.SUCCEEDED and harvest.added == 10
+    assert harvest.status == Run.Status.SUCCEEDED and harvest.added == 10
     assert server.query_calls() == [], "every batch came from staging"
     assert not staged.exists(), "removed once the harvest is stored"

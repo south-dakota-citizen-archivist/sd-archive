@@ -61,17 +61,18 @@ def test_report_links(county, picker, dataset, capsys, monkeypatch):
     from django.core.management import call_command
 
     from census.management.commands import beacon_report_links as cmd
-    from harvest.models import Feature, Harvest
+    from records.gis import recordset_for
+    from records.models import Record, Run
 
     beacon.load(picker)
-    harvest = Harvest.objects.create(dataset=dataset)
+    harvest = Run.objects.create(recordset=recordset_for(dataset))
     for key, pin in [("1", " 12.34 "), ("2", "ROAD")]:
-        Feature.objects.create(
-            dataset=dataset,
+        Record.objects.create(
+            recordset=harvest.recordset,
             key=key,
-            properties={"PIN": pin},
+            data={"PIN": pin},
             content_hash=key,
-            harvest=harvest,
+            run=harvest,
             first_seen=harvest.started_at,
         )
     monkeypatch.setattr(

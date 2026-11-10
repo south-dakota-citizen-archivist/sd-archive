@@ -4,7 +4,6 @@ import pytest
 from django.utils import timezone
 
 from harvest import service, views
-from harvest.models import Harvest
 
 
 @pytest.fixture
@@ -29,7 +28,7 @@ def no_celery(monkeypatch):
 
 def test_pages_render(client, harvested):
     pk = harvested.pk
-    second = Harvest.objects.filter(dataset=harvested).first()
+    second = harvested.harvests.first()
     pages = [
         "/",
         "/datasets/",
@@ -66,7 +65,7 @@ def test_feature_page_shows_the_latest_record(client, harvested):
 
 
 def test_harvest_page_lists_changed_records(client, harvested):
-    latest = Harvest.objects.filter(dataset=harvested).first()
+    latest = harvested.harvests.first()
     body = client.get(f"/harvests/{latest.pk}/").content.decode()
     assert "Changed records (1)" in body and "DOE, JANE" in body
 
@@ -187,9 +186,8 @@ def test_catalog_ranks_name_matches_first(client, dataset):
 
 
 def test_admin_pages(admin_client, harvested):
-    from harvest.models import Feature
 
-    feature = Feature.objects.filter(dataset=harvested).first()
+    feature = harvested.features.first()
     urls = [
         "/admin/",
         "/admin/census/dataset/",
@@ -203,9 +201,12 @@ def test_admin_pages(admin_client, harvested):
         "/admin/census/service/",
         "/admin/census/publisher/",
         "/admin/census/sourcecandidate/",
-        "/admin/harvest/harvest/",
-        "/admin/harvest/feature/",
-        f"/admin/harvest/feature/{feature.pk}/change/",
+        "/admin/records/run/",
+        "/admin/records/record/",
+        f"/admin/records/record/{feature.pk}/change/",
+        "/admin/records/recordset/",
+        "/admin/records/document/",
+        "/admin/records/extraction/",
         "/admin/search/nameentry/",
         "/admin/core/job/",
     ]

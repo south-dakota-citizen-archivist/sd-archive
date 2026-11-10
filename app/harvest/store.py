@@ -1,4 +1,4 @@
-"""Write a download into harvest.Feature: the latest version of each record only.
+"""Write a download into the layer's records (records.Record): the latest version of each only.
 
 Each record is keyed by its object ID (or, without one, by its content hash). For each key,
 an unchanged record is left alone, a changed one is overwritten, a new one is inserted, and
@@ -14,7 +14,8 @@ import geopandas as gpd
 from django.contrib.gis.geos import GEOSGeometry
 from django.db import transaction
 
-from harvest.models import Feature, Harvest
+from records.gis import recordset_for
+from records.models import Record, Run
 
 BATCH = 2000
 
@@ -56,16 +57,18 @@ def dataset_hash(rows: list[Row]) -> str:
 
 
 def current_count(dataset) -> int:
-    return Feature.objects.filter(dataset=dataset).count()
+    return dataset.features.count()
 
 
 @transaction.atomic
-def apply(dataset, harvest: Harvest, rows: list[Row]) -> dict[str, int]:
+def apply(dataset, harvest: Run, rows: list[Row]) -> dict[str, int]:
+    """Store a download as the layer's records; harvest is the run doing it."""
+    recordset = recordset_for(dataset)
     now = harvest.started_at
     incoming = {r.key: r for r in rows}  # identical rows without IDs collapse to one
     current = {
         key: (pk, content_hash)
-        for pk, key, content_hash in Feature.objects.filter(dataset=dataset).values_list(
+        for pk, key, content_hash in Record.objects.filter(recordset=recordset).values_list(
             "pk", "key", "content_hash"
         )
     }
@@ -75,7 +78,7 @@ def apply(dataset, harvest: Harvest, rows: list[Row]) -> dict[str, int]:
     removed = [k for k in current if k not in incoming]
 
     for chunk in batched([current[k][0] for k in removed], BATCH):
-        Feature.objects.filter(pk__in=chunk).delete()
+        Record.objects.filter(pk__in=chunk).delete()
 
     def geometry(r: Row):
         return GEOSGeometry(memoryview(r.wkb), srid=4326) if r.wkb else None
@@ -83,21 +86,21 @@ def apply(dataset, harvest: Harvest, rows: list[Row]) -> dict[str, int]:
     updates = []
     for key in changed:
         r = incoming[key]
-        updates.append(Feature(pk=current[key][0], properties=r.properties, geometry=geometry(r),
-                               content_hash=r.content_hash, harvest=harvest))  # fmt: skip
-    Feature.objects.bulk_update(
-        updates, ["properties", "geometry", "content_hash", "harvest"], batch_size=BATCH
+        updates.append(Record(pk=current[key][0], data=r.properties, geometry=geometry(r),
+                              content_hash=r.content_hash, run=harvest))  # fmt: skip
+    Record.objects.bulk_update(
+        updates, ["data", "geometry", "content_hash", "run"], batch_size=BATCH
     )
-    Feature.objects.bulk_create(
+    Record.objects.bulk_create(
         [
-            Feature(
-                dataset=dataset,
+            Record(
+                recordset=recordset,
                 key=key,
-                properties=incoming[key].properties,
+                data=incoming[key].properties,
                 geometry=geometry(incoming[key]),
                 content_hash=incoming[key].content_hash,
                 first_seen=now,
-                harvest=harvest,
+                run=harvest,
             )  # fmt: skip
             for key in added
         ],

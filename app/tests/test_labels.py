@@ -4,7 +4,7 @@ import pytest
 
 from harvest import service
 from harvest.labels import Labels, format_date
-from harvest.models import Harvest
+from records.models import Run
 from sdgis.arcgis import client
 
 STATUS = {
@@ -108,27 +108,27 @@ def test_harvest_refreshes_labels_and_csv_has_them(client, dataset, server):
 def test_harvest_skips_when_unchanged_at_source(dataset, server):
     server.extra_metadata["editingInfo"] = {"lastEditDate": 1735689600000}
     first = service.harvest_dataset(dataset)
-    assert first.status == Harvest.Status.SUCCEEDED
+    assert first.status == Run.Status.SUCCEEDED
     assert first.source_edited_at == datetime(2025, 1, 1, tzinfo=UTC)
 
     calls = len(server.query_calls())
     second = service.harvest_dataset(dataset)
-    assert second.status == Harvest.Status.SKIPPED
+    assert second.status == Run.Status.SKIPPED
     assert second.unchanged == 10 and not second.has_changes
     assert len(server.query_calls()) == calls, "no features downloaded"
 
-    assert service.harvest_dataset(dataset, force=True).status == Harvest.Status.SUCCEEDED
+    assert service.harvest_dataset(dataset, force=True).status == Run.Status.SUCCEEDED
 
     server.extra_metadata["editingInfo"] = {"lastEditDate": 1735776000000}
-    assert service.harvest_dataset(dataset).status == Harvest.Status.SUCCEEDED, "new edit date"
+    assert service.harvest_dataset(dataset).status == Run.Status.SUCCEEDED, "new edit date"
 
     server.ids = server.ids[:-1]
-    assert service.harvest_dataset(dataset).status == Harvest.Status.SUCCEEDED, "count changed"
+    assert service.harvest_dataset(dataset).status == Run.Status.SUCCEEDED, "count changed"
 
-    Harvest.objects.update(started_at=datetime.now(UTC) - timedelta(days=8))
-    assert service.harvest_dataset(dataset).status == Harvest.Status.SUCCEEDED, "a week old"
+    Run.objects.update(started_at=datetime.now(UTC) - timedelta(days=8))
+    assert service.harvest_dataset(dataset).status == Run.Status.SUCCEEDED, "a week old"
 
 
 def test_harvest_without_edit_date_always_downloads(dataset, server):
     service.harvest_dataset(dataset)
-    assert service.harvest_dataset(dataset).status == Harvest.Status.SUCCEEDED
+    assert service.harvest_dataset(dataset).status == Run.Status.SUCCEEDED

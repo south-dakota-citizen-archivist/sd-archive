@@ -408,7 +408,7 @@ def source_crawl(request: HttpRequest, slug: str) -> HttpResponse:
 
 def changes(request: HttpRequest) -> HttpResponse:
     """What's new: datasets added or removed by crawls, and harvests that found changes."""
-    from harvest.models import Harvest
+    from records.models import Run
 
     new = Dataset.objects.select_related("source", "jurisdiction").order_by("-first_seen")[:50]
     removed = (
@@ -417,9 +417,9 @@ def changes(request: HttpRequest) -> HttpResponse:
         .order_by("-removed_at")[:50]
     )
     harvests = (
-        Harvest.objects.filter(status="succeeded")
+        Run.objects.filter(status="succeeded", recordset__gis_dataset__isnull=False)
         .filter(Q(added__gt=0) | Q(changed__gt=0) | Q(removed__gt=0))
-        .select_related("dataset__jurisdiction")
+        .select_related("recordset__gis_dataset__jurisdiction")
         .order_by("-started_at")[:50]
     )
     crawls = Crawl.objects.select_related("source")[:30]

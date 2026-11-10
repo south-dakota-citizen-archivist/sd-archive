@@ -262,6 +262,20 @@ class Dataset(models.Model):
         ordering = ["source__name", "name"]
         indexes = [models.Index(fields=["source", "removed_at"])]
 
+    @property
+    def harvests(self):
+        """This layer's harvests (its record set's runs), newest first."""
+        from records.models import Run
+
+        return Run.objects.filter(recordset__gis_dataset=self)
+
+    @property
+    def features(self):
+        """This layer's harvested features (its record set's records)."""
+        from records.models import Record
+
+        return Record.objects.filter(recordset__gis_dataset=self)
+
     def __str__(self) -> str:
         return self.name
 

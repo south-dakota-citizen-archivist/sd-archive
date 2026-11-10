@@ -12,10 +12,10 @@ import shapely
 from django.db import connection
 
 SQL = """
-SELECT key, properties, ST_AsBinary(geometry) AS wkb
-FROM harvest_feature
-WHERE dataset_id = %(dataset_id)s
-ORDER BY length(key), key
+SELECT f.key, f.data, ST_AsBinary(f.geometry) AS wkb
+FROM records_record f JOIN records_recordset rs ON rs.id = f.recordset_id
+WHERE rs.gis_dataset_id = %(dataset_id)s
+ORDER BY length(f.key), f.key
 """
 
 

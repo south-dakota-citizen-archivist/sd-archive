@@ -1,11 +1,15 @@
 """Public records: a record set's items, their files, and what's read from the files.
 
 RecordSet → Record (one item at the source, as of the latest run) → Document (a file of a record)
-→ Extraction (fields read from a document, with the quote for each, and review).
-Direct-ingest rows are a Record's `data`; an Extraction is only what's read from a file.
+→ Extraction (fields read from a document, with the quote for each, and review). Each Run of a
+record set's source is logged with its counts and checks.
+
+A watched GIS layer is a record set too: its features are Records with a geometry, and each
+harvest is a Run. Direct-ingest rows are a Record's `data`; an Extraction is only what's read
+from a file.
 """
 
-from django.db import models
+from django.contrib.gis.db import models
 
 
 class RecordSet(models.Model):
@@ -15,6 +19,7 @@ class RecordSet(models.Model):
     class Ingest(models.TextChoices):
         ROWS = "rows", "Rows (the source lists the fields)"
         DOCUMENTS = "documents", "Documents (fields are read from files)"
+        GIS = "gis", "A GIS layer (features with geometry)"
 
     slug = models.SlugField(max_length=100, unique=True)
     name = models.CharField(max_length=255)
@@ -26,6 +31,10 @@ class RecordSet(models.Model):
     )  # fmt: skip
     base_url = models.URLField(max_length=1000, blank=True)
     ingest = models.CharField(max_length=20, choices=Ingest.choices, default=Ingest.ROWS)
+    gis_dataset = models.OneToOneField(
+        "census.Dataset", null=True, blank=True, on_delete=models.CASCADE,
+        related_name="recordset", help_text="For a GIS layer: the census's entry for it",
+    )  # fmt: skip
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -36,12 +45,62 @@ class RecordSet(models.Model):
         return self.name
 
 
+class Run(models.Model):
+    """One run of a record set's source: a GIS harvest, a scrape. Logs what it found and what
+    it changed."""
+
+    class Status(models.TextChoices):
+        RUNNING = "running"
+        SUCCEEDED = "succeeded"
+        SKIPPED = "skipped", "Skipped (unchanged at source)"
+        FAILED = "failed"
+
+    recordset = models.ForeignKey(RecordSet, on_delete=models.CASCADE, related_name="runs")
+    job = models.ForeignKey("core.Job", null=True, blank=True, on_delete=models.SET_NULL)
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.RUNNING)
+    started_at = models.DateTimeField(auto_now_add=True)
+    finished_at = models.DateTimeField(null=True, blank=True)
+    forced = models.BooleanField(default=False, help_text="Drop guard was bypassed")
+    expected_count = models.PositiveIntegerField(null=True, blank=True)
+    source_edited_at = models.DateTimeField(
+        null=True, blank=True, help_text="The source's last edit date, as it reported it"
+    )
+    fetched_count = models.PositiveIntegerField(null=True, blank=True)
+    added = models.PositiveIntegerField(default=0)
+    changed = models.PositiveIntegerField(default=0)
+    removed = models.PositiveIntegerField(default=0)
+    unchanged = models.PositiveIntegerField(default=0)
+    content_hash = models.CharField(max_length=64, blank=True)
+    export = models.FileField(
+        upload_to="exports/", blank=True, help_text="Set on the run that wrote the latest file"
+    )
+    checks = models.JSONField(default=dict, blank=True, help_text="Validation results")
+    error = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["-started_at"]
+
+    def __str__(self) -> str:
+        return f"Run of {self.recordset} at {self.started_at:%Y-%m-%d %H:%M}"
+
+    @property
+    def dataset(self):
+        """For a GIS layer: the census's Dataset."""
+        return self.recordset.gis_dataset
+
+    @property
+    def has_changes(self) -> bool:
+        return bool(self.added or self.changed or self.removed)
+
+
 class Record(models.Model):
-    """One item at the source, as of the latest run (no history: a change overwrites it)."""
+    """One item at the source, as of the latest run (no history: a change overwrites it, and
+    an item gone from the source is deleted). A GIS feature is a record with a geometry."""
 
     recordset = models.ForeignKey(RecordSet, on_delete=models.CASCADE, related_name="records")
     key = models.CharField(max_length=500, help_text="The source's own key for the item")
     data = models.JSONField(default=dict, blank=True, help_text="The fields, per the schema")
+    geometry = models.GeometryField(srid=4326, null=True, blank=True)
     content_hash = models.CharField(max_length=64)
     source_url = models.URLField(max_length=2000, blank=True)
     jurisdiction = models.ForeignKey(
@@ -50,9 +109,10 @@ class Record(models.Model):
     )  # fmt: skip
     first_seen = models.DateTimeField(help_text="When a run first found it")
     updated_at = models.DateTimeField(auto_now=True)
-    job = models.ForeignKey(
-        "core.Job", null=True, blank=True, on_delete=models.SET_NULL, related_name="records"
-    )
+    run = models.ForeignKey(
+        Run, null=True, blank=True, on_delete=models.SET_NULL, related_name="records",
+        help_text="The run that last wrote it",
+    )  # fmt: skip
     legacy = models.JSONField(default=dict, blank=True, help_text="IDs in the system it came from")
 
     class Meta:

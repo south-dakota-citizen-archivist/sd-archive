@@ -5,14 +5,13 @@ from census.models import Crawl
 from core.models import Job
 from harvest import service
 from harvest.frames import load_dataset
-from harvest.models import Harvest
 from sdgis.arcgis import client
 from sdgis.testing import ROOT, FakeDirectory
 
 
 def test_harvest_command(dataset):
     call_command("harvest", str(dataset.pk))
-    assert Harvest.objects.get(dataset=dataset).added == 10
+    assert dataset.harvests.get().added == 10
     assert Job.objects.get(kind="harvest").status == Job.Status.SUCCEEDED
 
 

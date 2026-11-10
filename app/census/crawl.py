@@ -87,7 +87,9 @@ def record_scan(source: Source, crawl: Crawl, scan: directory.DirectoryScan) -> 
 
     places = {layer.url: place_for(layer) for layer in scan.layers}
     harvested = set(
-        Dataset.objects.filter(source=source, harvests__isnull=False).values_list("url", flat=True)
+        Dataset.objects.filter(source=source, recordset__runs__isnull=False).values_list(
+            "url", flat=True
+        )
     )
     copies = duplicates.find_copies(
         scan.layers,

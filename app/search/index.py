@@ -7,16 +7,16 @@ from census.models import Dataset
 # One row per (dataset, feature, field, normalized name), as of the latest harvest
 REBUILD_SQL = """
 INSERT INTO search_nameentry (dataset_id, feature_key, field, name, normalized)
-SELECT DISTINCT ON (f.key, fld, gis_hub_normalize_name(f.properties ->> fld))
-    f.dataset_id,
+SELECT DISTINCT ON (f.key, fld, gis_hub_normalize_name(f.data ->> fld))
+    rs.gis_dataset_id,
     f.key,
     fld,
-    btrim(f.properties ->> fld),
-    gis_hub_normalize_name(f.properties ->> fld)
-FROM harvest_feature f
+    btrim(f.data ->> fld),
+    gis_hub_normalize_name(f.data ->> fld)
+FROM records_record f JOIN records_recordset rs ON rs.id = f.recordset_id
 CROSS JOIN unnest(%(fields)s::text[]) AS fld
-WHERE f.dataset_id = %(dataset_id)s
-  AND gis_hub_normalize_name(f.properties ->> fld) NOT IN ('', '0', 'NONE', 'NULL')
+WHERE rs.gis_dataset_id = %(dataset_id)s
+  AND gis_hub_normalize_name(f.data ->> fld) NOT IN ('', '0', 'NONE', 'NULL')
 """
 
 # Two steps, so one owner with hundreds of parcels can't crowd every other name out:

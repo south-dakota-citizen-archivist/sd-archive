@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404, render
 
 from census.models import Crawl, Dataset, Source
 from core.models import Job
-from harvest.models import Feature, Harvest
 from places.models import Jurisdiction
+from records.models import Record, Run
 from search.models import NameEntry
 
 
@@ -26,7 +26,7 @@ def home(request: HttpRequest) -> HttpResponse:
         .distinct()
         .count(),
         "watched": live.filter(status=Dataset.Status.WATCHED).count(),
-        "features": Feature.objects.count(),
+        "features": Record.objects.filter(recordset__gis_dataset__isnull=False).count(),
         "names": NameEntry.objects.count(),
     }
     top_topics = (
@@ -42,7 +42,9 @@ def home(request: HttpRequest) -> HttpResponse:
             "stats": stats,
             "top_topics": top_topics,
             "crawls": Crawl.objects.select_related("source")[:5],
-            "harvests": Harvest.objects.select_related("dataset")[:5],
+            "harvests": Run.objects.filter(recordset__gis_dataset__isnull=False).select_related(
+                "recordset__gis_dataset"
+            )[:5],
             "watched": live.filter(status=Dataset.Status.WATCHED).select_related("jurisdiction"),
         },
     )

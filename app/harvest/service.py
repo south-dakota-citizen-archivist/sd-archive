@@ -1,4 +1,4 @@
-"""Harvest a watched dataset: download, validate, store the latest records, export, index names."""
+"""Run a watched dataset: download, validate, store the latest records, export, index names."""
 
 import logging
 import shutil
@@ -13,7 +13,8 @@ from census import classify
 from census.models import Dataset
 from core.models import Job
 from harvest import export, store, validate
-from harvest.models import Harvest
+from records.gis import recordset_for
+from records.models import Run
 from sdgis.arcgis import client
 from search import index
 
@@ -29,8 +30,8 @@ def staging_dir(dataset: Dataset) -> Path:
     return Path(settings.MEDIA_ROOT) / "staging" / "harvest" / str(dataset.pk)
 
 
-def harvest_dataset(dataset: Dataset, job: Job | None = None, force: bool = False) -> Harvest:
-    harvest = Harvest.objects.create(dataset=dataset, job=job, forced=force)
+def harvest_dataset(dataset: Dataset, job: Job | None = None, force: bool = False) -> Run:
+    harvest = Run.objects.create(recordset=recordset_for(dataset), job=job, forced=force)
     try:
         # All or nothing: features, counts and the name index commit together. The download
         # itself is saved batch by batch in staging_dir() first, so it survives a stop.
@@ -39,7 +40,7 @@ def harvest_dataset(dataset: Dataset, job: Job | None = None, force: bool = Fals
     except Exception as e:
         harvest.refresh_from_db()
         (Path(settings.MEDIA_ROOT) / export.export_relpath(harvest)).unlink(missing_ok=True)
-        harvest.status = Harvest.Status.FAILED
+        harvest.status = Run.Status.FAILED
         harvest.error = f"{type(e).__name__}: {e}"
         harvest.finished_at = timezone.now()
         harvest.save()
@@ -51,12 +52,12 @@ def harvest_dataset(dataset: Dataset, job: Job | None = None, force: bool = Fals
     return harvest
 
 
-def last_full_harvest_if_unchanged(dataset: Dataset, harvest: Harvest) -> Harvest | None:
+def last_full_harvest_if_unchanged(dataset: Dataset, harvest: Run) -> Run | None:
     """The last full harvest, if the server's edit date and count both still match it and
     it's recent enough. Layers that don't report an edit date are always downloaded."""
     if harvest.source_edited_at is None:
         return None
-    last = dataset.harvests.filter(status=Harvest.Status.SUCCEEDED).exclude(pk=harvest.pk).first()
+    last = dataset.harvests.filter(status=Run.Status.SUCCEEDED).exclude(pk=harvest.pk).first()
     if (
         last is None
         or last.source_edited_at != harvest.source_edited_at
@@ -76,8 +77,8 @@ def refresh_code_labels(dataset: Dataset, metadata: dict) -> None:
         dataset.save(update_fields=["fields"])
 
 
-def skip(dataset: Dataset, harvest: Harvest, last: Harvest) -> None:
-    harvest.status = Harvest.Status.SKIPPED
+def skip(dataset: Dataset, harvest: Run, last: Run) -> None:
+    harvest.status = Run.Status.SKIPPED
     harvest.unchanged = harvest.expected_count
     harvest.checks = {
         "skipped": f"edit date and count match harvest {last.pk}; next full download "
@@ -92,7 +93,7 @@ def skip(dataset: Dataset, harvest: Harvest, last: Harvest) -> None:
     logger.info("%s: unchanged at source since %s, skipped", dataset, harvest.source_edited_at)
 
 
-def run(dataset: Dataset, harvest: Harvest, force: bool) -> None:
+def run(dataset: Dataset, harvest: Run, force: bool) -> None:
     session = client.make_session()
     metadata = client.get_metadata(session, dataset.url)
     oid_field = client.object_id_field(metadata)
@@ -132,7 +133,7 @@ def run(dataset: Dataset, harvest: Harvest, force: bool) -> None:
     if harvest.has_changes or previous is None:
         harvest.export = export.write_parquet(df, harvest)
 
-    harvest.status = Harvest.Status.SUCCEEDED
+    harvest.status = Run.Status.SUCCEEDED
     harvest.finished_at = timezone.now()
     harvest.save()
 

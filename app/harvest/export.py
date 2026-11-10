@@ -11,19 +11,19 @@ from django.conf import settings
 from django.db import connection
 
 from harvest.labels import Labels
-from harvest.models import Harvest
+from records.models import Run
 
 
-def export_relpath(harvest: Harvest) -> str:
+def export_relpath(harvest: Run) -> str:
     """Where a harvest writes its file while it runs."""
-    return f"exports/{harvest.dataset_id}/harvest-{harvest.pk}.parquet"
+    return f"exports/{harvest.recordset.gis_dataset_id}/harvest-{harvest.pk}.parquet"
 
 
 def latest_relpath(dataset_id: int) -> str:
     return f"exports/{dataset_id}/latest.parquet"
 
 
-def write_parquet(df: gpd.GeoDataFrame, harvest: Harvest) -> str:
+def write_parquet(df: gpd.GeoDataFrame, harvest: Run) -> str:
     """Write this harvest's file via a temp file and rename, so a failed write leaves nothing
     behind. promote() makes it the dataset's file once the harvest is stored."""
     relpath = export_relpath(harvest)
@@ -41,17 +41,17 @@ def write_parquet(df: gpd.GeoDataFrame, harvest: Harvest) -> str:
     return relpath
 
 
-def promote(harvest: Harvest) -> None:
+def promote(harvest: Run) -> None:
     """After a harvest is stored: its file becomes the dataset's only one (latest.parquet),
     and no earlier harvest points at a file."""
     if not harvest.export:
         return
     media = Path(settings.MEDIA_ROOT)
-    latest = latest_relpath(harvest.dataset_id)
+    latest = latest_relpath(harvest.recordset.gis_dataset_id)
     (media / harvest.export.name).replace(media / latest)
-    Harvest.objects.filter(pk=harvest.pk).update(export=latest)
+    Run.objects.filter(pk=harvest.pk).update(export=latest)
     harvest.export.name = latest
-    Harvest.objects.filter(dataset_id=harvest.dataset_id).exclude(pk=harvest.pk).update(export="")
+    Run.objects.filter(recordset=harvest.recordset).exclude(pk=harvest.pk).update(export="")
 
 
 def iter_current(dataset_id: int, chunk: int = 2000) -> Iterator[tuple[str, dict, str | None]]:
@@ -59,10 +59,11 @@ def iter_current(dataset_id: int, chunk: int = 2000) -> Iterator[tuple[str, dict
     with connection.cursor() as cur:
         cur.execute(
             """
-            SELECT key, properties, ST_AsGeoJSON(geometry, 7)
-            FROM harvest_feature
-            WHERE dataset_id = %s
-            ORDER BY length(key), key
+            SELECT r.key, r.data, ST_AsGeoJSON(r.geometry, 7)
+            FROM records_record r
+            JOIN records_recordset rs ON rs.id = r.recordset_id
+            WHERE rs.gis_dataset_id = %s
+            ORDER BY length(r.key), r.key
             """,
             [dataset_id],
         )

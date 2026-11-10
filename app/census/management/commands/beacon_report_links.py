@@ -58,10 +58,11 @@ PARCEL_LAYERS = {
 
 # Real parcel IDs start with a digit; this drops blanks and placeholders like ROAD or LAKE
 SQL = """
-SELECT DISTINCT btrim(f.properties ->> %(field)s) AS pid
-FROM harvest_feature f JOIN census_dataset d ON d.id = f.dataset_id
+SELECT DISTINCT btrim(f.data ->> %(field)s) AS pid
+FROM records_record f JOIN records_recordset rs ON rs.id = f.recordset_id
+JOIN census_dataset d ON d.id = rs.gis_dataset_id
 WHERE d.url = %(url)s
-  AND btrim(f.properties ->> %(field)s) ~ '^[0-9][0-9A-Za-z.-]*$'
+  AND btrim(f.data ->> %(field)s) ~ '^[0-9][0-9A-Za-z.-]*$'
 ORDER BY pid
 """
 
