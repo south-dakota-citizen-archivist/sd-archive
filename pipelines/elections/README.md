@@ -5,12 +5,12 @@ Every South Dakota election result on electionresults.sd.gov, at the precinct le
 ```sh
 uv run python pipelines/elections/discover.py           # catalog every election (eid) → data/elections.csv
 uv run python pipelines/elections/capture.py --all      # every race's precinct results, raw → .cache/elections/raw/
-uv run python pipelines/elections/build.py              # one table + checks → .cache/elections/build/
+uv run python pipelines/elections/build.py              # tables + checks → .cache/elections/build/
 ```
 
 All three resume where they stopped and never fetch the same thing twice. They make one request at a time with a pause between.
 
-As of 2026-11-10: **346,605 precinct rows** (317,452 from the API, 29,153 from the exports) and 29,578 county rows, from the 44 elections that have results. The other four are empty listings on the site.
+As of 2026-11-10: **346,605 precinct rows** (317,452 from the API, 29,153 from the exports) 29,578 county rows and 156 recount rows, from the 44 elections that have results. The other four are empty listings on the site.
 
 ## What the site has
 
@@ -50,7 +50,7 @@ Checks (`checks.json`): precinct sums against county totals, API precinct sums a
 - **The API and the exports disagree by a vote or two in a few precincts** (e.g. 2018 general, Lincoln County, "Sioux Falls 1-15": 316 against 317 for R. Blake Curd). It happens in about 1 in 300 of the county totals checked, in 2010–2024. The table keeps the API's numbers; `API precinct sums ≠ export totals` lists each one.
 - **The 2026-07-28 runoff (eid 801) is broken at the source.** Its county totals are exactly three times its precinct sums, the site says "Precincts 5850 of 1950 Reporting", registered voters reads 10,125,314, and Jackson County's Precinct-3 appears twice in the API (the exports have it once). The precinct rows look right otherwise; the county rows and the home page's counts don't.
 - **The 2012 primary lists one combined Davison County municipal precinct twice**, once with zero votes. Sums aren't affected.
-- **Recounts.** Export sheets for recounts (names ending in "RECOUNT", often cut off) are saved but not yet used.
+- **Recounts** are in their own table, `recount_results.parquet`, with the same columns (`source = "export_recount"`), so the election-night rows stay as published. They come from export sheets named "<race>  RECOUNT" (often cut off: "  RE", "  RECO") next to the race's original sheet; join on `eid`, `race_id`, `party_ballot` and `county`. As of 2026-11-10 there are 10 races × counties, all in the 2010 general, and every recount total equals the election-night total. Either those recounts changed nothing or the site updated the original race to the recount's numbers; the site doesn't say which. Its "Possible Recounts" page lists close races, not recount results.
 - **Precinct names and boundaries change between elections**, so a precinct ID isn't a stable place over time.
 - The election system's county codes aren't FIPS and aren't alphabetical. `sdplaces` maps them (`from_id("sos_election_county", …)`).
 - **The site shows today's county names on old elections.** Code 65 reads "Oglala Lakota" even in 2008, when the county was Shannon County. `county` keeps what the site says; `county_geoid` is the county in force on the election date (46113 before May 2015, 46102 after), and `county_geoid_current` is always 46102. Join on `county_geoid_current` for a series across years.

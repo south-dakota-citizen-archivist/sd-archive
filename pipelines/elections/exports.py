@@ -15,8 +15,8 @@ but no race ID ("REPState Rep District 06"), so they can't be matched to races a
 
 2012's exports have the votes for each precinct but leave the precinct names blank; those
 rows get precinct "" and their order on the sheet (precinct_seq). Sheets whose name ends in
-"RECOUNT" (or the start of it, cut off at 31 characters) are recounts, read but marked
-(recount=True) and not used to fill or check.
+"  RECOUNT" (or the start of it, cut off at 31 characters) are recounts, next to the race's
+original sheet. They're marked recount=True, and build.py puts them in their own table.
 
 Some workbooks repeat a sheet, with "_1" added to its name. A repeat with the same rows is
 dropped; one with different rows is kept and listed in `different_repeats`.
@@ -34,11 +34,13 @@ from pathlib import Path
 import pandas as pd
 
 SKIP = {"Statewide-Export", "Legislative-Export"}
-# Recount sheets end in RECOUNT, cut short by Excel's 31-character limit: "…  RE", "…  RECO"
+# Recount sheets end in "  RECOUNT" (" - RECOUNT" in the legislative workbook), cut short by
+# Excel's 31-character limit: "…  RE", "…  RECO". A name cut off mid-word ("A RESOLUTION RE")
+# has one space, so isn't a recount.
 # Primaries put the ballot's party first: "REP14452Governor", "NON13017City Council"
 SHEET = re.compile(
     r"^(?P<party>[A-Z]{3}(?=\d))?(?P<race>\d+)(?P<name>.*?)"
-    r"(?P<recount>\s+RE(?:C|CO|COU|COUN|COUNT)?)?$"
+    r"(?P<recount>(?:\s{2}|\s-\s)RE(?:C|CO|COU|COUN|COUNT)?)?$"
 )
 REPEAT = re.compile(r"_\d+$")
 BALLOT_QUESTION = re.compile(

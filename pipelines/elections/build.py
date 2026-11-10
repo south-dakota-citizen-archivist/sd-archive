@@ -103,7 +103,7 @@ def race_type(e: dict, summary_types: dict, counties_of: dict) -> str:
     return "CTY" if len(counties_of[e["race_id"]]) == 1 else ""
 
 
-def merge_exports(eid, on, root, races, precinct, county) -> tuple[list[dict], list[dict], set]:
+def merge_exports(eid, on, root, races, precinct, county) -> tuple[list, list, list, set]:
     """Check the API's precinct rows against the export workbooks, and fill what it lacks.
 
     - Check: each export TOTALS row (race, county, candidate) against the API's precinct votes
@@ -115,11 +115,12 @@ def merge_exports(eid, on, root, races, precinct, county) -> tuple[list[dict], l
       total isn't, and the export's totals equal the API's county totals, the export's precincts
       are used instead (2012 primary, Minnehaha). Returns those (race, party, county) keys so
       the caller can drop the zero rows.
+    - Recounts: recount sheets, row for row like the fill, returned separately.
     """
     repeats: list = []
     rows = exports.read_election(root, repeats)
     if not rows:
-        return [], [], set()
+        return [], [], [], set()
     issues: list[dict] = []
     if repeats:
         detail = f"{len(repeats)} repeated sheets with different rows, e.g. {repeats[:3]}"
@@ -189,9 +190,9 @@ def merge_exports(eid, on, root, races, precinct, county) -> tuple[list[dict], l
         today = sdplaces.current(p)
         counties[today.short_name] = (str(code).zfill(2), p.geoid, today.geoid)
     url = f"{SITE}ResultsExport.aspx?eid={eid}"
-    filled, unknown = [], set()
+    filled, recounts, unknown = [], [], set()
     for e in rows:
-        if e["precinct"] is None or e["recount"] or (e["pair"] in api_pairs - zeroed):
+        if e["precinct"] is None or (not e["recount"] and e["pair"] in api_pairs - zeroed):
             continue
         race_key = e["pair"][:2]
         race = race_info.get(race_key, {})
@@ -202,7 +203,7 @@ def merge_exports(eid, on, root, races, precinct, county) -> tuple[list[dict], l
         code, geoid, geoid_now = counties.get(e["county"], ("", "", ""))
         if not code:
             unknown.add(e["county"])
-        filled.append(
+        (recounts if e["recount"] else filled).append(
             {
                 "eid": eid,
                 "election_date": race.get("election_date") or on.isoformat(),
@@ -230,7 +231,7 @@ def merge_exports(eid, on, root, races, precinct, county) -> tuple[list[dict], l
                 "precinct_id": "",
                 "precinct": e["precinct"],
                 "reported": None,
-                "source": "export",
+                "source": "export_recount" if e["recount"] else "export",
                 "precinct_seq": e["precinct_seq"],
                 "export_file": f"exports/{e['file']}",
                 "export_sheet": e["sheet"],
@@ -240,10 +241,10 @@ def merge_exports(eid, on, root, races, precinct, county) -> tuple[list[dict], l
         issues.append(
             {"eid": eid, "check": "export county", "detail": f"unknown: {sorted(unknown)}"}
         )
-    return filled, issues, zeroed
+    return filled, recounts, issues, zeroed
 
 
-def build_one(eid: int, info: dict) -> tuple[list[dict], list[dict], list[dict]]:
+def build_one(eid: int, info: dict) -> tuple[list, list, list, list]:
     root = RAW / str(eid)
     on = date.fromisoformat(info["date"])
     races = {
@@ -313,7 +314,7 @@ def build_one(eid: int, info: dict) -> tuple[list[dict], list[dict], list[dict]]
 
     for r in precinct + county:
         r["source"] = "api"
-    filled, export_issues, zeroed = merge_exports(eid, on, root, races, precinct, county)
+    filled, recounts, export_issues, zeroed = merge_exports(eid, on, root, races, precinct, county)
     if zeroed:
         precinct = [
             r
@@ -379,7 +380,7 @@ def build_one(eid: int, info: dict) -> tuple[list[dict], list[dict], list[dict]]
     if mismatched:
         detail = f"{len(mismatched)} of {len(county)} county rows, e.g. {mismatched[:3]}"
         issues.append({"eid": eid, "check": "precinct sums ≠ county totals", "detail": detail})
-    return precinct, county, issues
+    return precinct, county, recounts, issues
 
 
 def main() -> None:
@@ -389,11 +390,12 @@ def main() -> None:
     catalog = {int(r["eid"]): r for r in csv.DictReader(CATALOG.open())}
     eids = args.eid or sorted(int(p.name) for p in RAW.iterdir() if (p / "races.json").exists())
 
-    precinct, county, issues = [], [], []
+    precinct, county, recount, issues = [], [], [], []
     for eid in eids:
-        p, c, i = build_one(eid, catalog[eid])
+        p, c, r, i = build_one(eid, catalog[eid])
         precinct += p
         county += c
+        recount += r
         issues += i
         n_races = len({(r["race_type"], r["race_id"], r["party_ballot"]) for r in p})
         n_precincts = len({(r["county_code"], r["precinct_id"], r["precinct"]) for r in p})
@@ -406,8 +408,13 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     pd.DataFrame(precinct).to_parquet(OUT / "precinct_results.parquet", index=False)
     pd.DataFrame(county).to_parquet(OUT / "county_results.parquet", index=False)
+    pd.DataFrame(recount).to_parquet(OUT / "recount_results.parquet", index=False)
     (OUT / "checks.json").write_text(json.dumps(issues, indent=1, ensure_ascii=False))
-    print(f"\n{len(precinct):,} precinct rows, {len(county):,} county rows → {OUT}")
+    n_recounts = len({(r["eid"], r["race_id"], r["county"]) for r in recount})
+    print(
+        f"\n{len(precinct):,} precinct rows, {len(county):,} county rows, "
+        f"{len(recount):,} recount rows ({n_recounts} races × counties) → {OUT}"
+    )
     for i in issues:
         print(f"  [{i['eid']}] {i['check']}: {i['detail'][:220]}")
 

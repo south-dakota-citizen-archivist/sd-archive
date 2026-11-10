@@ -66,6 +66,9 @@ def test_recount_sheet_names():
     for name in ("1556State Representatives  RE", "2628County Commissioner  RECO",
                  "2281County Auditor  RECOUNT"):  # fmt: skip
         assert exports.SHEET.match(name)["recount"], name
+    assert exports.SHEET.match("1556State Representatives - RE")["recount"]
+    # A long name cut off mid-word isn't a recount
+    assert not exports.SHEET.match("98Referendum  A RESOLUTION RE")["recount"]
     m = exports.SHEET.match("4265Presidential Electors")
     assert (m["race"], m["recount"]) == ("4265", None)
 
