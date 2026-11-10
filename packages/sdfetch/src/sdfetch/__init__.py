@@ -1,5 +1,6 @@
 """sdfetch: fetching for the South Dakota archive. See DESIGN.md."""
 
+from . import wayback
 from ._browser import STRATEGIES, Browser, BrowserResponse, browser
 from ._checkpoint import Checkpoint, checkpoint
 from ._disk import DiskSpaceLow, ensure_free, free_gb
@@ -30,4 +31,5 @@ __all__ = [
     "ensure_free",
     "free_gb",
     "retry_after",
+    "wayback",
 ]

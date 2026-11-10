@@ -77,5 +77,15 @@ Per-host settings: `sdfetch.Fetcher(store, delays={"sdsos.gov": 3.0})`. Block ch
 1. **Core** (`Fetcher`, `Store`, `Blocked`, `checkpoint`, `ensure_free`) with tests against a local test server, and the elections pipeline switched to it.
 2. ✅ 2026-11-10. **Looking like a browser, and escalation (§1a):** the `impersonate` rung through curl_cffi, the browser rungs behind `browser(strategy=…)`, `strategy="auto"` climbing on `Blocked`, the per-host memory, and `via` in the manifest. The five playwright-stealth scrapers (Spearfish, the liberator) switch over when their repos move onto sdfetch (step 5). A live check: plain HTTP with Chrome's headers got the Spearfish library's Cloudflare-fronted reports from the laptop, so that scraper may not need its browser at all.
 3. ✅ 2026-11-10. **WARC and HAR.** `Fetcher(warc=True)` writes every successful response to `warc/<time>-<pid>.warc.gz` beside the store: `response` and `request` records for the HTTP rungs, and `resource` records for browser pages, since a browser page is the document after its scripts ran. Each record notes its rung, and each manifest line gives its WARC file and offset. `har=` records each browser's traffic, and `sdfetch.har_requests()` / `python -m sdfetch.har` list the data requests in it, which is how a page's hidden API is found.
-4. **Wayback:** CDX, snapshots, Save Page Now. Port the pistol permit code.
+4. ✅ 2026-11-10. **Wayback** (`sdfetch.wayback`):
+   - `snapshots()`: the CDX index, paged by resume key, with filters for date, status (200 by default) and type, plus optional `collapse="digest"`. Each index page is stored.
+   - `fetch_snapshot()`: the original bytes from the `id_` URL, with the capture time and original URL in the manifest.
+   - `save_page()`: Save Page Now. It's built and tested against a fake server, but nothing calls it automatically, since it makes a public capture.
+
+   The pistol permit code's needs are covered:
+   - every capture in its `snapshots.json` (114) is in `snapshots()`
+   - a raw capture holds the same figures as its CSV row
+   - the index now has 76 captures newer than that list, plus 5 older ones it missed
+
+   The repo itself switches when it moves into `pipelines/`.
 5. **First release** (`sdfetch-v0.1.0`). Spearfish switches from `scrapers/net.py`, and spillarchive from its `net.py`, through git dependencies.
