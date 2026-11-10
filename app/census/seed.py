@@ -195,7 +195,8 @@ def render(path: Path | None = None) -> str:
     publishers = [
         p
         for p in Publisher.objects.select_related("jurisdiction").order_by("pk")
-        if p.pk in used or not p.sources.exists()
+        # publishers only of record sets belong to the records app, not this file
+        if p.pk in used or not (p.sources.exists() or p.recordsets.exists())
     ]
 
     parts = [HEADER]

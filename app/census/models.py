@@ -23,6 +23,10 @@ class Publisher(models.Model):
 
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True)
+    parent = models.ForeignKey(
+        "self", null=True, blank=True, on_delete=models.SET_NULL, related_name="children",
+        help_text="The office above it (a division's department)",
+    )  # fmt: skip
     jurisdiction = models.ForeignKey(
         Jurisdiction, null=True, blank=True, on_delete=models.SET_NULL, related_name="publishers"
     )

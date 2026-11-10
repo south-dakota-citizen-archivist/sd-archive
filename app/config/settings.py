@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "core",
     "places",
     "entities",
+    "records",
     "census",
     "harvest",
     "search",
