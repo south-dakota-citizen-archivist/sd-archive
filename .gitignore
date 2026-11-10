@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[codz]
+*.egg-info/
+build/
+dist/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.ipynb_checkpoints/
+
+# Secrets and local config
+.env
+.envrc
+local_settings.py
+.claude/settings.local.json
+
+# Data that never goes in git: originals, exports, caches, dumps
+media/
+.cache/
+*.sqlite3
+*.sqlite3-journal
+*.dump
+*.parquet
+
+# Front end
+node_modules/
+staticfiles/
+
+# Celery / Redis
+celerybeat-schedule*
+celerybeat.pid
+*.rdb
+*.aof
+*.pid
+
+# Logs and OS files
+*.log
+.DS_Store

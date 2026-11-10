@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ source.name }} · SD GIS Hub{% endblock %}
+{% block content %}
+<p class="text-sm"><a class="link" href="{% url 'census:source_list' %}">← Sources</a></p>
+<div class="flex flex-wrap items-start justify-between gap-3 mt-1">
+  <div>
+    <h1 class="text-xl font-semibold">{{ source.name }}</h1>
+    <p class="text-sm text-gray-600 break-all"><a class="link" href="{{ source.url }}" target="_blank" rel="noopener">{{ source.url }}</a></p>
+    <p class="text-sm text-gray-600">{{ source.get_platform_display }} · {{ source.publisher|default:"no publisher" }} · <a class="link" href="{% url 'census:dataset_list' %}?source={{ source.slug }}">{{ n_datasets|intcomma }} datasets</a></p>
+  </div>
+  <div class="flex gap-2">
+    {% if source.crawlable %}<form method="post" action="{% url 'census:source_crawl' source.slug %}">{% csrf_token %}<button class="btn btn-primary">Crawl now</button></form>
+    {% else %}<a class="btn btn-primary" href="{{ source.url }}" target="_blank" rel="noopener">Open in {{ source.get_platform_display }}</a>{% endif %}
+    <a class="btn" href="/admin/census/source/{{ source.pk }}/change/">Edit</a>
+  </div>
+</div>
+{% if source.notes %}<p class="card p-3 mt-4 text-sm text-gray-700">{{ source.notes }}</p>{% endif %}
+{% if source.crawlable %}
+<div class="grid gap-6 lg:grid-cols-2 mt-6">
+  <div class="card">
+    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Crawls</div>
+    <table class="tbl">
+      <thead><tr><th>When</th><th>Status</th><th class="text-right">Datasets</th><th class="text-right">New</th><th class="text-right">Removed</th><th class="text-right">Errors</th></tr></thead>
+      <tbody>
+        {% for c in crawls %}
+        <tr><td class="whitespace-nowrap">{{ c.started_at|date:"M j, Y H:i" }}</td><td>{{ c.get_status_display }}</td><td class="text-right">{{ c.datasets_seen }}</td><td class="text-right">{{ c.datasets_added }}</td><td class="text-right">{{ c.datasets_removed }}</td><td class="text-right">{{ c.service_errors }}</td></tr>
+        {% empty %}<tr><td colspan="6" class="text-gray-500">Never crawled.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Services with errors ({{ error_services|length }})</div>
+    <ul class="divide-y divide-gray-100 text-sm max-h-96 overflow-y-auto">
+      {% for s in error_services %}<li class="px-4 py-2"><span class="font-medium">{{ s.name }}/{{ s.type }}</span><div class="text-xs text-red-700 break-all">{{ s.error|truncatechars:200 }}</div></li>
+      {% empty %}<li class="px-4 py-2 text-gray-500">None.</li>{% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class="card mt-6">
+  <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Services ({{ services|length }})</div>
+  <div class="max-h-[32rem] overflow-y-auto">
+    <table class="tbl">
+      <thead><tr><th>Service</th><th>Folder</th><th class="text-right">Datasets</th></tr></thead>
+      <tbody>{% for s in services %}<tr><td><a class="link" href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}/{{ s.type }}</a></td><td>{{ s.folder }}</td><td class="text-right">{{ s.n_datasets }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

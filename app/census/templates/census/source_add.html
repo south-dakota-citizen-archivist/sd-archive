@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Add a source · SD GIS Hub{% endblock %}
+{% block content %}
+<p class="text-sm"><a class="link" href="{% url 'census:source_list' %}">← Sources</a></p>
+<h1 class="text-xl font-semibold mt-1">Add a source</h1>
+<p class="text-sm text-gray-600 break-all"><a class="link" href="{{ found.url }}" target="_blank" rel="noopener">{{ found.url }}</a></p>
+<p class="text-sm text-gray-600">
+  {{ found.platform_label }}{% if found.version %} {{ found.version }}{% endif %} ·
+  {{ found.services|length|intcomma }} service{{ found.services|length|pluralize }}{% if found.folders %} in {{ found.folders|length }} folder{{ found.folders|length|pluralize }} plus the root{% endif %} ·
+  {{ found.n_crawlable|intcomma }} map or feature service{{ found.n_crawlable|pluralize }} to crawl
+</p>
+<div class="flex flex-wrap gap-1 mt-2">{% for type, n in found.service_types.items %}<span class="pill">{{ type }} {{ n }}</span>{% endfor %}</div>
+
+{% if found.folder_errors %}
+<div class="rounded-md border border-amber-200 bg-amber-50 text-amber-900 px-3 py-2 text-sm mt-4">
+  {{ found.folder_errors|length }} folder{{ found.folder_errors|length|pluralize }} couldn't be read, so this list is incomplete. The crawl will try again.
+</div>
+{% endif %}
+{% if not found.n_crawlable %}
+<div class="rounded-md border border-amber-200 bg-amber-50 text-amber-900 px-3 py-2 text-sm mt-4">
+  This directory has no map or feature services, so a crawl will find no datasets.
+</div>
+{% endif %}
+{% for e in errors %}
+<div class="rounded-md border border-red-200 bg-red-50 text-red-800 px-3 py-2 text-sm mt-4">{{ e }}</div>
+{% endfor %}
+
+<form method="post" action="{% url 'census:source_add' %}" class="grid gap-6 lg:grid-cols-3 mt-6">
+  {% csrf_token %}
+  <input type="hidden" name="url" value="{{ found.url }}">
+  <div class="card p-4 space-y-3 text-sm">
+    <label class="block">Name
+      <input name="name" value="{{ form.name }}" required class="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5">
+    </label>
+    <label class="block">Publisher <span class="text-gray-500">(pick one or type a new name)</span>
+      <input name="publisher" value="{{ form.publisher }}" list="publishers" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5">
+    </label>
+    <label class="block">Default place <span class="text-gray-500">(slug, for datasets no row matches)</span>
+      <input name="jurisdiction" value="{{ form.jurisdiction }}" list="places" placeholder="south-dakota" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5">
+    </label>
+    <label class="block">Found via
+      <input name="found_via" value="{{ form.found_via }}" placeholder="county website, web search…" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5">
+    </label>
+    <button class="btn btn-primary">Add and crawl</button>
+    <p class="text-xs text-gray-500">The crawl lists every layer and table and counts their features. Watch it on the Jobs page.</p>
+  </div>
+
+  <div class="lg:col-span-2 space-y-4">
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Places</div>
+      <p class="px-4 pt-3 text-xs text-gray-600">
+        Datasets in a top-level folder, or in a service whose name starts with the key, are credited to that place.
+        These are guesses from the names; check them, clear a place to drop its row, or add your own.
+        {% if found.unmatched > 0 %}{{ found.unmatched|intcomma }} service{{ found.unmatched|pluralize }} matched no place and will get the default place.{% endif %}
+      </p>
+      <table class="tbl mt-2">
+        <thead><tr><th>Folder or name starts with</th><th>Place</th><th class="text-right">Services</th></tr></thead>
+        <tbody>
+          {% for key, slug, n in rows %}
+          <tr>
+            <td><input name="key" value="{{ key }}" class="w-full rounded-md border border-gray-300 px-2 py-1 font-mono text-xs"></td>
+            <td><input name="place" value="{{ slug }}" list="places" class="w-full rounded-md border border-gray-300 px-2 py-1"></td>
+            <td class="text-right tabular-nums text-gray-500">{{ n|default:"" }}</td>
+          </tr>
+          {% endfor %}
+          {% for i in "123" %}
+          <tr>
+            <td><input name="key" placeholder="e.g. Lawrence or bon_homme" class="w-full rounded-md border border-gray-300 px-2 py-1 font-mono text-xs"></td>
+            <td><input name="place" list="places" placeholder="place slug" class="w-full rounded-md border border-gray-300 px-2 py-1"></td>
+            <td></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <details class="card">
+      <summary class="px-4 py-2 text-sm font-medium cursor-pointer">Services ({{ found.services|length|intcomma }})</summary>
+      <ul class="divide-y divide-gray-100 text-sm max-h-96 overflow-y-auto border-t border-gray-200">
+        {% for s in found.services %}<li class="px-4 py-1.5 flex justify-between gap-3"><span class="break-all">{{ s.name }}</span><span class="text-xs text-gray-500 whitespace-nowrap">{{ s.type }}</span></li>{% endfor %}
+      </ul>
+    </details>
+  </div>
+</form>
+
+<datalist id="places">{% for j in jurisdictions %}<option value="{{ j.slug }}">{{ j.name }}</option>{% endfor %}</datalist>
+<datalist id="publishers">{% for p in publishers %}<option value="{{ p }}"></option>{% endfor %}</datalist>
+{% endblock %}

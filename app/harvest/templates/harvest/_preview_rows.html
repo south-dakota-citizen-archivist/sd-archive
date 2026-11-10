@@ -1,0 +1,14 @@
+{% if error %}
+  <div class="card p-4 text-sm text-red-800">Couldn't load a preview: {{ error }}</div>
+{% else %}
+<div class="card overflow-x-auto">
+  <table class="tbl text-xs">
+    <thead><tr>{% for c in columns %}<th title="{{ c.alias }}">{{ c.name }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      {% for values in rows %}
+        <tr>{% for v, code in values %}<td class="whitespace-nowrap max-w-xs truncate">{{ v|default_if_none:"" }}{% if code is not None %} <span class="text-gray-400">{{ code }}</span>{% endif %}</td>{% endfor %}</tr>
+      {% empty %}<tr><td class="text-gray-500">No rows returned.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}

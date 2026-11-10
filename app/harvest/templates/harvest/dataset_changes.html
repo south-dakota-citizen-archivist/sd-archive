@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Changes · {{ dataset.name }} · SD GIS Hub{% endblock %}
+{% block content %}
+{% include "_dataset_header.html" %}
+{% if not harvests %}
+  <div class="card p-4 text-sm text-gray-600">No harvests yet. <b>Watch</b> this dataset to track changes to its records over time.</div>
+{% else %}
+<div class="card overflow-x-auto">
+  <table class="tbl">
+    <thead><tr><th>Harvest</th><th>Status</th><th class="text-right">Features</th><th class="text-right">Added</th><th class="text-right">Changed</th><th class="text-right">Removed</th><th>Checks</th></tr></thead>
+    <tbody>
+      {% for h in harvests %}
+      <tr>
+        <td class="whitespace-nowrap"><a class="link" href="{% url 'harvest:harvest_detail' h.pk %}">{{ h.started_at|date:"M j, Y H:i" }}</a>{% if h.forced %} <span class="pill bg-amber-100 text-amber-800">forced</span>{% endif %}</td>
+        <td>{{ h.status }}{% if h.error %}<div class="text-xs text-red-700">{{ h.error|truncatechars:140 }}</div>{% endif %}</td>
+        <td class="text-right tabular-nums">{{ h.fetched_count|intcomma|default:"" }}</td>
+        <td class="text-right tabular-nums text-green-700">{{ h.added|intcomma }}</td>
+        <td class="text-right tabular-nums text-amber-700">{{ h.changed|intcomma }}</td>
+        <td class="text-right tabular-nums text-red-700">{{ h.removed|intcomma }}</td>
+        <td class="text-xs text-gray-500">{% for k, v in h.checks.items %}{{ k }}: {{ v }}{% if not forloop.last %} · {% endif %}{% endfor %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Places · SD GIS Hub{% endblock %}
+{% block content %}
+<h1 class="text-xl font-semibold">Places</h1>
+<p class="text-sm text-gray-600 mt-1 mb-4">Every South Dakota jurisdiction from the Census, with how many datasets the census has credited to it so far.</p>
+<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+  {% for kind, places in groups.items %}
+  <div class="card">
+    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">{{ kind }} ({{ places|length }})</div>
+    <ul class="text-sm max-h-[32rem] overflow-y-auto divide-y divide-gray-100">
+      {% for p in places %}
+        <li class="px-4 py-1.5 flex justify-between {% if not p.n_datasets %}text-gray-400{% endif %}">
+          <a class="{% if p.n_datasets %}link{% else %}hover:underline{% endif %}" href="{{ p.get_absolute_url }}">{{ p.short_name }}</a>
+          <span class="tabular-nums">{{ p.n_datasets|default:"" }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

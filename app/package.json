@@ -1,0 +1,14 @@
+{
+  "name": "sd-gis-hub",
+  "private": true,
+  "scripts": {
+    "build": "tailwindcss -i static/css/input.css -o static/css/tailwind.css --minify",
+    "dev": "tailwindcss -i static/css/input.css -o static/css/tailwind.css --watch"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "htmx.org": "^2.0.11",
+    "maplibre-gl": "^5.24.0",
+    "tailwindcss": "^4.3.3"
+  }
+}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}{{ key }} · {{ dataset.name }} · SD GIS Hub{% endblock %}
+{% block extra_head %}{% include "_maplibre.html" %}{% endblock %}
+{% block content %}
+<p class="text-sm text-gray-500"><a class="link" href="{{ dataset.get_absolute_url }}">{{ dataset.name }}</a>{% if dataset.jurisdiction %} · {{ dataset.jurisdiction }}{% endif %}</p>
+<h1 class="text-xl font-semibold mt-1">Record {{ key }}</h1>
+<p class="text-sm text-gray-600">
+  {% if latest.is_current %}Current{% else %}<span class="text-red-700">No longer in the source (removed {{ latest.valid_to|date }})</span>{% endif %}
+  {% with first=history|last %}· {{ history|length }} version{{ history|length|pluralize }} since {{ first.version.valid_from|date }}{% endwith %}
+</p>
+
+<div class="grid gap-6 lg:grid-cols-3 mt-4">
+  <div class="lg:col-span-2 space-y-6">
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">History</div>
+      <ol class="divide-y divide-gray-100 text-sm">
+        {% for item in history %}
+        <li class="px-4 py-3">
+          <div class="flex justify-between">
+            <span class="font-medium">{{ item.version.valid_from|date:"M j, Y" }}{% if item.version.valid_to %} – {{ item.version.valid_to|date:"M j, Y" }}{% else %} – now{% endif %}</span>
+            <a class="link text-xs" href="{% url 'harvest:harvest_detail' item.version.created_by_id %}">harvest #{{ item.version.created_by_id }}</a>
+          </div>
+          {% if forloop.last %}
+            <p class="text-xs text-gray-500 mt-1">First seen.</p>
+          {% else %}
+            {% if item.changes %}
+            <table class="text-xs mt-2">
+              {% for field, old, new in item.changes %}
+              <tr><td class="pr-3 font-mono text-gray-500 align-top">{{ field }}</td><td class="pr-2 text-red-700 line-through align-top">{{ old.0|default_if_none:"∅" }}{% if old.1 is not None %} ({{ old.1 }}){% endif %}</td><td class="text-green-800 align-top">{{ new.0|default_if_none:"∅" }}{% if new.1 is not None %} <span class="text-gray-400">{{ new.1 }}</span>{% endif %}</td></tr>
+              {% endfor %}
+            </table>
+            {% endif %}
+            {% if item.geometry_changed %}<p class="text-xs text-amber-700 mt-1">Shape changed.</p>{% endif %}
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Attributes {% if not latest.is_current %}(last known){% endif %}</div>
+      <table class="tbl text-xs">
+        {% for name, value, code in attributes %}<tr><td class="font-mono text-gray-500 w-48">{{ name }}</td><td class="whitespace-pre-wrap">{{ value|default_if_none:"" }}{% if code is not None %} <span class="text-gray-400">code {{ code }}</span>{% endif %}</td></tr>{% endfor %}
+      </table>
+    </div>
+  </div>
+  <div>
+    <div class="card overflow-hidden sticky top-4"><div id="map" class="h-80"></div></div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  const geometry = {{ geometry|safe }};
+  const bounds = geometry ? boundsOf(geometry) : null;
+  const map = hubMap("map", bounds ? { bounds: bounds.toArray() } : {});
+  if (bounds) map.fitBounds(bounds, { padding: 60, maxZoom: 15, duration: 0 });
+  if (geometry) map.on("load", () => {
+    map.addSource("feature", { type: "geojson", data: geometry });
+    addFeatureLayers(map, "feature");
+  });
+</script>
+{% endblock %}

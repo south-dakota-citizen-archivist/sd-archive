@@ -1,0 +1,33 @@
+{% load humanize %}
+<p class="text-sm text-gray-500 mb-2">{{ page.paginator.count|intcomma }} current record{{ page.paginator.count|pluralize }}. Click a column to sort; click a row's key for its history.</p>
+<div class="card overflow-x-auto">
+  <table class="tbl text-xs">
+    <thead>
+      <tr>
+        <th>Key</th>
+        {% for c in columns %}
+          <th><a class="hover:text-blue-700" title="{{ c.alias }}"
+                 hx-get="{% if sort == c.name and dir == 'asc' %}{% querystring sort=c.name dir='desc' page=None %}{% else %}{% querystring sort=c.name dir='asc' page=None %}{% endif %}"
+                 hx-target="#table-body" hx-push-url="true" href="#">{{ c.name }}{% if sort == c.name %} {% if dir == "desc" %}▼{% else %}▲{% endif %}{% endif %}</a></th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for key, values in rows %}
+        <tr>
+          <td><a class="link font-mono" href="{% url 'harvest:feature_detail' dataset.pk key %}">{{ key|truncatechars:14 }}</a></td>
+          {% for v, code in values %}<td class="whitespace-nowrap max-w-xs truncate" title="{{ v|default_if_none:'' }}{% if code is not None %} (code {{ code }}){% endif %}">{{ v|default_if_none:"" }}{% if code is not None %} <span class="text-gray-400">{{ code }}</span>{% endif %}</td>{% endfor %}
+        </tr>
+      {% empty %}
+        <tr><td colspan="{{ columns|length|add:1 }}" class="text-gray-500">No matching records.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% if page.paginator.num_pages > 1 %}
+<div class="flex items-center gap-2 mt-3 text-sm">
+  {% if page.has_previous %}<a class="btn" href="#" hx-get="{% querystring page=page.previous_page_number %}" hx-target="#table-body" hx-push-url="true">← Previous</a>{% endif %}
+  <span class="text-gray-500">Page {{ page.number }} of {{ page.paginator.num_pages|intcomma }}</span>
+  {% if page.has_next %}<a class="btn" href="#" hx-get="{% querystring page=page.next_page_number %}" hx-target="#table-body" hx-push-url="true">Next →</a>{% endif %}
+</div>
+{% endif %}

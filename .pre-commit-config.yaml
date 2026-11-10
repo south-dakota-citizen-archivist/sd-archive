@@ -1,0 +1,50 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+        exclude: ^app/static/css/tailwind\.css$
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        exclude: ^uv\.lock$  # the lockfile must be committed, however large
+
+  # Keep notebook outputs (maps, plots, data) out of git
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.9.1
+    hooks:
+      - id: nbstripout
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.13.6
+    hooks:
+      - id: uv-lock
+
+  # Ruff runs from the workspace environment so its version always matches uv.lock
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: uv run --frozen ruff check --fix
+        language: system
+        types_or: [python, pyi, jupyter]
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --frozen ruff format
+        language: system
+        types_or: [python, pyi, jupyter]
+      - id: readme-table
+        name: update the app README's sources table from the database
+        entry: uv run --frozen python app/manage.py build_readme
+        language: system
+        files: ^app/(README\.md|seeds/sources\.toml)$
+        pass_filenames: false
+      - id: django-check
+        name: django check and missing migrations
+        entry: bash -c 'uv run --frozen python app/manage.py check && uv run --frozen python app/manage.py makemigrations --check --dry-run'
+        language: system
+        types: [python]
+        pass_filenames: false

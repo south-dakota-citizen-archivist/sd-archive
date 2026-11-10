@@ -1,0 +1,32 @@
+{% if q %}
+  {% if not groups %}
+    <p class="text-sm text-gray-600">{% if q|length < 3 %}Type at least three characters.{% else %}No names match “{{ q }}”.{% endif %}</p>
+  {% else %}
+    <p class="text-sm text-gray-500 mb-3">{{ groups|length }} name{{ groups|length|pluralize }} on {{ n_records }} record{{ n_records|pluralize }}{% if truncated %} (the best 50 names; refine the search for more){% endif %}</p>
+    <div class="space-y-3">
+      {% for g in groups %}
+      <div class="card">
+        <div class="px-4 py-2 border-b border-gray-200 flex justify-between gap-3">
+          <span class="font-medium">{{ g.name }}</span>
+          <span class="text-xs text-gray-500">{{ g.n_records }} record{{ g.n_records|pluralize }}{% if g.n_datasets > 1 %} in {{ g.n_datasets }} datasets{% endif %}{% if not g.has_current %} · <span class="text-amber-700">former only</span>{% endif %}</span>
+        </div>
+        <ul class="divide-y divide-gray-100 text-sm">
+          {% for r in g.records %}
+          <li class="px-4 py-1.5 flex flex-wrap justify-between gap-2">
+            <span>
+              <a class="link font-mono" href="{% url 'harvest:feature_detail' r.dataset_id r.feature_key %}">{{ r.feature_key }}</a>
+              <span class="text-gray-600">· <a class="hover:underline" href="{% url 'census:dataset_detail' r.dataset_id %}">{{ r.dataset_name }}</a>{% if r.jurisdiction_name %}, {{ r.jurisdiction_name }}{% endif %}</span>
+              <span class="text-xs text-gray-400">({{ r.field }})</span>
+            </span>
+            <span class="text-xs {% if r.valid_to %}text-amber-700{% else %}text-gray-500{% endif %}">
+              {% if r.valid_to %}former: {{ r.valid_from|date:"M j, Y" }} – {{ r.valid_to|date:"M j, Y" }}{% else %}current since {{ r.valid_from|date:"M j, Y" }}{% endif %}
+            </span>
+          </li>
+          {% endfor %}
+          {% if g.n_records > g.records|length %}<li class="px-4 py-1.5 text-xs text-gray-500">Showing the first {{ g.records|length }} of {{ g.n_records }} records.</li>{% endif %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endif %}

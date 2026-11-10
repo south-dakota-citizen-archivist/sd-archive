@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@layer components {
+  .card { @apply bg-white border border-gray-200 rounded-lg; }
+  .btn { @apply inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50; }
+  .btn-primary { @apply border-blue-600 bg-blue-600 text-white hover:bg-blue-700; }
+  .pill { @apply inline-block rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-700; }
+  .tbl { @apply w-full text-sm; }
+  .tbl th { @apply text-left font-medium text-gray-500 border-b border-gray-200 px-3 py-2 whitespace-nowrap; }
+  .tbl td { @apply border-b border-gray-100 px-3 py-2 align-top; }
+  .link { @apply text-blue-700 hover:underline; }
+}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Changes · SD GIS Hub{% endblock %}
+{% block content %}
+<h1 class="text-xl font-semibold mb-4">Changes</h1>
+<div class="grid gap-6 lg:grid-cols-2">
+  <div class="card">
+    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Harvests that found changes</div>
+    <ul class="divide-y divide-gray-100 text-sm">
+      {% for h in harvests %}
+        <li class="px-4 py-2"><a class="link" href="{% url 'harvest:harvest_detail' h.pk %}">{{ h.dataset.name }}</a> <span class="text-gray-500">{{ h.dataset.jurisdiction|default:"" }} · {{ h.started_at|date:"M j" }} · <span class="text-green-700">+{{ h.added|intcomma }}</span> <span class="text-amber-700">~{{ h.changed|intcomma }}</span> <span class="text-red-700">−{{ h.removed|intcomma }}</span></span></li>
+      {% empty %}<li class="px-4 py-3 text-gray-500">No harvests have found changes yet.</li>{% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Datasets removed from their source</div>
+    <ul class="divide-y divide-gray-100 text-sm max-h-96 overflow-y-auto">
+      {% for d in removed %}
+        <li class="px-4 py-2"><a class="link" href="{{ d.get_absolute_url }}">{{ d.name }}</a> <span class="text-gray-500">{{ d.source }} · {{ d.removed_at|date:"M j, Y" }}</span></li>
+      {% empty %}<li class="px-4 py-3 text-gray-500">None yet.</li>{% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Newest datasets</div>
+    <ul class="divide-y divide-gray-100 text-sm max-h-96 overflow-y-auto">
+      {% for d in new %}
+        <li class="px-4 py-2"><a class="link" href="{{ d.get_absolute_url }}">{{ d.name }}</a> <span class="text-gray-500">{{ d.jurisdiction|default:d.source }} · first seen {{ d.first_seen|date:"M j, Y" }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Crawls</div>
+    <ul class="divide-y divide-gray-100 text-sm max-h-96 overflow-y-auto">
+      {% for c in crawls %}
+        <li class="px-4 py-2"><a class="link" href="{{ c.source.get_absolute_url }}">{{ c.source }}</a> <span class="text-gray-500">{{ c.started_at|date:"M j H:i" }} · {{ c.get_status_display }} · {{ c.datasets_added }} new, {{ c.datasets_changed }} changed, {{ c.datasets_removed }} removed</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

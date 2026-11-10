@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Jobs · SD GIS Hub{% endblock %}
+{% block content %}
+<div class="flex items-baseline justify-between mb-4">
+  <h1 class="text-xl font-semibold">Jobs</h1>
+  <p class="text-sm text-gray-500">{% for status, n in counts.items %}{{ n }} {{ status }}{% if not forloop.last %} · {% endif %}{% endfor %}</p>
+</div>
+{% if stale_pending %}
+  <div class="mb-4 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+    {{ stale_pending }} job{{ stale_pending|pluralize }} waiting. If this doesn't change, start a worker:
+    <code class="text-xs">uv run celery -A config worker -l info</code>
+  </div>
+{% endif %}
+<div class="card overflow-x-auto">
+  <table class="tbl">
+    <thead><tr><th>Job</th><th>Target</th><th>Status</th><th>Created</th><th>Took</th><th>Result</th></tr></thead>
+    <tbody id="job-rows" {% if active %}hx-get="{% url 'job_list' %}" hx-trigger="every 3s"{% endif %}>
+      {% include "core/_job_rows.html" %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

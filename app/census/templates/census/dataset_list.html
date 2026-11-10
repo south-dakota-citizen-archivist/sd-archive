@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Datasets · SD GIS Hub{% endblock %}
+{% block content %}
+<h1 class="text-xl font-semibold mb-4">Datasets</h1>
+<form class="card p-4 grid gap-3 md:grid-cols-6 items-end"
+      hx-get="{% url 'census:dataset_list' %}" hx-target="#results" hx-push-url="true"
+      hx-trigger="input changed delay:300ms from:input[name=q], change from:select, change from:input[type=checkbox], submit">
+  <label class="md:col-span-2 text-sm">Search names, descriptions and fields
+    <input name="q" value="{{ filters.q }}" placeholder="parcels, sale price, zoning…" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-1.5">
+  </label>
+  <label class="text-sm">Place
+    <select name="place" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1.5">
+      <option value="">Any</option>
+      {% for p in places %}<option value="{{ p.slug }}" {% if p.slug == filters.place %}selected{% endif %}>{{ p.name }}</option>{% endfor %}
+    </select>
+  </label>
+  <label class="text-sm">Topic
+    <select name="topic" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1.5">
+      <option value="">Any</option>
+      {% for t in topics %}<option value="{{ t.slug }}" {% if t.slug == filters.topic %}selected{% endif %}>{{ t.name }}</option>{% endfor %}
+    </select>
+  </label>
+  <label class="text-sm">Source
+    <select name="source" class="mt-1 w-full rounded-md border border-gray-300 px-2 py-1.5">
+      <option value="">Any</option>
+      {% for s in sources %}<option value="{{ s.slug }}" {% if s.slug == filters.source %}selected{% endif %}>{{ s.name }}</option>{% endfor %}
+    </select>
+  </label>
+  <div class="text-sm space-y-1">
+    <select name="status" class="w-full rounded-md border border-gray-300 px-2 py-1.5">
+      <option value="">Any status</option>
+      {% for value, label in statuses %}<option value="{{ value }}" {% if value == filters.status %}selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select>
+    <select name="kind" class="w-full rounded-md border border-gray-300 px-2 py-1.5">
+      <option value="">Layers and tables</option>
+      <option value="layer" {% if filters.kind == "layer" %}selected{% endif %}>Layers (with geometry)</option>
+      <option value="table" {% if filters.kind == "table" %}selected{% endif %}>Tables</option>
+    </select>
+    <label class="flex items-center gap-1 text-xs text-gray-600"><input type="checkbox" name="removed" value="1" {% if filters.removed == "1" %}checked{% endif %}> include removed</label>
+  </div>
+</form>
+<div id="results" class="mt-4">{% include "census/_dataset_results.html" %}</div>
+{% endblock %}

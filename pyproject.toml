@@ -1,0 +1,49 @@
+# sd-archive: the South Dakota citizen archive monorepo.
+# A uv workspace: the Django app (app/) plus shared libraries (packages/*).
+# See ../CONSOLIDATION-PLAN.md for the layout and migration stages.
+
+[tool.uv.workspace]
+members = ["app", "packages/*"]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.7.0",
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "pytest-django>=4.11",
+    "ruff>=0.11",
+]
+analysis = [
+    "folium>=0.20.0",
+    "mapclassify>=2.11.0",
+    "matplotlib>=3.11.2",
+    "notebook>=7.6.4",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# Where first-party code lives, so imports sort the same as in the original projects
+src = ["app", "packages/*/src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "PTH", "LOG", "G"]
+
+[tool.ruff.lint.per-file-ignores]
+"*/migrations/*.py" = ["E501"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+pythonpath = ["app"]
+testpaths = ["app/tests"]
+addopts = "-ra -m 'not network'"
+filterwarnings = [
+    # Admin URL fields; harmless until Django 6, when https becomes the default scheme
+    "ignore:The default scheme will be changed:django.utils.deprecation.RemovedInDjango60Warning",
+]
+markers = [
+    "network: hits live servers (deselected by default; run with `-m network`)",
+]

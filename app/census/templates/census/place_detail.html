@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ place.name }} · SD GIS Hub{% endblock %}
+{% block extra_head %}{% include "_maplibre.html" %}{% endblock %}
+{% block content %}
+<p class="text-sm text-gray-500"><a class="link" href="{% url 'census:place_list' %}">Places</a>{% if place.parent %} · <a class="link" href="{{ place.parent.get_absolute_url }}">{{ place.parent }}</a>{% endif %}</p>
+<h1 class="text-xl font-semibold mt-1">{{ place.name }}</h1>
+<p class="text-sm text-gray-600">{{ place.get_kind_display }} · GEOID {{ place.geoid }} · {{ datasets|length }} dataset{{ datasets|length|pluralize }} found</p>
+
+<div class="grid gap-6 lg:grid-cols-3 mt-4">
+  <div class="lg:col-span-2 space-y-4">
+    {% for topic, items in by_topic.items %}
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">{{ topic }} <span class="font-normal text-gray-500">({{ items|length }})</span></div>
+      <ul class="divide-y divide-gray-100 text-sm">
+        {% for d in items %}
+          <li class="px-4 py-2 flex justify-between gap-3">
+            <span><a class="link" href="{{ d.get_absolute_url }}">{{ d.name }}</a>{% if d.is_watched %} <span class="text-amber-500">★</span>{% endif %} <span class="text-xs text-gray-500">{{ d.service.name|default:"" }}</span></span>
+            <span class="text-gray-500 tabular-nums whitespace-nowrap">{{ d.feature_count|intcomma|default:"" }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% empty %}
+    <div class="card p-4 text-sm text-gray-600">
+      No datasets credited to {{ place.name }} yet. Either it doesn't publish GIS data on a source in the census, or that source isn't mapped to it.
+      {% if place.parent %}See also <a class="link" href="{{ place.parent.get_absolute_url }}">{{ place.parent }}</a>.{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="space-y-4">
+    <div class="card overflow-hidden"><div id="map" class="h-64"></div></div>
+    {% if datasets %}
+    <div class="card p-4 text-sm">
+      <h2 class="font-medium mb-2">Not found here</h2>
+      <p class="text-gray-600 text-xs mb-2">Topics with no datasets credited to {{ place.short_name }}:</p>
+      <div class="flex flex-wrap gap-1">{% for t in missing_topics %}<span class="pill">{{ t.name }}</span>{% empty %}<span class="text-xs text-gray-500">None: every topic has at least one dataset.</span>{% endfor %}</div>
+    </div>
+    {% endif %}
+    {% if sources %}
+    <div class="card p-4 text-sm"><h2 class="font-medium mb-2">Published on</h2>
+      <ul class="space-y-1">{% for s in sources %}<li><a class="link" href="{{ s.get_absolute_url }}">{{ s.name }}</a>{% if not s.crawlable %} · <a class="link text-xs" href="{{ s.url }}" target="_blank" rel="noopener">open ↗</a>{% endif %}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+    {% if children %}
+    <div class="card"><div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Cities and towns</div>
+      <ul class="text-sm divide-y divide-gray-100">{% for c in children %}<li class="px-4 py-1.5 flex justify-between"><a class="link" href="{{ c.get_absolute_url }}">{{ c.short_name }}</a><span class="text-gray-500">{{ c.n_datasets|default:"" }}</span></li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  const boundary = {{ boundary|safe }};
+  const bounds = boundary ? boundsOf(boundary) : null;
+  const map = hubMap("map", bounds ? { bounds: bounds.toArray() } : {});
+  if (boundary) map.on("load", () => {
+    map.addSource("boundary", { type: "geojson", data: boundary });
+    map.addLayer({ id: "b-fill", type: "fill", source: "boundary", paint: { "fill-color": ACCENT, "fill-opacity": 0.1 } });
+    map.addLayer({ id: "b-line", type: "line", source: "boundary", paint: { "line-color": ACCENT, "line-width": 2 } });
+  });
+</script>
+{% endblock %}

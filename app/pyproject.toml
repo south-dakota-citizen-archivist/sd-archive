@@ -1,0 +1,23 @@
+[project]
+name = "sd-archive-app"
+version = "0.1.0"
+description = "The South Dakota citizen archive's Django app: the GIS census and harvests (from gis-scraping), with public records to follow (Stage 3)."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "celery[redis]>=5.5",
+    "croniter>=6.0",
+    "curl-cffi>=0.17.0",
+    "django>=5.2,<6",
+    "django-ninja>=1.4",
+    "django-unfold>=0.70",
+    "geopandas>=1.2.0",
+    "nodriver>=0.50.99",
+    "psycopg[binary]>=3.2",
+    "pyarrow>=26.0.0",
+    "requests>=2.32",
+]
+
+[tool.uv]
+# A Django app, not an installable package. Lint and test settings live in the workspace root.
+package = false

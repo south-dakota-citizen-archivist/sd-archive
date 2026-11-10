@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Table · {{ dataset.name }} · SD GIS Hub{% endblock %}
+{% block content %}
+{% include "_dataset_header.html" %}
+{% if harvested %}
+  <form class="mb-3 flex gap-2" hx-get="{% url 'harvest:dataset_table' dataset.pk %}" hx-target="#table-body" hx-push-url="true" hx-trigger="input changed delay:400ms from:input, submit">
+    <input type="hidden" name="sort" value="{{ sort }}"><input type="hidden" name="dir" value="{{ dir }}">
+    <input name="q" value="{{ q }}" placeholder="Filter: any value contains…" class="w-80 rounded-md border border-gray-300 px-3 py-1.5 text-sm">
+  </form>
+  <div id="table-body">{% include "harvest/_table_rows.html" %}</div>
+{% else %}
+  <p class="text-sm text-gray-600 mb-3">Not harvested yet. These are the first 100 rows straight from the source. <b>Watch</b> this dataset to archive it and get sorting, filtering and history.</p>
+  <div hx-get="{% url 'harvest:dataset_preview_table' dataset.pk %}" hx-trigger="load">
+    <div class="card p-4 text-sm text-gray-500">Loading from {{ dataset.source }}…</div>
+  </div>
+{% endif %}
+{% endblock %}

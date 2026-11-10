@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Sources · SD GIS Hub{% endblock %}
+{% block content %}
+<div class="flex flex-wrap items-baseline justify-between gap-3 mb-4">
+  <h1 class="text-xl font-semibold">Sources</h1>
+  <form method="get" action="{% url 'census:source_add' %}" class="flex flex-1 max-w-xl gap-2">
+    <input name="url" required placeholder="Paste an ArcGIS services URL, e.g. https://gis.example.org/server/rest/services" class="flex-1 rounded-md border border-gray-300 px-3 py-1.5 text-sm">
+    <button class="btn btn-primary whitespace-nowrap">Add a source</button>
+  </form>
+</div>
+{% for g in groups %}
+{% if g.crawlable %}
+<h2 class="text-sm font-medium text-gray-700 mt-6 mb-2">{{ g.label }} <span class="font-normal text-gray-500">({{ g.sources|length }})</span></h2>
+<div class="card overflow-x-auto">
+  <table class="tbl">
+    <thead><tr><th>Source</th><th>Publisher</th><th class="text-right">Datasets</th><th class="text-right">Watched</th><th>Last crawled</th></tr></thead>
+    <tbody>
+      {% for s in g.sources %}
+      <tr>
+        <td><a class="link font-medium" href="{{ s.get_absolute_url }}">{{ s.name }}</a><div class="text-xs text-gray-500 break-all">{{ s.url }}</div></td>
+        <td>{{ s.publisher|default:"" }}</td>
+        <td class="text-right tabular-nums">{{ s.n_datasets|intcomma }}</td>
+        <td class="text-right tabular-nums">{{ s.n_watched|default:"" }}</td>
+        <td class="whitespace-nowrap text-gray-500">{{ s.last_crawled_at|naturaltime|default:"never" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<details class="card mt-6">
+  <summary class="px-4 py-2 text-sm font-medium text-gray-700 cursor-pointer">{{ g.label }} <span class="font-normal text-gray-500">({{ g.sources|length }}, listed but not crawled)</span></summary>
+  <table class="tbl border-t border-gray-200">
+    <thead><tr><th>Source</th><th>Publisher</th><th>Place</th><th></th></tr></thead>
+    <tbody>
+      {% for s in g.sources %}
+      <tr>
+        <td><a class="link font-medium" href="{{ s.get_absolute_url }}">{{ s.name }}</a></td>
+        <td>{{ s.publisher|default:"" }}</td>
+        <td>{% if s.jurisdiction %}<a class="link" href="{{ s.jurisdiction.get_absolute_url }}">{{ s.jurisdiction }}</a>{% endif %}</td>
+        <td class="text-right"><a class="link text-xs" href="{{ s.url }}" target="_blank" rel="noopener">open ↗</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</details>
+{% endif %}
+{% endfor %}
+{% endblock %}

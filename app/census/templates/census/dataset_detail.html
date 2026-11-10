@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ dataset.name }} · SD GIS Hub{% endblock %}
+{% block content %}
+{% include "_dataset_header.html" %}
+
+{% if dataset.last_error %}
+  <div class="mb-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">Last error: {{ dataset.last_error }}</div>
+{% endif %}
+
+<div class="grid gap-6 lg:grid-cols-3">
+  <div class="lg:col-span-2 space-y-6">
+    {% if dataset.description %}
+      <div class="card p-4 text-sm prose max-w-none">{{ dataset.description|striptags|truncatewords:120 }}</div>
+    {% endif %}
+
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Fields ({{ dataset.fields|length }})</div>
+      <div class="overflow-x-auto">
+        <table class="tbl">
+          <thead><tr><th>Name</th><th>Label</th><th>Type</th><th></th></tr></thead>
+          <tbody>
+            {% for f in dataset.fields %}
+            <tr>
+              <td class="font-mono text-xs">{{ f.name }}</td>
+              <td>{% if f.alias != f.name %}{{ f.alias }}{% endif %}</td>
+              <td class="text-gray-500">{{ f.type|cut:"esriFieldType" }}</td>
+              <td>{% if f.name in dataset.name_fields %}<span class="pill bg-purple-100 text-purple-800" title="Indexed for name search">name</span>{% endif %}{% if f.name == dataset.object_id_field %}<span class="pill">ID</span>{% endif %}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {% if schema_changes %}
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Schema changes</div>
+      <ul class="divide-y divide-gray-100 text-sm">
+        {% for o in schema_changes %}<li class="px-4 py-2">{{ o.observed_at|date }}: fields changed ({{ o.fields|length }} fields)</li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="space-y-6">
+    <dl class="card p-4 space-y-3 text-sm">
+      <div><dt class="text-gray-500">Publisher</dt><dd>{{ dataset.source.publisher|default:"—" }}</dd></div>
+      <div><dt class="text-gray-500">Service</dt><dd class="break-all">{{ dataset.service.name|default:"—" }} ({{ dataset.service.type }})</dd></div>
+      <div><dt class="text-gray-500">Topics</dt><dd>{% for t in dataset.topics.all %}<a class="pill hover:bg-gray-200 mr-1" href="{% url 'census:dataset_list' %}?topic={{ t.slug }}">{{ t.name }}</a>{% empty %}—{% endfor %}</dd></div>
+      <div><dt class="text-gray-500">First seen</dt><dd>{{ dataset.first_seen|date }} · last seen {{ dataset.last_seen|naturaltime }}</dd></div>
+      <div><dt class="text-gray-500">Paging</dt><dd>{{ dataset.max_record_count|default:"?" }} per request · pagination {{ dataset.supports_pagination|yesno:"supported,not supported,unknown" }}</dd></div>
+      <div><dt class="text-gray-500">Status</dt><dd>{{ dataset.get_status_display }}{% if dataset.is_watched %} · schedule <code class="text-xs">{{ dataset.harvest_schedule }}</code>{% endif %}</dd></div>
+      {% if dataset.last_harvested_at %}<div><dt class="text-gray-500">Last harvested</dt><dd>{{ dataset.last_harvested_at|naturaltime }}</dd></div>{% endif %}
+      {% if dataset.source_edited_at %}<div><dt class="text-gray-500">Last edited at the source</dt><dd>{{ dataset.source_edited_at|date:"M j, Y H:i" }}</dd></div>{% endif %}
+    </dl>
+
+    <div class="card p-4">
+      <h2 class="text-sm font-medium mb-2">Feature count over time</h2>
+      <svg id="count-chart" class="w-full h-24" viewBox="0 0 300 80" preserveAspectRatio="none"></svg>
+      <p id="count-note" class="text-xs text-gray-500 mt-1"></p>
+    </div>
+
+    {% if harvests %}
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Recent harvests</div>
+      <ul class="divide-y divide-gray-100 text-sm">
+        {% for h in harvests %}
+          <li class="px-4 py-2"><a class="link" href="{% url 'harvest:harvest_detail' h.pk %}">{{ h.started_at|date:"M j, Y H:i" }}</a> · {{ h.status }}{% if h.status == "succeeded" %} · +{{ h.added|intcomma }} ~{{ h.changed|intcomma }} −{{ h.removed|intcomma }}{% endif %}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if related %}
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Same service</div>
+      <ul class="divide-y divide-gray-100 text-sm">
+        {% for d in related %}<li class="px-4 py-2"><a class="link" href="{{ d.get_absolute_url }}">{{ d.name }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // A tiny inline chart: no charting library needed for one series
+  (function () {
+    const series = {{ count_series|safe }};
+    const svg = document.getElementById("count-chart");
+    const note = document.getElementById("count-note");
+    if (series.length === 0) { note.textContent = "No counts recorded yet."; return; }
+    const values = series.map((d) => d[1]);
+    const min = Math.min(...values), max = Math.max(...values);
+    const x = (i) => (series.length === 1 ? 150 : (i / (series.length - 1)) * 300);
+    const y = (v) => (max === min ? 40 : 75 - ((v - min) / (max - min)) * 70);
+    const points = series.map((d, i) => `${x(i)},${y(d[1])}`).join(" ");
+    svg.innerHTML = `<polyline fill="none" stroke="#2563eb" stroke-width="2" vector-effect="non-scaling-stroke" points="${points}"/>`
+      + series.map((d, i) => `<circle cx="${x(i)}" cy="${y(d[1])}" r="2.5" fill="#2563eb"><title>${d[0].slice(0, 10)}: ${d[1].toLocaleString()}</title></circle>`).join("");
+    note.textContent = `${series.length} crawl${series.length === 1 ? "" : "s"} · ${min.toLocaleString()}–${max.toLocaleString()} features`;
+  })();
+</script>
+{% endblock %}

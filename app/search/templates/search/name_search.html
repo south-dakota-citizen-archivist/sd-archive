@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{% if q %}{{ q }} · {% endif %}Name search · SD GIS Hub{% endblock %}
+{% block content %}
+<h1 class="text-xl font-semibold">Name search</h1>
+<p class="text-sm text-gray-600 mt-1">
+  Fuzzy search across {{ n_names|intcomma }} owner, taxpayer and other names in
+  {{ indexed_datasets|length }} harvested dataset{{ indexed_datasets|length|pluralize }}. Matches ignore case, accents, punctuation and word order.
+</p>
+<form class="mt-4 flex flex-wrap gap-2 items-center" hx-get="{% url 'search:name_search' %}" hx-target="#results" hx-push-url="true"
+      hx-trigger="input changed delay:300ms from:input[name=q], change from:input[type=checkbox], submit">
+  <input name="q" value="{{ q }}" autofocus placeholder="e.g. Wharf Resources, Johnson Mark" class="w-96 max-w-full rounded-md border border-gray-300 px-3 py-2">
+  <label class="text-sm text-gray-600 flex items-center gap-1"><input type="checkbox" name="current" value="1" {% if current_only %}checked{% endif %}> current records only</label>
+</form>
+<div id="results" class="mt-4">{% include "search/_results.html" %}</div>
+
+{% if not q and indexed_datasets %}
+<div class="card p-4 mt-6 text-sm">
+  <h2 class="font-medium mb-2">What's searched</h2>
+  <ul class="space-y-1">
+    {% for d in indexed_datasets %}<li><a class="link" href="{{ d.get_absolute_url }}">{{ d.name }}</a> <span class="text-gray-500">· {{ d.jurisdiction|default:d.source }} · fields: {{ d.name_fields|join:", " }}</span></li>{% endfor %}
+  </ul>
+  <p class="text-xs text-gray-500 mt-3">Names come from datasets you watch. Which fields count as names is suggested automatically and editable in the admin.</p>
+</div>
+{% endif %}
+{% endblock %}

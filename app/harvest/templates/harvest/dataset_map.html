@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Map · {{ dataset.name }} · SD GIS Hub{% endblock %}
+{% block extra_head %}{% include "_maplibre.html" %}{% endblock %}
+{% block content %}
+{% include "_dataset_header.html" %}
+<p class="text-sm text-gray-600 mb-2">
+  {% if harvested %}All current features, served as vector tiles from the archive. Click a feature for details.
+  {% else %}Not harvested yet: showing a sample of up to 500 features straight from the source.{% endif %}
+</p>
+<div class="card overflow-hidden"><div id="map" class="h-[36rem]"></div></div>
+<p id="map-status" class="text-xs text-gray-500 mt-2"></p>
+{% endblock %}
+{% block scripts %}
+<script>
+  const harvested = {{ harvested|yesno:"true,false" }};
+  const extent = {{ extent|safe }};
+  const datasetId = {{ dataset.pk }};
+  const status = document.getElementById("map-status");
+  const map = hubMap("map", extent ? { bounds: [[extent[0], extent[1]], [extent[2], extent[3]]] } : {});
+
+  function showPopup(props, lngLat, key) {
+    const link = key ? `<p class="mt-1"><a class="link" href="/datasets/${datasetId}/features/${encodeURIComponent(key)}/">History →</a></p>` : "";
+    new maplibregl.Popup({ maxWidth: "360px" }).setLngLat(lngLat).setHTML(propsTable(props) + link).addTo(map);
+  }
+
+  map.on("load", async () => {
+    if (harvested) {
+      map.addSource("features", {
+        type: "vector",
+        tiles: [`${location.origin}/tiles/${datasetId}/{z}/{x}/{y}.pbf`],
+        minzoom: 0, maxzoom: 16,
+      });
+      addFeatureLayers(map, "features", {
+        sourceLayer: "features",
+        onClick: async (f, lngLat) => {
+          const r = await fetch(`/datasets/${datasetId}/features/${encodeURIComponent(f.properties.key)}.json`);
+          if (r.ok) showPopup((await r.json()).properties, lngLat, f.properties.key);
+        },
+      });
+    } else {
+      status.textContent = "Loading sample from source…";
+      const r = await fetch("{% url 'census:dataset_preview' dataset.pk %}");
+      const data = await r.json();
+      if (!r.ok || data.error) { status.textContent = `Couldn't load a preview: ${data.error || r.status}`; return; }
+      map.addSource("features", { type: "geojson", data });
+      addFeatureLayers(map, "features", { onClick: (f, lngLat) => showPopup(f.properties, lngLat) });
+      const b = boundsOf(data);
+      if (b) map.fitBounds(b, { padding: 30, maxZoom: 15 });
+      status.textContent = `${data.features.length} sample features`;
+    }
+  });
+</script>
+{% endblock %}

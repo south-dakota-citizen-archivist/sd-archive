@@ -1,0 +1,38 @@
+{% load humanize %}
+<div class="mb-4">
+  <p class="text-sm text-gray-500">
+    <a class="link" href="{{ dataset.source.get_absolute_url }}">{{ dataset.source }}</a>
+    {% if dataset.jurisdiction %}· <a class="link" href="{{ dataset.jurisdiction.get_absolute_url }}">{{ dataset.jurisdiction }}</a>{% endif %}
+  </p>
+  <div class="flex flex-wrap items-start justify-between gap-3 mt-1">
+    <div>
+      <h1 class="text-xl font-semibold">{{ dataset.name }}</h1>
+      <p class="text-sm text-gray-600 mt-1">
+        {{ dataset.get_kind_display }}{% if dataset.geometry_type %} · {{ dataset.geometry_type|cut:"esriGeometry" }}{% endif %}
+        {% if dataset.feature_count is not None %} · {{ dataset.feature_count|intcomma }} features{% endif %}
+        {% if dataset.removed_at %} · <span class="text-red-700">removed from source {{ dataset.removed_at|date }}</span>{% endif %}
+      </p>
+    </div>
+    <div class="flex gap-2">
+      <form method="post" action="{% url 'census:dataset_watch' dataset.pk %}">{% csrf_token %}
+        {% if dataset.is_watched %}
+          <input type="hidden" name="watch" value="0"><button class="btn">★ Watching</button>
+        {% else %}
+          <input type="hidden" name="watch" value="1"><button class="btn btn-primary" title="Harvest this dataset on a schedule and keep its history">☆ Watch</button>
+        {% endif %}
+      </form>
+      <form method="post" action="{% url 'census:dataset_harvest' dataset.pk %}">{% csrf_token %}
+        <button class="btn" title="Download all features now">Harvest now</button>
+      </form>
+      <a class="btn" href="{{ dataset.url }}" target="_blank" rel="noopener">Source ↗</a>
+      <a class="btn" href="/admin/census/dataset/{{ dataset.pk }}/change/">Edit</a>
+    </div>
+  </div>
+  <div class="mt-4 border-b border-gray-200 flex gap-6 text-sm">
+    <a href="{% url 'census:dataset_detail' dataset.pk %}" class="pb-2 {% if tab == 'overview' %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Overview</a>
+    {% if dataset.is_spatial %}<a href="{% url 'harvest:dataset_map' dataset.pk %}" class="pb-2 {% if tab == 'map' %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Map</a>{% endif %}
+    <a href="{% url 'harvest:dataset_table' dataset.pk %}" class="pb-2 {% if tab == 'table' %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Table</a>
+    <a href="{% url 'harvest:dataset_changes' dataset.pk %}" class="pb-2 {% if tab == 'changes' %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Changes</a>
+    <a href="{% url 'harvest:dataset_download' dataset.pk %}" class="pb-2 {% if tab == 'download' %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Download</a>
+  </div>
+</div>

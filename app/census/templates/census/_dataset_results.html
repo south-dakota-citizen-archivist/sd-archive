@@ -1,0 +1,33 @@
+{% load humanize %}
+<p class="text-sm text-gray-500 mb-2">{{ total|intcomma }} dataset{{ total|pluralize }}</p>
+<div class="card overflow-x-auto">
+  <table class="tbl">
+    <thead><tr><th>Name</th><th>Place</th><th>Source</th><th>Type</th><th class="text-right">Features</th><th>Topics</th></tr></thead>
+    <tbody>
+      {% for d in page %}
+      <tr class="{% if d.removed_at %}opacity-60{% endif %}">
+        <td>
+          <a class="link font-medium" href="{{ d.get_absolute_url }}">{{ d.name }}</a>
+          {% if d.is_watched %}<span title="Watched" class="text-amber-500">★</span>{% endif %}
+          {% if d.removed_at %}<span class="pill bg-red-100 text-red-800">removed</span>{% endif %}
+          <div class="text-xs text-gray-500">{{ d.service.name|default:"" }}</div>
+        </td>
+        <td class="whitespace-nowrap">{% if d.jurisdiction %}<a class="link" href="{{ d.jurisdiction.get_absolute_url }}">{{ d.jurisdiction.name }}</a>{% endif %}</td>
+        <td class="text-gray-600">{{ d.source.name }}</td>
+        <td class="whitespace-nowrap text-gray-600">{% if d.kind == "table" %}table{% else %}{{ d.geometry_type|cut:"esriGeometry"|lower }}{% endif %}</td>
+        <td class="text-right tabular-nums">{{ d.feature_count|intcomma|default:"" }}</td>
+        <td>{% for t in d.topics.all %}<a class="pill hover:bg-gray-200 mr-1" href="?topic={{ t.slug }}">{{ t.name }}</a>{% endfor %}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6" class="text-gray-500">No datasets match.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% if page.paginator.num_pages > 1 %}
+<div class="flex items-center gap-2 mt-3 text-sm">
+  {% if page.has_previous %}<a class="btn" hx-get="{% querystring page=page.previous_page_number %}" hx-target="#results" hx-push-url="true" href="{% querystring page=page.previous_page_number %}">← Previous</a>{% endif %}
+  <span class="text-gray-500">Page {{ page.number }} of {{ page.paginator.num_pages }}</span>
+  {% if page.has_next %}<a class="btn" hx-get="{% querystring page=page.next_page_number %}" hx-target="#results" hx-push-url="true" href="{% querystring page=page.next_page_number %}">Next →</a>{% endif %}
+</div>
+{% endif %}

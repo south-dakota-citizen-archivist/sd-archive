@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Job #{{ job.pk }} · SD GIS Hub{% endblock %}
+{% block content %}
+<p class="text-sm"><a class="link" href="{% url 'job_list' %}">← Jobs</a></p>
+<h1 class="text-xl font-semibold mt-2">{{ job.kind }} #{{ job.pk }}: {{ job.label }}</h1>
+<dl class="card p-4 mt-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+  <div><dt class="text-gray-500">Status</dt><dd>{{ job.status }}</dd></div>
+  <div><dt class="text-gray-500">Created</dt><dd>{{ job.created_at }}</dd></div>
+  <div><dt class="text-gray-500">Started</dt><dd>{{ job.started_at|default:"—" }}</dd></div>
+  <div><dt class="text-gray-500">Finished</dt><dd>{{ job.finished_at|default:"—" }}</dd></div>
+</dl>
+{% if job.result %}<h2 class="font-medium mt-6 mb-2">Result</h2><pre class="card p-4 text-xs overflow-x-auto">{{ job.result|pprint }}</pre>{% endif %}
+{% if job.error %}<h2 class="font-medium mt-6 mb-2">Error</h2><pre class="card p-4 text-xs overflow-x-auto text-red-800 whitespace-pre-wrap">{{ job.error }}</pre>{% endif %}
+{% endblock %}

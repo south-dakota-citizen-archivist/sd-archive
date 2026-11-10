@@ -1,0 +1,42 @@
+{% load static %}<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}SD GIS Hub{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <script src="{% static 'vendor/htmx/htmx.min.js' %}" defer></script>
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+    <nav class="bg-white border-b border-gray-200">
+      <div class="mx-auto max-w-7xl px-4 flex items-center gap-6 h-12 overflow-x-auto">
+        <a href="{% url 'home' %}" class="font-semibold tracking-tight whitespace-nowrap hover:text-blue-700">SD GIS Hub</a>
+        {% url 'search:name_search' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if request.path == u %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Name search</a>
+        {% url 'census:dataset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Datasets</a>
+        {% url 'census:place_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Places</a>
+        {% url 'census:coverage' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Coverage</a>
+        {% url 'census:source_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Sources</a>
+        {% url 'census:changes' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Changes</a>
+        {% url 'job_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Jobs</a>
+        <span class="flex-1"></span>
+        <a href="/api/v1/docs" class="text-xs text-gray-400 hover:text-gray-600 whitespace-nowrap">API</a>
+        <a href="/admin/" class="text-xs text-gray-400 hover:text-gray-600 whitespace-nowrap">Admin →</a>
+      </div>
+    </nav>
+
+    {% if messages %}
+      <div class="mx-auto max-w-7xl w-full px-4 mt-4 space-y-2">
+        {% for message in messages %}
+          <div class="rounded-md border px-3 py-2 text-sm {% if message.tags == 'error' %}border-red-200 bg-red-50 text-red-800{% else %}border-green-200 bg-green-50 text-green-800{% endif %}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <main class="flex-1 mx-auto max-w-7xl w-full px-4 py-6">
+      {% block content %}{% endblock %}
+    </main>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

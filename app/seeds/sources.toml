@@ -1,0 +1,212 @@
+# Known sources, their publishers, and datasets to watch.
+#
+# The app rewrites this file whenever a source, publisher or watched dataset changes, so it
+# always matches the database. `uv run python manage.py seed` loads it, e.g. into a rebuilt
+# database. If you edit it by hand, run `seed` before changing anything in the app, or the
+# app will overwrite your edits. Jurisdictions are referenced by slug, e.g.
+# "lawrence-county", "sioux-falls", "south-dakota". Fields at their defaults are left out.
+
+[[publishers]]
+name = "First District Association of Local Governments"
+website = "https://www.1stdistrict.org/"
+notes = "Hosts GIS for 16 eastern South Dakota counties and cities, plus Lawrence County."
+
+[[publishers]]
+name = "South Dakota Department of Transportation"
+jurisdiction = "south-dakota"
+
+[[publishers]]
+name = "State of South Dakota (BIT hosted services)"
+jurisdiction = "south-dakota"
+notes = "Hosted layers from several agencies, including DANR water quality and dam safety."
+
+[[publishers]]
+name = "South Dakota Game, Fish and Parks"
+jurisdiction = "south-dakota"
+
+[[publishers]]
+name = "Rapid City / Pennington County GIS"
+jurisdiction = "pennington-county"
+notes = "Joint city-county GIS division. Also hosts Meade County parcels."
+
+[[publishers]]
+name = "Minnehaha County"
+jurisdiction = "minnehaha-county"
+
+[[publishers]]
+name = "City of Sioux Falls"
+jurisdiction = "sioux-falls"
+
+[[publishers]]
+name = "District 3 Planning and Development"
+
+[[publishers]]
+name = "State of South Dakota"
+
+[[sources]]
+name = "1st District (16 counties + Lawrence)"
+slug = "1stdistrict"
+url = "https://www.1stdistrict.org/arcgis/rest/services"
+platform = "arcgis_server"
+publisher = "First District Association of Local Governments"
+jurisdiction = "south-dakota"
+found_via = "Lawrence County property card"
+
+[sources.folder_jurisdictions]
+Beadle = "beadle-county"
+Clark = "clark-county"
+Codington = "codington-county"
+Deuel = "deuel-county"
+Edmunds = "edmunds-county"
+Grant = "grant-county"
+Hamlin = "hamlin-county"
+Hand = "hand-county"
+Kingsbury = "kingsbury-county"
+Lake = "lake-county"
+Lawrence = "lawrence-county"
+Milbank = "milbank"
+Miner = "miner-county"
+Moody = "moody-county"
+Roberts = "roberts-county"
+SDOneCall = "south-dakota"
+
+[[sources]]
+name = "SDDOT (sdgis.sd.gov/dot)"
+slug = "sddot"
+url = "https://sdgis.sd.gov/dot/rest/services"
+platform = "arcgis_server"
+publisher = "South Dakota Department of Transportation"
+jurisdiction = "south-dakota"
+found_via = "web search"
+
+[[sources]]
+name = "State hosted services (sdgis.sd.gov/host)"
+slug = "sd-hosted"
+url = "https://sdgis.sd.gov/host/rest/services"
+platform = "arcgis_server"
+publisher = "State of South Dakota (BIT hosted services)"
+jurisdiction = "south-dakota"
+found_via = "web search"
+
+[[sources]]
+name = "Game, Fish and Parks (ert.gfp.sd.gov)"
+slug = "sd-gfp"
+url = "https://ert.gfp.sd.gov/arcgis/rest/services"
+platform = "arcgis_server"
+publisher = "South Dakota Game, Fish and Parks"
+jurisdiction = "south-dakota"
+found_via = "web search"
+
+[[sources]]
+name = "Rapid City / Pennington County (gis.rcgov.org)"
+slug = "rapid-city-pennington"
+url = "https://gis.rcgov.org/server/rest/services"
+platform = "arcgis_server"
+publisher = "Rapid City / Pennington County GIS"
+jurisdiction = "pennington-county"
+found_via = "web search"
+
+[[sources]]
+name = "Minnehaha County (MinneMap)"
+slug = "minnehaha"
+url = "https://gis.minnehahacounty.gov/minnemap/rest/services"
+platform = "arcgis_server"
+publisher = "Minnehaha County"
+jurisdiction = "minnehaha-county"
+found_via = "web search"
+notes = "Some services hang instead of answering; crawls rely on the per-request timeout."
+
+[[sources]]
+name = "City of Sioux Falls (gis.siouxfalls.gov)"
+slug = "sioux-falls"
+url = "https://gis.siouxfalls.gov/arcgis/rest/services"
+platform = "arcgis_server"
+publisher = "City of Sioux Falls"
+jurisdiction = "sioux-falls"
+found_via = "web search"
+
+[[sources]]
+name = "City of Sioux Falls (ArcGIS Online)"
+slug = "sioux-falls-agol"
+url = "https://services.arcgis.com/YpECgwASS4iMvgsA/ArcGIS/rest/services"
+platform = "arcgis_online"
+publisher = "City of Sioux Falls"
+jurisdiction = "sioux-falls"
+found_via = "web search"
+
+[[sources]]
+name = "gis.districtiii.org"
+slug = "gis-districtiii-org"
+url = "https://gis.districtiii.org/server/rest/services"
+platform = "arcgis_server"
+publisher = "District 3 Planning and Development"
+jurisdiction = "south-dakota"
+found_via = "web search"
+
+[sources.folder_jurisdictions]
+aurora = "aurora-county"
+beadle = "beadle-county"
+bennett = "bennett-county"
+bon_homme = "bon-homme-county"
+brule = "brule-county"
+buffalo = "buffalo-county"
+butte = "butte-county"
+campbell = "campbell-county"
+charles_mix = "charles-mix-county"
+davison = "davison-county"
+day = "day-county"
+douglas = "douglas-county"
+edmunds = "edmunds-county"
+faulk = "faulk-county"
+gregory = "gregory-county"
+haakon = "haakon-county"
+hanson = "hanson-county"
+hughes = "hughes-county"
+hutchinson = "hutchinson-county"
+jackson = "jackson-county"
+jerauld = "jerauld-county"
+jones = "jones-county"
+lyman = "lyman-county"
+marshall = "marshall-county"
+mcpherson = "mcpherson-county"
+mellette = "mellette-county"
+mitchell = "mitchell"
+potter = "potter-county"
+sanborn = "sanborn-county"
+stanley = "stanley-county"
+sully = "sully-county"
+tripp = "tripp-county"
+turner = "turner-county"
+yankton = "yankton-county"
+ziebach = "ziebach-county"
+
+[[sources]]
+name = "SD DANR"
+slug = "sd-danr"
+url = "https://sdgis.sd.gov/danr/rest/services"
+platform = "arcgis_server"
+publisher = "State of South Dakota"
+jurisdiction = "south-dakota"
+found_via = "web search"
+
+[[sources]]
+name = "SD GIS"
+slug = "sd-gis"
+url = "https://sdgis.sd.gov/arcgis1/rest/services"
+platform = "arcgis_server"
+publisher = "State of South Dakota"
+jurisdiction = "south-dakota"
+found_via = "web search"
+
+# Datasets to harvest on a schedule. Matched by URL once a crawl has found them.
+[[watch]]
+url = "https://www.1stdistrict.org/arcgis/rest/services/Lawrence/lawrencemapnet2/FeatureServer/0"
+
+[[watch]]
+url = "https://www.1stdistrict.org/arcgis/rest/services/Moody/moodymapnet/FeatureServer/7"
+
+[[watch]]
+url = "https://gis.minnehahacounty.gov/minnemap/rest/services/OpenData/MinnehahaCountyParcels/MapServer/0"
+
+[[watch]]
+url = "https://gis.rcgov.org/server/rest/services/AGOL/AGOL/MapServer/20"

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Download · {{ dataset.name }} · SD GIS Hub{% endblock %}
+{% block content %}
+{% include "_dataset_header.html" %}
+{% if harvested %}
+<div class="grid gap-4 md:grid-cols-3">
+  <a class="card p-4 hover:border-blue-300 {% if not latest_export %}pointer-events-none opacity-50{% endif %}" href="{% url 'harvest:download' dataset.pk 'parquet' %}">
+    <div class="font-medium">GeoParquet</div>
+    <p class="text-sm text-gray-600 mt-1">The snapshot from the latest harvest that changed anything{% if latest_export %} ({{ latest_export.started_at|date }}){% endif %}. Best for GeoPandas, DuckDB and QGIS.</p>
+  </a>
+  <a class="card p-4 hover:border-blue-300" href="{% url 'harvest:download' dataset.pk 'geojson' %}">
+    <div class="font-medium">GeoJSON</div>
+    <p class="text-sm text-gray-600 mt-1">Current records, generated from the archive.</p>
+  </a>
+  <a class="card p-4 hover:border-blue-300" href="{% url 'harvest:download' dataset.pk 'csv' %}">
+    <div class="font-medium">CSV</div>
+    <p class="text-sm text-gray-600 mt-1">Current records with geometry as GeoJSON text in the last column. Coded fields get a <code>FIELD_label</code> column with each code's meaning.</p>
+  </a>
+</div>
+<p class="text-xs text-gray-500 mt-2">Files are named <code>{{ download_slug }}</code>, dated by the last harvest.</p>
+<div class="card p-4 mt-4 text-sm">
+  <h2 class="font-medium mb-2">From code</h2>
+  <pre class="bg-gray-50 rounded p-3 text-xs overflow-x-auto">import geopandas as gpd
+
+# Current records (or add as_of=2026-11-01T00:00:00 for a point in time)
+gdf = gpd.read_file("http://localhost:8000/api/v1/datasets/{{ dataset.pk }}/features?limit=5000")
+
+# Or the full snapshot
+gdf = gpd.read_parquet("http://localhost:8000{% url 'harvest:download' dataset.pk 'parquet' %}")</pre>
+</div>
+{% else %}
+  <div class="card p-4 text-sm text-gray-600">Downloads come from the archive. <b>Watch</b> this dataset to harvest it, or open the <a class="link" href="{{ dataset.url }}" target="_blank" rel="noopener">source</a> directly.</div>
+{% endif %}
+{% endblock %}
