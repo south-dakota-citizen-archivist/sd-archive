@@ -31,6 +31,7 @@ from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
+import exports  # pipelines/elections/exports.py (run as a script, so this folder is on the path)
 import pandas as pd
 
 import sdplaces
@@ -78,6 +79,114 @@ def county_place(code: str, on: date, issues: list, eid: int, name: str):
             }
         )
     return p
+
+
+def _norm(name: str) -> str:
+    """For matching candidate names across the API and exports ('O"Dea' = "O'Dea")."""
+    name = re.sub(r"[\"'’‘`]", "'", str(name))
+    return " ".join(name.split()).casefold()
+
+
+def merge_exports(eid, on, root, races, precinct, county) -> tuple[list[dict], list[dict]]:
+    """Check the API's precinct rows against the export workbooks, and fill what it lacks.
+
+    - Check: each export TOTALS row (race, county, candidate) against the API's precinct votes
+      summed the same way, where the API has that race in that county.
+    - Fill: races and counties the API has no precinct rows for (2012; a few ballot questions;
+      local races) come from the exports, with source="export". Race and candidate details
+      (type, IDs, party) come from the API's own county rows when it has them.
+    """
+    rows = exports.read_election(root)
+    if not rows:
+        return [], []
+    issues: list[dict] = []
+    api_pairs = {(r["race_id"], r["county"]) for r in precinct}
+
+    sums: dict[tuple, int] = defaultdict(int)
+    for r in precinct:
+        sums[(r["race_id"], r["county"], _norm(r["candidate"]))] += r["votes"]
+    checked, mismatched = 0, []
+    for e in rows:
+        if e["precinct"] is None and not e["recount"] and (e["race_id"], e["county"]) in api_pairs:
+            checked += 1
+            k = (e["race_id"], e["county"], _norm(e["candidate"]))
+            if sums.get(k) != e["votes"]:
+                mismatched.append(
+                    (e["race_title"], e["county"], e["candidate"], sums.get(k), e["votes"])
+                )
+    if mismatched:
+        detail = f"{len(mismatched)} of {checked} export totals, e.g. {mismatched[:3]}"
+        issues.append({"eid": eid, "check": "API precinct sums ≠ export totals", "detail": detail})
+
+    # What the API knows about each race and candidate, from any of its rows
+    race_info: dict[str, dict] = {}
+    cands: dict[tuple, dict] = {}
+    for r in county + precinct:
+        race_info.setdefault(r["race_id"], r)
+        cands.setdefault((r["race_id"], _norm(r["candidate"])), r)
+    by_race_id = defaultdict(list)
+    for k in races:
+        by_race_id[k[1]].append(k)
+    # County codes and GEOIDs by today's name, which is what the site and its exports show
+    counties: dict[str, tuple] = {}
+    for code in range(1, 68):
+        try:
+            p = sdplaces.from_id("sos_election_county", code, as_of=on)
+        except sdplaces.UnknownPlace:
+            continue
+        today = sdplaces.current(p)
+        counties[today.short_name] = (str(code).zfill(2), p.geoid, today.geoid)
+    url = f"{SITE}ResultsExport.aspx?eid={eid}"
+    filled, unknown = [], set()
+    for e in rows:
+        if e["precinct"] is None or e["recount"] or (e["race_id"], e["county"]) in api_pairs:
+            continue
+        race = race_info.get(e["race_id"], {})
+        keys = by_race_id.get(e["race_id"], [])
+        rtype, _, osn, party = keys[0] if len(keys) == 1 else ("", "", "", "0")
+        cand = cands.get((e["race_id"], _norm(e["candidate"])), {})
+        code, geoid, geoid_now = counties.get(e["county"], ("", "", ""))
+        if not code:
+            unknown.add(e["county"])
+        filled.append(
+            {
+                "eid": eid,
+                "election_date": race.get("election_date") or on.isoformat(),
+                "election": race.get("election", ""),
+                "election_status": race.get("election_status", ""),
+                "race_type": race.get("race_type") or rtype,
+                "race_id": e["race_id"],
+                "office_seq": race.get("office_seq") or osn,
+                "party_ballot": race.get("party_ballot", "" if party == "0" else party),
+                "race": race.get("race") or e["race_title"],
+                "vote_for": race.get("vote_for"),
+                "county_code": code,
+                "county": e["county"],
+                "county_geoid": geoid,
+                "county_geoid_current": geoid_now,
+                "candidate_id": cand.get("candidate_id", ""),
+                "candidate": cand.get("candidate") or e["candidate"],
+                "party": cand.get("party", ""),
+                "party_name": cand.get("party_name", ""),
+                "ballot_order": cand.get("ballot_order"),
+                "votes": e["votes"] or 0,
+                "winner": cand.get("winner", False),
+                "source_url": url,
+                "page_url": race.get("page_url", ""),
+                "precinct_id": "",
+                "precinct": e["precinct"],
+                "reported": None,
+                "source": "export",
+                "precinct_seq": e["precinct_seq"],
+                "export_file": f"exports/{e['file']}",
+                "export_sheet": e["sheet"],
+            }
+        )
+    if unknown:
+        issues.append(
+            {"eid": eid, "check": "export county", "detail": f"unknown: {sorted(unknown)}"}
+        )
+    return filled, issues
 
 
 def build_one(eid: int, info: dict) -> tuple[list[dict], list[dict], list[dict]]:
@@ -148,6 +257,12 @@ def build_one(eid: int, info: dict) -> tuple[list[dict], list[dict], list[dict]]
             else:
                 county.append(row)
 
+    for r in precinct + county:
+        r["source"] = "api"
+    filled, export_issues = merge_exports(eid, on, root, races, precinct, county)
+    precinct += filled
+    issues += export_issues
+
     # Checks
     summary = (
         json.loads((root / "summary.json").read_text()) if (root / "summary.json").exists() else {}
@@ -178,7 +293,7 @@ def build_one(eid: int, info: dict) -> tuple[list[dict], list[dict], list[dict]]
                 r["county_code"],
                 r["precinct_id"],
                 r["precinct"],
-                r["candidate_id"],
+                r["candidate_id"] or r["candidate"],
             )
         ] += 1
     dups = [k for k, n in seen.items() if n > 1]

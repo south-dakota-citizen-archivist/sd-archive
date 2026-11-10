@@ -50,7 +50,10 @@ UA = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/130.0.0.0 Safari/537.36"
 )
+API_LIVE = "https://sdresws.azurewebsites.us/ResultsAjax.svc/GetMapData"
 ERROR_MARK = "An error has occured"  # sic
+HIDDEN = re.compile(r'<input type="hidden" name="([^"]+)" id="[^"]*" value="([^"]*)"')
+POSTBACK = re.compile(r"__doPostBack\(&#39;([^&]+)&#39;,&#39;&#39;\)\">([^<]+)<")
 
 # Results pages worth following; turnout, terminology, media and export pages aren't races
 FOLLOW = re.compile(r"^(results(sw|list)\.aspx)$", re.I)
@@ -79,14 +82,23 @@ class Fetcher:
         self.requests = 0
 
     def get(self, url: str, path: Path) -> str:
+        return self.fetch(url, path).decode("utf-8", "replace")
+
+    def fetch(
+        self, url: str, path: Path, form: dict | None = None, note: dict | None = None
+    ) -> bytes:
+        """The response body, saved at path. A POST when form is given (the export postbacks)."""
         if path.exists() and not self.refresh:
-            return path.read_text()
+            return path.read_bytes()
         for attempt in range(4):
             try:
                 if self.requests:
                     time.sleep(self.delay)
                 self.requests += 1
-                resp = self.session.get(url, timeout=120)
+                if form is None:
+                    resp = self.session.get(url, timeout=120)
+                else:
+                    resp = self.session.post(url, data=form, timeout=300)
                 resp.raise_for_status()
                 break
             except requests.RequestException:
@@ -95,22 +107,20 @@ class Fetcher:
                 time.sleep(10 * (attempt + 1))
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_suffix(path.suffix + ".partial")
-        tmp.write_text(resp.text)
+        tmp.write_bytes(resp.content)
         tmp.replace(path)  # saved whole or not at all
+        entry = {
+            "url": url,
+            "method": "GET" if form is None else "POST",
+            **(note or {}),
+            "path": str(path.relative_to(self.root)),
+            "bytes": len(resp.content),
+            "sha256": hashlib.sha256(resp.content).hexdigest(),
+            "fetched_at": datetime.now(UTC).isoformat(timespec="seconds"),
+        }
         with (self.root / "manifest.jsonl").open("a") as f:
-            f.write(
-                json.dumps(
-                    {
-                        "url": url,
-                        "path": str(path.relative_to(self.root)),
-                        "bytes": len(resp.content),
-                        "sha256": hashlib.sha256(resp.content).hexdigest(),
-                        "fetched_at": datetime.now(UTC).isoformat(timespec="seconds"),
-                    }
-                )
-                + "\n"
-            )
-        return resp.text
+            f.write(json.dumps(entry) + "\n")
+        return resp.content
 
 
 def page_name(url: str) -> str:
@@ -123,15 +133,17 @@ def page_name(url: str) -> str:
     return re.sub(r"[^A-Za-z0-9=._-]", "-", f"{stem}_{query}")[:180] + ".html"
 
 
-def normalize(url: str, eid: int) -> str:
-    """Absolute URL with this election's eid, without the share-button noise."""
+def normalize(url: str, eid: int, live: bool = False) -> str:
+    """Absolute URL with this election's eid (none for the live election), without noise."""
     parts = urlsplit(urljoin(SITE, html.unescape(url)))
     query = dict(parse_qsl(parts.query))
-    query["eid"] = str(eid)
+    query.pop("eid", None)
+    if not live:
+        query["eid"] = str(eid)
     return f"{SITE}{parts.path.lstrip('/')}?{urlencode(sorted(query.items()))}"
 
 
-def links(page: str, eid: int) -> list[str]:
+def links(page: str, eid: int, live: bool = False) -> list[str]:
     out = []
     for href in re.findall(r'href="([^"]+)"', page):
         href = html.unescape(href)
@@ -139,7 +151,7 @@ def links(page: str, eid: int) -> list[str]:
             continue
         path = urlsplit(urljoin(SITE, href)).path.rsplit("/", 1)[-1]
         if FOLLOW.match(path) and "RECOUNT" not in href.upper():
-            out.append(normalize(href, eid))
+            out.append(normalize(href, eid, live))
     return out
 
 
@@ -174,7 +186,8 @@ def rows_of(text: str) -> list[dict]:
     return data if isinstance(data, list) else []
 
 
-def api_url(race: dict, category: str, county: str) -> str:
+def api_url(race: dict, category: str, county: str, live: bool = False) -> str:
+    """The archive API, or for the live election the current one (no electionID)."""
     party = race["party"] or "0"
     q = {
         "type": race["type"],
@@ -183,9 +196,69 @@ def api_url(race: dict, category: str, county: str) -> str:
         "osn": race["osn"],
         "county": county or "0",
         "party": party,
-        "electionID": race["eid"],
     }
-    return f"{API}?{urlencode(q)}"
+    if live:
+        return f"{API_LIVE}?{urlencode(q)}"
+    return f"{API}?{urlencode(q | {'electionID': race['eid']})}"
+
+
+def election_date(page: str) -> str:
+    """The hidden election date on any results page, as ISO: '11/3/2026' → '2026-11-03'."""
+    m = re.search(r'hidElectionDate" value="(\d+)/(\d+)/(\d{4})', page)
+    return f"{m[3]}-{int(m[1]):02d}-{int(m[2]):02d}" if m else ""
+
+
+def exports(f: Fetcher, eid: int, live: bool, log) -> dict:
+    """Every spreadsheet on the Exports page: statewide, legislative and each county.
+
+    They're ASP.NET postbacks, so the page's form is read once and each link's event target
+    posted back. Each export has a sheet per race with a row per precinct, and fills holes in
+    the API (2012's precincts; a few races it has no rows for).
+    """
+    url = normalize("ResultsExport.aspx", eid, live)
+    page_path = f.root / "exports" / "ResultsExport.html"
+
+    def read_page() -> tuple[dict, list]:
+        text = page_path.read_text(errors="replace")
+        form = {k: html.unescape(v) for k, v in HIDDEN.findall(text)}
+        return form, [
+            (html.unescape(t), html.unescape(n).strip()) for t, n in POSTBACK.findall(text)
+        ]
+
+    def out(name: str) -> Path:
+        return f.root / "exports" / (re.sub(r"[^A-Za-z0-9]+", "-", name).strip("-") + ".xlsx")
+
+    if not page_path.exists():
+        f.fetch(url, page_path)
+    form, targets = read_page()
+
+    def done(name: str) -> bool:  # saved, or the site errors on it (some 2008 counties)
+        return out(name).exists() or out(name).with_suffix(".error.html").exists()
+
+    if f.refresh or not all(done(n) for _, n in targets):
+        page_path.unlink()  # a fresh form (view state) to post back from
+        f.fetch(url, page_path)
+        form, targets = read_page()
+    saved = failed = 0
+    for target, name in targets:
+        path = out(name)
+        if done(name) and not f.refresh:
+            saved += path.exists()
+            failed += not path.exists()
+            continue
+        body = f.fetch(
+            url,
+            path,
+            form={**form, "__EVENTTARGET": target, "__EVENTARGUMENT": ""},
+            note={"event_target": target, "label": name},
+        )
+        if body[:2] == b"PK":  # an xlsx is a zip
+            saved += 1
+        else:
+            failed += 1
+            path.replace(path.with_suffix(".error.html"))
+    log(f"  eid {eid}: {saved} exports" + (f", {failed} failed" if failed else ""))
+    return {"exports": saved, "exports_failed": failed}
 
 
 def api_path(root: Path, race: dict, category: str, county: str) -> Path:
@@ -194,21 +267,41 @@ def api_path(root: Path, race: dict, category: str, county: str) -> Path:
     return root / "api" / re.sub(r"[^A-Za-z0-9._-]", "-", name)
 
 
-def capture(eid: int, delay: float, refresh: bool, log) -> dict:
+def is_live(f: Fetcher, eid: int, date: str) -> bool:
+    """Whether this election is the site's current one, served without an eid.
+
+    The site's newest election isn't in its archive yet: default.aspx?eid=N shows 0 ballots
+    cast, and the results are on default.aspx (no eid), from the current API.
+    """
+    archived = f.get(f"{SITE}default.aspx?eid={eid}", f.root / "pages" / f"default_eid={eid}.html")
+    if turnout(archived).get("ballots_cast") != 0:
+        return False
+    path = f.root / "pages" / "default_live.html"
+    path.unlink(missing_ok=True)  # always ask the site which election is current
+    current = f.get(f"{SITE}default.aspx", path)
+    return election_date(current) == date and bool(turnout(current).get("ballots_cast"))
+
+
+def capture(eid: int, delay: float, refresh: bool, log, date: str = "") -> dict:
     f = Fetcher(eid, delay, refresh)
     f.root.mkdir(parents=True, exist_ok=True)
+    live = bool(date) and is_live(f, eid, date)
+    if live:
+        f.refresh = True  # the current election's numbers can still change
+        log(f"  eid {eid}: the site's current election; capturing the live results (no eid)")
 
     # 1. Pages: breadth-first over results pages, two levels below the home page
-    start = f"{SITE}default.aspx?eid={eid}"
+    start = f"{SITE}default.aspx" if live else f"{SITE}default.aspx?eid={eid}"
     seen, queue, pages = {start}, [(start, 0)], {}
     while queue:
         url, depth = queue.pop(0)
-        text = f.get(url, f.root / "pages" / page_name(url))
+        name = page_name(url).replace(".html", "_live.html") if live else page_name(url)
+        text = f.get(url, f.root / "pages" / name)
         if ERROR_MARK in text:
             continue
         pages[url] = text
         if depth < 3:
-            for link in links(text, eid):
+            for link in links(text, eid, live):
                 if link not in seen:
                     seen.add(link)
                     queue.append((link, depth + 1))
@@ -238,21 +331,24 @@ def capture(eid: int, delay: float, refresh: bool, log) -> dict:
     # 3. Results
     precinct_rows = 0
     for r in races.values():
-        text = f.get(api_url(r, "PREC", "0"), api_path(f.root, r, "PREC", "0"))
+        text = f.get(api_url(r, "PREC", "0", live), api_path(f.root, r, "PREC", "0"))
         got = rows_of(text)
         r["precinct_source"] = "statewide"
         if not got and r["counties"]:
             r["precinct_source"] = "by county"
             for county in sorted(r["counties"]):
                 got += rows_of(
-                    f.get(api_url(r, "PREC", county), api_path(f.root, r, "PREC", county))
+                    f.get(api_url(r, "PREC", county, live), api_path(f.root, r, "PREC", county))
                 )
         r["precinct_rows"] = len(got)
         precinct_rows += len(got)
         if r["county_totals"]:
             r["county_rows"] = len(
-                rows_of(f.get(api_url(r, "CTY", "0"), api_path(f.root, r, "CTY", "0")))
+                rows_of(f.get(api_url(r, "CTY", "0", live), api_path(f.root, r, "CTY", "0")))
             )
+
+    # 4. Exports
+    exported = exports(f, eid, live, log)
 
     home = turnout(pages.get(start, ""))
     summary = [
@@ -267,7 +363,10 @@ def capture(eid: int, delay: float, refresh: bool, log) -> dict:
         "races": len(races),
         "precinct_rows": precinct_rows,
         "races_without_rows": len(empty),
+        **exported,
         **home,
+        "live": live,
+        "captured_at": datetime.now(UTC).isoformat(timespec="seconds"),
     }
     (f.root / "summary.json").write_text(json.dumps(result, indent=1))
     note = " (the site has no results: 0 ballots cast)" if home.get("ballots_cast") == 0 else ""
@@ -305,7 +404,7 @@ def main() -> None:
             f"({info.get('status', '?')})"
         )
         refresh = args.refresh_live and info.get("status") == "unofficial"
-        capture(eid, args.delay, refresh, log)
+        capture(eid, args.delay, refresh, log, info.get("date", ""))
 
 
 if __name__ == "__main__":
