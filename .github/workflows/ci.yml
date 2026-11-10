@@ -40,6 +40,10 @@ jobs:
           npm ci --prefix app
 
       - name: Pre-commit
+        # readme-table rebuilds app/README.md from the local database's sources; CI's
+        # database is empty, so that hook runs locally only
+        env:
+          SKIP: readme-table
         run: uv run pre-commit run --all-files --show-diff-on-failure
 
       - name: Test
