@@ -6,6 +6,7 @@ members = ["app", "packages/*"]
 [dependency-groups]
 dev = [
     # every package with all its extras, so every test can run
+    "sddocs[ocr,text,searchable,macos]",
     "sdfetch[impersonate,browser,warc,keychain]",
     "sdgis",
     "sdplaces[pandas,geo,address,geocode]",
@@ -27,6 +28,7 @@ analysis = [
 default-groups = ["dev"]
 
 [tool.uv.sources]
+sddocs = { workspace = true }
 sdfetch = { workspace = true }
 sdgis = { workspace = true }
 sdplaces = { workspace = true }

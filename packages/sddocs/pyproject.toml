@@ -1,0 +1,26 @@
+[project]
+name = "sddocs"
+version = "0.1.0"
+description = "Reading documents: each PDF page by its form fields, text layer or OCR, cached by page; fillable forms read by position; OCR engines; tables; text and date clean-up. No Django."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pdfplumber>=0.11",
+    "pypdfium2>=4.30",
+    "rapidfuzz>=3.9",
+]
+
+[project.optional-dependencies]
+# rapidocr, the default OCR engine (CPU, no system packages)
+ocr = ["rapidocr>=3.0", "onnxruntime>=1.20"]
+# fix_text() and parse_date()
+text = ["ftfy>=6.2", "dateparser>=1.2"]
+# searchable(): a text layer added to scanned PDFs (needs tesseract installed)
+searchable = ["ocrmypdf>=16"]
+macos = [
+    "ocrmac>=1.0 ; sys_platform == 'darwin'",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"

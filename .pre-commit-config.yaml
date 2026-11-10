@@ -10,7 +10,9 @@ repos:
       - id: check-toml
       - id: check-merge-conflict
       - id: check-added-large-files
-        exclude: ^uv\.lock$  # the lockfile must be committed, however large
+        # the lockfile must be committed, however large, and so must real documents used as
+        # test fixtures
+        exclude: ^(uv\.lock|packages/[^/]+/tests/data/.*\.pdf)$
 
   # Keep notebook outputs (maps, plots, data) out of git
   - repo: https://github.com/kynan/nbstripout
