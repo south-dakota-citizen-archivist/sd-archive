@@ -23,6 +23,27 @@ How every pipeline and source gets things from the web: plain HTTP, HTTP that lo
 | WARC and HAR | `warcio` writes every response to a WARC file as well (opt-in per source). HAR recording in the browser is for finding hidden APIs. | 3 |
 | Wayback | CDX search for a URL's snapshots, fetching a snapshot's original bytes (`id_`), and Save Page Now. | 4 |
 
+## 1a. Escalation: the lightest tool that works
+
+A new source starts with plain HTTP and climbs only as far as it has to. The ladder:
+
+| rung | what | when it's needed |
+|---|---|---|
+| `http` | requests, with Chrome's headers | most government sites and APIs |
+| `impersonate` | curl_cffi, with Chrome's TLS and HTTP/2 fingerprint | sites that block Python's TLS handshake (some Cloudflare and Akamai setups) |
+| `stealth` | Playwright + playwright-stealth | pages built by JavaScript, light bot checks |
+| `patchright` | patched Chromium, no automation flags | Cloudflare Turnstile and similar challenges |
+| `camoufox` | Firefox with a spoofed fingerprint | sites that still catch patched Chromium |
+| `nodriver` | Chrome over CDP without WebDriver | the last resort |
+
+- **`Fetcher(strategy="auto")`** (the default) climbs one rung whenever a fetch is `Blocked`: a challenge page, a 403 or 429 with a challenge, or an empty body where content is expected. It stops at the first rung that returns the content.
+- **It remembers.** The rung that worked is saved per host (`~/.cache/sdfetch/hosts.json`), so later runs start there instead of climbing again. About once a week it retries the rung below, so a site that relaxes goes back to the cheaper tool.
+- **A source can pin a rung** (`strategy="camoufox"`) when it's known, or cap the climb (`max_strategy="impersonate"`) for APIs where a browser makes no sense.
+- **Every manifest line records the rung** that fetched the file (`"via": "patchright"`), so the record shows how each file was obtained.
+- When the top rung is still blocked, `Blocked` reaches the caller and the source's checks report it. Nothing is stored, and the good copy is kept.
+
+The add-source skill gets the same rule: try `http` first, and climb only when a fetch is blocked.
+
 ## 2. The interface
 
 ```python
@@ -54,7 +75,7 @@ Per-host settings: `sdfetch.Fetcher(store, delays={"sdsos.gov": 3.0})`. Block ch
 ## 3. Steps
 
 1. **Core** (`Fetcher`, `Store`, `Blocked`, `checkpoint`, `ensure_free`) with tests against a local test server, and the elections pipeline switched to it.
-2. **Looking like a browser:** `impersonate=` through curl_cffi, and `browser(strategy=…)`. Port the five playwright-stealth scrapers' setup.
+2. **Looking like a browser, and escalation (§1a):** the `impersonate` rung through curl_cffi, the browser rungs behind `browser(strategy=…)`, `strategy="auto"` climbing on `Blocked`, the per-host memory, and `via` in the manifest. Port the five playwright-stealth scrapers' setup.
 3. **WARC and HAR.**
 4. **Wayback:** CDX, snapshots, Save Page Now. Port the pistol permit code.
 5. **First release** (`sdfetch-v0.1.0`). Spearfish switches from `scrapers/net.py`, and spillarchive from its `net.py`, through git dependencies.
