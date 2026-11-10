@@ -1,4 +1,4 @@
-"""sdfetch: fetching for the South Dakota archive. See DESIGN.md."""
+"""sdfetch: fetching with a raw store. See README.md."""
 
 from . import wayback
 from ._browser import STRATEGIES, Browser, BrowserResponse, browser

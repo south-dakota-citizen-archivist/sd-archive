@@ -58,7 +58,7 @@ def slugify(text: str) -> str:
 
 
 def read(base: str, name: str) -> gpd.GeoDataFrame:
-    # GDAL fetches /vsicurl/ itself, and would otherwise send "GDAL/x.y"
+    # GDAL fetches /vsicurl/ itself; give it the same headers as everything else
     os.environ["GDAL_HTTP_USERAGENT"] = BROWSER_HEADERS["User-Agent"]
     return gpd.read_file(f"/vsizip//vsicurl/{base}/{name}").to_crs(4326)
 

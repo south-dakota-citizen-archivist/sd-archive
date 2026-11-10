@@ -3,5 +3,5 @@
 Nothing in here imports Django, so adapters stay easy to test with fake servers.
 """
 
-# Requests look like a desktop browser (sdfetch); nothing names the project
+# Default request headers (shared with sdfetch)
 from sdfetch import BROWSER_HEADERS, USER_AGENT  # noqa: F401

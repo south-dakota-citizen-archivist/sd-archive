@@ -1,6 +1,6 @@
 # sdfetch
 
-Fetching for the South Dakota archive. Plain Python, no Django. The design and the step still to come (the first release) are in [DESIGN.md](DESIGN.md).
+Fetching with a raw store: HTTP with retries and per-host pauses, curl_cffi and browser fallbacks, a manifest of everything fetched, checkpoints, WARC and HAR recording, and the Wayback Machine. Plain Python, no Django.
 
 ```python
 import sdfetch
@@ -9,18 +9,68 @@ f = sdfetch.Fetcher(".cache/elections/raw/3", delay=1.0)  # a Store, or a folder
 html = f.text("https://electionresults.sd.gov/default.aspx?eid=3", "pages/default_eid=3.html")
 ```
 
-- **`Fetcher`**: GET and POST with retries (connection errors and HTTP 429/5xx; `Retry-After` honored), a pause between requests to the same host (`delay`, or `delays={"host": seconds}`), and a check for challenge and block pages (`Blocked`). `fetch(url, name)` returns the stored copy when there is one; `refresh=True` fetches again. `request()` sends without storing.
-- **Escalation** (`strategy="auto"`, the default): each request starts on the lightest rung that works for its host and climbs only when the response is a block page: `http` (requests) → `impersonate` (curl_cffi, Chrome's TLS fingerprint) → `stealth` (Playwright + playwright-stealth) → `patchright` → `camoufox` → `nodriver`. The rung that worked is remembered per host in `~/.cache/sdfetch/hosts.json` (`$SDFETCH_CACHE`), the rung below is retried once a week, and the manifest records each file's rung (`via`). POSTs stop at `impersonate`. Pin a rung with `strategy="patchright"`, or cap the climb with `max_strategy="impersonate"`. Install with the `impersonate` and `browser` extras.
-- **`browser(strategy)`**: a running browser for work that needs one (clicking, forms): `b.get(url)` waits out a challenge page, and `b.page` is the Playwright page. The Chrome strategies drive the installed Google Chrome, so version and fingerprint are a real current Chrome. Camoufox downloads its own Firefox build once (`uv run python -m camoufox fetch`, about 2.4 GB). Browsers a Fetcher starts stay open until `close()` or the end of a `with` block.
-- **WARC** (`Fetcher(warc=True)`, the `warc` extra): every successful response also goes into a standard web-archive file, `warc/<time>-<pid>.warc.gz` beside the store, readable by any WARC tool. HTTP responses are stored with their request; browser pages are stored as `resource` records, since they're the page after its scripts ran. The manifest line for each stored file gives its WARC file and offset (`warc`, `warc_offset`).
-- **HAR** (`Fetcher(har=True)`, or `browser(strategy, har="x.har")`): records everything a browser asks for. `sdfetch.har_requests("x.har")`, or `uv run python -m sdfetch.har x.har`, lists the data requests (JSON, XML, CSV, XHR and fetch calls), which is how to find the API behind a search page and then fetch it over plain HTTP.
-- **Wayback** (`sdfetch.wayback`):
-  - `snapshots(url, start=, end=, match=, collapse=)` lists a page's captures from the CDX index, keeping only status 200 unless told otherwise.
-  - `fetch_snapshot(snap, fetcher)` stores the bytes the site originally served (the `id_` form, with no toolbar), at `wayback/<host>/<timestamp>.<ext>`. Cite `snap.url`.
-  - `wayback.fetcher(store)` pauses 3 seconds between requests and never escalates to browsers.
-  - `save_page(url)` asks for a new capture. That makes a public capture, so it runs only when a source calls it on purpose.
-- **`Store`**: raw files by name, each written whole or not at all, and `manifest.jsonl` (URL, method, status, bytes, SHA-256, time, plus any `note`). A refresh that comes back empty keeps the stored copy (`EmptyResponse`). `blob()` stores by SHA-256 instead.
-- **`checkpoint(path)`**: finished units and a cursor in a JSON file, rewritten after each `mark()`, so an interrupted run picks up where it stopped.
-- **`ensure_free(path, gb=50)`**: raises `DiskSpaceLow` before a big download when the disk is nearly full.
+## Fetcher
 
-**Every request looks like desktop Chrome on a Mac** (`BROWSER_HEADERS`): nothing names the project, the org or a bot, and nothing goes out as `python-requests` or `Python-urllib`. sdgis and sdplaces send the same headers. Keep `CHROME` near the current stable version (157 as of 2026-11-10). A source can pass its own browser `user_agent`. Headers alone don't hide Python's TLS fingerprint; the `impersonate` rung (curl_cffi) does. Camoufox claims macOS, this machine's OS, so its canvas and WebGL are the real ones rather than randomized.
+- `fetch(url, name)` returns the stored copy when there is one, and otherwise fetches and stores it. `refresh=True` fetches again. `data=` makes it a POST. `request()` sends without storing.
+- **Retries** connection errors and HTTP 429/5xx with backoff, honoring `Retry-After`.
+- **Pauses** between requests to the same host: `delay`, or per host with `delays={"host": seconds}`. The pause is shared by every Fetcher in the process.
+- **Falls back** when a response isn't the content (an interstitial or error page, `Blocked`). It tries plain HTTP, then curl_cffi (`impersonate`), then a browser, stopping at the first method that gets the page.
+  - The method that worked is remembered per host in `~/.cache/sdfetch/hosts.json` (`$SDFETCH_CACHE`), and the cheaper one below it is tried again weekly.
+  - `strategy=` pins a method, and `max_strategy=` caps the fallback. POSTs stop at curl_cffi.
+  - The manifest records which method fetched each file (`via`).
+- **Errors** raise `requests.HTTPError`, or come back as responses with `raise_errors=False`. `fetch()` never stores an error page.
+- Default headers are a desktop browser's (`BROWSER_HEADERS`). `user_agent=` and `headers=` override them.
+
+## Browsers (`browser` extra)
+
+```python
+with sdfetch.browser("stealth") as b:  # or another of sdfetch.STRATEGIES
+    resp = b.get("https://example.org/search?q=smith")
+    b.page.click("text=Next")  # the Playwright page, for clicking and forms
+```
+
+The Playwright-based backends use the installed Google Chrome if there is one, and otherwise Playwright's Chromium. Camoufox downloads its own browser once (`uv run python -m camoufox fetch`, about 2.4 GB). A Fetcher's browsers stay open until `close()`, or until its `with` block ends.
+
+## Store
+
+Raw files by name, each written whole or not at all, plus `manifest.jsonl`: URL, method, status, bytes, SHA-256, time, and any `note`. A refresh that comes back empty keeps the stored copy (`EmptyResponse`). `blob()` stores by SHA-256 instead of by name.
+
+## WARC and HAR
+
+- `Fetcher(warc=True)` (the `warc` extra) also writes every successful response to `warc/<time>-<pid>.warc.gz` beside the store:
+  - HTTP responses as `response` and `request` records
+  - browser pages as `resource` records (the page after its scripts ran)
+
+  Each manifest line gives its WARC file and offset.
+- `Fetcher(har=True)`, or `browser(..., har="x.har")`, records everything a browser requests. `sdfetch.har_requests("x.har")`, or `uv run python -m sdfetch.har x.har`, lists the data requests (JSON, XML, CSV, XHR and fetch calls), which shows the API behind a page.
+
+## Wayback Machine
+
+```python
+from sdfetch import wayback
+
+f = wayback.fetcher(".cache/permits")  # 3 seconds between requests
+for snap in wayback.snapshots(PAGE, start="2019"):
+    html = wayback.fetch_snapshot(snap, f)  # the bytes the site served; cite snap.url
+```
+
+- `snapshots()` reads the CDX index, a page at a time. It keeps only status 200 by default, can filter by date and type, and `collapse="digest"` drops captures identical to the one before. Each index page is stored.
+- `fetch_snapshot()` stores a capture at `wayback/<host>/<timestamp>.<ext>`, with the capture time and original URL in the manifest.
+- `save_page(url)` requests a new capture (Save Page Now).
+
+## Also
+
+- `checkpoint(path)`: finished units and a cursor in a JSON file, rewritten after each `mark()`, so an interrupted run picks up where it stopped.
+- `ensure_free(path, gb=50)`: raises `DiskSpaceLow` when the disk is nearly full.
+
+## Use from another repo
+
+```toml
+[project]
+dependencies = ["sdfetch[impersonate]"]
+
+[tool.uv.sources]
+sdfetch = { git = "https://github.com/south-dakota-citizen-archivist/sd-archive", subdirectory = "packages/sdfetch", tag = "sdfetch-v0.1.1" }
+```
+
+Extras: `impersonate` (curl_cffi), `browser` (Playwright and the other browser backends), `warc` (warcio).

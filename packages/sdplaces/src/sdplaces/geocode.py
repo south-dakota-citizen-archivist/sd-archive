@@ -1,6 +1,5 @@
 """Geocoding street addresses, with every answer cached so each address is looked up once.
 
-Moved from whats-up-in-spearfish (scrapers/geo.py) and made usable anywhere in the state.
 Needs the `geocode` extra.
 
     from sdplaces.geocode import Geocoder, JsonCache
@@ -26,9 +25,6 @@ A Geocoder covers one area:
   ("100 MAIN ST, LEAD"), so the same street in two towns doesn't collide.
 - within: results outside it are treated as bad data. A Box, or any (lat, lon) → bool.
   Defaults to South Dakota's bounding box.
-
-Planned (CONSOLIDATION-PLAN Stage 4): a local lookup against county E911 address points,
-tried before the Census.
 """
 
 from __future__ import annotations
@@ -57,8 +53,6 @@ NOMINATIM = "https://nominatim.openstreetmap.org/search"
 NOMINATIM_DELAY = 1.1  # seconds between requests (their limit is one a second)
 MISS_RETRY_DAYS = 30
 STREET_LEVEL = {"road", "residential", "street", "highway"}
-# Requests look like a desktop browser (sdfetch). Nominatim's usage policy asks for an
-# identifying User-Agent; this doesn't send one, so keep to its one-request-a-second limit.
 USER_AGENT = BROWSER_HEADERS["User-Agent"]
 
 

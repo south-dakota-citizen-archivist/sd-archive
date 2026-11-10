@@ -1,5 +1,5 @@
 """South Dakota places keyed by Census GEOID: counties past and present, cities and towns,
-Census designated places and tribal areas. See DESIGN.md.
+Census designated places and tribal areas. See README.md.
 
     import sdplaces
     sdplaces.county("Lawrence").geoid                 # '46081'

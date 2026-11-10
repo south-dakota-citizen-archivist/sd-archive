@@ -21,9 +21,8 @@ from ._store import Store
 
 logger = logging.getLogger(__name__)
 
-# Every request looks like desktop Chrome on a Mac: nothing names the project or a bot, and
-# nothing goes out as python-requests or Python-urllib. Keep CHROME close to the current
-# stable release (a stale version stands out); Chrome reports only the major version.
+# Default request headers: desktop Chrome on macOS. Keep CHROME at the current stable
+# major version.
 CHROME = "157"
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "

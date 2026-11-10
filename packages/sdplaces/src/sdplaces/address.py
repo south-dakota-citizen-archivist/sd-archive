@@ -1,8 +1,7 @@
 """Street address standardization: the one place addresses are parsed and turned into keys
 for matching records across sources (permits, filings, agendas, county parcels).
 
-Moved from whats-up-in-spearfish (scrapers/address.py) and made statewide. Needs the
-`address` extra (usaddress, usaddress-scourgify).
+Needs the `address` extra (usaddress, usaddress-scourgify).
 
 Parsing is usaddress (a probabilistic US address parser); abbreviations follow USPS
 Publication 28 via usaddress-scourgify's tables. A thin layer around them handles what

@@ -1,10 +1,8 @@
 # SD GIS Hub
 
-> **Moved into the [sd-archive](../README.md) monorepo (2026-11-09).** Run the commands below from the repo root: `uv run python manage.py <cmd>` becomes `just manage <cmd>` (or `uv run python app/manage.py <cmd>`), and Celery runs with `just worker` / `just beat`.
-
 A local Django app that keeps a census of the public GIS data South Dakota governments publish, archives the datasets worth keeping with their full change history, and lets you search, map and download all of it, including a fuzzy search across every owner and taxpayer name in the archive.
 
-It runs on this laptop only. See [PLAN.md](PLAN.md) for the design and the road map.
+Run the commands below from the repository root.
 
 ## Sources
 
@@ -32,22 +30,20 @@ Listed but not crawled, on Schneider Beacon (18): [Brookings County](https://bea
 
 ## Setup
 
-Requirements, all already on this laptop:
+Requirements:
 
 - [uv](https://docs.astral.sh/uv/) and Node 22
-- [Postgres.app](https://postgresapp.com/), which includes PostGIS, running on port 5432
+- Postgres 17 with PostGIS on port 5432 ([Postgres.app](https://postgresapp.com/) includes it)
 - Redis (`brew install redis && brew services start redis`)
 
 ```sh
-uv sync
-npm install && npm run build      # Tailwind CSS; HTMX and MapLibre come from node_modules
+just setup                            # uv sync, npm ci + Tailwind build, pre-commit hooks
 createdb sd_gis_hub
-uv run python manage.py migrate
-uv run python manage.py load_jurisdictions   # state, 66 counties, 310 cities and towns, 12 tribal areas
-uv run python manage.py seed                 # publishers, sources and watched datasets from seeds/sources.toml
-uv run python manage.py import_beacon_clients  # South Dakota's Beacon apps, from seeds/beacon-clients.html
-uv run python manage.py createsuperuser      # for /admin/
-uv run pre-commit install
+just manage migrate
+just manage load_jurisdictions        # state, 66 counties, 310 cities and towns, 12 tribal areas
+just manage seed                      # publishers, sources and watched datasets from seeds/sources.toml
+just manage import_beacon_clients     # South Dakota's Beacon apps, from seeds/beacon-clients.html
+just manage createsuperuser           # for /admin/
 ```
 
 Database settings come from the usual `PG*` environment variables. The default database is `sd_gis_hub` on `localhost`.
@@ -55,17 +51,17 @@ Database settings come from the usual `PG*` environment variables. The default d
 ## Running it
 
 ```sh
-uv run python manage.py runserver                        # http://localhost:8000
-uv run celery -A config worker -l info                   # runs crawls and harvests
-uv run celery -A config beat -l info                     # starts scheduled crawls and harvests
+just serve                     # http://localhost:8000
+just worker                    # runs crawls and harvests
+just beat                      # starts scheduled crawls and harvests
 ```
 
 Without a worker, the buttons in the app queue jobs that wait on the Jobs page. Everything also runs from the command line without Celery:
 
 ```sh
-uv run python manage.py crawl                  # crawl every active source (or: crawl minnehaha sddot)
-uv run python manage.py harvest                # harvest every watched dataset (or: harvest 641 --force)
-uv run python manage.py build_readme           # refresh the sources table above
+just crawl                     # crawl every active source (or: just crawl minnehaha sddot)
+just harvest                   # harvest every watched dataset (or: just harvest 641 --force)
+just manage build_readme       # refresh the sources table above
 ```
 
 ## What's in the app
@@ -111,7 +107,7 @@ uv run python manage.py build_readme           # refresh the sources table above
 
 **Name search.**
 - After each harvest, the dataset's name fields go into `search_nameentry`, normalized by the SQL function `gis_hub_normalize_name()` (uppercase, accents removed, punctuation stripped) and indexed with `pg_trgm`.
-- The view `search_names` exposes those rows in a shared format. Other projects on this Postgres server, such as the public records liberator, can publish the same view, so one search page can later cover every project (see PLAN.md).
+- The view `search_names` exposes those rows in a shared format, which other databases on the same server can publish too, so one search can cover them all.
 
 ## Adding a source
 
@@ -121,7 +117,7 @@ Paste any URL on the server into the box on the Sources page: the services direc
 
 ## Analysis
 
-`harvest.frames.load_dataset()` loads a harvested dataset as a GeoDataFrame, from `manage.py shell` or any script that sets up Django:
+`harvest.frames.load_dataset()` loads a harvested dataset as a GeoDataFrame, from `just manage shell` or any script that sets up Django:
 
 ```python
 from harvest.frames import load_dataset
@@ -134,13 +130,13 @@ every_version = load_dataset(641, history=True)
 ## Development
 
 ```sh
-uv run pytest                    # tests use a throwaway Postgres database and a fake ArcGIS server
+just test                        # tests use a throwaway Postgres database and a fake ArcGIS server
 uv run pytest -m network         # one test against a live server
-uv run pre-commit run --all-files
+just check                       # every pre-commit hook
 ```
 
 Layout:
-- `../packages/sdgis/` (was `platforms/`): plain-Python ArcGIS and Beacon clients, with no Django imports
+- `../packages/sdgis/`: plain-Python ArcGIS and Beacon clients, with no Django imports
 - `census/`: places, sources, datasets, crawls, topics
 - `harvest/`: harvests, records with history, tiles, exports
 - `search/`: the name index

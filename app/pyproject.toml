@@ -1,7 +1,7 @@
 [project]
 name = "sd-archive-app"
 version = "0.1.0"
-description = "The South Dakota citizen archive's Django app: the GIS census and harvests (from gis-scraping), with public records to follow (Stage 3)."
+description = "A census and archive of South Dakota's public GIS data: crawls, harvests with change history, name search, maps and downloads."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

@@ -1,6 +1,4 @@
-# sd-archive: the South Dakota citizen archive monorepo.
-# A uv workspace: the Django app (app/) plus shared libraries (packages/*).
-# See ../CONSOLIDATION-PLAN.md for the layout and migration stages.
+# sd-archive: a uv workspace of the Django app (app/) and shared libraries (packages/*).
 
 [tool.uv.workspace]
 members = ["app", "packages/*"]

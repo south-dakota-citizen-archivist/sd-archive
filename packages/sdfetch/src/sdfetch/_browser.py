@@ -1,19 +1,13 @@
-"""Real browsers behind one interface: the upper rungs of the escalation ladder.
+"""Browsers behind one interface.
 
-    with sdfetch.browser("patchright") as b:
-        resp = b.get("https://example.org/")   # waits out a challenge page if one appears
+    with sdfetch.browser("stealth") as b:
+        resp = b.get("https://example.org/")   # waits for an interstitial page to clear
         b.page.click("text=Next")               # the Playwright page, for anything more
 
-Strategies, lightest first:
-- "stealth": the installed Google Chrome, driven by Playwright with playwright-stealth
-- "patchright": the installed Google Chrome, driven by patchright (no automation flags)
-- "camoufox": Camoufox, a Firefox build with a consistent spoofed fingerprint
-  (its browser is downloaded once by `python -m camoufox fetch`)
-- "nodriver": the installed Google Chrome over CDP, no WebDriver or Playwright at all
-
-The Chrome strategies use the real Chrome on this machine (channel="chrome"), so the browser
-version, TLS fingerprint and headers are all a real, current Chrome. Headless Chrome calls
-itself "HeadlessChrome"; that's replaced with "Chrome" everywhere it shows.
+Backends (STRATEGIES): "stealth" (Playwright with playwright-stealth), "patchright",
+"camoufox" (its browser is downloaded once by `python -m camoufox fetch`) and "nodriver".
+The Chrome-based ones use the installed Google Chrome when there is one, and otherwise
+Playwright's Chromium.
 """
 
 from __future__ import annotations
@@ -146,8 +140,7 @@ class Browser:
     def _start_camoufox(self) -> None:
         from camoufox.sync_api import Camoufox
 
-        # Claim this machine's OS, so canvas and WebGL can show the real ones; otherwise
-        # Camoufox randomizes them, which reads as a privacy-hardened Firefox, not a stock one
+        # The OS matches this machine's, so canvas and WebGL aren't randomized
         cm = Camoufox(headless=self.headless, locale="en-US", humanize=True, os="macos")
         browser = cm.__enter__()
         self._stack.append(lambda: cm.__exit__(None, None, None))

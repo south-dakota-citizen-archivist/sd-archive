@@ -14,7 +14,7 @@ LANGUAGE sql IMMUTABLE PARALLEL SAFE STRICT AS $$
 $$;
 """
 
-# The cross-project contract (see PLAN.md). url is relative to this app's base URL.
+# The shared format for name search across databases. url is relative to this app's base URL.
 SEARCH_NAMES_VIEW = """
 CREATE OR REPLACE VIEW search_names AS
 SELECT

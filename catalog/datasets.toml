@@ -1,6 +1,6 @@
 # The catalog of every dataset in the archive, and its unit of analysis.
 #
-# Two kinds (see "Two kinds of data" in ../../CONSOLIDATION-PLAN.md):
+# Two kinds:
 #
 #   grain = "aggregate"  the place itself is the unit: one row describes a county, district,
 #                        precinct or the state for a period (voter registration by county).
@@ -32,7 +32,7 @@ source = "SD Secretary of State, voter registration by county reports (PDF)"
 [[dataset]]
 id = "election-results"
 name = "Election results by precinct"
-project = "sd-archive/pipelines/elections (replaces 2022-sd-general-precinct-results)"
+project = "sd-archive/pipelines/elections"
 grain = "aggregate"
 geography = ["precinct", "county", "state", "sldl", "sldu"]
 period = "each election, 2008 on (electionresults.sd.gov); earlier from official returns"
@@ -253,7 +253,7 @@ source = "open.sd.gov vendor checkbook"
 [[dataset]]
 id = "lobbyists"
 name = "Lobbyist registrations (private and public) and expense reports"
-project = "public-records-liberator (replaces south-dakota-lobbyists)"
+project = "public-records-liberator"
 grain = "records"
 unit = "registration (and its expense reports)"
 entities = ["person", "organization", "government"]
@@ -303,7 +303,7 @@ source = "SD Secretary of State"
 [[dataset]]
 id = "newspaper-circulation"
 name = "Newspaper ownership and circulation statements"
-project = "public-records-liberator (replaces south-dakota-newspaper-circulation)"
+project = "public-records-liberator"
 grain = "records"
 unit = "statement"
 entities = ["organization"]

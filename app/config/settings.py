@@ -1,4 +1,4 @@
-"""Settings for a single-user app that runs on this laptop. Override anything via env vars."""
+"""Settings for a single-user local app. Override anything via env vars."""
 
 import importlib.util
 import os
@@ -85,8 +85,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# Postgres.app on this laptop. Shares a server with other projects (e.g. the public
-# records liberator's sd_scraper_fleet), which is what makes cross-project search easy.
+# Local Postgres with PostGIS, configured by the usual PG* environment variables.
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
