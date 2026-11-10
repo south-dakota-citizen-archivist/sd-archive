@@ -12,7 +12,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-from platforms import USER_AGENT
+from sdgis import USER_AGENT
 
 logger = logging.getLogger(__name__)
 

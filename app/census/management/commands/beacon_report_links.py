@@ -8,7 +8,7 @@ from urllib.parse import quote, urlencode
 from django.core.management.base import BaseCommand
 from django.db import connection
 
-from platforms.beacon import BASE_URL
+from sdgis.beacon import BASE_URL
 
 
 @dataclass(frozen=True)

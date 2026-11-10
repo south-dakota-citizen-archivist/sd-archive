@@ -21,7 +21,7 @@ from census.models import (
     Topic,
 )
 from core.tasks import start_crawl, start_harvest
-from platforms.arcgis import client
+from sdgis.arcgis import client
 
 PAGE_SIZE = 50
 

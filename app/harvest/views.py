@@ -21,7 +21,7 @@ from census.models import Dataset, Jurisdiction
 from harvest import export
 from harvest.labels import Labels
 from harvest.models import Feature, Harvest
-from platforms.arcgis import client
+from sdgis.arcgis import client
 
 NUMERIC_TYPES = {
     "esriFieldTypeOID",

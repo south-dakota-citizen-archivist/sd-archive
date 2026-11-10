@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.utils.text import slugify
 
 from census.models import Jurisdiction, Source, name_keys
-from platforms.arcgis import client, directory
+from sdgis.arcgis import client, directory
 
 # Where ArcGIS Server and Enterprise usually put the services directory
 COMMON_PATHS = ("arcgis/rest/services", "server/rest/services", "rest/services")

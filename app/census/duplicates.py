@@ -6,7 +6,7 @@ parcels as the full 120-column layer."""
 
 import re
 
-from platforms.arcgis.directory import LayerInfo
+from sdgis.arcgis.directory import LayerInfo
 
 # Services that usually re-publish another service's layers for a specific client
 SECONDARY_SERVICE_RE = re.compile(r"autocomplete|top10|wfs|wms|secure|_old|test|copy|view", re.I)

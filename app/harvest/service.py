@@ -13,7 +13,7 @@ from census.models import Dataset
 from core.models import Job
 from harvest import export, store, validate
 from harvest.models import Harvest
-from platforms.arcgis import client
+from sdgis.arcgis import client
 from search import index
 
 logger = logging.getLogger(__name__)

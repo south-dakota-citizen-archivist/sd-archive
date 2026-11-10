@@ -2,8 +2,8 @@ import pytest
 
 from census import crawl, sources, views
 from census.models import Dataset, Jurisdiction, Publisher, Source, name_keys
-from platforms.arcgis import client as arcgis_client
-from tests.platforms.test_directory import ROOT, FakeDirectory
+from sdgis.arcgis import client as arcgis_client
+from sdgis.testing import ROOT, FakeDirectory
 
 NEW_ROOT = "https://gis.example.org/server/rest/services"
 NEW_ROUTES = {

@@ -1,6 +1,6 @@
 import pytest
 
-from platforms.arcgis import client
+from sdgis.arcgis import client
 from tests.conftest import IDS, LAYER_URL, FakeResponse, FakeServer
 
 

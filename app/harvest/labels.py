@@ -2,7 +2,7 @@
 
 import re
 
-from platforms.arcgis.client import code_key
+from sdgis.arcgis.client import code_key
 
 # GDAL hands dates over as UTC ISO strings
 MIDNIGHT_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})T00:00:00(?:\.0+)?(?:Z|\+00:00)?$")

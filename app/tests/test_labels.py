@@ -5,7 +5,7 @@ import pytest
 from harvest import service
 from harvest.labels import Labels, format_date
 from harvest.models import Harvest
-from platforms.arcgis import client
+from sdgis.arcgis import client
 
 STATUS = {
     "type": "codedValue",

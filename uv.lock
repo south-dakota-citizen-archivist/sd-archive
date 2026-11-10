@@ -13,6 +13,7 @@ resolution-markers = [
 [manifest]
 members = [
     "sd-archive-app",
+    "sdgis",
 ]
 
 [manifest.dependency-groups]
@@ -3184,6 +3185,7 @@ dependencies = [
     { name = "psycopg", extra = ["binary"] },
     { name = "pyarrow" },
     { name = "requests" },
+    { name = "sdgis" },
 ]
 
 [package.metadata]
@@ -3198,6 +3200,24 @@ requires-dist = [
     { name = "nodriver", specifier = ">=0.50.99" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.2" },
     { name = "pyarrow", specifier = ">=26.0.0" },
+    { name = "requests", specifier = ">=2.32" },
+    { name = "sdgis", editable = "packages/sdgis" },
+]
+
+[[package]]
+name = "sdgis"
+version = "0.1.0"
+source = { editable = "packages/sdgis" }
+dependencies = [
+    { name = "geopandas" },
+    { name = "pandas" },
+    { name = "requests" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "geopandas", specifier = ">=1.2.0" },
+    { name = "pandas", specifier = ">=2.2" },
     { name = "requests", specifier = ">=2.32" },
 ]
 

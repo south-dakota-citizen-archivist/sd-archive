@@ -7,7 +7,7 @@ from django.db import transaction
 from django.utils.text import slugify
 
 from census.models import Jurisdiction, Publisher, Source
-from platforms.beacon.clients import BeaconClient, parse_clients, place_name
+from sdgis.beacon.clients import BeaconClient, parse_clients, place_name
 
 CLIENTS_FILE = Path(settings.BASE_DIR) / "seeds" / "beacon-clients.html"
 NOTES = (

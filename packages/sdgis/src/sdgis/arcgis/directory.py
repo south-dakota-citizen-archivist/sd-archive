@@ -14,7 +14,7 @@ from datetime import datetime
 
 import requests
 
-from platforms.arcgis import client
+from sdgis.arcgis import client
 
 logger = logging.getLogger(__name__)
 

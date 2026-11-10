@@ -6,8 +6,8 @@ from core.models import Job
 from harvest import service
 from harvest.frames import load_dataset
 from harvest.models import Harvest
-from platforms.arcgis import client
-from tests.platforms.test_directory import ROOT, FakeDirectory
+from sdgis.arcgis import client
+from sdgis.testing import ROOT, FakeDirectory
 
 
 def test_harvest_command(dataset):

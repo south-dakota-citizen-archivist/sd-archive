@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from html.parser import HTMLParser
 from urllib.parse import urlencode
 
-from platforms.beacon import BASE_URL
+from sdgis.beacon import BASE_URL
 
 
 @dataclass(frozen=True)

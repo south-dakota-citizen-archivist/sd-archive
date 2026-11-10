@@ -12,8 +12,8 @@ from census.models import (
     Source,
     Topic,
 )
-from platforms.arcgis import client, directory
-from tests.platforms.test_directory import ROOT, ROUTES, FakeDirectory
+from sdgis.arcgis import client, directory
+from sdgis.testing import ROOT, ROUTES, FakeDirectory
 
 
 @pytest.fixture

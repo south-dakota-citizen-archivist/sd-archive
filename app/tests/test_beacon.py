@@ -5,7 +5,7 @@ from census import beacon
 from census.models import Source
 from core import tasks
 from core.models import Job
-from tests.platforms.test_beacon import PICKER
+from sdgis.testing import PICKER
 
 
 @pytest.fixture

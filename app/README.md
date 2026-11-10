@@ -140,7 +140,7 @@ uv run pre-commit run --all-files
 ```
 
 Layout:
-- `platforms/`: plain-Python ArcGIS clients, with no Django imports
+- `../packages/sdgis/` (was `platforms/`): plain-Python ArcGIS and Beacon clients, with no Django imports
 - `census/`: places, sources, datasets, crawls, topics
 - `harvest/`: harvests, records with history, tiles, exports
 - `search/`: the name index

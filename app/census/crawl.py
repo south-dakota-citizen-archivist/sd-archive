@@ -8,7 +8,7 @@ from django.utils import timezone
 from census import classify, duplicates
 from census.models import Crawl, Dataset, DatasetObservation, Service, Source, Topic
 from core.models import Job
-from platforms.arcgis import directory
+from sdgis.arcgis import directory
 
 logger = logging.getLogger(__name__)
 
