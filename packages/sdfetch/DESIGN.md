@@ -88,4 +88,9 @@ Per-host settings: `sdfetch.Fetcher(store, delays={"sdsos.gov": 3.0})`. Block ch
    - the index now has 76 captures newer than that list, plus 5 older ones it missed
 
    The repo itself switches when it moves into `pipelines/`.
-5. **First release** (`sdfetch-v0.1.0`). Spearfish switches from `scrapers/net.py`, and spillarchive from its `net.py`, through git dependencies.
+5. ✅ 2026-11-10. **First release.** sd-archive is public on GitHub, with tags `sdfetch-v0.1.0` and `sdfetch-v0.1.1`. 0.1.1 lets sdfetch replace requests-style code: errors can come back as responses (`raise_errors=False`), `Blocked` is a `RequestException`, and auto mode skips rungs that aren't installed. Spearfish installs it as a git dependency pinned to the tag (whats-up-spearfish PR #7):
+   - `scrapers/net.py` and spillarchive's `net.py` keep their APIs, on one Fetcher per thread capped at curl_cffi.
+   - The library scraper starts on plain HTTP and can climb to the stealth browser.
+   - A full run of all 59 sources matched the last scheduled run.
+
+   To release again: bump `packages/sdfetch/pyproject.toml`, tag `sdfetch-vX.Y.Z`, push the tag, and change the tag in the user's `[tool.uv.sources]`.
