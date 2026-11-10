@@ -239,3 +239,54 @@ def children(parent: str | Place, kind: str | None = None) -> list[Place]:
     """Places whose parent is this one: Lawrence County's cities, the state's counties."""
     geoid = parent.geoid if isinstance(parent, Place) else str(parent)
     return [p for p in _table() if p.parent == geoid and (kind is None or p.kind == kind)]
+
+
+# --- Crosswalks ----------------------------------------------------------------------------
+
+CROSSWALK_FIELDS = ("system_id", "geoid", "name_in_source", "evidence", "note")
+
+
+@cache
+def _crosswalk(system: str) -> tuple[dict, ...]:
+    path = resources.files("sdplaces").joinpath(f"data/crosswalks/{system}.csv")
+    if not path.is_file():
+        known = sorted(
+            f.name.removesuffix(".csv")
+            for f in resources.files("sdplaces").joinpath("data/crosswalks").iterdir()
+            if f.name.endswith(".csv")
+        )
+        raise ValueError(f"No crosswalk {system!r}. Known: {', '.join(known)}")
+    with path.open(newline="") as f:
+        return tuple(csv.DictReader(f))
+
+
+def _same_id(a: str, b: str) -> bool:
+    a, b = str(a).strip(), str(b).strip()
+    return a == b or (a.isdigit() and b.isdigit() and int(a) == int(b))  # "07" == "7"
+
+
+def from_id(system: str, system_id: str | int, *, as_of: date | str | None = None) -> Place:
+    """The place an agency's own ID stands for: from_id("sos_election_county", 57) → Spink County.
+
+    Every mapping comes from a row in data/crosswalks/<system>.csv, with its evidence. Rows may
+    have valid_from / valid_to columns when a code meant different places over time; as_of picks
+    the row in force. Unknown IDs raise UnknownPlace; nothing is inferred from order or position.
+    """
+    on = date.fromisoformat(as_of) if isinstance(as_of, str) else as_of
+    rows = [r for r in _crosswalk(system) if _same_id(r["system_id"], system_id)]
+    if on is not None:
+        rows = [
+            r
+            for r in rows
+            if (not r.get("valid_from") or date.fromisoformat(r["valid_from"]) <= on)
+            and (not r.get("valid_to") or on < date.fromisoformat(r["valid_to"]))
+        ]
+    if not rows:
+        raise UnknownPlace(f"No {system} ID {system_id!r}" + (f" in force on {on}" if on else ""))
+    geoids = {r["geoid"] for r in rows}
+    if len(geoids) > 1:
+        raise AmbiguousPlace(
+            f"{system} ID {system_id!r} maps to several places; pass as_of=",
+            [get(g) for g in sorted(geoids)],
+        )
+    return get(geoids.pop())

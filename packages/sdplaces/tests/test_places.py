@@ -171,3 +171,38 @@ def test_add_geoid_reports_every_problem_at_once():
     with pytest.raises(UnknownPlace) as e:
         sdplaces.add_geoid(df, "county")
     assert "2 value(s)" in str(e.value)
+
+
+# --- Crosswalks -------------------------------------------------------------------------------
+
+
+def test_election_county_codes():
+    assert sdplaces.from_id("sos_election_county", 57).name == "Spink County"
+    assert sdplaces.from_id("sos_election_county", "07").name == "Yankton County"  # "07" == 7
+    assert sdplaces.from_id("sos_election_county", 1).name == "Minnehaha County"
+    assert sdplaces.from_id("sos_election_county", 65).name == "Oglala Lakota County"
+    with pytest.raises(UnknownPlace):
+        sdplaces.from_id("sos_election_county", 66)  # not used by the election system
+
+
+def test_every_crosswalk_row_points_at_a_real_place():
+    import csv
+    from importlib import resources
+
+    folder = resources.files("sdplaces").joinpath("data/crosswalks")
+    for f in folder.iterdir():
+        if f.name.endswith(".csv"):
+            with f.open(newline="") as fh:
+                for row in csv.DictReader(fh):
+                    assert sdplaces.get(row["geoid"]), (f.name, row)
+                    assert row["evidence"], (f.name, row)
+
+
+def test_election_crosswalk_covers_every_county():
+    geoids = {sdplaces.from_id("sos_election_county", i).geoid for i in [*range(1, 66), 67]}
+    assert geoids == {p.geoid for p in sdplaces.counties()}
+
+
+def test_unknown_crosswalk_system():
+    with pytest.raises(ValueError):
+        sdplaces.from_id("nope", 1)

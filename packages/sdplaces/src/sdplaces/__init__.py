@@ -5,6 +5,7 @@ Census designated places and tribal areas. See DESIGN.md.
     sdplaces.county("Lawrence").geoid                 # '46081'
     sdplaces.county("Shannon", current=True).name     # 'Oglala Lakota County'
     sdplaces.place("Spearfish").parent                # '46081'
+    sdplaces.from_id("sos_election_county", 57).name # 'Spink County'
 """
 
 from ._pandas import add_geoid
@@ -20,6 +21,7 @@ from ._places import (
     counties,
     county,
     current,
+    from_id,
     get,
     lookup,
     place,
@@ -39,6 +41,7 @@ __all__ = [
     "counties",
     "county",
     "current",
+    "from_id",
     "get",
     "lookup",
     "place",
