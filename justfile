@@ -32,6 +32,10 @@ worker:
 beat:
     cd app && uv run celery -A config beat -l info
 
+# What's running, stalled, failed or overdue, what will resume, disk and backups
+status:
+    {{manage}} status
+
 # Any Django management command: `just manage migrate`, `just manage shell`
 manage *args:
     {{manage}} {{args}}
@@ -40,9 +44,9 @@ manage *args:
 crawl *slugs:
     {{manage}} crawl {{slugs}}
 
-# Harvest watched GIS datasets now (all, or by id: `just harvest 641 --force`)
+# Harvest watched GIS datasets now (all, or by id: `just harvest 641 --force`); kept awake, resumes if stopped
 harvest *args:
-    {{manage}} harvest {{args}}
+    caffeinate -i {{manage}} harvest {{args}}
 
 # Rebuild Tailwind CSS while editing templates
 css:

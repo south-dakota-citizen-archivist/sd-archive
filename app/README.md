@@ -62,7 +62,14 @@ Without a worker, the buttons in the app queue jobs that wait on the Jobs page. 
 just crawl                     # crawl every active source (or: just crawl minnehaha sddot)
 just harvest                   # harvest every watched dataset (or: just harvest 641 --force)
 just manage build_readme       # refresh the sources table above
+just status                    # what's running, stalled, failed or overdue; partial downloads; disk; backups
 ```
+
+**Stopping and starting again.** Anything can be stopped at any point (a closed lid, a crash) and picks up where it was:
+- A harvest saves each downloaded batch to `media/staging/` as it arrives. A stopped harvest leaves them there, and the next run reuses them and fetches only the rest. They're removed once the harvest is stored.
+- A job whose worker stopped partway is marked *stalled* on the scheduler's next tick, and the crawl or harvest it left open is closed, so it runs again when due.
+- Schedules catch up once: after days asleep, an overdue crawl or harvest runs one time, not once per missed day.
+- On macOS, a failed job shows a notification: the first failure after a success, and again at three in a row (`SD_NOTIFY=0` turns them off).
 
 ## What's in the app
 
@@ -103,7 +110,7 @@ just manage build_readme       # refresh the sources table above
 - Each harvest that changes something also writes a GeoParquet snapshot to `media/exports/`.
 - Hosted layers report when their data last changed. If that date and the count both match the last full harvest, the harvest is recorded as skipped instead of downloading again, with a full download at least weekly regardless. Most ArcGIS Server layers don't report the date, so they're always downloaded.
 - The archive stores raw codes. The table and record pages show each code's label next to it, and CSV downloads add a `FIELD_label` column.
-- The whole harvest commits or rolls back as one unit.
+- The download is saved batch by batch (see "Stopping and starting again"); storing it commits or rolls back as one unit.
 
 **Name search.**
 - After each harvest, the dataset's name fields go into `search_nameentry`, normalized by the SQL function `gis_hub_normalize_name()` (uppercase, accents removed, punctuation stripped) and indexed with `pg_trgm`.

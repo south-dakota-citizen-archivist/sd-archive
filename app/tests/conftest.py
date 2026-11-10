@@ -13,6 +13,11 @@ def server(monkeypatch) -> FakeServer:
 
 
 @pytest.fixture(autouse=True)
+def no_notifications(settings):
+    settings.NOTIFY = False
+
+
+@pytest.fixture(autouse=True)
 def media_root(settings, tmp_path):
     settings.MEDIA_ROOT = tmp_path / "media"
     return settings.MEDIA_ROOT

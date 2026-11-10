@@ -116,6 +116,14 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# Local status in place of hosted monitoring (`just status`)
+# macOS notifications when work fails (core.notify); SD_NOTIFY=0 turns them off
+NOTIFY = env("SD_NOTIFY", "1") == "1"
+# Big downloads refuse to start, and `just status` warns, below this much free disk
+DISK_MIN_FREE_GB = float(env("SD_DISK_MIN_FREE_GB", "50"))
+# The nightly database dumps (ops/pg-nightly-dump.sh)
+BACKUP_DIR = Path(env("SD_BACKUP_DIR", str(Path.home() / "sd-backups")))
+
 # Celery: Redis from Homebrew
 CELERY_BROKER_URL = env("CELERY_BROKER_URL", "redis://localhost:6379/2")
 CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND", CELERY_BROKER_URL)

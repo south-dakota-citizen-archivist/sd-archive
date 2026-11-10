@@ -47,6 +47,9 @@ def run_job(job: Job, fn: Callable[[], dict | None]) -> Job:
         job.finished_at = timezone.now()
         job.save(update_fields=["status", "error", "finished_at"])
         logger.exception("Job %s failed", job)
+        from core.notify import job_failed
+
+        job_failed(job)
         raise
     job.status = Job.Status.SUCCEEDED
     job.result = result

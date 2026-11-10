@@ -13,17 +13,23 @@ from core.models import Job
 logger = logging.getLogger(__name__)
 
 
-def is_due(cron: str, last: datetime | None, now: datetime) -> bool:
+def next_run(cron: str, last: datetime | None) -> datetime | None:
+    """When work on this schedule is next due: the first schedule time after the last run.
+    A run missed while the laptop slept is due once at wake, not once per missed time."""
     if not cron:
-        return False
+        return None
     if last is None:
-        return True
+        return datetime.min.replace(tzinfo=timezone.get_current_timezone())
     try:
-        next_run = croniter(cron, timezone.localtime(last)).get_next(datetime)
+        return croniter(cron, timezone.localtime(last)).get_next(datetime)
     except (ValueError, KeyError):
         logger.error("Invalid cron expression %r", cron)
-        return False
-    return next_run <= now
+        return None
+
+
+def is_due(cron: str, last: datetime | None, now: datetime) -> bool:
+    due = next_run(cron, last)
+    return due is not None and due <= now
 
 
 def has_open_job(obj) -> bool:
