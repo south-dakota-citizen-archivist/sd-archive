@@ -10,12 +10,14 @@ uv run python pipelines/elections/build.py              # one table + checks →
 
 All three resume where they stopped and never fetch the same thing twice. They make one request at a time with a pause between.
 
+As of 2026-11-10: **346,605 precinct rows** (317,452 from the API, 29,153 from the exports) and 29,578 county rows, from the 44 elections that have results. The other four are empty listings on the site.
+
 ## What the site has
 
 - **48 elections, November 2008 to November 2026** (10 generals, 11 primaries, 27 specials), each chosen with `?eid=`. The catalog is [`data/elections.csv`](data/elections.csv).
 - **Precinct results for every race**, back to 2008, from the site's own API (`GetMapDataArchive`). One request with `county=0` returns every precinct that voted on a race, statewide or in one county. Each county's absentee ballots appear as an "Absentee Precinct".
 - **County totals** (`category=CTY`) for races with county breakdowns. build.py checks that precinct results add up to them.
-- **Export spreadsheets** (the Exports page): a workbook per county with a sheet per race and a row per precinct, plus statewide and legislative workbooks by county. They're a second primary source. They fill what the API lacks (2012's precincts, whose names the exports leave blank; two statewide ballot questions, 2010's Amendment K and 2016's Amendment T; local races in specials) and check the API's precinct rows. The site errors on 58 of 2008's 68 exports; the API has 2008 in full.
+- **Export spreadsheets** (the Exports page): a workbook per county with a sheet per race and a row per precinct, plus statewide and legislative workbooks by county. They're a second primary source. They fill what the API lacks (2012's precincts, whose names the exports leave blank; two statewide ballot questions, 2010's Amendment K and 2016's Amendment T; local races in specials) and check the API's precinct rows. The site errors on 58 of 2008's 68 exports and 22 of the 2010 primary's; the API has both in full.
 - **The current election isn't in the archive yet.** Its `?eid=` page shows 0 ballots cast, and its results are at the bare `default.aspx`, from the current API (`GetMapData`). capture.py notices this (an empty archive page, and the bare page showing the same date) and captures the live results, refetching them on every run because they can still change.
 
 ## What `capture.py` does
@@ -31,13 +33,23 @@ All three resume where they stopped and never fetch the same thing twice. They m
 
 Rows from the exports have `source = "export"`, `export_file` and `export_sheet`, and take race and candidate details (IDs, party) from the API's county rows where it has them. 2012's export rows have no precinct names; `precinct_seq` is their order on the sheet.
 
-Checks (`checks.json`): precinct sums against county totals, API precinct sums against export totals, races with no precinct rows, duplicates, and county codes and names.
+Reading the exports:
+
+- **Sheet names** are the race ID and the start of its name (`4265Presidential Electors`). In primaries, the ballot's party comes first (`REP14452Governor`, `NON` for the nonpartisan ballot), and rows are matched to the API by race, party ballot and county. The 2020 primary's sheets have no race ID (`REPState Rep District 06`), so they aren't read; the API has that election in full, so this loses only the cross-check.
+- **Repeated sheets.** Some workbooks repeat a sheet with `_1` on its name (2008). A repeat with the same rows is dropped; one with different rows would be reported (`export repeated sheets`).
+- **Race type for races the API doesn't list** (2008's and 2010's legislative and county races): from the legislative and statewide workbooks' sheet names, then `LEG` for a "State Senator/Representative" title (2008 has no legislative workbook), then `CTY` for a race in only one county's workbook.
+- **All-zero API precincts.** Where the API's precinct rows for a race in a county are all 0 but its county total isn't, and the export's totals equal that county total, the export's precincts replace the API rows. This happens in the 2012 primary (three legislative races in Minnehaha and Pennington), and `checks.json` lists each one (`API precinct rows all zero`).
+
+Checks (`checks.json`): precinct sums against county totals, API precinct sums against export totals, races with no precinct rows, duplicates (counting `precinct_seq`, for 2012's unnamed precincts), and county codes and names. Everything left in it as of 2026-11-10 is either an empty listing or a source error listed under Caveats.
 
 ## Caveats
 
 - **Most elections are labeled "Unofficial Results"** on the site, and its archive appears to keep the election-night counts. The 2024 general's presidential totals are within 0.05% of the certified canvass (Trump 271,938 against 272,081 certified). Use the SOS official canvass for certified numbers; elections the site labels official are marked `election_status = official`.
-- **Some elections in the catalog are empty shells.** The 2016-12-14 special (eid 200) shows 0 ballots cast and no contests; build.py reports these as `no races`, with the ballots-cast count, so they aren't mistaken for a failed capture.
+- **Some elections in the catalog are empty shells.** Four (eids 91, 115, 200, 662, including the 2016-12-14 special and a 2024-05-28 primary) show 0 ballots cast and no contests, and their exports fail. build.py reports these as `no races`, with the ballots-cast count, so they aren't mistaken for a failed capture.
 - **Some of the site's precinct numbers are wrong at the source.** In the 2010 general, Kristi Noem's precinct votes in Aurora County add up to 71, against a county total of 593, while the other candidates' precincts add up. The exports carry the same numbers. build.py reports every such mismatch (`precinct sums ≠ county totals`) and leaves the published numbers as they are.
+- **The API and the exports disagree by a vote or two in a few precincts** (e.g. 2018 general, Lincoln County, "Sioux Falls 1-15": 316 against 317 for R. Blake Curd). It happens in about 1 in 300 of the county totals checked, in 2010–2024. The table keeps the API's numbers; `API precinct sums ≠ export totals` lists each one.
+- **The 2026-07-28 runoff (eid 801) is broken at the source.** Its county totals are exactly three times its precinct sums, the site says "Precincts 5850 of 1950 Reporting", registered voters reads 10,125,314, and Jackson County's Precinct-3 appears twice in the API (the exports have it once). The precinct rows look right otherwise; the county rows and the home page's counts don't.
+- **The 2012 primary lists one combined Davison County municipal precinct twice**, once with zero votes. Sums aren't affected.
 - **Recounts.** Export sheets for recounts (names ending in "RECOUNT", often cut off) are saved but not yet used.
 - **Precinct names and boundaries change between elections**, so a precinct ID isn't a stable place over time.
 - The election system's county codes aren't FIPS and aren't alphabetical. `sdplaces` maps them (`from_id("sos_election_county", …)`).

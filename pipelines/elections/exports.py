@@ -9,13 +9,21 @@ and the start of its name ("4265Presidential Electors"). On each sheet, after a 
                                          …
                                          TOTALS        2,323         …
 
+Primaries' sheet names start with the ballot's party ("REP14452Governor"; "NON" for the
+nonpartisan ballot), kept as party_ballot. The 2020 primary's sheets have the party and name
+but no race ID ("REPState Rep District 06"), so they can't be matched to races and are skipped.
+
 2012's exports have the votes for each precinct but leave the precinct names blank; those
 rows get precinct "" and their order on the sheet (precinct_seq). Sheets whose name ends in
 "RECOUNT" (or the start of it, cut off at 31 characters) are recounts, read but marked
 (recount=True) and not used to fill or check.
 
-The statewide and legislative workbooks are by county, and aren't read here: the county
-workbooks have the same races in more detail.
+Some workbooks repeat a sheet, with "_1" added to its name. A repeat with the same rows is
+dropped; one with different rows is kept and listed in `different_repeats`.
+
+The statewide and legislative workbooks are by county, so their rows aren't read: the county
+workbooks have the same races in more detail. Their sheet names are read, though, because
+they say which races are statewide or legislative (`race_types`).
 """
 
 from __future__ import annotations
@@ -27,7 +35,15 @@ import pandas as pd
 
 SKIP = {"Statewide-Export", "Legislative-Export"}
 # Recount sheets end in RECOUNT, cut short by Excel's 31-character limit: "…  RE", "…  RECO"
-SHEET = re.compile(r"^(?P<race>\d+)(?P<name>.*?)(?P<recount>\s+RE(?:C|CO|COU|COUN|COUNT)?)?$")
+# Primaries put the ballot's party first: "REP14452Governor", "NON13017City Council"
+SHEET = re.compile(
+    r"^(?P<party>[A-Z]{3}(?=\d))?(?P<race>\d+)(?P<name>.*?)"
+    r"(?P<recount>\s+RE(?:C|CO|COU|COUN|COUNT)?)?$"
+)
+REPEAT = re.compile(r"_\d+$")
+BALLOT_QUESTION = re.compile(
+    r"^[A-Z]{0,3}\d+(Constitutional|Initiated|Referred|Amendment|Referendum)"
+)
 
 
 def _number(value) -> int | None:
@@ -72,12 +88,18 @@ def read_sheet(frame: pd.DataFrame) -> list[dict]:
     return rows
 
 
-def read_workbook(path: Path) -> list[dict]:
+def read_workbook(path: Path, different_repeats: list | None = None) -> list[dict]:
     """Every row of one county's workbook, with its race ID, sheet and county."""
     out = []
     sheets = pd.read_excel(path, sheet_name=None, header=None, dtype=str)
     for sheet, frame in sheets.items():
-        m = SHEET.match(sheet)
+        original = REPEAT.sub("", sheet)
+        if original != sheet and original in sheets:
+            if frame.equals(sheets[original]):
+                continue
+            if different_repeats is not None:
+                different_repeats.append((path.name, sheet))
+        m = SHEET.match(original)
         if not m or frame.shape[1] < 3:
             continue
         county = ""
@@ -89,6 +111,7 @@ def read_workbook(path: Path) -> list[dict]:
             out.append(
                 {
                     "race_id": m["race"],
+                    "party_ballot": m["party"] or "",
                     "recount": bool(m["recount"]),
                     "county": county,
                     "file": path.name,
@@ -99,10 +122,23 @@ def read_workbook(path: Path) -> list[dict]:
     return out
 
 
-def read_election(root: Path) -> list[dict]:
+def read_election(root: Path, different_repeats: list | None = None) -> list[dict]:
     """Every county workbook captured for one election (root = raw/<eid>)."""
     out = []
     for path in sorted((root / "exports").glob("*.xlsx")):
         if path.stem not in SKIP:
-            out += read_workbook(path)
+            out += read_workbook(path, different_repeats)
+    return out
+
+
+def race_types(root: Path) -> dict[str, str]:
+    """Race ID → type (LEG, SWR or BQ), from the sheet names of the summary workbooks."""
+    out = {}
+    for stem, kind in (("Legislative-Export", "LEG"), ("Statewide-Export", "SWR")):
+        path = root / "exports" / f"{stem}.xlsx"
+        if not path.exists():
+            continue
+        for sheet in pd.ExcelFile(path).sheet_names:
+            if m := SHEET.match(REPEAT.sub("", sheet)):
+                out[m["race"]] = "BQ" if BALLOT_QUESTION.match(sheet) else kind
     return out

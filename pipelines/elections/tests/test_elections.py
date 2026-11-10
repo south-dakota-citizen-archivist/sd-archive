@@ -105,3 +105,49 @@ def test_calls_parses_race_buttons():
         {"fn": "BuildCounty", "type": "BQ", "race": "66", "osn": "903", "county": "",
          "party": ""},
     ]  # fmt: skip
+
+
+def test_primary_sheet_names_carry_the_party():
+    m = exports.SHEET.match("REP14452Governor")
+    assert (m["party"], m["race"], m["name"]) == ("REP", "14452", "Governor")
+    m = exports.SHEET.match("NON13017City Council  RECO")
+    assert (m["party"], m["race"], bool(m["recount"])) == ("NON", "13017", True)
+    assert exports.SHEET.match("REPState Rep District 06") is None  # 2020: no race ID
+
+
+def write_workbook(path, sheets):
+    with pd.ExcelWriter(path) as w:
+        for name, rows in sheets.items():
+            pd.DataFrame(rows).to_excel(w, sheet_name=name, header=False, index=False)
+
+
+RACE = HEADER + [
+    ["Sheriff\nLawrence", "Precinct", "Ann Smith", None],
+    [None, "Precinct-01", "430", None],
+    [None, "TOTALS", "430", None],
+]
+
+
+def test_repeated_sheets(tmp_path):
+    other = [row[:] for row in RACE]
+    other[-1][2] = other[-2][2] = "431"
+    path = tmp_path / "Lawrence.xlsx"
+    write_workbook(path, {"651Sheriff": RACE, "651Sheriff_1": RACE, "652Auditor": RACE,
+                          "652Auditor_1": other})  # fmt: skip
+    repeats = []
+    rows = exports.read_workbook(path, repeats)
+    assert [r["sheet"] for r in rows if r["precinct"]] == [
+        "651Sheriff", "652Auditor", "652Auditor_1"
+    ]  # fmt: skip
+    assert repeats == [("Lawrence.xlsx", "652Auditor_1")]
+    assert {r["county"] for r in rows} == {"Lawrence"}
+
+
+def test_race_types(tmp_path):
+    (tmp_path / "exports").mkdir()
+    write_workbook(tmp_path / "exports" / "Legislative-Export.xlsx", {"1510State Senator": RACE})
+    write_workbook(
+        tmp_path / "exports" / "Statewide-Export.xlsx",
+        {"1586United States Senator": RACE, "29Constitutional Amendment K ": RACE},
+    )
+    assert exports.race_types(tmp_path) == {"1510": "LEG", "1586": "SWR", "29": "BQ"}
