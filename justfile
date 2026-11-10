@@ -21,6 +21,10 @@ check:
 test *args:
     uv run pytest {{args}}
 
+# Record (or re-record) the live responses that @pytest.mark.vcr tests replay: `just record packages/sdgis -k live_layer`
+record *args:
+    uv run pytest --record-mode=rewrite {{args}}
+
 # Run the Django development server at http://localhost:8000
 serve:
     {{manage}} runserver

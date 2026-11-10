@@ -18,6 +18,7 @@ dev = [
     "pytest-django>=4.11",
     "ruff>=0.11",
     "openpyxl>=3.1.5",
+    "pytest-recording>=0.14.1",
 ]
 analysis = [
     "folium>=0.20.0",
@@ -54,13 +55,16 @@ select = ["E", "F", "W", "I", "B", "UP", "SIM", "PTH", "LOG", "G"]
 DJANGO_SETTINGS_MODULE = "config.settings"
 pythonpath = ["app"]
 testpaths = ["app/tests", "packages/*/tests", "catalog/tests", "pipelines/elections/tests"]
-addopts = "-ra -m 'not network and not browser and not local_llm'"
+# Recorded responses (tests/cassettes/) replay and nothing records; any other request off this
+# machine fails the test. Re-record with `just record <tests>`.
+addopts = """-ra -m 'not network and not browser and not local_llm'
+  --record-mode=none --block-network --allowed-hosts=127.0.0.1,localhost,::1"""
 filterwarnings = [
     # Admin URL fields; harmless until Django 6, when https becomes the default scheme
     "ignore:The default scheme will be changed:django.utils.deprecation.RemovedInDjango60Warning",
 ]
 markers = [
-    "network: hits live servers (deselected by default; run with `-m network`)",
+    "network: hits live servers every run, where a recording can't stand in (deselected by default; run with `-m network`)",
     "browser: starts real browsers (slow; deselected by default; run with `-m browser`)",
     "local_llm: calls a model on this machine through Ollama (deselected by default)",
 ]

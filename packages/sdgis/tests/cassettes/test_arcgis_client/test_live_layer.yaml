@@ -1,0 +1,230 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://sdgis.sd.gov/danr/rest/services/BIT_Systems/NR42_SpillReports_Public/MapServer/0?f=json
+  response:
+    body:
+      string: '{"currentVersion":11.5,"cimVersion":"3.5.0","id":0,"name":"Spill Reports","type":"Feature
+        Layer","description":"","geometryType":"esriGeometryPoint","sourceSpatialReference":{"wkid":102100,"latestWkid":3857,"xyTolerance":0.001,"zTolerance":0.001,"mTolerance":0.001,"falseX":-20037700,"falseY":-30241100,"xyUnits":10000,"falseZ":0,"zUnits":1,"falseM":0,"mUnits":1},"spatialReference":{"wkid":102100,"latestWkid":3857,"xyTolerance":0.001,"zTolerance":2,"mTolerance":0.001,"falseX":-20037700,"falseY":-30241100,"xyUnits":1.4892314192838538E8,"falseZ":0,"zUnits":1,"falseM":-100000,"mUnits":10000},"copyrightText":"","parentLayer":null,"subLayers":[],"minScale":0,"maxScale":0,"referenceScale":0.0,"drawingInfo":{"renderer":{"type":"simple","symbol":{"type":"esriPMS","url":"0859df31a72fdb6b0be9709c8f4dffe2","imageData":"iVBORw0KGgoAAAANSUhEUgAAABIAAAAQCAYAAAAbBi9cAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABOElEQVQ4jb3TsUsCYRiA8edICvGGWsIgOxykIMo4OUITXAwcGmoIihCFsCVoEtITnVoyGpqbWg7/gCAQDhKObzu3NgenJgcHpzBsKYIrLzPpgXf43uH3Tp+HCeX5N2hjg11ZpmtZPP4FmlJViv0+fctia2xI0yhWKqjdLoNWi5wQ3I4DzSWTHCkKHkWBSIRTIbgDXn4FxeNc6zorH29dZ922KQtBeWTI52MtnWZblj93fj9SKsW+ENwAnZGgWIyrXI5F5z6fZ9k0uWw0OP4RCgQ4LJXYlKSvB7xeyGRI2jarvR5PbtBMNMpZIsEsQ8pmWarVuKjX2RsKhUKUqlVUXJIkKBSINZvsdDrcfwctaBoHgwHT7bYbBcEg8+Ew56bJA/DqhCTD4MQw3BFHXqDnhJ7fZ6wm9vvfABk6T+G5Jd55AAAAAElFTkSuQmCC","contentType":"image/png","width":13,"height":12,"angle":0,"xoffset":0,"yoffset":0}},"scaleSymbols":true,"transparency":0,"labelingInfo":null},"defaultVisibility":true,"extent":{"xmin":-1.15832751324E7,"ymin":5235710.162600003,"xmax":-1.07128140438E7,"ymax":5771496.858900003,"spatialReference":{"wkid":102100,"latestWkid":3857,"xyTolerance":0.001,"zTolerance":2,"mTolerance":0.001,"falseX":-20037700,"falseY":-30241100,"xyUnits":1.4892314192838538E8,"falseZ":0,"zUnits":1,"falseM":-100000,"mUnits":10000}},"hasAttachments":false,"htmlPopupType":"esriServerHTMLPopupTypeAsHTMLText","displayField":"site_name","typeIdField":null,"subtypeFieldName":null,"subtypeField":null,"defaultSubtypeCode":null,"fields":[{"name":"OBJECTID","type":"esriFieldTypeOID","alias":"OBJECTID","domain":null},{"name":"SHAPE","type":"esriFieldTypeGeometry","alias":"SHAPE","domain":null},{"name":"ForeignKey","type":"esriFieldTypeInteger","alias":"ForeignKey","domain":null},{"name":"id","type":"esriFieldTypeDouble","alias":"id","domain":null},{"name":"siteid","type":"esriFieldTypeInteger","alias":"siteid","domain":null},{"name":"site_name","type":"esriFieldTypeString","alias":"site_name","length":69,"domain":null},{"name":"site_type","type":"esriFieldTypeString","alias":"site_type","length":25,"domain":null},{"name":"status","type":"esriFieldTypeString","alias":"status","length":3,"domain":null},{"name":"street","type":"esriFieldTypeString","alias":"street","length":72,"domain":null},{"name":"city","type":"esriFieldTypeString","alias":"city","length":20,"domain":null},{"name":"zip_code","type":"esriFieldTypeString","alias":"zip_code","length":10,"domain":null},{"name":"county","type":"esriFieldTypeString","alias":"county","length":15,"domain":null},{"name":"resp_party","type":"esriFieldTypeString","alias":"resp_party","length":68,"domain":null},{"name":"spill_cat","type":"esriFieldTypeString","alias":"spill_cat","length":25,"domain":null},{"name":"material","type":"esriFieldTypeString","alias":"material","length":50,"domain":null},{"name":"r1","type":"esriFieldTypeString","alias":"r1","length":5,"domain":null},{"name":"sor_type","type":"esriFieldTypeString","alias":"sor_type","length":25,"domain":null}],"geometryField":{"name":"SHAPE","type":"esriFieldTypeGeometry","alias":"SHAPE"},"indexes":null,"subtypes":[],"relationships":[],"canModifyLayer":true,"canScaleSymbols":false,"hasLabels":false,"capabilities":"Map,Query,Data","maxRecordCount":2000,"maxSelectionCount":2000,"supportsStatistics":true,"supportsExceedsLimitStatistics":true,"supportsAdvancedQueries":true,"supportedQueryFormats":"JSON,
+        geoJSON, PBF","isDataVersioned":false,"ownershipBasedAccessControlForFeatures":{"allowOthersToQuery":true},"useStandardizedQueries":true,"supportedSpatialRelationships":["esriSpatialRelIntersects","esriSpatialRelContains","esriSpatialRelCrosses","esriSpatialRelEnvelopeIntersects","esriSpatialRelIndexIntersects","esriSpatialRelOverlaps","esriSpatialRelTouches","esriSpatialRelWithin","esriSpatialRelRelation"],"advancedQueryCapabilities":{"useStandardizedQueries":true,"supportsStatistics":true,"supportsPercentileStatistics":true,"supportsHavingClause":true,"supportsOrderBy":true,"supportsDistinct":true,"supportsCountDistinct":true,"supportsAdvancedQueryRelated":true,"supportsQueryRelatedPagination":true,"supportsPagination":true,"supportsLod":false,"supportsQueryWithLodSR":false,"supportsTrueCurve":true,"supportsQueryWithDatumTransformation":true,"supportsReturningQueryExtent":true,"supportsQueryWithDistance":true,"supportsSqlExpression":true,"supportsTimeRelation":true,"supportsSqlFormat":false,"supportsQueryAnalytic":true,"supportsCurrentUserQueries":true},"supportsDatumTransformation":true,"advancedQueryAnalyticCapabilities":{"supportsLinearRegression":true,"supportsAsync":false,"supportsPercentileAnalytic":true},"dateFieldsTimeReference":null,"preferredTimeReference":null,"datesInUnknownTimezone":false,"hasMetadata":true,"isDataArchived":false,"archivingInfo":{"supportsQueryWithHistoricMoment":false,"startArchivingMoment":-1},"supportsCoordinatesQuantization":true,"supportsDynamicLegends":true,"serviceItemId":"e2ce6e873b4b48fb829a5e8cda698938"}'
+    headers:
+      Cache-Control:
+      - must-revalidate,max-age=0,public
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 10 Nov 2026 21:44:23 GMT
+      ETag:
+      - '"3bfdd5f2"'
+      Server:
+      - Microsoft-IIS/10.0
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Origin
+      X-Content-Security-Policy:
+      - default-src 'self';
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Powered-By:
+      - ASP.NET
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '5514'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://sdgis.sd.gov/danr/rest/services/BIT_Systems/NR42_SpillReports_Public/MapServer/0/query?f=json&returnIdsOnly=true&where=OBJECTID+%3C%3D+25
+  response:
+    body:
+      string: '{"objectIdFieldName":"OBJECTID","objectIds":null}'
+    headers:
+      Cache-Control:
+      - must-revalidate,max-age=0,public
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 10 Nov 2026 21:44:23 GMT
+      ETag:
+      - '"f6fc889c"'
+      Server:
+      - Microsoft-IIS/10.0
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Security-Policy:
+      - default-src 'self';
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Powered-By:
+      - ASP.NET
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '49'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://sdgis.sd.gov/danr/rest/services/BIT_Systems/NR42_SpillReports_Public/MapServer/0/query?f=json&outFields=%2A&outSR=4326&where=OBJECTID+%3C%3D+25
+  response:
+    body:
+      string: '{"displayFieldName":"site_name","fieldAliases":{"OBJECTID":"OBJECTID","ForeignKey":"ForeignKey","id":"id","siteid":"siteid","site_name":"site_name","site_type":"site_type","status":"status","street":"street","city":"city","zip_code":"zip_code","county":"county","resp_party":"resp_party","spill_cat":"spill_cat","material":"material","r1":"r1","sor_type":"sor_type"},"geometryType":"esriGeometryPoint","spatialReference":{"wkid":4326,"latestWkid":4326},"fields":[{"name":"OBJECTID","type":"esriFieldTypeOID","alias":"OBJECTID"},{"name":"ForeignKey","type":"esriFieldTypeInteger","alias":"ForeignKey"},{"name":"id","type":"esriFieldTypeDouble","alias":"id"},{"name":"siteid","type":"esriFieldTypeInteger","alias":"siteid"},{"name":"site_name","type":"esriFieldTypeString","alias":"site_name","length":69},{"name":"site_type","type":"esriFieldTypeString","alias":"site_type","length":25},{"name":"status","type":"esriFieldTypeString","alias":"status","length":3},{"name":"street","type":"esriFieldTypeString","alias":"street","length":72},{"name":"city","type":"esriFieldTypeString","alias":"city","length":20},{"name":"zip_code","type":"esriFieldTypeString","alias":"zip_code","length":10},{"name":"county","type":"esriFieldTypeString","alias":"county","length":15},{"name":"resp_party","type":"esriFieldTypeString","alias":"resp_party","length":68},{"name":"spill_cat","type":"esriFieldTypeString","alias":"spill_cat","length":25},{"name":"material","type":"esriFieldTypeString","alias":"material","length":50},{"name":"r1","type":"esriFieldTypeString","alias":"r1","length":5},{"name":"sor_type","type":"esriFieldTypeString","alias":"sor_type","length":25}],"features":[]}'
+    headers:
+      Cache-Control:
+      - must-revalidate,max-age=0,public
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 10 Nov 2026 21:44:23 GMT
+      ETag:
+      - '"bab49a46"'
+      Server:
+      - Microsoft-IIS/10.0
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Security-Policy:
+      - default-src 'self';
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Powered-By:
+      - ASP.NET
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1673'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://sdgis.sd.gov/danr/rest/services/BIT_Systems/NR42_SpillReports_Public/MapServer/0/query?f=json&returnCountOnly=true&where=OBJECTID+%3C%3D+25
+  response:
+    body:
+      string: '{"count":0}'
+    headers:
+      Cache-Control:
+      - must-revalidate,max-age=0,public
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 10 Nov 2026 21:44:24 GMT
+      ETag:
+      - '"53cf146c"'
+      Server:
+      - Microsoft-IIS/10.0
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Security-Policy:
+      - default-src 'self';
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Powered-By:
+      - ASP.NET
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '11'
+    status:
+      code: 200
+      message: OK
+version: 1

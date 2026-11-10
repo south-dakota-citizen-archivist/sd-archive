@@ -34,6 +34,7 @@ dev = [
     { name = "pytest", specifier = ">=8.3" },
     { name = "pytest-cov", specifier = ">=6.0" },
     { name = "pytest-django", specifier = ">=4.11" },
+    { name = "pytest-recording", specifier = ">=0.14.1" },
     { name = "ruff", specifier = ">=0.11" },
     { name = "sddocs", extras = ["ocr", "text", "searchable", "macos"], editable = "packages/sddocs" },
     { name = "sdfetch", extras = ["impersonate", "browser", "warc", "keychain"], editable = "packages/sdfetch" },
@@ -4876,6 +4877,19 @@ wheels = [
 ]
 
 [[package]]
+name = "pytest-recording"
+version = "0.14.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pytest" },
+    { name = "vcrpy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b9/1b/12ba1460ae135e4dfcfb27ba23fdfdc8c991b26d4961a7bfaf40ca320d72/pytest_recording-0.14.1.tar.gz", hash = "sha256:904784991ed41b78353f27a91d1a0172e314994d23f088077445cddf4f82879f", size = 29134, upload-time = "2026-11-02T18:12:36.701Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bd/6a/48f56112703d3158f67c75a33f081aadfe7c311d9918d89443f4ad0f3527/pytest_recording-0.14.1-py3-none-any.whl", hash = "sha256:da954f116a4232aca5d7d518efab2c0f1b9421778e72913e9ad3e5777322cd62", size = 14307, upload-time = "2026-11-02T18:12:35.485Z" },
+]
+
+[[package]]
 name = "python-crfsuite"
 version = "0.9.12"
 source = { registry = "https://pypi.org/simple" }
@@ -6407,6 +6421,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/2a/f1/3b830a1f3ea493709e94b5b3b15434b65baea979d91797951da558053f1c/usaddress_scourgify-0.7.1.tar.gz", hash = "sha256:cb5aec6c1bfe4458dd90f87eaad602c334c0d17233d3f386537e3a492fc6421e", size = 28087, upload-time = "2026-08-07T16:48:05.325Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8d/90/9a419ed30ad3dbbfd88a64726d2c302ad1a8479240119b198ef2ba00091f/usaddress_scourgify-0.7.1-py3-none-any.whl", hash = "sha256:bddd5fb05f988795930ce5a781ba885b616a34e8d3e40ebd078568645273cd36", size = 28148, upload-time = "2026-08-07T16:48:04.243Z" },
+]
+
+[[package]]
+name = "vcrpy"
+version = "9.4.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyyaml" },
+    { name = "wrapt" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/1a/41/8dc8359ffee99a6e762bf4d55081944c354bfadff62c72b05d59c69c3e04/vcrpy-9.4.2.tar.gz", hash = "sha256:2ffc051adf50d9a83326c8d365c29929cd6788cef647326b55502b59276d443a", size = 123096, upload-time = "2026-11-02T20:24:46.692Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1a/96/f52f4a4c664fc3f9680fc6590bbdaf032833a3e1cefaed33d2b3c8b8be0a/vcrpy-9.4.2-py3-none-any.whl", hash = "sha256:ae6644e018e0663d4afd7cb232e029b4557ffccac2473b9ad4717f135b010b75", size = 57930, upload-time = "2026-11-02T20:24:45.152Z" },
 ]
 
 [[package]]

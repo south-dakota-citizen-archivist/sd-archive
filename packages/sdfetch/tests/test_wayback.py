@@ -118,7 +118,7 @@ def test_wayback_fetcher_defaults(tmp_path):
     assert f.delays["web.archive.org"] == 3.0 and f.max_strategy == "impersonate"
 
 
-@pytest.mark.network
+@pytest.mark.vcr  # the Wayback index's real answer, recorded
 def test_real_index():
     snaps = wayback.snapshots(PAGE, start="2019", end="2020", limit=5)  # captures begin in 2019
     assert snaps and all(s.original.startswith("http") and s.status == "200" for s in snaps)

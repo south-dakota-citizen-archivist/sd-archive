@@ -151,11 +151,9 @@ def test_session_has_retries_and_user_agent():
     assert session.get_adapter("https://x").max_retries.total == 2
 
 
-@pytest.mark.network
+@pytest.mark.vcr  # a real server's answers, recorded (just record packages/sdgis -k live_layer)
 def test_live_layer():
-    url = (
-        "https://www.1stdistrict.org/arcgis/rest/services/Lawrence/lawrencemapnet2/FeatureServer/0"
-    )
+    url = "https://sdgis.sd.gov/danr/rest/services/BIT_Systems/NR42_SpillReports_Public/MapServer/0"
     session = client.make_session()
     meta = client.get_metadata(session, url)
     gdf = client.fetch_features(session, url, meta, where="OBJECTID <= 25", batch_size=10)

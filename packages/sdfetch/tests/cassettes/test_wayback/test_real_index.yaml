@@ -1,0 +1,153 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://web.archive.org/cdx/search/cdx?filter=statuscode%3A200&fl=timestamp%2Coriginal%2Cmimetype%2Cstatuscode%2Cdigest%2Clength&from=2019&limit=5000&matchType=exact&output=json&showResumeKey=true&to=2020&url=https%3A%2F%2Fsdsos.gov%2Fgeneral-services%2Fconcealed-pistol-permits%2Fpistolstatistics.aspx
+  response:
+    body:
+      string: '[["timestamp","original","mimetype","statuscode","digest","length"],
+
+        ["20191016075642","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","4DE7W2AA5YVOVYK7IFU4VSZGHYRNWB2B","16434"],
+
+        ["20191023125629","http://sdsos.gov:80/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","CBGU2P5JZN5OICVQARUALG35WJF7YGM2","16217"],
+
+        ["20191101162841","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","4GG3GTXWYPQI6QS7SYJWV5PMXZWVKGT4","16099"],
+
+        ["20191119125810","http://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","5ZU4OWN5VARPF5OP5EB5ZDWGE7JPI5TS","16195"],
+
+        ["20191212012941","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","LQUHD75EOJ4BTALANV4JGXE2EMIQF5RP","16237"],
+
+        ["20191222164809","http://sdsos.gov:80/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","5F6QNYKZTV26TEBKAQF5AHHZQBUYWKJ7","15972"],
+
+        ["20200103183825","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","DO63PCGSIU6622NWUNIKG4QKRT42AYXZ","16172"],
+
+        ["20200203051128","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","HWDUBBSGMHQOPSW7L6DNBOZ65Y7OPFMF","16193"],
+
+        ["20200211090940","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","HWDUBBSGMHQOPSW7L6DNBOZ65Y7OPFMF","16170"],
+
+        ["20200304182951","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","SY5MHHDU2VEHEKR22IC5LAXQP7LATAED","16211"],
+
+        ["20200311082534","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","FXZOH4BU3O4KXTSIZVJIGNH2HZ5KNCGL","16209"],
+
+        ["20200411083735","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","LDZDTJP6RTV4YTPT3NPTIKCTVUCKSUZZ","16256"],
+
+        ["20200412100649","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","LDZDTJP6RTV4YTPT3NPTIKCTVUCKSUZZ","16281"],
+
+        ["20200425094917","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","DKGYLOWETNLPQLOBPOMIMTNN567OJCFE","16287"],
+
+        ["20200511082250","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","ARHJ6GGX7OC366J24XZL57JVLARPNZML","16265"],
+
+        ["20200513075409","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","ARHJ6GGX7OC366J24XZL57JVLARPNZML","16291"],
+
+        ["20200610012901","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","PBQPHK4F72CMPUNTE2QMICI6JMQ4IEX6","16336"],
+
+        ["20200610012913","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","PBQPHK4F72CMPUNTE2QMICI6JMQ4IEX6","16338"],
+
+        ["20200611084159","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","PBQPHK4F72CMPUNTE2QMICI6JMQ4IEX6","16315"],
+
+        ["20200711085809","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","K3WI2EJ5MK3ZIXHJAYNF2IADL3TXKNTC","16310"],
+
+        ["20200717144842","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","ZQWXX34LLST4CRRLINJWJRMA4F5Z2GJG","16325"],
+
+        ["20200811085810","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","2R24NP64WMDVUMHER3ANBKSOFDW27DFV","16292"],
+
+        ["20200818154043","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","PIUHQ3YRURCRYU7GUBFK6FERABUHW6D2","16281"],
+
+        ["20200911083757","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","YRHIJ3NILKY6GDNVRFB7CNTIHHWUVDX7","16307"],
+
+        ["20200913173833","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","EFT45PVSSQBU5X54PVCSWWKMJKFSRTIG","16311"],
+
+        ["20200915191925","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","I7NAHA5H3VG5AAGR7RFGVNDIB7ATUUQ4","16329"],
+
+        ["20200916151225","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","I7NAHA5H3VG5AAGR7RFGVNDIB7ATUUQ4","16329"],
+
+        ["20200924063047","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","YRHIJ3NILKY6GDNVRFB7CNTIHHWUVDX7","16333"],
+
+        ["20200928094949","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","YRHIJ3NILKY6GDNVRFB7CNTIHHWUVDX7","16463"],
+
+        ["20201003235549","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","J5XYGKDIGITAEL2SZKZ7V2CPGC373JV4","16304"],
+
+        ["20201011083129","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","J5XYGKDIGITAEL2SZKZ7V2CPGC373JV4","16331"],
+
+        ["20201016191643","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","J5XYGKDIGITAEL2SZKZ7V2CPGC373JV4","16352"],
+
+        ["20201021005140","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","XGFMWM2I56SQNGC7FBDGQXC53QZCE3ZF","16363"],
+
+        ["20201103130059","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","TWJJCHBPWJCI7O4XCHVQ2NLZDWNLG3IS","16304"],
+
+        ["20201103220231","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","DJDQ72DTKE5F6PQFDOD6N57KVHZVDC32","16355"],
+
+        ["20201106081858","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","CF7CEAGKNXZUBZJXZ3GKQHOTQIIV4YY6","16320"],
+
+        ["20201111084016","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","CF7CEAGKNXZUBZJXZ3GKQHOTQIIV4YY6","16348"],
+
+        ["20201211084105","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","YBQQHQRB5PPEN5J7IKHN4777Y2D5FXRM","16372"],
+
+        ["20201229153245","https://sdsos.gov/general-services/concealed-pistol-permits/pistolstatistics.aspx","text/html","200","YBQQHQRB5PPEN5J7IKHN4777Y2D5FXRM","16335"]]
+
+        '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 10 Nov 2026 21:44:25 GMT
+      Permissions-Policy:
+      - interest-cohort=()
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      Server:
+      - nginx
+      Transfer-Encoding:
+      - chunked
+      X-NA:
+      - '0'
+      X-NID:
+      - Gallatin Wireless Internet, LLC
+      X-Page-Cache:
+      - BYPASS
+      X-RL:
+      - '0'
+      X-be:
+      - wb_cdx_pygwb_nomatch
+      X-location:
+      - cdx
+      X-sd:
+      - '0'
+      content-length:
+      - '6507'
+      server-timing:
+      - exclusion.robots;dur=0.081719, exclusion.robots.policy;dur=0.071806, esindex;dur=0.007290
+      - TR;dur=0,Tw;dur=0,Tc;dur=0
+      - BYPASS
+      x-app-server:
+      - wwwb-app23-dc6
+      x-tr:
+      - '261'
+      x-ts:
+      - '200'
+    status:
+      code: 200
+      message: OK
+version: 1

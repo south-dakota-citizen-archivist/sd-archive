@@ -1,0 +1,676 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://electionresults.sd.gov/default.aspx?eid=684
+  response:
+    body:
+      string: "\r\n\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n<head><title>\r\n\tSouth Dakota
+        Secretary of State\r\n</title><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"
+        /><meta content=\"text/html; charset=windows-1252\" http-equiv=\"Content-Type\"
+        /><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0
+        minimum-scale=0.25, maximum-scale=10.0, user-scalable=yes\" /><link href=\"https://sdresws.azurewebsites.us/Styles/styles.bundle.css\"
+        rel=\"stylesheet\" />\r\n    <script src=\"https://sdresws.azurewebsites.us/Scripts/script.bundle.js\"></script>\r\n\r\n
+        \   \r\n    <script>\r\n        var ServiceRoot = 'https://sdresws.azurewebsites.us/';\r\n
+        \       var Maps = {};\r\n        var Bound = {};\r\n        var mapBuilt
+        = [];\r\n         \r\n        window.onload = function () {\r\n            var
+        WatchList = getCookie(\"SDTracked\");\r\n            //var temp = document.cookie;\r\n
+        \           if (WatchList) {\r\n                var checked = WatchList.split(\"_\");\r\n
+        \               for (var i = 0; i < checked.length; i++) {\r\n                    var
+        checkbox = document.getElementById(\"chk-\" + checked[i]);\r\n                    if
+        (checkbox !== null)\r\n                        checkbox.checked = true;\r\n
+        \               };\r\n            }\r\n            ClearSearch();\r\n            ClearSearchSide();\r\n
+        \       };\r\n\r\n        $(document).click(function (event) {\r\n            if
+        (!$(event.target).closest('#menudiv').length && !$(event.target).closest('#menuToggle').length)
+        {\r\n                if ($('#menudiv').css(\"visibility\") == 'visible') {\r\n
+        \                   $('#menudiv').css('visibility', 'hidden');\r\n                }\r\n
+        \           }\r\n        });\r\n\r\n        $(document).click(function (event)
+        {\r\n            if (!$(event.target).closest('.search-icon-wrapper').length)
+        {\r\n                if (document.getElementById('header-search-box').style.visibility
+        == 'visible') {\r\n                    document.getElementById('header-search-box').style.visibility
+        = 'hidden';\r\n                }\r\n                $('.search-icon-wrapper').removeClass('search-icon-wrapper-hover');\r\n
+        \               $('.search-icon').removeClass('search-icon-hover');\r\n            }\r\n
+        \       });\r\n\r\n        $(document).click(function (event) {\r\n            if
+        (!$(event.target).closest('.mtc-icon-position').length) {\r\n                if
+        (document.getElementById('header-share-box').style.visibility == 'visible')
+        {\r\n                    document.getElementById('header-share-box').style.visibility
+        = 'hidden';\r\n                }\r\n                $('.mtc-icon-position').removeClass('mtc-icon-position-hover');\r\n
+        \               $('.share-icon').removeClass('share-icon-hover');\r\n            }\r\n
+        \       });\r\n    </script>\r\n    <script>\r\n        //try using on mouse
+        out to auto close the header menu?\r\n        (function ($) {\r\n            $(document).ready(function
+        () {\r\n                $('#menuToggle').click(function (e) {\r\n                    //$('#menudiv').visibilityToggle();\r\n
+        \                   if($('#menudiv').css(\"visibility\") == 'hidden') {\r\n
+        \                       $('#menudiv').css('visibility', 'visible');\r\n                    }\r\n
+        \                   e.preventDefault();\r\n                });\r\n                $('#menuclose').click(function
+        (e) {\r\n                    $('#menudiv').visibilityToggle();\r\n                    if($('#menudiv').css(\"visibility\")
+        == 'visible') {\r\n                        $('#menudiv').css('visibility',
+        'hidden');\r\n                    }\r\n                    e.preventDefault();\r\n
+        \               });\r\n            });\r\n        }(jQuery));\r\n        //@
+        sourceURL=pen.js\r\n        jQuery.fn.visibilityToggle = function() {\r\n
+        \           return this.css('visibility', function(i, visibility) {\r\n                return
+        (visibility == 'visible') ? 'hidden' : 'visible';\r\n            });\r\n        };\r\n
+        \   </script>\r\n    <script type=\"text/javascript\">\r\n        //$(document).ready(function
+        () {\r\n        //    document.ontouchmove = function (e) {\r\n        //
+        \       e.preventDefault();\r\n        //    }\r\n        //});\r\n        $('body').on({\r\n
+        \           'touchmove': function(e) {\r\n                stick();\r\n            }\r\n
+        \       });\r\n        $('txtQuickSearch').on({\r\n            'focus': function(e)
+        {\r\n                e.preventDefault();\r\n                e.stopPropagation();\r\n
+        \               window.scrollTo(0, 0); //the second 0 marks the Y scroll pos.
+        Setting this to i.e. 100 will push the screen up by 100px. \r\n            }\r\n
+        \       });\r\n        $('txtQuickSearchSide').on({\r\n            'focus':
+        function (e) {\r\n                e.preventDefault();\r\n                e.stopPropagation();\r\n
+        \               window.scrollTo(0, 0); //the second 0 marks the Y scroll pos.
+        Setting this to i.e. 100 will push the screen up by 100px. \r\n            }\r\n
+        \       });\r\n    </script>\r\n    \r\n\r\n    <!-- GOOGLE ANALYTICS-->\r\n
+        \   <!-- Google tag (gtag.js) -->\r\n\r\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-5V7RHFF22H\"></script>\r\n\r\n
+        \   <script>\r\n\r\n        window.dataLayer = window.dataLayer || [];\r\n
+        \       function gtag() { dataLayer.push(arguments); }\r\n        gtag('js',
+        new Date());\r\n        gtag('config', 'G-5V7RHFF22H');\r\n\r\n    </script>\r\n\r\n
+        \   \r\n \r\n</head>\r\n<body onclick=\"\">\r\n    <form method=\"post\" action=\"./default.aspx?eid=684\"
+        id=\"form1\">\r\n<div class=\"aspNetHidden\">\r\n<input type=\"hidden\" name=\"__VIEWSTATE\"
+        id=\"__VIEWSTATE\" value=\"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\"
+        />\r\n</div>\r\n\r\n<div class=\"aspNetHidden\">\r\n\r\n\t<input type=\"hidden\"
+        name=\"__VIEWSTATEGENERATOR\" id=\"__VIEWSTATEGENERATOR\" value=\"CA0B0334\"
+        />\r\n\t<input type=\"hidden\" name=\"__EVENTVALIDATION\" id=\"__EVENTVALIDATION\"
+        value=\"Y4B15yAQri9VstNKWCRyEMz7nqTiy1euoKIkjuTcu0JpDTOGr/EyK4wsoa0buMO9zTAP7oMvmctxtU7cYSFQ4jf04ICBWFQHHC5P8T6vXiqeQsPKWk0iR3P5w4XmvFOjy90Xo0CjwThEgszj+eEdFq4igxPFHxUDnLnPCkNOQjB8yC+ccmVMQMCFH3K2sv9frnmxGeYrlUOWE+PI92BjP2HfmcxzIubT96l1G3w1buVrBjwk88WQWLg5FkCrjDXNeRzajqtPfW3HTPZO+CcfGm65BDS/zgtI4C0fbC/TLfpev0tZkejV31OWHQFWILAk\"
+        />\r\n</div>\r\n        <input type=\"hidden\" name=\"ctl00$hidElectionType\"
+        id=\"hidElectionType\" value=\"General\" />\r\n        <input type=\"hidden\"
+        name=\"ctl00$hidElectionDate\" id=\"hidElectionDate\" value=\"11/5/2024\"
+        />\r\n        <input type=\"hidden\" name=\"ctl00$hidPrecinctsReported\" id=\"hidPrecinctsReported\"
+        value=\"691\" />\r\n        <input type=\"hidden\" name=\"ctl00$hidPrecinctsPartial\"
+        id=\"hidPrecinctsPartial\" value=\"0\" />\r\n        <input type=\"hidden\"
+        name=\"ctl00$hidPrecinctsNotReported\" id=\"hidPrecinctsNotReported\" value=\"0\"
+        />\r\n        <input type=\"hidden\" name=\"ctl00$hidVoterTurnout\" id=\"hidVoterTurnout\"
+        value=\"436478\" />\r\n        <input type=\"hidden\" name=\"ctl00$hidVoterTotal\"
+        id=\"hidVoterTotal\" value=\"188714\" />\r\n        <div id=\"fader\"><h1>Preparing
+        Export...</h1></div>\r\n        <div class=\"outside-wrapper\">\r\n            <div
+        id=\"sticky-anchor\"></div>\r\n            <div id=\"sticky\" class=\"top-bluebar\">\r\n
+        \               <!--Menu button here-->\r\n                <a href=\"#\" id=\"menuToggle\"
+        title=\"show menu\"><span><em>Menu</em></span></a>\r\n                <div>\r\n
+        \                   \r\n                    \r\n                </div>\r\n
+        \               <div>\r\n                    \r\n                </div>\r\n
+        \               <div class=\" search-icon-wrapper\" onclick=\"MagClick()\">\r\n
+        \                   <div class=\"search-icon\" title=\"Search\"></div>\r\n
+        \                   <div id=\"header-search-box\" class=\" search-container\">\r\n
+        \                       <div class=\"search-box-wrapper\">\r\n                            <!--Search
+        box here -->\r\n                            <input name=\"ctl00$txtQuickSearch\"
+        type=\"text\" id=\"txtQuickSearch\" class=\"textboxSmallTransparent\" title=\"Search
+        for Contest or Candidate\" placeholder=\"Search...\" />\r\n                            \r\n
+        \                           <input type=\"submit\" name=\"ctl00$btnSearch\"
+        value=\"Search\" id=\"btnSearch\" class=\"search-button\" />\r\n                        </div>\r\n
+        \                   </div>\r\n                </div>\r\n                <div
+        class=\" mtc-icon-position\" onclick=\"ShareClick()\">\r\n                    <div
+        class=\"share-icon \" title=\"Share\"></div>\r\n                    <div id=\"header-share-box\"
+        class=\" share-container\">\r\n                        <div class=\"share-header\">SHARE
+        ON</div>\r\n                        <div class=\"share-icon-wrapper\">\r\n
+        \                           <div class=\"share-buttons\">\r\n                                <!--
+        Facebook --><a href=\"http://www.facebook.com/sharer.php?u=http://electionresults.sd.gov/default.aspx?eid=684\"
+        onclick=\"javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return
+        false;\"><img title=\"Share on Facebook\" alt=\"Facebook\" src=\"/Images/facebook.png\"
+        /></a><!-- Twitter --><a href=\"https://twitter.com/share?url=http://electionresults.sd.gov/default.aspx?eid=684&text=South
+        Dakota  Contests&hashtags=sdpol\" onclick=\"javascript:window.open(this.href,
+        '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return
+        false;\"><img title=\"Share on Twitter\" src=\"/Images/twitter.png\" alt=\"Twitter\"/></a>\r\n
+        \                           </div>\r\n                        </div>\r\n                    </div>\r\n
+        \               </div>\r\n                <div class=\"top-header-box2\">\r\n
+        \                   \r\n    <h2>\r\n        <a id=\"NavLinks_lnkTracked\"
+        href=\"MyTrackedContests.aspx?eid=684\">My Tracked Contests</a>\r\n    </h2>\r\n
+        \   <h5>\r\n        <a id=\"NavLinks_lnkHome\" href=\"https://sdsos.gov/default.aspx\"
+        target=\"_blank\">SOS Home</a>\r\n    </h5>\r\n\r\n                </div>\r\n
+        \           </div>\r\n            <!--End Top Blue Bar-->\r\n            <div
+        class=\"top-header\">\r\n                <div id=\"pnlHeader\" class=\"section
+        group\">\r\n\t\r\n                    <div class=\"col desktop\" style=\"padding:
+        3px 0 0 8px;\">\r\n                        <img src=\"/Images/SD_State_Seal.png\"
+        style=\"width: 78px; height: 78px;\" title=\"South Dakota State Seal\" alt=\"South
+        Dakota State Seal\" />\r\n                    </div>\r\n                    <div
+        class=\"col mobile\" style=\"padding: 6px 0 0 8px;\">\r\n                        <img
+        src=\"/Images/SD_State_Seal.png\" style=\"width: 59px; height: 59px;\" title=\"South
+        Dakota State Seal\" alt=\"South Dakota State Seal\" />\r\n                    </div>\r\n
+        \                   <div class=\"col top-header-box1\">\r\n                        <h2>\r\n
+        \                           <a id=\"lnkSOSName\" href=\"Default.aspx?eid=684\"
+        target=\"_blank\"></a>\r\n                        </h2>\r\n                        <h1>\r\n
+        \                           <a id=\"lnkStateSOS\" href=\"Default.aspx?eid=684\"
+        target=\"_blank\">South Dakota Secretary of State</a>\r\n                        </h1>\r\n
+        \                   </div>\r\n                    <!--End top-header-box1-->\r\n
+        \                   <!--End top-header-box2-->\r\n                \r\n</div>\r\n
+        \               <!--End Section Group-->\r\n            </div>\r\n            <!--End
+        Top Header-->\r\n            <div class=\"header-box-wrapper\">\r\n                <div
+        class=\"section group\">\r\n                    <a id=\"lnkDateHeader\" class=\"aspNetDisabled
+        col header-box1\"><h1>Unofficial Results</h1><h2>General Election November
+        5, 2024</h2>\r\n                        <div class=\"last-updated\"></div>\r\n
+        \                   </a>\r\n                    <script>\r\n                      //
+        TEMP 11/3/2026: hide pre-election timestamp until election-night loads start
+        (7:00 PM CT)\r\n                      (function () {\r\n                        var
+        el = document.querySelector('.last-updated');\r\n                        if
+        (!el) return;\r\n                        var m = el.textContent.match(/(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})\\s+(\\d{1,2}):(\\d{2})\\s*(AM|PM)/i);\r\n
+        \                       if (!m) { el.style.display = 'none'; return; }\r\n
+        \                       var h = (parseInt(m[4], 10) % 12) + (m[6].toUpperCase()
+        === 'PM' ? 12 : 0);\r\n                        var ts = new Date(+m[3], +m[1]
+        - 1, +m[2], h, +m[5]);\r\n                        if (ts < new Date(2026,
+        10, 3, 19, 0)) el.style.display = 'none';\r\n                      })();\r\n
+        \                   </script>\r\n                    <!--End Header Box 1-->\r\n
+        \                   <div class=\"col header-box2\">\r\n                        <div
+        class=\"header-box-content-top\">\r\n                            <h1>\r\n
+        \                               <a id=\"lnkVoterTurnout\" class=\"button\"
+        href=\"VoterTurnoutDetails.aspx?map=TURN&amp;eid=684\">Statewide Voter Turnout</a>\r\n
+        \                           </h1>\r\n                        </div>\r\n                        <!--End
+        header-box2-content-top-->\r\n                        <div class=\"header-box-content-bottom\">\r\n
+        \                           \r\n                            <div class=\"animate-position
+        desktop\">\r\n                                <div style=\"height: 150px\"><canvas
+        id=\"voter-turnout-canvas\"></canvas><div class=\"dough-percent\"><span class=\"int\">69</span><span
+        class=\"dec\">.82%</span></div></div>\r\n                            </div>\r\n
+        \                           <!--End Animate Position-->\r\n                            <div
+        class=\"animate-position mobile\" style=\"margin-top: -6px;\">\r\n                                <div><canvas
+        id=\"voter-turnout-mobile-canvas\"></canvas><div class=\"dough-percent\"><span
+        class=\"int\">69</span><span class=\"dec\">.82%</span></div></div>\r\n                            </div>\r\n
+        \                           <!--End Animate Position-->\r\n                        </div>\r\n
+        \                       <!--End header-box-content-bottom-->\r\n                        <div
+        class=\"header-box-content-reg\">\r\n                            <h2><span
+        class=\"header-ballot-text\">Ballots Cast</span><span class=\"header-ballot-number\">436,478</span><br
+        /><span class=\"header-voter-text\">Registered Voters</span><span class=\"header-voter-number\">625,192</span></h2>\r\n
+        \                       </div>\r\n                    </div>\r\n                    <!--End
+        Header Box 2-->\r\n                    <div class=\"col header-box3\">\r\n
+        \                       <div class=\"header-box-content-top\">\r\n                            <h1>\r\n
+        \                               <a id=\"lnkPrecinctsReporting\" class=\"button\"
+        href=\"VoterTurnoutDetails.aspx?map=PREC&amp;eid=684\">Precincts Fully Reported</a>\r\n
+        \                           </h1>\r\n                        </div>\r\n                        <!--End
+        header-box2-content-top-->\r\n                        <div class=\"header-box-content-bottom\">\r\n
+        \                           \r\n                            <div class=\"animate-position
+        desktop\">\r\n                                <div style=\"height: 150px\"><canvas
+        id=\"precinct-reported-canvas\"></canvas><div class=\"dough-percent\"><span
+        class=\"int\">100</span><span class=\"dec\">%</span></div></div>\r\n                            </div>\r\n
+        \                           <!--End Animate Position-->\r\n                            <div
+        class=\"animate-position mobile\">\r\n                                <div><canvas
+        id=\"precinct-reported-mobile-canvas\"></canvas><div class=\"dough-percent\"><span
+        class=\"int\">100</span><span class=\"dec\">%</span></div></div>\r\n                            </div>\r\n
+        \                           <!--End Animate Position-->\r\n                        </div>\r\n
+        \                       <!--End header-box-content-bottom-->\r\n                        <div
+        class=\"header-box-content-reg header-box-content-prec\">\r\n                            <h2><div
+        class='colordisc-yellow'></div><span class=\"header-partial-text\">Partially</span><span
+        class=\"header-partial-number\">0</span><br/><div class='colordisc-orange'></div><span
+        class=\"header-total-text\">Fully</span><span class=\"header-total-number\">691</span>
+        </br><div></div><span class=\"header-partial-text\">Total</span><span class=\"header-totalprecincts-text\">691</span></h2>\r\n
+        \                       </div>\r\n                    </div>\r\n                    <div
+        id=\"chartjs-tooltip\"></div>\r\n                    <!--End Header Box 3-->\r\n
+        \               </div>\r\n                <!--End Section Group-->\r\n                \r\n
+        \           </div>\r\n            <!--End Header Box Wrapper-->\r\n            \r\n
+        \           \r\n            \r\n            <!--Main Content-->\r\n            \r\n
+        \   <div class=\"outside-wrapper-body\">\r\n        <div class=\"section group
+        grid-box-wrapper\">\r\n            <div class=\"col-elec-search-box election-results-box\">\r\n
+        \               <div class=\"elec-results-header\">\r\n                    <h1>Election
+        Results</h1>\r\n                </div>\r\n                <!--End Elec Results
+        Header-->\r\n                \r\n                <div id=\"MainContent_pnlLinkGridWrapper\"
+        class=\"elec-results-grid-wrapper\">\r\n\t<span class=\"results-gridbox-links\"><a
+        class=\"col-elec-results-grid elec-results-grid\" href=\"/resultsSW.aspx?type=SWR&amp;map=CTY&amp;eid=684\"><div><h1>Statewide
+        Races</h1></div></a><a class=\"col-elec-results-grid elec-results-grid\" href=\"/resultsSW.aspx?type=BQ&amp;map=CTY&amp;eid=684\"><div><h1>Statewide
+        Ballot Questions</h1></div></a><a class=\"col-elec-results-grid elec-results-grid\"
+        href=\"/resultsSW.aspx?type=RET&amp;map=CTY&amp;eid=684\"><div><h1>Justice
+        Retention</h1></div></a><a class=\"col-elec-results-grid elec-results-grid\"
+        href=\"/resultsSW.aspx?type=LEG&amp;map=DIST&amp;eid=684\"><div><h1>Legislative
+        Races</h1></div></a><a class=\"col-elec-results-grid elec-results-grid\" href=\"/resultsList.aspx?type=cty&amp;map=CTY&amp;eid=684\"><div><h1>County<br/>Races
+        and Ballot Questions</h1></div></a><a class=\"col-elec-results-grid elec-results-grid\"
+        href=\"/resultsSW.aspx?type=SDD&amp;map=CTY&amp;eid=684\"><div><h1>Special
+        Districts</h1></div></a><a class=\"col-elec-results-grid elec-results-grid\"
+        href=\"/VoterTurnoutDetails.aspx?map=TURN&amp;eid=684\"><div><h1>Voter Turnout
+        Details</h1></div></a><a class=\"col-elec-results-grid elec-results-grid\"
+        href=\"/ResultsList.aspx?type=CTYALL&amp;eid=684\"><div><h1>Results by County</h1></div></a><a
+        class=\"col-elec-results-grid elec-results-grid\" href=\"/ResultsExport.aspx?&amp;eid=684\"><div><h1>Exports</h1></div></a><a
+        class=\"col-elec-results-grid elec-results-grid\" href=\"/ResultsSW.aspx?type=RECOUNT&amp;eid=684\"><div><h1>Possible
+        Recounts</h1></div></a><a class=\"col-elec-results-grid elec-results-grid\"
+        href=\"/ElectionTerminology.aspx?&amp;eid=684\"><div><h1>FAQs</h1></div></a></span>\r\n</div>\r\n
+        \           </div>\r\n            <!--End Election Results Box-->\r\n            <div
+        class=\"col-elec-search-box search-results-box\">\r\n                <!--End
+        Search Box Wrapper-->\r\n                <div class=\"results-county-header\">\r\n
+        \                   <h1>Results By County and Local Results</h1>\r\n                </div>\r\n
+        \               <div class=\"mt-map\">\r\n                    <map id=\"ImgMap0\"
+        name=\"ImgMap0\">\r\n                        <area alt=\"\" coords=\"15, 8,
+        73, 62\" href=\"#\" onclick=\"javascript:setCountyURL('35','Harding'); return
+        false;\" onkeypress=\"javascript:setCountyURL('35','Harding'); return false;\"
+        shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"74, 8,
+        127, 78\" href=\"#\" onclick=\"javascript:setCountyURL('53','Perkins'); return
+        false;\" onkeypress=\"javascript:setCountyURL('53','Perkins'); return false;\"
+        shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"131,
+        11, 215, 46\" href=\"#\" onclick=\"javascript:setCountyURL('20','Corson');
+        return false;\" onkeypress=\"javascript:setCountyURL('20','Corson'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"217,
+        12, 253, 37\" href=\"#\" onclick=\"javascript:setCountyURL('16','Campbell');
+        return false;\" onkeypress=\"javascript:setCountyURL('16','Campbell'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"255,
+        11, 308, 35\" href=\"#\" onclick=\"javascript:setCountyURL('47','McPherson');
+        return false;\" onkeypress=\"javascript:setCountyURL('47','McPherson'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"309,
+        10, 350, 62\" href=\"#\" onclick=\"javascript:setCountyURL('03','Brown');
+        return false;\" onkeypress=\"javascript:setCountyURL('03','Brown'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"351,
+        10, 390, 34\" href=\"#\" onclick=\"javascript:setCountyURL('48','Marshall');
+        return false;\" onkeypress=\"javascript:setCountyURL('48','Marshall'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"392,
+        9, 425, 54\" href=\"#\" onclick=\"javascript:setCountyURL('55','Roberts');
+        return false;\" onkeypress=\"javascript:setCountyURL('55','Roberts'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"392,
+        67, 392, 56, 434, 53, 434, 78, 415, 80, 414, 67\" href=\"#\" onclick=\"javascript:setCountyURL('29','Grant');
+        return false;\" onkeypress=\"javascript:setCountyURL('29','Grant'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"350,
+        37, 390, 68\" href=\"#\" onclick=\"javascript:setCountyURL('22','Day'); return
+        false;\" onkeypress=\"javascript:setCountyURL('22','Day'); return false;\"
+        shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"380,
+        70, 411, 95\" href=\"#\" onclick=\"javascript:setCountyURL('05','Codington');
+        return false;\" onkeypress=\"javascript:setCountyURL('05','Codington'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"414,
+        82, 436, 114\" href=\"#\" onclick=\"javascript:setCountyURL('23','Deuel');
+        return false;\" onkeypress=\"javascript:setCountyURL('23','Deuel'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"379,
+        98, 411, 116\" href=\"#\" onclick=\"javascript:setCountyURL('32','Hamlin');
+        return false;\" onkeypress=\"javascript:setCountyURL('32','Hamlin'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"352,
+        72, 376, 115\" href=\"#\" onclick=\"javascript:setCountyURL('18','Clark');
+        return false;\" onkeypress=\"javascript:setCountyURL('18','Clark'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"311,
+        62, 352, 112\" href=\"#\" onclick=\"javascript:setCountyURL('57','Spink');
+        return false;\" onkeypress=\"javascript:setCountyURL('57','Spink'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"262,
+        64, 312, 91\" href=\"#\" onclick=\"javascript:setCountyURL('28','Faulk');
+        return false;\" onkeypress=\"javascript:setCountyURL('28','Faulk'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"255,
+        35, 310, 63\" href=\"#\" onclick=\"javascript:setCountyURL('26','Edmunds');
+        return false;\" onkeypress=\"javascript:setCountyURL('26','Edmunds'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"276,
+        92, 311, 145\" href=\"#\" onclick=\"javascript:setCountyURL('33','Hand');
+        return false;\" onkeypress=\"javascript:setCountyURL('33','Hand'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"312,
+        110, 360, 145\" href=\"#\" onclick=\"javascript:setCountyURL('04','Beadle');
+        return false;\" onkeypress=\"javascript:setCountyURL('04','Beadle'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"360,
+        115, 402, 144\" href=\"#\" onclick=\"javascript:setCountyURL('42','Kingsbury');
+        return false;\" onkeypress=\"javascript:setCountyURL('42','Kingsbury'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"402,
+        115, 438, 144\" href=\"#\" onclick=\"javascript:setCountyURL('06','Brookings');
+        return false;\" onkeypress=\"javascript:setCountyURL('06','Brookings'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"416,
+        143, 439, 170\" href=\"#\" onclick=\"javascript:setCountyURL('52','Moody');
+        return false;\" onkeypress=\"javascript:setCountyURL('52','Moody'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"387,
+        145, 415, 171\" href=\"#\" onclick=\"javascript:setCountyURL('43','Lake');
+        return false;\" onkeypress=\"javascript:setCountyURL('43','Lake'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"359,
+        145, 389, 173\" href=\"#\" onclick=\"javascript:setCountyURL('51','Miner');
+        return false;\" onkeypress=\"javascript:setCountyURL('51','Miner'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"335,
+        144, 359, 174\" href=\"#\" onclick=\"javascript:setCountyURL('56','Sanborn');
+        return false;\" onkeypress=\"javascript:setCountyURL('56','Sanborn'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"299,
+        144, 336, 168\" href=\"#\" onclick=\"javascript:setCountyURL('40','Jerauld');
+        return false;\" onkeypress=\"javascript:setCountyURL('40','Jerauld'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"276,
+        168, 300, 166, 300, 146, 265, 146, 263, 156\" href=\"#\" onclick=\"javascript:setCountyURL('14','Buffalo');
+        return false;\" onkeypress=\"javascript:setCountyURL('14','Buffalo'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"256,
+        93, 277, 148\" href=\"#\" onclick=\"javascript:setCountyURL('38','Hyde');
+        return false;\" onkeypress=\"javascript:setCountyURL('38','Hyde'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"404,
+        169, 440, 198\" href=\"#\" onclick=\"javascript:setCountyURL('01','Minnehaha');
+        return false;\" onkeypress=\"javascript:setCountyURL('01','Minnehaha'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"375,
+        172, 403, 200\" href=\"#\" onclick=\"javascript:setCountyURL('46','McCook');
+        return false;\" onkeypress=\"javascript:setCountyURL('46','McCook'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"355,
+        171, 377, 201\" href=\"#\" onclick=\"javascript:setCountyURL('34','Hanson');
+        return false;\" onkeypress=\"javascript:setCountyURL('34','Hanson'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"334,
+        173, 354, 200\" href=\"#\" onclick=\"javascript:setCountyURL('08','Davison');
+        return false;\" onkeypress=\"javascript:setCountyURL('08','Davison'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"309,
+        168, 335, 201\" href=\"#\" onclick=\"javascript:setCountyURL('10','Aurora');
+        return false;\" onkeypress=\"javascript:setCountyURL('10','Aurora'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"273,
+        170, 308, 200\" href=\"#\" onclick=\"javascript:setCountyURL('13','Brule');
+        return false;\" onkeypress=\"javascript:setCountyURL('13','Brule'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"413,
+        198, 442, 231\" href=\"#\" onclick=\"javascript:setCountyURL('44','Lincoln');
+        return false;\" onkeypress=\"javascript:setCountyURL('44','Lincoln'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"388,
+        201, 388, 225, 399, 225, 401, 233, 414, 231, 414, 199\" href=\"#\" onclick=\"javascript:setCountyURL('61','Turner');
+        return false;\" onkeypress=\"javascript:setCountyURL('61','Turner'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"423,
+        233, 424, 261, 435, 277, 446, 269, 436, 254, 441, 232\" href=\"#\" onclick=\"javascript:setCountyURL('62','Union');
+        return false;\" onkeypress=\"javascript:setCountyURL('62','Union'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"403,
+        233, 422, 258\" href=\"#\" onclick=\"javascript:setCountyURL('19','Clay');
+        return false;\" onkeypress=\"javascript:setCountyURL('19','Clay'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"374,
+        225, 403, 252\" href=\"#\" onclick=\"javascript:setCountyURL('07','Yankton');
+        return false;\" onkeypress=\"javascript:setCountyURL('07','Yankton'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"350,
+        226, 345, 253, 355, 260, 363, 249, 375, 248, 375, 223\" href=\"#\" onclick=\"javascript:setCountyURL('12','Bon
+        Homme'); return false;\" onkeypress=\"javascript:setCountyURL('12','Bon Homme');
+        return false;\" shape=\"poly\" />\r\n                        <area alt=\"\"
+        coords=\"347, 201, 390, 225\" href=\"#\" onclick=\"javascript:setCountyURL('37','Hutchinson');
+        return false;\" onkeypress=\"javascript:setCountyURL('37','Hutchinson'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"310,
+        200, 311, 210, 348, 225, 349, 199\" href=\"#\" onclick=\"javascript:setCountyURL('25','Douglas');
+        return false;\" onkeypress=\"javascript:setCountyURL('25','Douglas'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"344,
+        253, 348, 225, 311, 210, 310, 199, 279, 199, 323, 242\" href=\"#\" onclick=\"javascript:setCountyURL('17','Charles
+        Mix'); return false;\" onkeypress=\"javascript:setCountyURL('17','Charles
+        Mix'); return false;\" shape=\"poly\" />\r\n                        <area
+        alt=\"\" coords=\"223, 64, 215, 33, 255, 35, 255, 64\" href=\"#\" onclick=\"javascript:setCountyURL('63','Walworth');
+        return false;\" onkeypress=\"javascript:setCountyURL('63','Walworth'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"216,
+        90, 225, 63, 263, 64, 262, 90\" href=\"#\" onclick=\"javascript:setCountyURL('54','Potter');
+        return false;\" onkeypress=\"javascript:setCountyURL('54','Potter'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"256,
+        119, 255, 89, 220, 90, 202, 113, 206, 116\" href=\"#\" onclick=\"javascript:setCountyURL('59','Sully');
+        return false;\" onkeypress=\"javascript:setCountyURL('59','Sully'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"259,
+        156, 257, 121, 204, 116, 207, 126\" href=\"#\" onclick=\"javascript:setCountyURL('36','Hughes');
+        return false;\" onkeypress=\"javascript:setCountyURL('36','Hughes'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"275,
+        203, 259, 202, 260, 181, 223, 186, 218, 182, 219, 148, 241, 146, 272, 164\"
+        href=\"#\" onclick=\"javascript:setCountyURL('45','Lyman'); return false;\"
+        onkeypress=\"javascript:setCountyURL('45','Lyman'); return false;\" shape=\"poly\"
+        />\r\n                        <area alt=\"\" coords=\"266, 239, 266, 203,
+        281, 202, 320, 238\" href=\"#\" onclick=\"javascript:setCountyURL('30','Gregory');
+        return false;\" onkeypress=\"javascript:setCountyURL('30','Gregory'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"227,
+        184, 265, 240\" href=\"#\" onclick=\"javascript:setCountyURL('60','Tripp');
+        return false;\" onkeypress=\"javascript:setCountyURL('60','Tripp'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"168,
+        211, 228, 242\" href=\"#\" onclick=\"javascript:setCountyURL('67','Todd');
+        return false;\" onkeypress=\"javascript:setCountyURL('67','Todd'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"167,
+        212, 169, 175, 181, 175, 199, 183, 227, 186, 226, 210\" href=\"#\" onclick=\"javascript:setCountyURL('50','Mellette');
+        return false;\" onkeypress=\"javascript:setCountyURL('50','Mellette'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"179,
+        149, 179, 173, 219, 187, 218, 150\" href=\"#\" onclick=\"javascript:setCountyURL('41','Jones');
+        return false;\" onkeypress=\"javascript:setCountyURL('41','Jones'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"172,
+        149, 243, 146, 209, 124, 203, 100, 176, 104\" href=\"#\" onclick=\"javascript:setCountyURL('58','Stanley');
+        return false;\" onkeypress=\"javascript:setCountyURL('58','Stanley'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"157,
+        47, 154, 84, 175, 84, 174, 104, 210, 101, 224, 64, 217, 44\" href=\"#\" onclick=\"javascript:setCountyURL('24','Dewey');
+        return false;\" onkeypress=\"javascript:setCountyURL('24','Dewey'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"126,
+        121, 173, 106, 175, 84, 156, 83, 157, 45, 128, 45\" href=\"#\" onclick=\"javascript:setCountyURL('64','Ziebach');
+        return false;\" onkeypress=\"javascript:setCountyURL('64','Ziebach'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"125,
+        164, 179, 162, 179, 149, 172, 148, 176, 106, 127, 122\" href=\"#\" onclick=\"javascript:setCountyURL('31','Haakon');
+        return false;\" onkeypress=\"javascript:setCountyURL('31','Haakon'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"116,
+        211, 169, 209, 168, 176, 177, 176, 178, 162, 127, 161, 122, 186, 115, 186\"
+        href=\"#\" onclick=\"javascript:setCountyURL('39','Jackson'); return false;\"
+        onkeypress=\"javascript:setCountyURL('39','Jackson'); return false;\" shape=\"poly\"
+        />\r\n                        <area alt=\"\" coords=\"118, 211, 170, 241\"
+        href=\"#\" onclick=\"javascript:setCountyURL('11','Bennett'); return false;\"
+        onkeypress=\"javascript:setCountyURL('11','Bennett'); return false;\" shape=\"rect\"
+        />\r\n                        <area alt=\"\" coords=\"125, 123, 109, 128,
+        102, 149, 11, 146, 8, 167, 86, 171, 78, 183, 123, 184\" href=\"#\" onclick=\"javascript:setCountyURL('02','Pennington');
+        return false;\" onkeypress=\"javascript:setCountyURL('02','Pennington'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"39,
+        112, 38, 137, 42, 137, 42, 147, 101, 149, 108, 127, 126, 119, 126, 78, 74,
+        78, 70, 111\" href=\"#\" onclick=\"javascript:setCountyURL('49','Meade');
+        return false;\" onkeypress=\"javascript:setCountyURL('49','Meade'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"14,
+        64, 75, 112\" href=\"#\" onclick=\"javascript:setCountyURL('15','Butte');
+        return false;\" onkeypress=\"javascript:setCountyURL('15','Butte'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"9,
+        114, 43, 148\" href=\"#\" onclick=\"javascript:setCountyURL('09','Lawrence');
+        return false;\" onkeypress=\"javascript:setCountyURL('09','Lawrence'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"7,
+        198, 9, 170, 88, 171, 66, 194, 66, 199\" href=\"#\" onclick=\"javascript:setCountyURL('21','Custer');
+        return false;\" onkeypress=\"javascript:setCountyURL('21','Custer'); return
+        false;\" shape=\"poly\" />\r\n                        <area alt=\"\" coords=\"7,
+        200, 66, 238\" href=\"#\" onclick=\"javascript:setCountyURL('27','Fall River');
+        return false;\" onkeypress=\"javascript:setCountyURL('27','Fall River'); return
+        false;\" shape=\"rect\" />\r\n                        <area alt=\"\" coords=\"63,
+        239, 118, 240, 116, 183, 77, 185, 66, 198\" href=\"#\" onclick=\"javascript:setCountyURL('65','Oglala
+        Lakota'); return false;\" onkeypress=\"javascript:setCountyURL('65','Oglala
+        Lakota'); return false;\" shape=\"poly\" />\r\n                    </map>\r\n
+        \                   <img src=\"/Images/sd-counties2.png\" usemap=\"#ImgMap0\"
+        style=\"width: 100%;\" />\r\n                </div>\r\n            </div>\r\n
+        \           <!--End Search Results Box-->\r\n        </div>\r\n        <!--End
+        Section Group-->\r\n    </div>\r\n    <script>\r\n        $(window).on('load',
+        function () {\r\n            var countymap = $('#ImgMap0')\r\n            countymap.imageMapResize();\r\n
+        \       });\r\n    </script>\r\n\r\n            <div class=\"bottom-graybar\"></div>\r\n
+        \           \r\n        </div>\r\n        \r\n        <!--End Bottom Bluebar-->\r\n
+        \       \r\n        <!--End Outside Wrapper-->\r\n        \r\n        <div
+        id=\"menudiv\" style=\"visibility: hidden;\" class=\"side-menu\">\r\n            <a
+        href=\"#\" id=\"menuclose\" title=\"close menu\"><span>close</span></a>\r\n
+        \           <div class=\"nav-header-links\">\r\n                <span><a id=\"lnkSideMenuHome\"
+        class=\"nav-home-link\" href=\"Default.aspx?eid=684\">Home</a></span>\r\n
+        \               <span>|</span>\r\n                <span><a id=\"lnkSideMenuTracked\"
+        class=\"nav-tracked-link\" href=\"MyTrackedContests.aspx?eid=684\">My Tracked
+        Contests</a></span>\r\n            </div>\r\n            <!--put the search
+        box here with full functionality-->\r\n            <div class=\"quick-search-side\">\r\n
+        \               <input name=\"ctl00$txtQuickSearchSide\" type=\"text\" id=\"txtQuickSearchSide\"
+        class=\"textboxSmallGray\" title=\"Search for Contest or Candidate\" placeholder=\"Search\"
+        />\r\n                <button class=\"close-icon-side\" type=\"reset\" onclick=\"ClearSearchSide()\"></button>\r\n
+        \           </div>\r\n            <h1>Election Results</h1>\r\n            <a
+        href=\"/resultsSW.aspx?type=SWR&map=CTY&eid=684\">Statewide Races</a><a href=\"/resultsSW.aspx?type=BQ&map=CTY&eid=684\">Statewide
+        Ballot Questions</a><a href=\"/resultsSW.aspx?type=RET&map=CTY&eid=684\">Justice
+        Retention</a><a href=\"/resultsSW.aspx?type=LEG&map=DIST&eid=684\">Legislative
+        Races</a><a href=\"/resultsList.aspx?type=cty&map=CTY&eid=684\">County<br/>Races
+        and Ballot Questions</a><a href=\"/resultsSW.aspx?type=SDD&map=CTY&eid=684\">Special
+        Districts</a><a href=\"/VoterTurnoutDetails.aspx?map=TURN&eid=684\">Voter
+        Turnout Details</a><a href=\"/ResultsList.aspx?type=CTYALL&eid=684\">Results
+        by County</a><a href=\"/ResultsExport.aspx?&eid=684\">Exports</a><a href=\"/ResultsSW.aspx?type=RECOUNT&eid=684\">Possible
+        Recounts</a><a href=\"/ProvisionalBallots.aspx?eid=684\">Provisional Ballots</a>\r\n
+        \           \r\n            \r\n            <h1>Election Resources</h1>\r\n
+        \           <a id=\"lnkSideElectionTerm\" href=\"ElectionTerminology.aspx?eid=684\">FAQs</a>\r\n
+        \           <a id=\"lnkSideMedia\" href=\"ResultsMedia.aspx?eid=684\">Media</a>\r\n
+        \           \r\n        </div>\r\n    </form>\r\n    <script>\r\n        (function
+        ($) {\r\n            $(document).ready(function () {\r\n                $('#menuToggle').click(function
+        (e) {\r\n                    var $parent = $(this).parent('nav');\r\n                    $parent.toggleClass('open');\r\n
+        \                   var navState = $parent.hasClass('open') ? 'hide' : 'show';\r\n
+        \                   $(this).attr('title', navState + ' navigation');\r\n                    setTimeout(function
+        () {\r\n                        console.log('timeout set');\r\n                        $('#menuToggle
+        > span').toggleClass('navClosed').toggleClass('navOpen');\r\n                    },
+        200);\r\n                    e.preventDefault();\r\n                });\r\n
+        \           });\r\n        }(jQuery));\r\n        //@ sourceURL=pen.js\r\n
+        \   </script>\r\n    <!--Quick search auto complete code-->\r\n    <script>\r\n
+        \       function ClearSearch() {\r\n            document.getElementById(\"txtQuickSearch\").value
+        = \"\";\r\n        }\r\n        function ClearSearchSide() {\r\n            document.getElementById(\"txtQuickSearchSide\").value
+        = \"\";\r\n        }\r\n        $(document).ready(function () {\r\n            var
+        results;\r\n            var electionType = document.getElementById(\"hidElectionType\").value;\r\n
+        \           var eid = getUrlVars()[\"eid\"];\r\n            var mode = getUrlVars()[\"mode\"];\r\n\r\n
+        \           if (eid !== undefined && !isNaN(eid) && eid != \"\") {\r\n                results
+        = getValues(ServiceRoot + \"ResultsAjax.svc/GetCandidates?ElectionType=\"
+        + electionType + \"&ElectionID=\" + eid);\r\n                eid = \"&eid=\"
+        + eid;\r\n                mode = \"\";\r\n            } else {\r\n                results
+        = getValues(ServiceRoot + \"ResultsAjax.svc/GetCandidates?ElectionType=\"
+        + electionType + \"&ElectionID=0\");\r\n                eid = \"\";\r\n                if
+        (mode !== undefined && mode !== \"\") {\r\n                    mode = \"&mode=\"
+        + mode;\r\n                } else {\r\n                    mode = \"\";\r\n
+        \               }\r\n            }\r\n\r\n            var objListTest = results[\"d\"];\r\n\r\n
+        \           $(\"#txtQuickSearch\").autocomplete({\r\n                appendTo:
+        '#header-search-box',\r\n                source: objListTest,\r\n                focus:
+        function (event, ui) {\r\n                    $(\"#txtQuickSearch\").val(ui.item.desc
+        + ' - ' + ui.item.name);\r\n                    return false;\r\n                },\r\n
+        \               select: function (event, ui) {\r\n                    $(\"#txtQuickSearch\").val(ui.item.desc
+        + ' - ' + ui.item.name);\r\n                    window.location.assign(\"SearchResults.aspx?ID=\"
+        + ui.item.ID + eid + mode);\r\n                    return false;\r\n                }\r\n
+        \           })\r\n            .data(\"ui-autocomplete\")._renderItem = function
+        (ul, item) {\r\n                return $(\"<li>\")\r\n                    .append(\"<a
+        href='SearchResults.aspx?ID=\" + item.ID + eid + mode + \"'><span class='\"
+        + item.Party + \"'>\" + item.name + \"</span><br><span class='search-description'>\"
+        + item.desc + \"</span></a>\")\r\n                    .appendTo(ul);\r\n            };\r\n
+        \           $(\"#txtQuickSearchSide\").autocomplete({\r\n                source:
+        objListTest,\r\n                focus: function (event, ui) {\r\n                    $(\"#txtQuickSearchSide\").val(ui.item.desc
+        + ' - ' + ui.item.name);\r\n                    return false;\r\n                },\r\n
+        \               select: function (event, ui) {\r\n                    $(\"#txtQuickSearchSide\").val(ui.item.desc
+        + ' - ' + ui.item.name);\r\n                    window.location.assign(\"SearchResults.aspx?ID=\"
+        + ui.itemID + eid + mode);\r\n                    return false;\r\n                }\r\n
+        \           })\r\n            .data(\"ui-autocomplete\")._renderItem = function
+        (ul, item) {\r\n                return $(\"<li>\")\r\n                .append(\"<a
+        href='SearchResults.aspx?ID=\" + item.ID + eid + mode + \"'><span class='\"
+        + item.Party + \"'>\" + item.name + \"</span><br><span class='search-description'>\"
+        + item.desc + \"</span></a>\")\r\n                .appendTo(ul);\r\n            };\r\n
+        \       });\r\n    </script>\r\n    \r\n</body>\r\n</html>\r\n"
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Tue, 10 Nov 2026 21:44:21 GMT
+      Server:
+      - Microsoft-IIS/10.0
+      Vary:
+      - Accept-Encoding
+      X-AspNet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      content-length:
+      - '45503'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://electionresults.sd.gov/default.aspx?eid=99999
+  response:
+    body:
+      string: "<html><head><title>Object moved</title></head><body>\r\n<h2>Object
+        moved to <a href=\"/ErrorPages/Error.aspx?aspxerrorpath=/default.aspx\">here</a>.</h2>\r\n</body></html>\r\n"
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '167'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Tue, 10 Nov 2026 21:44:21 GMT
+      Location:
+      - /ErrorPages/Error.aspx?aspxerrorpath=/default.aspx
+      Server:
+      - Microsoft-IIS/10.0
+      X-AspNet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+    status:
+      code: 302
+      message: Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://electionresults.sd.gov/ErrorPages/Error.aspx?aspxerrorpath=%2Fdefault.aspx
+  response:
+    body:
+      string: "\r\n\r\n<!DOCTYPE html>\r\n<html>\r\n<head><meta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=edge,chrome=1\" /><meta content=\"text/html; charset=windows-1252\"
+        http-equiv=\"Content-Type\" /><meta name=\"viewport\" content=\"width=device-width,
+        minimum-scale=1.0, maximum-scale=1.0\" /><title>\r\n\tSouth Dakota Secretary
+        of State\r\n</title><link href=\"/Styles/styles.css\" rel=\"stylesheet\" /><link
+        href=\"/Styles/stylesmobile.css\" rel=\"stylesheet\" /><link href=\"/Styles/font_PT_Sans.css\"
+        rel=\"stylesheet\" />\r\n    <script src=\"/Scripts/jquery/jquery-3.2.1.min.js\"></script>\r\n
+        \   <script type=\"text/javascript\" src=\"/Scripts/sticky.js\"></script>\r\n</head>\r\n<body>\r\n
+        \   <form method=\"post\" action=\"./Error.aspx?aspxerrorpath=%2fdefault.aspx\"
+        id=\"ctl01\">\r\n<div class=\"aspNetHidden\">\r\n<input type=\"hidden\" name=\"__VIEWSTATE\"
+        id=\"__VIEWSTATE\" value=\"+uvvQhWcNetrgUxoWgoFxlPt6m50NmXoWMrc/vn4bKvxpH2Kf7z7Bf2Ul67yQVevtnJx6f0S/qPe0tfNGxzoI+KRo1swF7JbE0d9QZYqM8pc1+Rur+u/Kr/ur07fFofqB2zeObf2jrT45tZHAJ7ymV0xSjnDxVJ0ScL7/kRI4/ScOUHpqPfJKOzQv0lBzphLeTveooP6Xheqv1PFFrltIF1m12+nR4LRuvrlsw4SoLJnHp6Zv8S0kqSQDBgY13wz\"
+        />\r\n</div>\r\n\r\n<div class=\"aspNetHidden\">\r\n\r\n\t<input type=\"hidden\"
+        name=\"__VIEWSTATEGENERATOR\" id=\"__VIEWSTATEGENERATOR\" value=\"58043A96\"
+        />\r\n</div>\r\n        <div class=\"outside-wrapper\">\r\n            <div
+        id=\"sticky-anchor\"></div>\r\n            <div id=\"sticky\" class=\"top-bluebar\">\r\n
+        \               <div class=\"top-header-box2\">\r\n                    <h3>\r\n
+        \                       <a id=\"lnkHome\" href=\"/Default.aspx?eid=99999\">Home</a>\r\n
+        \                   </h3>\r\n                </div>\r\n            </div>\r\n
+        \           <div class=\"top-header\">\r\n                <div class=\"section
+        group\">\r\n                    <div class=\"col desktop\" style=\"padding:
+        3px 0 0 8px;\">\r\n                        <img src=\"/Images/SD_State_Seal.png\"
+        style=\"width: 78px; height: 78px;\" title=\"South Dakota State Seal\" alt=\"South
+        Dakota State Seal\" />\r\n                    </div>\r\n                    <div
+        class=\"col mobile\" style=\"padding: 3px 0 0 8px;\">\r\n                        <img
+        src=\"/Images/SD_State_Seal.png\" style=\"width: 59px; height: 59px;\" title=\"South
+        Dakota State Seal\" alt=\"South Dakota State Seal\" />\r\n                    </div>\r\n
+        \                   <div class=\"col top-header-box1\">\r\n                        <h2>\r\n
+        \                           <a id=\"lnkSOSName\" href=\"/Default.aspx?eid=99999\"></a>\r\n
+        \                       </h2>\r\n                        <h1>\r\n                            <a
+        id=\"lnkSDSOS\" href=\"/Default.aspx?eid=99999\">South Dakota Secretary of
+        State</a>\r\n                        </h1>\r\n                    </div>\r\n
+        \               </div>\r\n            </div>\r\n            <div class=\"wrapper-inside\">\r\n
+        \               <h1 style=\"text-align: center\">An error has occured.\r\n
+        \               </h1>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</body>\r\n</html>\r\n"
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Tue, 10 Nov 2026 21:44:21 GMT
+      Server:
+      - Microsoft-IIS/10.0
+      Vary:
+      - Accept-Encoding
+      X-AspNet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      content-length:
+      - '2848'
+    status:
+      code: 200
+      message: OK
+version: 1
