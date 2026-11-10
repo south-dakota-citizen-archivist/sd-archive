@@ -38,7 +38,7 @@ select = ["E", "F", "W", "I", "B", "UP", "SIM", "PTH", "LOG", "G"]
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings"
 pythonpath = ["app"]
-testpaths = ["app/tests", "packages/*/tests"]
+testpaths = ["app/tests", "packages/*/tests", "catalog/tests"]
 addopts = "-ra -m 'not network'"
 filterwarnings = [
     # Admin URL fields; harmless until Django 6, when https becomes the default scheme

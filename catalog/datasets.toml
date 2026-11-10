@@ -1,0 +1,391 @@
+# The catalog of every dataset in the archive, and its unit of analysis.
+#
+# Two kinds (see "Two kinds of data" in ../../CONSOLIDATION-PLAN.md):
+#
+#   grain = "aggregate"  the place itself is the unit: one row describes a county, district,
+#                        precinct or the state for a period (voter registration by county).
+#                        Has: geography (sdplaces kinds), period, measures, dimensions.
+#
+#   grain = "records"    things within a place are the unit: one row is a person, organization,
+#                        filing, payment, permit or property (lobbyist registrations, permits).
+#                        Has: unit (what one row is), entities (the kinds of things it names:
+#                        person, organization, government, property), and place_link (how a row
+#                        is tied to a place: address, county, city, geometry, district, none).
+#
+# Everything here is already public. What gets republished, and how, is decided case by case.
+# Records can be rolled up into aggregates (permits per county per month); the rollup is its
+# own aggregate entry pointing back to the records. Ephemeral feeds (events, menus, news) aren't
+# listed. catalog/tests check every entry is complete for its grain.
+
+# ── Aggregate: the place is the unit ──────────────────────────────────────────────────────
+[[dataset]]
+id = "voter-registration"
+name = "Voter registration by county and party"
+project = "south-dakota-voter-registration-data"
+grain = "aggregate"
+geography = ["county", "state"]
+period = "monthly snapshots since 2015; election-day snapshots 1976–2014"
+measures = ["registered voters"]
+dimensions = ["party", "status (active/inactive)"]
+source = "SD Secretary of State, voter registration by county reports (PDF)"
+
+[[dataset]]
+id = "election-results"
+name = "Election results by precinct"
+project = "sd-archive/pipelines/elections (replaces 2022-sd-general-precinct-results)"
+grain = "aggregate"
+geography = ["precinct", "county", "state", "sldl", "sldu"]
+period = "each election, 2008 on (electionresults.sd.gov); earlier from official returns"
+measures = ["votes"]
+dimensions = ["election", "race", "candidate or choice", "party"]
+source = "SD Secretary of State, electionresults.sd.gov"
+notes = "Candidates are named, as candidates (public role). Precinct boundaries change between elections."
+
+[[dataset]]
+id = "motor-vehicle-registrations"
+name = "Motor vehicle registrations by county and type"
+project = "south-dakota-motor-vehicle-stats"
+grain = "aggregate"
+geography = ["county"]
+period = "calendar year"
+measures = ["registrations"]
+dimensions = ["registration type"]
+source = "SD Department of Revenue, motor vehicle statistics (PDF)"
+notes = "Oglala Lakota rows 2015–2025 carry Shannon's retired FIPS 46113; correct to 46102."
+
+[[dataset]]
+id = "pistol-permits"
+name = "Concealed pistol permits statewide"
+project = "south-dakota-pistol-permit-stats"
+grain = "aggregate"
+geography = ["state"]
+period = "snapshots, 2019 on (Wayback Machine)"
+measures = ["permits"]
+dimensions = ["permit type (regular, gold, enhanced)"]
+source = "SD Secretary of State, pistol permit statistics page"
+
+[[dataset]]
+id = "education-district-profiles"
+name = "School district profiles"
+project = "south-dakota-education-dashboard"
+grain = "aggregate"
+geography = ["school_district"]
+period = "school year, 2016–17 on"
+measures = ["enrollment", "spending", "staffing", "outcomes", "tax levies", "valuations"]
+dimensions = ["fund", "function", "object"]
+suppression = "DOE suppresses cells under 10 students; keep them suppressed, never back them out"
+source = "SD Department of Education, Statistical Digest"
+
+[[dataset]]
+id = "library-circulation"
+name = "Spearfish library checkouts"
+project = "whats-up-in-spearfish"
+grain = "aggregate"
+geography = ["place"]
+period = "monthly"
+measures = ["checkouts"]
+dimensions = ["collection"]
+source = "Grace Balloch Memorial Library"
+
+
+# ── Records: things within a place are the unit ───────────────────────────────────────────
+[[dataset]]
+id = "campaign-finance-filings"
+name = "Campaign finance filings (SDCFR and legacy)"
+project = "public-records-liberator"
+grain = "records"
+unit = "filing"
+entities = ["person", "organization"]
+place_link = "address"
+source = "SD Secretary of State, sdcfr.sdsos.gov"
+
+[[dataset]]
+id = "supplemental-campaign-finance"
+name = "Supplemental campaign finance statements"
+project = "public-records-liberator"
+grain = "records"
+unit = "filing"
+entities = ["person", "organization"]
+place_link = "address"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "communication-expenditures"
+name = "Communication (independent) expenditure statements"
+project = "public-records-liberator"
+grain = "records"
+unit = "filing"
+entities = ["person", "organization"]
+place_link = "none"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "fec"
+name = "FEC candidates, committees, contributions, disbursements, independent expenditures (SD)"
+project = "public-records-liberator"
+grain = "records"
+unit = "filing, contribution or expenditure"
+entities = ["person", "organization"]
+place_link = "address"
+source = "Federal Election Commission API"
+
+[[dataset]]
+id = "candidate-financial-interest"
+name = "Candidate financial interest statements"
+project = "public-records-liberator"
+grain = "records"
+unit = "statement"
+entities = ["person"]
+place_link = "none"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "polling-places"
+name = "Polling places"
+project = "south-dakota-polling-places"
+grain = "records"
+unit = "polling place"
+entities = ["government", "property"]
+place_link = "address"
+source = "SD Secretary of State, polling place lists (PDF)"
+notes = "Oglala Lakota mapped to Shannon's retired FIPS 46113; correct to 46102."
+
+[[dataset]]
+id = "legislature"
+name = "Legislature: sessions, bills, bill documents, votes, legislators, committees, session laws, staff"
+project = "public-records-liberator (and south-dakota-legislature-data, 1997–2024 backfill)"
+grain = "records"
+unit = "bill, vote, legislator term, committee membership or document"
+entities = ["person", "government"]
+place_link = "legislative district"
+source = "SD Legislature, sdlegislature.gov API"
+
+[[dataset]]
+id = "elected-official-financial-interest"
+name = "Elected official financial interest statements"
+project = "public-records-liberator"
+grain = "records"
+unit = "statement"
+entities = ["person"]
+place_link = "none"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "boards-commissions"
+name = "Boards and commissions members"
+project = "public-records-liberator (and south-dakota-boards-commissions, its public CSV)"
+grain = "records"
+unit = "appointment"
+entities = ["person", "government"]
+place_link = "city"
+source = "SD Office of the Governor, boardsandcommissions.sd.gov"
+
+[[dataset]]
+id = "oaths-of-office"
+name = "Oaths of office"
+project = "public-records-liberator"
+grain = "records"
+unit = "oath"
+entities = ["person"]
+place_link = "none"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "executive-orders"
+name = "Executive orders"
+project = "public-records-liberator"
+grain = "records"
+unit = "order"
+entities = ["person", "government"]
+place_link = "none"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "proclamations"
+name = "Gubernatorial proclamations"
+project = "public-records-liberator"
+grain = "records"
+unit = "proclamation"
+entities = ["person", "government"]
+place_link = "none"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "local-bond-statements"
+name = "Local government bond information statements"
+project = "public-records-liberator"
+grain = "records"
+unit = "bond statement"
+entities = ["government"]
+place_link = "jurisdiction"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "state-employee-salaries"
+name = "State employee salaries"
+project = "public-records-liberator"
+grain = "records"
+unit = "employee"
+entities = ["person"]
+place_link = "none"
+source = "open.sd.gov"
+
+[[dataset]]
+id = "state-employee-directory"
+name = "State employee phone directory"
+project = "public-records-liberator"
+grain = "records"
+unit = "employee"
+entities = ["person"]
+place_link = "city"
+source = "sd.gov phone book"
+
+[[dataset]]
+id = "vendor-checkbook"
+name = "State vendor payments"
+project = "south-dakota-vendor-checkbook"
+grain = "records"
+unit = "payment"
+entities = ["person", "organization", "government"]
+place_link = "none"
+source = "open.sd.gov vendor checkbook"
+
+[[dataset]]
+id = "lobbyists"
+name = "Lobbyist registrations (private and public) and expense reports"
+project = "public-records-liberator (replaces south-dakota-lobbyists)"
+grain = "records"
+unit = "registration (and its expense reports)"
+entities = ["person", "organization", "government"]
+place_link = "address"
+source = "SD Secretary of State, sosenterprise.sd.gov"
+
+[[dataset]]
+id = "athletic-agents"
+name = "Athletic agent registrations"
+project = "public-records-liberator"
+grain = "records"
+unit = "registration"
+entities = ["person"]
+place_link = "address"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "publicity-rights"
+name = "Personality's right of publicity registrations"
+project = "public-records-liberator"
+grain = "records"
+unit = "registration"
+entities = ["person", "organization"]
+place_link = "none"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "farm-ranch-names"
+name = "Farm, ranch and home name registrations"
+project = "public-records-liberator"
+grain = "records"
+unit = "registration"
+entities = ["person"]
+place_link = "county"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "raffle-requests"
+name = "Statewide raffle requests"
+project = "public-records-liberator"
+grain = "records"
+unit = "request"
+entities = ["organization"]
+place_link = "city"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "newspaper-circulation"
+name = "Newspaper ownership and circulation statements"
+project = "public-records-liberator (replaces south-dakota-newspaper-circulation)"
+grain = "records"
+unit = "statement"
+entities = ["organization"]
+place_link = "city"
+source = "SD Secretary of State"
+
+[[dataset]]
+id = "gis-parcels"
+name = "Harvested GIS layers (parcels and others), with history"
+project = "sd-archive/app (gis)"
+grain = "records"
+unit = "feature (parcel, address point, …), with history"
+entities = ["person", "organization", "government", "property"]
+place_link = "geometry"
+source = "county and regional ArcGIS servers"
+
+[[dataset]]
+id = "gis-census"
+name = "Census of public GIS datasets"
+project = "sd-archive/app (gis)"
+grain = "records"
+unit = "published GIS dataset"
+entities = ["government"]
+place_link = "jurisdiction"
+source = "ArcGIS services directories"
+
+[[dataset]]
+id = "spills"
+name = "Spill reports and case files"
+project = "whats-up-in-spearfish/spillarchive (statewide in sd-archive later)"
+grain = "records"
+unit = "spill (and its case file)"
+entities = ["person", "organization", "property"]
+place_link = "geometry"
+source = "SD DANR, Tanks and Spills Map and case files"
+
+[[dataset]]
+id = "building-permits"
+name = "Spearfish building permits"
+project = "whats-up-in-spearfish"
+grain = "records"
+unit = "permit"
+entities = ["person", "organization", "property"]
+place_link = "address"
+source = "City of Spearfish monthly permit reports"
+
+[[dataset]]
+id = "planning-records"
+name = "Spearfish planning and zoning records (OpenGov archive, Planning Commission items)"
+project = "whats-up-in-spearfish"
+grain = "records"
+unit = "application or agenda item"
+entities = ["person", "organization", "government", "property"]
+place_link = "address"
+source = "City of Spearfish OpenGov portal (closed 2026), CivicClerk agendas"
+
+[[dataset]]
+id = "danr-notices-cases"
+name = "DANR public notices and contested cases"
+project = "whats-up-in-spearfish"
+grain = "records"
+unit = "notice or case"
+entities = ["organization", "government", "property"]
+place_link = "county"
+source = "SD DANR"
+
+[[dataset]]
+id = "parole-board-actions"
+name = "Parole board action reports"
+project = "south-dakota-pardons-paroles"
+grain = "records"
+unit = "case decision"
+entities = ["person"]
+place_link = "county"
+source = "SD Board of Pardons and Paroles"
+
+[[dataset]]
+id = "cemetery-burials"
+name = "Rose Hill Cemetery burials (Spearfish)"
+project = "spearfish-cemetery-scraper"
+grain = "records"
+unit = "burial or burial space"
+entities = ["person", "property"]
+place_link = "geometry"
+source = "BurialSearch.com (Rose Hill Cemetery)"
