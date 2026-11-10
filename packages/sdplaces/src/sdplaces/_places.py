@@ -133,10 +133,15 @@ def all_places(kind: str | None = None, *, include_historical: bool = True) -> l
 
 
 def get(geoid: str, kind: str | None = None) -> Place:
-    """A place by GEOID. GEOIDs are unique within a kind; pass kind= if one is shared."""
+    """A place by GEOID. GEOIDs are unique within a kind; pass kind= if one is shared (46019
+    is Butte County and both District 19s), or pass the fully qualified GEOID, which is unique
+    on its own (0500000US46019)."""
     geoid = str(geoid).strip()
     by_geoid = _by_key()[0]
-    found = [p for (k, g), p in by_geoid.items() if g == geoid and (kind is None or k == kind)]
+    if "US" in geoid:
+        found = [p for p in by_geoid.values() if p.geoidfq == geoid]
+    else:
+        found = [p for (k, g), p in by_geoid.items() if g == geoid and (kind is None or k == kind)]
     if not found:
         raise UnknownPlace(f"No place with GEOID {geoid!r}" + (f" ({kind})" if kind else ""))
     if len(found) > 1:

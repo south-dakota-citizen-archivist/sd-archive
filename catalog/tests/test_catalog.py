@@ -25,10 +25,23 @@ ENTITIES = {"person", "organization", "government", "property"}
 PLACE_LINKS = {
     "address", "county", "city", "geometry", "jurisdiction", "legislative district", "none",
 }  # fmt: skip
-COMMON = {"id", "name", "project", "grain", "source"}
+COMMON = {"id", "name", "project", "grain", "coverage", "source"}
 AGGREGATE = {"geography", "period", "measures", "dimensions", "suppression"}
 RECORDS = {"unit", "entities", "place_link"}
 KNOWN = COMMON | AGGREGATE | RECORDS | {"notes"}
+
+
+@pytest.mark.parametrize("d", DATASETS, ids=lambda d: d["id"])
+def test_coverage_is_places_in_force(d):
+    """coverage lists fully qualified GEOIDs of places in force today: no typos, no retired
+    codes (0500000US46113), no plain GEOIDs (46019 is a county and two districts)."""
+    import sdplaces
+
+    assert d["coverage"] and len(set(d["coverage"])) == len(d["coverage"])
+    for geoid in d["coverage"]:
+        assert "US" in geoid, f"{geoid}: use the fully qualified GEOID"
+        place = sdplaces.get(geoid)
+        assert sdplaces.current(place) == place, f"{geoid} ({place.name}) is retired"
 
 
 def test_ids_are_unique():

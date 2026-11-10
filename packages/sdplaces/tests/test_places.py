@@ -82,6 +82,16 @@ def test_get_by_geoid():
         sdplaces.get("99999")
 
 
+def test_get_by_fully_qualified_geoid():
+    # 46019 alone is Butte County and both District 19s; the fully qualified GEOID is one place
+    with pytest.raises(AmbiguousPlace):
+        sdplaces.get("46019")
+    assert sdplaces.get("0500000US46019").name == "Butte County"
+    assert sdplaces.get("0400000US46").name == "South Dakota"
+    with pytest.raises(UnknownPlace):
+        sdplaces.get("0500000US46999")
+
+
 def test_children():
     lawrence = sdplaces.county("Lawrence")
     towns = {p.short_name for p in sdplaces.children(lawrence, kind="place")}
