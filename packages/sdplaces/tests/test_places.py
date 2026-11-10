@@ -180,9 +180,19 @@ def test_election_county_codes():
     assert sdplaces.from_id("sos_election_county", 57).name == "Spink County"
     assert sdplaces.from_id("sos_election_county", "07").name == "Yankton County"  # "07" == 7
     assert sdplaces.from_id("sos_election_county", 1).name == "Minnehaha County"
-    assert sdplaces.from_id("sos_election_county", 65).name == "Oglala Lakota County"
     with pytest.raises(UnknownPlace):
         sdplaces.from_id("sos_election_county", 66)  # not used by the election system
+
+
+def test_election_county_65_was_shannon_before_2015():
+    """The election system's code 65 is one county: Shannon until May 2015, then Oglala Lakota."""
+    assert sdplaces.from_id("sos_election_county", 65, as_of="2008-11-04").geoid == "46113"
+    assert sdplaces.from_id("sos_election_county", 65, as_of="2015-05-01").geoid == "46102"
+    assert sdplaces.from_id("sos_election_county", 65, as_of="2024-11-05").name == (
+        "Oglala Lakota County"
+    )
+    with pytest.raises(AmbiguousPlace):
+        sdplaces.from_id("sos_election_county", 65)  # which one depends on the date
 
 
 def test_every_crosswalk_row_points_at_a_real_place():
@@ -204,7 +214,8 @@ def test_every_crosswalk_row_points_at_a_real_place():
 
 
 def test_election_crosswalk_covers_every_county():
-    geoids = {sdplaces.from_id("sos_election_county", i).geoid for i in [*range(1, 66), 67]}
+    codes = [*range(1, 66), 67]
+    geoids = {sdplaces.from_id("sos_election_county", i, as_of="2024-11-05").geoid for i in codes}
     assert geoids == {p.geoid for p in sdplaces.counties()}
 
 
