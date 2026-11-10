@@ -6,7 +6,7 @@ members = ["app", "packages/*"]
 [dependency-groups]
 dev = [
     # every package with all its extras, so every test can run
-    "sdfetch[impersonate,browser,warc]",
+    "sdfetch[impersonate,browser,warc,keychain]",
     "sdgis",
     "sdplaces[pandas,geo,address,geocode]",
     "pre-commit>=4.7.0",

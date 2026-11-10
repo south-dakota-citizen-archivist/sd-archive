@@ -1,6 +1,6 @@
 # sdfetch
 
-Fetching with a raw store: HTTP with retries and paced requests, curl_cffi and browser fallbacks, routes, a manifest of everything fetched, page watching, trusted timestamps, checkpoints, WARC and HAR recording, and the Wayback Machine. Plain Python, no Django.
+Fetching with a raw store: HTTP with retries and paced requests, curl_cffi and browser fallbacks, routes, sessions and logins, a manifest of everything fetched, page watching, trusted timestamps, checkpoints, WARC and HAR recording, and the Wayback Machine. Plain Python, no Django.
 
 ```python
 import sdfetch
@@ -110,6 +110,28 @@ for snap in wayback.snapshots(PAGE, start="2019"):
 - `fetch_snapshot()` stores a capture at `wayback/<host>/<timestamp>.<ext>`, with the capture time and original URL in the manifest.
 - `save_page(url)` requests a new capture (Save Page Now).
 
+## Sessions and logins
+
+```python
+f = sdfetch.Fetcher(store, cookies="portal")  # ~/.cache/sdfetch/cookies/portal.json
+
+sdfetch.register_login(
+    "portal.example.gov",
+    sdfetch.form_login("https://portal.example.gov/login", user_field="email"),
+    logged_out=["Please sign in"],
+)
+```
+
+- **Cookies:** `cookies=` keeps one jar, by name or path. It's loaded into every strategy (requests, curl_cffi, the browsers) and saved after each successful response, including cookies a browser picked up. The file is readable only by you.
+- **Logins:** when a response for a registered host looks logged out (a `logged_out` phrase in its text or final URL), the Fetcher logs in once and retries. If the page still looks logged out, it raises `LoginRequired`. `logged_out` can also be set per site in the local config.
+- **`form_login()`** posts an HTML login form with its hidden fields.
+- **`browser_login()`** opens a browser window at the login page and fills in the username and password if given selectors. A person finishes anything else, such as a CAPTCHA or two-factor code, and the browser's cookies then serve plain requests.
+- **Usernames and passwords** are kept in the system keychain (the `keychain` extra), never in code or config:
+
+```sh
+uv run python -m sdfetch.credentials set portal.example.gov   # prompts
+```
+
 ## Watching pages
 
 ```python
@@ -152,7 +174,7 @@ stamp.verify_signature(store, entry)  # the authority's signature and chain, wit
 dependencies = ["sdfetch[impersonate]"]
 
 [tool.uv.sources]
-sdfetch = { git = "https://github.com/south-dakota-citizen-archivist/sd-archive", subdirectory = "packages/sdfetch", tag = "sdfetch-v0.3.0" }
+sdfetch = { git = "https://github.com/south-dakota-citizen-archivist/sd-archive", subdirectory = "packages/sdfetch", tag = "sdfetch-v0.4.0" }
 ```
 
-Extras: `impersonate` (curl_cffi), `browser` (Playwright and the other browser backends), `warc` (warcio).
+Extras: `impersonate` (curl_cffi), `browser` (Playwright and the other browser backends), `warc` (warcio), `keychain` (keyring).

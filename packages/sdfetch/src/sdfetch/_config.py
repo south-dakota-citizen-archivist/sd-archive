@@ -21,6 +21,7 @@
     days = "mon-fri"               # …on these days…
     tz = "America/Chicago"         # …in this time zone (default: this machine's)
     budget = 400                   # at most this many requests a day
+    logged_out = ["Please sign in"]  # text or URL parts that mean the session ended
 
 For a matching host these override the Fetcher's own arguments. The most specific host entry
 wins. Route URLs can hold credentials, so the manifest records route names, never URLs; keep
@@ -42,7 +43,7 @@ logger = logging.getLogger(__name__)
 
 HOST_KEYS = {
     "strategy", "max_strategy", "routes", "delay", "headers", "block_phrases",
-    "jitter", "hours", "days", "tz", "budget",
+    "jitter", "hours", "days", "tz", "budget", "logged_out",
 }  # fmt: skip
 
 

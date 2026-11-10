@@ -21,6 +21,7 @@ from ._config import Config, load_config
 from ._ladder import DIRECT, HostMemory, RungUnavailable, get_strategy, ladder
 from ._pacing import Budget, check_window, jittered
 from ._store import Store
+from .session import CookieJar, LoginRequired, login_for, looks_logged_out
 
 logger = logging.getLogger(__name__)
 
@@ -152,6 +153,8 @@ class Fetcher:
         retries: int = 4,
         backoff: float = 5,
         block_phrases: Iterable[str] = (),
+        cookies: bool | str | Path = False,
+        logged_out: Iterable[str] = (),
         raise_errors: bool = True,
         session: requests.Session | None = None,
         clients: dict[str, Callable] | None = None,
@@ -190,6 +193,11 @@ class Fetcher:
             self.session.headers["User-Agent"] = user_agent
         self.session.headers.update(headers or {})
         self.clients = dict(clients or {})  # rung → send(method, url, **kwargs), for tests
+        # Cookies: one jar, given to every client and saved after each response
+        self.jar = CookieJar(cookies or None)
+        self.jar.to_jar(self.session.cookies)
+        self.logged_out = list(logged_out)
+        self._logging_in = False
         self._impersonate: dict = {}  # route name → curl_cffi session
         self._browsers: dict = {}  # (strategy, route name) → Browser
         # WARC and HAR folders: True puts them in the store ("warc/", "har/")
@@ -312,6 +320,7 @@ class Fetcher:
             self._impersonate[name] = curl.Session(
                 impersonate=chrome[-1] if chrome else "chrome", proxy=proxy
             )
+            self.jar.to_jar(self._impersonate[name].cookies)
         try:
             return self._impersonate[name].request(method, url, **kwargs)
         except Timeout as exc:
@@ -338,7 +347,34 @@ class Fetcher:
                 raise RungUnavailable(f"{rung}: not installed (sdfetch[browser]): {exc}") from exc
             except Exception as exc:  # the browser itself didn't start
                 raise RungUnavailable(f"{rung}: couldn't start: {exc}") from exc
+            self._browsers[key].add_cookies(self.jar.to_playwright())
         return self._browsers[key]
+
+    # Cookies -------------------------------------------------------------
+
+    def add_cookies(self, cookies: list[dict]) -> None:
+        """Merge cookies into the jar, save it, and give them to every open client."""
+        if not self.jar.merge(cookies):
+            return
+        self.jar.save()
+        self.jar.to_jar(self.session.cookies)
+        for s in self._impersonate.values():
+            self.jar.to_jar(s.cookies)
+        for b in self._browsers.values():
+            b.add_cookies(self.jar.to_playwright())
+
+    def _collect_cookies(self, rung: str, route: str) -> None:
+        """The cookies the client that just answered holds, into the jar."""
+        name = self.config.resolve_route(route)[0]
+        if rung == "http":
+            found = CookieJar.from_cookiejar(self.session.cookies)
+        elif rung == "impersonate" and name in self._impersonate:
+            found = CookieJar.from_cookiejar(self._impersonate[name].cookies.jar)
+        elif (rung, name) in self._browsers:
+            found = self._browsers[(rung, name)].cookies()
+        else:
+            return
+        self.add_cookies(found)
 
     # Requests ------------------------------------------------------------
 
@@ -405,6 +441,7 @@ class Fetcher:
         *,
         check_blocked: bool = True,
         raise_errors: bool | None = None,
+        _relogged: bool = False,
         **kwargs,
     ):
         """One request, with the pause, retries and fallbacks, not stored. Returns a
@@ -412,7 +449,8 @@ class Fetcher:
         Raises Blocked when the last attempt is blocked too. A status that isn't retried, or
         still fails after the retries, raises requests.HTTPError, or with raise_errors=False
         is returned for the caller to check. Strategies and routes that aren't available are
-        skipped when there's something else to try."""
+        skipped when there's something else to try. A response that looks logged out, for a
+        host with a registered login, logs in once and retries (LoginRequired if that fails)."""
         raise_errors = self.raise_errors if raise_errors is None else raise_errors
         settings = self._settings(url)
         check_window(
@@ -465,6 +503,29 @@ class Fetcher:
                     self._warc = WarcWriter(self.warc_dir)
                     atexit.register(self.close)
                 self.last_warc = (self._warc.path, self._warc.write(method, url, resp, rung))
+            if rung not in self.clients:
+                self._collect_cookies(rung, route)
+            login = login_for(host)
+            phrases = [
+                *self.logged_out,
+                *settings.get("logged_out", []),
+                *(login[1] if login else []),
+            ]
+            if not self._logging_in and phrases and looks_logged_out(resp, phrases):
+                if _relogged or login is None:
+                    raise LoginRequired(
+                        f"{url}: logged out" + ("" if login else "; no login registered")
+                    )
+                logger.info("%s: logged out; logging in", url)
+                self._logging_in = True
+                try:
+                    login[0](self, url)
+                finally:
+                    self._logging_in = False
+                return self.request(
+                    method, url, check_blocked=check_blocked, raise_errors=raise_errors,
+                    _relogged=True, **kwargs,
+                )  # fmt: skip
             return resp
         assert last is not None
         raise last

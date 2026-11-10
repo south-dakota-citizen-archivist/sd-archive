@@ -262,6 +262,23 @@ class Browser:
         # sdfetch's block check
         return BrowserResponse(str(final or url), 200, html.encode("utf-8"), {})
 
+    def cookies(self) -> list[dict]:
+        """The browser's cookies, as dicts (name, value, domain, path, expires, …)."""
+        if self.strategy == "nodriver":
+            found = self._loop.run_until_complete(self._nd.cookies.get_all())
+            return [
+                {"name": c.name, "value": c.value, "domain": c.domain, "path": c.path,
+                 "expires": c.expires if c.expires and c.expires > 0 else None,
+                 "secure": c.secure, "httpOnly": c.http_only}
+                for c in found
+            ]  # fmt: skip
+        return [dict(c) for c in self.context.cookies()]
+
+    def add_cookies(self, cookies: list[dict]) -> None:
+        """Give the browser these cookies (Playwright's format; not supported by nodriver)."""
+        if cookies and self.strategy != "nodriver":
+            self.context.add_cookies(cookies)
+
     def close(self) -> None:
         while self._stack:
             with suppress(Exception):  # closing what's left matters more
