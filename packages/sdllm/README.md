@@ -13,17 +13,22 @@ Local models go through LiteLLM (Ollama, LM Studio, MLX and other OpenAI-compati
 from pydantic import BaseModel, Field
 import sdllm
 
+
 class Letter(BaseModel):
     file_number: str | None = Field(None, description="the agency's case or file number")
     recipient: str | None = Field(None, description="who the letter is addressed to")
 
-got = sdllm.extract(Letter, text, model="ollama_chat/gemma4:latest")
-got.data          # Letter(...)
-got.evidence      # {"file_number": "File Number 2026.148", ...}: the quote given for each field
-got.unsupported   # fields whose quote isn't in the text
 
-sdllm.classify(text, {"spill report": "the state's form", "letter": "correspondence"},
-               model="ollama_chat/gemma4:latest").label
+got = sdllm.extract(Letter, text, model="ollama_chat/gemma4:latest")
+got.data  # Letter(...)
+got.evidence  # {"file_number": "File Number 2026.148", ...}: the quote given for each field
+got.unsupported  # fields whose quote isn't in the text
+
+sdllm.classify(
+    text,
+    {"spill report": "the state's form", "letter": "correspondence"},
+    model="ollama_chat/gemma4:latest",
+).label
 ```
 
 ## What it does
