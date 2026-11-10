@@ -44,7 +44,7 @@ def test_scanned_page_by_ocr():
     assert 0 <= w["x0"] < w["x1"] <= 612 and 0 <= w["top"] < w["bottom"] <= 792  # PDF points
 
 
-@pytest.mark.parametrize("engine", ["rapidocr", "tesseract", "vision", "livetext"])
+@pytest.mark.parametrize("engine", ["rapidocr", "tesseract", "vision", "livetext", "textra"])
 def test_ocr_engines(engine, tmp_path):
     if not ocr.available(engine):
         pytest.skip(f"{engine} isn't available")

@@ -18,6 +18,7 @@ import csv
 import io
 import json
 import logging
+import os
 import shutil
 import subprocess
 import tempfile
@@ -87,21 +88,35 @@ def _has_rapidocr() -> bool:
     return True
 
 
+def textra_path() -> str | None:
+    """The textra command: on PATH, $TEXTRA, or where its installer puts it (~/.textra/bin,
+    which a shell profile adds to PATH but scheduled runs don't see)."""
+    for candidate in (shutil.which("textra"), os.environ.get("TEXTRA"),
+                      str(Path("~/.textra/bin/textra").expanduser())):  # fmt: skip
+        if candidate and Path(candidate).exists():
+            return candidate
+    return None
+
+
 def _textra(image) -> list[dict]:
     with tempfile.TemporaryDirectory() as tmp:
         png, out = Path(tmp) / "page.png", Path(tmp) / "page.json"
         image.save(png)
-        subprocess.run(["textra", "-s", str(png), "-p", str(out)], check=True, capture_output=True)
+        subprocess.run([textra_path(), "-s", str(png), "-p", str(out)], check=True,
+                       capture_output=True)  # fmt: skip
         data = json.loads(out.read_text())
     w, h = image.size
     pieces = []
-    for obs in data.get("observations", data if isinstance(data, list) else []):
-        box = obs.get("bounds") or obs.get("boundingBox") or {}
-        # normalized coordinates, origin at the bottom left
-        x, y = box.get("x", 0) * w, (1 - box.get("y", 0) - box.get("height", 0)) * h
-        pieces.append({"text": obs.get("text", ""), "conf": obs.get("confidence"), "x0": x,
-                       "x1": x + box.get("width", 0) * w, "top": y,
-                       "bottom": y + box.get("height", 0) * h})  # fmt: skip
+    for item in data.get("observations", []):
+        obs = item.get("observation", item)
+        b = obs.get("bounds") or {}
+        if not {"x1", "x2", "y1", "y2"} <= set(b):
+            continue
+        # two corners as fractions of the image, origin at the bottom left, in either order
+        xs, ys = (b["x1"], b["x2"]), (b["y1"], b["y2"])
+        pieces.append({"text": obs.get("text", ""), "conf": obs.get("confidence"),
+                       "x0": min(xs) * w, "x1": max(xs) * w,
+                       "top": (1 - max(ys)) * h, "bottom": (1 - min(ys)) * h})  # fmt: skip
     return pieces
 
 
@@ -160,7 +175,7 @@ def _has_ocrmac(framework: str) -> Callable[[], bool]:
 
 
 register_engine("rapidocr", _rapidocr, _has_rapidocr)
-register_engine("textra", _textra, lambda: shutil.which("textra") is not None)
+register_engine("textra", _textra, lambda: textra_path() is not None)
 register_engine("tesseract", _tesseract, lambda: shutil.which("tesseract") is not None)
 register_engine("vision", _ocrmac("vision"), _has_ocrmac("vision"))
 register_engine("livetext", _ocrmac("livetext"), _has_ocrmac("livetext"))
