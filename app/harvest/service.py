@@ -1,6 +1,7 @@
 """Harvest a watched dataset: download, validate, store with history, export, index names."""
 
 import logging
+import shutil
 from datetime import timedelta
 from pathlib import Path
 
@@ -22,10 +23,17 @@ logger = logging.getLogger(__name__)
 FULL_HARVEST_EVERY = timedelta(days=7)
 
 
+def staging_dir(dataset: Dataset) -> Path:
+    """Where a harvest's download batches are saved as they arrive. A stopped harvest resumes
+    from them; a finished one removes them."""
+    return Path(settings.MEDIA_ROOT) / "staging" / "harvest" / str(dataset.pk)
+
+
 def harvest_dataset(dataset: Dataset, job: Job | None = None, force: bool = False) -> Harvest:
     harvest = Harvest.objects.create(dataset=dataset, job=job, forced=force)
     try:
-        # All or nothing: features, counts and the name index commit together
+        # All or nothing: features, counts and the name index commit together. The download
+        # itself is saved batch by batch in staging_dir() first, so it survives a stop.
         with transaction.atomic():
             run(dataset, harvest, force)
     except Exception as e:
@@ -38,6 +46,7 @@ def harvest_dataset(dataset: Dataset, job: Job | None = None, force: bool = Fals
         dataset.last_error = harvest.error
         dataset.save(update_fields=["last_error"])
         raise
+    shutil.rmtree(staging_dir(dataset), ignore_errors=True)
     return harvest
 
 
@@ -95,7 +104,10 @@ def run(dataset: Dataset, harvest: Harvest, force: bool) -> None:
         skip(dataset, harvest, last)
         return
 
-    df = client.fetch_features(session, dataset.url, metadata, dataset.where, dataset.batch_size)
+    df = client.fetch_features(
+        session, dataset.url, metadata, dataset.where, dataset.batch_size,
+        staging=staging_dir(dataset),
+    )  # fmt: skip
     harvest.fetched_count = len(df)
 
     checks = validate.validate(df, harvest.expected_count, oid_field)

@@ -7,7 +7,7 @@ from celery import shared_task
 from croniter import croniter
 from django.utils import timezone
 
-from core.jobs import create_job, enqueue, target_label
+from core.jobs import create_job, enqueue, mark_stalled, target_label
 from core.models import Job
 
 logger = logging.getLogger(__name__)
@@ -53,6 +53,8 @@ def enqueue_due_work() -> dict:
 
     now = timezone.now()
     started = {"crawls": 0, "harvests": 0}
+    # Work whose worker died mid-run would otherwise count as open forever
+    mark_stalled()
 
     sources = Source.objects.filter(active=True, platform__in=Source.CRAWLABLE)
     for source in sources.exclude(crawl_schedule=""):

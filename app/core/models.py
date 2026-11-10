@@ -10,6 +10,7 @@ class Job(models.Model):
         RUNNING = "running"
         SUCCEEDED = "succeeded"
         FAILED = "failed"
+        STALLED = "stalled", "Stalled (its worker stopped)"
 
     kind = models.CharField(max_length=50, db_index=True)
     label = models.CharField(max_length=500)
@@ -20,6 +21,8 @@ class Job(models.Model):
         max_length=20, choices=Status.choices, default=Status.PENDING, db_index=True
     )
     celery_task_id = models.CharField(max_length=255, blank=True)
+    # host:pid of the process running it, to tell a running job from one whose worker died
+    worker = models.CharField(max_length=255, blank=True)
     args = models.JSONField(default=dict, blank=True)
     result = models.JSONField(default=dict, blank=True)
     error = models.TextField(blank=True)

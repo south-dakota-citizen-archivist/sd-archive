@@ -151,3 +151,23 @@ def test_names_indexed_with_history(dataset, server):
     assert former.valid_to is not None
     now = NameEntry.objects.get(dataset=dataset, normalized="DOE JANE")
     assert now.valid_to is None and now.feature_key == "2"
+
+
+def test_a_failed_harvest_keeps_its_batches_and_the_next_reuses_them(dataset, server, monkeypatch):
+    write_parquet = service.export.write_parquet
+
+    def broken_export(*args, **kwargs):
+        raise OSError("disk full")
+
+    monkeypatch.setattr(service.export, "write_parquet", broken_export)
+    with pytest.raises(OSError):
+        service.harvest_dataset(dataset)
+    staged = service.staging_dir(dataset)
+    assert len(list(staged.glob("batch-*.pkl"))) == 3, "the download survives the failure"
+
+    monkeypatch.setattr(service.export, "write_parquet", write_parquet)
+    server.calls.clear()
+    harvest = service.harvest_dataset(dataset)
+    assert harvest.status == Harvest.Status.SUCCEEDED and harvest.added == 10
+    assert server.query_calls() == [], "every batch came from staging"
+    assert not staged.exists(), "removed once the harvest is stored"

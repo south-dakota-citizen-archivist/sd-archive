@@ -22,6 +22,28 @@ def test_fetch_by_id_ranges():
     ]
 
 
+def test_staging_resumes_a_stopped_download(tmp_path):
+    first = FakeServer()
+    whole = client.fetch_features(first, LAYER_URL, first.metadata, staging=tmp_path)
+    saved = sorted(tmp_path.glob("batch-*.pkl"))
+    assert len(saved) == 3 and not list(tmp_path.glob("*.tmp"))
+
+    # a run that stopped before its last batch: that batch is fetched, the others reused
+    next(tmp_path.glob("batch-55-89-*.pkl")).unlink()
+    again = FakeServer()
+    resumed = client.fetch_features(again, LAYER_URL, again.metadata, staging=tmp_path)
+    assert [p["where"] for p in again.query_calls()] == [
+        "(1=1) AND OBJECTID >= 55 AND OBJECTID <= 89"
+    ]
+    # read back exactly as downloaded
+    assert resumed.to_json() == whole.to_json()
+
+    # a different filter never reuses another filter's batches
+    other = FakeServer()
+    client.fetch_features(other, LAYER_URL, other.metadata, "OBJECTID > 0", staging=tmp_path)
+    assert len(other.query_calls()) == 3
+
+
 def test_id_ranges_work_without_pagination_support():
     assert sorted(fetch(FakeServer(pagination=False))["OBJECTID"]) == IDS
 

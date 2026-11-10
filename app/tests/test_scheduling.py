@@ -75,3 +75,36 @@ def test_failed_task_records_error(dataset, server):
     job.refresh_from_db()
     assert job.status == Job.Status.FAILED
     assert "server reported 1" in job.error
+
+
+def test_a_job_whose_worker_died_is_marked_stalled_and_runs_again(dataset, queued):
+    import socket
+    import subprocess
+
+    from core.jobs import mark_stalled, this_worker
+    from harvest.models import Harvest
+
+    gone = subprocess.Popen(["true"])
+    gone.wait()  # a process that has exited
+    host = socket.gethostname()
+    dead = Job.objects.create(kind="harvest", label="x", target_type="census.dataset",
+                              target_id=dataset.pk, status=Job.Status.RUNNING,
+                              worker=f"{host}:{gone.pid}")  # fmt: skip
+    left_open = Harvest.objects.create(dataset=dataset, job=dead)
+    alive = Job.objects.create(kind="crawl", label="y", status=Job.Status.RUNNING,
+                               worker=this_worker())  # fmt: skip
+    elsewhere = Job.objects.create(kind="crawl", label="z", status=Job.Status.RUNNING,
+                                   worker="another-mac:1")  # fmt: skip
+
+    assert [j.pk for j in mark_stalled()] == [dead.pk]
+    dead.refresh_from_db(), left_open.refresh_from_db(), alive.refresh_from_db()
+    elsewhere.refresh_from_db()
+    assert dead.status == Job.Status.STALLED and "runs again" in dead.error
+    assert left_open.status == Harvest.Status.FAILED and left_open.finished_at
+    assert alive.status == elsewhere.status == Job.Status.RUNNING
+
+    # no longer an open job, so the dataset is scheduled again
+    dead.status = Job.Status.RUNNING
+    dead.save()
+    tasks.enqueue_due_work()
+    assert ("harvest", dataset.pk) in queued

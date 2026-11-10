@@ -1,10 +1,13 @@
 """Thin client for ArcGIS REST layer endpoints. Plain Python: no Django imports."""
 
+import hashlib
 import io
 import json
 import logging
+from collections.abc import Callable
 from datetime import UTC, datetime
 from itertools import batched
+from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
@@ -199,12 +202,30 @@ def fetch_by_offset(
     raise ArcGISError(f"{layer_url}: gave up after {MAX_PAGES} pages")
 
 
+def _staged(staging: Path | None, key: str, fetch: Callable[[], list[pd.DataFrame]]):
+    """fetch(), or the frames a previous run saved under key in staging. Each batch is written
+    whole (to a temporary name, then renamed), so a stopped run never leaves half a batch.
+    Pickled, not parquet, so a batch reads back exactly as it was downloaded."""
+    if staging is None:
+        return fetch(), False
+    path = Path(staging) / f"{key}.pkl"
+    if path.exists():
+        return pd.read_pickle(path), True
+    frames = fetch()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(".tmp")
+    pd.to_pickle(frames, tmp)
+    tmp.replace(path)
+    return frames, False
+
+
 def fetch_features(
     session: requests.Session,
     layer_url: str,
     metadata: dict,
     where: str = "1=1",
     batch_size: int | None = None,
+    staging: str | Path | None = None,
 ) -> gpd.GeoDataFrame:
     """Download every feature in a layer as a GeoDataFrame in EPSG:4326.
 
@@ -213,6 +234,11 @@ def fetch_features(
        and stays stable if rows change mid-scrape.
     2. resultOffset paging, for layers without an object ID field.
     3. A single query. If the server truncates it, count validation will catch it.
+
+    staging: a folder where each object-ID batch is saved as it arrives. A run that stops
+    partway and starts again reuses the batches already saved (a batch is named for its IDs
+    and the filter, so a changed layer fetches the batches that changed). The caller deletes
+    the folder once the download is used.
     """
     batch_size = batch_size or metadata.get("maxRecordCount") or DEFAULT_BATCH_SIZE
     oid_field = object_id_field(metadata)
@@ -220,11 +246,19 @@ def fetch_features(
     if oid_field:
         ids = get_ids(session, layer_url, where)
         logger.debug("%s: fetching %d IDs in batches of %d", layer_url, len(ids), batch_size)
-        frames = [
-            frame
-            for chunk in batched(ids, batch_size)
-            for frame in fetch_id_range(session, layer_url, where, oid_field, list(chunk))
-        ]
+        frames, reused = [], 0
+        for chunk in batched(ids, batch_size):
+            chunk = list(chunk)
+            digest = hashlib.sha256(f"{where}|{oid_field}|{chunk}".encode()).hexdigest()[:16]
+            got, was_saved = _staged(
+                Path(staging) if staging else None,
+                f"batch-{chunk[0]}-{chunk[-1]}-{digest}",
+                lambda chunk=chunk: fetch_id_range(session, layer_url, where, oid_field, chunk),
+            )
+            frames.extend(got)
+            reused += was_saved
+        if reused:
+            logger.info("%s: reused %d saved batches", layer_url, reused)
     elif supports_pagination(metadata):
         logger.debug("%s: no object ID field, paging by offset", layer_url)
         frames = fetch_by_offset(session, layer_url, where, batch_size)
