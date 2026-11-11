@@ -1,4 +1,4 @@
-"""DOC offenders: the real results for "Q" (both pages) and four people's pages (checked by
+"""DOC offenders: the real results for "Q" (all five pages) and four people's pages (checked by
 hand: completed sentence, in prison, on parole, no facility), and runs with the search window
 stood in for."""
 
@@ -25,9 +25,11 @@ def test_results():
     assert len(first) == 20
     assert first[0] == {"doc_number": "25287", "last_name": "Quakenbush", "first_name": "David",
                         "middle_initial": "M.", "detail_id": "kPKnHBADcW0="}  # fmt: skip
+    # the first page's pager quotes plainly, later pages' as &#39;
     assert parse.next_page(page("results-q-1.html"), 1) == "Page$2"
-    assert parse.next_page(page("results-q-2.html"), 2) is None
-    assert len(parse.results(page("results-q-2.html"))) == 20
+    assert parse.next_page(page("results-q-2.html"), 2) == "Page$3"
+    assert parse.next_page(page("results-q-5.html"), 5) is None
+    assert len(parse.results(page("results-q-5.html"))) == 17
     assert parse.detail_url("kPKnHBADcW0=") == (
         "https://docadultlookup.sd.gov/adult/lookup/details/?id=kPKnHBADcW0="
     )
@@ -72,7 +74,7 @@ class FakeSearcher:
 
 
 class FixtureFetcher:
-    """The plain requests: page 2 of the results, and people's pages (one fixture for all)."""
+    """The plain requests: Q's later result pages, and people's pages (one fixture for all)."""
 
     def __init__(self, store):
         self.store, self.asked = store, []
@@ -80,8 +82,8 @@ class FixtureFetcher:
     def request(self, method, url, data=None, **kwargs):
         self.asked.append((method, url))
         if method == "POST":
-            assert data["__EVENTARGUMENT"] == "Page$2"
-            body = page("results-q-2.html")
+            n = data["__EVENTARGUMENT"].removeprefix("Page$")
+            body = page(f"results-q-{n}.html")
         else:
             body = page("person-60714.html")
         return type("R", (), {"content": body})()
@@ -91,6 +93,7 @@ class FixtureFetcher:
 def searcher(monkeypatch):
     FakeSearcher.letters, FakeSearcher.puzzle_at = [], None
     monkeypatch.setattr(source, "_searcher", FakeSearcher)
+    monkeypatch.setattr(source, "SEARCH_GAP", (0.0, 0.0))
     return FakeSearcher
 
 
@@ -98,8 +101,8 @@ def test_a_run(db, sd_places, searcher, tmp_path):
     RecordSet.objects.create(slug="doc-offenders", name="DOC", dataset="doc-offenders")
     fetcher = FixtureFetcher(Store(tmp_path))
     run = run_source("doc-offenders", fetcher=fetcher)
-    assert len(searcher.letters) == 26 and run.added == 40
-    assert run.checks["by_letter"]["Q"] == 40 and run.checks["without_page"] == 0
+    assert len(searcher.letters) == 26 and run.added == 97
+    assert run.checks["by_letter"]["Q"] == 97 and run.checks["without_page"] == 0
     assert "stopped" not in run.checks
     person = Record.objects.get(key="25287")
     assert person.data["last_name"] == "Quakenbush"
@@ -122,7 +125,7 @@ def test_a_run(db, sd_places, searcher, tmp_path):
     searcher.letters = []
     fetcher.asked = []
     run = run_source("doc-offenders", fetcher=fetcher)
-    assert searcher.letters == [] and fetcher.asked == [] and run.unchanged == 40
+    assert searcher.letters == [] and fetcher.asked == [] and run.unchanged == 97
 
 
 def test_a_picture_puzzle_stops_the_run_and_keeps_what_it_has(db, sd_places, searcher,
@@ -131,8 +134,41 @@ def test_a_picture_puzzle_stops_the_run_and_keeps_what_it_has(db, sd_places, sea
     searcher.puzzle_at = "R"
     run = run_source("doc-offenders", fetcher=FixtureFetcher(Store(tmp_path)))
     assert "picture puzzle" in run.checks["stopped"]
-    assert run.added == 40 and run.checks["letters_searched"] == 17  # A to Q
+    assert run.added == 97 and run.checks["letters_searched"] == 17  # A to Q
     assert Record.objects.filter(dropped_at__isnull=False).count() == 0
+
+
+def test_searches_are_spaced_and_pages_read_in_between(db, sd_places, searcher, tmp_path,
+                                                       monkeypatch):  # fmt: skip
+    """With searches 10 "seconds" apart and each page read taking 1, the reading happens
+    while the next search waits."""
+    from functools import partial
+
+    now = [0.0]
+    searched_at = []
+    original = FakeSearcher.search
+
+    def search(self, letter):
+        searched_at.append(now[0])
+        return original(self, letter)
+
+    class Clocked(FixtureFetcher):
+        def request(self, method, url, **kwargs):
+            if method == "GET":
+                now[0] += 1
+            return super().request(method, url, **kwargs)
+
+    def sleep(seconds):
+        now[0] += seconds
+
+    monkeypatch.setattr(FakeSearcher, "search", search)
+    RecordSet.objects.create(slug="doc-offenders", name="DOC", dataset="doc-offenders")
+    items = partial(source.items, search_gap=(10.0, 10.0), clock=lambda: now[0], sleep=sleep)
+    monkeypatch.setattr(source.SOURCE, "items", items)
+    run_source("doc-offenders", fetcher=Clocked(Store(tmp_path)))
+    gaps = [b - a for a, b in zip(searched_at, searched_at[1:], strict=False)]
+    assert len(searched_at) == 26 and min(gaps) >= 10
+    assert searched_at[17] - searched_at[16] == 10  # R waited while 10 of Q's pages were read
 
 
 def test_a_run_reads_at_most_its_budget_of_pages(db, sd_places, searcher, tmp_path,
@@ -142,8 +178,8 @@ def test_a_run_reads_at_most_its_budget_of_pages(db, sd_places, searcher, tmp_pa
     RecordSet.objects.create(slug="doc-offenders", name="DOC", dataset="doc-offenders")
     monkeypatch.setattr(source.SOURCE, "items", partial(source.items, details_per_run=15))
     run = run_source("doc-offenders", fetcher=FixtureFetcher(Store(tmp_path)))
-    assert run.checks["pages_read"] == 15 and run.checks["without_page"] == 25
-    assert "25 left" in run.checks["stopped"]
+    assert run.checks["pages_read"] == 15 and run.checks["without_page"] == 82
+    assert "82 left" in run.checks["stopped"]
 
 
 @pytest.mark.vcr

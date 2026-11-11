@@ -1,0 +1,723 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head id="Head1">
+    <meta charset="UTF-8" />
+	<title>Offender Locator :: SD Dept of Corrections</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--COMMENTED OUT FOR TEST -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- Bootstrap core CSS -->
+    <link href="/includes/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/includes/Default/custom.css">
+    <link rel="stylesheet" type="text/css" href="/includes/Default/editor.css">
+
+    <link rel="stylesheet" type="text/css" href="/includes/custom.default.css">
+    <link rel="stylesheet" type="text/css" href="/includes/custom.desktop.css">
+    <link rel="stylesheet" type="text/css" href="/includes/custom.media.css">
+    <link rel="stylesheet" type="text/css" href="/includes/editor.css">
+
+    <link rel="stylesheet" type="text/css" id="active_font" href="Project/Contents/Main/x-small.css">
+
+    <link rel="stylesheet" type="text/css" href="/includes/Default/print.css" media="print">
+    <link rel="stylesheet" type="text/css" href="/includes/print.css" media="print">
+
+    <script src="Scripts/jquery/jquery-3.7.1.min.js"></script>
+    <link rel="Shortcut Icon" href="favicon.ico">
+
+    <script language="javascript">
+        if (top.frames.length != 0)
+            top.location = self.document.location;
+    </script>
+
+	<link rel="stylesheet" type="text/css" href="/includes/css/forms.css" />
+    <link rel="stylesheet" type="text/css" href="/includes/css/offsrch.css" />
+    <style id="antiClickjack">        
+        body {
+            display: none !important;
+        }
+    </style>
+    <script type="text/javascript">
+        if (self === top) {
+            var antiClickjack = document.getElementById("antiClickjack");
+            antiClickjack.parentNode.removeChild(antiClickjack);
+        }
+        else { top.location = self.location;}
+    </script>
+
+</head>
+
+<body class="front_end_body  site_standardsitetemplate">
+    
+    <div class="sitewrapper site_template mainSpan_wrapper" >
+
+        <div class="mainArea" id="mainSpan_wrapper_Screen" >
+        <div id="content" style="position: relative;" >
+            <header id="siteheader" class="" role="banner">
+                <div id="skipnav" role="alert">
+                    <a href="#pagebody">Skip to Main Content</a>
+                </div>
+                <h1 class="wcag_only">South Dakota Department of Corrections, SD</h1>
+                <a id="home_link" href="https://www.doc.sd.gov/home">Home</a>
+                <a class="menu_trigger mobile_only" href="javascript:void(0);">Menu</a>
+                <div id="headercolumn" class="site_template_column  header_column   ">
+                    <div id="top_nav">
+                        <a href="https://www.doc.sd.gov/adult-corrections/offender-locator" target="_self">Offender Locator</a>
+                        <a href="https://www.doc.sd.gov/about-us/careers" target="_self">Jobs</a>    
+                    </div>
+                    <div class="search_overlay"></div>
+                    <a href="javascript:void(0);" class="search-trigger hidden-xs">Search</a>
+                    <div class="top_search">
+                        <a class="close_search" href="javascript:void(0);">CLOSE</a>
+                        <div class="search_block">
+                            <div id="searchbox" class="clearfix">
+                                <label class="visually-hidden" for="search_text">Search</label>
+                                <input title="Search..." id="search_text" placeholder="Search..." type="text">
+                                <a href="javascript:void(0);">Go</a>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $(function () {
+
+                            $("#searchbox input").keydown(function (e) {
+                                if (e.keyCode == 13) {
+                                    $("#searchbox a").click();
+                                }
+                            });
+                            $("#searchbox a").click(function () {
+                                var keyWord = $("#searchbox input#search_text").val();
+                                if (keyWord.length <= 0) { return false; }
+                                keyWord = keyWord.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+                                keyWord = encodeURIComponent(keyWord.replace("<", " ").replace(">", " "));
+                                var link = '/SDDOCSD6/about-us/search';
+                                if (link.indexOf("?") >= 0)
+                                    link = link + "&q=" + keyWord;
+                                else
+                                    link = link + "?q=" + keyWord;
+                                if ('False' == 'True') {
+                                    window.top.location.href = link;
+                                    return false;
+                                } else {
+                                    window.location.href = link;
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+            </header>
+            <div class="onecolumnlayout clearfix" id="sitebody">
+                <div id="ColumnUserControl1" class="column sortable_col column top_col  clearfix">
+                    <div class=" main_menu_widget">
+                        <link rel="stylesheet" type="text/css" href="/includes/Default/dropdownmegamenu.css">
+                        <link rel="stylesheet" type="text/css" href="/includes/dropdownmegamenu.css">
+                        <nav id="menuContainer_1_0_15" class="regularmegamenu mainnav">
+                            <ul class="dropdownmenu clearfix">
+                                <li id="dropdownrootitem1" class='megamenu_first'><a class='dropdownrootitem1' href='https://www.doc.sd.gov/home' title="Home" data-navid="1" target="_self">Home</a></li>
+                                <li id="dropdownrootitem2" class='megamenu_first'>
+                                    <a class='dropdownrootitem2' href='https://www.doc.sd.gov/about-us' title="About Us" data-navid="2" target="_self">About Us</a>
+                                </li>
+                                <li id="dropdownrootitem3" class='megamenu_first'>
+                                    <a class='dropdownrootitem3' href='https://www.doc.sd.gov/adult-corrections' title="Adult Corrections" data-navid="3" target="_self">Adult Corrections</a>
+                                </li>
+                                <li id="dropdownrootitem4" class='megamenu_first'>
+                                    <a class='dropdownrootitem4' href='https://www.doc.sd.gov/safer-sd-reentry-initiative' title="SAFER SD Reentry Initiative" data-navid="17" target="_self">SAFER SD Reentry Initiative</a>
+                                </li>
+                                <li id="dropdownrootitem5" class='megamenu_first'>
+                                    <a class='dropdownrootitem5' href='https://www.doc.sd.gov/pheasantland-industries' title="Pheasantland Industries" data-navid="4" target="_self">Pheasantland Industries</a>
+                                </li>
+                                <li id="dropdownrootitem6" class='megamenu_first'>
+                                    <a class='dropdownrootitem6' href='https://www.doc.sd.gov/juvenile-corrections' title="Juvenile Corrections" data-navid="5" target="_self">Juvenile Corrections</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                
+
+        
+    
+        
+        <!-- </div> -->
+        
+            <a id="pagebody"></a>
+            <script type="text/javascript">
+                $(function () {
+                    var widgetContext = "widget_297_0_161";
+                    $("#" + widgetContext + " #share").click(function () {
+                        if (!$("#" + widgetContext + " div#share").hasClass("click-active"))
+                            $("#" + widgetContext + " div#share").find("ul").show();
+                        else
+                            $("#" + widgetContext + " div#share").find("ul").hide();
+                    });
+                    $("div").click(function () {
+                        if ($("#" + widgetContext + " div#share").hasClass("click-active")) {
+                            $("#" + widgetContext + " div#share").find("ul").hide();
+                        }
+                    });
+                    $(document).click(function (e) {
+                        if (!$(e.target).closest("#share").length > 0) {
+                            $("#" + widgetContext + " div#share").removeClass("click-active");
+                            $("#" + widgetContext + " div#share").find("ul").hide();
+                        }
+                    });
+                    var shareContainerTimeout = null;
+                    $("#" + widgetContext + " #share").bind('mouseover', function () {
+                        //If not relate to click event
+                        if (shareContainerTimeout) {
+                            clearTimeout(shareContainerTimeout);
+                            shareContainerTimeout = null;
+                        }
+                        shareContainerTimeout = setTimeout(function () {
+                            if (!$("#" + widgetContext + " div#share").hasClass("click-active"))
+                                $("#" + widgetContext + " div#share").find("ul").show();
+                        }, 100);
+                    });
+                    $("#" + widgetContext + " #share").bind('mouseleave', function () {
+                        //If not relate to click event     
+                        if (shareContainerTimeout) {
+                            clearTimeout(shareContainerTimeout);
+                            shareContainerTimeout = null;
+                        }
+                        shareContainerTimeout = setTimeout(function () {
+                            if (!$("#" + widgetContext + " div#share").hasClass("click-active"))
+                                $("#" + widgetContext + " div#share").find("ul").hide();
+                        }, 200);
+                    });
+                    $("header#" + widgetContext + " a.feedback_link").click(function () {
+                        var windowHeight = 485;
+                        if (window.innerWidth <= 648) {
+                            windowHeight = 545;
+                        }
+                        var opts = {
+                            title: "Feedback",
+                            url: "/VADEQVA6/Template/GetFeedbackPartial?feedbackUrl=https%3a%2f%2fdev8.visioninternet.com%2fVADEQVA6%2fget-involved%2fthe-environment-and-you%2f-fsiteid-1%3floadingmode%3dPreviewContent",
+                            useFrame: true,
+                            height: windowHeight,
+                            onClosed: function (result) {
+                                if (result != undefined && result.IsOk == true) {
+                                    $.refreshTempMessage(result.Message);
+                                }
+                            },
+                            skin: 'viClientDialog feedback_lightbox',
+                            fixed: false
+                        };
+                        $.viClientDialog(opts).open();
+                    });
+                    //Safari iOS: No click event
+                    $("header#" + widgetContext + " a.send_share_email").bind("click touchstart", function () {
+                        var shareEmailTitle = document.itemTitle ? encodeURIComponent(document.itemTitle.trim()).replace(/[!'()*]/g, escape) : "The+Environment+and+You";
+                        var opts = {
+                            title: "Click to submit an email online",
+                            url: "/VADEQVA6/Template/GetShareEmailPartial?shareUrl=https%3a%2f%2fdev8.visioninternet.com%2fVADEQVA6%2fget-involved%2fthe-environment-and-you%2f-fsiteid-1%3floadingmode%3dPreviewContent" + "&shareTitle=" + shareEmailTitle,
+                            useFrame: true,
+                            height: 485,
+                            onClosed: function (result) {
+                                if (result != undefined && result.IsOk == true) {
+                                    $.refreshTempMessage(result.Message);
+                                }
+                            },
+                            skin: 'viClientDialog send_share_email_lightbox',
+                            fixed: false
+                        };
+                        $.viClientDialog(opts).open();
+                    });
+                });
+            </script>
+
+<h2>Offender Locator</h2>
+
+<form method="post" action="./" onsubmit="javascript:return WebForm_OnSubmit();" id="frmInmate">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['frmInmate'];
+if (!theForm) {
+    theForm = document.frmInmate;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=Ur-lln6A3t04wk9omoWmSRQ9iqERPGF3WxMkmWQonRiRCGjB0IJYxolss87gHic5xfDaZuH9rNc82ifvpZdLvTlsq9yB4j6UZbSqIZxKF5c1&amp;t=639190653332169432" type="text/javascript"></script>
+
+
+<script src="/WebResource.axd?d=69HGzYhgC0OazkkfVMRh_LRJ4OHN-876cSwUsPmk8Lb10aA_Dnw7Id2rNkoEgxf02FbPClN88-QxWF-iW0o7VEEQttSe5AVck6A5mo-a6O41&amp;t=639190653332169432" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CD74C2D5" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="yYCQ5gUmNCe3mSlm3zdRmX3SDCoqnm2O8o18104UzfW1aWr9HTPcSAYZ6DYrwJ7maWjKWFEeCmKVT5c6amhzhAp7StvtlPOWrdnru3hK78qNvFHSW41x8+/EQ4Fw7ZYiogeqxjvykkqrYILiAkB7ma+iBvgIh3r2NpBJNjafQ1OcCLIWrcSa7LdbRUsbE6fwiWjex1Eqh4CKxCMoes1T0hBcaEu/ccso4NZ8YKTA22H3gTgtQ+53r2izhyODdUtYDtnrS3RqPhuTJN4gxOX5yIYODcXv/CtLGVUoVrJYKXRYwMF6wzUjPEgbHKvbxss9" />
+</div>
+   
+<div id="pnlSearch">
+	
+	<h3>Search Criteria</h3>
+	<p>
+		Please enter your search criteria into one or more of the following fields:</p>
+   	
+    
+	<div class="fldrow">
+        <div class="lfld">&nbsp;</div>
+        <div class="rfld">
+        	
+            
+        </div>
+    </div>
+    <div class="fldrow">
+        <div class="lfld"><label for="txtDocId" id="lblDocId">DOC #</label> <span class="ex">Ex. 987654</span></div>
+        <div class="rfld">
+        	<span id="reqDocId" class="err" on="" style="display:none;">DOC# is required.<br /></span>
+            <span id="regDocId" class="err" style="display:none;"><span>Invalid DOC#.</span> Supports only 0-9 chars.<br /></span>
+            <input name="txtDocId" type="text" maxlength="10" id="txtDocId" /><span class="reqfld">* Required</span>
+        </div>
+    </div>
+    <div class="fldrow">
+        <div class="lfld"><label for="txtLName" id="lblLName">Last Name</label> <span class="ex">Ex. Doe</span></div>
+        <div class="rfld">
+        	<div>
+            <span id="reqLName" class="err" style="display:none;">Name is required.<br /></span>
+            <span id="regLName" class="err" style="display:none;"><span>Invalid Name.</span> Supports only A-Z . , - [space] chars.<br /></span>
+            <input name="txtLName" type="text" value="Q" maxlength="75" id="txtLName" /><span class="reqfld">* Required</span></div>
+        </div>
+    </div>
+    <div class="fldrow">
+        <div class="lfld"><label for="txtFName" id="lblFName">First Name</label> <span class="ex">Ex. John</span></div>
+        <div class="rfld">
+            <span id="reqFName" class="err" style="display:none;">Name is required.<br /></span>
+            <span id="regFName" class="err" style="display:none;"><span>Invalid Name.</span> Supports only A-Z . , - [space] chars.<br /></span>
+            <input name="txtFName" type="text" maxlength="75" id="txtFName" /><span class="reqfld">* Required</span>
+        </div>
+    </div>
+    <div class="fldrow">
+        <div class="lfld"></div>
+        <div class="rfld">
+        	
+        </div>
+    </div>
+    <div class="fldrow">
+   
+        <div class="rfld">
+        	
+        	<asp:RequiredFieldValidator id="m_success"  Display="Dynamic" ErrorMessage="Verification Code is required.<br />" Enabled="false" CssClass="err" runat="server" />
+            <div id="imgCaptcha" class="g-recaptcha" data-sitekey="6LfE6YYUAAAAADiqVbUcktoCQ5J-KaOmSnHY2O83"></div>            
+
+        </div>
+    </div>
+    <div class="fldrow">
+        <input type="submit" name="btnMission" value="Submit" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;btnMission&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="btnMission" title="Submit" class="btnface" />
+        <input type="submit" name="btnReset" value="Reset" id="btnReset" title="Reset" class="btnface" />
+    </div>
+
+</div>
+
+
+
+<div id="pnlResults">
+	
+	<h3>Search Results</h3>
+	<div>
+		<table class="grv" cellspacing="0" rules="all" border="1" id="grvList" style="width:100%;border-collapse:collapse;">
+			<tr>
+				<th class="hdrtbl" scope="col">DOC #</th><th class="hdrtbl" scope="col">Last Name</th><th class="hdrtbl" scope="col">First Name</th><th class="hdrtbl" scope="col">M.I.</th>
+			</tr><tr class="rowodd">
+				<td class="id">
+                    <a id="grvList_hypDocId_0" href="details/?id=F6GfQGqJo6Y=">7502</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_0">Quilt</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_0">Stanton</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_0"> H.</span>
+                </td>
+			</tr><tr class="roweven">
+				<td class="id">
+                    <a id="grvList_hypDocId_1" href="details/?id=kb3g2pnpox0=">54952</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_1">Quincey</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_1">Trevor</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_1"> R.</span>
+                </td>
+			</tr><tr class="rowodd">
+				<td class="id">
+                    <a id="grvList_hypDocId_2" href="details/?id=S1kuOvH7JCQ=">13041</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_2">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_2">Amanda</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_2"> M.</span>
+                </td>
+			</tr><tr class="roweven">
+				<td class="id">
+                    <a id="grvList_hypDocId_3" href="details/?id=hJ8OffvndWs=">80156</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_3">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_3">Amey</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_3"> K.</span>
+                </td>
+			</tr><tr class="rowodd">
+				<td class="id">
+                    <a id="grvList_hypDocId_4" href="details/?id=90LHpky3WXo=">81252</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_4">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_4">Asia</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_4"> T.</span>
+                </td>
+			</tr><tr class="roweven">
+				<td class="id">
+                    <a id="grvList_hypDocId_5" href="details/?id=tcitlA5SINI=">17287</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_5">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_5">James</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_5"> R.</span>
+                </td>
+			</tr><tr class="rowodd">
+				<td class="id">
+                    <a id="grvList_hypDocId_6" href="details/?id=aa/2m0AZ/oo=">8560</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_6">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_6">Jason</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_6"> I.</span>
+                </td>
+			</tr><tr class="roweven">
+				<td class="id">
+                    <a id="grvList_hypDocId_7" href="details/?id=kwCwMYAanjQ=">80543</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_7">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_7">Justin</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_7"> B.</span>
+                </td>
+			</tr><tr class="rowodd">
+				<td class="id">
+                    <a id="grvList_hypDocId_8" href="details/?id=G5HD907cFB0=">17896</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_8">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_8">Loris</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_8"> G.</span>
+                </td>
+			</tr><tr class="roweven">
+				<td class="id">
+                    <a id="grvList_hypDocId_9" href="details/?id=oDPht2hOd 8=">18072</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_9">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_9">Milton</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_9"> D.</span>
+                </td>
+			</tr><tr class="rowodd">
+				<td class="id">
+                    <a id="grvList_hypDocId_10" href="details/?id=cmIKIsrccV8=">19447</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_10">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_10">Russell</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_10"> D.</span>
+                </td>
+			</tr><tr class="roweven">
+				<td class="id">
+                    <a id="grvList_hypDocId_11" href="details/?id=owppOr8PLS0=">77961</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_11">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_11">Saige</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_11"> M.</span>
+                </td>
+			</tr><tr class="rowodd">
+				<td class="id">
+                    <a id="grvList_hypDocId_12" href="details/?id=Do/OEv kp4k=">80729</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_12">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_12">Teanna</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_12"> R.</span>
+                </td>
+			</tr><tr class="roweven">
+				<td class="id">
+                    <a id="grvList_hypDocId_13" href="details/?id= nGUxWz8YwU=">19453</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_13">Quinn</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_13">Willis</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_13"> I.</span>
+                </td>
+			</tr><tr class="rowodd">
+				<td class="id">
+                    <a id="grvList_hypDocId_14" href="details/?id=h Uy6oOsjtk=">25059</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_14">Quinones</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_14">Juan</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_14"> M.</span>
+                </td>
+			</tr><tr class="roweven">
+				<td class="id">
+                    <a id="grvList_hypDocId_15" href="details/?id=zhWd5cnfmvk=">38871</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_15">Quinones</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_15">Julian</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_15"> </span>
+                </td>
+			</tr><tr class="rowodd">
+				<td class="id">
+                    <a id="grvList_hypDocId_16" href="details/?id=zqEMnmdpFgc=">52449</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_16">Quinones</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_16">William</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_16"> G.</span>
+                </td>
+			</tr><tr class="roweven">
+				<td class="id">
+                    <a id="grvList_hypDocId_17" href="details/?id=wI90zNsfb s=">3810</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_17">Quinones-Renteria</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_17">Andres</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_17"> </span>
+                </td>
+			</tr><tr class="rowodd">
+				<td class="id">
+                    <a id="grvList_hypDocId_18" href="details/?id=442CHYVdv8Q=">53093</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_18">Quinones-Rios</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_18">Agnes</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_18"> Y.</span>
+                </td>
+			</tr><tr class="roweven">
+				<td class="id">
+                    <a id="grvList_hypDocId_19" href="details/?id=fOh0MiBDYvI=">54338</a>
+                </td><td class="lname">
+                    <span id="grvList_lblLName_19">Quinones-Rodriguez</span>
+                </td><td class="fname">
+                    <span id="grvList_lblFName_19">Jose</span>
+                </td><td class="mi">
+                    <span id="grvList_lblFName_19"> A.</span>
+                </td>
+			</tr><tr class="pager" align="right">
+				<td colspan="4"><table>
+					<tr>
+						<td><a href="javascript:__doPostBack(&#39;grvList&#39;,&#39;Page$1&#39;)">1</a></td><td><a href="javascript:__doPostBack(&#39;grvList&#39;,&#39;Page$2&#39;)">2</a></td><td><a href="javascript:__doPostBack(&#39;grvList&#39;,&#39;Page$3&#39;)">3</a></td><td><span>4</span></td><td><a href="javascript:__doPostBack(&#39;grvList&#39;,&#39;Page$5&#39;)">5</a></td>
+					</tr>
+				</table></td>
+			</tr>
+		</table>
+	</div>
+
+</div>
+
+<div id="pnlDisclaim" class="info">
+	
+	<h4>Disclaimer</h4>
+	<p>
+    	This database contains public information on felony offenders sentenced to the Department of Corrections. This information includes South Dakota offenders sentenced to prison.
+        Information on offenders sentenced to county jail, probation, or any other form of supervision is not included. The 
+        information is derived from court records provided to the Department of Corrections  and Department of Corrections records and is made available as a public service. The 
+        Department of Corrections makes no guarantee as to the accuracy or completeness of the information. Any person who believes information provided is not accurate may contact 
+        the Department of Corrections at (605)367-5190 or (605)367-5140.</p>
+	<p>
+    	Neither the Department of Corrections, its officers or employees, nor the State of South Dakota assume any liability for the accuracy of information contained herein.</p>
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("reqDocId"), document.getElementById("regDocId"), document.getElementById("reqLName"), document.getElementById("regLName"), document.getElementById("reqFName"), document.getElementById("regFName"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var reqDocId = document.all ? document.all["reqDocId"] : document.getElementById("reqDocId");
+reqDocId.controltovalidate = "txtDocId";
+reqDocId.errormessage = "DOC# is required.<br />";
+reqDocId.display = "Dynamic";
+reqDocId.enabled = "False";
+reqDocId.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+reqDocId.initialvalue = "";
+var regDocId = document.all ? document.all["regDocId"] : document.getElementById("regDocId");
+regDocId.controltovalidate = "txtDocId";
+regDocId.errormessage = "<span>Invalid DOC#.</span> Supports only 0-9 chars.<br />";
+regDocId.display = "Dynamic";
+regDocId.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+regDocId.validationexpression = "^[0-9]*$";
+var reqLName = document.all ? document.all["reqLName"] : document.getElementById("reqLName");
+reqLName.controltovalidate = "txtLName";
+reqLName.errormessage = "Name is required.<br />";
+reqLName.display = "Dynamic";
+reqLName.enabled = "False";
+reqLName.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+reqLName.initialvalue = "";
+var regLName = document.all ? document.all["regLName"] : document.getElementById("regLName");
+regLName.controltovalidate = "txtLName";
+regLName.errormessage = "<span>Invalid Name.</span> Supports only A-Z . , - [space] chars.<br />";
+regLName.display = "Dynamic";
+regLName.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+regLName.validationexpression = "^[a-zA-Z.,\\s-]*$";
+var reqFName = document.all ? document.all["reqFName"] : document.getElementById("reqFName");
+reqFName.controltovalidate = "txtFName";
+reqFName.errormessage = "Name is required.<br />";
+reqFName.display = "Dynamic";
+reqFName.enabled = "False";
+reqFName.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+reqFName.initialvalue = "";
+var regFName = document.all ? document.all["regFName"] : document.getElementById("regFName");
+regFName.controltovalidate = "txtFName";
+regFName.errormessage = "<span>Invalid Name.</span> Supports only A-Z . , - [space] chars.<br />";
+regFName.display = "Dynamic";
+regFName.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+regFName.validationexpression = "^[a-zA-Z.,\\s-]*$";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+</form>
+        </div>
+
+    </div>
+</div>
+<footer id="page_footer" class="">
+    <div id="footercolumn" class="site_template_column  footer_column   ">
+        <div class="col-xs-12 col-sm-12 col-md-2">
+            <div class="footer_logo_one">
+                <a href="https://www.doc.sd.gov" target="_self" title="">
+                    <img src="Library/footer_logos/footerLogoOne.png" alt="Footer Seal">
+                </a>
+            </div>
+        </div>
+         <div class="col-xs-12 col-sm-6 col-md-4">          
+            <div class="footer_address">
+                <h2>Contact Us</h2>
+                <span>South Dakota Department of <br>
+                Corrections</span>
+                <p><a href="https://maps.app.goo.gl/sZihPatP6cxGihUT7">3200 East Highway 34, c/o 500 East <br>
+                Capitol Avenue Pierre, SD 57501</a>
+                </p>
+                <p>Phone: <a href="tel:(605) 773-3478">(605) 773-3478</a></p>
+                <p>Fax: <a href="tel:785-246-5077">(605) 773-6810</a></p>
+            </div>
+         </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">  
+                <div class="social_icons">
+                    <h2>Keep in Touch</h2>
+                        <a href="https://www.facebook.com/people/South-Dakota-Department-of-Corrections/100087616654629/" target="_blank">
+                            <img src="Library/social_icons/fb-icon.svg" alt="Facebook">
+                        </a>
+                        <a href="https://twitter.com/SouthDakotaDOC" target="_blank">
+                            <img src="Library/social_icons/x-icon.svg" alt="Twitter">
+                        </a>
+                        <a href="https://www.instagram.com/sdcorrections/" target="_blank">
+                            <img src="Library/social_icons/ig-icon.svg" alt="Instagram">
+                        </a>
+                        <a href="https://www.youtube.com/user/SouthDakotaDOC" target="_blank">
+                            <img src="Library/social_icons/yt-icon.svg" alt="Youtube">
+                        </a>
+                        <a href="https://www.linkedin.com/company/south-dakota-department-of-corrections" target="_blank">
+                            <img src="Library/social_icons/linkedin-icon.svg" alt="LinkedIn">
+                        </a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="footer_logo_two">
+                    <a href="https://www.doc.sd.gov" target="_self" title="">
+                        <img src="Library/footer_logos/footerLogoTwo.png" alt="Footer Portal Seal">
+                    </a>
+                </div>
+            </div>
+            <div class="footer_nav">
+                    <a href="https://www.doc.sd.gov/home" target="_self">Home</a>        
+                    <a href="https://www.doc.sd.gov/about-us" target="_self">About Us</a>        
+                    <a href="https://www.doc.sd.gov/adult-corrections" target="_self">Adult Corrections</a>      
+                    <a href="https://www.doc.sd.gov/juvenile-corrections" target="_self">Juvenile Corrections</a>        
+                    <a href="https://www.doc.sd.gov/adult-corrections/parole" target="_self">Parole</a>      
+                    <a href="https://www.doc.sd.gov/about-us/site-map" target="_self">Sitemap</a>        
+            </div>
+            <p class="footer_copyright">Design By <a href="https://www.granicus.com/">Granicus</a> - Connecting People &amp; Government</p>
+    </div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50346880-2', 'sd.gov');
+  ga('send', 'pageview');
+
+</script>
+    </footer>
+</div></div>
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="/includes/scripts/zoomEvents.js"></script>
+    <script src="/includes/bootstrap/bootstrap.min.js"></script>
+    <script src="/includes/mobile_nav_scripts.js"></script>
+    <script src="/includes/sitelayout_scripts.js"></script>
+</body>
+</html>

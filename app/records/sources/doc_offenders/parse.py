@@ -38,10 +38,11 @@ def results(html: bytes | str) -> list[dict]:
 
 
 def next_page(html: bytes | str, page: int) -> str | None:
-    """The postback argument for the page after `page`, if the pager offers one."""
-    arg = f"Page${page + 1}"
+    """The postback argument for the page after `page`, if the pager links to it (the pager
+    writes its quotes plainly on the first page and as &#39; on later ones)."""
     raw = html if isinstance(html, str) else html.decode("utf-8", "replace")
-    return arg if f"'{GRID}','{arg}'" in raw else None
+    pages = {int(n) for n in re.findall(rf"{GRID}(?:'|&#39;),(?:'|&#39;)Page\$(\d+)", raw)}
+    return f"Page${page + 1}" if page + 1 in pages else None
 
 
 def _date(value: str) -> str | None:

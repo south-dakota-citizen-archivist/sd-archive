@@ -6,9 +6,10 @@ listed name and by each alias, for matching across record sets.
 
 The locator searches by last name prefix, so a run searches each letter, A to Z (in a Chrome
 window: the search has an "I'm not a robot" box), and reads every page of each letter's
-results (plain form posts). Then it reads each person's page (plain links), at most
-`DETAILS_PER_RUN` new ones a run. Results and people's pages are kept by month: a stopped run
-resumes, and the next month's run reads them again. A person whose page hasn't been read
+results (plain form posts). Searches are 15 to 30 minutes apart; in between, and after, it
+reads people's pages (plain links), at most `DETAILS_PER_RUN` new ones a run. Results and
+people's pages are kept by month: a stopped run resumes, and the next month's run reads them
+again. A person whose page hasn't been read
 this month keeps the last one read; until every letter has been searched and every person
 has a page, the run is partial (nothing is marked dropped).
 """
@@ -18,6 +19,7 @@ from __future__ import annotations
 import logging
 import random
 import string
+import time
 from datetime import date
 from pathlib import Path
 
@@ -32,6 +34,7 @@ logger = logging.getLogger(__name__)
 STATE = "0400000US46"
 LETTERS = string.ascii_uppercase
 DETAILS_PER_RUN = 20000
+SEARCH_GAP = (15 * 60.0, 30 * 60.0)  # seconds between searches
 
 
 def browser_profile() -> Path:
@@ -74,26 +77,68 @@ def latest_detail(store, month: str, doc: str) -> tuple[str | None, bytes | None
     return (earlier[0].parent.name, earlier[0].read_bytes()) if earlier else (None, None)
 
 
-def items(fetcher, today: date | None = None, details_per_run: int = DETAILS_PER_RUN) -> Found:
+class _People:
+    """The people found so far, and reading their pages up to the run's budget."""
+
+    def __init__(self, fetcher, store, month: str, budget: int):
+        self.fetcher, self.store, self.month, self.budget = fetcher, store, month, budget
+        self.found: dict[str, dict] = {}
+        self.todo: list[str] = []
+        self.read = 0
+
+    def add(self, rows: list[dict]) -> None:
+        new = [r for r in rows if r["doc_number"] not in self.found]
+        for row in new:
+            self.found[row["doc_number"]] = row
+        month = self.month
+        todo = [r["doc_number"] for r in new
+                if latest_detail(self.store, month, r["doc_number"])[0] != month]  # fmt: skip
+        random.shuffle(todo)
+        self.todo += todo
+
+    def read_one(self) -> bool:
+        """Read one person's page; False if there's none to read or the budget is spent."""
+        if not self.todo or self.read >= self.budget:
+            return False
+        doc = self.todo.pop()
+        url = parse.detail_url(self.found[doc]["detail_id"])
+        html = self.fetcher.request("GET", url, timeout=120).content
+        parse.detail(html)  # a page that isn't a person's stops the run here, not later
+        if self.store is not None:
+            self.store.save(f"people/{self.month}/{doc}.html", html, url)
+        self.read += 1
+        return True
+
+
+def items(fetcher, today: date | None = None, details_per_run: int | None = None,
+          search_gap: tuple[float, float] | None = None, clock=time.monotonic,
+          sleep=time.sleep) -> Found:  # fmt: skip
+    """Searches are at least search_gap seconds apart; people's pages are read in between
+    (and after), up to details_per_run."""
+    details_per_run = DETAILS_PER_RUN if details_per_run is None else details_per_run
+    search_gap = SEARCH_GAP if search_gap is None else search_gap
     month = f"{today or date.today():%Y-%m}"
     store = getattr(fetcher, "store", None)
-    people: dict[str, dict] = {}
+    people = _People(fetcher, store, month, details_per_run)
     counts: dict[str, int] = {}
-    stopped = None
-    searcher = None
+    stopped, searcher, next_search = None, None, clock()
     try:
         for letter in LETTERS:
             pages = stored_letter(store, month, letter)
             if pages is None:
-                if searcher is None:
-                    searcher = _searcher().__enter__()
                 from .search import NeedsPerson
 
+                while clock() < next_search:  # read pages until the next search is due
+                    if not people.read_one():
+                        sleep(max(0.0, next_search - clock()))
+                if searcher is None:
+                    searcher = _searcher().__enter__()
                 try:
                     first = searcher.search(letter)
                 except NeedsPerson as e:
                     stopped = str(e)
                     break
+                next_search = clock() + random.uniform(*search_gap)
                 pages = letter_pages(fetcher, first)
                 if store is not None:
                     for i, page in enumerate(pages, start=1):
@@ -102,29 +147,16 @@ def items(fetcher, today: date | None = None, details_per_run: int = DETAILS_PER
                     store.save(f"results/{month}/{letter}/complete", b"", allow_empty=True)
             rows = [r for page in pages for r in parse.results(page)]
             counts[letter] = len(rows)
-            for row in rows:
-                people.setdefault(row["doc_number"], row)
+            people.add(rows)
     finally:
         if searcher is not None:
             searcher.__exit__(None, None, None)
-
-    todo = [d for d in people if latest_detail(store, month, d)[0] != month]
-    random.shuffle(todo)
-    fetched = 0
-    for doc in todo:
-        if fetched >= details_per_run:
-            stopped = (
-                stopped or f"read {fetched} people's pages this run; {len(todo) - fetched} left"
-            )
-            break
-        html = fetcher.request("GET", parse.detail_url(people[doc]["detail_id"]),
-                               timeout=120).content  # fmt: skip
-        parse.detail(html)  # a page that isn't a person's stops the run here, not later
-        if store is not None:
-            store.save(
-                f"people/{month}/{doc}.html", html, parse.detail_url(people[doc]["detail_id"])
-            )
-        fetched += 1
+    while people.read_one():
+        pass
+    if people.todo and not stopped:
+        stopped = f"read {people.read} people's pages this run; {len(people.todo)} left"
+    fetched = people.read
+    people = people.found
 
     out, missing = Found(), 0
     for doc, row in sorted(people.items(), key=lambda x: int(x[0])):
