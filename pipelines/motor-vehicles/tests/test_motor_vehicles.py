@@ -2,12 +2,23 @@
 Aurora and Oglala Lakota; checked by hand), the statistics page's listing, and a build."""
 
 import json
+import sys
 from pathlib import Path
 
-import build
-import fetch
-import parse
 import pytest
+
+# The pipeline's scripts import each other as top-level modules (they run as scripts), and
+# other pipelines have scripts by the same names (build.py, parse.py), so this pipeline's
+# folder goes first on the path and any same-named modules already imported are set aside
+# before importing its own (each test module keeps the ones it imported).
+_HERE = str(Path(__file__).resolve().parents[1])
+sys.path.insert(0, _HERE)
+for _name in ("build", "parse", "fetch"):
+    sys.modules.pop(_name, None)
+
+import build  # noqa: E402
+import fetch  # noqa: E402
+import parse  # noqa: E402
 
 FIXTURES = Path(__file__).parent / "fixtures"
 Y2026 = (FIXTURES / "2026-sample.pdf").read_bytes()

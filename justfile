@@ -74,6 +74,11 @@ publish-lobbyists:
     {{manage}} export_lobbyists
     gh release upload lobbyists-data app/media/exports/lobbyists/*.csv --clobber
 
+# Property tax levies: fetch the Department of Revenue's recaps and PT-74 files, build the tables
+property-tax:
+    uv run python pipelines/property-tax/fetch.py
+    uv run python pipelines/property-tax/build.py
+
 # Build the motor vehicle tables and replace them on their GitHub release
 publish-motor-vehicles: motor-vehicles
     cd .cache/motor-vehicles/build && for f in annual.csv annual.parquet monthly.csv monthly.parquet; do cp "$f" "motor-vehicles-$f"; done

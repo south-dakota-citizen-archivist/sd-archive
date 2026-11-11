@@ -20,6 +20,7 @@ GEOGRAPHIES = {
     "sldl",
     "sldu",
     "precinct",
+    "taxing_district",  # townships and special districts (fire, road, water…), by name and ID
 }
 ENTITIES = {"person", "organization", "government", "property"}
 PLACE_LINKS = {
