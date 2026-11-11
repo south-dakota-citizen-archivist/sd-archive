@@ -30,7 +30,7 @@ from datetime import date
 
 from entities.mentions import from_text
 from records.sources import Found, Item, Source
-from records.sources._irs.remote_zip import open_zip
+from records.sources._irs.remote_zip import open_zip, read_member
 from records.sources._places import city_place
 
 from . import parse
@@ -139,7 +139,8 @@ def items(fetcher, today: date | None = None, mirror: bool = True) -> Found:
             archive = open_zip(fetcher, url)
             for o in sorted(here):
                 if store is not None:
-                    _keep(store, o, archive.read(members[o]), f"{url}#{members[o]}", "irs")
+                    xml = read_member(archive, members[o])
+                    _keep(store, o, xml, f"{url}#{members[o]}", "irs")
             todo -= here
         counts[f"{year} not in any zip"] = len(todo)
     if mirror:

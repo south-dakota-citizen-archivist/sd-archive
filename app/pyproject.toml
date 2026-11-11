@@ -13,6 +13,7 @@ dependencies = [
     "django-ninja>=1.4",
     "django-unfold>=0.70",
     "geopandas>=1.2.0",
+    "inflate64>=1.0.4",
     "lxml>=5.3",
     "nodriver>=0.50.99",
     "pillow>=11.0",

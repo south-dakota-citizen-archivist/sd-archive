@@ -1,10 +1,15 @@
 """Members of a zip file on a web server, read with HTTP range requests: the central directory
-from the end of the file, then each wanted member's bytes, without downloading the archive."""
+from the end of the file, then each wanted member's bytes, without downloading the archive.
+read_member() also reads Deflate64 members (compression method 9, which Python's zipfile
+can't), as some of the IRS's archives use."""
 
 from __future__ import annotations
 
 import io
+import struct
 import zipfile
+
+DEFLATE64 = 9
 
 
 class RangeFile(io.RawIOBase):
@@ -69,3 +74,23 @@ class RangeFile(io.RawIOBase):
 
 def open_zip(fetcher, url: str) -> zipfile.ZipFile:
     return zipfile.ZipFile(io.BufferedReader(RangeFile(fetcher, url), buffer_size=64 * 1024))
+
+
+def read_member(archive: zipfile.ZipFile, name: str) -> bytes:
+    """A member's bytes, whatever its compression (Deflate64 included)."""
+    info = archive.getinfo(name)
+    if info.compress_type != DEFLATE64:
+        return archive.read(name)
+    import inflate64
+
+    fp = archive.fp
+    fp.seek(info.header_offset)
+    header = fp.read(30)
+    if header[:4] != b"PK\x03\x04":
+        raise zipfile.BadZipFile(f"{name}: no local file header")
+    name_len, extra_len = struct.unpack("<HH", header[26:30])
+    fp.seek(info.header_offset + 30 + name_len + extra_len)
+    data = inflate64.Inflater().inflate(fp.read(info.compress_size))
+    if zipfile.crc32(data) != info.CRC:
+        raise zipfile.BadZipFile(f"{name}: CRC doesn't match")
+    return data

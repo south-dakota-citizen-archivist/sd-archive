@@ -164,3 +164,29 @@ def test_run(db, sd_places, tmp_path):
     before = fetcher.ranges
     run = run_source("irs-990-returns", fetcher=fetcher)
     assert run.unchanged == 4 and fetcher.ranges == before and fetcher.mirror_files == 1
+
+
+def deflate64_zip(name: str, data: bytes) -> bytes:
+    """A one-member zip whose member is Deflate64 (method 9), as some IRS archives are."""
+    import struct
+    import zlib
+
+    import inflate64
+
+    deflater = inflate64.Deflater()
+    packed = deflater.deflate(data) + deflater.flush()
+    crc, fname = zlib.crc32(data), name.encode()
+    local = struct.pack("<4sHHHHHIIIHH", b"PK\x03\x04", 21, 0, 9, 0, 0, crc, len(packed),
+                        len(data), len(fname), 0) + fname + packed  # fmt: skip
+    central = struct.pack("<4sHHHHHHIIIHHHHHII", b"PK\x01\x02", 21, 21, 0, 9, 0, 0, crc,
+                          len(packed), len(data), len(fname), 0, 0, 0, 0, 0, 0) + fname  # fmt: skip
+    end = struct.pack("<4sHHHHIIH", b"PK\x05\x06", 0, 0, 1, 1, len(central), len(local), 0)
+    return local + central + end
+
+
+def test_a_deflate64_member():
+    from records.sources._irs.remote_zip import read_member
+
+    archive = zipfile.ZipFile(io.BytesIO(deflate64_zip("x/1_public.xml", F990)))
+    assert archive.getinfo("x/1_public.xml").compress_type == 9
+    assert read_member(archive, "x/1_public.xml") == F990
