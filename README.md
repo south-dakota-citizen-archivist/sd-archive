@@ -2,6 +2,8 @@
 
 Tools for obtaining, processing and publishing South Dakota public records: shared Python packages, data pipelines, a catalog of datasets, and a local Django app for South Dakota's public GIS data.
 
+_Built with Claude_
+
 ## Layout
 
 ```
