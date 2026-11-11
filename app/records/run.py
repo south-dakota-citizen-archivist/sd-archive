@@ -36,6 +36,7 @@ def run_source(slug: str, *, job: Job | None = None, fetcher=None, force: bool =
             # the source stopped partway (a block, a daily budget): keep what it found, and
             # since it didn't see everything, mark nothing as gone
             items, complete, stopped = list(stop.items), False, stop.reason
+            own_checks = stop.checks
         run.fetched_count = len(items)
         run.content_hash = ingest.run_hash(items)
         run.checks = dict(own_checks)

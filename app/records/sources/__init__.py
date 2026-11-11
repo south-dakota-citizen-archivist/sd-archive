@@ -80,6 +80,7 @@ class Stopped(Exception):  # noqa: N818 (a signal, not an error)
 
     def __init__(self, items: Iterable[Item], reason: str):
         super().__init__(reason)
+        self.checks = dict(getattr(items, "checks", None) or {})  # a Found's own checks
         self.items, self.reason = list(items), reason
 
 

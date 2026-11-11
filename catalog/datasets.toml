@@ -399,6 +399,17 @@ place_link = "geometry"
 source = "county and regional ArcGIS servers"
 
 [[dataset]]
+id = "beacon-parcels"
+name = "County parcels from Beacon (shape, owners, valuation)"
+project = "sd-archive"
+grain = "records"
+coverage = ["0500000US46081"]
+unit = "parcel"
+entities = ["person", "organization", "government", "property"]
+place_link = "geometry"
+source = "county Beacon apps (beacon.schneidercorp.com)"
+
+[[dataset]]
 id = "gis-census"
 name = "Census of public GIS datasets"
 project = "sd-archive/app (gis)"

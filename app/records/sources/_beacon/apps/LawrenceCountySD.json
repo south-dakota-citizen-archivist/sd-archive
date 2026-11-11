@@ -1,0 +1,357 @@
+{
+  "map": {
+    "app_id": 1225,
+    "layer_id": 37418,
+    "layer": "Parcels",
+    "key_field": "PARCEL_ID",
+    "srid": 102734,
+    "units": "ft",
+    "extent": {
+      "minx": 876975.0845965616,
+      "miny": 122595.58092218226,
+      "maxx": 1091517.1923530526,
+      "maxy": 313531.1137151759
+    },
+    "report_url": "/Application.aspx?AppID=1225&LayerID=37418&PageTypeID=4&PageID=14291&KeyValue={0}",
+    "layers": [
+      {
+        "group": "Base Data",
+        "name": "Address Points",
+        "layer_id": 38407,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "Parcel Legal",
+        "layer_id": 40742,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "Parcels",
+        "layer_id": 37418,
+        "key": "PARCEL_ID"
+      },
+      {
+        "group": "Base Data",
+        "name": "Parcel Numbers",
+        "layer_id": 38417,
+        "key": ""
+      },
+      {
+        "group": "Base Data",
+        "name": "Parcel Legal Labels",
+        "layer_id": 38466,
+        "key": ""
+      },
+      {
+        "group": "Base Data",
+        "name": "Qtr Qtr Sections",
+        "layer_id": 38462,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "Sections",
+        "layer_id": 38412,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "Mineral Surveys",
+        "layer_id": 38469,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "Roads",
+        "layer_id": 38408,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "ROW",
+        "layer_id": 38406,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "Vacated ROW",
+        "layer_id": 38461,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "USA Major Highways",
+        "layer_id": 38398,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "Railroads",
+        "layer_id": 38400,
+        "key": ""
+      },
+      {
+        "group": "Base Data",
+        "name": "Lakes",
+        "layer_id": 38401,
+        "key": ""
+      },
+      {
+        "group": "Base Data",
+        "name": "Streams and Rivers",
+        "layer_id": 38399,
+        "key": ""
+      },
+      {
+        "group": "Base Data",
+        "name": "Wetlands",
+        "layer_id": 38402,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "NBHD",
+        "layer_id": 38468,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "US GOVT LAND",
+        "layer_id": 40141,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Base Data",
+        "name": "Zip Codes",
+        "layer_id": 38464,
+        "key": ""
+      },
+      {
+        "group": "Base Data",
+        "name": "Contours 5m",
+        "layer_id": 38419,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "NRCS Soils",
+        "layer_id": 38465,
+        "key": "FID"
+      },
+      {
+        "group": "Base Data",
+        "name": "County Outlines",
+        "layer_id": 38420,
+        "key": ""
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "Zoning",
+        "layer_id": 38418,
+        "key": "FID"
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "Fire Plan",
+        "layer_id": 38471,
+        "key": "FID"
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "Central City Zoning",
+        "layer_id": 38944,
+        "key": "FID"
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "Deadwood Zoning",
+        "layer_id": 38472,
+        "key": "FID"
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "Lead Zoning",
+        "layer_id": 38405,
+        "key": "FID"
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "Spearfish Zoning",
+        "layer_id": 38404,
+        "key": "FID"
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "Whitewood Zoning",
+        "layer_id": 38403,
+        "key": "FID"
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "Mine Permit Boundary",
+        "layer_id": 42516,
+        "key": ""
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "No Septic",
+        "layer_id": 38467,
+        "key": ""
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "AG Tourism",
+        "layer_id": 45488,
+        "key": "FID"
+      },
+      {
+        "group": "Planning & Zoning",
+        "name": "FEMA 100 Yr Floodzone",
+        "layer_id": 38463,
+        "key": "FID"
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "City Limits",
+        "layer_id": 45890,
+        "key": "FID"
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "Joint Powers Area",
+        "layer_id": 38470,
+        "key": ""
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "CID",
+        "layer_id": 38474,
+        "key": ""
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "Frawley PUD",
+        "layer_id": 51840,
+        "key": ""
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "Arsenic 100PPM",
+        "layer_id": 38475,
+        "key": ""
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "School Districts",
+        "layer_id": 38410,
+        "key": "FID"
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "Fire Districts",
+        "layer_id": 38411,
+        "key": "FID"
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "Sanitary Districts",
+        "layer_id": 38415,
+        "key": "FID"
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "Voting District",
+        "layer_id": 38414,
+        "key": "FID"
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "Road Districts",
+        "layer_id": 38413,
+        "key": "FID"
+      },
+      {
+        "group": "Jurisdiction",
+        "name": "LC_SAR_BNDRY",
+        "layer_id": 46171,
+        "key": "FID"
+      },
+      {
+        "group": "Aerial Imagery",
+        "name": "2024 Aerial Imagery",
+        "layer_id": 42685,
+        "key": ""
+      },
+      {
+        "group": "Aerial Imagery",
+        "name": "2016 Aerial Imagery",
+        "layer_id": 42686,
+        "key": ""
+      }
+    ]
+  },
+  "pages": 31,
+  "sections": {
+    "Summary": {
+      "kind": "fields",
+      "pages": 31,
+      "fields": {
+        "ParcelNumber": 31,
+        "Quick Ref ID": 31,
+        "Property Address": 31,
+        "Brief Tax Description": 31,
+        "Taxing Unit Group": 31,
+        "Lot Size (SF)": 31,
+        "Acreage": 31,
+        "Property Class": 31,
+        "Zoning": 31,
+        "Lot Number": 31,
+        "Block Number": 31,
+        "Subdivision": 31,
+        "S-T-R": 31,
+        "Plat": 31,
+        "Ward": 31,
+        "City Ward": 31
+      }
+    },
+    "Tax Units": {
+      "kind": "rows",
+      "pages": 31,
+      "fields": {
+        "Code": 31,
+        "Description": 31,
+        "Rate": 31
+      }
+    },
+    "Valuation": {
+      "kind": "rows",
+      "pages": 30,
+      "fields": {
+        "Assessed Year": 30,
+        "ApprLandValue": 30,
+        "ApprImprovementValue": 30,
+        "ApprTotalValue": 30
+      }
+    }
+  },
+  "restricted": {
+    "Recent Sales in Area": 31,
+    "Land": 30,
+    "Sales": 28,
+    "Building Permits": 10,
+    "Sketches": 9,
+    "Residential Buildings": 8,
+    "Images": 8,
+    "Other Buildings": 6,
+    "Commercial Buildings": 1
+  },
+  "empty": {},
+  "owners": {
+    "pages": 31,
+    "types": {
+      "": 45
+    }
+  }
+}
