@@ -1,7 +1,11 @@
 """The vendor checkbook as files: one Parquet file per fiscal year of payments as currently
 published (vendor-checkbook-FY2027.parquet, …), and one of the rows the state no longer
 publishes as they were (corrected or withdrawn: vendor-checkbook-dropped.parquet), so a year's
-file sums to what the state shows."""
+file sums to what the state shows.
+
+Only years checked against one of the state's own files are written. Earlier years come from
+a copy that merged every day's version of a row, so their totals can't be confirmed; they stay
+in the archive, unpublished, until the state's final files for them are in hand."""
 
 from collections import defaultdict
 from decimal import Decimal
@@ -51,7 +55,10 @@ class Command(BaseCommand):
         out = Path(out)
         out.mkdir(parents=True, exist_ok=True)
         years, dropped = defaultdict(list), []
-        qs = Record.objects.filter(recordset__slug="vendor-checkbook").order_by("key")
+        payments = Record.objects.filter(recordset__slug="vendor-checkbook")
+        checked = set(payments.exclude(source_url__startswith="file:")
+                      .values_list("data__fiscal_year", flat=True).distinct())  # fmt: skip
+        qs = payments.filter(data__fiscal_year__in=checked).order_by("key")
         for key, data, first_seen, dropped_at in qs.values_list(
             "key", "data", "first_seen", "dropped_at"
         ).iterator(chunk_size=20000):

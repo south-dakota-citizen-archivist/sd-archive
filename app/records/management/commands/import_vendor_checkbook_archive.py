@@ -57,13 +57,17 @@ class Command(BaseCommand):
                         "ap_payment_date": r["ap_payment_date"],
                         "voucher_number": r["voucher_number"], "amount": parse.amount(r["amt"]),
                     }  # fmt: skip
+                    # The earlier archive kept no exact repeats, so a repeat here is the same
+                    # row written differently (spacing, amount format): one record
                     base = parse.key(row)
+                    if seen[base]:
+                        continue
                     seen[base] += 1
                     data = {**row, "agency_name": r["agency_name"] or None,
                             "fiscal_year": parse.fiscal_year(row["ap_payment_date"])}  # fmt: skip
                     if row["agency"] == "03":
                         data["agency_note"] = AGENCY_03
-                    items.append(Item(key=parse.key(row, seen[base]), data=data,
+                    items.append(Item(key=base, data=data,
                                       source_url=f"file:{path.name}", places=[STATE]))  # fmt: skip
         current = set(recordset.records.values_list("key", flat=True))
         new = [i for i in items if i.key not in current]

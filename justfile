@@ -64,6 +64,11 @@ scrape *args:
 documents *args:
     caffeinate -i {{manage}} documents {{args}}
 
+# Write the vendor checkbook's Parquet files and replace them on its GitHub release
+publish-vendor-checkbook:
+    {{manage}} export_vendor_checkbook
+    gh release upload vendor-checkbook-data app/media/exports/vendor-checkbook/*.parquet --clobber
+
 # Rebuild Tailwind CSS while editing templates
 css:
     npm run dev --prefix app

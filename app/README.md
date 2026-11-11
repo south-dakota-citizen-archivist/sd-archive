@@ -66,6 +66,7 @@ just harvest                   # harvest every watched dataset (or: just harvest
 just scrape <slug>             # run a record set's source (--force past the drop guard)
 just documents <slug>          # fetch, read, categorize and extract its documents (--steps, --limit, --model)
 just manage retry_documents    # send failed documents back to the step they failed at (--recordset, --dry-run)
+just publish-vendor-checkbook       # the vendor checkbook as Parquet files per fiscal year, on its GitHub release
 just manage compare_source <slug>  # what a run would change, compared with the stored records
 just manage adopt_legacy <slug>    # before a source's first run: give imported records its keys (--dry-run)
 just manage import_prl_snapshots <slug>  # an earlier system's snapshots of items it no longer kept, as dropped records
