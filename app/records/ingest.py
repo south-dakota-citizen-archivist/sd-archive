@@ -73,7 +73,8 @@ def _geometry(item: Item):
 
 
 @transaction.atomic
-def store(run: Run, items: Iterable[Item], *, complete: bool = True) -> Stored:
+def store(run: Run, items: Iterable[Item], *, complete: bool = True,
+          covers=None) -> Stored:  # fmt: skip
     """Store a run's items in its record set. Identical keys collapse to the last one."""
     recordset = run.recordset
     incoming = {i.key: i for i in items}
@@ -92,7 +93,13 @@ def store(run: Run, items: Iterable[Item], *, complete: bool = True) -> Stored:
         if k in current and (current[k][1] != incoming[k].content_hash or current[k][2])
     ]
     out.removed = (
-        [k for k in current if k not in incoming and current[k][2] is None] if complete else []
+        [
+            k
+            for k in current
+            if k not in incoming and current[k][2] is None and (covers is None or covers(k))
+        ]
+        if complete
+        else []
     )
     out.unchanged = len(incoming) - len(out.added) - len(out.changed)
 

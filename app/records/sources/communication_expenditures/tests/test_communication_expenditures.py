@@ -68,6 +68,23 @@ def test_a_short_read_fails():
         list(_sdcfr.grid(Short(), source.SEARCH, source.GRID, source.COLUMNS))
 
 
+def test_paging_that_doesnt_advance_fails():
+    class Stuck(FixtureFetcher):
+        def request(self, method, url, data=None, **kwargs):
+            r = super().request("GET", url, data, **kwargs)  # page 1 again, every time
+            return r
+
+    with pytest.raises(LayoutChanged, match="repeats page 1"):
+        list(_sdcfr.grid(Stuck(), source.SEARCH, source.GRID, source.COLUMNS))
+
+
+def test_the_grid_name_comes_from_its_pager():
+    from records.sources._tables import document
+
+    table = document(page("filed-page-1")).cssselect(f"table#{source.GRID}_ctl00")[0]
+    assert _sdcfr._unique_id(table, source.GRID) == "ctl00$MainContent$rgCommExList"
+
+
 def test_run(db, state):
     RecordSet.objects.create(slug="communication-expenditures", name="Communication expenditures",
                              dataset="communication-expenditures", ingest="documents")  # fmt: skip
