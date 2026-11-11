@@ -1,0 +1,433 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://docadultlookup.sd.gov/adult/lookup/details/?id=kPKnHBADcW0%3D
+  response:
+    body:
+      string: "\r\n<!DOCTYPE html>\r\n<html lang=\"en-us\">\r\n<head id=\"Head1\"><meta
+        charset=\"UTF-8\" /><title>\r\n\tOffender Locator :: SD Dept of Corrections\r\n</title><meta
+        http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n    <!--
+        Bootstrap core CSS -->\r\n    <link href=\"/includes/bootstrap/bootstrap.min.css\"
+        rel=\"stylesheet\" /><link rel=\"stylesheet\" type=\"text/css\" href=\"/includes/Default/custom.css\"
+        /><link rel=\"stylesheet\" type=\"text/css\" href=\"/includes/Default/editor.css\"
+        /><link rel=\"stylesheet\" type=\"text/css\" href=\"/includes/custom.default.css\"
+        /><link rel=\"stylesheet\" type=\"text/css\" href=\"/includes/custom.desktop.css\"
+        /><link rel=\"stylesheet\" type=\"text/css\" href=\"/includes/custom.media.css\"
+        /><link rel=\"stylesheet\" type=\"text/css\" href=\"/includes/editor.css\"
+        /><link id=\"active_font\" rel=\"stylesheet\" type=\"text/css\" href=\"Project/Contents/Main/x-small.css\"
+        /><link rel=\"stylesheet\" type=\"text/css\" href=\"/includes/Default/print.css\"
+        media=\"print\" /><link rel=\"stylesheet\" type=\"text/css\" href=\"/includes/print.css\"
+        media=\"print\" />\r\n\r\n    <script src=\"Scripts/jquery/jquery-3.7.1.min.js\"></script>\r\n
+        \   <link rel=\"Shortcut Icon\" href=\"favicon.ico\" />\r\n\r\n    <script
+        language=\"javascript\">\r\n        if (top.frames.length != 0)\r\n            top.location
+        = self.document.location;\r\n    </script>      \r\n\r\n    <link rel=\"stylesheet\"
+        type=\"text/css\" href=\"/includes/css/forms.css\" /><link rel=\"stylesheet\"
+        type=\"text/css\" href=\"/includes/css/offsrch.css\" />\r\n\r\n    <style
+        id=\"antiClickjack\">        \r\n        body {\r\n            display: none
+        !important;\r\n        }\r\n    </style>\r\n    <script type=\"text/javascript\">\r\n
+        \       if (self === top) {\r\n            var antiClickjack = document.getElementById(\"antiClickjack\");\r\n
+        \           antiClickjack.parentNode.removeChild(antiClickjack);\r\n        }\r\n
+        \       else { top.location = self.location;}\r\n    </script>\r\n\r\n\t<meta
+        http-equiv=\"X-UA-Compatible\" content=\"IE=Edge,chrome=1\" />\r\n\t<!--meta
+        http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"-->\r\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js\"
+        type=\"text/javascript\"></script>\r\n\t<script src=\"https://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js\"></script>\r\n
+        \   \r\n\t<script type=\"text/javascript\">\r\n\t\tfunction capitalizeEachWord(str)
+        {\r\n\t\t   \t\treturn str.replace(/\\w\\S*/g, function(txt) {\r\n        \t\t\treturn
+        txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();\r\n\t\t\t});\r\n\t\t}\r\n\t\r\n\t\t$(function()
+        {\r\n\t\t\t$('span.helpinfo').hover(function(e) {\r\n\t\t\t\tvar test = this.id;\r\n\t\t\t\tvar
+        title = this.title;\r\n\t\t\t\tvar descr = \"\";\r\n\t\t\t\tvar pos = \"\";\r\n\t\t\t\t\r\n\t\t\t\tswitch(test){\r\n\t\t\t\t\tcase
+        'help':\r\n\t\t\t\t\t\ttitle = capitalizeEachWord($(\"#lblHelp\").text());\r\n\t\t\t\t\t\tdescr
+        = '<p>Rolling over these icons will supply additional explination of the area.</p>';\r\n\t\t\t\t\t\tbreak;\t\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\tcase
+        'demogr':\r\n\t\t\t\t\t\ttitle = $(\"#lblDemoL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Demographics are updated in accordance with DOC policy. Information
+        includes last known demographics for the offender. Demographics of offenders
+        who discharge are not updated.</p>';\r\n\t\t\t\t\t\tbreak;\t\t\t\t\t\t\r\n\t\t\t\t\tcase
+        'alias':\r\n\t\t\t\t\t\ttitle = $(\"#lblAliasL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Additional names this person has gone by.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'docid':\r\n\t\t\t\t\t\ttitle = $(\"#lblDocIdL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Used to identify this person within the correctional system.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'curloc':\r\n\t\t\t\t\t\ttitle = $(\"#lblCurrLocL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>The location where this person is currently housed.</p>'\r\n\t\t\t\t\t\tdescr
+        += '<p><span class=\"type\">Virtual Facility (SD Offender elsewhere)</span>
+        - Offenders who display a facility of this are South Dakota inmates housed
+        in another state or jurisdiction.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'parolefld':\r\n\t\t\t\t\t\ttitle = $(\"#lblParoleFldL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Office location of this person&#39;s parole agent.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'corrstat':\r\n\t\t\t\t\t\ttitle = $(\"#lblCorrStatL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>This is the current status of the person, which may be one of the following:</p>';\r\n\t\t\t\t\t\tdescr
+        += '<p><span class=\"type\">Active Inmate</span> - Currently housed in a correctional
+        facility.</p>';\r\n\t\t\t\t\t\tdescr += '<p><span class=\"type\">Active Parole</span>
+        - Currently on parole supervision, which may include the community transition
+        program, extended detainment, detainment, or extended confinement</p>';\r\n\t\t\t\t\t\tdescr
+        += '<p><span class=\"type\">Completed Sentence</span> - The person has completed
+        their sentence(s) and is not in prison or on parole.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'adtl':\r\n\t\t\t\t\t\ttitle = $(\"#lblAdtlL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Additional information about this person and displays the status of
+        an offender.</p>'\r\n\t\t\t\t\t\tdescr += '<p><span class=\"type\">Attempt
+        to Locate (ATL)</span> - issued to law enforcement when offenders on parole
+        supervision whereabouts are unknown and efforts are underway to determine
+        if offender has absconded.</p>'\r\n\t\t\t\t\t\tdescr += '<p><span class=\"type\">Absconders</span>
+        - indicate offenders on parole supervision whose whereabouts are unknown.</p>'\r\n\t\t\t\t\t\tdescr
+        += '<p><span class=\"type\">Escape</span> - statuses are displayed depending
+        on the type of escape from prison.</p>'\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'discharge':\r\n\t\t\t\t\t    title = $(\"#lblDischarge\").text();\r\n\t\t\t\t\t
+        \   //descr = '<p>The date this person completed their sentence(s). If discharged,
+        this person is not in prison or on parole.</p>';\r\n                        //
+        Change made 12/12/2016 (Dan Roggenbuck):  Verbiage altered as requested by
+        DOC (Ticket #01738028)\r\n\t\t\t\t\t    descr = '<p>The date this person completed
+        their sentence(s). If discharged, this person is not in prison or on parole
+        unless they are on escape or absconding status.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\tcase
+        'conv':\r\n\t\t\t\t\t\ttitle = $(\"#lblCurConv\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>A listing of all current convictions.</p>';\r\n\t\t\t\t\t\tbreak;\t\r\n\t\t\t\t\tcase
+        'transno':\r\n\t\t\t\t\t\ttitle = $(\"#rptTrans_lblTransNoL_0\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>SD DOC number associated to each conviction.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t\r\n\t\t\t\t\tcase
+        'sentdate':\r\n\t\t\t\t\t\ttitle = $(\"#rptTrans_rptTransChild_0_lblSentDateL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Date sentenced on conviction.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'sentco':\r\n\t\t\t\t\t\ttitle = $(\"#rptTrans_rptTransChild_0_lblSentCoL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>County of conviction.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'crime':\r\n\t\t\t\t\t\ttitle = $(\"#rptTrans_rptTransChild_0_lblSentLenL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Crime of conviction.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase 'sentlen':\r\n\t\t\t\t\t\ttitle
+        = $(\"#rptTrans_rptTransChild_0_lblSentCrimeL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Length of sentence on conviction.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'sentadj':\r\n\t\t\t\t\t\ttitle = $(\"#rptTrans_rptTransChild_0_lblSentAdjL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Sentence adjustment from court.</p>'\r\n\t\t\t\t\t\tdescr += '<p><span
+        class=\"type\">Suspended</span> - The amount of time that the sentence is
+        suspended.</p>';\r\n\t\t\t\t\t\t//descr += '<p><span class=\"type\">Life</span>
+        - </p>';\r\n\t\t\t\t\t\t//descr += '<p><span class=\"type\">Death</span> -
+        </p>';\r\n\t\t\t\t\t\tpos = \"back\"\t\t\t\t\t\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\tcase
+        'bookkey':\r\n\t\t\t\t\t\ttitle = $(\"#lblBookKey\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Summary of dates from all convictions.</p>';\r\n\t\t\t\t\t\tbreak;\t\r\n\t\t\t\t\tcase
+        'inpd':\r\n\t\t\t\t\t\ttitle = $(\"#rptKey_lblINPDL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Earliest release date to parole supervision for new system offenders.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'nrd':\r\n\t\t\t\t\t\ttitle = $(\"#rptKey_lblNRDL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Date of next Board of Pardon and Parole hearing.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'gtrd':\r\n\t\t\t\t\t\ttitle = $(\"#rptKey_lblGTRDL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Earliest release date to parole supervision for old system offenders.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'agtrd':\r\n\t\t\t\t\t\ttitle = $(\"#rptKey_lblAGTRDL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Adjusted earliest release date to parole supervision for old system
+        offenders.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase 'ssrd':\r\n\t\t\t\t\t\ttitle
+        = $(\"#rptKey_lblSSRDL\").text();\r\n\t\t\t\t\t\tdescr = '<p>Date of completion
+        of the term of imprisonment and only applies to inmates with suspended sentences.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\tcase
+        'ted':\r\n\t\t\t\t\t\ttitle = $(\"#rptKey_lblTEDL\").text();\r\n\t\t\t\t\t\tdescr
+        = '<p>Date the term is completed. This represents end of term of parole or
+        if not on parole, end of sentence and release from prison.</p>';\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t}\r\n\t\t\t\t\r\n\t\t\t\tvar
+        html = '<div id=\"pinfo\">';\r\n\t\t\t\thtml += \t'\t<h4>' + title + '</h4>';\r\n\t\t\t\thtml
+        +=\t\t'\t' + descr + ''; \r\n\t\t\t\thtml +=\t \t'</div>';\r\n\t\t\t\t\r\n\t\t\t\t$('body').append(html).children('#pinfo').hide().fadeIn(400);\r\n\t\t\t\t$('#pinfo').css('top',
+        e.pageY + 0).css('left', e.pageX + 20); //-255\r\n\t\t\t\t\r\n\t\t\t\t//$('body').append(html).children('#pinfo').hide().fadeIn(400);\r\n\t\t\t\t//$('#pinfol').css('top',
+        e.pageY + -20).css('left', e.pageX + 50);\r\n\t\t\t\t\t\r\n\t\t\t}, function()
+        {\r\n\t\t\t\t$('#pinfo').remove();\r\n\t\t\t\t$(this).attr('title', descr);\r\n\t\t\t});\r\n\r\n\t\t\t$('span').mousemove(function(e)
+        {\r\n\t\t\t\t\r\n\t\t\t});\t\t\t\r\n\t\t});\r\n\t\t\r\n\t</script>\r\n    \r\n<!--[if
+        lt IE 7 ]> <html class=\"ie6 ielt9\"> <![endif]-->\r\n<!--[if IE 7 ]>    <html
+        class=\"ie7 ielt9\"> <![endif]-->\r\n<!--[if IE 8 ]>    <html class=\"ie8
+        ielt9\"> <![endif]-->\r\n<!--[if IE 9 ]>    <html class=\"ie9\"> <![endif]-->\r\n<!--[if
+        (gt IE 9)|!(IE)]><!--> <html class=\"\"> <!--<![endif]-->\r\n\r\n    <style
+        type=\"text/css\">\r\n\t\t#guide #container #main #col_m #pnlCurrConv .sec
+        .tbl\t\t{ display: table; width: 640px; border: 1px solid #333; border-width:
+        1px 0 0 1px; }\r\n\t\t.tblhead\t{ display: table-header-group; border: 0px
+        solid #F00; }\r\n\t\t.tblhead\t{ text-align: center; }\r\n\t\t.tblrow\t\t{
+        display: table-row; }\r\n\t\t.tblcell\t{ display: table-cell; padding: 2px;
+        border: 1px solid #333; border-width: 0 1px 1px 0; }\r\n\t\t\r\n\t\t/*.tblhead
+        .tblcell, .tblrow .tblcell\t\t\t{ float: left; }*/\r\n\t\t\r\n\t\t.sentdate
+        \t\t\t\t\t\t\t{ width: 12%; }\r\n\t\t.sentco \t\t\t\t\t\t\t{ width: 15%; }\r\n\t\t.crime
+        \t\t\t\t\t\t\t\t{ width: 45%; }\r\n\t\t.sentlen \t\t\t\t\t\t\t{ width: 13%;
+        }\r\n\t\t.sentadj \t\t\t\t\t\t\t{ width: 13%; }\r\n\t\t\r\n\t\t.tblrow .sentdate
+        \t\t\t\t\t{ text-align: center; }\r\n\t\t.tblrow .sentco \t\t\t\t\t{ text-align:
+        center; }\r\n\t\t.tblrow .crime \t\t\t\t\t\t{ width: 45%; }\r\n\t\t.tblrow
+        .sentlen \t\t\t\t\t{ text-align: center; }\r\n\t\t.tblrow .sentadj \t\t\t\t\t{
+        text-align: center; }\r\n\t</style>\r\n</head>\r\n\r\n<body class=\"front_end_body
+        \ site_standardsitetemplate\">\r\n    <div class=\"sitewrapper site_template
+        mainSpan_wrapper\" >\r\n        <div class=\"mainArea\" id=\"mainSpan_wrapper_Screen\"
+        ><div id=\"content\" style=\"position: relative; overflow-y:scroll;\" >\r\n\r\n
+        \               \r\n\r\n            <script>\r\n                (function
+        () {\r\n                    if (!window.history || !window.history.replaceState)
+        return;\r\n\r\n                    var cleanUrl = window.location.origin +
+        window.location.pathname;\r\n                    // If you also want to keep
+        hash fragments, append: + window.location.hash\r\n                    window.history.replaceState(null,
+        document.title, cleanUrl);\r\n                })();\r\n</script>\r\n<header
+        id=\"siteheader\" class=\"\" role=\"banner\">\n    <div id=\"skipnav\" role=\"alert\">\r\n
+        \       <a href=\"#pagebody\">Skip to Main Content</a>\r\n    </div>\r\n    <a
+        id=\"home_link\" href=\"https://www.doc.sd.gov/home\">Home</a>\r\n    <a class=\"menu_trigger
+        mobile_only\" href=\"javascript:void(0);\">Menu</a>\n    <div id=\"headercolumn\"
+        class=\"site_template_column  header_column   \">\r\n        <div id=\"top_nav\">\r\n
+        \           <a href=\"https://www.doc.sd.gov/adult-corrections/offender-locator\"
+        target=\"_self\">Offender Locator</a>\r\n            <a href=\"https://www.doc.sd.gov/about-us/careers\"
+        target=\"_self\">Jobs</a>    \r\n        </div>\r\n        <div class=\"search_overlay\"></div>\r\n
+        \       <a href=\"javascript:void(0);\" class=\"search-trigger hidden-xs\">Search</a>\r\n
+        \       <div class=\"top_search\">\r\n            <a class=\"close_search\"
+        href=\"javascript:void(0);\">CLOSE</a>\r\n            <div class=\"search_block\">\r\n
+        \               <div id=\"searchbox\" class=\"clearfix\">\r\n                    <label
+        class=\"visually-hidden\" for=\"search_text\">Search</label>\r\n                    <input
+        title=\"Search...\" id=\"search_text\" placeholder=\"Search...\" type=\"text\">\r\n
+        \                   <a href=\"javascript:void(0);\">Go</a>\r\n                </div>\r\n
+        \           </div>\r\n        </div>\r\n        <script>\r\n            $(function
+        () {\r\n\r\n                $(\"#searchbox input\").keydown(function (e) {\r\n
+        \                   if (e.keyCode == 13) {\r\n                        $(\"#searchbox
+        a\").click();\r\n                    }\r\n                });\r\n                $(\"#searchbox
+        a\").click(function () {\r\n                    var keyWord = $(\"#searchbox
+        input#search_text\").val();\r\n                    if (keyWord.length <= 0)
+        { return false; }\r\n                    keyWord = keyWord.replace(/^\\s\\s*/,
+        '').replace(/\\s\\s*$/, '');\r\n                    keyWord = encodeURIComponent(keyWord.replace(\"<\",
+        \" \").replace(\">\", \" \"));\r\n                    var link = '/SDDOCSD6/about-us/search';\r\n
+        \                   if (link.indexOf(\"?\") >= 0)\r\n                        link
+        = link + \"&q=\" + keyWord;\r\n                    else\r\n                        link
+        = link + \"?q=\" + keyWord;\r\n                    if ('False' == 'True')
+        {\r\n                        window.top.location.href = link;\r\n                        return
+        false;\r\n                    } else {\r\n                        window.location.href
+        = link;\r\n                    }\r\n                });\r\n            });\r\n
+        \       </script>\r\n    </div>\n</header>\n<div class=\"onecolumnlayout clearfix\"
+        id=\"sitebody\">\r\n    <div id=\"ColumnUserControl1\" class=\"column sortable_col
+        column top_col  clearfix\">\r\n        <div class=\" main_menu_widget\">\r\n
+        \           <link rel=\"stylesheet\" type=\"text/css\" href=\"/includes/Default/dropdownmegamenu.css\">\r\n
+        \           <link rel=\"stylesheet\" type=\"text/css\" href=\"/includes/dropdownmegamenu.css\">\r\n
+        \           <nav id=\"menuContainer_1_0_15\" class=\"regularmegamenu mainnav\">\r\n
+        \               <ul class=\"dropdownmenu clearfix\">\r\n                    <li
+        id=\"dropdownrootitem1\" class='megamenu_first'><a class='dropdownrootitem1'
+        href='https://www.doc.sd.gov/home' title=\"Home\" data-navid=\"1\" target=\"_self\">Home</a></li>\r\n
+        \                   <li id=\"dropdownrootitem2\" class='megamenu_first'>\r\n
+        \                       <a class='dropdownrootitem2' href='https://www.doc.sd.gov/about-us'
+        title=\"About Us\" data-navid=\"2\" target=\"_self\">About Us</a>\r\n                    </li>\r\n
+        \                   <li id=\"dropdownrootitem3\" class='megamenu_first'>\r\n
+        \                       <a class='dropdownrootitem3' href='https://www.doc.sd.gov/adult-corrections'
+        title=\"Adult Corrections\" data-navid=\"3\" target=\"_self\">Adult Corrections</a>\r\n
+        \                   </li>\r\n                    <li id=\"dropdownrootitem4\"
+        class='megamenu_first'>\r\n                        <a class='dropdownrootitem4'
+        href='https://www.doc.sd.gov/safer-sd-reentry-initiative' title=\"SAFER SD
+        Reentry Initiative\" data-navid=\"17\" target=\"_self\">SAFER SD Reentry Initiative</a>\r\n
+        \                   </li>\r\n                    <li id=\"dropdownrootitem5\"
+        class='megamenu_first'>\r\n                        <a class='dropdownrootitem5'
+        href='https://www.doc.sd.gov/pheasantland-industries' title=\"Pheasantland
+        Industries\" data-navid=\"4\" target=\"_self\">Pheasantland Industries</a>\r\n
+        \                   </li>\r\n                    <li id=\"dropdownrootitem6\"
+        class='megamenu_first'>\r\n                        <a class='dropdownrootitem6'
+        href='https://www.doc.sd.gov/juvenile-corrections' title=\"Juvenile Corrections\"
+        data-navid=\"5\" target=\"_self\">Juvenile Corrections</a>\r\n                    </li>\r\n
+        \               </ul>\r\n            </nav>\r\n        </div>\r\n        <a
+        id=\"pagebody\"></a>\r\n<header class=\"title_widget clearfix  \">\r\n    <h1><span>ADULT
+        CORRECTIONS</span></h1>\r\n</header>\r\n\r\n<script type=\"text/javascript\">\r\n
+        \   $(function () {\r\n        var widgetContext = \"widget_297_0_161\";\r\n
+        \       $(\"#\" + widgetContext + \" #share\").click(function () {\r\n            if
+        (!$(\"#\" + widgetContext + \" div#share\").hasClass(\"click-active\"))\r\n
+        \               $(\"#\" + widgetContext + \" div#share\").find(\"ul\").show();\r\n
+        \           else\r\n                $(\"#\" + widgetContext + \" div#share\").find(\"ul\").hide();\r\n
+        \       });\r\n        $(\"div\").click(function () {\r\n            if ($(\"#\"
+        + widgetContext + \" div#share\").hasClass(\"click-active\")) {\r\n                $(\"#\"
+        + widgetContext + \" div#share\").find(\"ul\").hide();\r\n            }\r\n
+        \       });\r\n        $(document).click(function (e) {\r\n            if
+        (!$(e.target).closest(\"#share\").length > 0) {\r\n                $(\"#\"
+        + widgetContext + \" div#share\").removeClass(\"click-active\");\r\n                $(\"#\"
+        + widgetContext + \" div#share\").find(\"ul\").hide();\r\n            }\r\n
+        \       });\r\n        var shareContainerTimeout = null;\r\n        $(\"#\"
+        + widgetContext + \" #share\").bind('mouseover', function () {\r\n            //If
+        not relate to click event\r\n            if (shareContainerTimeout) {\r\n
+        \               clearTimeout(shareContainerTimeout);\r\n                shareContainerTimeout
+        = null;\r\n            }\r\n            shareContainerTimeout = setTimeout(function
+        () {\r\n                if (!$(\"#\" + widgetContext + \" div#share\").hasClass(\"click-active\"))\r\n
+        \                   $(\"#\" + widgetContext + \" div#share\").find(\"ul\").show();\r\n
+        \           }, 100);\r\n        });\r\n        $(\"#\" + widgetContext + \"
+        #share\").bind('mouseleave', function () {\r\n            //If not relate
+        to click event     \r\n            if (shareContainerTimeout) {\r\n                clearTimeout(shareContainerTimeout);\r\n
+        \               shareContainerTimeout = null;\r\n            }\r\n            shareContainerTimeout
+        = setTimeout(function () {\r\n                if (!$(\"#\" + widgetContext
+        + \" div#share\").hasClass(\"click-active\"))\r\n                    $(\"#\"
+        + widgetContext + \" div#share\").find(\"ul\").hide();\r\n            }, 200);\r\n
+        \       });\r\n        $(\"header#\" + widgetContext + \" a.feedback_link\").click(function
+        () {\r\n            var windowHeight = 485;\r\n            if (window.innerWidth
+        <= 648) {\r\n                windowHeight = 545;\r\n            }\r\n            var
+        opts = {\r\n                title: \"Feedback\",\r\n                url: \"/VADEQVA6/Template/GetFeedbackPartial?feedbackUrl=https%3a%2f%2fdev8.visioninternet.com%2fVADEQVA6%2fget-involved%2fthe-environment-and-you%2f-fsiteid-1%3floadingmode%3dPreviewContent\",\r\n
+        \               useFrame: true,\r\n                height: windowHeight,\r\n
+        \               onClosed: function (result) {\r\n                    if (result
+        != undefined && result.IsOk == true) {\r\n                        $.refreshTempMessage(result.Message);\r\n
+        \                   }\r\n                },\r\n                skin: 'viClientDialog
+        feedback_lightbox',\r\n                fixed: false\r\n            };\r\n
+        \           $.viClientDialog(opts).open();\r\n        });\r\n        //Safari
+        iOS: No click event\r\n        $(\"header#\" + widgetContext + \" a.send_share_email\").bind(\"click
+        touchstart\", function () {\r\n            var shareEmailTitle = document.itemTitle
+        ? encodeURIComponent(document.itemTitle.trim()).replace(/[!'()*]/g, escape)
+        : \"The+Environment+and+You\";\r\n            var opts = {\r\n                title:
+        \"Click to submit an email online\",\r\n                url: \"/VADEQVA6/Template/GetShareEmailPartial?shareUrl=https%3a%2f%2fdev8.visioninternet.com%2fVADEQVA6%2fget-involved%2fthe-environment-and-you%2f-fsiteid-1%3floadingmode%3dPreviewContent\"
+        + \"&shareTitle=\" + shareEmailTitle,\r\n                useFrame: true,\r\n
+        \               height: 485,\r\n                onClosed: function (result)
+        {\r\n                    if (result != undefined && result.IsOk == true) {\r\n
+        \                       $.refreshTempMessage(result.Message);\r\n                    }\r\n
+        \               },\r\n                skin: 'viClientDialog send_share_email_lightbox',\r\n
+        \               fixed: false\r\n            };\r\n            $.viClientDialog(opts).open();\r\n
+        \       });\r\n    });\r\n</script>\r\n\r\n\r\n<h1>Adult Corrections</h1>\r\n<h2>Offender
+        Locator</h2>\r\n<form method=\"post\" action=\"./?id=kPKnHBADcW0%3d\" id=\"frmInmate\">\r\n<div
+        class=\"aspNetHidden\">\r\n<input type=\"hidden\" name=\"__VIEWSTATE\" id=\"__VIEWSTATE\"
+        value=\"/wEPDwUKLTk5MDI3NzUzMA9kFgICAw9kFgICAw9kFiACAw8PFgIeBFRleHQFFFF1YWtlbmJ1c2gsIERhdmlkIE0uZGQCCQ8PFgIfAAUCMzlkZAINDw8WAh8ABQVXaGl0ZWRkAhEPDxYCHwAFBE1hbGVkZAIVDw8WAh8ABQVCbGFja2RkAhkPDxYCHwAFBUhhemVsZGQCHQ8PFgIfAAUFNicgMCJkZAIhDw8WAh8ABQgxNjAgbGJzLmRkAiUPDxYCHwAFFFF1YWtlbmJ1c2gsICBEYXZpZCBNZGQCKQ8PFgIfAAUFMjUyODdkZAItDw8WAh8ABQdPdXRzaWRlZGQCLw8PFgIfAAUBIGRkAjMPDxYCHwAFAk5BZGQCNw8PFgIfAAUSQ29tcGxldGVkIFNlbnRlbmNlZGQCOw8PFgIfAAUCTkFkZAI/Dw8WAh8ABQoxMi8xNi8yMDEwZGRkkDElrRv7yffPwAowazVT96WvF5tS+zRlpmom4D7n0ss=\"
+        />\r\n</div>\r\n\r\n<div class=\"aspNetHidden\">\r\n\r\n\t<input type=\"hidden\"
+        name=\"__VIEWSTATEGENERATOR\" id=\"__VIEWSTATEGENERATOR\" value=\"AA03A666\"
+        />\r\n</div>\r\n\r\n\r\n\r\n\r\n<div id=\"pnlInmate\">\r\n\t\r\n\t<div class=\"optl\">\r\n
+        \       <!-- a href=\"/documents/adult/lookup/OffenderLocatorFAQ.pdf\" target=\"_blank\">Offender
+        Locator Frequently Asked Questions</a> <span class=\"note\">PDF</span -->\r\n
+        \       For <span id=\"lblHelp\">more information</span>, mouse over the <span
+        id=\"help\" class=\"helpinfo\"><img src=\"/images/layout/adult/lookup/helpinfo.png\"
+        width=\"12\" height=\"12\" /></span>\r\n    </div>\r\n    \r\n    <div class=\"optr\">\r\n
+        \       <a href=\"javascript: void history.back(-1)\">&lt;&lt; Back to Search
+        Results</a>\r\n    </div>\r\n\r\n    <div id=\"inmate\">\r\n        <div id=\"lcol\"
+        class=\"colfull\">\r\n            \r\n        </div>\r\n        \r\n        <div
+        id=\"comcol\" class=\"bkg\">\r\n            <div id=\"col\" class=\"col hdr\">\r\n
+        \               <h1>\r\n                \t<span id=\"lblMainName\">Quakenbush,
+        David M.</span> <span id=\"lblDemoL\">Demographics</span><span id=\"demogr\"
+        class=\"helpinfo\"><img src=\"/images/layout/adult/lookup/helpinfo.png\" width=\"12\"
+        height=\"12\" /></span></h1>\r\n            </div>\r\n            <div id=\"mcol\">\r\n
+        \           \t<div class=\"rec\">\r\n                    <div class=\"lbox\"><label
+        for=\"lblAge\" id=\"lblAgeL\">Age</label></div>\r\n                    <div
+        class=\"rbox\"><span id=\"lblAge\">39</span></div>\r\n                </div>\r\n
+        \               <div class=\"rec\">\r\n                    <div class=\"lbox\"><label
+        for=\"lblRace\" id=\"lblRaceL\">Race</label></div>\r\n                    <div
+        class=\"rbox\"><span id=\"lblRace\">White</span></div>\r\n                </div>\r\n
+        \               <div class=\"rec\">\r\n                    <div class=\"lbox\"><label
+        for=\"lblGender\" id=\"lblGenderL\">Gender</label></div>\r\n                    <div
+        class=\"rbox\"><span id=\"lblGender\">Male</span></div>\r\n                </div>\r\n
+        \               <div class=\"rec\">\r\n                    <div class=\"lbox\"><label
+        for=\"lblHair\" id=\"lblHairL\">Hair Color</label></div>\r\n                    <div
+        class=\"rbox\"><span id=\"lblHair\">Black</span></div>\r\n                </div>\r\n
+        \               <div class=\"rec\">\r\n                    <div class=\"lbox\"><label
+        for=\"lblEye\" id=\"lblEyeL\">Eye Color</label></div>\r\n                    <div
+        class=\"rbox\"><span id=\"lblEye\">Hazel</span></div>\r\n                </div>\r\n
+        \               <div class=\"rec\">\r\n                    <div class=\"lbox\"><label
+        for=\"lblHeight\" id=\"lblHeightL\">Height</label></div>\r\n                    <div
+        class=\"rbox\"><span id=\"lblHeight\">6' 0\"</span></div>\r\n                </div>\r\n
+        \               <div class=\"rec\">\r\n                    <div class=\"lbox\"><label
+        for=\"lblWeight\" id=\"lblWeightL\">Weight</label></div>\r\n                    <div
+        class=\"rbox\"><span id=\"lblWeight\">160 lbs.</span></div>\r\n                </div>\r\n
+        \           </div>\r\n            \r\n            <div id=\"rcol\">\r\n                <div
+        class=\"rec\">\r\n                    <div class=\"lbox\">\r\n                        <label
+        for=\"lblAlias\" id=\"lblAliasL\">Alias(es)</label>\r\n                        <span
+        id=\"alias\" class=\"helpinfo\"><img src=\"/images/layout/adult/lookup/helpinfo.png\"
+        width=\"12\" height=\"12\" /></span>\r\n                    </div>\r\n                    <div
+        class=\"rbox\"><span id=\"lblAlias\">Quakenbush,  David M</span></div>\r\n
+        \               </div>\r\n                <div class=\"rec\">\r\n                    <div
+        class=\"lbox\">\r\n                        <label for=\"lblDocId\" id=\"lblDocIdL\">DOC
+        Number</label>\r\n                        <span id=\"docid\" class=\"helpinfo\"><img
+        src=\"/images/layout/adult/lookup/helpinfo.png\" width=\"12\" height=\"12\"
+        /></span>\r\n                    </div>\r\n                    <div class=\"rbox\">#<span
+        id=\"lblDocId\">25287</span></div>\r\n                </div>\r\n                <div
+        class=\"rec\">\r\n                    <div class=\"lbox\">\r\n                        <label
+        for=\"lblCurrLoc\" id=\"lblCurrLocL\">Current Facility</label>\r\n                        <span
+        id=\"curloc\" class=\"helpinfo\"><img src=\"/images/layout/adult/lookup/helpinfo.png\"
+        width=\"12\" height=\"12\" /></span>\r\n                    </div>\r\n                    <div
+        class=\"rbox\">\r\n                        <span id=\"lblCurrLoc\">Outside</span><br
+        />\r\n                        <span id=\"lblCurrLocAddr\"> </span>\r\n                    </div>\r\n
+        \               </div>\r\n                <div class=\"rec\">\r\n                    <div
+        class=\"lbox\">\r\n                        <label for=\"lblParoleFld\" id=\"lblParoleFldL\">Parole
+        Office</label>\r\n                        <span id=\"parolefld\" class=\"helpinfo\"><img
+        src=\"/images/layout/adult/lookup/helpinfo.png\" width=\"12\" height=\"12\"
+        /></span>\r\n                    </div>\r\n                    <div class=\"rbox\"><span
+        id=\"lblParoleFld\">NA</span></div>\r\n                </div>\r\n                <div
+        class=\"rec\">\r\n                    <div class=\"lbox\">\r\n                        <label
+        for=\"lblCorrStat\" id=\"lblCorrStatL\">Correctional Status</label>\r\n                        <span
+        id=\"corrstat\" class=\"helpinfo\"><img src=\"/images/layout/adult/lookup/helpinfo.png\"
+        width=\"12\" height=\"12\" /></span>\r\n                    </div>\r\n                    <div
+        class=\"rbox\"><span id=\"lblCorrStat\">Completed Sentence</span></div>\r\n
+        \               </div>\r\n                <div class=\"rec\">\r\n                    <div
+        class=\"lbox\">\r\n                        <label for=\"lblAdtl\" id=\"lblAdtlL\">Additional
+        Info</label>\r\n                        <span id=\"adtl\" class=\"helpinfo\"><img
+        src=\"/images/layout/adult/lookup/helpinfo.png\" width=\"12\" height=\"12\"
+        /></span>\r\n                    </div>\r\n                    <div class=\"rbox\"><span
+        id=\"lblAdtl\">NA</span></div>\r\n                </div>\r\n            </div>\r\n
+        \           <div style=\"clear:both;\"><br /></div>\r\n            <div id=\"col2\"
+        class=\"col\">\r\n                <div class=\"lbox\">\r\n                    <span
+        id=\"lblDischarge\">Discharged</span>\r\n                    <span id=\"discharge\"
+        class=\"helpinfo\"><img src=\"/images/layout/adult/lookup/helpinfo.png\" width=\"12\"
+        height=\"12\" /></span>\r\n                </div>\r\n                <div
+        class=\"rbox\"><span id=\"lblDischargeDate\">12/16/2010</span></div>\r\n            </div>\r\n
+        \       </div>\r\n        \r\n        <br class=\"clear\" />\r\n        \r\n
+        \       \r\n    </div>\r\n\r\n</div>\r\n</form>    \r\n        </div>\r\n\r\n
+        \   </div>\r\n</div>\r\n<footer id=\"page_footer\" class=\"\">\r\n    <div
+        id=\"footercolumn\" class=\"site_template_column  footer_column   \">\r\n
+        \       <div class=\"col-xs-12 col-sm-12 col-md-2\">\r\n            <div class=\"footer_logo_one\">\r\n
+        \               <a href=\"https://www.doc.sd.gov\" target=\"_self\" title=\"\">\r\n
+        \                   <img src=\"Library/footer_logos/footerLogoOne.png\" alt=\"Footer
+        Seal\">\r\n                </a>\r\n            </div>\r\n        </div>\r\n
+        \        <div class=\"col-xs-12 col-sm-6 col-md-4\">          \r\n            <div
+        class=\"footer_address\">\r\n                <h2>Contact Us</h2>\r\n                <span>South
+        Dakota Department of <br>\r\n                Corrections</span>\r\n                <p><a
+        href=\"https://maps.app.goo.gl/sZihPatP6cxGihUT7\">3200 East Highway 34, c/o
+        500 East <br>\r\n                Capitol Avenue Pierre, SD 57501</a>\r\n                </p>\r\n
+        \               <p>Phone: <a href=\"tel:(605) 773-3478\">(605) 773-3478</a></p>\r\n
+        \               <p>Fax: <a href=\"tel:785-246-5077\">(605) 773-6810</a></p>\r\n
+        \           </div>\r\n         </div>\r\n            <div class=\"col-xs-12
+        col-sm-6 col-md-4\">  \r\n                <div class=\"social_icons\">\r\n
+        \                   <h2>Keep in Touch</h2>\r\n                        <a href=\"https://www.facebook.com/people/South-Dakota-Department-of-Corrections/100087616654629/\"
+        target=\"_blank\">\r\n                            <img src=\"Library/social_icons/fb-icon.svg\"
+        alt=\"Facebook\">\r\n                        </a>\r\n                        <a
+        href=\"https://twitter.com/SouthDakotaDOC\" target=\"_blank\">\r\n                            <img
+        src=\"Library/social_icons/x-icon.svg\" alt=\"Twitter\">\r\n                        </a>\r\n
+        \                       <a href=\"https://www.instagram.com/sdcorrections/\"
+        target=\"_blank\">\r\n                            <img src=\"Library/social_icons/ig-icon.svg\"
+        alt=\"Instagram\">\r\n                        </a>\r\n                        <a
+        href=\"https://www.youtube.com/user/SouthDakotaDOC\" target=\"_blank\">\r\n
+        \                           <img src=\"Library/social_icons/yt-icon.svg\"
+        alt=\"Youtube\">\r\n                        </a>\r\n                        <a
+        href=\"https://www.linkedin.com/company/south-dakota-department-of-corrections\"
+        target=\"_blank\">\r\n                            <img src=\"Library/social_icons/linkedin-icon.svg\"
+        alt=\"LinkedIn\">\r\n                        </a>\r\n                </div>\r\n
+        \           </div>\r\n            <div class=\"col-xs-12 col-sm-12 col-md-2\">\r\n
+        \               <div class=\"footer_logo_two\">\r\n                    <a
+        href=\"https://www.doc.sd.gov\" target=\"_self\" title=\"\">\r\n                        <img
+        src=\"Library/footer_logos/footerLogoTwo.png\" alt=\"Footer Portal Seal\">\r\n
+        \                   </a>\r\n                </div>\r\n            </div>\r\n
+        \           <div class=\"footer_nav\">\r\n                    <a href=\"https://www.doc.sd.gov/home\"
+        target=\"_self\">Home</a>        \r\n                    <a href=\"https://www.doc.sd.gov/about-us\"
+        target=\"_self\">About Us</a>        \r\n                    <a href=\"https://www.doc.sd.gov/adult-corrections\"
+        target=\"_self\">Adult Corrections</a>      \r\n                    <a href=\"https://www.doc.sd.gov/juvenile-corrections\"
+        target=\"_self\">Juvenile Corrections</a>        \r\n                    <a
+        href=\"https://www.doc.sd.gov/adult-corrections/parole\" target=\"_self\">Parole</a>
+        \     \r\n                    <a href=\"https://www.doc.sd.gov/about-us/site-map\"
+        target=\"_self\">Sitemap</a>        \r\n            </div>\r\n            <p
+        class=\"footer_copyright\">Design By <a href=\"https://www.granicus.com/\">Granicus</a>
+        - Connecting People &amp; Government</p>\r\n    </div>\r\n\r\n\r\n<script>\r\n
+        \   (function (i, s, o, g, r, a, m) {\r\n        i['GoogleAnalyticsObject']
+        = r; i[r] = i[r] || function () {\r\n            (i[r].q = i[r].q || []).push(arguments)\r\n
+        \       }, i[r].l = 1 * new Date(); a = s.createElement(o),\r\n            m
+        = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a,
+        m)\r\n    })(window, document, 'script', '//www.google-analytics.com/analytics.js',
+        'ga');\r\n\r\n    ga('create', 'UA-50346880-2', 'sd.gov');\r\n    ga('send',
+        'pageview');\r\n\r\n</script>\r\n    </footer>\n</div></div>\r\n    \r\n    <!--
+        Bootstrap core JavaScript -->\r\n    <script src=\"/includes/scripts/zoomEvents.js\"></script>\r\n
+        \   <script src=\"/includes/bootstrap/bootstrap.min.js\"></script>\r\n    <script
+        src=\"/includes/mobile_nav_scripts.js\"></script>\r\n    <script src=\"/includes/sitelayout_scripts.js\"></script>\r\n</body>\r\n</html>\r\n"
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '31266'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Wed, 11 Nov 2026 18:33:27 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

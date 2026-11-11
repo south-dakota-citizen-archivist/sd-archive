@@ -410,6 +410,17 @@ place_link = "jurisdiction"
 source = "SD Local Government Boards and Commissions portal (BIT)"
 
 [[dataset]]
+id = "doc-offenders"
+name = "Department of Corrections offenders (prison sentences, past and present)"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "person sentenced to prison"
+entities = ["person"]
+place_link = "city"
+source = "SD Department of Corrections offender locator"
+
+[[dataset]]
 id = "beacon-parcels"
 name = "County parcels from Beacon (shape, owners, valuation)"
 project = "sd-archive"

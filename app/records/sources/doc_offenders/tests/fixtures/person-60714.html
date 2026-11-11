@@ -1,0 +1,618 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head id="Head1"><meta charset="UTF-8" /><title>
+	Offender Locator :: SD Dept of Corrections
+</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Bootstrap core CSS -->
+    <link href="/includes/bootstrap/bootstrap.min.css" rel="stylesheet" /><link rel="stylesheet" type="text/css" href="/includes/Default/custom.css" /><link rel="stylesheet" type="text/css" href="/includes/Default/editor.css" /><link rel="stylesheet" type="text/css" href="/includes/custom.default.css" /><link rel="stylesheet" type="text/css" href="/includes/custom.desktop.css" /><link rel="stylesheet" type="text/css" href="/includes/custom.media.css" /><link rel="stylesheet" type="text/css" href="/includes/editor.css" /><link id="active_font" rel="stylesheet" type="text/css" href="Project/Contents/Main/x-small.css" /><link rel="stylesheet" type="text/css" href="/includes/Default/print.css" media="print" /><link rel="stylesheet" type="text/css" href="/includes/print.css" media="print" />
+
+    <script src="Scripts/jquery/jquery-3.7.1.min.js"></script>
+    <link rel="Shortcut Icon" href="favicon.ico" />
+
+    <script language="javascript">
+        if (top.frames.length != 0)
+            top.location = self.document.location;
+    </script>      
+
+    <link rel="stylesheet" type="text/css" href="/includes/css/forms.css" /><link rel="stylesheet" type="text/css" href="/includes/css/offsrch.css" />
+
+    <style id="antiClickjack">        
+        body {
+            display: none !important;
+        }
+    </style>
+    <script type="text/javascript">
+        if (self === top) {
+            var antiClickjack = document.getElementById("antiClickjack");
+            antiClickjack.parentNode.removeChild(antiClickjack);
+        }
+        else { top.location = self.location;}
+    </script>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	<!--meta http-equiv="X-UA-Compatible" content="IE=edge"-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
+	<script src="https://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+    
+	<script type="text/javascript">
+		function capitalizeEachWord(str) {
+		   		return str.replace(/\w\S*/g, function(txt) {
+        			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+			});
+		}
+	
+		$(function() {
+			$('span.helpinfo').hover(function(e) {
+				var test = this.id;
+				var title = this.title;
+				var descr = "";
+				var pos = "";
+				
+				switch(test){
+					case 'help':
+						title = capitalizeEachWord($("#lblHelp").text());
+						descr = '<p>Rolling over these icons will supply additional explination of the area.</p>';
+						break;						
+					
+					case 'demogr':
+						title = $("#lblDemoL").text();
+						descr = '<p>Demographics are updated in accordance with DOC policy. Information includes last known demographics for the offender. Demographics of offenders who discharge are not updated.</p>';
+						break;						
+					case 'alias':
+						title = $("#lblAliasL").text();
+						descr = '<p>Additional names this person has gone by.</p>';
+						break;
+					case 'docid':
+						title = $("#lblDocIdL").text();
+						descr = '<p>Used to identify this person within the correctional system.</p>';
+						break;
+					case 'curloc':
+						title = $("#lblCurrLocL").text();
+						descr = '<p>The location where this person is currently housed.</p>'
+						descr += '<p><span class="type">Virtual Facility (SD Offender elsewhere)</span> - Offenders who display a facility of this are South Dakota inmates housed in another state or jurisdiction.</p>';
+						break;
+					case 'parolefld':
+						title = $("#lblParoleFldL").text();
+						descr = '<p>Office location of this person&#39;s parole agent.</p>';
+						break;
+					case 'corrstat':
+						title = $("#lblCorrStatL").text();
+						descr = '<p>This is the current status of the person, which may be one of the following:</p>';
+						descr += '<p><span class="type">Active Inmate</span> - Currently housed in a correctional facility.</p>';
+						descr += '<p><span class="type">Active Parole</span> - Currently on parole supervision, which may include the community transition program, extended detainment, detainment, or extended confinement</p>';
+						descr += '<p><span class="type">Completed Sentence</span> - The person has completed their sentence(s) and is not in prison or on parole.</p>';
+						break;
+					case 'adtl':
+						title = $("#lblAdtlL").text();
+						descr = '<p>Additional information about this person and displays the status of an offender.</p>'
+						descr += '<p><span class="type">Attempt to Locate (ATL)</span> - issued to law enforcement when offenders on parole supervision whereabouts are unknown and efforts are underway to determine if offender has absconded.</p>'
+						descr += '<p><span class="type">Absconders</span> - indicate offenders on parole supervision whose whereabouts are unknown.</p>'
+						descr += '<p><span class="type">Escape</span> - statuses are displayed depending on the type of escape from prison.</p>'
+						break;
+					case 'discharge':
+					    title = $("#lblDischarge").text();
+					    //descr = '<p>The date this person completed their sentence(s). If discharged, this person is not in prison or on parole.</p>';
+                        // Change made 12/12/2016 (Dan Roggenbuck):  Verbiage altered as requested by DOC (Ticket #01738028)
+					    descr = '<p>The date this person completed their sentence(s). If discharged, this person is not in prison or on parole unless they are on escape or absconding status.</p>';
+						break;
+					
+					
+					case 'conv':
+						title = $("#lblCurConv").text();
+						descr = '<p>A listing of all current convictions.</p>';
+						break;	
+					case 'transno':
+						title = $("#rptTrans_lblTransNoL_0").text();
+						descr = '<p>SD DOC number associated to each conviction.</p>';
+						break;
+					
+					case 'sentdate':
+						title = $("#rptTrans_rptTransChild_0_lblSentDateL").text();
+						descr = '<p>Date sentenced on conviction.</p>';
+						break;
+					case 'sentco':
+						title = $("#rptTrans_rptTransChild_0_lblSentCoL").text();
+						descr = '<p>County of conviction.</p>';
+						break;
+					case 'crime':
+						title = $("#rptTrans_rptTransChild_0_lblSentLenL").text();
+						descr = '<p>Crime of conviction.</p>';
+						break;
+					case 'sentlen':
+						title = $("#rptTrans_rptTransChild_0_lblSentCrimeL").text();
+						descr = '<p>Length of sentence on conviction.</p>';
+						break;
+					case 'sentadj':
+						title = $("#rptTrans_rptTransChild_0_lblSentAdjL").text();
+						descr = '<p>Sentence adjustment from court.</p>'
+						descr += '<p><span class="type">Suspended</span> - The amount of time that the sentence is suspended.</p>';
+						//descr += '<p><span class="type">Life</span> - </p>';
+						//descr += '<p><span class="type">Death</span> - </p>';
+						pos = "back"					
+						break;
+					
+					
+						
+					case 'bookkey':
+						title = $("#lblBookKey").text();
+						descr = '<p>Summary of dates from all convictions.</p>';
+						break;	
+					case 'inpd':
+						title = $("#rptKey_lblINPDL").text();
+						descr = '<p>Earliest release date to parole supervision for new system offenders.</p>';
+						break;
+					case 'nrd':
+						title = $("#rptKey_lblNRDL").text();
+						descr = '<p>Date of next Board of Pardon and Parole hearing.</p>';
+						break;
+					case 'gtrd':
+						title = $("#rptKey_lblGTRDL").text();
+						descr = '<p>Earliest release date to parole supervision for old system offenders.</p>';
+						break;
+					case 'agtrd':
+						title = $("#rptKey_lblAGTRDL").text();
+						descr = '<p>Adjusted earliest release date to parole supervision for old system offenders.</p>';
+						break;
+					case 'ssrd':
+						title = $("#rptKey_lblSSRDL").text();
+						descr = '<p>Date of completion of the term of imprisonment and only applies to inmates with suspended sentences.</p>';
+						break;
+					case 'ted':
+						title = $("#rptKey_lblTEDL").text();
+						descr = '<p>Date the term is completed. This represents end of term of parole or if not on parole, end of sentence and release from prison.</p>';
+						break;
+				}
+				
+				var html = '<div id="pinfo">';
+				html += 	'	<h4>' + title + '</h4>';
+				html +=		'	' + descr + ''; 
+				html +=	 	'</div>';
+				
+				$('body').append(html).children('#pinfo').hide().fadeIn(400);
+				$('#pinfo').css('top', e.pageY + 0).css('left', e.pageX + 20); //-255
+				
+				//$('body').append(html).children('#pinfo').hide().fadeIn(400);
+				//$('#pinfol').css('top', e.pageY + -20).css('left', e.pageX + 50);
+					
+			}, function() {
+				$('#pinfo').remove();
+				$(this).attr('title', descr);
+			});
+
+			$('span').mousemove(function(e) {
+				
+			});			
+		});
+		
+	</script>
+    
+<!--[if lt IE 7 ]> <html class="ie6 ielt9"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7 ielt9"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8 ielt9"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+
+    <style type="text/css">
+		#guide #container #main #col_m #pnlCurrConv .sec .tbl		{ display: table; width: 640px; border: 1px solid #333; border-width: 1px 0 0 1px; }
+		.tblhead	{ display: table-header-group; border: 0px solid #F00; }
+		.tblhead	{ text-align: center; }
+		.tblrow		{ display: table-row; }
+		.tblcell	{ display: table-cell; padding: 2px; border: 1px solid #333; border-width: 0 1px 1px 0; }
+		
+		/*.tblhead .tblcell, .tblrow .tblcell			{ float: left; }*/
+		
+		.sentdate 							{ width: 12%; }
+		.sentco 							{ width: 15%; }
+		.crime 								{ width: 45%; }
+		.sentlen 							{ width: 13%; }
+		.sentadj 							{ width: 13%; }
+		
+		.tblrow .sentdate 					{ text-align: center; }
+		.tblrow .sentco 					{ text-align: center; }
+		.tblrow .crime 						{ width: 45%; }
+		.tblrow .sentlen 					{ text-align: center; }
+		.tblrow .sentadj 					{ text-align: center; }
+	</style>
+</head>
+
+<body class="front_end_body  site_standardsitetemplate">
+    <div class="sitewrapper site_template mainSpan_wrapper" >
+        <div class="mainArea" id="mainSpan_wrapper_Screen" ><div id="content" style="position: relative; overflow-y:scroll;" >
+
+                
+
+            <script>
+                (function () {
+                    if (!window.history || !window.history.replaceState) return;
+
+                    var cleanUrl = window.location.origin + window.location.pathname;
+                    // If you also want to keep hash fragments, append: + window.location.hash
+                    window.history.replaceState(null, document.title, cleanUrl);
+                })();
+</script>
+<header id="siteheader" class="" role="banner">
+    <div id="skipnav" role="alert">
+        <a href="#pagebody">Skip to Main Content</a>
+    </div>
+    <a id="home_link" href="https://www.doc.sd.gov/home">Home</a>
+    <a class="menu_trigger mobile_only" href="javascript:void(0);">Menu</a>
+    <div id="headercolumn" class="site_template_column  header_column   ">
+        <div id="top_nav">
+            <a href="https://www.doc.sd.gov/adult-corrections/offender-locator" target="_self">Offender Locator</a>
+            <a href="https://www.doc.sd.gov/about-us/careers" target="_self">Jobs</a>    
+        </div>
+        <div class="search_overlay"></div>
+        <a href="javascript:void(0);" class="search-trigger hidden-xs">Search</a>
+        <div class="top_search">
+            <a class="close_search" href="javascript:void(0);">CLOSE</a>
+            <div class="search_block">
+                <div id="searchbox" class="clearfix">
+                    <label class="visually-hidden" for="search_text">Search</label>
+                    <input title="Search..." id="search_text" placeholder="Search..." type="text">
+                    <a href="javascript:void(0);">Go</a>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function () {
+
+                $("#searchbox input").keydown(function (e) {
+                    if (e.keyCode == 13) {
+                        $("#searchbox a").click();
+                    }
+                });
+                $("#searchbox a").click(function () {
+                    var keyWord = $("#searchbox input#search_text").val();
+                    if (keyWord.length <= 0) { return false; }
+                    keyWord = keyWord.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+                    keyWord = encodeURIComponent(keyWord.replace("<", " ").replace(">", " "));
+                    var link = '/SDDOCSD6/about-us/search';
+                    if (link.indexOf("?") >= 0)
+                        link = link + "&q=" + keyWord;
+                    else
+                        link = link + "?q=" + keyWord;
+                    if ('False' == 'True') {
+                        window.top.location.href = link;
+                        return false;
+                    } else {
+                        window.location.href = link;
+                    }
+                });
+            });
+        </script>
+    </div>
+</header>
+<div class="onecolumnlayout clearfix" id="sitebody">
+    <div id="ColumnUserControl1" class="column sortable_col column top_col  clearfix">
+        <div class=" main_menu_widget">
+            <link rel="stylesheet" type="text/css" href="/includes/Default/dropdownmegamenu.css">
+            <link rel="stylesheet" type="text/css" href="/includes/dropdownmegamenu.css">
+            <nav id="menuContainer_1_0_15" class="regularmegamenu mainnav">
+                <ul class="dropdownmenu clearfix">
+                    <li id="dropdownrootitem1" class='megamenu_first'><a class='dropdownrootitem1' href='https://www.doc.sd.gov/home' title="Home" data-navid="1" target="_self">Home</a></li>
+                    <li id="dropdownrootitem2" class='megamenu_first'>
+                        <a class='dropdownrootitem2' href='https://www.doc.sd.gov/about-us' title="About Us" data-navid="2" target="_self">About Us</a>
+                    </li>
+                    <li id="dropdownrootitem3" class='megamenu_first'>
+                        <a class='dropdownrootitem3' href='https://www.doc.sd.gov/adult-corrections' title="Adult Corrections" data-navid="3" target="_self">Adult Corrections</a>
+                    </li>
+                    <li id="dropdownrootitem4" class='megamenu_first'>
+                        <a class='dropdownrootitem4' href='https://www.doc.sd.gov/safer-sd-reentry-initiative' title="SAFER SD Reentry Initiative" data-navid="17" target="_self">SAFER SD Reentry Initiative</a>
+                    </li>
+                    <li id="dropdownrootitem5" class='megamenu_first'>
+                        <a class='dropdownrootitem5' href='https://www.doc.sd.gov/pheasantland-industries' title="Pheasantland Industries" data-navid="4" target="_self">Pheasantland Industries</a>
+                    </li>
+                    <li id="dropdownrootitem6" class='megamenu_first'>
+                        <a class='dropdownrootitem6' href='https://www.doc.sd.gov/juvenile-corrections' title="Juvenile Corrections" data-navid="5" target="_self">Juvenile Corrections</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <a id="pagebody"></a>
+<header class="title_widget clearfix  ">
+    <h1><span>ADULT CORRECTIONS</span></h1>
+</header>
+
+<script type="text/javascript">
+    $(function () {
+        var widgetContext = "widget_297_0_161";
+        $("#" + widgetContext + " #share").click(function () {
+            if (!$("#" + widgetContext + " div#share").hasClass("click-active"))
+                $("#" + widgetContext + " div#share").find("ul").show();
+            else
+                $("#" + widgetContext + " div#share").find("ul").hide();
+        });
+        $("div").click(function () {
+            if ($("#" + widgetContext + " div#share").hasClass("click-active")) {
+                $("#" + widgetContext + " div#share").find("ul").hide();
+            }
+        });
+        $(document).click(function (e) {
+            if (!$(e.target).closest("#share").length > 0) {
+                $("#" + widgetContext + " div#share").removeClass("click-active");
+                $("#" + widgetContext + " div#share").find("ul").hide();
+            }
+        });
+        var shareContainerTimeout = null;
+        $("#" + widgetContext + " #share").bind('mouseover', function () {
+            //If not relate to click event
+            if (shareContainerTimeout) {
+                clearTimeout(shareContainerTimeout);
+                shareContainerTimeout = null;
+            }
+            shareContainerTimeout = setTimeout(function () {
+                if (!$("#" + widgetContext + " div#share").hasClass("click-active"))
+                    $("#" + widgetContext + " div#share").find("ul").show();
+            }, 100);
+        });
+        $("#" + widgetContext + " #share").bind('mouseleave', function () {
+            //If not relate to click event     
+            if (shareContainerTimeout) {
+                clearTimeout(shareContainerTimeout);
+                shareContainerTimeout = null;
+            }
+            shareContainerTimeout = setTimeout(function () {
+                if (!$("#" + widgetContext + " div#share").hasClass("click-active"))
+                    $("#" + widgetContext + " div#share").find("ul").hide();
+            }, 200);
+        });
+        $("header#" + widgetContext + " a.feedback_link").click(function () {
+            var windowHeight = 485;
+            if (window.innerWidth <= 648) {
+                windowHeight = 545;
+            }
+            var opts = {
+                title: "Feedback",
+                url: "/VADEQVA6/Template/GetFeedbackPartial?feedbackUrl=https%3a%2f%2fdev8.visioninternet.com%2fVADEQVA6%2fget-involved%2fthe-environment-and-you%2f-fsiteid-1%3floadingmode%3dPreviewContent",
+                useFrame: true,
+                height: windowHeight,
+                onClosed: function (result) {
+                    if (result != undefined && result.IsOk == true) {
+                        $.refreshTempMessage(result.Message);
+                    }
+                },
+                skin: 'viClientDialog feedback_lightbox',
+                fixed: false
+            };
+            $.viClientDialog(opts).open();
+        });
+        //Safari iOS: No click event
+        $("header#" + widgetContext + " a.send_share_email").bind("click touchstart", function () {
+            var shareEmailTitle = document.itemTitle ? encodeURIComponent(document.itemTitle.trim()).replace(/[!'()*]/g, escape) : "The+Environment+and+You";
+            var opts = {
+                title: "Click to submit an email online",
+                url: "/VADEQVA6/Template/GetShareEmailPartial?shareUrl=https%3a%2f%2fdev8.visioninternet.com%2fVADEQVA6%2fget-involved%2fthe-environment-and-you%2f-fsiteid-1%3floadingmode%3dPreviewContent" + "&shareTitle=" + shareEmailTitle,
+                useFrame: true,
+                height: 485,
+                onClosed: function (result) {
+                    if (result != undefined && result.IsOk == true) {
+                        $.refreshTempMessage(result.Message);
+                    }
+                },
+                skin: 'viClientDialog send_share_email_lightbox',
+                fixed: false
+            };
+            $.viClientDialog(opts).open();
+        });
+    });
+</script>
+
+
+<h1>Adult Corrections</h1>
+<h2>Offender Locator</h2>
+<form method="post" action="./?id=e1ieBKlOd2Q%3d" id="frmInmate">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTk5MDI3NzUzMA9kFgICAw9kFgICAw9kFiACAw8PFgIeBFRleHQFEVF1YXJsZXMsIEphY29iIEwuZGQCCQ8PFgIfAAUCMjdkZAINDw8WAh8ABQVXaGl0ZWRkAhEPDxYCHwAFBE1hbGVkZAIVDw8WAh8ABQ1SZWQgb3IgQXVidXJuZGQCGQ8PFgIfAAUFSGF6ZWxkZAIdDw8WAh8ABQU1JyA1ImRkAiEPDxYCHwAFCDE2MCBsYnMuZGQCJQ8PFgIfAAUTUXVhcmxlcywgIEphY29iIExlZWRkAikPDxYCHwAFBTYwNzE0ZGQCLQ8PFgIfAAUfU291dGggRGFrb3RhIFN0YXRlIFBlbml0ZW50aWFyeWRkAi8PDxYCHwAFLDE2MDAgIE5vcnRoIERyaXZlPGJyIC8+U2lvdXggRmFsbHMsIFNEIDU3MTE3ZGQCMw8PFgIfAAUCTkFkZAI3Dw8WAh8ABQ1BY3RpdmUgSW5tYXRlZGQCOw8PFgIfAAUCTkFkZAI/Dw8WAh8ABQJOQWRkZCC2L2KE5iI+k5hSuCF7PbkBHSCOI7dKt9PjcFJx2jlt" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="AA03A666" />
+</div>
+
+
+
+
+<div id="pnlInmate">
+	
+	<div class="optl">
+        <!-- a href="/documents/adult/lookup/OffenderLocatorFAQ.pdf" target="_blank">Offender Locator Frequently Asked Questions</a> <span class="note">PDF</span -->
+        For <span id="lblHelp">more information</span>, mouse over the <span id="help" class="helpinfo"><img src="/images/layout/adult/lookup/helpinfo.png" width="12" height="12" /></span>
+    </div>
+    
+    <div class="optr">
+        <a href="javascript: void history.back(-1)">&lt;&lt; Back to Search Results</a>
+    </div>
+
+    <div id="inmate">
+        <div id="lcol" class="colfull">
+            
+        </div>
+        
+        <div id="comcol" class="bkg">
+            <div id="col" class="col hdr">
+                <h1>
+                	<span id="lblMainName">Quarles, Jacob L.</span> <span id="lblDemoL">Demographics</span><span id="demogr" class="helpinfo"><img src="/images/layout/adult/lookup/helpinfo.png" width="12" height="12" /></span></h1>
+            </div>
+            <div id="mcol">
+            	<div class="rec">
+                    <div class="lbox"><label for="lblAge" id="lblAgeL">Age</label></div>
+                    <div class="rbox"><span id="lblAge">27</span></div>
+                </div>
+                <div class="rec">
+                    <div class="lbox"><label for="lblRace" id="lblRaceL">Race</label></div>
+                    <div class="rbox"><span id="lblRace">White</span></div>
+                </div>
+                <div class="rec">
+                    <div class="lbox"><label for="lblGender" id="lblGenderL">Gender</label></div>
+                    <div class="rbox"><span id="lblGender">Male</span></div>
+                </div>
+                <div class="rec">
+                    <div class="lbox"><label for="lblHair" id="lblHairL">Hair Color</label></div>
+                    <div class="rbox"><span id="lblHair">Red or Auburn</span></div>
+                </div>
+                <div class="rec">
+                    <div class="lbox"><label for="lblEye" id="lblEyeL">Eye Color</label></div>
+                    <div class="rbox"><span id="lblEye">Hazel</span></div>
+                </div>
+                <div class="rec">
+                    <div class="lbox"><label for="lblHeight" id="lblHeightL">Height</label></div>
+                    <div class="rbox"><span id="lblHeight">5' 5"</span></div>
+                </div>
+                <div class="rec">
+                    <div class="lbox"><label for="lblWeight" id="lblWeightL">Weight</label></div>
+                    <div class="rbox"><span id="lblWeight">160 lbs.</span></div>
+                </div>
+            </div>
+            
+            <div id="rcol">
+                <div class="rec">
+                    <div class="lbox">
+                        <label for="lblAlias" id="lblAliasL">Alias(es)</label>
+                        <span id="alias" class="helpinfo"><img src="/images/layout/adult/lookup/helpinfo.png" width="12" height="12" /></span>
+                    </div>
+                    <div class="rbox"><span id="lblAlias">Quarles,  Jacob Lee</span></div>
+                </div>
+                <div class="rec">
+                    <div class="lbox">
+                        <label for="lblDocId" id="lblDocIdL">DOC Number</label>
+                        <span id="docid" class="helpinfo"><img src="/images/layout/adult/lookup/helpinfo.png" width="12" height="12" /></span>
+                    </div>
+                    <div class="rbox">#<span id="lblDocId">60714</span></div>
+                </div>
+                <div class="rec">
+                    <div class="lbox">
+                        <label for="lblCurrLoc" id="lblCurrLocL">Current Facility</label>
+                        <span id="curloc" class="helpinfo"><img src="/images/layout/adult/lookup/helpinfo.png" width="12" height="12" /></span>
+                    </div>
+                    <div class="rbox">
+                        <span id="lblCurrLoc">South Dakota State Penitentiary</span><br />
+                        <span id="lblCurrLocAddr">1600  North Drive<br />Sioux Falls, SD 57117</span>
+                    </div>
+                </div>
+                <div class="rec">
+                    <div class="lbox">
+                        <label for="lblParoleFld" id="lblParoleFldL">Parole Office</label>
+                        <span id="parolefld" class="helpinfo"><img src="/images/layout/adult/lookup/helpinfo.png" width="12" height="12" /></span>
+                    </div>
+                    <div class="rbox"><span id="lblParoleFld">NA</span></div>
+                </div>
+                <div class="rec">
+                    <div class="lbox">
+                        <label for="lblCorrStat" id="lblCorrStatL">Correctional Status</label>
+                        <span id="corrstat" class="helpinfo"><img src="/images/layout/adult/lookup/helpinfo.png" width="12" height="12" /></span>
+                    </div>
+                    <div class="rbox"><span id="lblCorrStat">Active Inmate</span></div>
+                </div>
+                <div class="rec">
+                    <div class="lbox">
+                        <label for="lblAdtl" id="lblAdtlL">Additional Info</label>
+                        <span id="adtl" class="helpinfo"><img src="/images/layout/adult/lookup/helpinfo.png" width="12" height="12" /></span>
+                    </div>
+                    <div class="rbox"><span id="lblAdtl">NA</span></div>
+                </div>
+            </div>
+            <div style="clear:both;"><br /></div>
+            <div id="col2" class="col">
+                <div class="lbox">
+                    <span id="lblDischarge">Discharged</span>
+                    <span id="discharge" class="helpinfo"><img src="/images/layout/adult/lookup/helpinfo.png" width="12" height="12" /></span>
+                </div>
+                <div class="rbox"><span id="lblDischargeDate">NA</span></div>
+            </div>
+        </div>
+        
+        <br class="clear" />
+        
+        
+    </div>
+
+</div>
+</form>    
+        </div>
+
+    </div>
+</div>
+<footer id="page_footer" class="">
+    <div id="footercolumn" class="site_template_column  footer_column   ">
+        <div class="col-xs-12 col-sm-12 col-md-2">
+            <div class="footer_logo_one">
+                <a href="https://www.doc.sd.gov" target="_self" title="">
+                    <img src="Library/footer_logos/footerLogoOne.png" alt="Footer Seal">
+                </a>
+            </div>
+        </div>
+         <div class="col-xs-12 col-sm-6 col-md-4">          
+            <div class="footer_address">
+                <h2>Contact Us</h2>
+                <span>South Dakota Department of <br>
+                Corrections</span>
+                <p><a href="https://maps.app.goo.gl/sZihPatP6cxGihUT7">3200 East Highway 34, c/o 500 East <br>
+                Capitol Avenue Pierre, SD 57501</a>
+                </p>
+                <p>Phone: <a href="tel:(605) 773-3478">(605) 773-3478</a></p>
+                <p>Fax: <a href="tel:785-246-5077">(605) 773-6810</a></p>
+            </div>
+         </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">  
+                <div class="social_icons">
+                    <h2>Keep in Touch</h2>
+                        <a href="https://www.facebook.com/people/South-Dakota-Department-of-Corrections/100087616654629/" target="_blank">
+                            <img src="Library/social_icons/fb-icon.svg" alt="Facebook">
+                        </a>
+                        <a href="https://twitter.com/SouthDakotaDOC" target="_blank">
+                            <img src="Library/social_icons/x-icon.svg" alt="Twitter">
+                        </a>
+                        <a href="https://www.instagram.com/sdcorrections/" target="_blank">
+                            <img src="Library/social_icons/ig-icon.svg" alt="Instagram">
+                        </a>
+                        <a href="https://www.youtube.com/user/SouthDakotaDOC" target="_blank">
+                            <img src="Library/social_icons/yt-icon.svg" alt="Youtube">
+                        </a>
+                        <a href="https://www.linkedin.com/company/south-dakota-department-of-corrections" target="_blank">
+                            <img src="Library/social_icons/linkedin-icon.svg" alt="LinkedIn">
+                        </a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="footer_logo_two">
+                    <a href="https://www.doc.sd.gov" target="_self" title="">
+                        <img src="Library/footer_logos/footerLogoTwo.png" alt="Footer Portal Seal">
+                    </a>
+                </div>
+            </div>
+            <div class="footer_nav">
+                    <a href="https://www.doc.sd.gov/home" target="_self">Home</a>        
+                    <a href="https://www.doc.sd.gov/about-us" target="_self">About Us</a>        
+                    <a href="https://www.doc.sd.gov/adult-corrections" target="_self">Adult Corrections</a>      
+                    <a href="https://www.doc.sd.gov/juvenile-corrections" target="_self">Juvenile Corrections</a>        
+                    <a href="https://www.doc.sd.gov/adult-corrections/parole" target="_self">Parole</a>      
+                    <a href="https://www.doc.sd.gov/about-us/site-map" target="_self">Sitemap</a>        
+            </div>
+            <p class="footer_copyright">Design By <a href="https://www.granicus.com/">Granicus</a> - Connecting People &amp; Government</p>
+    </div>
+
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-50346880-2', 'sd.gov');
+    ga('send', 'pageview');
+
+</script>
+    </footer>
+</div></div>
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="/includes/scripts/zoomEvents.js"></script>
+    <script src="/includes/bootstrap/bootstrap.min.js"></script>
+    <script src="/includes/mobile_nav_scripts.js"></script>
+    <script src="/includes/sitelayout_scripts.js"></script>
+</body>
+</html>
