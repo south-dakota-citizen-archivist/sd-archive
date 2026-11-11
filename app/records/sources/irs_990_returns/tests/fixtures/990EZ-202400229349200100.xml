@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Return returnVersion="2022v5.0" xmlns="http://www.irs.gov/efile" xsi:schemaLocation="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2024-01-21T23:03:53-06:00</ReturnTs>
+    <TaxPeriodEndDt>2023-08-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>503664273</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>DETERMAN DATA SERVICES</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>161 S 6TH ST</AddressLine1Txt>
+        <CityNm>EMERY</CityNm>
+        <StateAbbreviationCd>SD</StateAbbreviationCd>
+        <ZIPCd>57332</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990EZ</ReturnTypeCd>
+    <TaxPeriodBeginDt>2022-09-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>237137609</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>MITCHELL EDUCATION ASSOCIATION</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>MITC</BusinessNameControlTxt>
+      <PhoneNum>6059953000</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>PO BOX 775</AddressLine1Txt>
+        <CityNm>MITCHELL</CityNm>
+        <StateAbbreviationCd>SD</StateAbbreviationCd>
+        <ZIPCd>57301</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>NANCY LEACH</PersonNm>
+      <PersonTitleTxt>secretary</PersonTitleTxt>
+      <PhoneNum>6058380219</PhoneNum>
+      <SignatureDt>2024-01-05</SignatureDt>
+    </BusinessOfficerGrp>
+    <SigningOfficerGrp>
+      <PersonFullName>
+        <PersonFirstNm>NANCY</PersonFirstNm>
+        <PersonLastNm>LEACH</PersonLastNm>
+      </PersonFullName>
+      <SSN>XXX-XX-XXXX</SSN>
+    </SigningOfficerGrp>
+    <IRSResponsiblePrtyInfoCurrInd>0</IRSResponsiblePrtyInfoCurrInd>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>VIRGIL DETERMAN</PreparerPersonNm>
+      <PTIN>P01236590</PTIN>
+      <PhoneNum>6058380219</PhoneNum>
+    </PreparerPersonGrp>
+    <TaxYr>2022</TaxYr>
+    <BuildTS>2023-04-26 12:10:37Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="2">
+    <IRS990EZ documentId="IRS990EZ">
+      <AddressChangeInd>X</AddressChangeInd>
+      <MethodOfAccountingCashInd>X</MethodOfAccountingCashInd>
+      <ScheduleBNotRequiredInd>X</ScheduleBNotRequiredInd>
+      <Organization501cInd organization501cTypeTxt="6">X</Organization501cInd>
+      <GrossReceiptsAmt>34405</GrossReceiptsAmt>
+      <InfoInScheduleOPartIInd>X</InfoInScheduleOPartIInd>
+      <ContributionsGiftsGrantsEtcAmt>34405</ContributionsGiftsGrantsEtcAmt>
+      <TotalRevenueAmt>34405</TotalRevenueAmt>
+      <OtherExpensesTotalAmt>34045</OtherExpensesTotalAmt>
+      <TotalExpensesAmt>34045</TotalExpensesAmt>
+      <ExcessOrDeficitForYearAmt>360</ExcessOrDeficitForYearAmt>
+      <NetAssetsOrFundBalancesBOYAmt>26195</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>26555</NetAssetsOrFundBalancesEOYAmt>
+      <CashSavingsAndInvestmentsGrp>
+        <BOYAmt>26195</BOYAmt>
+        <EOYAmt>26556</EOYAmt>
+      </CashSavingsAndInvestmentsGrp>
+      <Form990TotalAssetsGrp>
+        <BOYAmt>26195</BOYAmt>
+        <EOYAmt>26556</EOYAmt>
+      </Form990TotalAssetsGrp>
+      <NetAssetsOrFundBalancesGrp>
+        <BOYAmt>26195</BOYAmt>
+        <EOYAmt>26556</EOYAmt>
+      </NetAssetsOrFundBalancesGrp>
+      <PrimaryExemptPurposeTxt>CONTRACT NEGOTIONS TEACHER SUPPORT AND EMPLOYEE RELATIONS</PrimaryExemptPurposeTxt>
+      <ProgramSrvcAccomplishmentGrp>
+        <DescriptionProgramSrvcAccomTxt>EMPLOYEE RELATIONS</DescriptionProgramSrvcAccomTxt>
+      </ProgramSrvcAccomplishmentGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>NONE</PersonNm>
+        <TitleTxt>NONE</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <ActivitiesNotPreviouslyRptInd>0</ActivitiesNotPreviouslyRptInd>
+      <ChgMadeToOrgnzngDocNotRptInd>0</ChgMadeToOrgnzngDocNotRptInd>
+      <OrganizationHadUBIInd>0</OrganizationHadUBIInd>
+      <SubjectToProxyTaxInd>0</SubjectToProxyTaxInd>
+      <OrganizationDissolvedEtcInd>0</OrganizationDissolvedEtcInd>
+      <Form1120PolFiledInd>0</Form1120PolFiledInd>
+      <MadeLoansToFromOfficersInd>0</MadeLoansToFromOfficersInd>
+      <BooksInCareOfDetail>
+        <PersonNm>NANCY LEACH</PersonNm>
+        <USAddress>
+          <AddressLine1Txt>PO BOX 775</AddressLine1Txt>
+          <CityNm>MITCHELL</CityNm>
+          <StateAbbreviationCd>SD</StateAbbreviationCd>
+          <ZIPCd>57301</ZIPCd>
+        </USAddress>
+        <PhoneNum>6059953000</PhoneNum>
+      </BooksInCareOfDetail>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ForeignOfficeInd>0</ForeignOfficeInd>
+      <DonorAdvisedFndsInd>0</DonorAdvisedFndsInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <TanningServicesProvidedInd>0</TanningServicesProvidedInd>
+      <Form720FiledInd>0</Form720FiledInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <TransactionWithControlEntInd>0</TransactionWithControlEntInd>
+      <PoliticalCampaignActyInd>0</PoliticalCampaignActyInd>
+    </IRS990EZ>
+    <IRS990ScheduleO documentId="IRS990ScheduleO">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I, LINE 16</FormAndLineReferenceDesc>
+        <ExplanationTxt>1) OTHER EXPENSES SDEA PAYMENTS AMOUNT 29867 2) OTHER EXPENSES BOARD STIPEND AMOUNT 2650 3) OTHER EXPENSES MEMBERSHIPS CHANBER AMOUNT 83 4) OTHER EXPENSES PROMOTION AMOUNT 530 5) OTHER EXPENSES MOVIE TICKETS EXPENSE AMOUNT 700 6) OTHER EXPENSES OFFICE EXPENSE AMOUNT 215</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>
