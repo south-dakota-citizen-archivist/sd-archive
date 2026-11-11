@@ -1,0 +1,960 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://sdsos.gov/general-information/about-state-south-dakota/personality_right_publicity.aspx
+  response:
+    body:
+      string: "\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n\r\n\t\t\t<meta
+        charset=\"utf-8\">\r\n        <meta name=\"HandheldFriendly\" content=\"True\">\r\n
+        \       <meta name=\"MobileOptimized\" content=\"320\">\r\n        <meta name=\"viewport\"
+        content=\"initial-scale=1.0, width=device-width\" />\r\n        <meta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=edge,chrome=1\">\r\n        \r\n        <META HTTP-EQUIV=\"Pragma\"
+        CONTENT=\"no-cache\">\r\n<META HTTP-EQUIV=\"Cache-Control\" CONTENT=\"no-cache,no-Store\">\r\n\t\t\r\n\t\t\r\n<!--
+        This is a default image that Facebook can use as a thumbnail when sharing
+        pages from this site -->\r\n<meta property=\"og:image\" content=\"/images/sos-logo-fb.jpg\">\r\n\t\r\n\t<!--
+        Place favicon.ico and apple-touch-icon.png in the images folder -->\r\n\t<link
+        rel=\"shortcut icon\" href=\"/images/favicon.ico\">\r\n\t<link rel=\"apple-touch-icon\"
+        href=\"/images/apple-touch-icon.png\"><!--60X60-->\r\n\t\r\n\t\r\n\t\r\n    \r\n
+        \   \r\n\t\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"/stylesheets/screen.css\"
+        media=\"screen\">\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"/stylesheets/user.css\"
+        media=\"screen\">\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"/stylesheets/print.css\"
+        media=\"print\">\r\n    \r\n\r\n    <!--[if lt IE 9]>\r\n    <link href=\"/stylesheets/screen-ie8.css\"
+        rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>\r\n    <![endif]-->\r\n
+        \   \r\n    \r\n    <!--[if lt IE 9]>\r\n\t<script src=\"/includes/Javascript/html5shiv/html5shiv.js\"></script>\r\n\t<![endif]-->\r\n\r\n\r\n\r\n<!--//
+        INCLUDE JQUERY //-->\r\n    <script type=\"text/javascript\" src=\"https://cdn.sd.gov/lib/jquery-3.6.4/jquery.min.js\"></script>\r\n
+        \   <script type=\"text/javascript\" src=\"/includes/Javascript/jquery-migrate.min.js\"></script>\r\n
+        \   <script type=\"text/javascript\" src=\"/includes/Javascript/jquery.easing.1.3.js\"></script>\r\n
+        \   \r\n    \r\n    \r\n\r\n<!-- SIDEBAR TREEVIEW -->\r\n\t<script src=\"/includes/Javascript/jquery-treeview/jquery.treeview.js\"></script>\r\n\r\n\r\n
+        \   \r\n\r\n<!-- RESPONSIVE SLIDESHOW -->\r\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"/includes/Javascript/wow_slider/style.css\" />\r\n    <script src=\"/includes/Javascript/initialize_treeview.js\"></script>\r\n
+        \   \r\n    \r\n\t\r\n<!-- START FACEBOOK FEED -->\r\n    <script> $(document).ready(function(){
+        createAccessToken(); });\t</script>\r\n\r\n\r\n\r\n\r\n<!-- IMG SWAPPING FOR
+        HEADER LOGO -->\r\n<script src=\"/includes/Javascript/image_swap.js\"></script>\r\n\r\n\r\n\r\n\r\n<!--
+        IN_CONTENT IMAGE ROTATORS -->\r\n<script src=\"/includes/Javascript/image_rotators.js\"></script>\r\n\r\n\r\n<!--//INTERACTIVE
+        MAPs//-->\r\n\r\n<script src=\"/includes/Javascript/raphael.js\" type=\"text/javascript\"
+        charset=\"utf-8\"></script>\r\n<script src=\"/includes/_Map_Legislative_Districts.js\"></script>\r\n<script
+        src=\"/includes/_Map_Legislative_Districts_Numbers.js\"></script>\r\n<script
+        src=\"/includes/_Map_County_Lines.js\"></script>\r\n<script src=\"/includes/_Map_County_Names.js\"></script>\r\n<script
+        src=\"/includes/_Map_Legislative_Districts_Cities.js\"></script>\r\n<script
+        src=\"/includes/Javascript/setup_interactive_map_arrays.js\"></script>\r\n\r\n<!--//\r\n\r\n//-->\r\n\r\n<!--Cross
+        Frame Scripting Code from BIT-->\r\n<SCRIPT LANGUAGE = javascript>\r\nif (top.frames.length!=0)\r\ntop.location=self.document.location;\r\n</SCRIPT>\r\n\r\n\r\n\r\n<!--//RESPONSIE
+        CALENDAR//-->\r\n<link href='/includes/Javascript/fullcalendar/fullcalendar/fullcalendar2.css'
+        rel='stylesheet' />\r\n<link href='/includes/Javascript/fullcalendar/fullcalendar/fullcalendar.print.css'
+        rel='stylesheet' media='print' />\r\n\r\n\r\n\r\n\r\n<!--//respond.js to patch
+        html5-->\r\n<!--[if lt IE 9]>\r\n    <script src=\"/includes/Javascript/respond.src.js\"></script>\r\n<![endif]-->\r\n\r\n\r\n\r\n
+        \   \r\n    <!-- SEO TITLE AND DESCRIPTION HERE -->\r\n    <title>About South
+        Dakota: South Dakota Secretary of State</title>\r\n    <meta name=\"description\"
+        content=\"\"/>\r\n\r\n</head>\r\n    \r\n<body class=\"level_two\">\r\n\r\n\r\n\t\t\t\t<script>\r\n
+        \   (function () {\r\n        var cx = '012382400048732927914:nqn5si4dtbg';\r\n
+        \       var gcse = document.createElement('script');\r\n        gcse.type
+        = 'text/javascript';\r\n        gcse.async = true;\r\n        gcse.src = (document.location.protocol
+        == 'https:' ? 'https:' : 'http:') +\r\n            '//www.google.com/cse/cse.js?cx='
+        + cx;\r\n        var s = document.getElementsByTagName('script')[0];\r\n        s.parentNode.insertBefore(gcse,
+        s);\r\n    })();\r\n</script>\r\n\r\n<script>\r\n    (function (i, s, o, g,
+        r, a, m) {\r\n        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function
+        () {\r\n            (i[r].q = i[r].q || []).push(arguments)\r\n        },
+        i[r].l = 1 * new Date(); a = s.createElement(o),\r\n        m = s.getElementsByTagName(o)[0];
+        a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)\r\n    })(window,
+        document, 'script', '//www.google-analytics.com/analytics.js', 'ga');\r\n\r\n
+        \   ga('create', 'UA-60581758-1', 'auto');\r\n    ga('send', 'pageview');\r\n\r\n</script>\r\n<div
+        class=\"wrapper\">\r\n    \r\n    \t\t\r\n           \r\n        <header class=\"clearfix\">\r\n
+        \             \t\t\t\r\n              \t\t\t<div id=\"blue_bar\" class=\"clearfix\">\r\n
+        \                       \t\t\r\n                                <div class=\"centerer\">\r\n
+        \                                        <a href=\"/default.aspx\" title=\"Home\"><img
+        src=\"/images/SOS_logo_REV.png\" alt=\"South Dakota Secretary of State logo\"
+        id=\"header_logo\" onMouseOver=\"MM_swapImage('header_logo','','/images/SOS_logo_REV_O.png',1)\"
+        onMouseOut=\"MM_swapImgRestore()\" /></a> \r\n                                         \r\n
+        \                                        \r\n                                \r\n
+        \                                       <!--BEGIN MOBILE MENU-->\r\n                                        <div
+        id=\"mobile_nav\" class=\"\">\r\n                                                <span
+        id=\"mobile_nav_icon\">MENU</span>\r\n                                        </div>\r\n
+        \                                       \r\n                                        <nav
+        class=\"mobile_nav_menu \">\r\n                                            <img
+        src=\"/images/mobile_arrow_up.png\" alt=\"arrow\" id=\"mobile_arrow\" />\r\n
+        \                                           <div id=\"mobile_menu_box\" class=\"\">\r\n
+        \                                               <ul class=\"mobilemenu treeview
+        clearfix\">\r\n                                                    <li class=\"\"><a
+        href=\"/default.aspx\" title=\"Home\">Home</a></li>\r\n                                                    <!--
+        most of the mobile menu is generated automatically, all you need to do is
+        add your main sections here as list items-->\r\n                                                    <li
+        ><a href=\"/elections-voting/default.aspx\" title=\"Elections & Voting\">Elections
+        &amp; Voting</a><ul class=\"\"><!-- Master Nav list for Elections section-->\r\n\r\n<!--
+        you break the columns out into even lists as needed, there are three columns.
+        NOTE: In mobile view, the columns are stacked on top of each other 1,2,3.
+        When the pages are wider, then the columns are next to each other left to
+        right 1,2,3. -->\r\n\r\n<!-- you can add images to any link, but you have
+        to use this format. The Images are hidden and the text is used instead, when
+        at mobile view. Images are shown when screens are larger and can accomodate
+        that. -->\r\n<!--  <a href=\"/path/to/file.aspx\"><img src=\"/images/where_do_i_vote.png\"
+        alt=\"Where do I vote?\" /><span>Where do I vote?</span></a>  -->\r\n<title>South
+        Dakota Legislative District Map</title>\r\n\r\n\r\n<div class=\"nav_col_1
+        clearfix\">\r\n\r\n    <!-- each of these main level list items (li) needs
+        to test the SubSection variable. The value of that variable determines which
+        of these main li will be given class of \"active_subsection\". That determines
+        which sidebar navigation is showing on third level pages and below. If the
+        wrong sidebar is showing, then it likely stems back to the value of SubSection
+        being wrong, which is set at the top if each aspx page. -->\r\n\r\n\r\n\r\n
+        \   <!-- this is a main subnav, if you want to add an item to the upper navigation,
+        or the footer list for this section, then it needs to be at this outer level-->\r\n\r\n
+        \   <!-- sub items are nested within each li, as applicable. The \"treeview\"
+        class is what gives this main sub nave the ability to have the +/- expanding/contracting
+        buttons in the sidebar-->\r\n\r\n    <!--here is a template you can use for
+        adding more top level list items with nested sub navs //\r\n                                                            <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a>\r\n                                                                <ul
+        class='treeview'>\r\n                                                                        <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a></li>\r\n
+        \                                                                       <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a>\r\n                                                                        \t<ul>\r\n
+        \                                                                                   <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a></li>\r\n
+        \                                                                                   <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a></li>\r\n
+        \                                                                                   <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a></li>\r\n
+        \                                                                           </ul>\r\n
+        \                                                                       </li>\r\n
+        \                                                                       <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a></li>\r\n
+        \                                                               </ul>\r\n
+        \                                                           </li>\r\n                                                            //-->\r\n<ul>\r\n
+        \       <li class=''><a\r\n            href='/elections-voting/upcoming-elections/general-information/default.aspx'
+        title='Upcoming Elections'>2026 Election Information</a>\r\n          <ul
+        class='treeview'>\r\n            <li><a href='/elections-voting/upcoming-elections/general-information/default.aspx'\r\n
+        \                   title='General Information'>Election Information</a>\r\n
+        \               <ul>\r\n                    <li><a href=\"https://vip.sdsos.gov/candidatelist.aspx?eid=774\">Candidate
+        List</a></li>\r\n                    <li><a\r\n                            href=\"https://sdsos.gov/elections-voting/upcoming-elections/general-information/2026
+        Election Information/2026-ballot-questions.aspx\">Ballot\r\n                            Questions</a></li>\r\n
+        \                   <li><a\r\n                            href=\"/elections-voting/upcoming-elections/general-information/2026-candidate-calendar.aspx\">Candidate\r\n
+        \                           Calendar</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/2026-Election-Information.aspx\">Election\r\n
+        \                           Calendar</a></li>\r\n                    <li><a
+        href=\"/elections-voting/upcoming-elections/general-information/2026-signature-requirements-candidates.aspx\">Number
+        of Signers Required for 2026 Candidate Petitions</a></a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/Circulate-2026-nominating-petitions-candidates.aspx\">Circulate\r\n
+        \                           a Nominating Petition for Statewide, Legislative
+        &amp; County Candidates </a></li>\r\n                    <li><a\r\n                            href=\"/elections-voting/upcoming-elections/general-information/2026-Independent-Candidate-Information.aspx\">Independent\r\n
+        \                           Candidate Information</a></li>\r\n                    <li><a
+        href=\"/elections-voting/assets/2026 Documents/2026CountyCandidatesCampaignGuide.pdf\">How
+        to be a\r\n                            County Candidate</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/2026-offices-to-be-filled.aspx\">Offices\r\n
+        \                           to be Filled in 2026</a></li>\r\n                    <li><a
+        href='/elections-voting/upcoming-elections/general-information/office-term-limits-and-qualifications.aspx'\r\n
+        \                           title='Qualifications to hold office &amp; term
+        limits'>Qualifications to Hold Office &amp;\r\n                            Term
+        Limits</a></li>\r\n                    <li><a\r\n                            href=\"/elections-voting/upcoming-elections/general-information/2026-candidate-withdrawal-info.aspx\">Candidate\r\n
+        \                           Withdrawal Information</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/2026-Election-Polling-Places.aspx\">2026\r\n
+        \                           Election Precincts &amp; Polling Places</a></li>\r\n\t\t\t
+        \ <li><a href=\"/elections-voting/upcoming-elections/general-information/2026-Election-Absentee-Data.aspx\">2026
+        Weekly Absentee Numbers</a></li>\r\n                    <li><a href=\"/elections-voting/upcoming-elections/general-information/information-on-election-equipment.aspx\">Election\r\n
+        \                           Equipment, Electronic Pollbooks, and Vote Center
+        Information</a></li>\r\n                </ul>\r\n            </li>\r\n        </ul>\r\n
+        \   </li>\r\n    <li><a\r\n            href=\"/elections-voting/upcoming-elections/general-information/2026-ballot-questions.aspx\">2026\r\n
+        \           Statewide Ballot Questions</a></li>\r\n    <li class=''><a\r\n
+        \           href='/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/default.aspx'\r\n            title='Ballot Question
+        Information'>Ballot Question Info</a>\r\n        <ul class=\"treeview\">\r\n
+        \           <li><a href='/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/default.aspx'\r\n                    title='Ballot
+        Question Information'>Ballot Question Information</a>\r\n                <ul>\r\n
+        \                   <li><a href='/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/signature-requirements-ballot-question-petitions.aspx'\r\n
+        \                           title='Signature requirements for ballot question
+        petitions'>Signature Requirements &amp;\r\n                            General
+        Information</a></li>\r\n                    <li><a href='/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/general-ballot-question-information.aspx'\r\n
+        \                           title='General ballot question information'>History
+        &amp; Past SD Ballot Questions</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/challenging-statewide-ballot-question.aspx\">Challenging\r\n
+        \                           a Statewide Ballot Question</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/Ballot-Measure-Signature-Withdrawal-Information.aspx\">Ballot\r\n
+        \                           Measure Signature Withdrawal Information</a></li>\r\n
+        \               </ul>\r\n            </li>\r\n        </ul>\r\n    </li>\r\n
+        \   <li class=''><a\r\n            href=\"/elections-voting/upcoming-elections/general-information/2026
+        Political Party Information/recognized-political-parties.aspx\"\r\n            title='Political
+        Party Information'>Political Party Info</a>\r\n        <ul class=\"treeview\">\r\n
+        \           <li><a href=\"/elections-voting/upcoming-elections/general-information/2026
+        Political Party Information/recognized-political-parties.aspx\"\r\n                    Title=\"Policitical
+        Party Information\">Political Party Information</a>\r\n                <ul>\r\n
+        \                   <li><a\r\n                            href=\"/elections-voting/upcoming-elections/general-information/2026
+        Political Party Information/form-a-new-political-party.aspx\">Forming\r\n
+        \                           A New Political Party</a></li>\r\n                    <li><a
+        href=\"/elections-voting/assets/2026 Documents/2026PolticalPartyFlowChart.pdf\">New
+        Party,\r\n                            Alternative Political Party Status,
+        and Recognized Party Requirements 2026</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/election-resources/election-history/2024/2024-Political-Party-Conventions.aspx\">Political\r\n
+        \                           Party State Conventions and Certification of Nominated
+        Candidates </a></li>\r\n                </ul>\r\n            </li>\r\n        </ul>\r\n
+        \   </li>\r\n    <li class=''><a\r\n            href='/elections-voting/voting/help-america-vote-act.aspx'
+        title='Help America Vote Act (HAVA)'>Help America\r\n            Vote Act
+        (HAVA)</a> </li>\r\n    <li class=''><a\r\n            href=\"/elections-voting/election-resources/Election-Truth-and-Transparency-Page/default.aspx\">Election
+        Truth\r\n            &amp; Transparency</a></li>\r\n\r\n\r\n</ul>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--links
+        column two-->\r\n<div class=\"nav_col_2 clearfix\">\r\n<ul>\r\n        <li><a
+        href=\"https://vip.sdsos.gov/CountyAuditors.aspx\">County Auditor Contact
+        Information</a></li>\r\n    <li class=''><a\r\n            href='/elections-voting/campaign-finance/default.aspx'
+        title='Campaign Finance'>Campaign Finance</a>\r\n        <ul class=\"treeview\">\r\n
+        \           <li><a href=\"/elections-voting/campaign-finance/campaign-finance-faqs.aspx\">
+        Campaign Finance FAQs</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/default.aspx\"
+        title=\"Campaign Finance Guidelines\">Campaign\r\n                    Finance
+        Reporting System</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/Independent_expenditures.aspx\">Communication\r\n
+        \                   Expenditures</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/contribution-limits.aspx\">Contribution
+        Limits </a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/paper-forms.aspx\"
+        title=\"Paper Forms\">Paper Forms</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/important-dates.aspx\">Report
+        Deadlines and Who Files</a>\r\n            </li>\r\n            <li><a href=\"/elections-voting/campaign-finance/Search.aspx\">Search
+        Reports</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/Supplemental-Reports.aspx\">Supplemental
+        Reports</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/campaign-finance-complaint-procedure.aspx\">Campaign
+        Finance\r\n                    Complaint Process</a></li>\r\n        </ul>\r\n
+        \   </li>\r\n\r\n    <li class=''><a\r\n            href='/elections-voting/financial-interest-statements/default.aspx'
+        title='Petitions'>Conflict of Interest /\r\n            Financial Interest
+        Statements</a>\r\n        <ul class=\"treeview\">\r\n            <li><a href='/elections-voting/financial-interest-statements/default.aspx'\r\n
+        \                   title='Financial Interest Statement Forms'>Forms</a></li>\r\n
+        \           <li><a href='/elections-voting/financial-interest-statements/search.aspx'\r\n
+        \                   title='Search Financial Interest Statements'>Search for
+        Financial Interest Statements (FIS) -\r\n                    Candidates</a></li>\r\n
+        \       </ul>\r\n    </li>\r\n\r\n    <li><a href='/about-the-office/board-of-elections/default.aspx'
+        title='Board of Elections'>Board of Elections</a>\r\n    </li>\r\n    <li
+        class=''><a\r\n            href='/elections-voting/nominating-petitions/download-nominating-petition.aspx
+        '\r\n            title='Petitions'>Petitions</a>\r\n        <ul class=\"treeview\">\r\n
+        \           <li><a href='/elections-voting/nominating-petitions/download-nominating-petition.aspx'\r\n
+        \                   title='Download nominating petition'>Download a Petition</a></li>\r\n
+        \           <li><a href='/elections-voting/nominating-petitions/request-petition-copies.aspx'\r\n
+        \                   title='Request Petition Copies'>Request Copies of Filed
+        Petitions</a></li>\r\n            <li><a href=\"/elections-voting/nominating-petitions/Challenging-a-petition.aspx\">Challenging
+        a Petition\r\n                    (excluding ballot question petitions)</a></li>\r\n
+        \       </ul>\r\n    </li>\r\n    <li><a href='/elections-voting/NVRA/NVRA.aspx'
+        title='NVRA'>National Voter Registration Act (NVRA)</a></li>\r\n\r\n</ul>\r\n</div>\r\n\r\n\r\n\r\n\r\n<!--links
+        column three-->\r\n<div class=\"nav_col_3 clearfix\">\r\n<ul>\r\n    \r\n
+        \   <li><a href=\"/elections-voting/voting/register-to-vote/default.aspx\"
+        title=\"Register to Vote\"\r\n            style=\"line-height: 1.5em;\">Register
+        to Vote<br>\r\n            Update Voter Registration<br>\r\n            Cancel
+        Voter Registration</a></li>\r\n    <li><a href='/elections-voting/upcoming-elections/voter-registration-totals/default.aspx'\r\n
+        \           title='Voter Registration Totals'>Voter Registration Totals</a></li>\r\n\r\n
+        \   <li class=''><a\r\n            href='/elections-voting/election-resources/default.aspx'
+        title='Election Resources'>Election Resources</a>\r\n        <ul class=\"treeview\">\r\n
+        \           <li><a href=\"/elections-voting/assets/Archive/Prior to 2026/LegislativeDist2023.pdf\"
+        title='South Dakota Legislative Districts'\r\n                    target=\"_blank\">South
+        Dakota Legislative Districts</a></li>\r\n            <li><a href='/elections-voting/election-resources/election-laws-and-administrative-rules.aspx'\r\n
+        \                   title='Election Laws and Administrative Rules'>Election
+        Laws and Administrative Rules</a></li>\r\n            <li><a href='/elections-voting/election-resources/election-history/default.aspx'\r\n
+        \                   title='Election History'>Election History</a></li>\r\n
+        \           <li><a href=\"/elections-voting/election-resources/current-elected-officials.aspx\">Current
+        Elected\r\n                    Officials</a></li>\r\n            <li><a\r\n
+        \                   href=\"/elections-voting/election-resources/county-auditor-resource-page-primary-general-elections.aspx\">County\r\n
+        \                   Auditors - Primary &amp; General Election Resources</a></li>\r\n\r\n
+        \       </ul>\r\n    </li>\r\n\r\n    <li><a href='/elections-voting/election-resources/county-auditor-resource-page-primary-general-elections.aspx'\r\n
+        \           title='Auditor Resources'>Auditor Resources</a></li>\r\n    <li><a
+        href='/elections-voting/upcoming-elections/municipal-school-information/default.aspx'\r\n
+        \           title='City/School Resources'>City/School Resources</a></li>\r\n
+        \   <li><a href='/elections-voting/upcoming-elections/Myths-vs-Facts-and-FAQS/faqs.aspx'
+        title-'FAQs'>Election FAQs</a></li>\r\n\r\n</ul>\r\n</div>\r\n\r\n\r\n<!--links
+        column four-->\r\n<div class=\"nav_col_4 clearfix\">\r\n<ul>\r\n    \r\n    <li><a
+        href='/elections-voting/voting/absentee-voting.aspx' title='Absentee Voting'>Absentee
+        Voting</a></li>\r\n\r\n\r\n    <li><a href=\"https://vip.sdsos.gov/VIPLogin.aspx\"
+        title=\"Where Do I Vote? View Sample Ballot Track Absentee Ballot\"\r\n            style=\"line-height:
+        1.5em; color: #870305;\"><strong>Voter Information Portal (VIP)</strong><br>\r\n
+        \           Where Do I Vote?<br />\r\n            View Sample Ballot<br />Track
+        Absentee Ballot<br />Check Voter Registration</a></li>\r\n\r\n    <li class=''><a\r\n
+        \           href='/elections-voting/voting/default.aspx' title='Voting'>Voting
+        Information</a>\r\n        <ul class='treeview'>\r\n            <li><a href='https://vip.sdsos.gov/VIPLogin.aspx'
+        title='Where do I vote?'>Where Do I Vote?</a></li>\r\n            <li><a href='/elections-voting/voting/register-to-vote/default.aspx'
+        title='Register to vote'>Register to\r\n                    Vote</a>\r\n                <ul>\r\n
+        \                   <li><a href='/elections-voting/voting/register-to-vote/residency-qualification.aspx'\r\n
+        \                           title='Residency Qualification'>Residency Qualification</a></li>\r\n
+        \                   <li><a href=\"/elections-voting/voting/register-to-vote/voter-challenge-information.aspx\">Voter
+        Registration Challenges</a></li>\r\n                    <li><a href='/elections-voting/voting/register-to-vote/felony-convictions.aspx'\r\n
+        \                           title='Felony Convictions'>Felony Convictions</a></li>\r\n
+        \                   <li><a href='/elections-voting/voting/register-to-vote/voter-registration-drive-instructions.aspx'\r\n
+        \                           title='Voter Registration Drive Instructions'>Voter
+        Registration Drive Instructions</a></li>\r\n                    <li class=\"last\"><a
+        href='/elections-voting/voting/register-to-vote/forms.aspx'\r\n                            title='Forms'>Forms</a></li>\r\n
+        \               </ul>\r\n            </li>\r\n            <li><a href='https://sdsos.gov/elections-voting/NVRA/NVRA.aspx'>National
+        Voter Registration Act (NVRA)</a>\r\n                <ul>\r\n                    <li><a
+        href='https://sdsos.gov/elections-voting/NVRA/coordinator-contacts.aspx'>Voter
+        Registration\r\n                            Agency (VRA) Contacts</a></li>\r\n
+        \                   <li><a href=https://sdsos.gov/elections-voting/NVRA/agency-voter-reg.aspx\r\n
+        \                           title='Agency Voter Registration Material'>Agency
+        Voter Registration Material</a></li>\r\n                    <li><a href='https://sdsos.gov/elections-voting/NVRA/monthly-activity.aspx'>Monthly
+        Voter\r\n                            Registration Activity</a></li>\r\n                    <li><a
+        href='https://sdsos.gov/elections-voting/NVRA/policies-and-procedures.aspx'>Policies
+        and\r\n                            Procedures</a></li>\r\n                    <li><a
+        href='https://sdsos.gov/elections-voting/NVRA/Training.aspx'>Training</a></li>\r\n
+        \               </ul>\r\n            <li><a href='/elections-voting/voting/registration-changes.aspx'
+        title='Registration Changes'>Registration\r\n                    Changes</a></li>\r\n
+        \           <li><a href='/elections-voting/voting/polling-place-accessibility.aspx'\r\n
+        \                   title='Polling Place Accessibility'>Polling Place Accessibility</a></li>\r\n
+        \           <li><a href='/elections-voting/voting/military-members.aspx' title='Military
+        Members'>Military Members</a>\r\n            </li>\r\n            <li><a href='/elections-voting/voting/overseas-citizen-voter.aspx'
+        title='Overseas Citizen Voter'>Overseas\r\n                    Citizen Voter</a></li>\r\n\r\n
+        \           <li><a href='/elections-voting/voting/absentee-voting.aspx' title='Absentee
+        Voting'>Absentee Voting</a></li>\r\n            <li><a href='/elections-voting/voting/help-america-vote-act.aspx'
+        title='Absentee Voting'>Help America Vote\r\n                    Act (HAVA)</a></li>\r\n
+        \           <li><a href='/elections-voting/voting/kids-voting-southdakota.aspx'
+        title='Kids Voting South Dakota'>Kids\r\n                    Voting South
+        Dakota</a></li>\r\n            <li><a href='/elections-voting/voting/college-students.aspx'
+        title='College Students'>College Students</a></li>\r\n            <li><a href=\"/elections-voting/voting/sos-awards.aspx\">Secretary
+        of State Awards</a></li>\r\n            <li><a href=\"/elections-voting/voting/Secure-Active-Designation.aspx\">Address
+        Confidentiality</a></li>\r\n\r\n        </ul>\r\n    </li>\r\n\r\n    <li><a
+        href='/elections-voting/election-resources/election-history/default.aspx'
+        title='Election History'>Election\r\n            History</a></li>\r\n    <li><a
+        href=\"/elections-voting/voting/sos-awards.aspx\">Secretary of State Awards</a></li>\r\n\r\n\r\n</ul>\r\n</div></ul></li>\r\n
+        \                                                   <li ><a href=\"/Business-Services/default.aspx\"
+        title=\"Business Services\">Business Services</a><ul class=\"\"> <!-- Master
+        Nav list for BUSINESS SERVICES section-->\r\n                             \r\n
+        \                                    \t\r\n                                           \r\n<div
+        class=\"nav_col_1 clearfix\">\r\n<ul>\r\n\t    <li class=''><a href=\"https://sosenterprise.sd.gov/BusinessServices/Business/RegistrationInstr.aspx\"
+        title=\"Start a New Business\">Register a Business<br>\r\n    </a>\r\n    <ul
+        class=\"treeview\">\r\n        <li><a href=\"/Business-Services/corporations/corporate-forms/default.aspx\"
+        title=\"Business Forms\">Business Forms</a>\r\n          <ul>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/business-corporations.aspx\"
+        title=\"Business Corporations\">Business Corporations</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/limited-liability-companies.aspx\"
+        title=\"Limited Liability Companies\">Limited Liability Companies</a></li>\r\n
+        \           <li><a href=\"/Business-Services/corporations/corporate-forms/series-llc.aspx\"
+        title=\"Series LLCs\">Series LLCs</a></li>\r\n            <li><a href=\"/Business-Services/corporations/corporate-forms/nonprofit-corporations.aspx\"
+        title=\"Nonprofit Corporations\">Nonprofit Corporations</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/limited-liability-partnerships.aspx\"
+        title=\"Limited Liability Partnerships\">Limited Liability Partnerships</a></li>\r\n
+        \           <li><a href=\"/Business-Services/corporations/corporate-forms/limited-partnerships.aspx\"
+        title=\"Limited Partnerships\">Limited Partnerships</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/cooperatives.aspx\"
+        title=\"Cooperatives\">Cooperatives</a></li>\r\n            <li><a href=\"/Business-Services/corporations/corporate-forms/business-trusts.aspx\"
+        title=\"Business Trusts\">Business Trusts</a></li>\r\n            <li><a href=\"/Business-Services/corporations/corporate-forms/miscellaneous-forms.aspx\"
+        title=\"Miscellaneous Forms\">Miscellaneous Forms</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/commercial-registered-agents.aspx\"
+        title=\"Commercial Registered Agents\">Commercial Registered Agents</a></li>\r\n
+        \         </ul>\r\n        </li>\r\n      </ul>\r\n\t\t\r\n    <li><a href=\"https://sosenterprise.sd.gov/ucc/\">File
+        a UCC/EFS</a></li>\r\n\t<li><a href=\"http://sdsos.gov/Business-Services/trademark-name-registration/default.aspx\">File
+        a Trademark</a></li>\r\n\t<li><a href=\"https://sosenterprise.sd.gov/BusinessServices/Fictitious/FictitiousHome.aspx\">File
+        a DBA</a></li>  \r\n\t<li><a href=\"/Business-Services/corporations/corporate-forms/default.aspx\">Business
+        Paper Forms</a></li>\r\n</ul>\r\n</div>       \r\n                                            \r\n<!--links
+        column two-->\r\n<div class=\"nav_col_2 clearfix\">\r\n<ul>\r\n\t\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/AnnualReportInstr.aspx\">File
+        an Annual Report<br></a></li>\r\n\t<li ><a href=\"https://sosenterprise.sd.gov/BusinessServices/Business/SOCInstr.aspx\"
+        title=\"File a Registered Agent Statement of Change\">File a Registered Agent
+        Change</a></li>\r\n\t<li ><a href=\"https://sosenterprise.sd.gov/BusinessServices/Business/ReinstatementInstr.aspx\"
+        title=\"File a Reinstatement\">Prepare a Reinstatement</a></li>\r\n\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/CertOfExistenceInstr.aspx\"
+        title=\"Certificates of Good Standing/Existence\">Certificates of Good Standing/Existence</a></li>\r\n</ul>\r\n</div>\r\n\r\n\r\n<!--links
+        column three-->\r\n<div class=\"nav_col_3 clearfix\">\r\n<ul>\r\n\t\t<li class=''><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/FilingSearch.aspx\"
+        title=\"Search for a Busineses\">Search for a Business</a></li>\r\n\t<li ><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/NameAvailability.aspx\"
+        title=\"Name Availability Search\">Search Business Name Availability</a>   </li>\r\n\t\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/RaSearch.aspx\">Search
+        Business by Registered Agent</a></li>\r\n\t\t<li><a href=\"/Business-Services/assets/ForeignBeneficialOwnersofAgriculturalLand.pdf\">Foreign
+        Beneficial Owner Report</a></li>\r\n</ul>\r\n</div>\r\n\r\n<!--links column
+        four-->\r\n<div class=\"nav_col_4 clearfix\">\r\n<ul>\r\n\t\t<li class=''><a
+        href=\"/Business-Services/BusinessResources/business-resources.aspx\" title=\"UCC
+        Filings\">Business Resources</a>\r\n\t<ul class=\"treeview\">\r\n\t  <li><a
+        href=\"https://sosenterprise.sd.gov/ucc/\" title=\"UCC & EFS Forms\">UCC &amp;
+        EFS Forms</a></li>\r\n\t\t\r\n\t  <li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/default.aspx\"
+        title=\"UCC Information\">UCC Information</a> \r\n\t\t<ul>\r\n\t\t\t<li><a
+        href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/where-to-file.aspx\"
+        title=\"Where to File\">Where to File</a> </li>\r\n\t\t\t<li><a href=\"/general-information/filing-fees.aspx\"
+        target=\"_blank\" title=\"Fee Schedule\">Fee Schedule</a></li>\r\n\t\t\t<li><a
+        href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/caretaker.aspx\">Livestock
+        Caretaker Filings</a></li>\r\n\t\t\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/cheyenne-river-sioux-tribe-compact.aspx\"
+        title=\"Cheyenne River Sioux Tribe Compact\">Cheyenne River Sioux Tribe Compact</a>
+        </li>\r\n\t\t\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/oglala-sioux-tribe-compact.aspx\"
+        title=\"Oglala Sioux Tribe Compact\">Oglala Sioux Tribe Compact</a> </li>\r\n\t\t</ul>\r\n\t
+        \ </li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t             \r\n\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/efsforms.aspx\">EFS
+        Paper Forms</a></li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t             \r\n\t<li><a
+        href=\"/Business-Services/uniform-commercial-code/sd-laws-administrative-rules.aspx\"
+        title=\"South Dakota Laws and Administrative Rules\">South Dakota Laws and
+        Administrative Rules</a>  </li>\r\n\t<li><a href=\"/Business-Services/uniform-commercial-code/docs/NEWUCCSubscriptionForm.pdf\"
+        target=\"_blank\" title=\"Subscribe to UCC Filing System\">Subscribe to UCC
+        Filing System</a></li>\r\n\t<li><a href=\"/Business-Services/database-downloads.aspx\"
+        target=\"_blank\" title=\"Download UCC Database\">Subscribe to  UCC &amp;
+        EFS Databases</a></li>\r\n\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/contact.aspx\"
+        title=\"Contact Us & FAQs\">Contact Us &amp; FAQs</a></li>\r\n\t</ul>\r\n\t</li>\r\n\r\n<!--
+        ------------START OF TRADEMARKS SECTION-------------------------- -->  \r\n<li
+        class=''><a href=\"https://sdsos.gov/general-information/filing-fees.aspx\"
+        title=\"Trademarks\">Fee Schedule</a> \r\n\t<ul class=\"treeview\">\r\n\t\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/TrademarkSearch.aspx\"
+        title=\"Trademark Search\">Search for a Trademark</a></li>\r\n\t\t<li><a href=\"/Business-Services/trademark-name-registration/trade-marks.aspx\"
+        title=\"Trademarks\">Trademark Forms</a></li>\r\n\t\t<li><a href=\"/Business-Services/trademark-name-registration/emblems.aspx\"
+        title=\"Emblems\">Emblem Forms</a></li>\r\n\t\t<li><a href=\"/Business-Services/trademark-name-registration/farm-ranch-home-names.aspx\"
+        title=\"Farm/Ranch Home Names\">Farm/Ranch/Home Name Forms</a></li>\r\n\t\t<li><a
+        href=\"/Business-Services/database-downloads.aspx\">Request Trademark Database
+        Download</a></li>\r\n\t\t<!--<li><a href=\"/business-services/trademark-name-registration/docs/trademark_application_booklet_2015.pdf\"
+        target=\"_blank\" title=\"Handbook\">Handbook</a></li>-->\r\n\t</ul>\r\n</li>\r\n
+        <!-- ------------END OF TRADEMARKS SECTION-------------------------- -->\r\n<li
+        ><a href=\"http://sdsos.gov/Business-Services/corporations/contact.aspx\">Frequently
+        Asked Questions</a></li>\r\n<li ><a href=\"/Business-Services/uniform-commercial-code/docs/NEWUCCSubscriptionForm.pdf\">Become
+        a UCC Subscriber</a></li>\r\n</ul>\r\n</div>\r\n                                           \r\n
+        \                                          </ul></li>\r\n                                                    <li
+        ><a href=\"/general-services/default.aspx\" title=\"Services for Individuals\">General
+        Services</a><ul class=\"\"><!-- Master Nav list for INDIVIDUALS section-->\r\n\r\n<div
+        class=\"nav_col_1 clearfix\">\r\n<ul>\r\n        <li class=''><a href=\"/general-services/concealed-pistol-permits/cc-default.aspx\"
+        title=\"Pistol Permits\">Pistol Permits</a>\r\n        <ul class='treeview'>\r\n
+        \           <li><a href=\"/general-services/concealed-pistol-permits/cc-permit-types.aspx\"
+        title=\"Concealed Carry Types\">Types of Concealed Carry Permits</a></li>\r\n\t\t\t<li><a
+        href=\"/general-services/concealed-pistol-permits/cc-application.aspx\" title=\"Concealed
+        Carry Application Process\">How to Apply for a Permit</a></li>\r\n\t\t\t<li><a
+        href=\"/general-services/concealed-pistol-permits/cc-replacement.aspx\" title=\"Concealed
+        Carry Replacement\">Request Replacement Permit</a></li>\r\n\t\t\t<li><a href=\"/general-services/concealed-pistol-permits/cc-reciprocity.aspx\"
+        title=\"Concealed Carry Reciprocity\">Concealed Carry Reciprocity</a></li>\r\n\t\t\t<li><a
+        href=\"/general-services/concealed-pistol-permits/cc-handgun-course.aspx\"
+        title=\"Enhanced Permit Handgun Course\">Enhanced Permit Handgun Course</a></li>\r\n\t\t\t<li><a
+        href=\"/general-services/concealed-pistol-permits/cc-law-enforcement.aspx\"
+        title=\"Law Enforcement Officers Safety Act\">Law Enforcement Officers <br>\r\n\t\t\t&emsp;Safety
+        Act</a></li>\r\n\t\t\t<li><a href=\"/general-services/concealed-pistol-permits/cc-active-duty.aspx\"
+        title=\"Active Duty Military & Spouses\">Active Duty Military & Spouses</a></li>\r\n
+        \           <li><a href=\"/general-services/concealed-pistol-permits/cc-faqs.aspx\"
+        title=\"Frequently Asked Pistol Permit Questions\">Frequently Asked Pistol
+        Permit <br>&emsp;Questions</a></li>\r\n            <li><a href=\"/general-services/concealed-pistol-permits/docs/FirearmHandbook.pdf\"
+        target=\"_blank\" title=\"South Dakota Firearm Laws\">South Dakota Firearm
+        Laws <br>\r\n\t\t\t&emsp;Handbook</a></li>\r\n\t\t\t<li><a href=\"/general-services/concealed-pistol-permits/pistolstatistics.aspx\"
+        title=\"\">Pistol Permit Statistics</a></li>\r\n        </ul>\r\n    </li>\r\n
+        \ <li><a href=\"/general-services/concealed-pistol-permits/cc-reciprocity.aspx\"
+        title=\"Pistol Permit Reciprocity\">Pistol Permit Reciprocity</a></li>\r\n\t<li><a
+        href=\"/general-services/concealed-pistol-permits/cc-faqs.aspx\" title=\"Pistol
+        Permit FAQs\">Pistol Permit FAQs</a></li>\r\n\t  <li><a href=\"https://sdsos.gov/general-information/postsecondary-education/default.aspx\"
+        title=\"Postsecondary Education\">Postsecondary Education</a></li>\r\n\r\n<!--Start
+        of Board of Finance Section-->\r\n\t<li class=''><a href=\"/about-the-office/board-of-finance/default.aspx\"
+        title=\"State Board of Finance\">State Board of Finance</a>\r\n\t\t<ul class=\"treeview\">\r\n\t\t\t<li><a
+        href=\"https://boardsandcommissions.sd.gov/Meetings.aspx?BoardID=121\" title=\"Board
+        of Finance Meetings\">Monthly Meeting Information</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-perdiem.aspx\" title=\"Board
+        of Finance Per Diem Information\">Per Diem Information</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-household-moving.aspx\" title=\"Board
+        of Finance Household Moving Allowances\">Household Moving Allowance</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-state-hosting.aspx\" title=\"Board
+        of Finance State Hosting Requests\">State Hosting Requests</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-home-station.aspx\" title=\"Board
+        of Finance Home Station Requests\">Home Station Requests</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-debt-write-off.aspx\" title=\"Board
+        of Finance Debt Write-Off Requests\">Debt Write-Off Requests</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-appeal.aspx\" title=\"Board
+        of Finance Appeal Process\">Appeal Process</a></li>\r\n\t\t</ul>\r\n  </li>\r\n<!--End
+        of Board of Finance Section-->\r\n\r\n</ul>\r\n</div>\r\n\r\n\r\n<!--links
+        column two-->\r\n<div class=\"nav_col_2 clearfix\">\r\n<ul>\r\n            <li
+        class=''><a href=\"https://sosenterprise.sd.gov/BusinessServices/Notary/Default.aspx\"
+        title=\"Notary Public\">Notary Public</a>\r\n        <ul class='treeview'>\r\n
+        \           <li><a href=\"/general-services/notary-public/how-become-notary.aspx\"
+        title=\"Becoming a Notary Public\">Becoming a Notary Public</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/getting-notary-seal.aspx\" title=\"Getting
+        a Notary Seal\">About the Notary Seal</a></li>\r\n\t\t\t<li><a href=\"/general-services/notary-public/enotary.aspx\">E-Notary</a></li>\r\n
+        \           <li><a href=\"/general-services/notary-public/complete-notarization.aspx\"
+        title=\"Components of a Complete Notarization\">Components of a Complete Notarization</a></li>\r\n
+        \           <li><a href=\"/general-services/notary-public/important-concepts.aspx\"
+        title=\"Eight Important Concepts\">Eight Important Concepts</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/dos-donts.aspx\" title=\"Dos &amp;
+        Don'ts\">Dos and Don'ts</a></li>\r\n            <li><a href=\"/general-services/notary-public/notary-procedures.aspx\"
+        title=\"Notary Procedures\">Notary Procedures</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/notaryfaqs.aspx\" title=\"Frequently
+        Asked Questions\">Frequently Asked Questions</a></li>\r\n            <li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Notary/NotarySearch.aspx\"
+        title=\"Search Notary Database\">Search Notary Database</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/glossary-terms.aspx\" title=\"Glossary
+        of Terms\">Glossary of Terms</a></li>\r\n            <li><a href=\"/general-services/notary-public/acknowledgements.aspx\"
+        title=\"Acknowledgements/Affidavits\">Acknowledgements/Affidavits</a></li>\r\n
+        \           <li><a href=\"/general-services/notary-public/lost-stolen-seal.aspx\"
+        title=\"Lost or Stolen Seal\">Lost or Stolen Seal</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/commission-expiration-dates.aspx\"
+        title=\"Commission and Expiration Dates\">Commission and Expiration Dates</a></li>\r\n
+        \           <li><a href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=18-1\"
+        target=\"_blank\" title=\"Notary Laws SDCL 18-1\">Notary Laws SDCL 18-1</a></li>\r\n
+        \           <li><a href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=18-5\"
+        target=\"_blank\" title=\"Uniform Acknowledgement SDCL 18-5\">Uniform Acknowledgement
+        SDCL 18-5</a></li>\r\n            <li><a href=\"/general-services/notary-public/what-if-move.aspx\"
+        title=\"What if I move?\">What if I move?</a></li>\r\n            <li><a href=\"/general-services/notary-public/name-changes.aspx\"
+        title=\"What if my name changes?\">What if my name changes?</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/renewal.aspx\" title=\"Notary Commission
+        Renewal\">Notary Commission Renewal</a></li>\r\n            <li><a href=\"/general-services/notary-public/docs/SDNotaryPublicHandbook.pdf\"
+        target=\"_blank\" title=\"Notary Handbook\">Notary Handbook</a></li>\r\n        </ul>\r\n
+        \   </li>\r\n\r\n    <li><a href=\"https://sosenterprise.sd.gov/BusinessServices/Notary/NotarySearch.aspx\"
+        title=\"Notary Public Searches\">Notary Public Searches</a></li>\r\n    <li><a
+        href=\"/general-services/notary-public/notaryfaqs.aspx\" title=\"Notary Public
+        FAQs\">Notary Public FAQs</a></li>\r\n\t<li><a href=\"/general-services/apostilles-authentications.aspx\"
+        title=\"Apostilles / Authentications\">Apostilles &amp; Authentications</a></li>\r\n
+        \   <li><a href=\"/general-information/executive-actions/raffle-requests/default.aspx\"
+        title=\"Raffle Requests\">Raffle Requests</a></li>    \r\n</ul>\r\n</div>\r\n\r\n\r\n<!--links
+        column three-->\r\n<div class=\"nav_col_3 clearfix\">\r\n<ul>\r\n    \t<li
+        class=''><a href=\"https://sosenterprise.sd.gov/businessservices/lobbyist/default.aspx\"
+        title=\"Lobbyist\">Lobbyists</a>    </li>\r\n\r\n    <li><a href=\"https://sosenterprise.sd.gov/businessservices/lobbyist/default.aspx\"
+        title=\"Lobbyist Searches\">Lobbyist Searches</a></li>\r\n    <li><a href=\"/general-information/executive-actions/general-appointments/search/\"
+        title=\"General Appointments\">General Appointments</a></li>\r\n\t<li><a href=\"/general-information/executive-actions/oaths-of-office/search/Default.aspx\"
+        title=\"Oaths of Office\">Oaths of Office</a></li>\r\n    <li><a href=\"/general-information/executive-actions/elected-officials-fis/search/Default.aspx\"
+        title=\"Financial Interest Statements Elected Officials\">Financial Interest
+        Statements <br>\r\n    Elected Officials</a></li>\r\n\r\n</ul>\r\n</div>\r\n<div
+        class=\"nav_col_4 clearfix\">\r\n<ul>\r\n    \t<li><a href=\"/general-information/executive-actions/executive-orders/search/Default.aspx\"
+        title=\"Executive Orders\">Executive Orders</a></li>\r\n    <li><a href=\"/general-information/executive-actions/gubernatorial-proclamations/search/Default.aspx\"
+        title=\"Executive Proclamations\">Executive Proclamations</a></li>\r\n    <li
+        class=\"nav_box_drop\"><a href=\"#\" title=\"General Information\" aria-haspopup=\"true\">General
+        Information</a>\r\n        <!--<ul class=\"ddList\">\r\n            <li><a
+        href=\"/general-information/about-state-south-dakota/default.aspx\" title=\"About
+        South Dakota\">About South Dakota</a></li>\r\n            <li><a href=\"/general-information/about-state-south-dakota/summary-south-dakota-state-government/default.aspx
+        \" title=\"Summary of State Government\">Summary of State Government</a></li>\r\n
+        \           <li><a href=\"/general-information/blue-book-legislative-manual.aspx\"
+        title=\"Blue Book Legislative Manual\">Blue Book Legislative Manual</a></li>\r\n
+        \           <li><a href=\"/general-information/publications/default.aspx\"
+        title=\"Economic Reports\">Economic Reports</a></li>\r\n            <li><a
+        href=\"/general-information/filing-fees.aspx\" title=\"Filing Fees\">Filing
+        Fees</a></li>\r\n            <li><a href=\"/general-information/about-state-south-dakota/honoring-our-flag.aspx\"
+        title=\"Honoring the Flag\">Honoring the Flag</a></li>\r\n            <li><a
+        href=\"/general-information/loading-acrobat-reader.aspx\" title=\"Loading
+        Acrobat Reader\">Loading Acrobat Reader</a></li>\r\n            <li><a href=\"/general-information/about-state-south-dakota/state-constitution.aspx\"
+        title=\"State Constitution\">State Constitution</a></li>\r\n            <li><a
+        href=\"http://www.sdcounties.org/\" title=\"South Dakota Association of County
+        Officials\">South Dakota Association of County Officials</a></li>\r\n            <li><a
+        href=\"/general-information/about-state-south-dakota/state-seal-symbols.aspx\"
+        title=\"State Seal and Symbols\">State Seal and Symbols</a></li>\r\n        </ul>-->\r\n
+        \       <ul class=\"ddlist\">\r\n        <li><a href=\"/general-information/about-state-south-dakota/default.aspx\"
+        title=\"About the state of South Dakota\">About South Dakota</a> </li>\r\n\t\t<li><a
+        href=\"https://sdsos.gov/about-the-office/about-secretary-johnson.aspx\" title=\"About
+        Secretary Monae L. Johnson\">About Secretary Johnson</a> </li>\r\n        <li><a
+        href=\"/general-information/about-state-south-dakota/summary-south-dakota-state-government/default.aspx\"
+        title=\"A summary of South Dakota State Government\">A Summary of South Dakota<br
+        /> State Government</a></li>\r\n        <li><a href=\"/general-information/administrative-rules/search/\"
+        title=\"Administrative Rules\">Administrative Rules</a></li>\r\n        <li><a
+        href=\"/general-information/blue-book-legislative-manual.aspx\" title=\"Blue
+        Book Legislative Manual\">Blue Book Legislative Manual</a></li>\r\n        <li><a
+        href=\"/general-information/publications/default.aspx\" title=\"Publications\">Economic
+        Reports</a></li>\r\n        <li><a href=\"/general-information/executive-actions/oaths-of-office/search/\"
+        title=\"Executive Orders\">Executive Appointments</a></li>\r\n        <li><a
+        href=\"/general-information/executive-actions/executive-orders/search/Default.aspx\"
+        target=\"_blank\" title=\"Executive Orders\">Executive Orders</a></li>\r\n
+        \       <li><a href=\"/general-information/executive-actions/gubernatorial-proclamations/search/Default.aspx\"
+        target=\"_blank\" title=\"Executive Proclamations\">Executive Proclamations</a></li>\r\n
+        \   <li><a href=\"/general-information/filing-fees.aspx\" target=\"_blank\"
+        title=\"Filing Fees\">Filing Fees</a></li>\r\n    <li><a href=\"/general-information/about-state-south-dakota/honoring-our-flag.aspx\"
+        title=\"Honoring our flag\">Honoring Our flag</a></li>\r\n    <li><a href=\"/general-information/loading-acrobat-reader.aspx\"
+        title=\"Loading Acrobat Reader\">Loading Acrobat Reader</a></li>\r\n    <li><a
+        href='http://www.nass.org/' target=\"_blank\" title='National Association
+        of Secretaries of State'>National Association of<br /> Secretaries of State</a></li>\r\n
+        \   <li><a href='/about-the-office/other-secretary-of-state-websites.aspx'
+        title='Other Secretary of State websites'>Other Secretary of State Websites</a></li>\r\n
+        \   <li><a href='/about-the-office/board-of-elections/default.aspx' title='State
+        Board of Elections'>State Board of Elections</a>    </li>\r\n    \r\n    <li><a
+        href=\"/elections-voting/assets/Archive/Prior to 2026/2025 South Dakota Constitution
+        20250919.pdf\" title=\"State Constitution\">State Constitution</a></li>\r\n
+        \   <li><a href=\"/general-information/about-state-south-dakota/state-seal-symbols.aspx\"
+        title=\"State seal and symbols\">State Seal and Emblems</a></li>\r\n            </ul>\r\n
+        \   </li>\r\n\r\n    <li class=\"nav_box_drop\"><a href=\"#\" title=\"Other
+        Filings\" aria-haspopup=\"true\">Other Filings</a>\r\n        <ul class=\"ddList\">\r\n
+        \           <li><a href=\"/general-information/about-state-south-dakota/use-of-state-seal.aspx\">Use
+        of the State Seal</a></li>\r\n            <li><a href=\"/general-information/miscellaneous-forms/athletic-agent-registration.aspx\"
+        title=\"Athlete Agent Registration\">Athlete Agent Registration</a></li>\r\n
+        \           <li><a href=\"/general-information/miscellaneous-forms/environmental-covenant-registry.aspx\"
+        title=\"Environmental Covenant Registry\">Environmental Covenant Registry</a></li>\r\n
+        \           <li><a href=\"/general-information/miscellaneous-forms/local-bond-information-statements.aspx\"
+        title=\"Local Bond Information Statements\">Local Bond Information Statements</a></li>\r\n
+        \           <li><a href=\"/general-information/miscellaneous-forms/newspaper-ownership-circulation-statment.aspx\"
+        title=\"Newspaper Ownership and Circulation\">Newspaper Ownership and Circulation</a></li>\r\n
+        \           <li><a href=\"/general-information/about-state-south-dakota/personality_right_publicity.aspx\"
+        title=\"Personality's Right of Publicity\">Personality's Right of Publicity</a></li>\r\n
+        \           <li><a href=\"/general-information/postsecondary-education/default.aspx\"
+        title=\"Postsecondary Education\">Postsecondary Education</a></li>\r\n            <li><a
+        href=\"/general-information/summons-complaint.aspx\" title=\"Summons and Complaints\">Summons
+        and Complaints</a></li>\r\n        </ul>\r\n    </li>\r\n\r\n</ul>\r\n</div>\r\n\r\n</ul></li>\r\n
+        \                                                   \r\n                                                </ul>\r\n
+        \                                           </div>\r\n                                        </nav>\r\n
+        \                                       \r\n                                        <!--END
+        MOBILE MENU-->\r\n                                       \r\n                                        \r\n
+        \                                       <div id=\"header_krebs\">\r\n                                            <!--
+        Monae L. Johnson -->\r\n                                            <div></div>\r\n
+        \                                       </div>\r\n                                        \r\n
+        \                                       \r\n                                        <nav
+        id=\"header_contact\" class=\"tertiary\">\r\n                                            <ul
+        class=\"\" id=\"\">\r\n                                               <li
+        class=\"\"><a href=\"/contacts/default.aspx\" title=\"Contact Us\" class=\"\">Contact
+        Us</a>\r\n                                                 <ul class=\"contact_nav\"><!--
+        Master Nav list for CONTACT section-->\r\n\r\n<div class=\"nav_col_1 clearfix\">\r\n
+        \   <ul>\r\n        <li class=\"active_subsection\">\r\n            <a href=\"/contacts/default.aspx\"
+        title=\"Contact Us\">Contact Us</a>\r\n            <ul class=\"treeview\">\r\n
+        \               <li><a href='https://vip.sdsos.gov/CountyAuditors.aspx' title='County
+        Auditors'>County Auditors</a></li>\r\n                <li><a href='/contacts/assets/SDCountyROD.pdf'
+        title='County Registers of Deeds'>County Registers of\r\n                        Deeds</a></li>\r\n
+        \               <li><a href='http://www.sdmunicipalleague.org/' title='Municipal
+        Finance Officers'>Municipal Finance\r\n                        Officers</a></li>\r\n
+        \               <li><a href='http://asbsd.org/' title='School Business Managers'>School
+        Business Managers</a></li>\r\n            </ul>\r\n        </li>\r\n    </ul>\r\n</div></ul><img
+        src=\"/images/pointer.png\" class=\"header_contact_icon\" alt=\"pointer arrow
+        icon\" /></li>\r\n                                            </ul>\r\n                                        </nav>\r\n
+        \                                       \r\n                                \r\n
+        \                                       \r\n                                </div>\r\n
+        \                              \r\n                          </div>      \r\n
+        \                         \r\n                          \r\n                          <!--
+        this adds the grey bar sub navigation to all interior pages-->\r\n                          <div
+        id='grey_bar' class='clearfix'><nav class='centerer'><ul><li><a href='/elections-voting/default.aspx'
+        title='Elections and Voting' class=''><img src='/images/elections_icon_tiny.png'
+        alt='Elections and Voting' />Elections &amp; Voting</a></li><li><a href='/business-services/default.aspx'
+        title='Business Services' class=''><img src='/images/business_icon_tiny.png'
+        alt='Business Services' />Business Services</a></li><li><a href='/general-services/default.aspx'
+        title='General Services' class=''><img src='/images/individuals_icon_tiny.png'
+        alt='General Services' />General Services</a></li></ul></nav></div>\r\n                          \r\n
+        \                             \r\n                          \r\n                          \r\n
+        \                         \r\n                        <div class=\"centerer\">\r\n
+        \                       \r\n                        <!--comment out this section
+        when you want the election button turned off-->\r\n                        \r\n
+        \                     \r\n                        \r\n                        \r\n
+        \                       \r\n                        \r\n                        <div
+        id=\"red_drop\" class=\"clearfix\" >\r\n                         \t\t\r\n
+        \                                       <nav class=\"secondary\">\r\n                                            <ul
+        class=\"\" id=\"\">\r\n                                            \t\r\n
+        \                                               <!-- these items are automatically
+        appended to the mobile menu, if you don't want one to show in the mobile menu
+        then add the class mobile_omit to the containing li -->\r\n\t\t\t\t\t\t\t\t\t\t
+        \    <li><a href=\"https://vip.sdsos.gov/\"><strong>Voter Information Portal
+        (VIP)</strong></a></li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<li><a href=\"https://electionresults.sd.gov/Default.aspx\"><strong>General
+        Election Results</strong></a></li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<!--<li><a href=\"https://sdsos.gov/elections-voting/voting/register-to-vote/default.aspx\"><strong>Register
+        to Vote</strong></a></li>-->\r\n\t\t\t\t\t\t\t\t\t\t\t\t<li><a href=\"https://vip.sdsos.gov/candidatelist.aspx?eid=774\"><strong>Candidate
+        List</strong></a></li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<li><a href=\"https://sosenterprise.sd.gov/businessservices/lobbyist/default.aspx\"><strong>Lobbyist</strong></a></li>\r\n
+        \                                              <!-- <li><a href=\"https://sdsos.gov/Business-Services/default.aspx\"><strong>Business
+        Filings</strong></a></li>-->\r\n                                               <!--
+        <li><a href=\"https://sdsos.gov/elections-voting/upcoming-elections/general-information/2026/2026-ballot-questions.aspx\"><strong>2026
+        Ballot Questions</strong></a></li>-->\r\n                                             <!--
+        \  <li><a href=\"/general-services/concealed-pistol-permits/cc-default.aspx\"><strong>Pistol
+        Permits</strong></a></li>-->\r\n                                                <li><a
+        href=\"https://sdcfr.sdsos.gov/\" class=\"\"><strong>Campaign Finance Reports</strong></a></li>\r\n
+        \                                               <li class=\"\"><a href=\"/a-z-topics/default.aspx\"
+        title=\"Search By Subject\"><strong>Search by Subject</strong></a></li>\r\n
+        \                                               \r\n                                               \r\n
+        \                                             \r\n                                               \r\n\t\t\t\t\t\t\t\t\t\t\t
+        \  \r\n                                            </ul>\r\n                                         </nav>\r\n
+        \                                        \r\n                                         <!--
+        keep this here, even though it is empty. Items are added and deleted from
+        this container at various screen sizes-->\r\n                                         <nav
+        class=\"secondary_expanded\">\r\n                                            <ul
+        class=\"\" id=\"\">\r\n                                            \t\r\n
+        \                                           </ul>\r\n                                         </nav>\r\n
+        \                              </div>\r\n                         </div>\r\n\t\t</header>\r\n
+        \       \r\n       \r\n        \r\n        <!-- this is turned off for interior
+        pages, via CSS -->\r\n     \r\n        \r\n        \r\n       \r\n        \r\n
+        \       \r\n        <section id=\"middle\" class=\"clearfix\">\n<div id=\"header_blank\"
+        class=\"interior_header clearfix\">\n\n        &nbsp;\n\n</div>\r\n\t\t\t\t\r\n\t\t\t\t\r\n
+        \               <section class=\"centerer\">\r\n                \t\t\r\n                        \r\n
+        \                              <div class=\"sidebar clearfix\">\n\n    <nav
+        class=\"general_nav section_nav_list clearfix\">\n        <div class=\"main_level
+        clearfix\">\n            <!--this section has a special sidebar format because
+        it's at the root level-->\n            <ul class=\"nav_col_1 clearfix\">\n
+        \               <li class=\"active_subsection\"><a href=\"/general-information/filing-fees.aspx\"\n
+        \                       title=\"Other Filing Fees\">Other Filing Fees</a>\n
+        \                   <div class=\"treeview\">\n                        <!--
+        Master Nav list for OTHER FILINGS section-->\r\n\r\n\r\n<div class=\"nav_col_1
+        clearfix\">\r\n<ul>\r\n    \r\n    <li><a href=\"/general-information/miscellaneous-forms/athletic-agent-registration.aspx\"
+        title=\"Athletic Agent Registration\">Athletic Agent Registration</a></li>\r\n
+        \   <li><a href=\"/general-information/miscellaneous-forms/environmental-covenant-registry.aspx\"
+        title=\"Environmental Covenant Registry\">Environmental Covenant Registry</a></li>\r\n
+        \   <li><a href=\"/general-information/miscellaneous-forms/local-bond-information-statements.aspx\"
+        title=\"Local Bond Information Statements\">Local Bond Information Statements</a></li>\r\n
+        \   \r\n    <li><a href=\"/general-information/miscellaneous-forms/newspaper-ownership-circulation-statment.aspx\"
+        title=\"Newspaper Ownership and Circulation Statement\">Newspaper Ownership
+        and Circulation Statement</a></li>\r\n    \r\n    <li><a href=\"/general-information/about-state-south-dakota/personality_right_publicity.aspx\"
+        title=\"Personality's Right of Publicity\">Personality's Right of Publicity</a></li>\r\n
+        \   \r\n    <li><a href=\"/general-information/postsecondary-education/default.aspx\"
+        title=\"Postsecondary Education\">Postsecondary Education</a>\r\n        <ul
+        class=\"treeview\">\r\n            <li><a href=\"/general-information/postsecondary-education/SD-Codified-Law-13-48.aspx\"
+        title=\"SDCL 13-48\">SD Codified Law 13-48</a></li>\r\n            <li><a
+        href=\"/general-information/postsecondary-education/Application.aspx\" title=\"\">Applications
+        / Renewals</a></li>\r\n            <li><a href=\"/general-information/postsecondary-education/exempt-postsecondary-institutions.aspx\"
+        title=\"Exempt Postsecondary Institutions\">Exempt Postsecondary Institutions</a></li>\r\n
+        \           <li><a href=\"/general-information/postsecondary-education/authorizations.aspx\"
+        title=\"Authorized Institutions\">Authorized Institutions</a></li>\r\n        </ul>\r\n
+        \   </li>\r\n    \r\n    <li><a href=\"/general-information/summons-complaint.aspx\"
+        title=\"Summons and Complaint\">Summons and Complaint</a></li>\r\n\r\n\r\n</ul>\r\n</div>\r\n\n
+        \                   </div>\n                </li>\n            </ul>\n\n\n
+        \       </div>\n    </nav>\n\n</div>\r\n                        \r\n                        \r\n
+        \                       \r\n                        \r\n                        <div
+        class=\"clearfix content_block\">\r\n                        \t\t<div id=\"breadcrumb_holder\"
+        class=\"clearfix\">\n\n<span id=\"breadcrumb\"></span>\n\n\n</div>\n\n\r\n
+        \                               <h1>Personality's Right of Publicity</h1>\r\n
+        \                               \r\n                                \r\n\t\r\n\t
+        \       <p>Pursuant to <a target=\"_blank\" href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=21-64-2\">SDCL
+        21-64-2</a>, no person may use any aspect of a personality's right of publicity
+        for\r\n            a commercial purpose during the personality's lifetime
+        or for seventy years after the death of the \r\n            personality without
+        the express written consent of the personality, or if the personality is deceased
+        without the express written consent of the personality's next of kin or other
+        person or entity that owns the right of publicity.\r\n            </p>\r\n\r\n
+        \                           <p>The provisions of this chapter apply to a personality
+        who is deceased prior to July 1, 2015 <a target=\"_blank\" href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=21-64-3\">(SDCL
+        21-64-3)</a>.</p>\r\n\r\n                            <p>For specific information
+        regarding definitions, termination of rights, cause of action, permitted uses
+        and exclusive remedy <a target=\"_blank\" href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=21-64\">click
+        here.</a></p>\r\n\r\n                            <h3>Registration of claim
+        of right of publicity by successor</h3>\r\n\r\n                            <p>Pursuant
+        to <a target=\"_blank\" href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=21-64-11\">21-64-11,</a>
+        any person claiming to be a successor in interest to the right of publicity
+        of a deceased personality pursuant to this chapter or a licensee thereof may
+        register that claim with the secretary of state on a form prescribed by the
+        secretary of state and upon payment of a one hundred dollar filing fee to
+        the secretary of state.</p>\r\n  \r\n                            <p>For registration
+        form, <a target=\"_blank\" href=\"/general-information/assets/ClaimantForm.pdf\">click
+        here.</a></p>\r\n\r\n                            <p>The table below lists
+        the registration forms currently on file with the Secretary of State.</p>\r\n
+        \                           <table>\r\n                                <tr>\r\n
+        \                                   <th>Name of Deceased Personality</th>\r\n
+        \                                   <th>Name of Claimant</th>\r\n                                    <th>Date
+        Filed</th>\r\n                                </tr>\r\n                                <tr>\r\n
+        \                                 <th><em>Russell Charles Means</em></th>\r\n
+        \                                 <th><em>Pearl Daniel Means</em></th>\r\n
+        \                                 <th><a href=\"../assets/MeansRussellCharles20151020.pdf\">July
+        21, 2015</a></th>\r\n                                </tr>\r\n                                <tr>\r\n
+        \                                 <th><em>Johnny Carson AKA John W. Carson</em></th>\r\n
+        \                                 <th><em>JWCF, LP, A Delaware Limited Partnership</em></th>\r\n
+        \                                 <th><a href=\"../assets/PersonalityJohnnyCarson.pdf\">July
+        12, 2017</a></th>\r\n                                </tr>\r\n                                <tr>\r\n
+        \                                 <th><em>Cecil B. Demille</em></th>\r\n                                  <th><em>Motion
+        Picture Associates, LLC</em></th>\r\n                                  <th><a
+        href=\"../assets/PersonalityCecilDemille.pdf\">December, 20 2017</a></th>\r\n
+        \                               </tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n                                  <th><em>Louis
+        Armstrong</em></th>\r\n                                  <th><em>The Louis
+        Armstrong Educational Foundation, Inc.</em></th>\r\n                                  <th><a
+        href=\"../assets/Louis Armstrong _Personalitys_Right_of_Publicity.PDF\">September,
+        27 2018</a></th>\r\n\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n                                  <th><em>Ronald
+        Wilson Reagan</em></th>\r\n                                  <th><em>Ronald
+        Reagan Presidential Foundation and Institute</em></th>\r\n                                  <th><a
+        href=\"../assets/Personalitys Right of Publicity/RonaldReagan.PDF\">May 1,
+        2019</a></th>\r\n</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n                                  <th><em>Nancy
+        Reagan</em></th>\r\n                                  <th><em>Ronald Reagan
+        Presidential Foundation and Institute</em></th>\r\n                                  <th><a
+        href=\"../assets/Personalitys Right of Publicity/NancyReagan.PDF\">May 1,
+        2019</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n                                  <th><em>Barry
+        White</em></th>\r\n                                  <th><em>Barry White Family
+        Trust</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/BarryWhite.PDF\">January 31, 2020</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n
+        \                                 <th><em>Kobe B. Bryant</em></th>\r\n                                  <th><em>Vanessa
+        Bryant, Trustee of Bryant Community Property Trust</em></th>\r\n                                  <th><a
+        href=\"../assets/Personalitys Right of Publicity/KobeBryant.PDF\">March 11,
+        2020</a></th>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n
+        \                                 <th><em>Phyllis McGuire</em></th>\r\n                                  <th><em>PJM
+        Living Trust</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/PhyllisMcGuire.PDF\">February 8, 2021</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n
+        \                                 <th><em>Evel Knievel</em></th>\r\n                                  <th><em>K
+        and K Promotions, Inc</em></th>\r\n                                  <th><a
+        href=\"../assets/Personalitys Right of Publicity/EvelKnievel.PDF\">March 22,
+        2021</a></th>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n
+        \                                 <th><em>Chick Corea</em></th>\r\n                                  <th><em>The
+        Corea Family Trust</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/ChickCorea.PDF\">May 10, 2021</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n
+        \                                 <th><em>Kirk Douglas</em></th>\r\n                                  <th><em>Anita
+        Resenstein, Fayez Sarofim, Stuart Korshak, James Greenbaum, Arnold Rosenstein</em></th>\r\n
+        \                                 <th><a href=\"../assets/Personalitys Right
+        of Publicity/KirkDouglas.PDF\">December 20, 2021</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n
+        \                                 <th><em>Jessica Combs</em></th>\r\n                                  <th><em>Nina
+        Darrington</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/JessicaCombs.PDF\">December 20, 2021</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n
+        \                                 <th><em>Clyde Fessler Jr.</em></th>\r\n
+        \                                 <th><em>Clyde Derek Fessler</em></th>\r\n
+        \                                 <th><a href=\"../assets/Personalitys Right
+        of Publicity/KirkDouglas.PDF\">December 20, 2021</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n
+        \                                 <th><em>John E. A. Phillips</em></th>\r\n
+        \                                 <th><em>John E. A. Phillips Family, LLC</em></th>\r\n
+        \                                 <th><a href=\"../assets/Personalitys Right
+        of Publicity/JohnPhillips.PDF\">January 24, 2022</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n
+        \                                 <th><em>MAC Davis</em></th>\r\n                                  <th><em>Lisa
+        Gerard Davis</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/MACDavis.PDF\">March 31, 2022</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n
+        \                                 <th><em>Joseph Campbell</em></th>\r\n                                  <th><em>Joseph
+        Campbell Foundation</em></th>\r\n                                  <th><a
+        href=\"../assets/Personalitys Right of Publicity/JosephCampbell.PDF\">May
+        31, 2023</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n                                  <th><em>Burt
+        Bacharach</em></th>\r\n                                  <th><em>Jane Straus
+        Bacharach a/k/a Jane Hanson Bacharach</em></th>\r\n                                  <th><a
+        href=\"../assets/Personalitys Right of Publicity/BurtBacharach20230811.pdf\">August
+        14, 2023</a></th>\r\n\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t<tr>\r\n                                  <th><em>James
+        Timothy McCarver</em></th>\r\n                                  <th><em>Kathryn
+        McCarver Root</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/JamesTimothyMcCarver.PDF\">November 6, 2023</a></th>\r\n\r\n
+        \                               <tr>\r\n                                  <th
+        height=\"44\"><em>Ron Popeil</em></th>\r\n                                  <th><em>Ron's
+        Enterprise, LLC</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/RonPopeil06.14.2024.pdf\">June 14, 2024</a></th>\r\n                                <tr>\r\n
+        \                                 <th height=\"44\"><em>Mickey Charles Mantle</em></th>\r\n
+        \                                 <th><em>Mickey Charles Mantle Marital Trust
+        II</em></th>\r\n                                  <th><em><a href=\"../assets/Personalitys
+        Right of Publicity/MickeyCharlesMantle07.15.2024.pdf\">July 15, 2024</a></em></th>\r\n
+        \                               <tr>\r\n\t\t\t\t\t\t\t\t\t<th height=\"44\"><em>Howard
+        Robard Hughes, Jr.</em></th>\r\n\t\t\t\t\t\t\t\t\t<th><em>The Howard Hughes
+        Company, LLC</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/HowardRobardHughesJr20240730.pdf\">July 30, 2024</a></th>\r\n
+        \                               <tr>\r\n                                  <th
+        height=\"44\"><em>John Lennon</em></th>\r\n                                  <th><em>Yoko
+        Ono Lennon</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/JohnLennon.pdf\">December 17, 2024</a></th>\r\n                                <tr>\r\n\t\t\t\t\t\t\t\t
+        \ <th height=\"44\"><em>Elaine Wynn</em></th>\r\n                                  <th><em>Kevyn
+        Wynn and Gillian Wynn, as cotrustees of the Elaine P. Wynn Family Trust -
+        2016</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/ElaineWynn.pdf\">August 22, 2025</a></th>\r\n                                <tr>\r\n\t\t\t\t\t\t\t\t
+        \ <th height=\"44\"><em>Marcel Hall pka Biz Markie</em></th>\r\n\t\t\t\t\t\t\t\t
+        \ <th><em>Tara L. Hall</em></th>\r\n                                  <th><a
+        href=\"../assets/Personalitys Right of Publicity/MarcelHallpkaBizMarkie.PDF\">September
+        3, 2025</a></th>\r\n                                <tr>\r\n                                  <th
+        height=\"44\"><em>Lisa 'Left Eye' Lopes</em></th>\r\n                                  <th><em>Wanda
+        Lopes-Colemon</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/LisaLopes.PDF\">November 7, 2025</a></th>\r\n                                <tr>\r\n
+        \                                 <th height=\"44\"><em>Alan Bergman</em></th>\r\n
+        \                                 <th><em>Julie Bergman</em></th>\r\n                                  <th><a
+        href=\"../assets/Personalitys Right of Publicity/AlanBergman.pdf\">March 19,
+        2026</a></th>\r\n                                <tr>\r\n                                  <th
+        height=\"44\"><em>Marilyn Bergman</em></th>\r\n                                  <th><em>Julie
+        Bergman</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/MarilynBergman.pdf\">March 19, 2026</a></th>\r\n                                <tr>\r\n
+        \                                 <th height=\"44\"><em>HOFER (Family Surname/Personality
+        Estate)</em></th>\r\n                                  <th><em>Robert-David:
+        Hofer</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/HOFER.pdf\">April 1, 2026</a></th>\r\n                                <tr>\r\n
+        \                                 <th height=\"44\"><em>EMMONS (Family Surname/Personality
+        Estate)</em></th>\r\n                                  <th><em>Donta-Terrell:
+        Emmons</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/EMMONS.pdf\">April 10, 2026</a></th>\r\n                                <tr>\r\n
+        \                                 <th height=\"44\"><em>Fred Kavli</em></th>\r\n
+        \                                 <th><em>The Kavli Foundation</em></th>\r\n
+        \                                 <th><a href=\"../assets/Personalitys Right
+        of Publicity/Kavli.pdf\">April 28, 2026</a></th>\r\n                                <tr>\r\n\t\t\t\t\t\t\t\t\t<th
+        height=\"44\"><em>John Coltrane</em></th>\r\n\t\t\t\t\t\t\t\t\t<th><em>Jowcol
+        Music LLC</em></th>\r\n                                  <th><a href=\"../assets/Personalitys
+        Right of Publicity/JohnColtrane.pdf\">October 8, 2026</a></th>\r\n                                </table>\r\n\r\n
+        \                           <p>According to <a href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=21-64-10\">SCDL
+        21-64-10</a>, a successor in interest to the right of publicity of a deceased
+        personality pursuant to this chapter or a licensee thereof may not recover
+        damages or equitable relief for a use prohibited pursuant to this chapter
+        that occurs before the successor in interest registers a claim of right of
+        publicity pursuant to SDCL 21-64-11.</p>\r\n\r\n\r\n                        </div>\r\n
+        \                       \r\n                        \r\n                \t\t\r\n
+        \               \r\n                </section>\r\n      \t \t\t\r\n               \r\n
+        \                  \r\n\r\n</section><!--#middle-->\r\n    \r\n    \r\n    \r\n
+        \   <footer>  \r\n    \t\r\n        <div id=\"gold_band\"></div>     \r\n
+        \   \t<section class=\"centerer clearfix\">\r\n        \t\t\r\n                \r\n
+        \               \t\t\t\r\n                \r\n                  <section id=\"footer_bottom\"
+        class=\"clearfix\">\r\n                \r\n                \t\r\n                 \r\n
+        \                     <a href=\"https://www.sd.gov/cs?id=sc_cat_item&sys_id=f7f939eddbd4b150b2fb93d4f39619c0\"
+        target=\"_blank\" rel=\"noreferrer noopener\">Request Public Records</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href=\"http://sd.gov/privacy.aspx\" target=\"_blank\" title=\"Privacy Policy\">Privacy
+        Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"http://sd.gov/disclaim.aspx\"
+        target=\"_blank\" title=\"Information Accuracy\">Information Accuracy</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href=\"http://sd.gov/\" title=\"State Homepage\" target=\"_blank\">State Homepage</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href=\"http://sd.gov/accpolicy.aspx\">Accessibility Policy</a></section>\r\n
+        \               \r\n\t\t\t\r\n\t\t\t      </section>\r\n        \r\n        \r\n
+        \       \r\n    </footer>\r\n\r\n\r\n</div><!--#wrapper-->\r\n\t\r\n    <script>\r\n
+        \ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\r\n
+        \ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\n
+        \ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\n
+        \ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');\r\n\r\n
+        \ ga('create', 'UA-24951685-11', 'sdsos.gov');\r\n  ga('send', 'pageview');\r\n\r\n</script>\r\n<script>\r\n
+        \   (function (i, s, o, g, r, a, m) {\r\n        i['GoogleAnalyticsObject']
+        = r; i[r] = i[r] || function () {\r\n            (i[r].q = i[r].q || []).push(arguments)\r\n
+        \       }, i[r].l = 1 * new Date(); a = s.createElement(o),\r\n        m =
+        s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a,
+        m)\r\n    })(window, document, 'script', '//www.google-analytics.com/analytics.js',
+        'ga');\r\n\r\n    ga('create', 'UA-60581758-1', 'auto');\r\n    ga('send',
+        'pageview');\r\n\r\n</script>\r\n \r\n\r\n    \r\n<!-- RIGHT SLIDER NAV -->\r\n<script
+        src=\"/includes/Javascript/right_slider_navs.js\"></script>\r\n \r\n \r\n
+        \r\n \r\n<!-- RESPONSIVE SLIDESHOWS -->\r\n<script type=\"text/javascript\"
+        src=\"/includes/Javascript/wow_slider/wowslider.js\"></script>\r\n<script
+        type=\"text/javascript\" src=\"/includes/Javascript/wow_slider/script.js\"></script>\r\n<script
+        type=\"text/javascript\">\r\n\t\tif ($('.wowslider').length) { // implies
+        *not* zero\r\n\t\t\t<!--settings for homepage slideshow-->\r\n\t\t\t//jQuery(\".wowslider\").wowSlider({effect:\"blinds\",prev:\"\",next:\"\",duration:600,delay:8000,width:1000,height:420,autoPlay:true,playPause:false,stopOnHover:true,loop:false,bullets:true,caption:true,captionEffect:\"fade\",controls:true,onBeforeStep:0,images:0});\r\n\t\t\t\r\n\t\t\tjQuery(\".wowslider\").wowSlider({effect:\"basic\",prev:\"\",next:\"\",duration:20*100,delay:80*100,width:1000,height:420,autoPlay:true,playPause:false,stopOnHover:true,loop:false,bullets:true,caption:true,captionEffect:\"fade\",controls:true,onBeforeStep:0,images:0});\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t\r\n\t\t
+        \ } \r\n</script>\r\n    \r\n    \r\n   \r\n    \r\n   \r\n\r\n<!--CUSTOM
+        FACEBOOK FEED-->\r\n<link href=\"/includes/Javascript/jquery.neosmart.fb.wall/jquery.neosmart.fb.wall.css\"
+        rel=\"stylesheet\" type=\"text/css\"/>\r\n<script src=\"/includes/Javascript/jquery.neosmart.fb.wall/jquery.neosmart.fb.wall.js\"
+        type=\"text/javascript\"></script>\r\n<script type=\"text/javascript\">\r\n/***************************************************************************************************\r\n
+        * fb.wall plugin page\r\n***************************************************************************************************/\r\n</script>\r\n
+        \   \r\n    \r\n  \r\n  \r\n  \r\n  \r\n  \r\n  \r\n<!--CREATE RED DROP NAVS
+        AT DIFFERENT SCREEN SIZES-->  \r\n<script src=\"/includes/Javascript/red_drop_nav.js\"></script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!---INITIALIZE
+        SIDEBAR TREEVIEW---->\r\n\r\n<script>\r\n$(document).ready(function(){\r\n\t//
+        second example\r\n\t\r\n\tif ($('.sidebar .treeview').length > 0) { \r\n\t\t$(\".sidebar
+        .treeview\").treeview({\r\n\t\t\tanimated: \"fast\",\r\n\t\t\t\t collapsed:
+        true,\r\n\t\t\t\t control: \"#treecontrol\",\r\n\t\t\t\t persist: \"location\"\r\n\t\t\t\t
+        //unique: true\r\n\t\t});\r\n\t}\r\n\r\n\r\n\tif ($('.mobile_nav_menu .treeview').length
+        > 0) { \r\n\t\t$(\".mobile_nav_menu .treeview\").treeview({\r\n\t\t\tanimated:
+        \"fast\",\r\n\t\t\t\t collapsed: true,\r\n\t\t\t\t control: \"#treecontrol\",\r\n\t\t\t\t
+        persist: \"location\"\r\n\t\t\t\t //unique: true\r\n\t\t});\r\n\t}\r\n\t\r\n});\r\n</script>\r\n
+        \  \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--GENERATE BREADCRUMBS-->\r\n<script
+        src=\"/includes/Javascript/generate_breadcrumbs.js\"></script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--
+        INTERACTIVE, RESPONSIVE TABLES -->\r\n\r\n<!--IF using IE8 or 9, then we'll
+        use this version of responsive tables-->\r\n<!--[if lte IE 9]>\r\n<script>\r\n$(
+        \"table:not(#election_history_data_table):not(#active_voter_totals)\" ).each(function(
+        index ) {\r\n\t\t\t\t\tif ($(this).hasClass(\"responsiveness\")) {\r\n\t\t\t\t\t\t//do
+        nothing\r\n\t\t\t\t\t} else {\r\n\t\t\t\t\t\t$(this).addClass(\"responsiveness\");\r\n\t\t\t\t\t}\r\n\t\t\t\t});\r\n
+        \               </script>\r\n<link rel=\"stylesheet\" href=\"/includes/Javascript/zurb-responsive-tables/responsive-tables.css\">\r\n<script
+        src=\"/includes/Javascript/zurb-responsive-tables/responsive-tables.js\"></script>\r\n\r\n<![endif]-->\r\n\r\n\r\n\r\n<!--IF
+        NOT IE at all, (IE10 will also use this set because it ignores conditional
+        comments), then use this version of repsonsive tables -- SAME AS greater than
+        IE9 ones above-->\r\n<!--[if !IE]> -->\r\n\r\n<!-- <![endif]-->\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+        \  \r\n   \r\n<!--sort election history table-->\r\n<link href=\"/includes/Javascript/SortTables_Responsive/css/styleRespScroll.css\"
+        rel=\"stylesheet\" type=\"text/css\" />\r\n<script type=\"text/javascript\"
+        src=\"/includes/Javascript/SortTables_Responsive/script.js\"></script>\r\n<script
+        src=\"/includes/Javascript/initialize_election_history_table.js\"></script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--COUNTY
+        INTERACTIVE MAP-->  \r\n<script src=\"/includes/Javascript/county_map.js\"></script>\r\n\r\n
+        \ \r\n<!--LEGISLATIVE DISTRICTS INTERACTIVE MAP-->  \r\n<script src=\"/includes/Javascript/legislative_districts_map.js\"></script>\r\n\r\n\r\n<!--DOWNLOAD
+        TABLES IN EXCEL FORMAT-->\r\n<script src=\"/includes/Javascript/download_excel.js\"></script>\r\n\r\n\r\n<script>\r\n/*\r\n$(
+        \"#download_county_data\" ).click(function() {\r\n\t\tdownload(\"Statewide
+        Voter Registration by County\", \"county_map_data_table\");\r\n});\r\n//download
+        link for IE users\r\n$( \"#download_county_data_ie\" ).click(function() {\r\n\t\twriteToExcel(\"county_map_data_table\");\r\n});\r\n\r\n\r\n\r\n$(
+        \"#download_district_data\" ).click(function() {\r\n\t\tdownload(\"Statewide
+        Voter Registration by Legislative District\", \"distrit_map_data_table\");\r\n});\r\n//download
+        link for IE users\r\n$( \"#download_district_data_ie\" ).click(function()
+        {\r\n\t\twriteToExcel(\"distrit_map_data_table\");\r\n});\r\n\r\n\r\n\r\n$(
+        \"#download_auditor_data\" ).click(function() {\r\n\t\tdownload(\"SD County
+        Auditors\", \"county_auditor_table\");\r\n});\r\n//download link for IE users\r\n$(
+        \"#download_auditor_data_ie\" ).click(function() {\r\n\t\twriteToExcel(\"county_auditor_table\");\r\n});*/\r\n</script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--
+        OPEN EXTERNAL LINKS IN NEW WINDOW AUTOMATICALLY -->\r\n<script>\r\n$('a:not([href^=\"https://sdsos.gov\"]):not([href^=\"http://dev.sos.sd.gov/\"]):not([href^=\"#\"]):not([href^=\"/\"]):not([href^=\"mailto:\"])').attr(\"target\",\"_blank\");\r\n\r\n/*\r\nvar
+        width = $(window).width();\r\nvar height = $(window).height();\r\n\r\n\r\n$('a:not([href^=\"http://sdsos.insightmarketingdesign.com\"]):not([href^=\"#\"]):not([href^=\"/\"]):not([href^=\"mailto:\"])').click(function()
+        {\r\n        window.open($(this).attr('href'),'title', 'width='+width+', height='+height+'');\r\n
+        \       return false;\r\n    });   \r\n\t*/\r\n</script>\r\n\r\n\r\n\r\n\r\n<!--//RESPONSIVE
+        CALENDAR//-->\r\n<script src='/includes/Javascript/fullcalendar/fullcalendar/fullcalendar-list2.js'></script>\r\n<script
+        src='/includes/Javascript/fullcalendar/fullcalendar/gcal.js'></script>\r\n<script
+        src=\"/includes/Javascript/initialize_calendar.js\"></script>\r\n\r\n<!--
+        Siteimprove Analytics -->\r\n<script async src=\"https://siteimproveanalytics.com/js/siteanalyze_2183.js\"></script>\r\n\t
+        \       \r\n</body>\r\n</html>"
+    headers:
+      CF-RAY:
+      - a58a40467985e777-DEN
+      Cache-Control:
+      - public
+      Connection:
+      - keep-alive
+      Content-Security-Policy:
+      - default.src 'self';
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Wed, 11 Nov 2026 03:36:10 GMT
+      Expires:
+      - Wed, 11 Nov 2026 04:36:10 GMT
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '81343'
+    status:
+      code: 200
+      message: OK
+version: 1

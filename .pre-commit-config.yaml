@@ -2,10 +2,12 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
+      # Fixtures and recordings stay exactly as the source published them
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
+        exclude: /tests/(fixtures|cassettes)/
       - id: end-of-file-fixer
-        exclude: ^app/static/css/tailwind\.css$
+        exclude: ^app/static/css/tailwind\.css$|/tests/(fixtures|cassettes)/
       - id: check-yaml
       - id: check-toml
       - id: check-merge-conflict

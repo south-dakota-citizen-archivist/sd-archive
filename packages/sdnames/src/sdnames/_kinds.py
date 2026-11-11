@@ -75,6 +75,8 @@ _TRUST = _words(
 _ESTATE = re.compile(r"(?<!REAL)(?<!LIFE) (?:ESTATE|EST) OF |(?<!REAL)(?<!LIFE) ESTATE $| HEIRS ")
 
 _AND = re.compile(r"\s*&\s*|\s+(?:AND|OR)\s+", re.I)
+# In a given-first list, a comma separates names ("ANN LEE, BOB RAY"), except before a suffix
+_LIST_COMMA = re.compile(r",(?!\s*(?:JR|SR|II|III|IV|V|ESQ|MD|PHD|DDS|CPA)\b)\s*", re.I)
 _INITIAL = re.compile(r"^[A-Z]\.?$", re.I)
 
 
@@ -137,6 +139,7 @@ def parties(text: str, order: Order = "auto") -> list[Party]:
     SMITH JOHN A & MARY L (order="family_first") → SMITH, JOHN A | SMITH, MARY L
     JOHN AND MARY SMITH → SMITH, JOHN | MARY SMITH
     LEWIS, JAMES CARL ETUX → LEWIS, JAMES CARL | (spouse)
+    ANN LEE, BOB RAY, JR. AND CY DOE (order="given_first") → ANN LEE | BOB RAY, JR. | CY DOE
     Organizations, governments, trusts and estates are one party."""
     text = clean(text)
     text, care_of = split_care_of(text)
@@ -161,12 +164,14 @@ def parties(text: str, order: Order = "auto") -> list[Party]:
 
 def _people(text: str, order: Order, role: str | None) -> list[Party]:
     pieces = [clean(p.strip(" ,")) for p in _AND.split(text)]
+    if order == "given_first":
+        pieces = [clean(q) for p in pieces for q in _LIST_COMMA.split(p)]
     pieces = [p for p in pieces if p]
     if not pieces:
         return []
     names: list[str] = []
     first = pieces[0]
-    if "," in first or order == "family_first":
+    if order == "family_first" or (order == "auto" and "," in first):
         if "," in first:
             family = first.split(",", 1)[0].strip()
         else:

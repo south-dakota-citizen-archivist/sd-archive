@@ -1,0 +1,10 @@
+# Hand corrections to the Secretary of State's page (records.fixes). Each applies only while
+# the page still publishes the value it corrects.
+
+[[fix]]
+where = { personality_name = "Clyde Fessler Jr." }
+field = "form_url"
+published = "https://sdsos.gov/general-information/assets/Personalitys%20Right%20of%20Publicity/KirkDouglas.PDF"
+corrected = "https://sdsos.gov/general-information/assets/Personalitys%20Right%20of%20Publicity/ClydeFesslerJr.PDF"
+reason = "The page links Fessler's row to Kirk Douglas's filing; Fessler's filing is published at ClydeFesslerJr.PDF."
+checked = 2026-11-10

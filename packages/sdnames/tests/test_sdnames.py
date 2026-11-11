@@ -108,6 +108,22 @@ def test_parties_two_people_stay_two_people():
     assert [(p.given, p.family) for p in got] == [("HENRY", "JAMES"), ("FRANK", "OCEAN")]
 
 
+def test_parties_split_a_given_first_list_on_commas():
+    claimants = "Anita Resenstein, Fayez Sarofim, Stuart Korshak, James Greenbaum"
+    assert names(claimants, "given_first") == [
+        ("Anita Resenstein", None),
+        ("Fayez Sarofim", None),
+        ("Stuart Korshak", None),
+        ("James Greenbaum", None),
+    ]
+    assert names("Clyde Fessler, Jr., Ann Lee, III and Bo Day", "given_first") == [
+        ("Clyde Fessler, Jr.", None),
+        ("Ann Lee, III", None),
+        ("Bo Day", None),
+    ]
+    assert names("Banks, Chris") == [("Banks, Chris", None)]  # a comma means family first
+
+
 def test_parties_roles():
     assert names("PENNOCK, SCOTT R & DOUGLASS, CLYDETTE D CO-TRUSTEES") == [
         ("PENNOCK, SCOTT R", "trustee"), ("DOUGLASS, CLYDETTE D", "trustee")]  # fmt: skip
