@@ -1,0 +1,461 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://open.sd.gov/contracts.aspx
+  response:
+    body:
+      string: "\r\n\r\n<!DOCTYPE html>\r\n\r\n\r\n<html>\r\n<head><meta charset=\"utf-8\"
+        /><title>\r\n\tOpen SD\r\n</title><meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\"
+        /><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"
+        /><meta HTTP-EQUIV=\"Pragma\" content=\"no-cache\" /><meta HTTP-EQUIV=\"Cache-Control\"
+        content=\"no-cache,no-Store\" /><link rel=\"icon\" type=\"image/png\" href=\"/img/favicon.png\"
+        />\r\n<SCRIPT language=\"JAVASCRIPT\">\r\n\r\n    if (top.frames.length !=
+        0)\r\n        top.location = self.document.location;\r\n\r\n</SCRIPT>\r\n\r\n\r\n
+        \  \r\n    <link href=\"/inc/styles/styles.css\" type=\"text/css\" rel=\"stylesheet\"
+        /> \r\n    <script src=\"/inc/scripts/jquery-1.11.1.min.js\" type=\"text/javascript\"></script>\r\n
+        \   <script src=\"/inc/scripts/jquery-scrolltofixed-min.js\" type=\"text/javascript\">\r\n\r\n</script>\r\n<script
+        type=\"text/javascript\">\r\n    $(document).ready(function () {\r\n        $(\".nav-button\").click(function
+        () {\r\n            $(\"nav > #navigation > ul\").toggleClass(\"open\");\r\n
+        \       });\r\n\r\n        $(\"nav > #navigation > ul > li > a\").click(function
+        (e) {\r\n\r\n            if ($(this).parent(\"li\").has(\"ul\").length) {\r\n
+        \               e.preventDefault();\r\n                \r\n            }\r\n
+        \         //  else {\r\n             $(\"nav > #navigation > ul > li:hover
+        > ul\").toggleClass(\"open1\");\r\n          //  }\r\n               // return;\r\n
+        \          \r\n        });\r\n\r\n        $(\"nav > #navigation > ul > li
+        > ul > li\").click(function () {\r\n            \r\n           $(\"nav > #navigation
+        > ul > li > ul > li:hover > ul\").toggleClass(\"open2\");\r\n            $(\"nav
+        > #navigation > ul > li:hover > ul\").addClass(\"open1\");\r\n        });\r\n\r\n
+        \       if ($(window).width() > 1000) {\r\n            var stickyNavTop =
+        $('nav').offset().top;\r\n\r\n        var stickyNav = function () {\r\n            var
+        scrollTop = $(window).scrollTop();\r\n\r\n            if (scrollTop > stickyNavTop)
+        {\r\n                $('nav').addClass('sticky');\r\n            } else {\r\n
+        \               $('nav').removeClass('sticky');\r\n            }\r\n        };\r\n\r\n
+        \       stickyNav();\r\n\r\n        $(window).scroll(function () {\r\n            stickyNav();\r\n
+        \       });\r\n        }\r\n        else {\r\n            $('nav').removeClass('sticky');\r\n
+        \       }\r\n\r\n        SizeChange();\r\n        \r\n\r\n        if ($(window).width()
+        <= 1000) {\r\n            $(\"#navigation > ul > li\").each(function (index)
+        {\r\n                if ($(this).children(\"ul\").length > 0) {\r\n                  \r\n
+        \               }\r\n                else {\r\n                    $(this).children(\"a\").css(\"width\",
+        \"100%\");\r\n    \r\n                }\r\n            });\r\n\r\n        }\r\n\r\n
+        \   });\r\n\r\n  \r\n //   var listItems = $(\"#navigation > ul\").children();\r\n
+        \ //  var count = listItems.length;\r\n\r\nvar windowsize = $(window).width();\r\n\r\n
+        \   $(window).resize(function () {\r\n        var windowsize = $(window).width();\r\n
+        \       SizeChange();\r\n    });\r\n\r\n   \r\n    \r\n\r\n    function SizeChange()
+        {  \r\n        if ($(window).width() <= 1000) {\r\n\r\n            $(\"nav
+        > #navigation > ul > li\").width(\"95%\");\r\n        }\r\n        else {\r\n
+        \           var listItems = $(\"#navigation > ul\").children();\r\n            var
+        count = listItems.length;\r\n            $(\"nav > #navigation > ul > li\").width(100
+        / count + \"%\");\r\n        }\r\n    }\r\n\r\n    </script>\r\n</head>\r\n<body>\r\n
+        \   <form method=\"post\" action=\"./contracts.aspx\" id=\"form1\">\r\n<div
+        class=\"aspNetHidden\">\r\n<input type=\"hidden\" name=\"__VIEWSTATE\" id=\"__VIEWSTATE\"
+        value=\"/wEPDwUJNjgzMjg3Mjc0D2QWAgIED2QWBgIDDw8WAh4EVGV4dAWJGDx1bD48bGk+PGEgaWQ9Jzc5JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cDovL2F0Zy5zZC5nb3YvT3BlbkdvdmVybm1lbnQuYXNweCc+U3RhdHV0ZXMgYW5kIFJ1bGVzPC9hPjx1bD48bGk+PGEgaWQ9JzgxJyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly9zZGxlZ2lzbGF0dXJlLmdvdi9TdGF0dXRlcy8nPlNEIFN0YXR1dGVzPC9hPjwvbGk+PGxpPjxhIGlkPSc4MicgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vcnVsZXMuc2QuZ292Jz5Qcm9wb3NlZCBSdWxlczwvYT48L2xpPjxsaT48YSBpZD0nODMnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkbGVnaXNsYXR1cmUuZ292L1J1bGVzLyc+UHJvbXVsZ2F0ZWQgUnVsZXM8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPSc4NScgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9Jyc+Qm9hcmRzICYgQ29tbWlzc2lvbnM8L2E+PHVsPjxsaT48YSBpZD0nMTU0JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly9ib2FyZHNhbmRjb21taXNzaW9ucy5zZC5nb3YvJz5TdGF0ZSBHb3Zlcm5tZW50PC9hPjwvbGk+PGxpPjxhIGlkPScxNTUnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkbG9jYWxnb3YuYXBwc3NkLnNkLmdvdi8nPkxvY2FsIEdvdmVybm1lbnQ8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPSc4NicgdGFyZ2V0PScnIGhyZWY9Jy9JbmZvX3ByLmFzcHgnPlBheXJvbGw8L2E+PHVsPjxsaT48YSBpZD0nODcnIHRhcmdldD0nJyBocmVmPScvZW1wbG95ZWVzLmFzcHgnPkVtcGxveWVlIFNhbGFyaWVzPC9hPjwvbGk+PGxpPjxhIGlkPSc4OCcgdGFyZ2V0PScnIGhyZWY9Jy9leGVjdXRpdmVfc2FsYXJpZXMuYXNweCc+RXhlY3V0aXZlIFNhbGFyaWVzPC9hPjwvbGk+PGxpPjxhIGlkPSc5MCcgdGFyZ2V0PScnIGhyZWY9Jy9RVF9TdGFmZmluZy5hc3B4Jz5DdXJyZW50IFN0YWZmaW5nIExldmVsPC9hPjwvbGk+PC91bD48L2xpPjxsaT48YSBpZD0nOTEnIHRhcmdldD0nJyBocmVmPScnPkNoZWNrYm9vazwvYT48dWw+PGxpPjxhIGlkPSc5MicgdGFyZ2V0PScnIGhyZWY9J2h0dHBzOi8vc291dGhkYWtvdGEuc3BlbmRpbmcuc29jcmF0YS5jb20vIyEveWVhci8yMDI2Lyc+T3BlbiBDaGVja2Jvb2sgLSBJbnRlcmFjdGl2ZTwvYT48L2xpPjxsaT48YSBpZD0nMTU3JyB0YXJnZXQ9JycgaHJlZj0naHR0cHM6Ly9vcGVuLnNkLmdvdi92ZW5kb3IuYXNweCc+VmVuZG9yIFBheW1lbnQgTGlzdGluZyAtIDUgeXJzPC9hPjwvbGk+PGxpPjxhIGlkPScxMzknIHRhcmdldD0nJyBocmVmPSdodHRwczovL29wZW4uc2QuZ292L2NvdmlkMTlfZXhwZW5kaXR1cmVzLmFzcHgnPkFsbCBDT1ZJRCBTcGVuZGluZzwvYT48L2xpPjxsaT48YSBpZD0nOTMnIHRhcmdldD0nJyBocmVmPSdodHRwczovL29wZW4uc2QuZ292L0NvdmlkMTlfQUxMXzIwMDAuYXNweCc+U2VhcmNoIENPVklEIFN0aW11bHVzIFZlbmRvciBQYXltZW50czwvYT48L2xpPjwvdWw+PC9saT48bGk+PGEgaWQ9Jzk0JyB0YXJnZXQ9JycgaHJlZj0nIyc+Q29udHJhY3RzL0dyYW50czwvYT48dWw+PGxpPjxhIGlkPSc5NScgdGFyZ2V0PScnIGhyZWY9Jy9jb250cmFjdHMuYXNweCc+Q29udHJhY3QvR3JhbnQgU2VhcmNoPC9hPjwvbGk+PGxpPjxhIGlkPSc5NicgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vd3d3LnNkLmdvdi9iaHJhP2lkPWNzX2tiX2FydGljbGVfdmlldyZzeXNwYXJtX2FydGljbGU9S0IwMDQ0Nzg3JnN5c19rYl9pZD1mNjU3MTVkMjk3NjA3ZTkwN2ZjMWI0ODBmMDUzYWZmYSZzcGE9MSc+Q29tbW9kaXR5IENvbnRyYWN0IExpc3Q8L2E+PC9saT48bGk+PGEgaWQ9JzEzMicgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vc291cmNpbmcuZXNtc29sdXRpb25zLmNvbS9wb3N0aW5nYm9hcmQvZW50aXRpZXMvMzQ0NGE0MDQtMzgxOC00OTRmLTg0YzUtMmE4NTBhY2Q3Nzc5Jz5SRlAvQmlkIFNlYXJjaDwvYT48L2xpPjxsaT48YSBpZD0nOTcnIHRhcmdldD0nJyBocmVmPScvcmZwLmFzcHgnPlJGUCBSZWdpc3RlciBvZiBQcm9wb3NhbHM8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPSc5OCcgdGFyZ2V0PScnIGhyZWY9JyMnPlN0YXRlIEJ1ZGdldDwvYT48dWw+PGxpPjxhIGlkPScxMzgnIHRhcmdldD0nJyBocmVmPSdodHRwczovL3NvdXRoZGFrb3RhLmJ1ZGdldC5zb2NyYXRhLmNvbS8jIS95ZWFyL2RlZmF1bHQnPk9wZW4gQnVkZ2V0PC9hPjwvbGk+PGxpPjxhIGlkPSc5OScgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHA6Ly9iZm0uc2QuZ292L2J1ZGdldCc+QnVkZ2V0IERvY3VtZW50czwvYT48L2xpPjxsaT48YSBpZD0nMTAyJyB0YXJnZXQ9JycgaHJlZj0nL2J1ZGdldHRyYW5zZmVycy5hc3B4Jz5CdWRnZXQgVHJhbnNmZXJzPC9hPjwvbGk+PGxpPjxhIGlkPScxMDMnIHRhcmdldD0nJyBocmVmPScvVGF4X0V4cGVuZGl0dXJlcy5hc3B4Jz5UYXggRXhwZW5kaXR1cmVzPC9hPjwvbGk+PC91bD48L2xpPjxsaT48YSBpZD0nNScgdGFyZ2V0PSdjb250ZW50JyBocmVmPSdodHRwOi8vd3d3LnN0YXRlLnNkLnVzL2JmbS9sZWRnZXIvaW5mb19mcC5odG0nPkZpbmFuY2lhbCBQdWJsaWNhdGlvbnM8L2E+PHVsPjxsaT48YSBpZD0nMTA1JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cDovL2JmbS5zZC5nb3YvZGFzaGJvYXJkcy9EZWZhdWx0LmFzcHgnPkZpbmFuY2lhbCBNZXRyaWNzPC9hPjwvbGk+PGxpPjxhIGlkPScxMzAnIHRhcmdldD0nX3RhcmdldCcgaHJlZj0naHR0cDovL2JmbS5zZC5nb3YvbHRmcC8nPkxvbmcgVGVybSBGaW5hbmNpYWwgUGxhbjwvYT48L2xpPjxsaT48YSBpZD0nMTA4JyB0YXJnZXQ9JycgaHJlZj0nL0luZm9fYmIuYXNweCc+QnVkZ2V0IGluIEJyaWVmPC9hPjwvbGk+PGxpPjxhIGlkPScxMDknIHRhcmdldD0nJyBocmVmPScvSW5mb19mci5hc3B4Jz5Bbm51YWwgRmluYW5jaWFsIFJlcG9ydHM8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPScxMTAnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkcmVhZHl0b3dvcmsuY29tL2Fib3V0LXVzL3B1YmxpYy1yZWNvcmRzLyc+RWNvbm9taWMgRGV2ZWxvcG1lbnQ8L2E+PC9saT48L3VsPmRkAgYPDxYCHwAFFTExLzExLzIwMjYgMzoxNTo0MyBBTWRkAggPEGQPFiJmAgECAgIDAgQCBQIGAgcCCAIJAgoCCwIMAg0CDgIPAhACEQISAhMCFAIVAhYCFwIYAhkCGgIbAhwCHQIeAh8CIAIhFiIQBQggQUxMICggKQUBMGcQBSRBR1JJQ1VMVFVSRSAmIE5BVC4gUkVTT1VSQ0VTICAgKDAzICkFAzAzIGcQBSRBVFRPUk5FWSBHRU5FUkFMICAgICAgICAgICAgICAgKDI5ICkFAzI5IGcQBSRCSFJBIEFETUlOSVNUUkFUSU9OICAgICAgICAgICAgKDAxMikFAzAxMmcQBSRCSFJBIEhVTUFOIFJFU09VUkNFUyAgICAgICAgICAgKDAxNCkFAzAxNGcQBSRCT0FSRCBPRiBSRUdFTlRTICAgICAgICAgICAgICAgKDE1ICkFAzE1IGcQBSRCVVJFQVUgT0YgRklOQU5DRSAmIE1BTkFHRU1FTlQgKDAxMSkFAzAxMWcQBSRCVVJFQVUgT0YgSU5GT1JNQVRJT04gJiBURUNIICAgKDAxMykFAzAxM2cQBSRDT1JSRUNUSU9OUyAgICAgICAgICAgICAgICAgICAgKDE4ICkFAzE4IGcQBSRFRFVDQVRJT04gICAgICAgICAgICAgICAgICAgICAgKDEyICkFAzEyIGcQBSRHQU1FLCBGSVNIIEFORCBQQVJLUyAgICAgICAgICAgKDA2ICkFAzA2IGcQBSRHT1ZFUk5PUidTIE9GRklDRSAgICAgICAgICAgICAgKDAxMCkFAzAxMGcQBSRIRUFMVEggICAgICAgICAgICAgICAgICAgICAgICAgKDA5ICkFAzA5IGcQBSRIVU1BTiBTRVJWSUNFUyAgICAgICAgICAgICAgICAgKDE5ICkFAzE5IGcQBSRJTlZFU1RNRU5UIENPVU5DSUwgICAgICAgICAgICAgKDMyMSkFAzMyMWcQBSRMQUJPUiBBTkQgUkVHVUxBVElPTiAgICAgICAgICAgKDEwICkFAzEwIGcQBSRMRUdJU0xBVElWRSBBVURJVCAgICAgICAgICAgICAgKDI4OCkFAzI4OGcQBSRMRUdJU0xBVElWRSBSRVNFQVJDSCBDT1VOQ0lMICAgKDI4MSkFAzI4MWcQBSRMT1RURVJZICAgICAgICAgICAgICAgICAgICAgICAgKDAyOCkFAzAyOGcQBSRNSUxJVEFSWSAgICAgICAgICAgICAgICAgICAgICAgKDE2ICkFAzE2IGcQBSRQVUJMSUMgU0FGRVRZICAgICAgICAgICAgICAgICAgKDE0ICkFAzE0IGcQBSRQVUJMSUMgVVRJTElUSUVTIENPTU1JU1NJT04gICAgKDI2ICkFAzI2IGcQBSRSRVRJUkVNRU5UIFNZU1RFTSAgICAgICAgICAgICAgKDI1ICkFAzI1IGcQBSRSRVZFTlVFICAgICAgICAgICAgICAgICAgICAgICAgKDAyICkFAzAyIGcQBSRTQ0hPT0wgJiBQVUJMSUMgTEFORFMgICAgICAgICAgKDMwICkFAzMwIGcQBSRTRUNSRVRBUlkgT0YgU1RBVEUgICAgICAgICAgICAgKDMxICkFAzMxIGcQBSRTT0NJQUwgU0VSVklDRVMgICAgICAgICAgICAgICAgKDA4ICkFAzA4IGcQBSRTVEFURSBBVURJVE9SICAgICAgICAgICAgICAgICAgKDMzICkFAzMzIGcQBSRTVEFURSBUUkVBU1VSRVIgICAgICAgICAgICAgICAgKDMyMCkFAzMyMGcQBSRUT1VSSVNNICAgICAgICAgICAgICAgICAgICAgICAgKDA0ICkFAzA0IGcQBSRUUkFOU1BPUlRBVElPTiAgICAgICAgICAgICAgICAgKDExICkFAzExIGcQBSRUUklCQUwgUkVMQVRJT05TICAgICAgICAgICAgICAgKDA3ICkFAzA3IGcQBSRVTklGSUVEIEpVRElDSUFMIFNZU1RFTVMgICAgICAgKDI3ICkFAzI3IGcQBSRWRVRFUkFOUycgQUZGQUlSUyAgICAgICAgICAgICAgKDE3ICkFAzE3IGdkZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WBQUGUmFkaW8xBQZSYWRpbzIFBlJhZGlvMgUGUmFkaW8zBQZSYWRpbzO6F2yG3tMz2t9WSkNErJiTIdHSOQ==\"
+        />\r\n</div>\r\n\r\n<div class=\"aspNetHidden\">\r\n\r\n\t<input type=\"hidden\"
+        name=\"__VIEWSTATEGENERATOR\" id=\"__VIEWSTATEGENERATOR\" value=\"C541E659\"
+        />\r\n\t<input type=\"hidden\" name=\"__EVENTVALIDATION\" id=\"__EVENTVALIDATION\"
+        value=\"/wEdACstcpu9uYiXYKNJccXU76JymYOy734x5yOenrHD/CNcyAB3NPxwqghWo2Zy62HCsJIy0mBNmtDfEYEZBrodEAOwGtmlxdWuDWN1fIkvWR1NL3L46IZ0m7bxmwBQmjBhv0UhK1yN5DzsZ6inX8XDVy2thIn521QoA2EIUN/VRJAG3DyGbTFexQfpaxYDgY8fYOVxNGGmO0p9U5yvQ1JfwxKcQxAvwMipmxsizF+mTm4zT4qqVDoQ7vu6vt2sJU33wMTAqUQ7giDx9DIOlTpJUlhtAjccCkUQCSq8zy5yTsgtM8F1S0K+lrojlcD1TsOPnacLvUzsWOO3rrspb73ir5o8DGqOAxSeDCBO7sqZXSnfeGKX/eF5/gUmCWIslST3P/m1R78grlTOtNuU5hnhY4wBdOz2BOZZY+PAsY+Vtto8k+xfRDIomF0efR8E7kujclfAr1VLcNkrSdYlkvhbMjUQC/dlmCKfhzJCMF6o+vt9l6DK2m0/eoOEhpu0THZHQUj2q6Wdp8kX7uF0Q0flUNMjCQcVIzDeQeW+Tr0wvTwEDrkAaWfVsW/BaNH4xSUWG2yhnqiBqO1Dum8NKUTjpBQA+PjxTLtNHEDcVJYE/HHf462FvKCmkJgKksUSALjH+x0d6DUjwFBCUHHpprnx6SdigRodimUfzajfRPBOSX8s33BlBspzk9v9cXeVeXYMfrsi6iFqcSlKFqA3KPLxx0IWzC2N2EcTKsyom5bCT37JekPibIA2L3dqwgbuO4mtebqRO8fEgCA2Z9JvMYBtZnfQPawAHUOJzSNLmcdlBWD2pQ1PW/WQmrhjmeKsSW1gWdXAaBJjP1fJmVouvLfF3Ls6Hf/mbbbuXTqLA+Skho9o97sCdCov+1FPMh8ojWXysH8JlS2Y+xnf1lTpVsTt8/FJ3hADCa4BJwYC+/dWSbfGVlr9JDk=\"
+        />\r\n</div> \r\n        <header>\r\n            <a id=\"logo\" href=\"/\">Open
+        <span id=\"sd\">SD</span></a>\r\n            <div id=\"title\">South Dakota
+        Transparency Website</div>\r\n            <div class=\"nav-button\"><img src=\"/img/menu.png\"
+        alt=\"Menu Icon\" /></div>\r\n        </header>  \r\n\r\n\r\n<nav>\r\n    <span
+        id=\"navigation\"><ul><li><a id='79' target='_blank' href='http://atg.sd.gov/OpenGovernment.aspx'>Statutes
+        and Rules</a><ul><li><a id='81' target='_blank' href='https://sdlegislature.gov/Statutes/'>SD
+        Statutes</a></li><li><a id='82' target='_blank' href='https://rules.sd.gov'>Proposed
+        Rules</a></li><li><a id='83' target='_blank' href='https://sdlegislature.gov/Rules/'>Promulgated
+        Rules</a></li></ul></li><li><a id='85' target='_blank' href=''>Boards & Commissions</a><ul><li><a
+        id='154' target='_blank' href='https://boardsandcommissions.sd.gov/'>State
+        Government</a></li><li><a id='155' target='_blank' href='https://sdlocalgov.appssd.sd.gov/'>Local
+        Government</a></li></ul></li><li><a id='86' target='' href='/Info_pr.aspx'>Payroll</a><ul><li><a
+        id='87' target='' href='/employees.aspx'>Employee Salaries</a></li><li><a
+        id='88' target='' href='/executive_salaries.aspx'>Executive Salaries</a></li><li><a
+        id='90' target='' href='/QT_Staffing.aspx'>Current Staffing Level</a></li></ul></li><li><a
+        id='91' target='' href=''>Checkbook</a><ul><li><a id='92' target='' href='https://southdakota.spending.socrata.com/#!/year/2026/'>Open
+        Checkbook - Interactive</a></li><li><a id='157' target='' href='https://open.sd.gov/vendor.aspx'>Vendor
+        Payment Listing - 5 yrs</a></li><li><a id='139' target='' href='https://open.sd.gov/covid19_expenditures.aspx'>All
+        COVID Spending</a></li><li><a id='93' target='' href='https://open.sd.gov/Covid19_ALL_2000.aspx'>Search
+        COVID Stimulus Vendor Payments</a></li></ul></li><li><a id='94' target=''
+        href='#'>Contracts/Grants</a><ul><li><a id='95' target='' href='/contracts.aspx'>Contract/Grant
+        Search</a></li><li><a id='96' target='_blank' href='https://www.sd.gov/bhra?id=cs_kb_article_view&sysparm_article=KB0044787&sys_kb_id=f65715d297607e907fc1b480f053affa&spa=1'>Commodity
+        Contract List</a></li><li><a id='132' target='_blank' href='https://sourcing.esmsolutions.com/postingboard/entities/3444a404-3818-494f-84c5-2a850acd7779'>RFP/Bid
+        Search</a></li><li><a id='97' target='' href='/rfp.aspx'>RFP Register of Proposals</a></li></ul></li><li><a
+        id='98' target='' href='#'>State Budget</a><ul><li><a id='138' target='' href='https://southdakota.budget.socrata.com/#!/year/default'>Open
+        Budget</a></li><li><a id='99' target='_blank' href='http://bfm.sd.gov/budget'>Budget
+        Documents</a></li><li><a id='102' target='' href='/budgettransfers.aspx'>Budget
+        Transfers</a></li><li><a id='103' target='' href='/Tax_Expenditures.aspx'>Tax
+        Expenditures</a></li></ul></li><li><a id='5' target='content' href='http://www.state.sd.us/bfm/ledger/info_fp.htm'>Financial
+        Publications</a><ul><li><a id='105' target='_blank' href='http://bfm.sd.gov/dashboards/Default.aspx'>Financial
+        Metrics</a></li><li><a id='130' target='_target' href='http://bfm.sd.gov/ltfp/'>Long
+        Term Financial Plan</a></li><li><a id='108' target='' href='/Info_bb.aspx'>Budget
+        in Brief</a></li><li><a id='109' target='' href='/Info_fr.aspx'>Annual Financial
+        Reports</a></li></ul></li><li><a id='110' target='_blank' href='https://sdreadytowork.com/about-us/public-records/'>Economic
+        Development</a></li></ul></span>\r\n            \r\n        </nav>\r\n        \r\n
+        \       <section id=\"main\">\r\n            \r\n                <h2>Grants
+        and Contracts</h2>\r\n                <p>as required by <a target=\"_blank\"
+        href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=1-56-10\">SDCL
+        1-56-10</a> and <a target=\"_blank\" href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=1-27-46\">SDCL
+        1-27-46</a><br />\r\n\r\n                as of <span id=\"lbl_Date\">11/11/2026
+        3:15:43 AM</span>\r\n            </p>\r\n                \r\n            \r\n
+        \               <div class=\"fbox\">\r\n                    <div class=\"lbox\">\r\n
+        \                       <strong>Department:</strong>\r\n                    </div>\r\n
+        \                   <div class=\"rbox\">\r\n                        <select
+        name=\"ddl_DoA\" id=\"ddl_DoA\">\r\n\t<option value=\"0\"> ALL ( )</option>\r\n\t<option
+        value=\"03 \">AGRICULTURE &amp; NAT. RESOURCES   (03 )</option>\r\n\t<option
+        value=\"29 \">ATTORNEY GENERAL               (29 )</option>\r\n\t<option value=\"012\">BHRA
+        ADMINISTRATION            (012)</option>\r\n\t<option value=\"014\">BHRA HUMAN
+        RESOURCES           (014)</option>\r\n\t<option value=\"15 \">BOARD OF REGENTS
+        \              (15 )</option>\r\n\t<option value=\"011\">BUREAU OF FINANCE
+        &amp; MANAGEMENT (011)</option>\r\n\t<option value=\"013\">BUREAU OF INFORMATION
+        &amp; TECH   (013)</option>\r\n\t<option value=\"18 \">CORRECTIONS                    (18
+        )</option>\r\n\t<option value=\"12 \">EDUCATION                      (12 )</option>\r\n\t<option
+        value=\"06 \">GAME, FISH AND PARKS           (06 )</option>\r\n\t<option value=\"010\">GOVERNOR&#39;S
+        OFFICE              (010)</option>\r\n\t<option value=\"09 \">HEALTH                         (09
+        )</option>\r\n\t<option value=\"19 \">HUMAN SERVICES                 (19 )</option>\r\n\t<option
+        value=\"321\">INVESTMENT COUNCIL             (321)</option>\r\n\t<option value=\"10
+        \">LABOR AND REGULATION           (10 )</option>\r\n\t<option value=\"288\">LEGISLATIVE
+        AUDIT              (288)</option>\r\n\t<option value=\"281\">LEGISLATIVE RESEARCH
+        COUNCIL   (281)</option>\r\n\t<option value=\"028\">LOTTERY                        (028)</option>\r\n\t<option
+        value=\"16 \">MILITARY                       (16 )</option>\r\n\t<option value=\"14
+        \">PUBLIC SAFETY                  (14 )</option>\r\n\t<option value=\"26 \">PUBLIC
+        UTILITIES COMMISSION    (26 )</option>\r\n\t<option value=\"25 \">RETIREMENT
+        SYSTEM              (25 )</option>\r\n\t<option value=\"02 \">REVENUE                        (02
+        )</option>\r\n\t<option value=\"30 \">SCHOOL &amp; PUBLIC LANDS          (30
+        )</option>\r\n\t<option value=\"31 \">SECRETARY OF STATE             (31 )</option>\r\n\t<option
+        value=\"08 \">SOCIAL SERVICES                (08 )</option>\r\n\t<option value=\"33
+        \">STATE AUDITOR                  (33 )</option>\r\n\t<option value=\"320\">STATE
+        TREASURER                (320)</option>\r\n\t<option value=\"04 \">TOURISM
+        \                       (04 )</option>\r\n\t<option value=\"11 \">TRANSPORTATION
+        \                (11 )</option>\r\n\t<option value=\"07 \">TRIBAL RELATIONS
+        \              (07 )</option>\r\n\t<option value=\"27 \">UNIFIED JUDICIAL
+        SYSTEMS       (27 )</option>\r\n\t<option value=\"17 \">VETERANS&#39; AFFAIRS
+        \             (17 )</option>\r\n\r\n</select>\r\n                    </div>\r\n
+        \               </div>\r\n                <div class=\"fbox\">\r\n                    <div
+        class=\"lbox\">\r\n                        <strong>Vendor Name contains:</strong>\r\n
+        \                   </div>\r\n                    <div class=\"rbox\">\r\n
+        \                       <input name=\"tb_Vendor\" type=\"text\" id=\"tb_Vendor\"
+        />\r\n                    </div>\r\n                </div>\r\n                <div
+        class=\"fbox\">\r\n                    <div class=\"lbox\">\r\n                        <strong>Document
+        Description contains:</strong>\r\n                    </div>\r\n                    <div
+        class=\"rbox\">\r\n                        <input name=\"tb_Doc_Descp\" type=\"text\"
+        id=\"tb_Doc_Descp\" />\r\n                    </div>\r\n                </div>\r\n
+        \               <div class=\"fbox\">\r\n                    <div class=\"lbox\">\r\n
+        \                       <strong>Contract/Grant Number contains:</strong>\r\n
+        \                   </div>\r\n                    <div class=\"rbox\">\r\n
+        \                       <input name=\"tb_Contract_number\" type=\"text\" id=\"tb_Contract_number\"
+        />\r\n                    </div>\r\n                </div>\r\n                <div
+        class=\"fbox\">\r\n                    <div class=\"lbox\">\r\n                        <strong>Filter:</strong>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div
+        class=\"rbox\">\r\n\t\t\t\t\t\t<input id=\"Radio1\" type=\"radio\" name=\"RadioGroup1\"
+        value=\"Radio1\" checked=\"checked\" /><label for=\"Radio1\">All</label>\r\n\t\t\t\t\t\t<input
+        id=\"Radio2\" type=\"radio\" name=\"RadioGroup1\" value=\"Radio2\" /><label
+        for=\"Radio2\">Contracts Only</label>\r\n\t\t\t\t\t\t<input id=\"Radio3\"
+        type=\"radio\" name=\"RadioGroup1\" value=\"Radio3\" /><label for=\"Radio3\">Grants
+        Only</label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\r\n\t\t\t\t</div>\r\n\t\t\t\t\r\n\r\n
+        \               <input type=\"submit\" name=\"btn_Search\" value=\"Search\"
+        id=\"btn_Search\" />&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" name=\"btn_Reset\"
+        value=\"Reset\" id=\"btn_Reset\" /><br /><br />\r\n            \r\n\r\n                <span
+        id=\"lbl_Contracts\"></span>\r\n\r\n          \r\n        </section>\r\n        <div
+        id=\"Popup\">\r\n              <div id=\"PopupDef\"></div>\r\n              <br
+        clear=\"all\"/><br /><span id=\"glossary\"><a href=\"/glossary.aspx\">Glossary</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+        id=\"close\">Close</span><br /><br />\r\n          </div>\r\n<footer>\r\n
+        \           &copy; Copyright 2019<br /><br />\r\n            <a href=\"http://sd.gov\">SD.Gov</a>
+        | <a href=\"mailto:bfminfo@state.sd.us?subject=OpenSD\">Feedback</a> | <a
+        href=\"http://bfm.sd.gov/ContactUs.aspx\">Contact Us</a> | <a href=\"http://sd.gov/accpolicy.aspx\">Accessibility</a>
+        | <a href=\"http://sd.gov/disclaim.aspx\">Disclaimer</a> | <a href=\"http://sd.gov/privacy.aspx\">Privacy
+        Policy</a>\r\n        </footer>\r\n\r\n <script>\r\n\r\n        $(document).ready(function
+        () {\r\n            $('div#Popup').hide();\r\n            $('.title').mousedown(function
+        (e) {\r\n                var moveLeft = 10;\r\n                var moveDown
+        = 20;\r\n                var htmlstring = $(this).next().html()\r\n                document.getElementById('PopupDef').innerHTML
+        = htmlstring;\r\n                if (windowsize <= 1000) {\r\n                    \r\n
+        \                   $(\"div#Popup\").css('top', e.pageY + moveDown).css('padding-left',
+        moveLeft);\r\n                }\r\n                else {\r\n                    moveLeft
+        = -50;\r\n                    $(\"div#Popup\").css('top', e.pageY + moveDown).css('left',
+        e.pageX + moveLeft);\r\n                }\r\n                $('div#Popup').show();\r\n
+        \           });\r\n        });\r\n        $('#close').click(function () {\r\n
+        \           $(\"#Popup\").hide();\r\n        });\r\n\r\n    </script></form>\r\n
+        \  \r\n</body>\r\n</html>\r\n"
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '21153'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Wed, 11 Nov 2026 09:15:43 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: __VIEWSTATE=%2FwEPDwUJNjgzMjg3Mjc0D2QWAgIED2QWBgIDDw8WAh4EVGV4dAWJGDx1bD48bGk%2BPGEgaWQ9Jzc5JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cDovL2F0Zy5zZC5nb3YvT3BlbkdvdmVybm1lbnQuYXNweCc%2BU3RhdHV0ZXMgYW5kIFJ1bGVzPC9hPjx1bD48bGk%2BPGEgaWQ9JzgxJyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly9zZGxlZ2lzbGF0dXJlLmdvdi9TdGF0dXRlcy8nPlNEIFN0YXR1dGVzPC9hPjwvbGk%2BPGxpPjxhIGlkPSc4MicgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vcnVsZXMuc2QuZ292Jz5Qcm9wb3NlZCBSdWxlczwvYT48L2xpPjxsaT48YSBpZD0nODMnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkbGVnaXNsYXR1cmUuZ292L1J1bGVzLyc%2BUHJvbXVsZ2F0ZWQgUnVsZXM8L2E%2BPC9saT48L3VsPjwvbGk%2BPGxpPjxhIGlkPSc4NScgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9Jyc%2BQm9hcmRzICYgQ29tbWlzc2lvbnM8L2E%2BPHVsPjxsaT48YSBpZD0nMTU0JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly9ib2FyZHNhbmRjb21taXNzaW9ucy5zZC5nb3YvJz5TdGF0ZSBHb3Zlcm5tZW50PC9hPjwvbGk%2BPGxpPjxhIGlkPScxNTUnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkbG9jYWxnb3YuYXBwc3NkLnNkLmdvdi8nPkxvY2FsIEdvdmVybm1lbnQ8L2E%2BPC9saT48L3VsPjwvbGk%2BPGxpPjxhIGlkPSc4NicgdGFyZ2V0PScnIGhyZWY9Jy9JbmZvX3ByLmFzcHgnPlBheXJvbGw8L2E%2BPHVsPjxsaT48YSBpZD0nODcnIHRhcmdldD0nJyBocmVmPScvZW1wbG95ZWVzLmFzcHgnPkVtcGxveWVlIFNhbGFyaWVzPC9hPjwvbGk%2BPGxpPjxhIGlkPSc4OCcgdGFyZ2V0PScnIGhyZWY9Jy9leGVjdXRpdmVfc2FsYXJpZXMuYXNweCc%2BRXhlY3V0aXZlIFNhbGFyaWVzPC9hPjwvbGk%2BPGxpPjxhIGlkPSc5MCcgdGFyZ2V0PScnIGhyZWY9Jy9RVF9TdGFmZmluZy5hc3B4Jz5DdXJyZW50IFN0YWZmaW5nIExldmVsPC9hPjwvbGk%2BPC91bD48L2xpPjxsaT48YSBpZD0nOTEnIHRhcmdldD0nJyBocmVmPScnPkNoZWNrYm9vazwvYT48dWw%2BPGxpPjxhIGlkPSc5MicgdGFyZ2V0PScnIGhyZWY9J2h0dHBzOi8vc291dGhkYWtvdGEuc3BlbmRpbmcuc29jcmF0YS5jb20vIyEveWVhci8yMDI2Lyc%2BT3BlbiBDaGVja2Jvb2sgLSBJbnRlcmFjdGl2ZTwvYT48L2xpPjxsaT48YSBpZD0nMTU3JyB0YXJnZXQ9JycgaHJlZj0naHR0cHM6Ly9vcGVuLnNkLmdvdi92ZW5kb3IuYXNweCc%2BVmVuZG9yIFBheW1lbnQgTGlzdGluZyAtIDUgeXJzPC9hPjwvbGk%2BPGxpPjxhIGlkPScxMzknIHRhcmdldD0nJyBocmVmPSdodHRwczovL29wZW4uc2QuZ292L2NvdmlkMTlfZXhwZW5kaXR1cmVzLmFzcHgnPkFsbCBDT1ZJRCBTcGVuZGluZzwvYT48L2xpPjxsaT48YSBpZD0nOTMnIHRhcmdldD0nJyBocmVmPSdodHRwczovL29wZW4uc2QuZ292L0NvdmlkMTlfQUxMXzIwMDAuYXNweCc%2BU2VhcmNoIENPVklEIFN0aW11bHVzIFZlbmRvciBQYXltZW50czwvYT48L2xpPjwvdWw%2BPC9saT48bGk%2BPGEgaWQ9Jzk0JyB0YXJnZXQ9JycgaHJlZj0nIyc%2BQ29udHJhY3RzL0dyYW50czwvYT48dWw%2BPGxpPjxhIGlkPSc5NScgdGFyZ2V0PScnIGhyZWY9Jy9jb250cmFjdHMuYXNweCc%2BQ29udHJhY3QvR3JhbnQgU2VhcmNoPC9hPjwvbGk%2BPGxpPjxhIGlkPSc5NicgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vd3d3LnNkLmdvdi9iaHJhP2lkPWNzX2tiX2FydGljbGVfdmlldyZzeXNwYXJtX2FydGljbGU9S0IwMDQ0Nzg3JnN5c19rYl9pZD1mNjU3MTVkMjk3NjA3ZTkwN2ZjMWI0ODBmMDUzYWZmYSZzcGE9MSc%2BQ29tbW9kaXR5IENvbnRyYWN0IExpc3Q8L2E%2BPC9saT48bGk%2BPGEgaWQ9JzEzMicgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vc291cmNpbmcuZXNtc29sdXRpb25zLmNvbS9wb3N0aW5nYm9hcmQvZW50aXRpZXMvMzQ0NGE0MDQtMzgxOC00OTRmLTg0YzUtMmE4NTBhY2Q3Nzc5Jz5SRlAvQmlkIFNlYXJjaDwvYT48L2xpPjxsaT48YSBpZD0nOTcnIHRhcmdldD0nJyBocmVmPScvcmZwLmFzcHgnPlJGUCBSZWdpc3RlciBvZiBQcm9wb3NhbHM8L2E%2BPC9saT48L3VsPjwvbGk%2BPGxpPjxhIGlkPSc5OCcgdGFyZ2V0PScnIGhyZWY9JyMnPlN0YXRlIEJ1ZGdldDwvYT48dWw%2BPGxpPjxhIGlkPScxMzgnIHRhcmdldD0nJyBocmVmPSdodHRwczovL3NvdXRoZGFrb3RhLmJ1ZGdldC5zb2NyYXRhLmNvbS8jIS95ZWFyL2RlZmF1bHQnPk9wZW4gQnVkZ2V0PC9hPjwvbGk%2BPGxpPjxhIGlkPSc5OScgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHA6Ly9iZm0uc2QuZ292L2J1ZGdldCc%2BQnVkZ2V0IERvY3VtZW50czwvYT48L2xpPjxsaT48YSBpZD0nMTAyJyB0YXJnZXQ9JycgaHJlZj0nL2J1ZGdldHRyYW5zZmVycy5hc3B4Jz5CdWRnZXQgVHJhbnNmZXJzPC9hPjwvbGk%2BPGxpPjxhIGlkPScxMDMnIHRhcmdldD0nJyBocmVmPScvVGF4X0V4cGVuZGl0dXJlcy5hc3B4Jz5UYXggRXhwZW5kaXR1cmVzPC9hPjwvbGk%2BPC91bD48L2xpPjxsaT48YSBpZD0nNScgdGFyZ2V0PSdjb250ZW50JyBocmVmPSdodHRwOi8vd3d3LnN0YXRlLnNkLnVzL2JmbS9sZWRnZXIvaW5mb19mcC5odG0nPkZpbmFuY2lhbCBQdWJsaWNhdGlvbnM8L2E%2BPHVsPjxsaT48YSBpZD0nMTA1JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cDovL2JmbS5zZC5nb3YvZGFzaGJvYXJkcy9EZWZhdWx0LmFzcHgnPkZpbmFuY2lhbCBNZXRyaWNzPC9hPjwvbGk%2BPGxpPjxhIGlkPScxMzAnIHRhcmdldD0nX3RhcmdldCcgaHJlZj0naHR0cDovL2JmbS5zZC5nb3YvbHRmcC8nPkxvbmcgVGVybSBGaW5hbmNpYWwgUGxhbjwvYT48L2xpPjxsaT48YSBpZD0nMTA4JyB0YXJnZXQ9JycgaHJlZj0nL0luZm9fYmIuYXNweCc%2BQnVkZ2V0IGluIEJyaWVmPC9hPjwvbGk%2BPGxpPjxhIGlkPScxMDknIHRhcmdldD0nJyBocmVmPScvSW5mb19mci5hc3B4Jz5Bbm51YWwgRmluYW5jaWFsIFJlcG9ydHM8L2E%2BPC9saT48L3VsPjwvbGk%2BPGxpPjxhIGlkPScxMTAnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkcmVhZHl0b3dvcmsuY29tL2Fib3V0LXVzL3B1YmxpYy1yZWNvcmRzLyc%2BRWNvbm9taWMgRGV2ZWxvcG1lbnQ8L2E%2BPC9saT48L3VsPmRkAgYPDxYCHwAFFTExLzExLzIwMjYgMzoxNTo0MyBBTWRkAggPEGQPFiJmAgECAgIDAgQCBQIGAgcCCAIJAgoCCwIMAg0CDgIPAhACEQISAhMCFAIVAhYCFwIYAhkCGgIbAhwCHQIeAh8CIAIhFiIQBQggQUxMICggKQUBMGcQBSRBR1JJQ1VMVFVSRSAmIE5BVC4gUkVTT1VSQ0VTICAgKDAzICkFAzAzIGcQBSRBVFRPUk5FWSBHRU5FUkFMICAgICAgICAgICAgICAgKDI5ICkFAzI5IGcQBSRCSFJBIEFETUlOSVNUUkFUSU9OICAgICAgICAgICAgKDAxMikFAzAxMmcQBSRCSFJBIEhVTUFOIFJFU09VUkNFUyAgICAgICAgICAgKDAxNCkFAzAxNGcQBSRCT0FSRCBPRiBSRUdFTlRTICAgICAgICAgICAgICAgKDE1ICkFAzE1IGcQBSRCVVJFQVUgT0YgRklOQU5DRSAmIE1BTkFHRU1FTlQgKDAxMSkFAzAxMWcQBSRCVVJFQVUgT0YgSU5GT1JNQVRJT04gJiBURUNIICAgKDAxMykFAzAxM2cQBSRDT1JSRUNUSU9OUyAgICAgICAgICAgICAgICAgICAgKDE4ICkFAzE4IGcQBSRFRFVDQVRJT04gICAgICAgICAgICAgICAgICAgICAgKDEyICkFAzEyIGcQBSRHQU1FLCBGSVNIIEFORCBQQVJLUyAgICAgICAgICAgKDA2ICkFAzA2IGcQBSRHT1ZFUk5PUidTIE9GRklDRSAgICAgICAgICAgICAgKDAxMCkFAzAxMGcQBSRIRUFMVEggICAgICAgICAgICAgICAgICAgICAgICAgKDA5ICkFAzA5IGcQBSRIVU1BTiBTRVJWSUNFUyAgICAgICAgICAgICAgICAgKDE5ICkFAzE5IGcQBSRJTlZFU1RNRU5UIENPVU5DSUwgICAgICAgICAgICAgKDMyMSkFAzMyMWcQBSRMQUJPUiBBTkQgUkVHVUxBVElPTiAgICAgICAgICAgKDEwICkFAzEwIGcQBSRMRUdJU0xBVElWRSBBVURJVCAgICAgICAgICAgICAgKDI4OCkFAzI4OGcQBSRMRUdJU0xBVElWRSBSRVNFQVJDSCBDT1VOQ0lMICAgKDI4MSkFAzI4MWcQBSRMT1RURVJZICAgICAgICAgICAgICAgICAgICAgICAgKDAyOCkFAzAyOGcQBSRNSUxJVEFSWSAgICAgICAgICAgICAgICAgICAgICAgKDE2ICkFAzE2IGcQBSRQVUJMSUMgU0FGRVRZICAgICAgICAgICAgICAgICAgKDE0ICkFAzE0IGcQBSRQVUJMSUMgVVRJTElUSUVTIENPTU1JU1NJT04gICAgKDI2ICkFAzI2IGcQBSRSRVRJUkVNRU5UIFNZU1RFTSAgICAgICAgICAgICAgKDI1ICkFAzI1IGcQBSRSRVZFTlVFICAgICAgICAgICAgICAgICAgICAgICAgKDAyICkFAzAyIGcQBSRTQ0hPT0wgJiBQVUJMSUMgTEFORFMgICAgICAgICAgKDMwICkFAzMwIGcQBSRTRUNSRVRBUlkgT0YgU1RBVEUgICAgICAgICAgICAgKDMxICkFAzMxIGcQBSRTT0NJQUwgU0VSVklDRVMgICAgICAgICAgICAgICAgKDA4ICkFAzA4IGcQBSRTVEFURSBBVURJVE9SICAgICAgICAgICAgICAgICAgKDMzICkFAzMzIGcQBSRTVEFURSBUUkVBU1VSRVIgICAgICAgICAgICAgICAgKDMyMCkFAzMyMGcQBSRUT1VSSVNNICAgICAgICAgICAgICAgICAgICAgICAgKDA0ICkFAzA0IGcQBSRUUkFOU1BPUlRBVElPTiAgICAgICAgICAgICAgICAgKDExICkFAzExIGcQBSRUUklCQUwgUkVMQVRJT05TICAgICAgICAgICAgICAgKDA3ICkFAzA3IGcQBSRVTklGSUVEIEpVRElDSUFMIFNZU1RFTVMgICAgICAgKDI3ICkFAzI3IGcQBSRWRVRFUkFOUycgQUZGQUlSUyAgICAgICAgICAgICAgKDE3ICkFAzE3IGdkZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WBQUGUmFkaW8xBQZSYWRpbzIFBlJhZGlvMgUGUmFkaW8zBQZSYWRpbzO6F2yG3tMz2t9WSkNErJiTIdHSOQ%3D%3D&__VIEWSTATEGENERATOR=C541E659&__EVENTVALIDATION=%2FwEdACstcpu9uYiXYKNJccXU76JymYOy734x5yOenrHD%2FCNcyAB3NPxwqghWo2Zy62HCsJIy0mBNmtDfEYEZBrodEAOwGtmlxdWuDWN1fIkvWR1NL3L46IZ0m7bxmwBQmjBhv0UhK1yN5DzsZ6inX8XDVy2thIn521QoA2EIUN%2FVRJAG3DyGbTFexQfpaxYDgY8fYOVxNGGmO0p9U5yvQ1JfwxKcQxAvwMipmxsizF%2BmTm4zT4qqVDoQ7vu6vt2sJU33wMTAqUQ7giDx9DIOlTpJUlhtAjccCkUQCSq8zy5yTsgtM8F1S0K%2BlrojlcD1TsOPnacLvUzsWOO3rrspb73ir5o8DGqOAxSeDCBO7sqZXSnfeGKX%2FeF5%2FgUmCWIslST3P%2Fm1R78grlTOtNuU5hnhY4wBdOz2BOZZY%2BPAsY%2BVtto8k%2BxfRDIomF0efR8E7kujclfAr1VLcNkrSdYlkvhbMjUQC%2FdlmCKfhzJCMF6o%2Bvt9l6DK2m0%2FeoOEhpu0THZHQUj2q6Wdp8kX7uF0Q0flUNMjCQcVIzDeQeW%2BTr0wvTwEDrkAaWfVsW%2FBaNH4xSUWG2yhnqiBqO1Dum8NKUTjpBQA%2BPjxTLtNHEDcVJYE%2FHHf462FvKCmkJgKksUSALjH%2Bx0d6DUjwFBCUHHpprnx6SdigRodimUfzajfRPBOSX8s33BlBspzk9v9cXeVeXYMfrsi6iFqcSlKFqA3KPLxx0IWzC2N2EcTKsyom5bCT37JekPibIA2L3dqwgbuO4mtebqRO8fEgCA2Z9JvMYBtZnfQPawAHUOJzSNLmcdlBWD2pQ1PW%2FWQmrhjmeKsSW1gWdXAaBJjP1fJmVouvLfF3Ls6Hf%2FmbbbuXTqLA%2BSkho9o97sCdCov%2B1FPMh8ojWXysH8JlS2Y%2Bxnf1lTpVsTt8%2FFJ3hADCa4BJwYC%2B%2FdWSbfGVlr9JDk%3D&ddl_DoA=320&tb_Vendor=&tb_Doc_Descp=&tb_Contract_number=&RadioGroup1=Radio2&btn_Search=Search
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '7705'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: POST
+    uri: https://open.sd.gov/contracts.aspx
+  response:
+    body:
+      string: "\r\n\r\n<!DOCTYPE html>\r\n\r\n\r\n<html>\r\n<head><meta charset=\"utf-8\"
+        /><title>\r\n\tOpen SD\r\n</title><meta http-equiv=\"x-ua-compatible\" content=\"IE=edge\"
+        /><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"
+        /><meta HTTP-EQUIV=\"Pragma\" content=\"no-cache\" /><meta HTTP-EQUIV=\"Cache-Control\"
+        content=\"no-cache,no-Store\" /><link rel=\"icon\" type=\"image/png\" href=\"/img/favicon.png\"
+        />\r\n<SCRIPT language=\"JAVASCRIPT\">\r\n\r\n    if (top.frames.length !=
+        0)\r\n        top.location = self.document.location;\r\n\r\n</SCRIPT>\r\n\r\n\r\n
+        \  \r\n    <link href=\"/inc/styles/styles.css\" type=\"text/css\" rel=\"stylesheet\"
+        /> \r\n    <script src=\"/inc/scripts/jquery-1.11.1.min.js\" type=\"text/javascript\"></script>\r\n
+        \   <script src=\"/inc/scripts/jquery-scrolltofixed-min.js\" type=\"text/javascript\">\r\n\r\n</script>\r\n<script
+        type=\"text/javascript\">\r\n    $(document).ready(function () {\r\n        $(\".nav-button\").click(function
+        () {\r\n            $(\"nav > #navigation > ul\").toggleClass(\"open\");\r\n
+        \       });\r\n\r\n        $(\"nav > #navigation > ul > li > a\").click(function
+        (e) {\r\n\r\n            if ($(this).parent(\"li\").has(\"ul\").length) {\r\n
+        \               e.preventDefault();\r\n                \r\n            }\r\n
+        \         //  else {\r\n             $(\"nav > #navigation > ul > li:hover
+        > ul\").toggleClass(\"open1\");\r\n          //  }\r\n               // return;\r\n
+        \          \r\n        });\r\n\r\n        $(\"nav > #navigation > ul > li
+        > ul > li\").click(function () {\r\n            \r\n           $(\"nav > #navigation
+        > ul > li > ul > li:hover > ul\").toggleClass(\"open2\");\r\n            $(\"nav
+        > #navigation > ul > li:hover > ul\").addClass(\"open1\");\r\n        });\r\n\r\n
+        \       if ($(window).width() > 1000) {\r\n            var stickyNavTop =
+        $('nav').offset().top;\r\n\r\n        var stickyNav = function () {\r\n            var
+        scrollTop = $(window).scrollTop();\r\n\r\n            if (scrollTop > stickyNavTop)
+        {\r\n                $('nav').addClass('sticky');\r\n            } else {\r\n
+        \               $('nav').removeClass('sticky');\r\n            }\r\n        };\r\n\r\n
+        \       stickyNav();\r\n\r\n        $(window).scroll(function () {\r\n            stickyNav();\r\n
+        \       });\r\n        }\r\n        else {\r\n            $('nav').removeClass('sticky');\r\n
+        \       }\r\n\r\n        SizeChange();\r\n        \r\n\r\n        if ($(window).width()
+        <= 1000) {\r\n            $(\"#navigation > ul > li\").each(function (index)
+        {\r\n                if ($(this).children(\"ul\").length > 0) {\r\n                  \r\n
+        \               }\r\n                else {\r\n                    $(this).children(\"a\").css(\"width\",
+        \"100%\");\r\n    \r\n                }\r\n            });\r\n\r\n        }\r\n\r\n
+        \   });\r\n\r\n  \r\n //   var listItems = $(\"#navigation > ul\").children();\r\n
+        \ //  var count = listItems.length;\r\n\r\nvar windowsize = $(window).width();\r\n\r\n
+        \   $(window).resize(function () {\r\n        var windowsize = $(window).width();\r\n
+        \       SizeChange();\r\n    });\r\n\r\n   \r\n    \r\n\r\n    function SizeChange()
+        {  \r\n        if ($(window).width() <= 1000) {\r\n\r\n            $(\"nav
+        > #navigation > ul > li\").width(\"95%\");\r\n        }\r\n        else {\r\n
+        \           var listItems = $(\"#navigation > ul\").children();\r\n            var
+        count = listItems.length;\r\n            $(\"nav > #navigation > ul > li\").width(100
+        / count + \"%\");\r\n        }\r\n    }\r\n\r\n    </script>\r\n</head>\r\n<body>\r\n
+        \   <form method=\"post\" action=\"./contracts.aspx\" id=\"form1\">\r\n<div
+        class=\"aspNetHidden\">\r\n<input type=\"hidden\" name=\"__VIEWSTATE\" id=\"__VIEWSTATE\"
+        value=\"/wEPDwUJNjgzMjg3Mjc0D2QWAgIED2QWCAIDDw8WAh4EVGV4dAWJGDx1bD48bGk+PGEgaWQ9Jzc5JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cDovL2F0Zy5zZC5nb3YvT3BlbkdvdmVybm1lbnQuYXNweCc+U3RhdHV0ZXMgYW5kIFJ1bGVzPC9hPjx1bD48bGk+PGEgaWQ9JzgxJyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly9zZGxlZ2lzbGF0dXJlLmdvdi9TdGF0dXRlcy8nPlNEIFN0YXR1dGVzPC9hPjwvbGk+PGxpPjxhIGlkPSc4MicgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vcnVsZXMuc2QuZ292Jz5Qcm9wb3NlZCBSdWxlczwvYT48L2xpPjxsaT48YSBpZD0nODMnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkbGVnaXNsYXR1cmUuZ292L1J1bGVzLyc+UHJvbXVsZ2F0ZWQgUnVsZXM8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPSc4NScgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9Jyc+Qm9hcmRzICYgQ29tbWlzc2lvbnM8L2E+PHVsPjxsaT48YSBpZD0nMTU0JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly9ib2FyZHNhbmRjb21taXNzaW9ucy5zZC5nb3YvJz5TdGF0ZSBHb3Zlcm5tZW50PC9hPjwvbGk+PGxpPjxhIGlkPScxNTUnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkbG9jYWxnb3YuYXBwc3NkLnNkLmdvdi8nPkxvY2FsIEdvdmVybm1lbnQ8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPSc4NicgdGFyZ2V0PScnIGhyZWY9Jy9JbmZvX3ByLmFzcHgnPlBheXJvbGw8L2E+PHVsPjxsaT48YSBpZD0nODcnIHRhcmdldD0nJyBocmVmPScvZW1wbG95ZWVzLmFzcHgnPkVtcGxveWVlIFNhbGFyaWVzPC9hPjwvbGk+PGxpPjxhIGlkPSc4OCcgdGFyZ2V0PScnIGhyZWY9Jy9leGVjdXRpdmVfc2FsYXJpZXMuYXNweCc+RXhlY3V0aXZlIFNhbGFyaWVzPC9hPjwvbGk+PGxpPjxhIGlkPSc5MCcgdGFyZ2V0PScnIGhyZWY9Jy9RVF9TdGFmZmluZy5hc3B4Jz5DdXJyZW50IFN0YWZmaW5nIExldmVsPC9hPjwvbGk+PC91bD48L2xpPjxsaT48YSBpZD0nOTEnIHRhcmdldD0nJyBocmVmPScnPkNoZWNrYm9vazwvYT48dWw+PGxpPjxhIGlkPSc5MicgdGFyZ2V0PScnIGhyZWY9J2h0dHBzOi8vc291dGhkYWtvdGEuc3BlbmRpbmcuc29jcmF0YS5jb20vIyEveWVhci8yMDI2Lyc+T3BlbiBDaGVja2Jvb2sgLSBJbnRlcmFjdGl2ZTwvYT48L2xpPjxsaT48YSBpZD0nMTU3JyB0YXJnZXQ9JycgaHJlZj0naHR0cHM6Ly9vcGVuLnNkLmdvdi92ZW5kb3IuYXNweCc+VmVuZG9yIFBheW1lbnQgTGlzdGluZyAtIDUgeXJzPC9hPjwvbGk+PGxpPjxhIGlkPScxMzknIHRhcmdldD0nJyBocmVmPSdodHRwczovL29wZW4uc2QuZ292L2NvdmlkMTlfZXhwZW5kaXR1cmVzLmFzcHgnPkFsbCBDT1ZJRCBTcGVuZGluZzwvYT48L2xpPjxsaT48YSBpZD0nOTMnIHRhcmdldD0nJyBocmVmPSdodHRwczovL29wZW4uc2QuZ292L0NvdmlkMTlfQUxMXzIwMDAuYXNweCc+U2VhcmNoIENPVklEIFN0aW11bHVzIFZlbmRvciBQYXltZW50czwvYT48L2xpPjwvdWw+PC9saT48bGk+PGEgaWQ9Jzk0JyB0YXJnZXQ9JycgaHJlZj0nIyc+Q29udHJhY3RzL0dyYW50czwvYT48dWw+PGxpPjxhIGlkPSc5NScgdGFyZ2V0PScnIGhyZWY9Jy9jb250cmFjdHMuYXNweCc+Q29udHJhY3QvR3JhbnQgU2VhcmNoPC9hPjwvbGk+PGxpPjxhIGlkPSc5NicgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vd3d3LnNkLmdvdi9iaHJhP2lkPWNzX2tiX2FydGljbGVfdmlldyZzeXNwYXJtX2FydGljbGU9S0IwMDQ0Nzg3JnN5c19rYl9pZD1mNjU3MTVkMjk3NjA3ZTkwN2ZjMWI0ODBmMDUzYWZmYSZzcGE9MSc+Q29tbW9kaXR5IENvbnRyYWN0IExpc3Q8L2E+PC9saT48bGk+PGEgaWQ9JzEzMicgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vc291cmNpbmcuZXNtc29sdXRpb25zLmNvbS9wb3N0aW5nYm9hcmQvZW50aXRpZXMvMzQ0NGE0MDQtMzgxOC00OTRmLTg0YzUtMmE4NTBhY2Q3Nzc5Jz5SRlAvQmlkIFNlYXJjaDwvYT48L2xpPjxsaT48YSBpZD0nOTcnIHRhcmdldD0nJyBocmVmPScvcmZwLmFzcHgnPlJGUCBSZWdpc3RlciBvZiBQcm9wb3NhbHM8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPSc5OCcgdGFyZ2V0PScnIGhyZWY9JyMnPlN0YXRlIEJ1ZGdldDwvYT48dWw+PGxpPjxhIGlkPScxMzgnIHRhcmdldD0nJyBocmVmPSdodHRwczovL3NvdXRoZGFrb3RhLmJ1ZGdldC5zb2NyYXRhLmNvbS8jIS95ZWFyL2RlZmF1bHQnPk9wZW4gQnVkZ2V0PC9hPjwvbGk+PGxpPjxhIGlkPSc5OScgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHA6Ly9iZm0uc2QuZ292L2J1ZGdldCc+QnVkZ2V0IERvY3VtZW50czwvYT48L2xpPjxsaT48YSBpZD0nMTAyJyB0YXJnZXQ9JycgaHJlZj0nL2J1ZGdldHRyYW5zZmVycy5hc3B4Jz5CdWRnZXQgVHJhbnNmZXJzPC9hPjwvbGk+PGxpPjxhIGlkPScxMDMnIHRhcmdldD0nJyBocmVmPScvVGF4X0V4cGVuZGl0dXJlcy5hc3B4Jz5UYXggRXhwZW5kaXR1cmVzPC9hPjwvbGk+PC91bD48L2xpPjxsaT48YSBpZD0nNScgdGFyZ2V0PSdjb250ZW50JyBocmVmPSdodHRwOi8vd3d3LnN0YXRlLnNkLnVzL2JmbS9sZWRnZXIvaW5mb19mcC5odG0nPkZpbmFuY2lhbCBQdWJsaWNhdGlvbnM8L2E+PHVsPjxsaT48YSBpZD0nMTA1JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cDovL2JmbS5zZC5nb3YvZGFzaGJvYXJkcy9EZWZhdWx0LmFzcHgnPkZpbmFuY2lhbCBNZXRyaWNzPC9hPjwvbGk+PGxpPjxhIGlkPScxMzAnIHRhcmdldD0nX3RhcmdldCcgaHJlZj0naHR0cDovL2JmbS5zZC5nb3YvbHRmcC8nPkxvbmcgVGVybSBGaW5hbmNpYWwgUGxhbjwvYT48L2xpPjxsaT48YSBpZD0nMTA4JyB0YXJnZXQ9JycgaHJlZj0nL0luZm9fYmIuYXNweCc+QnVkZ2V0IGluIEJyaWVmPC9hPjwvbGk+PGxpPjxhIGlkPScxMDknIHRhcmdldD0nJyBocmVmPScvSW5mb19mci5hc3B4Jz5Bbm51YWwgRmluYW5jaWFsIFJlcG9ydHM8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPScxMTAnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkcmVhZHl0b3dvcmsuY29tL2Fib3V0LXVzL3B1YmxpYy1yZWNvcmRzLyc+RWNvbm9taWMgRGV2ZWxvcG1lbnQ8L2E+PC9saT48L3VsPmRkAgYPDxYCHwAFFTExLzExLzIwMjYgMzoxNTo0MyBBTWRkAggPEGQPFiJmAgECAgIDAgQCBQIGAgcCCAIJAgoCCwIMAg0CDgIPAhACEQISAhMCFAIVAhYCFwIYAhkCGgIbAhwCHQIeAh8CIAIhFiIQBQggQUxMICggKQUBMGcQBSRBR1JJQ1VMVFVSRSAmIE5BVC4gUkVTT1VSQ0VTICAgKDAzICkFAzAzIGcQBSRBVFRPUk5FWSBHRU5FUkFMICAgICAgICAgICAgICAgKDI5ICkFAzI5IGcQBSRCSFJBIEFETUlOSVNUUkFUSU9OICAgICAgICAgICAgKDAxMikFAzAxMmcQBSRCSFJBIEhVTUFOIFJFU09VUkNFUyAgICAgICAgICAgKDAxNCkFAzAxNGcQBSRCT0FSRCBPRiBSRUdFTlRTICAgICAgICAgICAgICAgKDE1ICkFAzE1IGcQBSRCVVJFQVUgT0YgRklOQU5DRSAmIE1BTkFHRU1FTlQgKDAxMSkFAzAxMWcQBSRCVVJFQVUgT0YgSU5GT1JNQVRJT04gJiBURUNIICAgKDAxMykFAzAxM2cQBSRDT1JSRUNUSU9OUyAgICAgICAgICAgICAgICAgICAgKDE4ICkFAzE4IGcQBSRFRFVDQVRJT04gICAgICAgICAgICAgICAgICAgICAgKDEyICkFAzEyIGcQBSRHQU1FLCBGSVNIIEFORCBQQVJLUyAgICAgICAgICAgKDA2ICkFAzA2IGcQBSRHT1ZFUk5PUidTIE9GRklDRSAgICAgICAgICAgICAgKDAxMCkFAzAxMGcQBSRIRUFMVEggICAgICAgICAgICAgICAgICAgICAgICAgKDA5ICkFAzA5IGcQBSRIVU1BTiBTRVJWSUNFUyAgICAgICAgICAgICAgICAgKDE5ICkFAzE5IGcQBSRJTlZFU1RNRU5UIENPVU5DSUwgICAgICAgICAgICAgKDMyMSkFAzMyMWcQBSRMQUJPUiBBTkQgUkVHVUxBVElPTiAgICAgICAgICAgKDEwICkFAzEwIGcQBSRMRUdJU0xBVElWRSBBVURJVCAgICAgICAgICAgICAgKDI4OCkFAzI4OGcQBSRMRUdJU0xBVElWRSBSRVNFQVJDSCBDT1VOQ0lMICAgKDI4MSkFAzI4MWcQBSRMT1RURVJZICAgICAgICAgICAgICAgICAgICAgICAgKDAyOCkFAzAyOGcQBSRNSUxJVEFSWSAgICAgICAgICAgICAgICAgICAgICAgKDE2ICkFAzE2IGcQBSRQVUJMSUMgU0FGRVRZICAgICAgICAgICAgICAgICAgKDE0ICkFAzE0IGcQBSRQVUJMSUMgVVRJTElUSUVTIENPTU1JU1NJT04gICAgKDI2ICkFAzI2IGcQBSRSRVRJUkVNRU5UIFNZU1RFTSAgICAgICAgICAgICAgKDI1ICkFAzI1IGcQBSRSRVZFTlVFICAgICAgICAgICAgICAgICAgICAgICAgKDAyICkFAzAyIGcQBSRTQ0hPT0wgJiBQVUJMSUMgTEFORFMgICAgICAgICAgKDMwICkFAzMwIGcQBSRTRUNSRVRBUlkgT0YgU1RBVEUgICAgICAgICAgICAgKDMxICkFAzMxIGcQBSRTT0NJQUwgU0VSVklDRVMgICAgICAgICAgICAgICAgKDA4ICkFAzA4IGcQBSRTVEFURSBBVURJVE9SICAgICAgICAgICAgICAgICAgKDMzICkFAzMzIGcQBSRTVEFURSBUUkVBU1VSRVIgICAgICAgICAgICAgICAgKDMyMCkFAzMyMGcQBSRUT1VSSVNNICAgICAgICAgICAgICAgICAgICAgICAgKDA0ICkFAzA0IGcQBSRUUkFOU1BPUlRBVElPTiAgICAgICAgICAgICAgICAgKDExICkFAzExIGcQBSRUUklCQUwgUkVMQVRJT05TICAgICAgICAgICAgICAgKDA3ICkFAzA3IGcQBSRVTklGSUVEIEpVRElDSUFMIFNZU1RFTVMgICAgICAgKDI3ICkFAzI3IGcQBSRWRVRFUkFOUycgQUZGQUlSUyAgICAgICAgICAgICAgKDE3ICkFAzE3IGdkZAIaDw8WAh8ABa4TPHRhYmxlIGlkPSdjb250cmFjdHMnPjx0aGVhZD48dHI+PHRoPjxhIGNsYXNzPSd0aXRsZSc+Q29udHJhY3QvR3JhbnQ8L2E+PGRpdiBjbGFzcz0nZGVmaW5pdGlvbic+PGg0PkNvbnRyYWN0PC9oND5UeXBlcyBvZiBzdGF0ZSBjb250cmFjdHM6PHA+PHVsPjxsaT5TZXJ2aWNlIGNvbnRyYWN0cyBhcmUgYWdyZWVtZW50cyB0byBwcm92aWRlIHNlcnZpY2VzIGluc3RlYWQgb2YgYSBzdXBwbHkgb3IgbWF0ZXJpYWwgYW5kIG1heSBiZSBrZXB0IGJ5IHRoZSBpbmRpdmlkdWFsIGFnZW5jeSBlbnRlcmluZyBpbnRvIHRoZSBjb250cmFjdC48bGk+Q29uc3VsdGFudCBjb250cmFjdHMgYXJlIGEgc3Vic2V0IG9mIHNlcnZpY2UgY29udHJhY3RzLCB1c2VkIHRvIG9idGFpbiBjb25zdWx0aW5nIHNlcnZpY2VzLiAgQ29uc3VsdGFudCBjb250cmFjdHMgYXJlIHJlcXVpcmVkIHRvIGJlIGZpbGVkIHdpdGggdGhlIHN0YXRlIGF1ZGl0b3IncyBvZmZpY2UgYW5kIGNvcGllcyBjYW4gYmUgb2J0YWluZWQgdGhlcmUuPGxpPlByb2N1cmVtZW50IGNvbnRyYWN0cyBhcmUgaXNzdWVkIGJ5IHRoZSBPZmZpY2Ugb2YgUHJvY3VyZW1lbnQgZm9yIHN1cHBsaWVzIGFuZCBtYXRlcmlhbHMgYW5kIGFyZSBhdmFpbGFibGUgb24gdGhlIDxhIGhyZWY9Imh0dHA6Ly93d3cuc3RhdGUuc2QudXMvYm9hL29wbS8iIHRhcmdldD0ibmV3Ij5PUE0gd2Vic2l0ZTwvYT4uPGxpPkxlZ2FsIGNvbnRyYWN0cyBhcmUgZmlsZWQgd2l0aCB0aGUgYXR0b3JuZXkgZ2VuZXJhbCdzIG9mZmljZS48L3VsPjwvZGl2PiBOdW1iZXI8L3RoPjx0aD5EZXNjcmlwdGlvbjwvdGg+PHRoPlZlbmRvciBOYW1lPC90aD48dGg+PGEgY2xhc3M9J3RpdGxlJz5BZ2VuY3k8L2E+PGRpdiBjbGFzcz0nZGVmaW5pdGlvbic+PGg0PkFnZW5jeTwvaDQ+VGhlIHRlcm0gImFnZW5jeSIgaXMgdXNlZCB0byByZWZlciB0byB0aGUgZGVwYXJ0bWVudHMsIGJ1cmVhdXMsIGFuZCBvZmZpY2VzIHRoYXQgY29tcHJpc2Ugc3RhdGUgZ292ZXJubWVudC4gIEFnZW5jaWVzIGFyZSBoZWFkZWQgYnkgYSBjYWJpbmV0IFNlY3JldGFyeSBvciBDb21taXNzaW9uZXIsIG9yIGJ5IGFuIGVsZWN0ZWQgb2ZmaWNpYWwuICBOdW1lcmljYWwgY29kZXMgYXNzaWduZWQgdG8gYWdlbmNpZXMgYXJlIGxpc3RlZCA8YSB0YXJnZXQ9Im5ldyIgaHJlZj0iaW5mb19hZ2VuY2llcy5odG0iPmhlcmU8L2E+LjwvZGl2PiBhbmQgTmFtZTwvdGg+PHRoPkJlZ2luIERhdGU8L3RoPjx0aD5BbW91bnQ8L3RoPjwvdHI+PC90aGVhZD48dHI+PHRkPjxhIGhyZWY9J2NvbnRyYWN0c0RvY1Nob3cuYXNweD9Eb2NJRD0yNkc1MDE4OTUzKysrKysrJz4yNkc1MDE4OTUzICAgICAgPC9hPjwvdGQ+PHRkPjMgZWFjaCBEZWxsIGxhcHRvcHMsIGRvY2tpbmcgc3RhdGlvbnMsIDYgbW9uaXRvcnM8L3RkPjx0ZD5ERUxMIE1BUktFVElORyBMUCAgICAgICAgICAgICA8L3RkPjx0ZD4zMjAgLSBTVEFURSBUUkVBU1VSRVIgICAgICAgICAgICAgICA8L3RkPjx0ZD4yMDI2MDUxOTwvdGQ+PHRkIGFsaWduPSdyaWdodCc+JDExLDg1MDwvdGQ+PC90cj48dHI+PHRkPjxhIGhyZWY9J2NvbnRyYWN0c0RvY1Nob3cuYXNweD9Eb2NJRD0yNS0zMjAxLVRNMSsrKysrJz4yNS0zMjAxLVRNMSAgICAgPC9hPjwvdGQ+PHRkPk1lcmNoYW50IHByb2Nlc3Npbmc8L3RkPjx0ZD5FTEFWT04gSU5DICAgICAgICAgICAgICAgICAgICA8L3RkPjx0ZD4zMjAgLSBTVEFURSBUUkVBU1VSRVIgICAgICAgICAgICAgICA8L3RkPjx0ZD4yMDI1MTAyMzwvdGQ+PHRkIGFsaWduPSdyaWdodCc+Tm8gU2V0IEFtb3VudDwvdGQ+PC90cj48dHI+PHRkPjxhIGhyZWY9J2NvbnRyYWN0c0RvY1Nob3cuYXNweD9Eb2NJRD0yNS0zMjAxLVRNKysrKysrJz4yNS0zMjAxLVRNICAgICAgPC9hPjwvdGQ+PHRkPk1lcmNoYW50IFByb2Nlc3Npbmc8L3RkPjx0ZD5FTEFWT04gSU5DICAgICAgICAgICAgICAgICAgICA8L3RkPjx0ZD4zMjAgLSBTVEFURSBUUkVBU1VSRVIgICAgICAgICAgICAgICA8L3RkPjx0ZD4yMDI1MTAyMzwvdGQ+PHRkIGFsaWduPSdyaWdodCc+Tm8gU2V0IEFtb3VudDwvdGQ+PC90cj48dHI+PHRkPjxhIGhyZWY9J2NvbnRyYWN0c0RvY1Nob3cuYXNweD9Eb2NJRD1CQU5LK1NFUlZJQ0VTKysrJz5CQU5LIFNFUlZJQ0VTICAgPC9hPjwvdGQ+PHRkPkJhbmtpbmcgU2VydmljZXMgZm9yIFN0YXRlIG9mIFNvdXRoIERha290YSAoUkZQICMyMjk3KTwvdGQ+PHRkPkZJUlNUIFBSRU1JRVIgQkFOSyAgICAgICAgICAgIDwvdGQ+PHRkPjMyMCAtIFNUQVRFIFRSRUFTVVJFUiAgICAgICAgICAgICAgIDwvdGQ+PHRkPjIwMjIwNzAxPC90ZD48dGQgYWxpZ249J3JpZ2h0Jz5ObyBTZXQgQW1vdW50PC90ZD48L3RyPjwvdGFibGU+KiogVG8gdmlldyB0aGUgYW1vdW50IG9yIGRlc2NyaXB0aW9uIGZvciBjb250cmFjdHMgZW50ZXJlZCBwcmlvciB0byAwNy8wMS8yMDE2IHlvdSBtYXkgbmVlZCB0byB2aWV3IHRoZSBhY3R1YWwgY29udHJhY3QuZGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgUFBlJhZGlvMQUGUmFkaW8xBQZSYWRpbzIFBlJhZGlvMwUGUmFkaW8zMowWCeeW4AQUTfnndtYm3cO6gyE=\"
+        />\r\n</div>\r\n\r\n<div class=\"aspNetHidden\">\r\n\r\n\t<input type=\"hidden\"
+        name=\"__VIEWSTATEGENERATOR\" id=\"__VIEWSTATEGENERATOR\" value=\"C541E659\"
+        />\r\n\t<input type=\"hidden\" name=\"__EVENTVALIDATION\" id=\"__EVENTVALIDATION\"
+        value=\"/wEdACtw7fB0ozNlMcq+h1ffrfOemYOy734x5yOenrHD/CNcyAB3NPxwqghWo2Zy62HCsJIy0mBNmtDfEYEZBrodEAOwGtmlxdWuDWN1fIkvWR1NL3L46IZ0m7bxmwBQmjBhv0UhK1yN5DzsZ6inX8XDVy2thIn521QoA2EIUN/VRJAG3DyGbTFexQfpaxYDgY8fYOVxNGGmO0p9U5yvQ1JfwxKcQxAvwMipmxsizF+mTm4zT4qqVDoQ7vu6vt2sJU33wMTAqUQ7giDx9DIOlTpJUlhtAjccCkUQCSq8zy5yTsgtM8F1S0K+lrojlcD1TsOPnacLvUzsWOO3rrspb73ir5o8DGqOAxSeDCBO7sqZXSnfeGKX/eF5/gUmCWIslST3P/m1R78grlTOtNuU5hnhY4wBdOz2BOZZY+PAsY+Vtto8k+xfRDIomF0efR8E7kujclfAr1VLcNkrSdYlkvhbMjUQC/dlmCKfhzJCMF6o+vt9l6DK2m0/eoOEhpu0THZHQUj2q6Wdp8kX7uF0Q0flUNMjCQcVIzDeQeW+Tr0wvTwEDrkAaWfVsW/BaNH4xSUWG2yhnqiBqO1Dum8NKUTjpBQA+PjxTLtNHEDcVJYE/HHf462FvKCmkJgKksUSALjH+x0d6DUjwFBCUHHpprnx6SdigRodimUfzajfRPBOSX8s33BlBspzk9v9cXeVeXYMfrsi6iFqcSlKFqA3KPLxx0IWzC2N2EcTKsyom5bCT37JekPibIA2L3dqwgbuO4mtebqRO8fEgCA2Z9JvMYBtZnfQPawAHUOJzSNLmcdlBWD2pQ1PW/WQmrhjmeKsSW1gWdXAaBJjP1fJmVouvLfF3Ls6Hf/mbbbuXTqLA+Skho9o97sCdCov+1FPMh8ojWXysH8JlS2Y+xnf1lTpVsTt8/FJ4Cd+epbHQuJCQ6hvguiVgYOALYA=\"
+        />\r\n</div> \r\n        <header>\r\n            <a id=\"logo\" href=\"/\">Open
+        <span id=\"sd\">SD</span></a>\r\n            <div id=\"title\">South Dakota
+        Transparency Website</div>\r\n            <div class=\"nav-button\"><img src=\"/img/menu.png\"
+        alt=\"Menu Icon\" /></div>\r\n        </header>  \r\n\r\n\r\n<nav>\r\n    <span
+        id=\"navigation\"><ul><li><a id='79' target='_blank' href='http://atg.sd.gov/OpenGovernment.aspx'>Statutes
+        and Rules</a><ul><li><a id='81' target='_blank' href='https://sdlegislature.gov/Statutes/'>SD
+        Statutes</a></li><li><a id='82' target='_blank' href='https://rules.sd.gov'>Proposed
+        Rules</a></li><li><a id='83' target='_blank' href='https://sdlegislature.gov/Rules/'>Promulgated
+        Rules</a></li></ul></li><li><a id='85' target='_blank' href=''>Boards & Commissions</a><ul><li><a
+        id='154' target='_blank' href='https://boardsandcommissions.sd.gov/'>State
+        Government</a></li><li><a id='155' target='_blank' href='https://sdlocalgov.appssd.sd.gov/'>Local
+        Government</a></li></ul></li><li><a id='86' target='' href='/Info_pr.aspx'>Payroll</a><ul><li><a
+        id='87' target='' href='/employees.aspx'>Employee Salaries</a></li><li><a
+        id='88' target='' href='/executive_salaries.aspx'>Executive Salaries</a></li><li><a
+        id='90' target='' href='/QT_Staffing.aspx'>Current Staffing Level</a></li></ul></li><li><a
+        id='91' target='' href=''>Checkbook</a><ul><li><a id='92' target='' href='https://southdakota.spending.socrata.com/#!/year/2026/'>Open
+        Checkbook - Interactive</a></li><li><a id='157' target='' href='https://open.sd.gov/vendor.aspx'>Vendor
+        Payment Listing - 5 yrs</a></li><li><a id='139' target='' href='https://open.sd.gov/covid19_expenditures.aspx'>All
+        COVID Spending</a></li><li><a id='93' target='' href='https://open.sd.gov/Covid19_ALL_2000.aspx'>Search
+        COVID Stimulus Vendor Payments</a></li></ul></li><li><a id='94' target=''
+        href='#'>Contracts/Grants</a><ul><li><a id='95' target='' href='/contracts.aspx'>Contract/Grant
+        Search</a></li><li><a id='96' target='_blank' href='https://www.sd.gov/bhra?id=cs_kb_article_view&sysparm_article=KB0044787&sys_kb_id=f65715d297607e907fc1b480f053affa&spa=1'>Commodity
+        Contract List</a></li><li><a id='132' target='_blank' href='https://sourcing.esmsolutions.com/postingboard/entities/3444a404-3818-494f-84c5-2a850acd7779'>RFP/Bid
+        Search</a></li><li><a id='97' target='' href='/rfp.aspx'>RFP Register of Proposals</a></li></ul></li><li><a
+        id='98' target='' href='#'>State Budget</a><ul><li><a id='138' target='' href='https://southdakota.budget.socrata.com/#!/year/default'>Open
+        Budget</a></li><li><a id='99' target='_blank' href='http://bfm.sd.gov/budget'>Budget
+        Documents</a></li><li><a id='102' target='' href='/budgettransfers.aspx'>Budget
+        Transfers</a></li><li><a id='103' target='' href='/Tax_Expenditures.aspx'>Tax
+        Expenditures</a></li></ul></li><li><a id='5' target='content' href='http://www.state.sd.us/bfm/ledger/info_fp.htm'>Financial
+        Publications</a><ul><li><a id='105' target='_blank' href='http://bfm.sd.gov/dashboards/Default.aspx'>Financial
+        Metrics</a></li><li><a id='130' target='_target' href='http://bfm.sd.gov/ltfp/'>Long
+        Term Financial Plan</a></li><li><a id='108' target='' href='/Info_bb.aspx'>Budget
+        in Brief</a></li><li><a id='109' target='' href='/Info_fr.aspx'>Annual Financial
+        Reports</a></li></ul></li><li><a id='110' target='_blank' href='https://sdreadytowork.com/about-us/public-records/'>Economic
+        Development</a></li></ul></span>\r\n            \r\n        </nav>\r\n        \r\n
+        \       <section id=\"main\">\r\n            \r\n                <h2>Grants
+        and Contracts</h2>\r\n                <p>as required by <a target=\"_blank\"
+        href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=1-56-10\">SDCL
+        1-56-10</a> and <a target=\"_blank\" href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=1-27-46\">SDCL
+        1-27-46</a><br />\r\n\r\n                as of <span id=\"lbl_Date\">11/11/2026
+        3:15:43 AM</span>\r\n            </p>\r\n                \r\n            \r\n
+        \               <div class=\"fbox\">\r\n                    <div class=\"lbox\">\r\n
+        \                       <strong>Department:</strong>\r\n                    </div>\r\n
+        \                   <div class=\"rbox\">\r\n                        <select
+        name=\"ddl_DoA\" id=\"ddl_DoA\">\r\n\t<option value=\"0\"> ALL ( )</option>\r\n\t<option
+        value=\"03 \">AGRICULTURE &amp; NAT. RESOURCES   (03 )</option>\r\n\t<option
+        value=\"29 \">ATTORNEY GENERAL               (29 )</option>\r\n\t<option value=\"012\">BHRA
+        ADMINISTRATION            (012)</option>\r\n\t<option value=\"014\">BHRA HUMAN
+        RESOURCES           (014)</option>\r\n\t<option value=\"15 \">BOARD OF REGENTS
+        \              (15 )</option>\r\n\t<option value=\"011\">BUREAU OF FINANCE
+        &amp; MANAGEMENT (011)</option>\r\n\t<option value=\"013\">BUREAU OF INFORMATION
+        &amp; TECH   (013)</option>\r\n\t<option value=\"18 \">CORRECTIONS                    (18
+        )</option>\r\n\t<option value=\"12 \">EDUCATION                      (12 )</option>\r\n\t<option
+        value=\"06 \">GAME, FISH AND PARKS           (06 )</option>\r\n\t<option value=\"010\">GOVERNOR&#39;S
+        OFFICE              (010)</option>\r\n\t<option value=\"09 \">HEALTH                         (09
+        )</option>\r\n\t<option value=\"19 \">HUMAN SERVICES                 (19 )</option>\r\n\t<option
+        value=\"321\">INVESTMENT COUNCIL             (321)</option>\r\n\t<option value=\"10
+        \">LABOR AND REGULATION           (10 )</option>\r\n\t<option value=\"288\">LEGISLATIVE
+        AUDIT              (288)</option>\r\n\t<option value=\"281\">LEGISLATIVE RESEARCH
+        COUNCIL   (281)</option>\r\n\t<option value=\"028\">LOTTERY                        (028)</option>\r\n\t<option
+        value=\"16 \">MILITARY                       (16 )</option>\r\n\t<option value=\"14
+        \">PUBLIC SAFETY                  (14 )</option>\r\n\t<option value=\"26 \">PUBLIC
+        UTILITIES COMMISSION    (26 )</option>\r\n\t<option value=\"25 \">RETIREMENT
+        SYSTEM              (25 )</option>\r\n\t<option value=\"02 \">REVENUE                        (02
+        )</option>\r\n\t<option value=\"30 \">SCHOOL &amp; PUBLIC LANDS          (30
+        )</option>\r\n\t<option value=\"31 \">SECRETARY OF STATE             (31 )</option>\r\n\t<option
+        value=\"08 \">SOCIAL SERVICES                (08 )</option>\r\n\t<option value=\"33
+        \">STATE AUDITOR                  (33 )</option>\r\n\t<option selected=\"selected\"
+        value=\"320\">STATE TREASURER                (320)</option>\r\n\t<option value=\"04
+        \">TOURISM                        (04 )</option>\r\n\t<option value=\"11 \">TRANSPORTATION
+        \                (11 )</option>\r\n\t<option value=\"07 \">TRIBAL RELATIONS
+        \              (07 )</option>\r\n\t<option value=\"27 \">UNIFIED JUDICIAL
+        SYSTEMS       (27 )</option>\r\n\t<option value=\"17 \">VETERANS&#39; AFFAIRS
+        \             (17 )</option>\r\n\r\n</select>\r\n                    </div>\r\n
+        \               </div>\r\n                <div class=\"fbox\">\r\n                    <div
+        class=\"lbox\">\r\n                        <strong>Vendor Name contains:</strong>\r\n
+        \                   </div>\r\n                    <div class=\"rbox\">\r\n
+        \                       <input name=\"tb_Vendor\" type=\"text\" id=\"tb_Vendor\"
+        />\r\n                    </div>\r\n                </div>\r\n                <div
+        class=\"fbox\">\r\n                    <div class=\"lbox\">\r\n                        <strong>Document
+        Description contains:</strong>\r\n                    </div>\r\n                    <div
+        class=\"rbox\">\r\n                        <input name=\"tb_Doc_Descp\" type=\"text\"
+        id=\"tb_Doc_Descp\" />\r\n                    </div>\r\n                </div>\r\n
+        \               <div class=\"fbox\">\r\n                    <div class=\"lbox\">\r\n
+        \                       <strong>Contract/Grant Number contains:</strong>\r\n
+        \                   </div>\r\n                    <div class=\"rbox\">\r\n
+        \                       <input name=\"tb_Contract_number\" type=\"text\" id=\"tb_Contract_number\"
+        />\r\n                    </div>\r\n                </div>\r\n                <div
+        class=\"fbox\">\r\n                    <div class=\"lbox\">\r\n                        <strong>Filter:</strong>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div
+        class=\"rbox\">\r\n\t\t\t\t\t\t<input id=\"Radio1\" type=\"radio\" name=\"RadioGroup1\"
+        value=\"Radio1\" /><label for=\"Radio1\">All</label>\r\n\t\t\t\t\t\t<input
+        id=\"Radio2\" type=\"radio\" name=\"RadioGroup1\" value=\"Radio2\" checked=\"checked\"
+        /><label for=\"Radio2\">Contracts Only</label>\r\n\t\t\t\t\t\t<input id=\"Radio3\"
+        type=\"radio\" name=\"RadioGroup1\" value=\"Radio3\" /><label for=\"Radio3\">Grants
+        Only</label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\r\n\t\t\t\t</div>\r\n\t\t\t\t\r\n\r\n
+        \               <input type=\"submit\" name=\"btn_Search\" value=\"Search\"
+        id=\"btn_Search\" />&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" name=\"btn_Reset\"
+        value=\"Reset\" id=\"btn_Reset\" /><br /><br />\r\n            \r\n\r\n                <span
+        id=\"lbl_Contracts\"><table id='contracts'><thead><tr><th><a class='title'>Contract/Grant</a><div
+        class='definition'><h4>Contract</h4>Types of state contracts:<p><ul><li>Service
+        contracts are agreements to provide services instead of a supply or material
+        and may be kept by the individual agency entering into the contract.<li>Consultant
+        contracts are a subset of service contracts, used to obtain consulting services.
+        \ Consultant contracts are required to be filed with the state auditor's office
+        and copies can be obtained there.<li>Procurement contracts are issued by the
+        Office of Procurement for supplies and materials and are available on the
+        <a href=\"http://www.state.sd.us/boa/opm/\" target=\"new\">OPM website</a>.<li>Legal
+        contracts are filed with the attorney general's office.</ul></div> Number</th><th>Description</th><th>Vendor
+        Name</th><th><a class='title'>Agency</a><div class='definition'><h4>Agency</h4>The
+        term \"agency\" is used to refer to the departments, bureaus, and offices
+        that comprise state government.  Agencies are headed by a cabinet Secretary
+        or Commissioner, or by an elected official.  Numerical codes assigned to agencies
+        are listed <a target=\"new\" href=\"info_agencies.htm\">here</a>.</div> and
+        Name</th><th>Begin Date</th><th>Amount</th></tr></thead><tr><td><a href='contractsDocShow.aspx?DocID=26G5018953++++++'>26G5018953
+        \     </a></td><td>3 each Dell laptops, docking stations, 6 monitors</td><td>DELL
+        MARKETING LP             </td><td>320 - STATE TREASURER               </td><td>20260519</td><td
+        align='right'>$11,850</td></tr><tr><td><a href='contractsDocShow.aspx?DocID=25-3201-TM1+++++'>25-3201-TM1
+        \    </a></td><td>Merchant processing</td><td>ELAVON INC                    </td><td>320
+        - STATE TREASURER               </td><td>20251023</td><td align='right'>No
+        Set Amount</td></tr><tr><td><a href='contractsDocShow.aspx?DocID=25-3201-TM++++++'>25-3201-TM
+        \     </a></td><td>Merchant Processing</td><td>ELAVON INC                    </td><td>320
+        - STATE TREASURER               </td><td>20251023</td><td align='right'>No
+        Set Amount</td></tr><tr><td><a href='contractsDocShow.aspx?DocID=BANK+SERVICES+++'>BANK
+        SERVICES   </a></td><td>Banking Services for State of South Dakota (RFP #2297)</td><td>FIRST
+        PREMIER BANK            </td><td>320 - STATE TREASURER               </td><td>20220701</td><td
+        align='right'>No Set Amount</td></tr></table>** To view the amount or description
+        for contracts entered prior to 07/01/2016 you may need to view the actual
+        contract.</span>\r\n\r\n          \r\n        </section>\r\n        <div id=\"Popup\">\r\n
+        \             <div id=\"PopupDef\"></div>\r\n              <br clear=\"all\"/><br
+        /><span id=\"glossary\"><a href=\"/glossary.aspx\">Glossary</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+        id=\"close\">Close</span><br /><br />\r\n          </div>\r\n<footer>\r\n
+        \           &copy; Copyright 2019<br /><br />\r\n            <a href=\"http://sd.gov\">SD.Gov</a>
+        | <a href=\"mailto:bfminfo@state.sd.us?subject=OpenSD\">Feedback</a> | <a
+        href=\"http://bfm.sd.gov/ContactUs.aspx\">Contact Us</a> | <a href=\"http://sd.gov/accpolicy.aspx\">Accessibility</a>
+        | <a href=\"http://sd.gov/disclaim.aspx\">Disclaimer</a> | <a href=\"http://sd.gov/privacy.aspx\">Privacy
+        Policy</a>\r\n        </footer>\r\n\r\n <script>\r\n\r\n        $(document).ready(function
+        () {\r\n            $('div#Popup').hide();\r\n            $('.title').mousedown(function
+        (e) {\r\n                var moveLeft = 10;\r\n                var moveDown
+        = 20;\r\n                var htmlstring = $(this).next().html()\r\n                document.getElementById('PopupDef').innerHTML
+        = htmlstring;\r\n                if (windowsize <= 1000) {\r\n                    \r\n
+        \                   $(\"div#Popup\").css('top', e.pageY + moveDown).css('padding-left',
+        moveLeft);\r\n                }\r\n                else {\r\n                    moveLeft
+        = -50;\r\n                    $(\"div#Popup\").css('top', e.pageY + moveDown).css('left',
+        e.pageX + moveLeft);\r\n                }\r\n                $('div#Popup').show();\r\n
+        \           });\r\n        });\r\n        $('#close').click(function () {\r\n
+        \           $(\"#Popup\").hide();\r\n        });\r\n\r\n    </script></form>\r\n
+        \  \r\n</body>\r\n</html>\r\n"
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '26971'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Wed, 11 Nov 2026 09:15:43 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

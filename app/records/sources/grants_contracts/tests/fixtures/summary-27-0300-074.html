@@ -1,0 +1,187 @@
+
+
+<!DOCTYPE html>
+
+
+<html>
+<head><meta charset="utf-8" /><title>
+	Contracts Summary
+</title><meta http-equiv="x-ua-compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta HTTP-EQUIV="Pragma" content="no-cache" /><meta HTTP-EQUIV="Cache-Control" content="no-cache,no-Store" /><link rel="icon" type="image/png" href="/img/favicon.png" />
+<SCRIPT language="JAVASCRIPT">
+
+    if (top.frames.length != 0)
+        top.location = self.document.location;
+
+</SCRIPT>
+
+
+   
+    <link href="/inc/styles/styles.css" type="text/css" rel="stylesheet" /> 
+    <script src="/inc/scripts/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="/inc/scripts/jquery-scrolltofixed-min.js" type="text/javascript">
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".nav-button").click(function () {
+            $("nav > #navigation > ul").toggleClass("open");
+        });
+
+        $("nav > #navigation > ul > li > a").click(function (e) {
+
+            if ($(this).parent("li").has("ul").length) {
+                e.preventDefault();
+                
+            }
+          //  else {
+             $("nav > #navigation > ul > li:hover > ul").toggleClass("open1");
+          //  }
+               // return;
+           
+        });
+
+        $("nav > #navigation > ul > li > ul > li").click(function () {
+            
+           $("nav > #navigation > ul > li > ul > li:hover > ul").toggleClass("open2");
+            $("nav > #navigation > ul > li:hover > ul").addClass("open1");
+        });
+
+        if ($(window).width() > 1000) {
+            var stickyNavTop = $('nav').offset().top;
+
+        var stickyNav = function () {
+            var scrollTop = $(window).scrollTop();
+
+            if (scrollTop > stickyNavTop) {
+                $('nav').addClass('sticky');
+            } else {
+                $('nav').removeClass('sticky');
+            }
+        };
+
+        stickyNav();
+
+        $(window).scroll(function () {
+            stickyNav();
+        });
+        }
+        else {
+            $('nav').removeClass('sticky');
+        }
+
+        SizeChange();
+        
+
+        if ($(window).width() <= 1000) {
+            $("#navigation > ul > li").each(function (index) {
+                if ($(this).children("ul").length > 0) {
+                  
+                }
+                else {
+                    $(this).children("a").css("width", "100%");
+    
+                }
+            });
+
+        }
+
+    });
+
+  
+ //   var listItems = $("#navigation > ul").children();
+  //  var count = listItems.length;
+
+var windowsize = $(window).width();
+
+    $(window).resize(function () {
+        var windowsize = $(window).width();
+        SizeChange();
+    });
+
+   
+    
+
+    function SizeChange() {  
+        if ($(window).width() <= 1000) {
+
+            $("nav > #navigation > ul > li").width("95%");
+        }
+        else {
+            var listItems = $("#navigation > ul").children();
+            var count = listItems.length;
+            $("nav > #navigation > ul > li").width(100 / count + "%");
+        }
+    }
+
+    </script>
+</head>
+<body>
+    <form method="post" action="./contractsDocShow.aspx?DocID=27-0300-074+++++" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEwNDg2MjMxNTcPZBYCAgQPZBYGAgMPDxYCHgRUZXh0BYkYPHVsPjxsaT48YSBpZD0nNzknIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwOi8vYXRnLnNkLmdvdi9PcGVuR292ZXJubWVudC5hc3B4Jz5TdGF0dXRlcyBhbmQgUnVsZXM8L2E+PHVsPjxsaT48YSBpZD0nODEnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkbGVnaXNsYXR1cmUuZ292L1N0YXR1dGVzLyc+U0QgU3RhdHV0ZXM8L2E+PC9saT48bGk+PGEgaWQ9JzgyJyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly9ydWxlcy5zZC5nb3YnPlByb3Bvc2VkIFJ1bGVzPC9hPjwvbGk+PGxpPjxhIGlkPSc4MycgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vc2RsZWdpc2xhdHVyZS5nb3YvUnVsZXMvJz5Qcm9tdWxnYXRlZCBSdWxlczwvYT48L2xpPjwvdWw+PC9saT48bGk+PGEgaWQ9Jzg1JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0nJz5Cb2FyZHMgJiBDb21taXNzaW9uczwvYT48dWw+PGxpPjxhIGlkPScxNTQnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL2JvYXJkc2FuZGNvbW1pc3Npb25zLnNkLmdvdi8nPlN0YXRlIEdvdmVybm1lbnQ8L2E+PC9saT48bGk+PGEgaWQ9JzE1NScgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vc2Rsb2NhbGdvdi5hcHBzc2Quc2QuZ292Lyc+TG9jYWwgR292ZXJubWVudDwvYT48L2xpPjwvdWw+PC9saT48bGk+PGEgaWQ9Jzg2JyB0YXJnZXQ9JycgaHJlZj0nL0luZm9fcHIuYXNweCc+UGF5cm9sbDwvYT48dWw+PGxpPjxhIGlkPSc4NycgdGFyZ2V0PScnIGhyZWY9Jy9lbXBsb3llZXMuYXNweCc+RW1wbG95ZWUgU2FsYXJpZXM8L2E+PC9saT48bGk+PGEgaWQ9Jzg4JyB0YXJnZXQ9JycgaHJlZj0nL2V4ZWN1dGl2ZV9zYWxhcmllcy5hc3B4Jz5FeGVjdXRpdmUgU2FsYXJpZXM8L2E+PC9saT48bGk+PGEgaWQ9JzkwJyB0YXJnZXQ9JycgaHJlZj0nL1FUX1N0YWZmaW5nLmFzcHgnPkN1cnJlbnQgU3RhZmZpbmcgTGV2ZWw8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPSc5MScgdGFyZ2V0PScnIGhyZWY9Jyc+Q2hlY2tib29rPC9hPjx1bD48bGk+PGEgaWQ9JzkyJyB0YXJnZXQ9JycgaHJlZj0naHR0cHM6Ly9zb3V0aGRha290YS5zcGVuZGluZy5zb2NyYXRhLmNvbS8jIS95ZWFyLzIwMjYvJz5PcGVuIENoZWNrYm9vayAtIEludGVyYWN0aXZlPC9hPjwvbGk+PGxpPjxhIGlkPScxNTcnIHRhcmdldD0nJyBocmVmPSdodHRwczovL29wZW4uc2QuZ292L3ZlbmRvci5hc3B4Jz5WZW5kb3IgUGF5bWVudCBMaXN0aW5nIC0gNSB5cnM8L2E+PC9saT48bGk+PGEgaWQ9JzEzOScgdGFyZ2V0PScnIGhyZWY9J2h0dHBzOi8vb3Blbi5zZC5nb3YvY292aWQxOV9leHBlbmRpdHVyZXMuYXNweCc+QWxsIENPVklEIFNwZW5kaW5nPC9hPjwvbGk+PGxpPjxhIGlkPSc5MycgdGFyZ2V0PScnIGhyZWY9J2h0dHBzOi8vb3Blbi5zZC5nb3YvQ292aWQxOV9BTExfMjAwMC5hc3B4Jz5TZWFyY2ggQ09WSUQgU3RpbXVsdXMgVmVuZG9yIFBheW1lbnRzPC9hPjwvbGk+PC91bD48L2xpPjxsaT48YSBpZD0nOTQnIHRhcmdldD0nJyBocmVmPScjJz5Db250cmFjdHMvR3JhbnRzPC9hPjx1bD48bGk+PGEgaWQ9Jzk1JyB0YXJnZXQ9JycgaHJlZj0nL2NvbnRyYWN0cy5hc3B4Jz5Db250cmFjdC9HcmFudCBTZWFyY2g8L2E+PC9saT48bGk+PGEgaWQ9Jzk2JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly93d3cuc2QuZ292L2JocmE/aWQ9Y3Nfa2JfYXJ0aWNsZV92aWV3JnN5c3Bhcm1fYXJ0aWNsZT1LQjAwNDQ3ODcmc3lzX2tiX2lkPWY2NTcxNWQyOTc2MDdlOTA3ZmMxYjQ4MGYwNTNhZmZhJnNwYT0xJz5Db21tb2RpdHkgQ29udHJhY3QgTGlzdDwvYT48L2xpPjxsaT48YSBpZD0nMTMyJyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly9zb3VyY2luZy5lc21zb2x1dGlvbnMuY29tL3Bvc3Rpbmdib2FyZC9lbnRpdGllcy8zNDQ0YTQwNC0zODE4LTQ5NGYtODRjNS0yYTg1MGFjZDc3NzknPlJGUC9CaWQgU2VhcmNoPC9hPjwvbGk+PGxpPjxhIGlkPSc5NycgdGFyZ2V0PScnIGhyZWY9Jy9yZnAuYXNweCc+UkZQIFJlZ2lzdGVyIG9mIFByb3Bvc2FsczwvYT48L2xpPjwvdWw+PC9saT48bGk+PGEgaWQ9Jzk4JyB0YXJnZXQ9JycgaHJlZj0nIyc+U3RhdGUgQnVkZ2V0PC9hPjx1bD48bGk+PGEgaWQ9JzEzOCcgdGFyZ2V0PScnIGhyZWY9J2h0dHBzOi8vc291dGhkYWtvdGEuYnVkZ2V0LnNvY3JhdGEuY29tLyMhL3llYXIvZGVmYXVsdCc+T3BlbiBCdWRnZXQ8L2E+PC9saT48bGk+PGEgaWQ9Jzk5JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cDovL2JmbS5zZC5nb3YvYnVkZ2V0Jz5CdWRnZXQgRG9jdW1lbnRzPC9hPjwvbGk+PGxpPjxhIGlkPScxMDInIHRhcmdldD0nJyBocmVmPScvYnVkZ2V0dHJhbnNmZXJzLmFzcHgnPkJ1ZGdldCBUcmFuc2ZlcnM8L2E+PC9saT48bGk+PGEgaWQ9JzEwMycgdGFyZ2V0PScnIGhyZWY9Jy9UYXhfRXhwZW5kaXR1cmVzLmFzcHgnPlRheCBFeHBlbmRpdHVyZXM8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPSc1JyB0YXJnZXQ9J2NvbnRlbnQnIGhyZWY9J2h0dHA6Ly93d3cuc3RhdGUuc2QudXMvYmZtL2xlZGdlci9pbmZvX2ZwLmh0bSc+RmluYW5jaWFsIFB1YmxpY2F0aW9uczwvYT48dWw+PGxpPjxhIGlkPScxMDUnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwOi8vYmZtLnNkLmdvdi9kYXNoYm9hcmRzL0RlZmF1bHQuYXNweCc+RmluYW5jaWFsIE1ldHJpY3M8L2E+PC9saT48bGk+PGEgaWQ9JzEzMCcgdGFyZ2V0PSdfdGFyZ2V0JyBocmVmPSdodHRwOi8vYmZtLnNkLmdvdi9sdGZwLyc+TG9uZyBUZXJtIEZpbmFuY2lhbCBQbGFuPC9hPjwvbGk+PGxpPjxhIGlkPScxMDgnIHRhcmdldD0nJyBocmVmPScvSW5mb19iYi5hc3B4Jz5CdWRnZXQgaW4gQnJpZWY8L2E+PC9saT48bGk+PGEgaWQ9JzEwOScgdGFyZ2V0PScnIGhyZWY9Jy9JbmZvX2ZyLmFzcHgnPkFubnVhbCBGaW5hbmNpYWwgUmVwb3J0czwvYT48L2xpPjwvdWw+PC9saT48bGk+PGEgaWQ9JzExMCcgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vc2RyZWFkeXRvd29yay5jb20vYWJvdXQtdXMvcHVibGljLXJlY29yZHMvJz5FY29ub21pYyBEZXZlbG9wbWVudDwvYT48L2xpPjwvdWw+ZGQCBg8PFgIfAAUVMTEvMTEvMjAyNiAzOjEyOjM3IEFNZGQCCA8PFgIfAAWaCzx0YWJsZSBpZD0nY29udHJhY3RzZGV0YWlsJz48dHI+PHRkPjxzdHJvbmc+KkNvbnRyYWN0Ojwvc3Ryb25nPjwvdGQ+PHRkPjxhIHRhcmdldD0nX2JsYW5rJyBocmVmPScvcmVkaXJlY3QuYXNweD9Eb2N1bWVudD1odHRwOi8vb3Blbi5zZC5nb3YvY29udHJhY3RzLzAzLzI3LTAzMDAtMDc0LnBkZic+MjctMDMwMC0wNzQgICAgIDwvYT48L3RkPjwvdHI+PHRyPjx0ZD48c3Ryb25nPkFtb3VudDo8L3N0cm9uZz48L3RkPjx0ZD4kNTAsMDAwPC90ZD48L3RyPjx0cj48dGQ+PGEgY2xhc3M9J3RpdGxlJz48c3Ryb25nPkFnZW5jeTo8L3N0cm9uZz48L2E+PGRpdiBjbGFzcz0nZGVmaW5pdGlvbic+PGg0PkFnZW5jeTwvaDQ+VGhlIHRlcm0gImFnZW5jeSIgaXMgdXNlZCB0byByZWZlciB0byB0aGUgZGVwYXJ0bWVudHMsIGJ1cmVhdXMsIGFuZCBvZmZpY2VzIHRoYXQgY29tcHJpc2Ugc3RhdGUgZ292ZXJubWVudC4gIEFnZW5jaWVzIGFyZSBoZWFkZWQgYnkgYSBjYWJpbmV0IFNlY3JldGFyeSBvciBDb21taXNzaW9uZXIsIG9yIGJ5IGFuIGVsZWN0ZWQgb2ZmaWNpYWwuICBOdW1lcmljYWwgY29kZXMgYXNzaWduZWQgdG8gYWdlbmNpZXMgYXJlIGxpc3RlZCA8YSB0YXJnZXQ9Im5ldyIgaHJlZj0iaW5mb19hZ2VuY2llcy5odG0iPmhlcmU8L2E+LjwvZGl2PjwvdGQ+PHRkPjAzICAtIEFHUklDVUxUVVJFICYgTkFULiBSRVNPVVJDRVMgIDwvdGQ+PC90cj48dHI+PHRkPjxzdHJvbmc+VmVuZG9yIE5hbWU6PC9zdHJvbmc+PC90ZD48dGQ+U09VVEggREFLIFBFVFJPTEVVTSBNS1QgQVNTT0MgPC90ZD48L3RyPjx0cj48dGQ+PHN0cm9uZz5DaXR5Ojwvc3Ryb25nPjwvdGQ+PHRkPlBJRVJSRSAgICAgICAgICAgICAgICAgICAgICAgIDwvdGQ+PC90cj48dHI+PHRkPjxzdHJvbmc+U3RhdGU6PC9zdHJvbmc+PC90ZD48dGQ+U0Q8L3RkPjwvdHI+PHRyPjx0ZD48c3Ryb25nPlNvbGljaXRhdGlvbiBUeXBlOjwvc3Ryb25nPjwvdGQ+PHRkPlByb2Zlc3Npb25hbCBTZXJ2aWNlcyB1bmRlciAkNTBLICg1LTE4RC0xNyk8L3RkPjwvdHI+PHRyPjx0ZD48c3Ryb25nPkRlc2NyaXB0aW9uOjwvc3Ryb25nPjwvdGQ+PHRkPlVuZGVyZ3JvdW5kIFN0b3JhZ2UgVGFuayBDbGFzcyBBICYgQiBPcGVyYXRvciBUcmFpbmluZzwvdGQ+PC90cj48L3RhYmxlPjxici8+KiBJZiBhbiBpbWFnZSBvZiBhbiBhd2FyZGVkIGNvbnRyYWN0IG9yIGdyYW50IGlzIG5vdCBsaW5rZWQgdG8gdGhlIGRvY3VtZW50IG51bWJlciBsaXN0ZWQgaGVyZSwgeW91IHdpbGwgbmVlZCB0byA8c3Ryb25nPmNvbnRhY3QgdGhlIHJlc3BvbnNpYmxlIGFnZW5jeSBkaXJlY3RseTwvc3Ryb25nPi4gIDxici8+IEl0IGlzIHRoZSByZXNwb25zaWJpbGl0eSBvZiB0aGUgY29udHJhY3RpbmcgYWdlbmN5IHRvIHBvc3QgYSBjb3B5IG9mIHRoZWlyIGNvbnRyYWN0cyBhbmQgZ3JhbnRzIGhlcmUuPGJyPmRkZFp2DLGzRbSKEYnlHjdZ/+hMP0jB" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="3BEE66A2" />
+</div> 
+        <header>
+            <a id="logo" href="/">Open <span id="sd">SD</span></a>
+            <div id="title">South Dakota Transparency Website</div>
+            <div class="nav-button"><img src="/img/menu.png" alt="Menu Icon" /></div>
+        </header>  
+
+
+<nav>
+    <span id="navigation"><ul><li><a id='79' target='_blank' href='http://atg.sd.gov/OpenGovernment.aspx'>Statutes and Rules</a><ul><li><a id='81' target='_blank' href='https://sdlegislature.gov/Statutes/'>SD Statutes</a></li><li><a id='82' target='_blank' href='https://rules.sd.gov'>Proposed Rules</a></li><li><a id='83' target='_blank' href='https://sdlegislature.gov/Rules/'>Promulgated Rules</a></li></ul></li><li><a id='85' target='_blank' href=''>Boards & Commissions</a><ul><li><a id='154' target='_blank' href='https://boardsandcommissions.sd.gov/'>State Government</a></li><li><a id='155' target='_blank' href='https://sdlocalgov.appssd.sd.gov/'>Local Government</a></li></ul></li><li><a id='86' target='' href='/Info_pr.aspx'>Payroll</a><ul><li><a id='87' target='' href='/employees.aspx'>Employee Salaries</a></li><li><a id='88' target='' href='/executive_salaries.aspx'>Executive Salaries</a></li><li><a id='90' target='' href='/QT_Staffing.aspx'>Current Staffing Level</a></li></ul></li><li><a id='91' target='' href=''>Checkbook</a><ul><li><a id='92' target='' href='https://southdakota.spending.socrata.com/#!/year/2026/'>Open Checkbook - Interactive</a></li><li><a id='157' target='' href='https://open.sd.gov/vendor.aspx'>Vendor Payment Listing - 5 yrs</a></li><li><a id='139' target='' href='https://open.sd.gov/covid19_expenditures.aspx'>All COVID Spending</a></li><li><a id='93' target='' href='https://open.sd.gov/Covid19_ALL_2000.aspx'>Search COVID Stimulus Vendor Payments</a></li></ul></li><li><a id='94' target='' href='#'>Contracts/Grants</a><ul><li><a id='95' target='' href='/contracts.aspx'>Contract/Grant Search</a></li><li><a id='96' target='_blank' href='https://www.sd.gov/bhra?id=cs_kb_article_view&sysparm_article=KB0044787&sys_kb_id=f65715d297607e907fc1b480f053affa&spa=1'>Commodity Contract List</a></li><li><a id='132' target='_blank' href='https://sourcing.esmsolutions.com/postingboard/entities/3444a404-3818-494f-84c5-2a850acd7779'>RFP/Bid Search</a></li><li><a id='97' target='' href='/rfp.aspx'>RFP Register of Proposals</a></li></ul></li><li><a id='98' target='' href='#'>State Budget</a><ul><li><a id='138' target='' href='https://southdakota.budget.socrata.com/#!/year/default'>Open Budget</a></li><li><a id='99' target='_blank' href='http://bfm.sd.gov/budget'>Budget Documents</a></li><li><a id='102' target='' href='/budgettransfers.aspx'>Budget Transfers</a></li><li><a id='103' target='' href='/Tax_Expenditures.aspx'>Tax Expenditures</a></li></ul></li><li><a id='5' target='content' href='http://www.state.sd.us/bfm/ledger/info_fp.htm'>Financial Publications</a><ul><li><a id='105' target='_blank' href='http://bfm.sd.gov/dashboards/Default.aspx'>Financial Metrics</a></li><li><a id='130' target='_target' href='http://bfm.sd.gov/ltfp/'>Long Term Financial Plan</a></li><li><a id='108' target='' href='/Info_bb.aspx'>Budget in Brief</a></li><li><a id='109' target='' href='/Info_fr.aspx'>Annual Financial Reports</a></li></ul></li><li><a id='110' target='_blank' href='https://sdreadytowork.com/about-us/public-records/'>Economic Development</a></li></ul></span>
+            
+        </nav>
+        
+        <section id="main">
+            
+                <h2>Grants and Contracts</h2>
+                <p>as required by <a target="_blank" href="http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=1-56-10">SDCL 1-56-10</a> and <a target="_blank" href="http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=1-27-46">SDCL 1-27-46</a><br />
+                as of <span id="lbl_Date">11/11/2026 3:12:37 AM</span>
+            </p>
+            
+                <span id="lbl_Contracts"><table id='contractsdetail'><tr><td><strong>*Contract:</strong></td><td><a target='_blank' href='/redirect.aspx?Document=http://open.sd.gov/contracts/03/27-0300-074.pdf'>27-0300-074     </a></td></tr><tr><td><strong>Amount:</strong></td><td>$50,000</td></tr><tr><td><a class='title'><strong>Agency:</strong></a><div class='definition'><h4>Agency</h4>The term "agency" is used to refer to the departments, bureaus, and offices that comprise state government.  Agencies are headed by a cabinet Secretary or Commissioner, or by an elected official.  Numerical codes assigned to agencies are listed <a target="new" href="info_agencies.htm">here</a>.</div></td><td>03  - AGRICULTURE & NAT. RESOURCES  </td></tr><tr><td><strong>Vendor Name:</strong></td><td>SOUTH DAK PETROLEUM MKT ASSOC </td></tr><tr><td><strong>City:</strong></td><td>PIERRE                        </td></tr><tr><td><strong>State:</strong></td><td>SD</td></tr><tr><td><strong>Solicitation Type:</strong></td><td>Professional Services under $50K (5-18D-17)</td></tr><tr><td><strong>Description:</strong></td><td>Underground Storage Tank Class A & B Operator Training</td></tr></table><br/>* If an image of an awarded contract or grant is not linked to the document number listed here, you will need to <strong>contact the responsible agency directly</strong>.  <br/> It is the responsibility of the contracting agency to post a copy of their contracts and grants here.<br></span>
+                
+
+        </section>
+        <div id="Popup">
+              <div id="PopupDef"></div>
+              <br clear="all"/><br /><span id="glossary"><a href="/glossary.aspx">Glossary</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="close">Close</span><br /><br />
+          </div>
+<footer>
+            &copy; Copyright 2019<br /><br />
+            <a href="http://sd.gov">SD.Gov</a> | <a href="mailto:bfminfo@state.sd.us?subject=OpenSD">Feedback</a> | <a href="http://bfm.sd.gov/ContactUs.aspx">Contact Us</a> | <a href="http://sd.gov/accpolicy.aspx">Accessibility</a> | <a href="http://sd.gov/disclaim.aspx">Disclaimer</a> | <a href="http://sd.gov/privacy.aspx">Privacy Policy</a>
+        </footer>
+
+ <script>
+
+        $(document).ready(function () {
+            $('div#Popup').hide();
+            $('.title').mousedown(function (e) {
+                var moveLeft = 10;
+                var moveDown = 20;
+                var htmlstring = $(this).next().html()
+                document.getElementById('PopupDef').innerHTML = htmlstring;
+                if (windowsize <= 1000) {
+                    
+                    $("div#Popup").css('top', e.pageY + moveDown).css('padding-left', moveLeft);
+                }
+                else {
+                    moveLeft = -50;
+                    $("div#Popup").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+                }
+                $('div#Popup').show();
+            });
+        });
+        $('#close').click(function () {
+            $("#Popup").hide();
+        });
+
+    </script></form>
+    
+</body>
+</html>

@@ -289,6 +289,17 @@ place_link = "none"
 source = "open.sd.gov vendor checkbook (BFM's rolling three-year files, kept permanently; July 2020 on)"
 
 [[dataset]]
+id = "grants-contracts"
+name = "State grants and contracts"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "grant or contract"
+entities = ["person", "organization", "government"]
+place_link = "city"
+source = "open.sd.gov grants and contracts (SDCL 1-56-10, 1-27-46)"
+
+[[dataset]]
 id = "state-vendors"
 name = "State vendors (who the state pays, and how much a year)"
 project = "sd-archive"
