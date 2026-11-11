@@ -98,7 +98,6 @@ measures = ["checkouts"]
 dimensions = ["collection"]
 source = "Grace Balloch Memorial Library"
 
-
 # ── Records: things within a place are the unit ───────────────────────────────────────────
 [[dataset]]
 id = "campaign-finance-filings"
@@ -476,6 +475,17 @@ place_link = "city"
 source = "IRS Form 990-N e-Postcard bulk download"
 
 [[dataset]]
+id = "cemetery-burials"
+name = "Cemetery burials (cemeteries on BurialSearch)"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "burial"
+entities = ["person"]
+place_link = "geometry"
+source = "BurialSearch (CIMS) cemetery maps: Bear Butte, Britton, Belle Fourche, Rose Hill"
+
+[[dataset]]
 id = "beacon-parcels"
 name = "County parcels from Beacon (shape, owners, valuation)"
 project = "sd-archive"
@@ -568,14 +578,3 @@ unit = "case decision"
 entities = ["person"]
 place_link = "county"
 source = "SD Board of Pardons and Paroles"
-
-[[dataset]]
-id = "cemetery-burials"
-name = "Rose Hill Cemetery burials (Spearfish)"
-project = "spearfish-cemetery-scraper"
-grain = "records"
-coverage = ["1600000US4660020"]  # Spearfish city
-unit = "burial or burial space"
-entities = ["person", "property"]
-place_link = "geometry"
-source = "BurialSearch.com (Rose Hill Cemetery)"
