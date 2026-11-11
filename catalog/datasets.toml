@@ -432,6 +432,17 @@ place_link = "jurisdiction"
 source = "National Governors Association"
 
 [[dataset]]
+id = "supreme-court-justices"
+name = "South Dakota Supreme Court justices"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "justice"
+entities = ["person"]
+place_link = "jurisdiction"
+source = "SD Unified Judicial System, Supreme Court Photographic History"
+
+[[dataset]]
 id = "beacon-parcels"
 name = "County parcels from Beacon (shape, owners, valuation)"
 project = "sd-archive"
