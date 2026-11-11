@@ -1,0 +1,1113 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://sdcfr.sdsos.gov/Search/FiledCommunicationExpenditures.aspx
+  response:
+    body:
+      string: "\r\n    \r\n\r\n<!DOCTYPE html>\r\n<html xml:lang=\"en\">\r\n<head><meta
+        http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" /><meta content=\"text/html;
+        charset=windows-1252\" http-equiv=\"Content-Type\" /><meta name=\"viewport\"
+        content=\"width=device-width, minimum-scale=1.0, maximum-scale=1.0\" /><meta
+        name=\"description\" /><meta name=\"keywords\" /><meta name=\"viewport\" content=\"width=device-width,
+        minimum-scale=1.0, maximum-scale=1.0\" /><meta name=\"revisit-after\" content=\"30
+        days\" /><meta name=\"robots\" content=\"ALL\" /><link href=\"https://fonts.googleapis.com/css?family=Aguafina+Script\"
+        rel=\"stylesheet\" type=\"text/css\" />\r\n    <script type=\"text/javascript\"
+        src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js\"></script>\r\n
+        \   \r\n        <link type=\"image/x-icon\" rel=\"shortcut icon\" href=\"/favicon.png\"
+        />\r\n        <link href=\"/Styles/stylesAlta.css\" rel=\"stylesheet\" type=\"text/css\"
+        />\r\n        \r\n        <!-- SD SOS Header -->\r\n        \t\t<meta charset=\"utf-8\">\r\n
+        \       <meta name=\"HandheldFriendly\" content=\"True\">\r\n        <meta
+        name=\"MobileOptimized\" content=\"320\">\r\n        <meta name=\"viewport\"
+        content=\"initial-scale=1.0, width=device-width\" />\r\n        <meta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=edge,chrome=1\">\r\n\t\t\r\n\t\t\r\n<!-- This is a default image
+        that Facebook can use as a thumbnail when sharing pages from this site -->\r\n<meta
+        property=\"og:image\" content=\"/images/sos-logo-fb.jpg\">\r\n\t\r\n\t<!--
+        Place favicon.ico and apple-touch-icon.png in the images folder -->\r\n\t<link
+        rel=\"shortcut icon\" href=\"../Images/favicon.ico\">\r\n\t<link rel=\"apple-touch-icon\"
+        href=\"../images/apple-touch-icon.png\"><!--60X60-->\r\n\t\r\n\t\r\n\t<!--[if
+        lt IE 9]>\r\n\t<script src=\"http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js\"></script>\r\n\t<script
+        src=\"http://html5shim.googlecode.com/svn/trunk/html5.js\"></script>\r\n\t<![endif]-->\r\n
+        \   \r\n \t<link rel=\"profile\" href=\"http://gmpg.org/xfn/11\" />\r\n\t\r\n
+        \   <link rel=\"stylesheet\" type=\"text/css\" href=\"/Styles/screen.css\"
+        media=\"screen\">\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"/Styles/user.css\"
+        media=\"screen\">\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"/Styles/print.css\"
+        media=\"print\">\r\n\t\r\n    \r\n    <!--[if lt IE 9]>\r\n    <link href=\"/Styles/screen-ie8.css\"
+        rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>\r\n    <![endif]-->\r\n\r\n\r\n\r\n<!--//
+        INCLUDE JQUERY //-->\r\n    <script type=\"text/javascript\" src=\"/includes/Javascript/jquery-3.6.0.min.js\"></script>\r\n
+        \   <script type=\"text/javascript\" src=\"/includes/Javascript/jquery.easing.1.3.js\"></script>\r\n
+        \   \r\n    \r\n<link type=\"text/css\" href=\"https://www.google.com/uds/api/search/1.0/432dd570d1a386253361f581254f9ca1/default+en.css\"
+        rel=\"stylesheet\">\r\n\r\n<!-- IMG SWAPPING FOR HEADER LOGO -->\r\n<script
+        src=\"/includes/Javascript/image_swap.js\"></script>\r\n\r\n\r\n\r\n        <!--
+        SD SOS Header -->\r\n\r\n        <!--Menu-->\r\n        <script src=\"https://code.jquery.com/jquery-latest.min.js\"
+        type=\"text/javascript\"></script>\r\n        <script src=\"https://s3.amazonaws.com/menumaker/menumaker.min.js\"
+        type=\"text/javascript\"></script>\r\n        <script src=\"/Scripts/script.js\"></script>\r\n
+        \       <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css\">\r\n
+        \       <link rel=\"stylesheet\" href=\"/Styles/menu.css\">\r\n        <link
+        href='https://fonts.googleapis.com/css?family=Aguafina+Script' rel='stylesheet'
+        type='text/css'>\r\n        <script type=\"text/javascript\" src=\"/Scripts/MasterPage.aspx\"></script>\r\n
+        \       <script src=\"/Scripts/SweetAlert2.js\"></script>\r\n        <script>\r\n
+        \           function OpenLogin() {\r\n                var menu = $find(\"ctl00_rm1\");\r\n\r\n
+        \               menu.findItemByText(\"Committees Login Here\").open();\r\n
+        \               //menu.get_element().style.display = \"\";\r\n            }\r\n
+        \       </script>\r\n        <!--Menu-->\r\n    \r\n    <script type=\"text/javascript\">\r\n
+        \       function ShowHidePassword() {\r\n            var txt = $(\"[id*=txtPassword]\");\r\n
+        \           if (txt.prop(\"type\") == \"password\") {\r\n                txt.prop(\"type\",
+        \"text\");\r\n            }\r\n            else {\r\n                txt.prop(\"type\",
+        \"password\");\r\n            }\r\n        }\r\n    </script>\r\n    <title>\r\n\tCampaign
+        Finance\r\n</title>\r\n        <link href=\"/MySkin/Grid.MySkin.css\" rel=\"stylesheet\"
+        type=\"text/css\" />\r\n<meta http-equiv='refresh' content='10800;url=../SessionExpired.aspx'><link
+        href=\"/WebResource.axd?d=agGahnv0qV7OM0Yn3lwGKnc0QYXnLsbGF-WjbXnAfof3o3chtXbMoyt1Ku1rOY0K8ciCgaRGumz7kyWncQ90_Kfb6LmGiKL1Vo0exXJNlixNY0S5QgPY-L3FeJwt6cECPNpk_-JbR_EUIEwt0asOuA2&amp;t=639026416740000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=o-6FE6dckIU_mgXHr5p0zEXdmpllFGLziF1xbhCdN8mR70fK680mKLZDsEX2UtL4Ge8MOlpQMt8FIFpLh6piD5QVPef8vTKcV_0hgk3Wm6_ADe9DR2FuAvNiagFTw_2B44SCKsMLZRYZv1bOcsQW__7jGHLCds0sBqtZWeOQ-3k1&amp;t=639026416740000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=dwiSj9s7lZ-LMM0XxE-cxZ-6DzxYMjoPKWMgswqHr-_qm9_DZVnIf1iPeTeQqXGQTzp31PZAdpPqxt1blrQgrR4jx7ZJ1WeqEyFjtSQOlVAJPq4Ul5xgtfw79xKJyNqQVU-0MasT8Rr2AlvITV5IAA2&amp;t=639026416740000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=MnH15Ez9F8hr6GUc3R_U_CMA_eOFH6xxUdJlEDEF-g_Ei-Z27EdH5im27SLNRvQXE68B1L2xf7GQYk2yc-eLyWWBXd7yXyITXdptowoKok4b8oUq0wxIR7TreCJTEWXnSZgwgMrC--PwIec6rzrFgDT7KSNj3iFygwgTFZLlTP8cM92ZS5ZSsytC2_GaIerV0&amp;t=639026416720000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=nYL42wRZj1rCPgHfsbf7drPv9qkrEMRzlNh0TAEpyGFK3le7_CGLb_pbU2rOPN9Yvp7HuVdQ2ZEvHTdFchV6FRVMsIPc_aRcn4Dus_VvbaxZYcBHFZdiwFID5B-hZwptt4c4rNgOPw-LgZNgHVOq3Q2&amp;t=639026416740000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=QA0if9KY-awx_rJBX8yp3hq4bSxRLE8dBkffnpFsnlneqWBgK42TZ7eZUFqpl9p0SRPXPpLSt79OTpZaKxXX2CLHWZp_rHxYo1lYDAI7TIl3pNKMd0CbJVFkXCiV9OyOnKEW8ZgrjahtdvHOvl5GcbigwBlt7DumoYUYuFaxWe81&amp;t=639026416740000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=UapKqqmAbtDIM4YhLdnSqGsEKulLBl9yn3NQRGeE9D4_U_Aezb0xuHlnFOwKVaGnIN8RLdsxEqQJ0IR_HYHCBRK4eX3Ei2Qil5spZBoSPKqBrBB-RyFlQQG2EAwi8b2pGA0nfBnFNjr3lrKsGJaH5g2&amp;t=639026416740000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=2hQx0YYg0y_--0oePAb1qI6axHvrHAAurIctw3BEYzuN_ydKfFFytxEEyizkJXhMUE9MeFV-uWV1qbInhvkCViW9UQa3igAf9Kfji-OJYVPXQyYH8cgtbcbjsZs-lLd0lXcER4xZoz7CRM1AV-EFYdlWAQiDSeZRUkcKDpgaUj41&amp;t=639026416740000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /></head>\r\n\r\n<body>\r\n
+        \   <!-- SD SOS Header -->\r\n    <script>\r\n    (function () {\r\n        var
+        cx = '012382400048732927914:nqn5si4dtbg';\r\n        var gcse = document.createElement('script');\r\n
+        \       gcse.type = 'text/javascript';\r\n        gcse.async = true;\r\n        gcse.src
+        = (document.location.protocol == 'https:' ? 'https:' : 'http:') +\r\n            '//www.google.com/cse/cse.js?cx='
+        + cx;\r\n        var s = document.getElementsByTagName('script')[0];\r\n        s.parentNode.insertBefore(gcse,
+        s);\r\n    })();\r\n\r\n    (function (i, s, o, g, r, a, m) {\r\n        i['GoogleAnalyticsObject']
+        = r; i[r] = i[r] || function () {\r\n            (i[r].q = i[r].q || []).push(arguments)\r\n
+        \       }, i[r].l = 1 * new Date(); a = s.createElement(o),\r\n        m =
+        s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a,
+        m)\r\n    })(window, document, 'script', '//www.google-analytics.com/analytics.js',
+        'ga');\r\n\r\n    ga('create', 'UA-60581758-1', 'auto');\r\n    ga('send',
+        'pageview');\r\n\r\n    $('#mobile_nav_icon').click(function (event) {\r\n\r\n
+        \       if ($('.mobile_nav_menu').css(\"visibility\") == \"hidden\") {\r\n
+        \           $('.mobile_nav_menu').css({ 'visibility': 'visible' });\r\n            //$('.mobile_nav_menu').slideDown('fast');\r\n
+        \           //alert('yup');\r\n        } else {\r\n            $('.mobile_nav_menu').css({
+        'visibility': 'hidden' });\r\n            //$('.mobile_nav_menu').slideUp('fast');\r\n
+        \       }\r\n\r\n    });\r\n\r\n</script>\r\n<div class=\"wrapper\" id=\"divHeaderWrapper\">\r\n
+        \   \r\n    \t\t\r\n           \r\n        <header class=\"clearfix\">\r\n
+        \             \t\t\t\r\n              \t\t\t<div id=\"blue_bar\" class=\"clearfix\">\r\n
+        \                       \t\t\r\n                                <div class=\"centerer\">\r\n
+        \                                        <a href=\"https://sdsos.gov/default.aspx\"
+        title=\"Home\"><img src=\"/images/SOS_logo_REV.png\" alt=\"South Dakota Secretary
+        of State logo\" id=\"header_logo\" onMouseOver=\"MM_swapImage('header_logo','','/images/SOS_logo_REV_O.png',1)\"
+        onMouseOut=\"MM_swapImgRestore()\" /></a> \r\n                                         \r\n
+        \                                        \r\n                                \r\n
+        \                                       <!--BEGIN MOBILE MENU-->\r\n                                        <div
+        id=\"mobile_nav\" class=\"\">\r\n                                                <span
+        id=\"mobile_nav_icon\"></span>\r\n                                        </div>\r\n
+        \                                       \r\n                                        <nav
+        class=\"mobile_nav_menu \">\r\n                                            \r\n
+        \                                           <div id=\"mobile_menu_box\" class=\"\">\r\n
+        \                                               <ul class=\"mobilemenu treeview
+        clearfix\">\r\n                                                    <li class=\"\"><a
+        href=\"https://sdsos.gov/default.aspx\" title=\"Home\">Home</a></li>\r\n                                                    <!--
+        most of the mobile menu is generated automatically, all you need to do is
+        add your main sections here as list items-->\r\n                                                    <li
+        ><a href=\"https://sdsos.gov/elections-voting/default.aspx\" title=\"Elections
+        & Voting\">Elections &amp; Voting</a><ul class=\"\"> <!-- Master Nav list
+        for Elections section-->\r\n                             \r\n                                     \t\t<!--
+        you break the columns out into even lists as needed, there are three columns.
+        NOTE: In mobile view, the columns are stacked on top of each other 1,2,3.
+        When the pages are wider, then the columns are next to each other left to
+        right 1,2,3. -->\r\n                                            \r\n                                            <!--
+        you can add images to any link, but you have to use this format. The Images
+        are hidden and the text is used instead, when at mobile view. Images are shown
+        when screens are larger and can accomodate that. -->\r\n                                            <!--
+        \ <a href=\"/path/to/file.aspx\"><img src=\"/images/where_do_i_vote.png\"
+        alt=\"Where do I vote?\" /><span>Where do I vote?</span></a>  --> \r\n                                           \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            <!--links
+        column two-->\r\n                                            <div class=\"nav_col_2
+        clearfix\">\r\n                                         <li><a href='https://sos.sd.gov/Elections/VIPLogin.aspx'
+        title='View Sample Ballot' >View Sample Ballot</a></li>\r\n                                                <li><a
+        href='https://sos.sd.gov/Elections/VIPLogin.aspx' title='Track Absentee Ballot'
+        >Track Absentee Ballot</a></li>\r\n                                                  \r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n
+        \                                                    <li class='' ><a href='/elections-voting/voting/default.aspx'
+        title='Voting' >Voting</a>\r\n                                                                <ul
+        class='treeview'>\r\n                                                                        <li><a
+        href='https://sos.sd.gov/Elections/VIPLogin.aspx' title='Where do I vote?'>Where
+        do I vote?</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/voting/register-to-vote/default.aspx' title='Register
+        to vote'>Register to vote</a>\r\n                                                                        \t<ul>\r\n
+        \                                                                               <li><a
+        href='/elections-voting/voting/register-to-vote/residency-qualification.aspx'
+        title='Residency Qualification'>Residency Qualification</a></li>\r\n                                                                                <li><a
+        href='/elections-voting/voting/register-to-vote/agency-voter-registration-materials.aspx'
+        title='Agency Voter Registration Material'>Agency Voter Registration Material</a></li>\r\n
+        \                                                                               <li><a
+        href='/elections-voting/voting/register-to-vote/felony-convictions.aspx' title='Felony
+        Convictions'>Felony Convictions</a></li>\r\n                                                                                <li><a
+        href='/elections-voting/voting/register-to-vote/voter-registration-drive-instructions.aspx'
+        title='Voter Registration Drive Instructions'>Voter Registration Drive Instructions</a></li>\r\n
+        \                                                                               <li
+        class=\"last\"><a href='/elections-voting/voting/register-to-vote/forms.aspx'
+        title='Forms'>Forms</a></li>\r\n                                                                            </ul>\r\n
+        \                                                                       </li>\r\n
+        \                                                                       \r\n
+        \                                                                       \r\n
+        \                                                                       <li><a
+        href='/elections-voting/voting/registration-changes.aspx' title='Registration
+        Changes'>Registration Changes</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/voting/polling-place-accessibility.aspx' title='Polling
+        Place Accessibility'>Polling Place Accessibility</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/voting/military-members.aspx' title='Military Members'>Military
+        Members</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/voting/overseas-citizen-voter.aspx' title='Overseas
+        Citizen Voter'>Overseas Citizen Voter</a></li>\r\n                                                                        \r\n
+        \                                                                       <li><a
+        href='/elections-voting/voting/absentee-voting.aspx' title='Absentee Voting'>Absentee
+        Voting</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/voting/VOTE605.aspx' title='18-26 Initiative'>VOTE605
+        Mobile App</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/voting/help-america-vote-act.aspx' title='Absentee
+        Voting'>Help America Vote Act (HAVA)</a></li>\r\n                                                                        <li><a
+        href='http://www.chiesman.org/action/kidsvoting/index.html' title='Kids Voting
+        South Dakota'>Kids Voting South Dakota</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/voting/college-students.aspx' title='College Students'>College
+        Students</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/voting/rock-the-vote.aspx' title='Rock the Vote'>Rock
+        the Vote</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/voting/18-26-initiative.aspx' title='18-26 Initiative'>18-26
+        Initiative</a></li>\r\n                                                                </ul>\r\n</li>\r\n
+        \                                                           <li><a href='/elections-voting/voting/absentee-voting.aspx'
+        title='Vote Absentee'>Vote Absentee</a></li>\r\n                                                            \r\n
+        \                                                          \r\n                                                        \r\n
+        \                                                       \r\n                                                        \r\n
+        \                                                       \r\n                                                        \r\n
+        \                                           </div>\r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           <!--links column three-->\r\n
+        \                                           <div class=\"nav_col_3 clearfix\">\r\n
+        \                                                <li class='' ><a href='/elections-voting/upcoming-elections/general-information/default.aspx'
+        title='Upcoming Elections' >Upcoming Elections</a>\r\n                                                          \r\n
+        \                     <ul class='treeview'>\r\n                                                                        <li><a
+        href='/elections-voting/upcoming-elections/general-information/default.aspx'
+        title='General Information'>2016 Election Information</a>\r\n                                                                          <ul>\r\n
+        \                                                                       <li><a
+        href='/elections-voting/upcoming-elections/general-information/2016-ballot-questions.aspx'
+        title='2016 Ballot Questions'>Ballot Questions</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/upcoming-elections/general-information/2016-candidate-calendar.aspx'
+        title='2016 Candidate Calendar'>Candidate Calendar</a></li>\r\n                                                                        <li><a
+        href='/elections-voting/upcoming-elections/general-information/2016-election-information.aspx'
+        title='Election Calendar'> Election Calendar</a></li>\r\n                                                                        <li><a
+        href=\"/elections-voting/upcoming-elections/general-information/2016-signature-requirements.aspx\"
+        title=\"Number of Signers Required\">Number of Signers Required for 2016 Petitions</a></li>\r\n
+        \                                                                       <li><a
+        href='/elections-voting/upcoming-elections/general-information/2016-offices-to-be-filled.aspx'
+        title='Offices to be filled in the 2016 election'>Offices to be filled</a></li>\r\n
+        \                                                                       <li><a
+        href='/elections-voting/upcoming-elections/general-information/2016PoliticalPartyConventions.aspx'
+        title='Political Party State Conventions'>Political Party State Conventions</a></li>\r\n
+        \                                                                       <li><a
+        href=\"/elections-voting/upcoming-elections/general-information/2016-Presidential-Ballot-Access.aspx\">Presidential
+        Ballot Access</a></li>\r\n                                                                        <li><a
+        href=\"/elections-voting/assets/PrecinctsPollingPlacePerCounty.pdf\">Primary
+        Election Precincts &amp; Polling Places Per County</a></li>\r\n                                                                        <li><a
+        href=\"/elections-voting/upcoming-elections/general-information/2016-GeneralAbsentee-list.aspx\"
+        title=\"General Election Absentee\">General Election Absentee Ballot Statistics
+        </a></li>\r\n                                                                        <li><a
+        href=\"/elections-voting/upcoming-elections/general-information/2016-Absentee-list.aspx\"
+        title=\"Primary Election Absentee\">Primary Election Absentee Ballot Statistics</a></li>\r\n
+        \                                                                       <li><a
+        href='/elections-voting/upcoming-elections/general-information/recognized-political-parties.aspx'
+        title='Recognized Political Parties'>Recognized Political Parties</a></li>\r\n
+        \                                                                       </ul>\r\n</li>\r\n
+        \                                                             </ul>\r\n                                              <ul
+        class='treeview'>\r\n                                                \r\n
+        \                                               \r\n                                                <li><a
+        href=\"/elections-voting/assets/2016LocalJurisdictionElectionDates.pdf\">Local
+        Election Dates</a></li>\r\n                                                <li><a
+        href='/elections-voting/upcoming-elections/voter-registration-totals/default.aspx'
+        title='Voter Registration Totals'>Voter Registration Totals</a> </li>\r\n
+        \                                               <li><a href='/elections-voting/upcoming-elections/ballot-question-information/default.aspx'
+        title='Ballot Question Information'>Ballot Question Information</a>\r\n                                                  <ul>\r\n
+        \                                                   \r\n                                                    <li><a
+        href='/elections-voting/upcoming-elections/ballot-question-information/signature-requirements-ballot-question-petitions.aspx'
+        title='Signature requirements for ballot question petitions'>Signature Requirements
+        &amp; General Information</a></li>\r\n                                                    <li><a
+        href='/elections-voting/upcoming-elections/ballot-question-information/general-ballot-question-information.aspx'
+        title='General ballot question information'>History &amp; Past SD Ballot Questions</a></li>\r\n
+        \                                                   <li><a href=\"/elections-voting/upcoming-elections/ballot-question-information/challenging-statewide-ballot-question.aspx\">Challenging
+        a Statewide Ballot Question</a></li>\r\n                                                    \r\n
+        \                                                 </ul>\r\n                                                </li>\r\n
+        \                                               \r\n                                                <li><a
+        href='/elections-voting/upcoming-elections/municipal-school-information/default.aspx'
+        title='Municipal and School Information'>Municipal and School Information</a>
+        </li>\r\n                                                \r\n                                                \r\n
+        \                                               \r\n                                              </ul>\r\n
+        \                                             </li>\r\n                                                            \r\n
+        \                                                           \r\n                                                           <li
+        class=''><a href='/elections-voting/campaign-finance/default.aspx' title='Campaign
+        Finance' >Campaign Finance</a>\r\n                                                             \r\n
+        \                                                            \r\n<ul class=\"treeview\">\r\n
+        \                                                                        <li><a
+        href='/elections-voting/campaign-finance/important-dates.aspx' title='Important
+        Dates'>Important Dates</a></li>\r\n                                                                         <li><a
+        href='/elections-voting/campaign-finance/paper-forms.aspx' title='Paper Forms'>Paper
+        Forms</a></li>\r\n                                                                         <li><a
+        href='/elections-voting/campaign-finance/campaign-finance-faqs.aspx' title='Campaign
+        Finance FAQs'>Campaign Finance FAQs</a></li>\r\n                                                                         <li><a
+        href=\"/elections-voting/campaign-finance/Search.aspx\">Search Reports</a></li>\r\n
+        \                                                                        <li><a
+        href=\"/elections-voting/campaign-finance/Independent_expenditures.aspx\">Independent
+        Expenditures</a></li>\r\n                                                                         \r\n
+        \                                                           \t</ul>\r\n                                                           \r\n
+        \                                                          \r\n                                                          </li>\r\n
+        \                                           \t\t      <li class=''><a href='/elections-voting/nominating-petitions/default.aspx'
+        title='Petitions' >Petitions</a>\r\n                                               \t
+        <ul class=\"treeview\">\r\n                                                            \t\r\n
+        \                                                               \r\n                                                                         \r\n
+        \                                                                       \r\n
+        \                                                                        <li><a
+        href='/elections-voting/nominating-petitions/how-to-circulate.aspx' title='How
+        to Circulate a Nominating Petition'>How to Circulate a Nominating Petition</a></li>\r\n
+        \                                                                         <li><a
+        href='/elections-voting/nominating-petitions/download-nominating-petition.aspx'
+        title='Download nominating petition'>Download a Petition</a></li>\r\n                                                                           <li><a
+        href='/elections-voting/upcoming-elections/general-information/2016-signature-requirements.aspx'
+        title='Number of signers required'>Number of Signers Required for 2016 Petitions</a></li>\r\n
+        \                                                                            <li><a
+        href='/elections-voting/nominating-petitions/qualifications-office-term-limits.aspx'
+        title='Qualifications to hold office &amp; term limits'>Qualifications to
+        hold office &amp; term limits</a></li>\r\n                                                                              \r\n
+        \                                                                            \r\n
+        \                                                                             \r\n
+        \                                                           </ul>\r\n                          </li>\r\n
+        \                                                       \r\n                                                        \r\n
+        \                                                       <li class=''><a href='/elections-voting/election-resources/default.aspx'
+        title='Election Resources' >Election Resources</a>\r\n                                                        \t<ul
+        class=\"treeview\">\r\n                                                            \t\t<li><a
+        href='/elections-voting/assets/LegislativeDist2011.pdf' title='South Dakota
+        Legislative Districts' target=\"_blank\">South Dakota Legislative Districts</a></li>\r\n
+        \                                                                   <li><a
+        href='/elections-voting/election-resources/election-presentations.aspx' title='Election
+        Presentations'>Election Presentations</a></li>\r\n                                                                    <li><a
+        href='/elections-voting/election-resources/election-laws-and-administrative-rules.aspx'
+        title='Election Laws and Administrative Rules'>Election Laws and Administrative
+        Rules</a></li>\r\n                                                                    \r\n
+        \                                                                   <li><a
+        href='/elections-voting/election-resources/election-information-youth.aspx'
+        title='Election Information for Youth'>Election Information for Youth</a>
+        \r\n                                                                       \r\n
+        \                                                                   </li>\r\n
+        \                                                                   \r\n                                                                    <li><a
+        href='/elections-voting/election-resources/election-history/default.aspx'
+        title='Election History'>Election History</a>\r\n                                                                    </li>\r\n
+        \                                                                   \r\n                                                                    <li><a
+        href='/elections-voting/election-resources/current-elected-officials.aspx'
+        title='Current Elected Officials'>Current Elected Officials</a></li>\r\n                                                                    <li><a
+        href=\"/elections-voting/election-resources/county-auditor-resource-page-primary-general-elections.aspx\">County
+        Auditors - Primary &amp; General Election Resources</a></li>\r\n            \r\n
+        \                                                           </ul>\r\n                                            </li>\r\n
+        \                                           </div>\r\n                \t\t\t\t\t\t\t\r\n
+        \                                      \r\n                                </ul></li>\r\n
+        \                                                   <li ><a href=\"https://sdsos.gov/business-services/default.aspx\"
+        title=\"Business Services\">Business Services</a><ul class=\"\"> <!-- Master
+        Nav list for BUSINESS SERVICES section-->\r\n                             \r\n
+        \                                    \t\r\n                                           \r\n
+        \                                           <div class=\"nav_col_1 clearfix\">\r\n
+        \                                   \t\t\t\t\t\t\r\n                                                           \r\n
+        \                                                           \r\n                                                                                            \r\n
+        \                                                                                                                       \r\n
+        \                                                                                                                       \r\n
+        \                                                           <li class=''><a
+        href=\"/business-services/corporations/default.aspx\" title=\"Business Registration\">Business
+        Registration</a> \r\n                                                                    <ul
+        class=\"treeview\">\r\n                                                                        <li><a
+        href=\"/account/login.aspx?type=ar\" target=\"_blank\" title=\"Annual Report
+        Login\">File Annual Report</a></li>\r\n                                                                        <li><a
+        href=\"/business/search.aspx\" target=\"_blank\" title=\"Search Corporate
+        Database\">Search Businesses</a></li>\r\n                                                                        <li><a
+        href=\"/business-services/corporations/corporate-forms/default.aspx\" title=\"Corporate
+        Forms\">Business Forms</a> \r\n                                                                                <ul>\r\n
+        \                                                                                   <li><a
+        href=\"/business-services/corporations/corporate-forms/business-corporations.aspx\"
+        title=\"Business Corporations\">Business Corporations</a></li>\r\n                                                                                    <li><a
+        href=\"/business-services/corporations/corporate-forms/limited-liability-companies.aspx\"
+        title=\"Limited Liability Companies\">Limited Liability Companies</a></li>\r\n
+        \                                                                                   <li><a
+        href=\"/business-services/corporations/corporate-forms/nonprofit-corporations.aspx\"
+        title=\"Nonprofit Corporations\">Nonprofit Corporations</a></li>\r\n                                                                                    <li><a
+        href=\"/business-services/corporations/corporate-forms/limited-liability-partnerships.aspx\"
+        title=\"Limited Liability Partnerships\">Limited Liability Partnerships</a></li>\r\n
+        \                                                                                   <li><a
+        href=\"/business-services/corporations/corporate-forms/limited-partnerships.aspx\"
+        title=\"Limited Partnerships\">Limited Partnerships</a></li>\r\n                                                                                    <li><a
+        href=\"/business-services/corporations/corporate-forms/cooperatives.aspx\"
+        title=\"Cooperatives\">Cooperatives</a></li>\r\n                                                                                    <li><a
+        href=\"/business-services/corporations/corporate-forms/business-trusts.aspx\"
+        title=\"Business Trusts\">Business Trusts</a></li>\r\n                                                                                    <li><a
+        href=\"/business-services/corporations/corporate-forms/miscellaneous-forms.aspx\"
+        title=\"Miscellaneous Forms\">Miscellaneous Forms</a></li>\r\n                                                                                    <li><a
+        href=\"/business-services/corporations/corporate-forms/commercial-registered-agents.aspx\"
+        title=\"Commercial Registered Agents\">Commercial Registered Agents</a></li>\r\n
+        \                                                                            </ul>\r\n
+        \                                                                       </li>\r\n
+        \                                                                       \r\n
+        \                                                                       \r\n
+        \                                                                       <li><a
+        href=\"/business-services/corporations/commercial-registered-agents/default.aspx\"
+        title=\"Commercial Registered Agents\">Commercial Registered Agents</a> \r\n
+        \                                                                               <ul>\r\n
+        \                                                                               <li><a
+        href=\"/business-services/corporations/commercial-registered-agents/recently-appointed.aspx\"
+        title=\"Recently Appointed Registered Agents\">Recently Appointed Registered
+        Agents</a></li>\r\n                                                                                </ul>\r\n
+        \                                                                       </li>\r\n
+        \                                                                       <li><a
+        href=\"/business-services/corporations/request-certificate-good-standing.aspx\"
+        title=\"Request-Certificate of Good Standing\">Certificate of Good Standing</a>\r\n
+        \                                                                         <ul>\r\n
+        \                                                                           \r\n
+        \                                                                           <li><a
+        href=\"https://sos.sd.gov/business/VerifyCGS.aspx\" target=\"_blank\" title=\"Fee
+        Schedule\">Validation of Certificate</a></li>\r\n                                                                          </ul>\r\n
+        \                                                                       </li>\r\n
+        \                                                                       <li><a
+        href=\"/business-services/corporations/business-resources/default.aspx\" title=\"Business
+        Resources\">Business Resources</a> \r\n                                                                                <ul>\r\n
+        \                                                                               <li><a
+        href=\"/general-information/filing-fees.aspx\" target=\"_blank\" title=\"Fee
+        Schedule\">Fee Schedule</a></li>\r\n                                                                                <li><a
+        href=\"/Payment/PADAccountManagement.aspx\" target=\"_blank\" title=\"PAD
+        Account\">PAD Account</a></li>\r\n                                                                                <li><a
+        href=\"http://dor.sd.gov/\" target=\"_blank\" title=\"South Dakota Department
+        of Revenue\">South Dakota Department of Revenue</a></li>\r\n                                                                                <li><a
+        href=\"http://www.usd.edu/business/small-business-development-center/\" target=\"_blank\"
+        title=\"South Dakota Small Business Development Center\">South Dakota Small
+        Business Development Center</a></li>\r\n                                                                                <li><a
+        href=\"http://sd.gov/\" target=\"_blank\" title=\"State of South Dakota\">State
+        of South Dakota</a></li>\r\n                                                                                <li><a
+        href=\"http://www.sba.gov/\" target=\"_blank\" title=\"US Small Business Administrationr\">US
+        Small Business Administration</a></li>\r\n                                                                                <li><a
+        href=\"http://www.irs.gov/Businesses/\" target=\"_blank\" title=\"Tax Information
+        for Businesses\">Tax Information for Businesses</a></li>\r\n                                                                                <li><a
+        href=\"http://www.irs.gov/Charities-&-Non-Profits\" target=\"_blank\" title=\"Tax
+        Information for Charities and other Non-Profits\">Tax Information for Charities
+        and other Non-Profits</a></li>\r\n                                                                                <li><a
+        href=\"/business-services/corporations/business-resources/sd-ready-to-work.aspx\"
+        title=\"SD Ready to Work\">SD Ready to Work</a></li>\r\n                                                                                <li><a
+        href=\"/business-services/corporations/business-resources/informational-pamphlets.aspx\"
+        title=\"Informational Pamphlets\">Informational Pamphlets</a> \r\n                                                                                \r\n
+        \                                                                       </li>\r\n
+        \                                                                       <li><a
+        href=\"/general-information/publications/default.aspx\" title=\"Economic Reports\">Economic
+        Reports</a></li>\r\n                                                                               \r\n
+        \                                                                            </ul>\r\n
+        \                                                                       </li>\r\n
+        \                                                                       <li><a
+        href=\"/business-services/assets/NEWBusinessUCCDatabaseSubscriptionForm.pdf\"
+        target=\"_blank\" title=\"Download Business Database\">Download Business Database</a></li>\r\n
+        \                                                                       <li><a
+        href=\"/business-services/corporations/contact.aspx\" title=\"Contact Us &
+        FAQs\">Contact Us & FAQs</a></li>\r\n                                                                        \r\n
+        \                                                                   </ul>\r\n
+        \                                                      </li>\r\n                                                            \r\n
+        \                                                           \r\n                                                            \r\n
+        \                                                           \r\n                                                   <li
+        class=''><a href=\"/business/search.aspx\" target=\"_blank\" title=\"Search
+        Corporations\">Search Businesses</a> </li>         \r\n                                                 <li
+        class=''><a href=\"/business-services/uniform-commercial-code/default.aspx\"
+        title=\"UCC\">UCC</a>\r\n                                                   <ul
+        class=\"treeview\">\r\n                                                                     <!--//<li><a
+        href=\"/business-services/uniform-commercial-code/homestead.aspx\" title=\"Homestead
+        UCC\"> Homestead UCC - File Online</a></li>//-->\r\n                                                                    \r\n
+        \                                                                    <li><a
+        href=\"/business-services/uniform-commercial-code/ucc-efs-information/default.aspx\"
+        title=\"UCC Information\">UCC Information</a> \r\n                                                                       \t
+        <ul>\r\n                                                                           \t
+        \r\n                                                                             <li><a
+        href=\"/business-services/uniform-commercial-code/ucc-efs-information/where-to-file.aspx\"
+        title=\"Where to File\">Where to File</a> </li>\r\n                                                                             <li><a
+        href=\"/general-information/filing-fees.aspx\" target=\"_blank\" title=\"Fee
+        Schedule\">Fee Schedule</a> </li>\r\n                                                                             <li><a
+        href=\"/business-services/uniform-commercial-code/ucc-efs-information/cheyenne-river-sioux-tribe-compact.aspx\"
+        title=\"Cheyenne River Sioux Tribe Compact\">Cheyenne River Sioux Tribe Compact</a>
+        </li>\r\n                                                                             <li><a
+        href=\"/business-services/uniform-commercial-code/ucc-efs-information/oglala-sioux-tribe-compact.aspx\"
+        title=\"Oglala Sioux Tribe Compact\">Oglala Sioux Tribe Compact</a> </li>\r\n
+        \                                                                               \r\n
+        \                                                                               \r\n
+        \                                                                        </ul>\r\n\r\n
+        \                                                                    </li>\r\n
+        \                                                                       \r\n
+        \                                                                       <li><a
+        href=\"#\">EFS Information</a>\r\n                                                                            <ul>\r\n
+        \                                                                               <li><a
+        href=\"/business-services/uniform-commercial-code/ucc-efs-information/forms.aspx\"
+        title=\"Forms\">Forms</a></li>\r\n                                                                                <li><a
+        href=\"/business-services/uniform-commercial-code/ucc-efs-information/buyer-registration.aspx\"
+        title=\"Buyer Registration\">Buyer Registration</a></li>\r\n                                                                                <li><a
+        href=\"/business-services/assets/NEWEFSSubscriptionForm.pdf\" target=\"_blank\"
+        title=\"Download EFS Master List\">Download EFS Master List</a></li>\r\n                                                                            </ul>\r\n
+        \                                                                       </li>\r\n
+        \                                                                       \r\n
+        \                                                                    <li><a
+        href=\"/business-services/uniform-commercial-code/sd-laws-administrative-rules.aspx\"
+        title=\"South Dakota Laws and Administrative Rules\">South Dakota Laws and
+        Administrative Rules</a>  </li>\r\n                                                                         <li><a
+        href=\"/business-services/assets/NEWUCCSubscriptionForm.pdf\" target=\"_blank\"
+        title=\"Subscribe to UCC Filing System\">Subscribe to UCC Filing System</a></li>\r\n
+        \                                                                        <li><a
+        href=\"/business-services/assets/NEWBusinessUCCDatabaseSubscriptionForm.pdf\"
+        target=\"_blank\" title=\"Download UCC Database\">Download UCC Database</a></li>\r\n
+        \                                                                       <li><a
+        href=\"/business-services/assets/UCCImageDatabaseSubscriptionForm.pdf\" target=\"_blank\"
+        title=\"Download UCC Bulk Image Database\">Download UCC Bulk Image Database</a></li>\r\n
+        \                                                                        <li><a
+        href=\"/business-services/uniform-commercial-code/ucc-efs-information/contact.aspx\"
+        title=\"Contact Us & FAQs\">Contact Us & FAQs</a></li>\r\n                                                                           \r\n
+        \                                                      \r\n                                                           \r\n
+        \                                                      \r\n                                                                 </ul>\r\n
+        \                                                           </li>\r\n                                                            \r\n
+        \                                                           \r\n                                                           \r\n
+        \                                                           \r\n                                                            \r\n
+        \                                                           \r\n                                                           \r\n
+        \                                                          \r\n</div>\r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           <!--links column two-->\r\n                                            <div
+        class=\"nav_col_2 clearfix\">\r\n                                        \r\n
+        \                                       \r\n                                        \t\t\t\t
+        <li class=''><a href=\"/business-services/trademark-name-registration/default.aspx\"
+        title=\"Trademarks\">Trademarks</a> \r\n                                                                    <ul
+        class=\"treeview\">\r\n                                                                        <li><a
+        href=\"/business-services/trademark-name-registration/trade-marks.aspx\" title=\"Trademarks\">Trademark
+        Forms</a></li>\r\n                                                                        <li><a
+        href=\"/business-services/trademark-name-registration/emblems.aspx\" title=\"Emblems\">Emblem
+        Forms</a></li>\r\n                                                                        <li><a
+        href=\"/business-services/trademark-name-registration/farm-ranch-home-names.aspx\"
+        title=\"Farm/Ranch Home Names\">Farm/Ranch Home Name Forms</a></li>\r\n                                                                        <li><a
+        href=\"/business-services/assets/trademark_application_booklet_2015.pdf\"
+        target=\"_blank\" title=\"Handbook\">Handbook</a></li>\r\n                                                                    </ul>\r\n
+        \                                                           </li>\r\n                                                            \r\n
+        \                                                           \r\n                                                            <li
+        ><a href=\"/business-services/fictitious-business-name-registration.aspx\"
+        title=\"DBA/Fictitious Names\">DBA/Fictitious Names</a> \r\n                                                                    \r\n
+        \                                                           </li>\r\n                                                            \r\n
+        \                                                         \r\n                                                        \r\n
+        \                                           </div>\r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           <!--links column three-->\r\n
+        \                                           <div class=\"nav_col_3 clearfix\">\r\n\r\n
+        \                                                        <li><a href=\"/account/login.aspx?type=ar\"
+        style=\"font-size: 1.2em; font-weight: bold;\" target=\"_blank\" id=\"where_do_i_vote\">File
+        an<br />Annual Report</a></li>\r\n                                                        \r\n
+        \                                           </div>\r\n                                            \r\n
+        \                                          \r\n                                           </ul></li>\r\n
+        \                                                   <li ><a href=\"https://sdsos.gov/services-for-individuals/default.aspx\"
+        title=\"Services for Individuals\">Services for Individuals</a><ul class=\"\">
+        <!-- Master Nav list for INDIVIDUALS section-->\r\n                             \r\n
+        \                                 \r\n                                           \r\n
+        \                                           <div class=\"nav_col_1 clearfix\">\r\n
+        \                                   \t\t\t\t\t\t\r\n                                                        \r\n
+        \                                                           \r\n                                                            <li
+        class=\"\"><a href=\"/services-for-individuals/concealed-pistol-permits/default.aspx\"
+        title=\"Pistol Permits\">Pistol Permits</a> \r\n                                                                    <ul
+        class='treeview'>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/concealed-pistol-permits/map.aspx\" title=\"Which
+        SD Permit is required for carrying a concealed weapon across state lines?\">Which
+        SD Permit is required for carrying a concealed weapon across state lines?</a></li>\r\n
+        \                                                                       <li><a
+        href=\"/services-for-individuals/concealed-pistol-permits/concealed-carry.aspx\"
+        title=\"Which out-of-state permit holders can carry concealed in South Dakota?\">Which
+        out-of-state permit holders can be carry concealed in South Dakota?</a></li>\r\n
+        \                                                                       <li><a
+        href=\"/services-for-individuals/assets/SummaryCarryStates.pdf\" target=\"_blank\"
+        title=\"Summary of States regarding South Dakota Permits\">Summary of States
+        regarding South Dakota Permits</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/concealed-pistol-permits/opencarry.aspx\"
+        title=\"Which states allow open carry?\">Which states allow open carry?</a></li>\r\n
+        \                                                                       <li><a
+        href=\"/services-for-individuals/concealed-pistol-permits/faqs.aspx\" title=\"Frequently
+        Asked Pistol Permit Questions\">Frequently Asked Pistol Permit Questions</a></li>\r\n
+        \                                                                       <li><a
+        href=\"/services-for-individuals/concealed-pistol-permits/purchase-firearm.aspx\"
+        title=\"Purchase a Firearm\">Purchase a Firearm</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/assets/2015SDFirearmLaws.pdf\" target=\"_blank\"
+        title=\"South Dakota Firearm Laws\">South Dakota Firearm Laws</a></li>\r\n\r\n
+        \                                                                   </ul>\r\n
+        \                                                           </li>\r\n\r\n
+        \                                               <li class=\" statistics\"><a
+        href=\"/services-for-individuals/concealed-pistol-permits/default.aspx\" title=\"Pistol
+        Permits\">Pistol Permit Statistics</a> \r\n                                                                    <ul
+        class='treeview' style=\"color: black;\">                                                                       \r\n
+        \                                                                       <li><strong>Total
+        Active Regular and Enhanced Permits</strong></li>\r\n                                                                        <li>6/30/2016
+        - 92,361</li>\r\n                                                                        <li>5/31/2016
+        - 91,785</li>\r\n                                                                        <li>4/30/2016
+        - 91,136</li>\r\n                                                                        <li>3/31/2016
+        -  90,346 </li>\r\n                                                                        <li>2/29/2016
+        - 88,995</li>\r\n                                                                        <li>1/31/2016
+        - 87,655</li>\r\n                                                                       \r\n
+        \                                                                       \r\n
+        \                                                                       <li><strong>Total
+        New and Renewal Regular Permits Issued</strong></li>\r\n                                                                        <li>2016
+        to date - 15,647 </li>\r\n                                                                        <li>2015
+        \u2013 22,554</li>\r\n                                                                        <li>2014
+        \u2013 18,656</li>\r\n                                                                        <li>2013
+        \u2013 26,863</li>\r\n                                                                        <li>2012
+        \u2013 17,160</li>\r\n                                                                        <li>2011
+        \u2013 15,332</li>\r\n                                                                        <li>2010
+        \u2013 14,839</li>\r\n                                                                        <li>2009
+        \u2013 16,095</li>\r\n                                                                        <li>2008
+        \u2013 13,838</li>\r\n                                                                        <li>2007
+        \u2013 11,533</li>\r\n                                                                        <li>2006
+        \u2013 11,763</li>\r\n                                                                        <li><strong>Total
+        New Enhanced Permits Issued</strong></li>\r\n                                                                        <li>2016
+        to date - 539</li>\r\n                                                                        <li>2015
+        - 37</li>\r\n  \r\n                                                                    </ul>\r\n
+        \                                                           </li>\r\n                                                           \r\n
+        \                                                           \r\n                                                            <li
+        class=\"\"><a href=\"/services-for-individuals/lobbyist-employer-registration/default.aspx\"
+        title=\"Lobbyist\">Lobbyist</a> \r\n                                                            \t\t<ul
+        class='treeview'>\r\n                                                                       \r\n
+        \                                                                       </ul>\r\n
+        \                                                           </li>\r\n                                                          \r\n\r\n
+        \                                                          \r\n                                                           \r\n
+        \                                           </div>\r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            <!--links
+        column two-->\r\n                                            <div class=\"nav_col_2
+        clearfix\">\r\n                                        \r\n                                           <li
+        class=\"\"><a href=\"/services-for-individuals/notary-public/default.aspx\"
+        title=\"Notary Public\">Notary Public</a> \r\n                                                                    <ul
+        class='treeview'>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/notary-public/how-become-notary.aspx\" title=\"Becoming
+        a Notary Public\">Becoming a Notary Public</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/notary-public/getting-notary-seal.aspx\"
+        title=\"Getting a Notary Seal\">About the Notary Seal</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/notary-public/complete-notarization.aspx\"
+        title=\"Components of a Complete Notarization\">Components of a Complete Notarization</a></li>\r\n
+        \                                                                       <li><a
+        href=\"/services-for-individuals/notary-public/important-concepts.aspx\" title=\"Eight
+        Important Concepts\">Eight Important Concepts</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/notary-public/dos-donts.aspx\" title=\"Dos
+        &amp; Don'ts\">Dos and Don'ts</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/notary-public/notary-procedures.aspx\" title=\"Notary
+        Procedures\">Notary Procedures</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/notary-public/faqs.aspx\" title=\"Frequently
+        Asked Questions\">Frequently Asked Questions</a></li>\r\n                                                                        <li><a
+        href=\"https://apps.sd.gov/ST12ODRS/aspx/frmNotaryViewlist.aspx?cmd=resetall\"
+        title=\"Search Notary Database\">Search Notary Database</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/notary-public/glossary-terms.aspx\" title=\"Glossary
+        of Terms\">Glossary of Terms</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/notary-public/acknowledgements.aspx\" title=\"Acknowledgements/Affidavits\">Acknowledgements/Affidavits</a></li>\r\n
+        \                                                                       <li><a
+        href=\"/services-for-individuals/notary-public/lost-stolen-seal.aspx\" title=\"Lost
+        or Stolen Seal\">Lost or Stolen Seal</a></li>\r\n                                                                        \r\n
+        \                                                                       <li><a
+        href=\"/services-for-individuals/notary-public/commission-expiration-dates.aspx\"
+        title=\"Commission and Expiration Dates\">Commission and Expiration Dates</a></li>\r\n
+        \                                                                       <li><a
+        href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=18-1\"
+        target=\"_blank\" title=\"Notary Laws SDCL 18-1\">Notary Laws SDCL 18-1</a></li>\r\n
+        \                                                                       <li><a
+        href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=18-5\"
+        target=\"_blank\" title=\"Uniform Acknowledgement SDCL 18-5\">Uniform Acknowledgement
+        SDCL 18-5</a></li>\r\n                                                                        \r\n
+        \                                                                       <li><a
+        href=\"/services-for-individuals/notary-public/what-if-move.aspx\" title=\"What
+        if I move?\">What if I move?</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/notary-public/name-changes.aspx\" title=\"What
+        if my name changes?\">What if my name changes?</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/notary-public/renewal.aspx\" title=\"Notary
+        Commission Renewal\">Notary Commission Renewal</a></li>\r\n                                                                        <li><a
+        href=\"/services-for-individuals/assets/SDNotaryPublicHandbook.pdf\" target=\"_blank\"
+        title=\"Notary Handbook\">Notary Handbook</a></li>\r\n                                                                        \r\n
+        \                                                                   </ul>\r\n
+        \                                                           </li>\r\n                                        \t\t\t\t\t\r\n
+        \                                                           <li><a href=\"/services-for-individuals/apostilles-authentications.aspx\"
+        title=\"Apostilles\">Apostilles</a></li>\r\n                                                            \r\n
+        \                                                     \r\n                                                        \r\n
+        \                                           </div>\r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           \r\n                                            \r\n
+        \                                           <!--links column three-->\r\n
+        \                                           <div class=\"nav_col_3 clearfix\">\r\n
+        \                                           \t\t<!--\t<li><a href=\"/services-for-individuals/lobbyist-employer-registration/default.aspx\"><img
+        src=\"/services-for-individuals/assets/lobbyist_registration.png\" alt=\"Lobbyist
+        Registration\" /><span>Lobbyist Registration</span></a></li>-->\r\n                                                        \r\n
+        \                                                       \r\n                                            </div>\r\n
+        \               \t\t\t\t\t\t\t\r\n                                       \r\n
+        \                               </ul></li>\r\n                                                    \r\n
+        \                                               </ul>\r\n                                            </div>\r\n
+        \                                       </nav>\r\n                                        \r\n
+        \                                       <!--END MOBILE MENU-->\r\n                                       \r\n
+        \                                       \r\n                                        <div
+        id=\"header_currentsos\">\r\n                                            <h3>MONAE
+        L. JOHNSON</h3>\r\n                                        </div>\r\n                                        \r\n
+        \                                       \r\n                                        <nav
+        id=\"header_contact\" class=\"tertiary\">\r\n                                            <ul
+        class=\"\" id=\"\">\r\n                                               <li
+        class=\"mobile_omit expanded_omit\">(605) 773-3537<img src=\"/images/speech_bubble.png\"
+        class=\"header_contact_icon\" alt=\"speech bubble icon\" /></li>\r\n                                               <li
+        class=\"mobile_omit expanded_omit\"><a href=\"/cdn-cgi/l/email-protection#5d3e3b2f1d2e293c2938732e3973282e\"><span
+        class=\"__cf_email__\" data-cfemail=\"dfbcb9ad9facabbeabbaf1acbbf1aaac\">[email&#160;protected]</span></a><img
+        src=\"/images/email.png\" class=\"header_contact_icon\" alt=\"email icon\"
+        /></li>\r\n                                               <li class=\"\"><a
+        href=\"https://sdsos.gov/contact-us/default.aspx\" title=\"Contact Us\" class=\"\">Contact
+        us</a><ul class=\"contact_nav\"> <!-- Master Nav list for CONTACT section-->\n
+        \                            \n                                     \t\n                                           \n
+        \                                                               \t\t<li><a
+        href='/contact-us/county-auditors.aspx' title='County Auditors'>County Auditors</a></li>\n
+        \                                                                       <li><a
+        href='/contact-us/county-registers-of-deeds.aspx' title='County Registers
+        of Deeds'>County Registers of Deeds</a></li>\n                                                                        <li><a
+        href='/contact-us/municipal-finance-officers.aspx' title='Municipal Finance
+        Officers'>Municipal Finance Officers</a></li>\n                                                                        <li><a
+        href='/contact-us/school-business-managers.aspx' title='School Business Managers'>School
+        Business Managers</a></li>\n                                                          \n
+        \                                                         </ul><img src=\"/images/pointer.png\"
+        class=\"header_contact_icon\" alt=\"pointer arrow icon\" /></li>\r\n                                            </ul>\r\n
+        \                                       </nav>\r\n                                        \r\n
+        \                               \r\n                                        \r\n
+        \                               </div>\r\n                               \r\n
+        \                         </div>      \r\n                          \r\n                          \r\n
+        \ \r\n                        <div class=\"centerer\">\r\n                        \r\n
+        \                       <!--comment out this section when you want the election
+        button turned off-->\r\n                        \r\n                      \r\n
+        \                       \r\n                        \r\n                        \r\n
+        \                       \r\n\r\n                         </div>\r\n\t\t</header>\r\n
+        \       \r\n       \r\n        \r\n        <!-- this is turned off for interior
+        pages, via CSS -->\r\n     \r\n        \r\n        </div>\r\n       \r\n        \r\n
+        \       \r\n        <section id=\"middle\" class=\"clearfix\"></section>\r\n
+        \   <!-- SD SOS Header -->\r\n    <form method=\"post\" action=\"./FiledCommunicationExpenditures.aspx\"
+        onsubmit=\"javascript:return WebForm_OnSubmit();\" id=\"ctl01\">\r\n<div class=\"aspNetHidden\">\r\n<input
+        type=\"hidden\" name=\"RadScriptManager1_TSM\" id=\"RadScriptManager1_TSM\"
+        value=\"\" />\r\n<input type=\"hidden\" name=\"__EVENTTARGET\" id=\"__EVENTTARGET\"
+        value=\"\" />\r\n<input type=\"hidden\" name=\"__EVENTARGUMENT\" id=\"__EVENTARGUMENT\"
+        value=\"\" />\r\n<input type=\"hidden\" name=\"__VIEWSTATE\" id=\"__VIEWSTATE\"
+        value=\"/wEPDwULLTE3ODgxMjE1NjkPZBYCZg9kFgICAg9kFhBmDxYCHgdWaXNpYmxlaGQCAg8WAh4EVGV4dAUGR3Vlc3QhZAIDD2QWAgIBDxQrAAIUKwACDxYIHhVFbmFibGVFbWJlZGRlZFNjcmlwdHNnHhxFbmFibGVFbWJlZGRlZEJhc2VTdHlsZXNoZWV0Zx4SUmVzb2x2ZWRSZW5kZXJNb2RlCylzVGVsZXJpay5XZWIuVUkuUmVuZGVyTW9kZSwgVGVsZXJpay5XZWIuVUksIFZlcnNpb249MjAyMC4zLjEwMjEuNDAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49MTIxZmFlNzgxNjViYTNkNAEeF0VuYWJsZUFqYXhTa2luUmVuZGVyaW5naGQQFgFmFgEUKwACDxYCHwEFFUNvbW1pdHRlZXMgTG9naW4gSGVyZWQQFgFmFgEUKwACZGQPFgFmFgEFdFRlbGVyaWsuV2ViLlVJLlJhZE1lbnVJdGVtLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDIwLjMuMTAyMS40MCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0DxYBZhYBBXRUZWxlcmlrLldlYi5VSS5SYWRNZW51SXRlbSwgVGVsZXJpay5XZWIuVUksIFZlcnNpb249MjAyMC4zLjEwMjEuNDAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49MTIxZmFlNzgxNjViYTNkNGQWAmYPDxYCHwEFFUNvbW1pdHRlZXMgTG9naW4gSGVyZWRkAgUPFgIfAGhkAgcPFgIfAGhkAggPFgIfAGhkAgoPFgIfAGhkAgsPZBYGAgEPFCsAAjwrAAQBAA8WCB8ECysEAR8CZx8DZx8FaGQQFgRmAgECAgIDFgQ8KwAEAQAPFggfA2cfBAsrBAEfBWgfAmdkPCsABAEADxYIHwNnHwQLKwQBHwVoHwJnZDwrAAQBAA8WCB8DZx8ECysEAR8FaB8CZ2Q8KwAEAQAPFggfA2cfBAsrBAEfBWgfAmdkDxYEZmZmZhYBBXJUZWxlcmlrLldlYi5VSS5SYWRXaW5kb3csIFRlbGVyaWsuV2ViLlVJLCBWZXJzaW9uPTIwMjAuMy4xMDIxLjQwLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTEyMWZhZTc4MTY1YmEzZDQWCGYPPCsABAEADxYIHwNnHwQLKwQBHwVoHwJnZGQCAQ88KwAEAQAPFggfA2cfBAsrBAEfBWgfAmdkZAICDzwrAAQBAA8WCB8DZx8ECysEAR8FaB8CZ2RkAgMPPCsABAEADxYIHwNnHwQLKwQBHwVoHwJnZGQCBw8PFgYfAmcfA2cfBWhkZAIJD2QWBAIBDw8WBh8CZx8DZx8FaGRkAgMPZBYCAgMPZBYCAgEPPCsADgIAFCsAAg8WDB4LXyFJdGVtQ291bnQCAR8FaB8CZx8DZx8ECysEAR4LXyFEYXRhQm91bmRnZBcCBQtFZGl0SW5kZXhlcxYABQ9TZWxlY3RlZEluZGV4ZXMWAAEWAhYLDwIHFCsABxQrAAUWBB4IRGF0YVR5cGUZKwIeBG9pbmQCAmRkZAUHUERGTGluaxQrAAUWBB8IGSsBHwkCA2RkZAUFY2V4SUQUKwAFFgQfCBkrAR8JAgRkZGQFEWNleF9GS19Eb2N1bWVudElEFCsABRYEHwgZKwIfCQIFZGRkBRFjZXhOYW1lc01lbnRpb25lZBQrAAUWBB8IGSsCHwkCBmRkZAUSY2V4VHlwZURlc2NyaXB0aW9uFCsABRYEHwgZKwIfCQIHZGRkBRJjZXhEYXRlQ29tbVdhc01hZGUUKwAFFgQfCBkrAh8JAghkZGQFCURhdGVGaWxlZGRlFCsAAAspelRlbGVyaWsuV2ViLlVJLkdyaWRDaGlsZExvYWRNb2RlLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDIwLjMuMTAyMS40MCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0ATwrAAcACyl1VGVsZXJpay5XZWIuVUkuR3JpZEVkaXRNb2RlLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDIwLjMuMTAyMS40MCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0ARYCHgRfZWZzFgIeE2NzX3BvcHVwc19DbG9zZVRleHQFBUNsb3NlZBYMHghEYXRhS2V5cxYAHgVfcWVsdBkpZ1N5c3RlbS5EYXRhLkRhdGFSb3dWaWV3LCBTeXN0ZW0uRGF0YSwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkfBgIKHhRJc0JvdW5kVG9Gb3J3YXJkT25seWgeBV8hQ0lTFwAfB2dkZhYGZg8UKwADZGRkZAIBDxYFFCsAAg8WDB8MFgAfDRkrBx8GAgofDmgfDxcAHwdnZBcEBQZfIURTSUMCkAEFC18hSXRlbUNvdW50AgoFEEN1cnJlbnRQYWdlSW5kZXhmBQhfIVBDb3VudAIPFgIeA19zZRYCHgJfY2YUKwAKFCsAAhQrAAEFBWNleElEFCsAAQIEFCsAAhQrAAEFBWNleElEFCsAAQIFFCsAAhQrAAEFBWNleElEFCsAAQIGFCsAAhQrAAEFBWNleElEFCsAAQIHFCsAAhQrAAEFBWNleElEFCsAAQIIFCsAAhQrAAEFBWNleElEFCsAAQIKFCsAAhQrAAEFBWNleElEFCsAAQIMFCsAAhQrAAEFBWNleElEFCsAAQINFCsAAhQrAAEFBWNleElEFCsAAQIPFCsAAhQrAAEFBWNleElEFCsAAQIQFgdkZGRkZGRkFgJnZxYCZg9kFixmD2QWBGYPDxYCHwBoZBYCZg8PFgIeCkNvbHVtblNwYW4CBWQWAmYPZBYCAgEPZBYCZg9kFgQCAg9kFgRmDw8WCB4LQ29tbWFuZE5hbWUFBFBhZ2UeD0NvbW1hbmRBcmd1bWVudAUETmV4dB4QQ2F1c2VzVmFsaWRhdGlvbmgeB1Rvb2xUaXAFCU5leHQgUGFnZWRkAgIPDxYIHxMFBFBhZ2UfFAUETGFzdB8VaB8WBQlMYXN0IFBhZ2VkZAIDDw8WBB4IQ3NzQ2xhc3MFEHJnV3JhcCByZ0FkdlBhcnQeBF8hU0ICAmQWAgIBDxQrAAIPFhgeGVJlZ2lzdGVyV2l0aFNjcmlwdE1hbmFnZXJnHgxUYWJsZVN1bW1hcnkFG1BhZ2UgU2l6ZSBEcm9wIERvd24gQ29udHJvbB8CZx8DZx4MVGFibGVDYXB0aW9uBRBQYWdlU2l6ZUNvbWJvQm94HgpJbnB1dFRpdGxlZR4TRW5hYmxlRW1iZWRkZWRTa2luc2geHU9uQ2xpZW50U2VsZWN0ZWRJbmRleENoYW5naW5nBTBUZWxlcmlrLldlYi5VSS5HcmlkLkNoYW5naW5nUGFnZVNpemVDb21ib0hhbmRsZXIeE2NhY2hlZFNlbGVjdGVkVmFsdWVkHwdnHhFFbmFibGVBcmlhU3VwcG9ydGgeHE9uQ2xpZW50U2VsZWN0ZWRJbmRleENoYW5nZWQFLlRlbGVyaWsuV2ViLlVJLkdyaWQuQ2hhbmdlUGFnZVNpemVDb21ib0hhbmRsZXJkDxQrAAMUKwACDxYGHwEFAjEwHgVWYWx1ZQUCMTAeCFNlbGVjdGVkZxYCHhBvd25lclRhYmxlVmlld0lkBSRjdGwwMF9NYWluQ29udGVudF9yZ0NvbW1FeExpc3RfY3RsMDBkFCsAAg8WBh8BBQI1MB8iBQI1MB8jaBYCHyQFJGN0bDAwX01haW5Db250ZW50X3JnQ29tbUV4TGlzdF9jdGwwMGQUKwACDxYGHwEFAzEwMB8iBQMxMDAfI2gWAh8kBSRjdGwwMF9NYWluQ29udGVudF9yZ0NvbW1FeExpc3RfY3RsMDBkDxQrAQNmZmYWAQV4VGVsZXJpay5XZWIuVUkuUmFkQ29tYm9Cb3hJdGVtLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDIwLjMuMTAyMS40MCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0xMjFmYWU3ODE2NWJhM2Q0FgpmDw8WBB8XBQlyY2JIZWFkZXIfGAICZGQCAQ8PFgQfFwUJcmNiRm9vdGVyHxgCAmRkAgIPDxYGHwEFAjEwHyIFAjEwHyNnFgIfJAUkY3RsMDBfTWFpbkNvbnRlbnRfcmdDb21tRXhMaXN0X2N0bDAwZAIDDw8WBh8BBQI1MB8iBQI1MB8jaBYCHyQFJGN0bDAwX01haW5Db250ZW50X3JnQ29tbUV4TGlzdF9jdGwwMGQCBA8PFgYfAQUDMTAwHyIFAzEwMB8jaBYCHyQFJGN0bDAwX01haW5Db250ZW50X3JnQ29tbUV4TGlzdF9jdGwwMGQCAQ9kFgZmDw8WBB8BBQYmbmJzcDsfAGhkZAIBDw8WBB8BBQYmbmJzcDsfAGhkZAICDw8WAh8BBTFOYW1lIG9mIFBlcnNvbiBvciBFbnRpdHkgTWFraW5nIHRoZSBDb21tdW5pY2F0aW9u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HycFIS4uL0RvY3VtZW50LmFzcHg/RG9jdW1lbnRJRD0zMzgwOB8WBS1BbWVyaWNhbiBDYW5jZXIgU29jaWV0eSBDYW5jZXIgQWN0aW9uIE5ldHdvcmtkZAIDDw8WAh8BBQIxNmRkAgQPDxYCHwEFBTMzODA4ZGQCBQ8PFgIfAQUUVHVpdGlvbjRUZWNoU3R1ZGVudHNkZAIGDw8WAh8BBUxFbWFpbCBicm9hZGNhc3QsIG5ld3MgcmVsZWFzZSBkaXN0cmlidXRpb24sIHdlYnNpdGUgcG9zdCwgc29jaWFsIG1lZGlhIHBvc3RzZGQCBw8PFgIfAQUKMTAvMDEvMjAxOGRkAggPDxYCHwEFCjEwLzAyLzIwMThkZAIVD2QWAmYPDxYCHwBoZGQCAg8PZBYCHgVzdHlsZQUNZGlzcGxheTpub25lOxYCZg88KwANAQAPFgQFG1VzZUNvbHVtbkhlYWRlcnNBc1NlbGVjdG9yc2gFGFVzZVJvd0hlYWRlcnNBc1NlbGVjdG9yc2gPFgQfHWgfIGhkZBgDBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WCQUJY3RsMDAkcm0xBSJjdGwwMCRybTEkaTAkaTAkY2JTaG93SGlkZVBhc3N3b3JkBRdjdGwwMCRSYWRXaW5kb3dNYW5hZ2VyMQUZY3RsMDAkcnduZFByZXZpZXdSZWdpc3RlcgUbY3RsMDAkcnduZFByZXZpZXdEaXNjbG9zdXJlBQ9jdGwwMCRyd25kTG9naW4FFGN0bDAwJHJ3bmRBZG1pbkxvZ2luBR5jdGwwMCRNYWluQ29udGVudCRyZ0NvbW1FeExpc3QFQWN0bDAwJE1haW5Db250ZW50JHJnQ29tbUV4TGlzdCRjdGwwMCRjdGwwMyRjdGwwMSRQYWdlU2l6ZUNvbWJvQm94BUFjdGwwMCRNYWluQ29udGVudCRyZ0NvbW1FeExpc3QkY3RsMDAkY3RsMDMkY3RsMDEkUGFnZVNpemVDb21ib0JveA8UKwACBQIxMAUCMTBkBUFjdGwwMCRNYWluQ29udGVudCRyZ0NvbW1FeExpc3QkY3RsMDAkY3RsMDIkY3RsMDAkUGFnZVNpemVDb21ib0JveA8UKwACZQUCMTBkbJWXGuL95fjXS48yrTo4OKsi/qGdJDeA+8JioViFPrI=\"
+        />\r\n</div>\r\n\r\n<script data-cfasync=\"false\" src=\"/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js\"></script><script
+        type=\"text/javascript\">\r\n//<![CDATA[\r\nvar theForm = document.forms['ctl01'];\r\nif
+        (!theForm) {\r\n    theForm = document.ctl01;\r\n}\r\nfunction __doPostBack(eventTarget,
+        eventArgument) {\r\n    if (!theForm.onsubmit || (theForm.onsubmit() != false))
+        {\r\n        theForm.__EVENTTARGET.value = eventTarget;\r\n        theForm.__EVENTARGUMENT.value
+        = eventArgument;\r\n        theForm.submit();\r\n    }\r\n}\r\n//]]>\r\n</script>\r\n\r\n\r\n<script
+        src=\"/WebResource.axd?d=EkejGjT-HASiDX6UrlEO9cW0SXJ18wBmHgbbKFha7LrBgjUr7p8c0vC4i-yk83E2jNXxQY2TCa_6vEWQNGVShv_DpAYKv0yZkzwUDfhgSfY1&amp;t=639256397480000000\"
+        type=\"text/javascript\"></script>\r\n\r\n\r\n<script src=\"/ScriptResource.axd?d=cagE29IWmUtvQ0412CXgXsw4X3bQKBR9le1S2lkmqEil_6PdZJV504TVKA_ZRZQ3bP1sYKp1nc1Gk7US1_vH6Dei-6mXLRwtRtoNf_v4pe7OrOiOssJeSKFBMsieK3Yw0aUBAPUyCtEAVs2MpybpmO_PkE0_P97gOWaOKIloG5A1&amp;t=fffffffffa471ef6\"
+        type=\"text/javascript\"></script>\r\n<script src=\"/Telerik.Web.UI.WebResource.axd?_TSM_HiddenField_=RadScriptManager1_TSM&amp;compress=1&amp;_TSM_CombinedScripts_=%3b%3bSystem.Web.Extensions%2c+Version%3d4.0.0.0%2c+Culture%3dneutral%2c+PublicKeyToken%3d31bf3856ad364e35%3aen-US%3a39dc0f0b-b5e9-4901-bc67-ede7f0e4b1cd%3aea597d4b%3ab25378d2%3bTelerik.Web.UI%2c+Version%3d2020.3.1021.40%2c+Culture%3dneutral%2c+PublicKeyToken%3d121fae78165ba3d4%3aen-US%3a19ea68a6-ea7d-4bf3-ac58-3ac1f9c656cf%3a16e4e7cd%3af7645509%3a24ee1bba%3a33715776%3ae330518b%3a2003d0b8%3ac128760b%3a88144a7a%3a1e771326%3ac8618e41%3a1a73651d%3a333f8d94%3a874f8ea2%3ab2e06756%3a19620875%3a92fe8ea0%3afa31b949%3af46195d3%3a4877f69a%3a490a9d4e%3abd8f85e4%3aed16cbdc%3a58366029%3aaa288e2d%3a258f1c72\"
+        type=\"text/javascript\"></script>\r\n<script type=\"text/javascript\">\r\n//<![CDATA[\r\nfunction
+        WebForm_OnSubmit() {\r\nif (typeof(ValidatorOnSubmit) == \"function\" && ValidatorOnSubmit()
+        == false) return false;\r\nreturn true;\r\n}\r\n//]]>\r\n</script>\r\n\r\n<div
+        class=\"aspNetHidden\">\r\n\r\n\t<input type=\"hidden\" name=\"__VIEWSTATEGENERATOR\"
+        id=\"__VIEWSTATEGENERATOR\" value=\"12F3E3BF\" />\r\n\t<input type=\"hidden\"
+        name=\"__EVENTVALIDATION\" id=\"__EVENTVALIDATION\" value=\"/wEdABhWA02uZ8xhU96WSXsh/4FkwRTxHfI9b0c14j16oSsZmefFr048O7VsMwA4S0kciKahOfRXQxr3ilbIpGqvdbAhcNvH13//J17cM0B3H7IlIRDaZFO39v+Zl5Z0gW/43/i9xAz9RBAOYulY5fXAhXvu0LRNBAnUMIouDCEuQi42lrxkLVJBgAbDPMDXCZBDyyz2avNgeOuMIc2B/sLa/JJHL7XG1ZmmmG0WUrDKQg49ElZnnGRSxRFEY40h5EO+wZdj09nrosFMmzj8tIVDll6gHIneB6IuTqxYLgvSAJAJPPqyfKQ3U3JigyiHIECL9wDs6+EeAJaSP+q3urxSiiKx8lDWB33fKReit3A9oiqKbml3e2XTTnu64TaEiOCTWldtmMCFYyLbHBhFN3G6xP40BkD6hGdy40O/5xVIN/t5IvmgGXqa/eWFxaHsY01RW8yZb+9hdFpNhXQm/6h2OmnzVd2D2cPUkGF1iIh+fpsoqzpRYatWyBupjo3kPVu/fMD5PKTqnxgPxwmx3B+UaqlNLSJupFq5xWkoJYH6qEuO3w==\"
+        />\r\n</div>\r\n        \r\n        <div id=\"divNoTestMessage\"><br /></div>
+        \     \r\n        <div class=\"outside-wrapper\">\r\n            <div class=\"section
+        group\">\r\n                <div class=\"col column1-welcome\">\r\n                    <span
+        class=\"welcome\">Welcome,&nbsp;</span>Guest!\r\n                </div>\r\n
+        \               <div class=\"col column2-login\">\r\n                    <span
+        id=\"spanLoginButton\" class=\"login-button\">\r\n                        <div
+        tabindex=\"0\" id=\"ctl00_rm1\" class=\"RadMenu RadMenu_Default RadMenu-Login\">\r\n\t<!--
+        2020.3.1021.40 --><ul class=\"rmRootGroup rmHorizontal\">\r\n\t\t<li class=\"rmItem
+        rmFirst rmLast\"><a class=\"rmLink rmRootLink\" href=\"#\"><span class=\"rmText\">Committees
+        Login Here</span></a><div class=\"rmSlide\">\r\n\t\t\t<ul class=\"rmVertical
+        rmGroup rmLevel1\">\r\n\t\t\t\t<li class=\"rmItem rmFirst rmLast rmTemplate\"><div
+        class=\"rmText\">\r\n\t\t\t\t\t\r\n                                                <div
+        id=\"loginDropDown\">\r\n                                                    <h2
+        style=\"font-weight: 400 !important;\">Log In </h2>\r\n                                                    <h3
+        style=\"font-size: 1em !important; font-weight: normal !important;\">Please
+        allow pop ups</h3>\r\n                                                    <span
+        class=\"failureNotification\">\r\n                                                        \r\n
+        \                                                   </span>\r\n                                                    <div
+        id=\"ctl00_rm1_i0_i0_vdsumLogin\" class=\"failureNotification\" style=\"display:none;\">\r\n\r\n\t\t\t\t\t</div>\r\n
+        \                                                   <div>\r\n                                                        <fieldset>\r\n
+        \                                                           <legend>Account
+        Information</legend>\r\n                                                            <div
+        style=\"padding-left: 10px; padding-right: 5px;\">\r\n                                                                <label
+        for=\"ctl00_rm1_i0_i0_txtUserN\" id=\"ctl00_rm1_i0_i0_lblUsername\">Username:</label>\r\n
+        \                                                               <input name=\"ctl00$rm1$i0$i0$txtUserN\"
+        type=\"text\" maxlength=\"100\" id=\"ctl00_rm1_i0_i0_txtUserN\" class=\"textEntry\"
+        />\r\n                                                                <span
+        id=\"ctl00_rm1_i0_i0_rfvUserName\" title=\"Required field\" class=\"failureNotification\"
+        style=\"visibility:hidden;\">* Required</span>\r\n                                                            </div>\r\n
+        \                                                           <div style=\"padding-left:
+        10px; padding-right: 5px;\">\r\n                                                                <label
+        for=\"ctl00_rm1_i0_i0_txtPassword\" id=\"ctl00_rm1_i0_i0_lblPassword\">Password:</label>\r\n
+        \                                                               <input name=\"ctl00$rm1$i0$i0$txtPassword\"
+        type=\"password\" maxlength=\"100\" id=\"ctl00_rm1_i0_i0_txtPassword\" class=\"passwordEntry\"
+        /><br />\r\n                                                                <div
+        style=\"padding: 2px 1px 1px 10px\">\r\n                                                                    <input
+        id=\"ctl00_rm1_i0_i0_cbShowHidePassword\" type=\"checkbox\" name=\"ctl00$rm1$i0$i0$cbShowHidePassword\"
+        onclick=\"ShowHidePassword();\" /><label for=\"ctl00_rm1_i0_i0_cbShowHidePassword\">Show
+        Password</label>\r\n                                                                </div>\r\n
+        \                                                               <span id=\"ctl00_rm1_i0_i0_rfvPassword\"
+        title=\"Required field\" class=\"failureNotification\" style=\"visibility:hidden;\">*
+        Required</span>\r\n                                                            </div>\r\n
+        \                                                       </fieldset>\r\n                                                        <p
+        class=\"submitButton\">\r\n                                                            <input
+        type=\"submit\" name=\"ctl00$rm1$i0$i0$btnLogin\" value=\"Log In\" onclick=\"javascript:WebForm_DoPostBackWithOptions(new
+        WebForm_PostBackOptions(&quot;ctl00$rm1$i0$i0$btnLogin&quot;, &quot;&quot;,
+        true, &quot;vdgrpLogin&quot;, &quot;&quot;, false, false))\" id=\"ctl00_rm1_i0_i0_btnLogin\"
+        class=\"normalButton-Login\" />\r\n                                                        </p>\r\n
+        \                                                   </div>\r\n                                                    <a
+        href=\"../Register/Register.aspx\">register&nbsp;a&nbsp;committee</a><br />\r\n
+        \                                                   <a href=\"../Account/ForgotPassword.aspx\">forgot
+        password?</a><br />\r\n                                                    <a
+        href=\"../Account/RetrieveUsername.aspx\">forgot username?</a>\r\n                                                </div>\r\n
+        \                                           \r\n\t\t\t\t</div></li>\r\n\t\t\t</ul>\r\n\t\t</div></li>\r\n\t</ul><input
+        id=\"ctl00_rm1_ClientState\" name=\"ctl00_rm1_ClientState\" type=\"hidden\"
+        />\r\n</div>\r\n                    </span>\r\n                </div>\r\n
+        \               <div class=\"col column3-search\">\r\n                    <span
+        class=\"search-button\"><a href=\"/Search/Search.aspx\">Search for a Committee</a></span>\r\n
+        \               </div>\r\n            </div>\r\n            <!--end welcome
+        box-->\r\n            <div id='cssmenu'>\r\n                <ul>\r\n                    <li><a
+        target=\"_blank\" href=\"https://sdsos.gov/elections-voting/campaign-finance/campaign-finance-faqs.aspx\">FAQs</a></li>\r\n
+        \                   <li><a target=\"_blank\" href=\"http://sdlegislature.gov/statutes/Codified_laws/DisplayStatute.aspx?Statute=12-27&Type=Statute\">Laws</a></li>\r\n
+        \                   <li id=\"lnkReg\"><a href=\"/Register/Register.aspx\"
+        onclick=\"if (confirm('Are you forming a NEW committee?  If yes, click OK
+        and fill out the statement of organization.\\n\\r If you are not forming a
+        new committee but would like to update your committee\u2019s information,
+        click Cancel and login to your committee page and edit your statement of organization
+        there.')){return true;}else{event.stopPropagation(); event.preventDefault();};\">File
+        Statement of Organization<br /><i style=\"color:red; font-size:small; margin-right:0;\">(new
+        committees only)</i></a></li>\r\n                    <li><a href=\"https://sdsos.gov/elections-voting/campaign-finance/important-dates.aspx\"
+        target=\"_blank\">Deadlines and Who Files</a></li>\r\n                    <li><a
+        href=\"https://sdsos.gov/elections-voting/campaign-finance/contribution-limits.aspx\"
+        target=\"_blank\">Contribution Limits</a></li>\r\n                    \r\n
+        \                   <li><a href=\"/Search/ViewFileCommEx.aspx\">Communication
+        Expenditures</a></li>\r\n                    <li><a href=\"/Search/FiledSupplementalStatements.aspx\">Supplemental
+        Reports</a></li>\r\n                    <li id=\"lnkPaperForms\"><a href=\"https://sdsos.gov/elections-voting/campaign-finance/paper-forms.aspx\"
+        target=\"_blank\">Paper Forms</a></li>\r\n                    \r\n                                        \r\n
+        \               </ul>\r\n            </div>\r\n            <!--end cssmenu-->\r\n
+        \       </div>\r\n        <div>\r\n            <div class=\"loginmessage\">\r\n
+        \               <span id=\"lblLoginMessage\"></span>\r\n            </div>
+        \           \r\n            <div class=\"logo-box\">                \r\n                <a
+        href=\"/Default.aspx\">\r\n                    <img alt=\"Campaign Finance
+        Reporting System\" title=\"Campaign Finance Reporting System\" src=\"/Images/campaign-finance-header-blue-logo.png\"></a>\r\n
+        \           </div>\r\n        </div>\r\n\r\n        \r\n\r\n        <div id=\"contentBox\"
+        class=\"content-box\">\r\n            <div class=\"mobile-wrapper\">\r\n\r\n
+        \               <div id=\"container\" class=\"center\">\r\n                    <div
+        id=\"ctl00_RadWindowManager1\" style=\"display:none;\">\r\n\t<div id=\"ctl00_rwndPreviewRegister\"
+        style=\"display:none;\">\r\n\t\t<div id=\"ctl00_rwndPreviewRegister_C\" style=\"display:none;\">\r\n\r\n\t\t</div><input
+        id=\"ctl00_rwndPreviewRegister_ClientState\" name=\"ctl00_rwndPreviewRegister_ClientState\"
+        type=\"hidden\" />\r\n\t</div><div id=\"ctl00_rwndPreviewDisclosure\" style=\"display:none;\">\r\n\t\t<div
+        id=\"ctl00_rwndPreviewDisclosure_C\" style=\"display:none;\">\r\n\r\n\t\t</div><input
+        id=\"ctl00_rwndPreviewDisclosure_ClientState\" name=\"ctl00_rwndPreviewDisclosure_ClientState\"
+        type=\"hidden\" />\r\n\t</div><div id=\"ctl00_rwndLogin\" style=\"display:none;\">\r\n\t\t<div
+        id=\"ctl00_rwndLogin_C\" style=\"display:none;\">\r\n\r\n\t\t</div><input
+        id=\"ctl00_rwndLogin_ClientState\" name=\"ctl00_rwndLogin_ClientState\" type=\"hidden\"
+        />\r\n\t</div><div id=\"ctl00_rwndAdminLogin\" style=\"display:none;\">\r\n\t\t<div
+        id=\"ctl00_rwndAdminLogin_C\" style=\"display:none;\">\r\n\r\n\t\t</div><input
+        id=\"ctl00_rwndAdminLogin_ClientState\" name=\"ctl00_rwndAdminLogin_ClientState\"
+        type=\"hidden\" />\r\n\t</div><div id=\"ctl00_RadWindowManager1_alerttemplate\"
+        style=\"display:none;\">\r\n\t\t<div class=\"rwDialogPopup radalert\">\t\t\t\r\n\t\t\t<div
+        class=\"rwDialogText\">\r\n\t\t\t{1}\t\t\t\t\r\n\t\t\t</div>\r\n\t\t\t\r\n\t\t\t<div>\r\n\t\t\t\t<a
+        \ onclick=\"$find('{0}').close(true);\"\r\n\t\t\t\tclass=\"rwPopupButton\"
+        href=\"javascript:void(0);\">\r\n\t\t\t\t\t<span class=\"rwOuterSpan\">\r\n\t\t\t\t\t\t<span
+        class=\"rwInnerSpan\">##LOC[OK]##</span>\r\n\t\t\t\t\t</span>\r\n\t\t\t\t</a>\t\t\t\t\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t</div><div
+        id=\"ctl00_RadWindowManager1_prompttemplate\" style=\"display:none;\">\r\n\t\t
+        <div class=\"rwDialogPopup radprompt\">\t\t\t\r\n\t\t\t    <div class=\"rwDialogText\">\r\n\t\t\t
+        \   {1}\t\t\t\t\r\n\t\t\t    </div>\t\t\r\n\t\t\t    <div>\r\n\t\t\t\t    <script
+        type=\"text/javascript\">\r\n\t\t\t\t    function RadWindowprompt_detectenter(id,
+        ev, input)\r\n\t\t\t\t    {\t\t\t\t\t\t\t\r\n\t\t\t\t\t    if (!ev) ev = window.event;
+        \               \r\n\t\t\t\t\t    if (ev.keyCode == 13)\r\n\t\t\t\t\t    {\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        \       \r\n\t\t\t\t\t        var but = input.parentNode.parentNode.getElementsByTagName(\"A\")[0];\t\t\t\t\t
+        \       \r\n\t\t\t\t\t        if (but)\r\n\t\t\t\t\t\t    {\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t
+        \   if (but.click) but.click();\r\n\t\t\t\t\t\t\t    else if (but.onclick)\r\n\t\t\t\t\t\t\t
+        \   {\r\n\t\t\t\t\t\t\t        but.focus(); var click = but.onclick; but.onclick
+        = null; if (click) click.call(but);\t\t\t\t\t\t\t \r\n\t\t\t\t\t\t\t    }\r\n\t\t\t\t\t\t
+        \   }\r\n\t\t\t\t\t       return false;\r\n\t\t\t\t\t    } \r\n\t\t\t\t\t
+        \   else return true;\r\n\t\t\t\t    }\t \r\n\t\t\t\t    </script>\r\n\t\t\t\t
+        \   <input title=\"Enter Value\" onkeydown=\"return RadWindowprompt_detectenter('{0}',
+        event, this);\" type=\"text\"  class=\"rwDialogInput\" value=\"{2}\" />\r\n\t\t\t
+        \   </div>\r\n\t\t\t    <div>\r\n\t\t\t\t    <a onclick=\"$find('{0}').close(this.parentNode.parentNode.getElementsByTagName('input')[0].value);\"\t\t\t\t\r\n\t\t\t\t\t
+        \   class=\"rwPopupButton\" href=\"javascript:void(0);\" ><span class=\"rwOuterSpan\"><span
+        class=\"rwInnerSpan\">##LOC[OK]##</span></span></a>\r\n\t\t\t\t    <a onclick=\"$find('{0}').close(null);\"
+        class=\"rwPopupButton\"  href=\"javascript:void(0);\"><span class=\"rwOuterSpan\"><span
+        class=\"rwInnerSpan\">##LOC[Cancel]##</span></span></a>\r\n\t\t\t    </div>\r\n\t\t
+        \   </div>\t\t\t\t       \r\n\t\t</div><div id=\"ctl00_RadWindowManager1_confirmtemplate\"
+        style=\"display:none;\">\r\n\t\t<div class=\"rwDialogPopup radconfirm\">\t\t\t\r\n\t\t\t<div
+        class=\"rwDialogText\">\r\n\t\t\t{1}\t\t\t\t\r\n\t\t\t</div>\t\t\t\t\t\t\r\n\t\t\t<div>\r\n\t\t\t\t<a
+        onclick=\"$find('{0}').close(true);\"  class=\"rwPopupButton\" href=\"javascript:void(0);\"
+        ><span class=\"rwOuterSpan\"><span class=\"rwInnerSpan\">##LOC[OK]##</span></span></a>\r\n\t\t\t\t<a
+        onclick=\"$find('{0}').close(false);\" class=\"rwPopupButton\"  href=\"javascript:void(0);\"><span
+        class=\"rwOuterSpan\"><span class=\"rwInnerSpan\">##LOC[Cancel]##</span></span></a>\r\n\t\t\t</div>\r\n\t\t</div>\t\t\r\n\t\t</div><input
+        id=\"ctl00_RadWindowManager1_ClientState\" name=\"ctl00_RadWindowManager1_ClientState\"
+        type=\"hidden\" />\r\n</div>\r\n                    <script type=\"text/javascript\">\r\n//<![CDATA[\r\nSys.WebForms.PageRequestManager._initialize('ctl00$RadScriptManager1',
+        'ctl01', ['tctl00$MainContent$ctl00$MainContent$rapCommExPanel','','tctl00$RadAjaxManager1SU','RadAjaxManager1SU'],
+        [], [], 90, 'ctl00');\r\n//]]>\r\n</script>\r\n\r\n                    <div
+        id=\"RadAjaxManager1SU\">\r\n\t<span id=\"ctl00_RadAjaxManager1\" style=\"display:none;\"></span>\r\n</div>\r\n
+        \                   <div id=\"RadAjaxLoadingPanel1\" class=\"RadAjax RadAjax_Default\"
+        style=\"display:none;\">\r\n\t<div class=\"raDiv\">\r\n\r\n\t</div><div class=\"raColor
+        raTransp\">\r\n\r\n\t</div>\r\n</div>\r\n                    \r\n                    \r\n
+        \   <div id=\"MainContent_ralpCommEx\" class=\"RadAjax RadAjax_Default\" style=\"display:none;\">\r\n\t<div
+        class=\"raDiv\">\r\n\r\n\t</div><div class=\"raColor raTransp\">\r\n\r\n\t</div>\r\n</div>\r\n
+        \   <div class=\"RadAjaxPanel\" id=\"ctl00_MainContent_ctl00_MainContent_rapCommExPanel\">\r\n\t<div
+        id=\"ctl00_MainContent_rapCommEx\" style=\"width:100%;\">\r\n\t\t\r\n        <div>\r\n
+        \           <h1>Filed Communication Expenditures</h1>\r\n        </div>    \r\n
+        \       <div>\r\n            <span id=\"MainContent_lblCommextListHeader\">To
+        view communication expenditures filed prior to June 5, 2018, </span>&nbsp;<a
+        target=\"_blank\" style=\"color: blue !important\" href=\"https://sdsos.gov/elections-voting/campaign-finance/Independent_expenditures.aspx\">click
+        here</a>\r\n        </div>\r\n        <div id=\"MainContent_pnlComexfilinglist\">\r\n\t\t\t\r\n
+        \           <table style=\"width:100%\">\r\n                <tr>\r\n                    <td
+        style=\"width:2%\"></td>\r\n                    <td style=\"width:96%\">\r\n
+        \                       <div id=\"ctl00_MainContent_rgCommExList\" class=\"RadGrid
+        RadGrid_MySkin\">\r\n\r\n\t\t\t<table class=\"rgMasterTable\" id=\"ctl00_MainContent_rgCommExList_ctl00\"
+        style=\"width:100%;table-layout:auto;empty-cells:show;\">\r\n\t\t\t\t<colgroup>\r\n\t\t<col
+        \ />\r\n\t\t<col style=\"display:none;\" />\r\n\t\t<col style=\"display:none;\"
+        />\r\n\t\t<col  />\r\n\t\t<col  />\r\n\t\t<col  />\r\n\t\t<col  />\r\n\t</colgroup>\r\n<thead>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th
+        scope=\"col\" class=\"rgHeader\" style=\"text-align:center;\">Name of Person
+        or Entity Making the Communication</th><th scope=\"col\" class=\"rgHeader\"
+        style=\"display:none;text-align:center;\"><a onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_rgCommExList_ctl00&#39;),
+        &#39;cexID&#39;); return false;\" title=\"Click here to sort\" href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl02$ctl01$ctl00&#39;,&#39;&#39;)\">ID</a></th><th
+        scope=\"col\" class=\"rgHeader\" style=\"display:none;text-align:center;\"><a
+        onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_rgCommExList_ctl00&#39;),
+        &#39;cex_FK_DocumentID&#39;); return false;\" title=\"Click here to sort\"
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl02$ctl01$ctl01&#39;,&#39;&#39;)\">DocID</a></th><th
+        scope=\"col\" class=\"rgHeader\" style=\"text-align:center;\"><a onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_rgCommExList_ctl00&#39;),
+        &#39;cexNamesMentioned&#39;); return false;\" title=\"Click here to sort\"
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl02$ctl01$ctl02&#39;,&#39;&#39;)\">Name
+        Mentioned or Identified in Communication</a></th><th scope=\"col\" class=\"rgHeader\"
+        style=\"text-align:center;\"><a onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_rgCommExList_ctl00&#39;),
+        &#39;cexTypeDescription&#39;); return false;\" title=\"Click here to sort\"
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl02$ctl01$ctl03&#39;,&#39;&#39;)\">Communication
+        Type & Description</a></th><th scope=\"col\" class=\"rgHeader\" style=\"text-align:center;\"><a
+        onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_rgCommExList_ctl00&#39;),
+        &#39;cexDateCommWasMade&#39;); return false;\" title=\"Click here to sort\"
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl02$ctl01$ctl04&#39;,&#39;&#39;)\">Date
+        of Communication</a></th><th scope=\"col\" class=\"rgHeader\" style=\"text-align:center;\"><a
+        onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_rgCommExList_ctl00&#39;),
+        &#39;DateFiled&#39;); return false;\" title=\"Click here to sort\" href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl02$ctl01$ctl05&#39;,&#39;&#39;)\">Date
+        Filed</a></th>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</thead><tfoot>\r\n\t\t\t\t\t<tr
+        class=\"rgPager\">\r\n\t\t\t\t\t\t<td colspan=\"5\"><table summary=\"Data
+        pager which controls on which page is the RadGrid control.\" style=\"width:100%;border-spacing:0;\">\r\n\t\t\t\t\t\t\t<caption>\r\n\t\t\t\t\t\t\t\t<span
+        style='display: none'>Data pager</span>\r\n\t\t\t\t\t\t\t</caption><thead>\r\n\t\t\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t\t\t<th
+        scope=\"col\">Data pager</th>\r\n\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t</thead><tbody>\r\n\t\t\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t\t\t<td
+        class=\"rgPagerCell NextPrevAndNumeric\"><div class=\"rgWrap rgArrPart1\">\r\n\t\t\t\t\t\t\t\t\t\t<img
+        title=\"First Page\" src=\"/MySkin/Grid/PagingFirst.gif\" alt=\"First Page\"
+        /><img title=\"Previous Page\" src=\"/MySkin/Grid/PagingPrev.gif\" alt=\"Previous
+        Page\" />\r\n\t\t\t\t\t\t\t\t\t</div><div class=\"rgWrap rgNumPart\">\r\n\t\t\t\t\t\t\t\t\t\t<a
+        onclick=\"return false;\" class=\"rgCurrentPage\" href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl05&#39;,&#39;&#39;)\"><span>1</span></a><a
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl07&#39;,&#39;&#39;)\"><span>2</span></a><a
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl09&#39;,&#39;&#39;)\"><span>3</span></a><a
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl11&#39;,&#39;&#39;)\"><span>4</span></a><a
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl13&#39;,&#39;&#39;)\"><span>5</span></a><a
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl15&#39;,&#39;&#39;)\"><span>6</span></a><a
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl17&#39;,&#39;&#39;)\"><span>7</span></a><a
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl19&#39;,&#39;&#39;)\"><span>8</span></a><a
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl21&#39;,&#39;&#39;)\"><span>9</span></a><a
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl23&#39;,&#39;&#39;)\"><span>10</span></a><a
+        title=\"Next Pages\" href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl25&#39;,&#39;&#39;)\"><span>...</span></a>\r\n\t\t\t\t\t\t\t\t\t</div><div
+        class=\"rgWrap rgArrPart2\">\r\n\t\t\t\t\t\t\t\t\t\t<a title=\"Next Page\"
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl28&#39;,&#39;&#39;)\"><img
+        title=\"Next Page\" src=\"/MySkin/Grid/PagingNext.gif\" alt=\"Next Page\"
+        /></a><a title=\"Last Page\" href=\"javascript:__doPostBack(&#39;ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$ctl30&#39;,&#39;&#39;)\"><img
+        title=\"Last Page\" src=\"/MySkin/Grid/PagingLast.gif\" alt=\"Last Page\"
+        /></a>\r\n\t\t\t\t\t\t\t\t\t</div><div class=\"rgWrap rgAdvPart\">\r\n\t\t\t\t\t\t\t\t\t\t<span
+        id=\"ctl00_MainContent_rgCommExList_ctl00_ctl03_ctl01_ChangePageSizeLabel\"
+        class=\"rgPagerLabel\">Page size:</span><div id=\"ctl00_MainContent_rgCommExList_ctl00_ctl03_ctl01_PageSizeComboBox\"
+        class=\"RadComboBox RadComboBox_MySkin\" style=\"width:46px;white-space:normal;\">\r\n\t\t\t\t\t\t\t\t\t\t\t<table
+        summary=\"Page Size Drop Down Control\" style=\"border-width:0;border-collapse:collapse;width:100%\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<caption>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\tPageSizeComboBox\r\n\t\t\t\t\t\t\t\t\t\t\t\t</caption><tr
+        class=\"rcbReadOnly\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t<td class=\"rcbInputCell
+        rcbInputCellLeft\" style=\"width:100%;\"><input name=\"ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$PageSizeComboBox\"
+        type=\"text\" class=\"rcbInput radPreventDecorate\" id=\"ctl00_MainContent_rgCommExList_ctl00_ctl03_ctl01_PageSizeComboBox_Input\"
+        value=\"10\" readonly=\"readonly\" /></td><td class=\"rcbArrowCell rcbArrowCellRight\"><a
+        id=\"ctl00_MainContent_rgCommExList_ctl00_ctl03_ctl01_PageSizeComboBox_Arrow\"
+        style=\"overflow: hidden;display: block;position: relative;outline: none;\">select</a></td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t\t\t\t</table><div
+        class=\"rcbSlide\" style=\"z-index:6000;display:none;\"><div id=\"ctl00_MainContent_rgCommExList_ctl00_ctl03_ctl01_PageSizeComboBox_DropDown\"
+        class=\"RadComboBoxDropDown RadComboBoxDropDown_MySkin \"><div class=\"rcbScroll
+        rcbWidth\"><ul class=\"rcbList\"><li class=\"rcbItem\">10</li><li class=\"rcbItem\">50</li><li
+        class=\"rcbItem\">100</li></ul></div></div></div><input id=\"ctl00_MainContent_rgCommExList_ctl00_ctl03_ctl01_PageSizeComboBox_ClientState\"
+        name=\"ctl00_MainContent_rgCommExList_ctl00_ctl03_ctl01_PageSizeComboBox_ClientState\"
+        type=\"hidden\" />\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t</div><div
+        class=\"rgWrap rgInfoPart\">\r\n\t\t\t\t\t\t\t\t\t\t &nbsp;<strong>144</strong>
+        items in <strong>15</strong> pages\r\n\t\t\t\t\t\t\t\t\t</div></td>\r\n\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t</tbody>\r\n\t\t\t\t\t\t</table></td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</tfoot><tbody>\r\n\t\t\t\t<tr
+        class=\"rgRow\" id=\"ctl00_MainContent_rgCommExList_ctl00__0\" style=\"text-align:center;\">\r\n\t\t\t\t\t<td><a
+        title=\"Altria Client Services LLC on behalf of Philip Morris USA and U.S.
+        Smokeless Tobacco Co.\" href=\"../Document.aspx?DocumentID=24074\" target=\"_blank\">Altria
+        Client Services LLC on behalf of Philip Morris USA and U.S. Smokeless Tobacco
+        Co.</a></td><td style=\"display:none;\">4</td><td style=\"display:none;\">24074</td><td>Initiated
+        Measure 25</td><td>E-mails opposing Initiated Measure 25</td><td>09/28/2018</td><td>09/30/2018</td>\r\n\t\t\t\t</tr><tr
+        class=\"rgAltRow\" id=\"ctl00_MainContent_rgCommExList_ctl00__1\" style=\"text-align:center;\">\r\n\t\t\t\t\t<td><a
+        title=\"Altria Client Services LLC on behalf of Altria Group Distribution
+        Company\" href=\"../Document.aspx?DocumentID=28975\" target=\"_blank\">Altria
+        Client Services LLC on behalf of Altria Group Distribution Company</a></td><td
+        style=\"display:none;\">5</td><td style=\"display:none;\">28975</td><td>Initiated
+        Measure 25</td><td>Phone calls opposing Initiated Measure 25</td><td>10/19/2018</td><td>10/19/2018</td>\r\n\t\t\t\t</tr><tr
+        class=\"rgRow\" id=\"ctl00_MainContent_rgCommExList_ctl00__2\" style=\"text-align:center;\">\r\n\t\t\t\t\t<td><a
+        title=\"Growth Energy\" href=\"../Document.aspx?DocumentID=33202\" target=\"_blank\">Growth
+        Energy</a></td><td style=\"display:none;\">6</td><td style=\"display:none;\">33202</td><td>Kristi
+        Noem</td><td>Federal grassroots lobbying advertisement in the SF Argus Leader</td><td>10/21/2018</td><td>10/22/2018</td>\r\n\t\t\t\t</tr><tr
+        class=\"rgAltRow\" id=\"ctl00_MainContent_rgCommExList_ctl00__3\" style=\"text-align:center;\">\r\n\t\t\t\t\t<td><a
+        title=\"American Cancer Society Cancer Action Network\" href=\"../Document.aspx?DocumentID=33504\"
+        target=\"_blank\">American Cancer Society Cancer Action Network</a></td><td
+        style=\"display:none;\">7</td><td style=\"display:none;\">33504</td><td>Tuition4TechStudents</td><td>Facebook
+        advertising (IM25 support)</td><td>10/20/2018</td><td>10/22/2018</td>\r\n\t\t\t\t</tr><tr
+        class=\"rgRow\" id=\"ctl00_MainContent_rgCommExList_ctl00__4\" style=\"text-align:center;\">\r\n\t\t\t\t\t<td><a
+        title=\"Stanford Adelstein\" href=\"../Document.aspx?DocumentID=33596\" target=\"_blank\">Stanford
+        Adelstein</a></td><td style=\"display:none;\">8</td><td style=\"display:none;\">33596</td><td>Billie
+        Sutton & Kristi Noem</td><td>Support of Billie Sutton for Governor radio ad.</td><td>10/22/2018</td><td>10/23/2018</td>\r\n\t\t\t\t</tr><tr
+        class=\"rgAltRow\" id=\"ctl00_MainContent_rgCommExList_ctl00__5\" style=\"text-align:center;\">\r\n\t\t\t\t\t<td><a
+        title=\"American Cancer Society Cancer Action Network\" href=\"../Document.aspx?DocumentID=33728\"
+        target=\"_blank\">American Cancer Society Cancer Action Network</a></td><td
+        style=\"display:none;\">10</td><td style=\"display:none;\">33728</td><td>Tuition4TechStudents</td><td>Email
+        broadcast (IM 25 support)</td><td>10/23/2018</td><td>10/25/2018</td>\r\n\t\t\t\t</tr><tr
+        class=\"rgRow\" id=\"ctl00_MainContent_rgCommExList_ctl00__6\" style=\"text-align:center;\">\r\n\t\t\t\t\t<td><a
+        title=\"Yankton Area Progressive Growth\" href=\"../Document.aspx?DocumentID=33730\"
+        target=\"_blank\">Yankton Area Progressive Growth</a></td><td style=\"display:none;\">12</td><td
+        style=\"display:none;\">33730</td><td>Initiated Measure 25</td><td>Newspaper
+        Ad</td><td>10/30/2018</td><td>10/26/2018</td>\r\n\t\t\t\t</tr><tr class=\"rgAltRow\"
+        id=\"ctl00_MainContent_rgCommExList_ctl00__7\" style=\"text-align:center;\">\r\n\t\t\t\t\t<td><a
+        title=\"Stanford Adelstein\" href=\"../Document.aspx?DocumentID=33734\" target=\"_blank\">Stanford
+        Adelstein</a></td><td style=\"display:none;\">13</td><td style=\"display:none;\">33734</td><td>Billie
+        Sutton</td><td>Support Billie Sutton for governor radio ad.</td><td>10/26/2018</td><td>10/26/2018</td>\r\n\t\t\t\t</tr><tr
+        class=\"rgRow\" id=\"ctl00_MainContent_rgCommExList_ctl00__8\" style=\"text-align:center;\">\r\n\t\t\t\t\t<td><a
+        title=\"Planned Parenthood Minnesota North Dakota South Dakota\" href=\"../Document.aspx?DocumentID=33804\"
+        target=\"_blank\">Planned Parenthood Minnesota North Dakota South Dakota</a></td><td
+        style=\"display:none;\">15</td><td style=\"display:none;\">33804</td><td>U.S.
+        Representative Kristi Noem</td><td>Candidate for Governor in South Dakota</td><td>10/31/2018</td><td>10/29/2018</td>\r\n\t\t\t\t</tr><tr
+        class=\"rgAltRow\" id=\"ctl00_MainContent_rgCommExList_ctl00__9\" style=\"text-align:center;\">\r\n\t\t\t\t\t<td><a
+        title=\"American Cancer Society Cancer Action Network\" href=\"../Document.aspx?DocumentID=33808\"
+        target=\"_blank\">American Cancer Society Cancer Action Network</a></td><td
+        style=\"display:none;\">16</td><td style=\"display:none;\">33808</td><td>Tuition4TechStudents</td><td>Email
+        broadcast, news release distribution, website post, social media posts</td><td>10/01/2018</td><td>10/02/2018</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t</tbody>\r\n\r\n\t\t\t</table><div
+        id=\"ctl00_MainContent_rgCommExList_SharedCalendarContainer\" style=\"display:none;\">\r\n\r\n\t\t\t</div><input
+        id=\"ctl00_MainContent_rgCommExList_ClientState\" name=\"ctl00_MainContent_rgCommExList_ClientState\"
+        type=\"hidden\" />\t</div>\r\n\t\t\t\r\n                    </td>\r\n                    <td
+        style=\"width:2%\"></td>\r\n                </tr>\r\n            </table>
+        \           \r\n        \r\n\t\t</div>        \r\n    \r\n\t</div>\r\n</div>\r\n
+        \   \r\n\r\n                </div>\r\n\r\n                <div class=\"corner-triangle-bottom-small\"></div>\r\n
+        \           </div>\r\n            <!--end content-box-->\r\n        </div>\r\n
+        \       <br />\r\n        <br />\r\n        <br />\r\n        <!-- end mobile-wrapper-->\r\n\r\n
+        \       <br />\r\n        <br />\r\n        <!-- SD SOS Header -->\r\n        </section><!--#middle-->\r\n
+        \   \r\n    \r\n    \r\n    <footer>  \r\n    \t\r\n        <div id=\"gold_band\"></div>
+        \    \r\n    \t<section class=\"centerer clearfix\">\r\n        \t\t\r\n                \r\n
+        \               \t\t\t\r\n                \r\n                  <section id=\"footer_bottom\"
+        class=\"clearfix\">\r\n                \r\n                \t\r\n                 \r\n
+        \                     <a href=\"http://sd.gov/privacy.aspx\" target=\"_blank\"
+        title=\"Privacy Policy\">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href=\"http://sd.gov/disclaim.aspx\" target=\"_blank\" title=\"Information
+        Accuracy\">Information Accuracy</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href=\"http://sd.gov/\" title=\"State Homepage\" target=\"_blank\">State Homepage</a>\r\n\r\n
+        \                   \r\n        \t\t</section>\r\n                \r\n        </section>\r\n
+        \       \r\n        \r\n        \r\n    </footer>\r\n\r\n\r\n</div><!--#wrapper-->\r\n\t\r\n
+        \   \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n        <!-- SD SOS Header
+        -->\r\n\r\n    \r\n<script type=\"text/javascript\">\r\n//<![CDATA[\r\nvar
+        Page_ValidationSummaries =  new Array(document.getElementById(\"ctl00_rm1_i0_i0_vdsumLogin\"));\r\nvar
+        Page_Validators =  new Array(document.getElementById(\"ctl00_rm1_i0_i0_rfvUserName\"),
+        document.getElementById(\"ctl00_rm1_i0_i0_rfvPassword\"));\r\n//]]>\r\n</script>\r\n\r\n<script
+        type=\"text/javascript\">\r\n//<![CDATA[\r\nvar ctl00_rm1_i0_i0_vdsumLogin
+        = document.all ? document.all[\"ctl00_rm1_i0_i0_vdsumLogin\"] : document.getElementById(\"ctl00_rm1_i0_i0_vdsumLogin\");\r\nctl00_rm1_i0_i0_vdsumLogin.validationGroup
+        = \"vdgrpLogin\";\r\nvar ctl00_rm1_i0_i0_rfvUserName = document.all ? document.all[\"ctl00_rm1_i0_i0_rfvUserName\"]
+        : document.getElementById(\"ctl00_rm1_i0_i0_rfvUserName\");\r\nctl00_rm1_i0_i0_rfvUserName.controltovalidate
+        = \"ctl00_rm1_i0_i0_txtUserN\";\r\nctl00_rm1_i0_i0_rfvUserName.errormessage
+        = \"Please enter a username\";\r\nctl00_rm1_i0_i0_rfvUserName.validationGroup
+        = \"vdgrpLogin\";\r\nctl00_rm1_i0_i0_rfvUserName.evaluationfunction = \"RequiredFieldValidatorEvaluateIsValid\";\r\nctl00_rm1_i0_i0_rfvUserName.initialvalue
+        = \"\";\r\nvar ctl00_rm1_i0_i0_rfvPassword = document.all ? document.all[\"ctl00_rm1_i0_i0_rfvPassword\"]
+        : document.getElementById(\"ctl00_rm1_i0_i0_rfvPassword\");\r\nctl00_rm1_i0_i0_rfvPassword.controltovalidate
+        = \"ctl00_rm1_i0_i0_txtPassword\";\r\nctl00_rm1_i0_i0_rfvPassword.errormessage
+        = \"Please enter a password\";\r\nctl00_rm1_i0_i0_rfvPassword.validationGroup
+        = \"vdgrpLogin\";\r\nctl00_rm1_i0_i0_rfvPassword.evaluationfunction = \"RequiredFieldValidatorEvaluateIsValid\";\r\nctl00_rm1_i0_i0_rfvPassword.initialvalue
+        = \"\";\r\n//]]>\r\n</script>\r\n\r\n\r\n<script type=\"text/javascript\">\r\n//<![CDATA[\r\nwindow.__TsmHiddenField
+        = $get('RadScriptManager1_TSM');\r\n(function(id) {\r\n    var e = document.getElementById(id);\r\n
+        \   if (e) {\r\n        e.dispose = function() {\r\n            Array.remove(Page_ValidationSummaries,
+        document.getElementById(id));\r\n        }\r\n        e = null;\r\n    }\r\n})('ctl00_rm1_i0_i0_vdsumLogin');\r\n\r\nvar
+        Page_ValidationActive = false;\r\nif (typeof(ValidatorOnLoad) == \"function\")
+        {\r\n    ValidatorOnLoad();\r\n}\r\n\r\nfunction ValidatorOnSubmit() {\r\n
+        \   if (Page_ValidationActive) {\r\n        return ValidatorCommonOnSubmit();\r\n
+        \   }\r\n    else {\r\n        return true;\r\n    }\r\n}\r\n        \r\ndocument.getElementById('ctl00_rm1_i0_i0_rfvUserName').dispose
+        = function() {\r\n    Array.remove(Page_Validators, document.getElementById('ctl00_rm1_i0_i0_rfvUserName'));\r\n}\r\n\r\ndocument.getElementById('ctl00_rm1_i0_i0_rfvPassword').dispose
+        = function() {\r\n    Array.remove(Page_Validators, document.getElementById('ctl00_rm1_i0_i0_rfvPassword'));\r\n}\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadMenu, {\"_childListElementCssClass\":null,\"_skin\":\"Default\",\"clickToOpen\":true,\"clientStateFieldID\":\"ctl00_rm1_ClientState\",\"collapseAnimation\":\"{\\\"duration\\\":450}\",\"expandAnimation\":\"{\\\"duration\\\":450}\",\"itemData\":[{\"items\":[{\"text\":\"test\",\"templated\":true}]}]},
+        {\"itemOpened\":ExternalitemOpened}, null, $get(\"ctl00_rm1\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadWindow, {\"_dockMode\":false,\"animation\":2,\"animationDuration\":250,\"autoSize\":true,\"behaviors\":37,\"clientStateFieldID\":\"ctl00_rwndPreviewRegister_ClientState\",\"enableShadow\":true,\"formID\":\"ctl01\",\"iconUrl\":\"\",\"minimizeIconUrl\":\"\",\"modal\":true,\"name\":\"rwndPreviewRegister\",\"navigateUrl\":\"../Register/RegisterPreview.aspx\",\"reloadOnShow\":true,\"skin\":\"Telerik\",\"visibleStatusbar\":false,\"width\":\"700px\"},
+        null, null, $get(\"ctl00_rwndPreviewRegister\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadWindow, {\"_dockMode\":false,\"animation\":2,\"animationDuration\":250,\"autoSize\":true,\"behaviors\":37,\"clientStateFieldID\":\"ctl00_rwndPreviewDisclosure_ClientState\",\"enableShadow\":true,\"formID\":\"ctl01\",\"iconUrl\":\"\",\"minimizeIconUrl\":\"\",\"modal\":true,\"name\":\"rwndPreviewDisclosure\",\"navigateUrl\":\"../Disclosure/DisclosurePreview.aspx\",\"reloadOnShow\":true,\"skin\":\"Telerik\",\"visibleStatusbar\":false,\"width\":\"700px\"},
+        null, null, $get(\"ctl00_rwndPreviewDisclosure\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadWindow, {\"_dockMode\":false,\"animation\":2,\"animationDuration\":250,\"autoSize\":true,\"behaviors\":37,\"clientStateFieldID\":\"ctl00_rwndLogin_ClientState\",\"enableShadow\":true,\"formID\":\"ctl01\",\"iconUrl\":\"\",\"minimizeIconUrl\":\"\",\"modal\":true,\"name\":\"rwndLogin\",\"navigateUrl\":\"../Account/Login.aspx\",\"reloadOnShow\":true,\"skin\":\"Telerik\"},
+        null, null, $get(\"ctl00_rwndLogin\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadWindow, {\"_dockMode\":false,\"animation\":2,\"animationDuration\":250,\"autoSize\":true,\"behaviors\":33,\"clientStateFieldID\":\"ctl00_rwndAdminLogin_ClientState\",\"enableShadow\":true,\"formID\":\"ctl01\",\"iconUrl\":\"\",\"minimizeIconUrl\":\"\",\"modal\":true,\"name\":\"rwndAdminLogin\",\"navigateUrl\":\"../Admin/ASOSLogin.aspx\",\"reloadOnShow\":true,\"skin\":\"Telerik\"},
+        null, null, $get(\"ctl00_rwndAdminLogin\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadWindowManager, {\"clientStateFieldID\":\"ctl00_RadWindowManager1_ClientState\",\"formID\":\"ctl01\",\"iconUrl\":\"\",\"minimizeIconUrl\":\"\",\"name\":\"RadWindowManager1\",\"skin\":\"Telerik\",\"windowControls\":\"['ctl00_rwndPreviewRegister','ctl00_rwndPreviewDisclosure','ctl00_rwndLogin','ctl00_rwndAdminLogin']\"},
+        null, {\"child\":\"ctl00_rwndPreviewRegister\"}, $get(\"ctl00_RadWindowManager1\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadAjaxManager, {\"_updatePanels\":\"\",\"ajaxSettings\":[],\"clientEvents\":{OnRequestStart:\"\",OnResponseEnd:\"\"},\"defaultLoadingPanelID\":\"RadAjaxLoadingPanel1\",\"enableAJAX\":true,\"enableHistory\":false,\"links\":[],\"styles\":[],\"uniqueID\":\"ctl00$RadAjaxManager1\",\"updatePanelsRenderMode\":0},
+        null, null, $get(\"ctl00_RadAjaxManager1\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadAjaxLoadingPanel, {\"initialDelayTime\":50,\"isSticky\":false,\"minDisplayTime\":250,\"skin\":\"Default\",\"uniqueID\":\"ctl00$RadAjaxLoadingPanel1\",\"zIndex\":90000},
+        null, null, $get(\"RadAjaxLoadingPanel1\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadAjaxLoadingPanel, {\"initialDelayTime\":0,\"isSticky\":false,\"minDisplayTime\":0,\"skin\":\"Default\",\"uniqueID\":\"ctl00$MainContent$ralpCommEx\",\"zIndex\":90000},
+        null, null, $get(\"MainContent_ralpCommEx\"));\r\n});\r\n\r\nvar callBackFrameUrl='/WebResource.axd?d=LX_n85yUG1e0OsvgVVt75HXd1LCYw8LMo1hjKSq6DP1HfmfFtJcUSB_2Vc41bpjhd26fA1WGcOWT-MYqmbbe6XdTzJ9CleaNmBhqddl-JEI1&t=639256397480000000';\r\nWebForm_InitCallback();Sys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadComboBox, {\"_dropDownWidth\":0,\"_height\":0,\"_skin\":\"MySkin\",\"_text\":\"10\",\"_uniqueId\":\"ctl00$MainContent$rgCommExList$ctl00$ctl03$ctl01$PageSizeComboBox\",\"_value\":\"10\",\"clientStateFieldID\":\"ctl00_MainContent_rgCommExList_ctl00_ctl03_ctl01_PageSizeComboBox_ClientState\",\"collapseAnimation\":\"{\\\"duration\\\":450}\",\"expandAnimation\":\"{\\\"duration\\\":450}\",\"itemData\":[{\"value\":\"10\",\"selected\":true,\"attributes\":{\"ownerTableViewId\":\"ctl00_MainContent_rgCommExList_ctl00\"}},{\"value\":\"50\",\"attributes\":{\"ownerTableViewId\":\"ctl00_MainContent_rgCommExList_ctl00\"}},{\"value\":\"100\",\"attributes\":{\"ownerTableViewId\":\"ctl00_MainContent_rgCommExList_ctl00\"}}],\"localization\":\"{\\\"AllItemsCheckedString\\\":\\\"All
+        items checked\\\",\\\"ItemsCheckedString\\\":\\\"items checked\\\",\\\"CheckAllString\\\":\\\"Check
+        All\\\"}\",\"selectedIndex\":0}, {\"selectedIndexChanged\":Telerik.Web.UI.Grid.ChangePageSizeComboHandler,\"selectedIndexChanging\":Telerik.Web.UI.Grid.ChangingPageSizeComboHandler},
+        null, $get(\"ctl00_MainContent_rgCommExList_ctl00_ctl03_ctl01_PageSizeComboBox\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadGrid, {\"ClientID\":\"ctl00_MainContent_rgCommExList\",\"ClientSettings\":{\"AllowAutoScrollOnDragDrop\":true,\"ShouldCreateRows\":true,\"DataBinding\":{},\"Selecting\":{\"CellSelectionMode\":0},\"Scrolling\":{},\"Resizing\":{},\"ClientMessages\":{},\"KeyboardNavigationSettings\":{\"AllowActiveRowCycle\":false,\"EnableKeyboardShortcuts\":true,\"FocusKey\":89,\"InitInsertKey\":73,\"RebindKey\":82,\"ExitEditInsertModeKey\":27,\"UpdateInsertItemKey\":13,\"DeleteActiveRow\":127,\"ExpandDetailTableKey\":39,\"CollapseDetailTableKey\":37,\"MoveDownKey\":40,\"MoveUpKey\":38,\"SaveChangesKey\":85,\"CancelChangesKey\":81},\"Animation\":{},\"Virtualization\":{}},\"Skin\":\"MySkin\",\"SortingSettings\":{\"EnableSkinSortStyles\":true,\"SortToolTip\":\"Click
+        here to sort\",\"SortedAscToolTip\":\"Sorted asc\",\"SortedDescToolTip\":\"Sorted
+        desc\",\"SortedBackColor\":{\"R\":0,\"G\":0,\"B\":0,\"A\":0,\"IsKnownColor\":false,\"IsEmpty\":true,\"IsNamedColor\":false,\"IsSystemColor\":false,\"Name\":\"0\"},\"ViewState\":{}},\"UniqueID\":\"ctl00$MainContent$rgCommExList\",\"_activeRowIndex\":\"\",\"_controlToFocus\":\"\",\"_currentPageIndex\":0,\"_defaultDateTimeFormat\":\"M/d/yyyy
+        h:mm:ss tt\",\"_editIndexes\":\"[]\",\"_embeddedSkin\":false,\"_freezeText\":\"Freeze\",\"_gridTableViewsData\":\"[{\\\"ClientID\\\":\\\"ctl00_MainContent_rgCommExList_ctl00\\\",\\\"UniqueID\\\":\\\"ctl00$MainContent$rgCommExList$ctl00\\\",\\\"PageSize\\\":10,\\\"PageCount\\\":15,\\\"EditMode\\\":\\\"EditForms\\\",\\\"AllowPaging\\\":true,\\\"CurrentPageIndex\\\":0,\\\"VirtualItemCount\\\":0,\\\"AllowMultiColumnSorting\\\":false,\\\"AllowNaturalSort\\\":true,\\\"AllowFilteringByColumn\\\":false,\\\"PageButtonCount\\\":10,\\\"HasDetailTables\\\":false,\\\"HasMultiHeaders\\\":false,\\\"CheckListWebServicePath\\\":\\\"\\\",\\\"GroupLoadMode\\\":\\\"Server\\\",\\\"PagerAlwaysVisible\\\":false,\\\"Name\\\":\\\"Master\\\",\\\"IsItemInserted\\\":false,\\\"clientDataKeyNames\\\":[],\\\"hasDetailItemTemplate\\\":false,\\\"_dataBindTemplates\\\":false,\\\"_selectedItemStyle\\\":\\\"\\\",\\\"_selectedItemStyleClass\\\":\\\"rgSelectedRow\\\",\\\"_columnsData\\\":[{\\\"UniqueName\\\":\\\"PDFLink\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridHyperLinkColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":false,\\\"DataTypeName\\\":\\\"System.String\\\",\\\"DataTextField\\\":\\\"cexPersonEntity\\\",\\\"DataTextFormatString\\\":\\\"{0}\\\",\\\"DataNavigateUrlFields\\\":[\\\"cex_FK_DocumentID\\\"],\\\"Target\\\":\\\"_blank\\\",\\\"DataNavigateUrlFormatString\\\":\\\"/Document.aspx?DocumentID={0}\\\",\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"cexID\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"cexID\\\",\\\"DataTypeName\\\":\\\"System.Int32\\\",\\\"DataField\\\":\\\"cexID\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"cex_FK_DocumentID\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"cex_FK_DocumentID\\\",\\\"DataTypeName\\\":\\\"System.Int32\\\",\\\"DataField\\\":\\\"cex_FK_DocumentID\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"cexNamesMentioned\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"cexNamesMentioned\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"DataField\\\":\\\"cexNamesMentioned\\\",\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"cexTypeDescription\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"cexTypeDescription\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"DataField\\\":\\\"cexTypeDescription\\\",\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"cexDateCommWasMade\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"cexDateCommWasMade\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"DataField\\\":\\\"cexDateCommWasMade\\\",\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"DateFiled\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"DateFiled\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"DataField\\\":\\\"DateFiled\\\",\\\"Display\\\":true}]}]\",\"_imagesPath\":\"/MySkin/Grid/\",\"_masterClientID\":\"ctl00_MainContent_rgCommExList_ctl00\",\"_shouldFocusOnPage\":false,\"_unfreezeText\":\"Unfreeze\",\"allowMultiRowSelection\":false,\"clientStateFieldID\":\"ctl00_MainContent_rgCommExList_ClientState\",\"expandItems\":{},\"renderMode\":1},
+        null, null, $get(\"ctl00_MainContent_rgCommExList\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadAjaxPanel, {\"clientEvents\":{OnRequestStart:\"\",OnResponseEnd:\"\"},\"enableAJAX\":true,\"enableHistory\":false,\"links\":[],\"loadingPanelID\":\"MainContent_ralpCommEx\",\"styles\":[],\"uniqueID\":\"ctl00$MainContent$rapCommEx\"},
+        null, null, $get(\"ctl00_MainContent_rapCommEx\"));\r\n});\r\n//]]>\r\n</script>\r\n</form>\r\n
+        \   <script>\r\n        (function (i, s, o, g, r, a, m) {\r\n            i['GoogleAnalyticsObject']
+        = r; i[r] = i[r] || function () {\r\n                (i[r].q = i[r].q || []).push(arguments)\r\n
+        \           }, i[r].l = 1 * new Date(); a = s.createElement(o),\r\n            m
+        = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a,
+        m)\r\n        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js',
+        'ga');\r\n\r\n        ga('create', 'UA-870931-13', 'auto');\r\n        ga('send',
+        'pageview');\r\n\r\n    </script>\r\n</body>\r\n\r\n</html>\r\n"
+    headers:
+      CF-RAY:
+      - a58b1eb75f86088b-DEN
+      Cache-Control:
+      - private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Wed, 11 Nov 2026 06:08:01 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-AspNet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '119947'
+    status:
+      code: 200
+      message: OK
+version: 1
