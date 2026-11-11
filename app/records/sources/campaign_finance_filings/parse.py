@@ -31,9 +31,11 @@ def cfemail(encoded: str) -> str:
 
 
 def _value(el) -> str | None:
-    hidden = el.cssselect("[data-cfemail]")
-    if hidden:
-        return cfemail(hidden[0].get("data-cfemail"))
+    """The element's text, with any email hidden by Cloudflare decoded in place."""
+    for hidden in el.cssselect("[data-cfemail]"):
+        hidden.text = cfemail(hidden.get("data-cfemail"))
+        for child in list(hidden):
+            hidden.remove(child)
     value = text(el)
     return None if value in ("", "(none)") else value
 

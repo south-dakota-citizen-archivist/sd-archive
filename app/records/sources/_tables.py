@@ -14,14 +14,18 @@ class LayoutChanged(ValueError):
 
 
 def document(html: str | bytes):
-    """Parse a page. Bytes are decoded as the page declares (UTF-8 when it doesn't say,
-    Windows-1252 if that fails), never left for lxml to read as Latin-1."""
+    """Parse a page. Bytes are decoded as UTF-8 when they're valid UTF-8 (text in another
+    encoding almost never is, and pages declare windows-1252 over UTF-8 bytes), else as the
+    page declares, else as Windows-1252; never left for lxml to read as Latin-1."""
     if isinstance(html, bytes):
-        declared = re.search(rb"""charset=["']?([\w-]+)""", html[:4096], re.I)
         try:
-            html = html.decode(declared[1].decode() if declared else "utf-8")
-        except (UnicodeDecodeError, LookupError):
-            html = html.decode("cp1252", errors="replace")
+            html = html.decode("utf-8")
+        except UnicodeDecodeError:
+            declared = re.search(rb"""charset=["']?([\w-]+)""", html[:4096], re.I)
+            try:
+                html = html.decode(declared[1].decode() if declared else "cp1252")
+            except (UnicodeDecodeError, LookupError):
+                html = html.decode("cp1252", errors="replace")
     return lxml.html.fromstring(html)
 
 

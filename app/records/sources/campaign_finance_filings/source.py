@@ -1,15 +1,16 @@
 """Campaign finance committees and their filings, from sdcfr.sdsos.gov (the portal since
 2018). The committee search (by name, blank: every committee) lists them; each committee's
 page gives its officers and every filing, scanned or filed online. One record per committee
-page (cid and rid), its filings the record's documents.
+committee, keyed by its cid (the rid in its link changes when it files a new statement of
+organization), its filings the record's documents.
 
-The record set also holds filings from the Secretary of State's older search system, which
-this source doesn't read (covers()); those wait for that system's port.
+The older system's filings are their own record set (campaign-finance-legacy).
 """
 
 from __future__ import annotations
 
 from datetime import date
+from urllib.parse import parse_qs, urlsplit
 
 from entities.mentions import from_text
 from records.sources import DocumentLink, Item, Source, _sdcfr
@@ -49,8 +50,19 @@ def committees(fetcher, month: str) -> list[dict]:
             continue
         url = _sdcfr.SITE + "/Search/" + link.split("Search/")[-1]
         values = [text(c) or None for c in cells[: len(COLUMNS)]]
-        out[url] = {"url": url, "ballot_question": values[3], "cfr_username": values[7]}
+        row = {"url": url, "cid": cid(url), "rid": rid(url), "ballot_question": values[3],
+               "cfr_username": values[7]}  # fmt: skip
+        if row["cid"] not in out or int(row["rid"] or 0) > int(out[row["cid"]]["rid"] or 0):
+            out[row["cid"]] = row  # the latest registration
     return list(out.values())
+
+
+def cid(url: str) -> str:
+    return parse_qs(urlsplit(url).query).get("cid", [""])[0]
+
+
+def rid(url: str) -> str | None:
+    return parse_qs(urlsplit(url).query).get("rid", [None])[0]
 
 
 def page(fetcher, url: str, month: str) -> bytes:
@@ -70,7 +82,7 @@ def items(fetcher) -> list[Item]:
         city = city_place(_city(info["address"]))
         docs = [DocumentLink(f["url"], metadata={k: v for k, v in f.items() if k != "url"})
                 for f in filings]  # fmt: skip
-        out.append(Item(key=c["url"], data=data, source_url=c["url"], documents=docs,
+        out.append(Item(key=c["cid"], data=data, source_url=c["url"], documents=docs,
                         places=[STATE, *([city] if city else [])]))  # fmt: skip
     return out
 
@@ -102,5 +114,9 @@ def from_legacy(data: dict) -> dict:
             "treasurer_name": data.get("treasurer_name")}  # fmt: skip
 
 
+def legacy_key(record) -> str:
+    return cid(record.key) if "sdcfr.sdsos.gov" in record.key else record.key
+
+
 SOURCE = Source(slug="campaign-finance-filings", items=items, mentions=mentions,
-                covers=lambda key: "sdcfr.sdsos.gov" in key, from_legacy=from_legacy)  # fmt: skip
+                from_legacy=from_legacy, legacy_key=legacy_key)  # fmt: skip

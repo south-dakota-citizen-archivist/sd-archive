@@ -33,11 +33,27 @@ def test_a_committee_page():
     assert filings[0]["url"] == "https://sdcfr.sdsos.gov/Document.aspx?DocumentID=5406&type=img"
 
 
+def test_an_email_in_an_address_is_decoded_in_place():
+    html = (b'<span id="MainContent_SchRsltCommitteInfo1_lblciHeader">X PAC</span>'
+            b'<span id="MainContent_SchRsltCommitteInfo1_lblciAddress"><a class="__cf_email__" '
+            b'data-cfemail="047677707665677571656844656b682a676b69">[email&#160;protected]</a>'
+            b', Rapid City SD, 57702</span>')  # fmt: skip
+    info, _ = parse.committee(html, URL)
+    assert info["address"] == "rstracqual@aol.com, Rapid City SD, 57702"
+
+
+def test_keys_are_the_committee_not_its_registration():
+    class Old:
+        key = "https://sdcfr.sdsos.gov/Search/SearchResults.aspx?cid=102&rid=1506"
+
+    assert source.legacy_key(Old()) == "102"
+
+
 def test_cfemail():
     assert parse.cfemail("047677707665677571656844656b682a676b69") == "rstracqual@aol.com"
 
 
-def test_run_keeps_records_from_the_older_system(db, state, sd_counties, monkeypatch):
+def test_run(db, state, sd_counties, monkeypatch):
     from places.models import Jurisdiction
 
     Jurisdiction.objects.create(kind="place", geoid="4652980", geoidfq="1600000US4652980",
@@ -45,22 +61,20 @@ def test_run_keeps_records_from_the_older_system(db, state, sd_counties, monkeyp
                                 slug="rapid-city", parent=state)  # fmt: skip
     rs = RecordSet.objects.create(slug="campaign-finance-filings", name="Campaign finance",
                                   dataset="campaign-finance", ingest="documents")  # fmt: skip
-    old = Record.objects.create(recordset=rs, key="https://sdsos.gov/old.pdf", content_hash="x",
-                                first_seen="2026-01-01T00:00Z")  # fmt: skip
     monkeypatch.setattr(source, "committees",
-                        lambda fetcher, month: [{"url": URL, "ballot_question": None,
+                        lambda fetcher, month: [{"url": URL, "cid": "1111", "rid": "2423",
+                                                 "ballot_question": None,
                                                  "cfr_username": "rick"}])  # fmt: skip
     monkeypatch.setattr(
         source, "page", lambda fetcher, url, month: (FIXTURES / "committee-1111.html").read_bytes()
     )
     get("campaign-finance-filings")
     run = run_source("campaign-finance-filings", fetcher=object())
-    assert (run.added, run.removed) == (1, 0)
-    old.refresh_from_db()
-    assert old.dropped_at is None, "the older system's records aren't this source's to drop"
-    rick = Record.objects.get(key=URL)
+    assert (run.added, run.removed) == (1, 0) and rs.records.count() == 1
+    rick = Record.objects.get(key="1111")  # the committee, whatever its latest registration
+    assert rick.source_url == URL
     assert rick.documents.count() == 8 and rick.data["filings"] == 8
     assert sorted(p.short_name for p in rick.places.all()) == ["Rapid City", "South Dakota"]
-    roles = set(Mention.objects.filter(record_key=f"campaign-finance-filings:{URL}")
+    roles = set(Mention.objects.filter(record_key="campaign-finance-filings:1111")
                 .values_list("role", flat=True))  # fmt: skip
     assert roles == {"committee", "candidate", "chair", "treasurer"}

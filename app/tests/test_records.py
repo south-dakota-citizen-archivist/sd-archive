@@ -863,6 +863,15 @@ def test_file_links_text_extensions_and_scope():
     assert file_links('<a href="a.pdf">A</a>')[0].url == "a.pdf"  # no base: as written
 
 
+def test_pages_decode_as_utf8_whatever_they_declare():
+    from records.sources._tables import document
+
+    page = '<meta charset="windows-1252"><p>IGLÚHAPI 6th\u00a0St.</p>'.encode()
+    assert document(page).text_content() == "IGLÚHAPI 6th\u00a0St."
+    old = '<meta charset="windows-1252"><p>\u201cquoted\u201d</p>'.encode("cp1252")
+    assert document(old).text_content() == "\u201cquoted\u201d"
+
+
 # --- Commands --------------------------------------------------------------------------------
 
 
