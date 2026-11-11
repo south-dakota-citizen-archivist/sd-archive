@@ -145,6 +145,17 @@ place_link = "address"
 source = "Federal Election Commission API"
 
 [[dataset]]
+id = "candidates"
+name = "Candidates on South Dakota ballots (federal to precinct, 2012 on)"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "candidacy (a candidate in one contest in one election)"
+entities = ["person"]
+place_link = "jurisdiction"
+source = "SD Secretary of State candidate lists (vip.sdsos.gov)"
+
+[[dataset]]
 id = "candidate-financial-interest"
 name = "Candidate financial interest statements"
 project = "public-records-liberator"

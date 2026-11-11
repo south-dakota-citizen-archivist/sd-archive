@@ -143,3 +143,18 @@ def sd_places(state):
                      valid_from=p.valid_from, valid_to=p.valid_to)
         for kind in ("place", "cdp") for p in sdplaces.all_places(kind)
     ])  # fmt: skip
+
+
+@pytest.fixture
+def sd_all_places(state):
+    """Every South Dakota place sdplaces knows besides the state: counties, cities and CDPs,
+    tribal areas, school districts and legislative districts, without boundaries."""
+    import sdplaces
+    from places.models import Jurisdiction
+
+    return Jurisdiction.objects.bulk_create([
+        Jurisdiction(kind=p.kind, geoid=p.geoid, geoidfq=p.geoidfq, name=p.name,
+                     short_name=p.short_name, slug=f"{p.kind}-{p.slug}", ocd_id=p.ocd_id,
+                     valid_from=p.valid_from, valid_to=p.valid_to)
+        for p in sdplaces.all_places() if p.kind != "state"
+    ])  # fmt: skip

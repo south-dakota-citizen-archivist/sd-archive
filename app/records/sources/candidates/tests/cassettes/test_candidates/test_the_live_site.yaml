@@ -1,0 +1,599 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://vip.sdsos.gov/candidatelist.aspx?eid=580
+  response:
+    body:
+      string: "\r\n    \r\n\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head><title>\r\n\t
+        Candidate List\r\n</title><meta name=\"description\" /><meta charset=\"utf-8\"
+        /><meta name=\"HandheldFriendly\" content=\"True\" /><meta name=\"MobileOptimized\"
+        content=\"320\" /><meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"
+        /><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />\r\n\t\t\r\n\t\t\r\n<!--
+        This is a default image that Facebook can use as a thumbnail when sharing
+        pages from this site -->\r\n<meta property=\"og:image\" content=\"/images/sos-logo-fb.jpg\"
+        />\r\n\t\r\n\t<!-- Place favicon.ico and apple-touch-icon.png in the images
+        folder -->\r\n\t<link rel=\"shortcut icon\" href=\"/images/favicon.ico\" /><link
+        rel=\"apple-touch-icon\" href=\"/images/apple-touch-icon.png\" /><!--60X60-->\r\n\t\r\n\t\r\n\t<!--[if
+        lt IE 9]>\r\n\t<script src=\"http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js\"></script>\r\n\t<script
+        src=\"http://html5shim.googlecode.com/svn/trunk/html5.js\"></script>\r\n\t<![endif]-->\r\n
+        \   \r\n \t<link rel=\"profile\" href=\"http://gmpg.org/xfn/11\" /><link rel=\"stylesheet\"
+        type=\"text/css\" href=\"/stylesheets/screen.css\" media=\"screen\" /><link
+        rel=\"stylesheet\" type=\"text/css\" href=\"/stylesheets/user.css\" media=\"screen\"
+        /><link rel=\"stylesheet\" type=\"text/css\" href=\"/stylesheets/print.css\"
+        media=\"print\" />\r\n\t\r\n    \r\n    <!--[if lt IE 9]>\r\n    <link href=\"/stylesheets/screen-ie8.css\"
+        rel=\"stylesheet\" type=\"text/css\" media=\"screen\" />\r\n    <![endif]-->\r\n\r\n\r\n\r\n<!--//
+        INCLUDE JQUERY //-->\r\n    <script type=\"text/javascript\" src=\"/includes/Javascript/jquery-1.7.1.min.js\"></script>\r\n
+        \   <script type=\"text/javascript\" src=\"/includes/Javascript/jquery.easing.1.3.js\"></script>\r\n
+        \   \r\n    \r\n\r\n\r\n<!-- IMG SWAPPING FOR HEADER LOGO -->\r\n<script src=\"/includes/Javascript/image_swap.js\"></script>\r\n\r\n\r\n<link
+        href=\"Styles/Site.css\" rel=\"stylesheet\" type=\"text/css\" /><link href=\"Styles/Elections.css\"
+        rel=\"stylesheet\" type=\"text/css\" />\r\n    <!-- Global site tag (gtag.js)
+        - Google Analytics -->\r\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-870931-10\"></script>\r\n<script>\r\n
+        \   window.dataLayer = window.dataLayer || [];\r\n    function gtag() { dataLayer.push(arguments);
+        }\r\n    gtag('js', new Date());\r\n\r\n    gtag('config', 'UA-870931-10');\r\n</script>\r\n\r\n<link
+        href=\"/WebResource.axd?d=urCACUaUZeT6oPoIZXShbg1aEX50J5wzupcIX3GRHzqUuWliOdq865Q8hbEnLQQO6BR25Vgxz3vW_Q8nscgxlp12P8KTlSJOVsLsntUIp93MMwEFqpeshcsk7zWRUIk90&amp;t=639167265540000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=4ytSv8sIF7k2K6JRNAeY3a_qmAzwt44C9iHTWcjkwGBAAmhiGdwwr7-9FGl68ob82XJdFbSZaG_NkIqO6dETZTCEcXyxEK40NTr8QeV8ccKMOtBQ66anFWoNjwyk-RnPZ9QKQ9duxWfLfczYuooSew2&amp;t=639167265540000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=Nhf6TpUj19KZ9rhEj2xtdZYx8vz6MsHa8tvw9_A6YEiFekEVDf79jL_HHwSqJ0up6T2d3fhO5tq8p-q6zDE8mhsv9YM0lkG0Qdaq9sZAULn4gpOMC8LZ0BVzxE6YSktM0&amp;t=639167265540000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=7RkMGAtaEIp2mKcOqdFCIgbTOUhFU9NLxFYEmr_bYOwETdr7kg2hcM8xnCPoL10tsNYuJSi0HGSpZ5LhcSmwyND3hpuGq5MJyDdzPuLo1eM6rSKX1tauhaq_eI7XG6MaDHy0bjSCTAGoQzoS7Tax4g2&amp;t=639167265540000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=vsKpXOsoEwDUfVug9KOqSpejFsNpO-xTXwVXC5lWRt2kirpLOptK3I14GeYznSnO4eit0WrZizb39MXE_o_yvlMT1McN4nEViPK88-0fOAg_WtmEsXDJtbupYqlaro-D0&amp;t=639167265540000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /><link
+        href=\"/WebResource.axd?d=gGPJcKA2egeNvbDi_oMTrf_gJwO0DgxcM7CN86M0LA9knlmuKvatZnVldaKzYtBSg7AhCAxN6mDaTxrlwYQ7g7ZyyCNMAHZJH4HQljPFBXyGcRl8kJXlGCi3mYzqN8qtxez5rwMYwIJMdd8CK3nPEQ2&amp;t=639167265540000000\"
+        type=\"text/css\" rel=\"stylesheet\" class=\"Telerik_stylesheet\" /></head>\r\n<body
+        class=\"external level_two\">\r\n\r\n    \r\n<div class=\"wrapper\">\r\n    \r\n
+        \   \t\t\r\n           \r\n        <header class=\"clearfix\">\r\n              \t\t\t\r\n
+        \             \t\t\t<div id=\"blue_bar\" class=\"clearfix\">\r\n                        \t\t\r\n
+        \                               <div class=\"centerer\">\r\n                                         <a
+        href=\"https://sdsos.gov\" title=\"Home\"><img src=\"/images/SOS_logo_REV.png\"
+        alt=\"South Dakota Secretary of State logo\" id=\"header_logo\" onMouseOver=\"MM_swapImage('header_logo','','/images/SOS_logo_REV_O.png',1)\"
+        onMouseOut=\"MM_swapImgRestore()\" /></a> \r\n                                         \r\n
+        \                                     \r\n                                        \r\n
+        \                                       <div id=\"header_krebs\">\r\n                                            <h3>Monae
+        L. Johnson</h3>\r\n                                        </div>\r\n                                        \r\n
+        \                                       \r\n                                        <nav
+        id=\"header_contact\" class=\"tertiary\">\r\n                                            <ul
+        class=\"\" id=\"\">\r\n                                               \r\n
+        \                                              <!--<li class=\"\"><a href=\"https://sdsos.gov/contact-us/default.aspx\"
+        title=\"Contact Us\" class=\"\">Contact us</a><img src=\"/images/pointer.png\"
+        class=\"header_contact_icon\" alt=\"pointer arrow icon\" /></li>-->\r\n                                               <li
+        class=\"\"><a href=\"https://sdsos.gov/contact-us/default.aspx\" title=\"Contact
+        Us\" class=\"\">Contact us</a><img src=\"/images/pointer.png\" class=\"header_contact_icon\"
+        alt=\"pointer arrow icon\" /></li>\r\n                                            </ul>\r\n
+        \                                       </nav>\r\n                                        \r\n
+        \                               \r\n                                        \r\n
+        \                               </div>\r\n                               \r\n
+        \                         </div>      \r\n                          \r\n                      \r\n
+        \                         \r\n                          \r\n                        <div
+        class=\"centerer\">\r\n                        \r\n                      \r\n
+        \                       \r\n                        \r\n                         <div
+        id=\"red_drop\" class=\"clearfix\" >\r\n                         \t\t\r\n
+        \                                       \r\n                                        <nav
+        class=\"secondary\">\r\n                                            <ul class=\"\"
+        id=\"\">\r\n                                            \t\r\n                                                <!--
+        these items are automatically appended to the mobile menu, if you don't want
+        one to show in the mobile menu then add the class mobile_omit to the containing
+        li -->\r\n                                               \r\n                                                <li><a
+        href=\"https://sdsos.gov/elections-voting/voting/register-to-vote/default.aspx\"
+        target=\"_blank\"><strong>Register to Vote</strong></a></li>\r\n                                                <li><a
+        href=\"https://sdsos.gov/general-services/concealed-pistol-permits/cc-default.aspx\"><strong>Pistol
+        Permits</strong></a></li>\r\n                                                <li><a
+        href=\"https://sosenterprise.sd.gov/businessservices/lobbyist/default.aspx\"
+        target=\"_blank\"><strong>Lobbyist Registration</strong></a></li>\r\n                                                <li><a
+        href=\"https://sdcfr.sdsos.gov/\" class=\"\" target=\"_blank\"><strong>Campaign
+        Finance Reports</strong></a></li>\r\n                                                \r\n
+        \                                              <li class=\"\"><a href=\"https://sdsos.gov/a-z-topics/default.aspx\"
+        title=\"Search By Subject\"><strong>Search by Subject</strong></a></li>\r\n
+        \                                              \r\n                                              \r\n
+        \                                           </ul>\r\n                                         </nav>\r\n
+        \                                        \r\n                                         <!--
+        keep this here, even though it is empty. Items are added and deleted from
+        this container at various screen sizes-->\r\n                                         <nav
+        class=\"secondary_expanded\">\r\n                                            <ul
+        class=\"\" id=\"\">\r\n                                            \t\r\n
+        \                                           </ul>\r\n                                         </nav>\r\n
+        \                              </div>\r\n                         </div>\r\n\t\t</header>\r\n
+        \       \r\n       \r\n      \r\n        \r\n        \r\n        <section
+        id=\"middle\" class=\"clearfix\">\n<div id=\"header_blank\" class=\"interior_header
+        clearfix\">\n\n        &nbsp;\n\n</div><form method=\"post\" action=\"./candidatelist.aspx?eid=580\"
+        id=\"Form1\">\r\n<div class=\"aspNetHidden\">\r\n<input type=\"hidden\" name=\"RadScriptManager1_TSM\"
+        id=\"RadScriptManager1_TSM\" value=\"\" />\r\n<input type=\"hidden\" name=\"__EVENTTARGET\"
+        id=\"__EVENTTARGET\" value=\"\" />\r\n<input type=\"hidden\" name=\"__EVENTARGUMENT\"
+        id=\"__EVENTARGUMENT\" value=\"\" />\r\n<input type=\"hidden\" name=\"__VIEWSTATE\"
+        id=\"__VIEWSTATE\" value=\"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\"
+        />\r\n</div>\r\n\r\n<script type=\"text/javascript\">\r\n//<![CDATA[\r\nvar
+        theForm = document.forms['Form1'];\r\nif (!theForm) {\r\n    theForm = document.Form1;\r\n}\r\nfunction
+        __doPostBack(eventTarget, eventArgument) {\r\n    if (!theForm.onsubmit ||
+        (theForm.onsubmit() != false)) {\r\n        theForm.__EVENTTARGET.value =
+        eventTarget;\r\n        theForm.__EVENTARGUMENT.value = eventArgument;\r\n
+        \       theForm.submit();\r\n    }\r\n}\r\n//]]>\r\n</script>\r\n\r\n\r\n<script
+        src=\"/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZLYOGH4LO_4rGLtYc0jBy3oMcDZ6u7F_QuyUgT6iPLQQ80uL1C7byxmhxJbICCEF9w2&amp;t=639256397480000000\"
+        type=\"text/javascript\"></script>\r\n\r\n\r\n<script src=\"/Telerik.Web.UI.WebResource.axd?_TSM_HiddenField_=RadScriptManager1_TSM&amp;compress=1&amp;_TSM_CombinedScripts_=%3b%3bSystem.Web.Extensions%2c+Version%3d4.0.0.0%2c+Culture%3dneutral%2c+PublicKeyToken%3d31bf3856ad364e35%3aen-US%3a39dc0f0b-b5e9-4901-bc67-ede7f0e4b1cd%3aea597d4b%3ab25378d2%3bTelerik.Web.UI%2c+Version%3d2022.1.119.45%2c+Culture%3dneutral%2c+PublicKeyToken%3d121fae78165ba3d4%3aen-US%3af00be9f9-5d75-4a4b-891e-b5c0e5b2a8e2%3a16e4e7cd%3af7645509%3aed16cbdc%3a88144a7a%3a33715776%3a58366029%3a24ee1bba%3ae330518b%3a2003d0b8%3ac128760b%3a1e771326%3ac8618e41%3ae4f8f289%3a1a73651d%3a333f8d94\"
+        type=\"text/javascript\"></script>\r\n<div class=\"aspNetHidden\">\r\n\r\n\t<input
+        type=\"hidden\" name=\"__VIEWSTATEGENERATOR\" id=\"__VIEWSTATEGENERATOR\"
+        value=\"E0DD8FE6\" />\r\n\t<input type=\"hidden\" name=\"__EVENTVALIDATION\"
+        id=\"__EVENTVALIDATION\" value=\"VcDZte9d196oEzobtNYG0EwrxImJun3knyDeiRKPxyEIXWfnya53CcgWv7sgku0znnqU83ymus48mxg9RhOrS4nK/BdDbbuJNzRi/KJmLOMRtv1xE/1As4ZdzT4WFO7Dvs2aWBN9ZaDDtrOR0uvp63soAVbgTF8Rutc5cHbb7cpPo/5cKuAcQZAyuUt6HLWOUFh5dagZlZ6iVxgtd2+CuRkloqauVC7knCOhamyTM51w5wkwxj9zK2OGubgMn8iRVcJ/tzwJCGpTTuqhaGLi2Ow00SuJhqg56Q2ZDPgub4fc1fLq+iNiK9XwT6f8px/KXU4DJH+CshDGS9K8G9p/0ywue06WHNlW6iaWEIJc87RcFDXQxV18SUuH2HyXX5WbLX6U5NiXqip2ru6/C4bN+Xb1x/9yvi4hURKId8+pRDGqliv6dVLfox/RhRHxXGaUdjw0nUg8BWPUT1Vs3lD68A==\"
+        />\r\n</div>\r\n        \r\n    <style>\r\n        .RadGrid input {\r\n            display:
+        inline-block;\r\n        }\r\n        table.rgCommandTable > tbody > tr:first-child
+        > td:first-child {\r\n            display: none;\r\n        }\r\n    </style>\r\n\r\n\r\n
+        \       <div class=\"centerer\">\r\n\r\n            <script type=\"text/javascript\">\r\n//<![CDATA[\r\nSys.WebForms.PageRequestManager._initialize('ctl00$RadScriptManager1',
+        'Form1', ['tctl00$MainContent$ctl00$MainContent$RadAjaxPanel1Panel',''], [],
+        ['ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl00$ExportToExcelButton','','ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl00$ExportToPdfButton','','ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl00$ExportToCsvButton',''],
+        600, 'ctl00');\r\n//]]>\r\n</script>\r\n\r\n            <div id=\"RadAjaxLoadingPanel1\"
+        class=\"RadAjax RadAjax_Default\" style=\"display:none;\">\r\n\t<div class=\"raDiv\">\r\n\t\t\r\n
+        \           \r\n\t</div><div class=\"raColor raTransp\">\r\n\r\n\t</div>\r\n</div>\r\n
+        \           <div class=\"content_block content_block_expanded\">\r\n                \r\n
+        \   <div id=\"MainContent_RadAjaxLoadingPanel1\" class=\"RadAjax RadAjax_Default\"
+        style=\"display:none;\">\r\n\t<div class=\"raDiv\">\r\n\t\t\r\n    \r\n\t</div><div
+        class=\"raColor raTransp\">\r\n\r\n\t</div>\r\n</div>\r\n    <div class=\"RadAjaxPanel\"
+        id=\"ctl00_MainContent_ctl00_MainContent_RadAjaxPanel1Panel\" style=\"height:100%;\">\r\n\t<div
+        id=\"ctl00_MainContent_RadAjaxPanel1\" style=\"height:100%;width:100%;\">\r\n\t\t<!--
+        2022.1.119.45 -->   \r\n        <table style=\"width: 100%;\">\r\n            <tr>\r\n
+        \               <td style=\"font-size: x-large; font-weight: 700; color: Maroon;\"
+        colspan=\"3\">\r\n                    <span id=\"MainContent_lblFormHeader\"></span>\r\n
+        \               </td>\r\n            </tr>\r\n            <tr>\r\n                <td
+        style=\"font-size: 15px; font-weight: 300;\" colspan=\"3\">\r\n                    \r\n
+        \                   \r\n                </td>\r\n            </tr>\r\n            <tr>\r\n
+        \               <td colspan=\"3\">\r\n                    <span id=\"MainContent_lblFormFooter\"></span>\r\n
+        \               </td>\r\n            </tr>\r\n         \r\n            <tr>\r\n
+        \               <td style=\"font-size: medium; color: black;\" colspan=\"3\">\r\n
+        \                   \r\n                </td>\r\n            </tr>\r\n            <tr>\r\n
+        \               <td style=\"font-size: medium; color: black;\" colspan=\"3\">\r\n
+        \                   <div id=\"ctl00_MainContent_grdCandidates\" class=\"RadGrid
+        RadGrid_Default\">\r\n\r\n\t\t<table class=\"rgMasterTable\" id=\"ctl00_MainContent_grdCandidates_ctl00\"
+        style=\"width:100%;table-layout:auto;empty-cells:show;\">\r\n\t\t\t<colgroup>\r\n\t\t<col
+        style=\"width:100px\" />\r\n\t\t<col style=\"width:60px\" />\r\n\t\t<col style=\"width:40px\"
+        />\r\n\t\t<col style=\"width:70px\" />\r\n\t\t<col style=\"width:70px\" />\r\n\t\t<col
+        style=\"width:47px\" />\r\n\t\t<col style=\"width:50px;display:none;\" />\r\n\t\t<col
+        style=\"width:110px\" />\r\n\t\t<col style=\"display:none;\" />\r\n\t\t<col
+        style=\"display:none;\" />\r\n\t\t<col style=\"display:none;\" />\r\n\t\t<col
+        style=\"display:none;\" />\r\n\t\t<col style=\"display:none;\" />\r\n\t\t<col
+        style=\"display:none;\" />\r\n\t\t<col style=\"display:none;\" />\r\n\t\t<col
+        style=\"display:none;\" />\r\n\t\t<col style=\"display:none;\" />\r\n\t\t<col
+        style=\"display:none;\" />\r\n\t\t<col style=\"display:none;\" />\r\n\t\t<col
+        style=\"display:none;\" />\r\n\t\t<col style=\"display:none;\" />\r\n\t\t<col
+        style=\"display:none;\" />\r\n\t\t<col style=\"display:none;\" />\r\n\t</colgroup>\r\n<thead>\r\n\t\t\t\t<tr
+        class=\"rgCommandRow\">\r\n\t\t\t\t\t<td class=\"rgCommandCell\" colspan=\"7\"><table
+        class=\"rgCommandTable\" summary=\"Command item for additional functionalities
+        for the grid like adding a new record and exporting.\" style=\"width:100%;\">\r\n\t\t\t\t\t\t<caption>\r\n\t\t\t\t\t\t\t<span
+        style='display: none'>Command item</span>\r\n\t\t\t\t\t\t</caption><thead>\r\n\t\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t\t<th
+        scope=\"col\">Command item</th>\r\n\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t</thead><tbody>\r\n\t\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t\t<td
+        align=\"left\">&nbsp;</td><td align=\"right\">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<input
+        type=\"button\" name=\"ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl00$ExportToExcelButton\"
+        value=\" \" onclick=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl00$ExportToExcelButton&#39;,&#39;&#39;)\"
+        id=\"ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl00_ExportToExcelButton\"
+        title=\"Export to Excel\" class=\"rgExpXLS\" />&nbsp;&nbsp;<input type=\"button\"
+        name=\"ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl00$ExportToPdfButton\"
+        value=\" \" onclick=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl00$ExportToPdfButton&#39;,&#39;&#39;)\"
+        id=\"ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl00_ExportToPdfButton\"
+        title=\"Export to PDF\" class=\"rgExpPDF\" />&nbsp;&nbsp;<input type=\"button\"
+        name=\"ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl00$ExportToCsvButton\"
+        value=\" \" onclick=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl00$ExportToCsvButton&#39;,&#39;&#39;)\"
+        id=\"ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl00_ExportToCsvButton\"
+        title=\"Export to CSV\" class=\"rgExpCSV\" />&nbsp;&nbsp;</td>\r\n\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t</tbody>\r\n\t\t\t\t\t</table></td>\r\n\t\t\t\t</tr><tr>\r\n\t\t\t\t\t<th
+        scope=\"col\" class=\"rgHeader\"><a onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_grdCandidates_ctl00&#39;),
+        &#39;Race&#39;); return false;\" title=\"Click here to sort\" href=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl02$ctl00&#39;,&#39;&#39;)\">Contest</a></th><th
+        scope=\"col\" class=\"rgHeader\"><a onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_grdCandidates_ctl00&#39;),
+        &#39;CandidateName&#39;); return false;\" title=\"Click here to sort\" href=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl02$ctl01&#39;,&#39;&#39;)\">Name</a></th><th
+        scope=\"col\" class=\"rgHeader\"><a onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_grdCandidates_ctl00&#39;),
+        &#39;PoliticalPartyID&#39;); return false;\" title=\"Click here to sort\"
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl02$ctl02&#39;,&#39;&#39;)\">Party</a></th><th
+        scope=\"col\" class=\"rgHeader\"><a onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_grdCandidates_ctl00&#39;),
+        &#39;PetitionFilingDate&#39;); return false;\" title=\"Click here to sort\"
+        href=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl02$ctl03&#39;,&#39;&#39;)\">Petition
+        Filing Date</a></th><th scope=\"col\" class=\"rgHeader\"><a onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_grdCandidates_ctl00&#39;),
+        &#39;Jurisdiction&#39;); return false;\" title=\"Click here to sort\" href=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl02$ctl04&#39;,&#39;&#39;)\">District/County</a></th><th
+        scope=\"col\" class=\"rgHeader\">Ballot Order</th><th scope=\"col\" class=\"rgHeader\"
+        style=\"display:none;\"><a onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_grdCandidates_ctl00&#39;),
+        &#39;WithdrawnDate&#39;); return false;\" title=\"Click here to sort\" href=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl02$ctl05&#39;,&#39;&#39;)\">WithdrawnDate</a></th><th
+        scope=\"col\" class=\"rgHeader\">Mailing Address</th><th scope=\"col\" class=\"rgHeader
+        rgSorted\" style=\"display:none;\"><a onclick=\"Telerik.Web.UI.Grid.Sort($find(&#39;ctl00_MainContent_grdCandidates_ctl00&#39;),
+        &#39;OfficeSeqNum&#39;); return false;\" title=\"Click here to sort\" href=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl02$ctl06&#39;,&#39;&#39;)\">OfficeSeqNum</a>&nbsp;<input
+        type=\"button\" name=\"ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl02$ctl07\"
+        value=\" \" onclick=\"javascript:__doPostBack(&#39;ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl02$ctl07&#39;,&#39;&#39;)\"
+        title=\"Sorted asc\" class=\"rgSortAsc\" /></th><th scope=\"col\" class=\"rgHeader\"
+        style=\"display:none;\">elFirstName</th><th scope=\"col\" class=\"rgHeader\"
+        style=\"display:none;\">elMiddleName</th><th scope=\"col\" class=\"rgHeader\"
+        style=\"display:none;\">elLastName</th><th scope=\"col\" class=\"rgHeader\"
+        style=\"display:none;\">elSuffix</th><th scope=\"col\" class=\"rgHeader\"
+        style=\"display:none;\">Status</th><th scope=\"col\" class=\"rgHeader\" style=\"display:none;\">elType</th><th
+        scope=\"col\" class=\"rgHeader\" style=\"display:none;\">eldate</th><th scope=\"col\"
+        class=\"rgHeader\" style=\"display:none;\">elAddress1</th><th scope=\"col\"
+        class=\"rgHeader\" style=\"display:none;\">elAddress2</th><th scope=\"col\"
+        class=\"rgHeader\" style=\"display:none;\">elCity</th><th scope=\"col\" class=\"rgHeader\"
+        style=\"display:none;\">elState</th><th scope=\"col\" class=\"rgHeader\" style=\"display:none;\">elZip</th><th
+        scope=\"col\" class=\"rgHeader\" style=\"display:none;\">DistrictType</th><th
+        scope=\"col\" class=\"rgHeader\" style=\"display:none;\">Elector1</th>\r\n\t\t\t\t</tr><tr
+        class=\"rgFilterRow\">\r\n\t\t\t\t\t<td style=\"white-space:nowrap;\"><input
+        name=\"ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl03$FilterTextBox_Race\"
+        type=\"text\" size=\"10\" id=\"ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_Race\"
+        class=\"rgFilterBox\" alt=\"Filter Race column\" onchange=\"$find(&quot;ctl00_MainContent_grdCandidates_ctl00&quot;)._filterNoDelay(&quot;ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_Race&quot;,&quot;Race&quot;)\"
+        onkeypress=\"if(event.keyCode == 13){ this.blur(); event.cancelBubble = true;
+        event.returnValue = false; if (event.stopPropagation){ event.stopPropagation();
+        event.preventDefault();} $find(&quot;ctl00_MainContent_grdCandidates_ctl00&quot;)._filterNoDelay(&quot;ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_Race&quot;,&quot;Race&quot;)
+        }\" /></td><td style=\"white-space:nowrap;\"><input name=\"ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl03$FilterTextBox_CandidateName\"
+        type=\"text\" size=\"10\" id=\"ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_CandidateName\"
+        class=\"rgFilterBox\" alt=\"Filter CandidateName column\" onchange=\"$find(&quot;ctl00_MainContent_grdCandidates_ctl00&quot;)._filterNoDelay(&quot;ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_CandidateName&quot;,&quot;CandidateName&quot;)\"
+        onkeypress=\"if(event.keyCode == 13){ this.blur(); event.cancelBubble = true;
+        event.returnValue = false; if (event.stopPropagation){ event.stopPropagation();
+        event.preventDefault();} $find(&quot;ctl00_MainContent_grdCandidates_ctl00&quot;)._filterNoDelay(&quot;ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_CandidateName&quot;,&quot;CandidateName&quot;)
+        }\" /></td><td style=\"white-space:nowrap;\"><input name=\"ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl03$FilterTextBox_PoliticalPartyID\"
+        type=\"text\" size=\"10\" id=\"ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_PoliticalPartyID\"
+        class=\"rgFilterBox\" alt=\"Filter PoliticalPartyID column\" onchange=\"$find(&quot;ctl00_MainContent_grdCandidates_ctl00&quot;)._filterNoDelay(&quot;ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_PoliticalPartyID&quot;,&quot;PoliticalPartyID&quot;)\"
+        onkeypress=\"if(event.keyCode == 13){ this.blur(); event.cancelBubble = true;
+        event.returnValue = false; if (event.stopPropagation){ event.stopPropagation();
+        event.preventDefault();} $find(&quot;ctl00_MainContent_grdCandidates_ctl00&quot;)._filterNoDelay(&quot;ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_PoliticalPartyID&quot;,&quot;PoliticalPartyID&quot;)
+        }\" /></td><td>&nbsp;</td><td style=\"white-space:nowrap;\"><input name=\"ctl00$MainContent$grdCandidates$ctl00$ctl02$ctl03$FilterTextBox_Jurisdiction\"
+        type=\"text\" size=\"10\" id=\"ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_Jurisdiction\"
+        class=\"rgFilterBox\" alt=\"Filter Jurisdiction column\" onchange=\"$find(&quot;ctl00_MainContent_grdCandidates_ctl00&quot;)._filterNoDelay(&quot;ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_Jurisdiction&quot;,&quot;Jurisdiction&quot;)\"
+        onkeypress=\"if(event.keyCode == 13){ this.blur(); event.cancelBubble = true;
+        event.returnValue = false; if (event.stopPropagation){ event.stopPropagation();
+        event.preventDefault();} $find(&quot;ctl00_MainContent_grdCandidates_ctl00&quot;)._filterNoDelay(&quot;ctl00_MainContent_grdCandidates_ctl00_ctl02_ctl03_FilterTextBox_Jurisdiction&quot;,&quot;Jurisdiction&quot;)
+        }\" /></td><td>&nbsp;</td><td style=\"display:none;\">&nbsp;</td><td>&nbsp;</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead><tbody>\r\n\t\t\t<tr
+        class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__0\">\r\n\t\t\t\t<td>School
+        Board Member</td><td>Todd A Grabow</td><td>NON</td><td>03/24/2023</td><td>Hill
+        City School District 51-2</td><td>&nbsp;</td><td style=\"display:none;\">&nbsp;</td><td>23802
+        SYNDICATE CT &nbsp; HILL CITY SD 57745</td><td class=\"rgSorted\" style=\"display:none;\">719</td><td
+        style=\"display:none;\">Todd</td><td style=\"display:none;\">A</td><td style=\"display:none;\">Grabow</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">23802 SYNDICATE CT</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">HILL CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57745</td><td style=\"display:none;\">SCH</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__1\">\r\n\t\t\t\t<td>School
+        Area Board Member</td><td>Walter Swan Jr</td><td>NON</td><td>03/20/2023</td><td>Rapid
+        City School District 51-4 Area 4</td><td>1</td><td style=\"display:none;\">&nbsp;</td><td>1411
+        N 7TH ST &nbsp; RAPID CITY SD 57701</td><td class=\"rgSorted\" style=\"display:none;\">766</td><td
+        style=\"display:none;\">Walter</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Swan</td><td style=\"display:none;\">Jr</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">1411 N 7TH ST</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57701</td><td style=\"display:none;\">SBR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__2\">\r\n\t\t\t\t<td>School
+        Area Board Member</td><td>Karen S. Woods</td><td>NON</td><td>03/27/2023</td><td>Rapid
+        City School District 51-4 Area 4</td><td>2</td><td style=\"display:none;\">&nbsp;</td><td>4716
+        CHALKSTONE DR &nbsp; RAPID CITY SD 57701</td><td class=\"rgSorted\" style=\"display:none;\">766</td><td
+        style=\"display:none;\">Karen</td><td style=\"display:none;\">S.</td><td style=\"display:none;\">Woods</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">4716 CHALKSTONE DR</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57701</td><td style=\"display:none;\">SBR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__3\">\r\n\t\t\t\t<td>School
+        Area Board Member</td><td>Gerald Harvey</td><td>NON</td><td>03/28/2023</td><td>Rapid
+        City School District 51-4 Area 4</td><td>3</td><td style=\"display:none;\">&nbsp;</td><td>616
+        N 1ST ST &nbsp; RAPID CITY SD 57701</td><td class=\"rgSorted\" style=\"display:none;\">766</td><td
+        style=\"display:none;\">Gerald</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Harvey</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Active</td><td style=\"display:none;\">Combined</td><td
+        style=\"display:none;\">6/6/2023 12:00:00 AM</td><td style=\"display:none;\">616
+        N 1ST ST</td><td style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">RAPID
+        CITY</td><td style=\"display:none;\">SD</td><td style=\"display:none;\">57701</td><td
+        style=\"display:none;\">SBR</td><td style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr
+        class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__4\">\r\n\t\t\t\t<td>School
+        Area Board Member</td><td>Amy Sazue</td><td>NON</td><td>03/28/2023</td><td>Rapid
+        City School District 51-4 Area 4</td><td>4</td><td style=\"display:none;\">&nbsp;</td><td>2710
+        RED CLOUD ST &nbsp; RAPID CITY SD 57701</td><td class=\"rgSorted\" style=\"display:none;\">766</td><td
+        style=\"display:none;\">Amy</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Sazue</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Active</td><td style=\"display:none;\">Combined</td><td
+        style=\"display:none;\">6/6/2023 12:00:00 AM</td><td style=\"display:none;\">2710
+        RED CLOUD ST</td><td style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">RAPID
+        CITY</td><td style=\"display:none;\">SD</td><td style=\"display:none;\">57701</td><td
+        style=\"display:none;\">SBR</td><td style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr
+        class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__5\">\r\n\t\t\t\t<td>School
+        Area Board Member</td><td>Christine Stephenson</td><td>NON</td><td>03/17/2023</td><td>Rapid
+        City School District 51-4 Area 5</td><td>1</td><td style=\"display:none;\">&nbsp;</td><td>1521
+        FOREST DR &nbsp; RAPID CITY SD 57701</td><td class=\"rgSorted\" style=\"display:none;\">766</td><td
+        style=\"display:none;\">Christine</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Stephenson</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Active</td><td style=\"display:none;\">Combined</td><td
+        style=\"display:none;\">6/6/2023 12:00:00 AM</td><td style=\"display:none;\">1521
+        FOREST DR</td><td style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">RAPID
+        CITY</td><td style=\"display:none;\">SD</td><td style=\"display:none;\">57701</td><td
+        style=\"display:none;\">SBR</td><td style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr
+        class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__6\">\r\n\t\t\t\t<td>School
+        Area Board Member</td><td>Paul Lloyd</td><td>NON</td><td>03/27/2023</td><td>Rapid
+        City School District 51-4 Area 5</td><td>2</td><td style=\"display:none;\">&nbsp;</td><td>1731
+        ROUNDS ST &nbsp; RAPID CITY SD 57702</td><td class=\"rgSorted\" style=\"display:none;\">766</td><td
+        style=\"display:none;\">Paul</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Lloyd</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Active</td><td style=\"display:none;\">Combined</td><td
+        style=\"display:none;\">6/6/2023 12:00:00 AM</td><td style=\"display:none;\">1731
+        ROUNDS ST</td><td style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">RAPID
+        CITY</td><td style=\"display:none;\">SD</td><td style=\"display:none;\">57702</td><td
+        style=\"display:none;\">SBR</td><td style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr
+        class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__7\">\r\n\t\t\t\t<td>Mayor</td><td>Ron
+        Weifenbach</td><td>NON</td><td>03/22/2023</td><td>Rapid City</td><td>1</td><td
+        style=\"display:none;\">&nbsp;</td><td>4153 AUGUSTA DR &nbsp; RAPID CITY SD
+        57703</td><td class=\"rgSorted\" style=\"display:none;\">802</td><td style=\"display:none;\">Ron</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Weifenbach</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">4153 AUGUSTA DR</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57703</td><td style=\"display:none;\">MUN</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__8\">\r\n\t\t\t\t<td>Mayor</td><td>Laura
+        B. Armstrong</td><td>NON</td><td>03/27/2023</td><td>Rapid City</td><td>2</td><td
+        style=\"display:none;\">&nbsp;</td><td>1235 PINE HILLS DR &nbsp; Rapid City
+        SD 57702</td><td class=\"rgSorted\" style=\"display:none;\">802</td><td style=\"display:none;\">Laura</td><td
+        style=\"display:none;\">B.</td><td style=\"display:none;\">Armstrong</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">1235 PINE HILLS DR</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Rapid City</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57702</td><td style=\"display:none;\">MUN</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__9\">\r\n\t\t\t\t<td>Mayor</td><td>Brad
+        Estes</td><td>NON</td><td>03/28/2023</td><td>Rapid City</td><td>3</td><td
+        style=\"display:none;\">&nbsp;</td><td>1236 SETTLERS CREEK PL &nbsp; RAPID
+        CITY SD 57701</td><td class=\"rgSorted\" style=\"display:none;\">802</td><td
+        style=\"display:none;\">Brad</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Estes</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Active</td><td style=\"display:none;\">Combined</td><td
+        style=\"display:none;\">6/6/2023 12:00:00 AM</td><td style=\"display:none;\">1236
+        SETTLERS CREEK PL</td><td style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">RAPID
+        CITY</td><td style=\"display:none;\">SD</td><td style=\"display:none;\">57701</td><td
+        style=\"display:none;\">MUN</td><td style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr
+        class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__10\">\r\n\t\t\t\t<td>Mayor</td><td>Jason
+        Salamun</td><td>NON</td><td>03/24/2023</td><td>Rapid City</td><td>4</td><td
+        style=\"display:none;\">&nbsp;</td><td>4935 SPRINGTREE CT &nbsp; RAPID CITY
+        SD 57702</td><td class=\"rgSorted\" style=\"display:none;\">802</td><td style=\"display:none;\">Jason</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Salamun</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">4935 SPRINGTREE CT</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57702</td><td style=\"display:none;\">MUN</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__11\">\r\n\t\t\t\t<td>Mayor</td><td>Joshua
+        Kevin Lyle</td><td>NON</td><td>03/27/2023</td><td>Rapid City</td><td>5</td><td
+        style=\"display:none;\">&nbsp;</td><td>921 1/2 5TH ST &nbsp; RAPID CITY SD
+        57701</td><td class=\"rgSorted\" style=\"display:none;\">802</td><td style=\"display:none;\">Joshua</td><td
+        style=\"display:none;\">Kevin</td><td style=\"display:none;\">Lyle</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">921 1/2 5TH ST</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57701</td><td style=\"display:none;\">MUN</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__12\">\r\n\t\t\t\t<td>Alderman</td><td>Josh
+        Biberdorf</td><td>NON</td><td>03/28/2023</td><td>Rapid City Ward-1</td><td>1</td><td
+        style=\"display:none;\">&nbsp;</td><td>836 ENCHANTED PINES DR &nbsp; RAPID
+        CITY SD 57701</td><td class=\"rgSorted\" style=\"display:none;\">828</td><td
+        style=\"display:none;\">Josh</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Biberdorf</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Active</td><td style=\"display:none;\">Combined</td><td
+        style=\"display:none;\">6/6/2023 12:00:00 AM</td><td style=\"display:none;\">836
+        ENCHANTED PINES DR</td><td style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">RAPID
+        CITY</td><td style=\"display:none;\">SD</td><td style=\"display:none;\">57701</td><td
+        style=\"display:none;\">WAR</td><td style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr
+        class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__13\">\r\n\t\t\t\t<td>Alderman</td><td>Patrick
+        Jones</td><td>NON</td><td>03/21/2023</td><td>Rapid City Ward-1</td><td>2</td><td
+        style=\"display:none;\">&nbsp;</td><td>219 CLEVELAND ST &nbsp; RAPID CITY
+        SD 57701</td><td class=\"rgSorted\" style=\"display:none;\">828</td><td style=\"display:none;\">Patrick</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Jones</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">219 CLEVELAND ST</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57701</td><td style=\"display:none;\">WAR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__14\">\r\n\t\t\t\t<td>Alderman</td><td>Jerry
+        Long</td><td>NON</td><td>03/27/2023</td><td>Rapid City Ward-1</td><td>3</td><td
+        style=\"display:none;\">&nbsp;</td><td>636 RANCHESTER ST &nbsp; RAPID CITY
+        SD 57701</td><td class=\"rgSorted\" style=\"display:none;\">828</td><td style=\"display:none;\">Jerry</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Long</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">636 RANCHESTER ST</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57701</td><td style=\"display:none;\">WAR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgAltRow\" pageBreak=\"pageBreak\"
+        id=\"ctl00_MainContent_grdCandidates_ctl00__15\">\r\n\t\t\t\t<td>Alderman</td><td>Lindsey
+        M. Seachris</td><td>NON</td><td>03/21/2023</td><td>Rapid City Ward-2</td><td>&nbsp;</td><td
+        style=\"display:none;\">&nbsp;</td><td>707 E MEADE ST &nbsp; RAPID CITY SD
+        57701</td><td class=\"rgSorted\" style=\"display:none;\">828</td><td style=\"display:none;\">Lindsey</td><td
+        style=\"display:none;\">M.</td><td style=\"display:none;\">Seachris</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">707 E MEADE ST</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57701</td><td style=\"display:none;\">WAR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__16\">\r\n\t\t\t\t<td>Alderman</td><td>Kevin
+        Maher</td><td>NON</td><td>03/27/2023</td><td>Rapid City Ward-3</td><td>1</td><td
+        style=\"display:none;\">&nbsp;</td><td>3530 SHERIDAN LAKE RD &nbsp; RAPID
+        CITY SD 57702</td><td class=\"rgSorted\" style=\"display:none;\">828</td><td
+        style=\"display:none;\">Kevin</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Maher</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Active</td><td style=\"display:none;\">Combined</td><td
+        style=\"display:none;\">6/6/2023 12:00:00 AM</td><td style=\"display:none;\">3530
+        SHERIDAN LAKE RD</td><td style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">RAPID
+        CITY</td><td style=\"display:none;\">SD</td><td style=\"display:none;\">57702</td><td
+        style=\"display:none;\">WAR</td><td style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr
+        class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__17\">\r\n\t\t\t\t<td>Alderman</td><td>Rob
+        Keighron</td><td>NON</td><td>03/23/2023</td><td>Rapid City Ward-3</td><td>2</td><td
+        style=\"display:none;\">&nbsp;</td><td>2319 CAMBRIDGE PL &nbsp; RAPID CITY
+        SD 57702</td><td class=\"rgSorted\" style=\"display:none;\">828</td><td style=\"display:none;\">Rob</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Keighron</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">2319 CAMBRIDGE PL</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57702</td><td style=\"display:none;\">WAR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__18\">\r\n\t\t\t\t<td>Alderman</td><td>Chad
+        C Lewis</td><td>NON</td><td>03/27/2023</td><td>Rapid City Ward-3</td><td>3</td><td
+        style=\"display:none;\">&nbsp;</td><td>3440 CORRAL DR APT 207 &nbsp; RAPID
+        CITY SD 57702</td><td class=\"rgSorted\" style=\"display:none;\">828</td><td
+        style=\"display:none;\">Chad</td><td style=\"display:none;\">C</td><td style=\"display:none;\">Lewis</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">3440 CORRAL DR APT 207</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">RAPID CITY</td><td
+        style=\"display:none;\">SD</td><td style=\"display:none;\">57702</td><td style=\"display:none;\">WAR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__19\">\r\n\t\t\t\t<td>Alderman</td><td>John
+        Roberts</td><td>NON</td><td>03/27/2023</td><td>Rapid City Ward-4</td><td>1</td><td
+        style=\"display:none;\">&nbsp;</td><td>4512 MILEHIGH AVE &nbsp; RAPID CITY
+        SD 57701</td><td class=\"rgSorted\" style=\"display:none;\">828</td><td style=\"display:none;\">John</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Roberts</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">4512 MILEHIGH AVE</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57701</td><td style=\"display:none;\">WAR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__20\">\r\n\t\t\t\t<td>Alderman</td><td>Valeriah
+        Big Eagle</td><td>NON</td><td>03/28/2023</td><td>Rapid City Ward-4</td><td>2</td><td
+        style=\"display:none;\">&nbsp;</td><td>922 N 7TH ST &nbsp; RAPID CITY SD 57701</td><td
+        class=\"rgSorted\" style=\"display:none;\">828</td><td style=\"display:none;\">Valeriah</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Big Eagle</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">922 N 7TH ST</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">RAPID CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57701</td><td style=\"display:none;\">WAR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__21\">\r\n\t\t\t\t<td>Alderman</td><td>Carl
+        Doaty Jr</td><td>NON</td><td>03/16/2023</td><td>Hill City Ward-1</td><td>1</td><td
+        style=\"display:none;\">&nbsp;</td><td>107 ELM ST &nbsp; HILL CITY SD 57745</td><td
+        class=\"rgSorted\" style=\"display:none;\">832</td><td style=\"display:none;\">Carl</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Doaty</td><td
+        style=\"display:none;\">Jr</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">107 ELM ST</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">HILL CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57745</td><td style=\"display:none;\">WAR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__22\">\r\n\t\t\t\t<td>Alderman</td><td>Ethan
+        Walker</td><td>NON</td><td>03/08/2023</td><td>Hill City Ward-1</td><td>2</td><td
+        style=\"display:none;\">&nbsp;</td><td>213 MINOR LAKE CIR &nbsp; HILL CITY
+        SD 57745</td><td class=\"rgSorted\" style=\"display:none;\">832</td><td style=\"display:none;\">Ethan</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Walker</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">213 MINOR LAKE CIR</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">HILL CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57745</td><td style=\"display:none;\">WAR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr class=\"rgAltRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__23\">\r\n\t\t\t\t<td>Alderman</td><td>Lori
+        Miner</td><td>NON</td><td>03/16/2023</td><td>Hill City Ward-2</td><td>1</td><td
+        style=\"display:none;\">&nbsp;</td><td>1180 BISHOP MOUNTAIN DR &nbsp; Hill
+        City SD 57745</td><td class=\"rgSorted\" style=\"display:none;\">832</td><td
+        style=\"display:none;\">Lori</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Miner</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">Active</td><td style=\"display:none;\">Combined</td><td
+        style=\"display:none;\">6/6/2023 12:00:00 AM</td><td style=\"display:none;\">1180
+        BISHOP MOUNTAIN DR</td><td style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Hill
+        City</td><td style=\"display:none;\">SD</td><td style=\"display:none;\">57745</td><td
+        style=\"display:none;\">WAR</td><td style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr><tr
+        class=\"rgRow\" id=\"ctl00_MainContent_grdCandidates_ctl00__24\">\r\n\t\t\t\t<td>Alderman</td><td>Gary
+        Auch</td><td>NON</td><td>03/14/2023</td><td>Hill City Ward-2</td><td>2</td><td
+        style=\"display:none;\">&nbsp;</td><td>256 MARYBETH CT &nbsp; HILL CITY SD
+        57745</td><td class=\"rgSorted\" style=\"display:none;\">832</td><td style=\"display:none;\">Gary</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Auch</td><td
+        style=\"display:none;\">&nbsp;</td><td style=\"display:none;\">Active</td><td
+        style=\"display:none;\">Combined</td><td style=\"display:none;\">6/6/2023
+        12:00:00 AM</td><td style=\"display:none;\">256 MARYBETH CT</td><td style=\"display:none;\">&nbsp;</td><td
+        style=\"display:none;\">HILL CITY</td><td style=\"display:none;\">SD</td><td
+        style=\"display:none;\">57745</td><td style=\"display:none;\">WAR</td><td
+        style=\"display:none;\">&nbsp;</td>\r\n\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\r\n\t\t</table><div
+        id=\"ctl00_MainContent_grdCandidates_SharedCalendarContainer\" style=\"display:none;\">\r\n\r\n\t\t</div><div
+        tabindex=\"0\" id=\"ctl00_MainContent_grdCandidates_rfltMenu\">\r\n\t\t\t<div
+        class=\"RadMenu RadMenu_Default RadMenu_Context RadMenu_Default_Context\">\r\n\t\t\t\t<ul
+        class=\"rmActive rmVertical rmGroup rmLevel1\">\r\n\t\t\t\t\t<li class=\"rmItem
+        rmFirst\"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">NoFilter</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">Contains</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">DoesNotContain</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">StartsWith</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">EndsWith</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">EqualTo</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">NotEqualTo</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">GreaterThan</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">LessThan</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">GreaterThanOrEqualTo</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">LessThanOrEqualTo</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">Between</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">NotBetween</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">IsEmpty</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">NotIsEmpty</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">IsNull</span></a></li><li
+        class=\"rmItem \"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">NotIsNull</span></a></li><li
+        class=\"rmItem rmLast\"><a class=\"rmLink\" href=\"#\"><span class=\"rmText\">Custom</span></a></li>\r\n\t\t\t\t</ul>\r\n\t\t\t</div><input
+        id=\"ctl00_MainContent_grdCandidates_rfltMenu_ClientState\" name=\"ctl00_MainContent_grdCandidates_rfltMenu_ClientState\"
+        type=\"hidden\" />\r\n\t\t</div><input id=\"ctl00_MainContent_grdCandidates_ClientState\"
+        name=\"ctl00_MainContent_grdCandidates_ClientState\" type=\"hidden\" />\t</div>\r\n\t\t\r\n
+        \               </td>\r\n            </tr>\r\n        </table>\r\n        <input
+        type=\"hidden\" name=\"ctl00$MainContent$hidElectionDate\" id=\"MainContent_hidElectionDate\"
+        />\r\n\r\n        \r\n        <input type=\"hidden\" name=\"ctl00$MainContent$hidElectionType\"
+        id=\"MainContent_hidElectionType\" value=\"Combined\" />\r\n         \r\n\t</div>\r\n</div>\r\n\r\n
+        \           </div>\r\n\r\n            \r\n            </section><!--#middle-->\r\n\r\n</div><!--#wrapper-->\r\n\r\n<!--CREATE
+        RED DROP NAVS AT DIFFERENT SCREEN SIZES-->\r\n<script src=\"/includes/Javascript/red_drop_nav.js\"></script>\r\n\r\n\r\n
+        \       </div>\r\n    \r\n\r\n<script type=\"text/javascript\">\r\n//<![CDATA[\r\nwindow.__TsmHiddenField
+        = $get('RadScriptManager1_TSM');Sys.Application.add_init(function() {\r\n
+        \   $create(Telerik.Web.UI.RadAjaxLoadingPanel, {\"initialDelayTime\":0,\"isSticky\":false,\"minDisplayTime\":0,\"skin\":\"Default\",\"uniqueID\":\"ctl00$RadAjaxLoadingPanel1\",\"zIndex\":90000},
+        null, null, $get(\"RadAjaxLoadingPanel1\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadAjaxLoadingPanel, {\"initialDelayTime\":0,\"isSticky\":false,\"minDisplayTime\":0,\"skin\":\"Default\",\"uniqueID\":\"ctl00$MainContent$RadAjaxLoadingPanel1\",\"zIndex\":90000},
+        null, null, $get(\"MainContent_RadAjaxLoadingPanel1\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadContextMenu, {\"_childListElementCssClass\":null,\"_skin\":\"Default\",\"clickToOpen\":true,\"clientStateFieldID\":\"ctl00_MainContent_grdCandidates_rfltMenu_ClientState\",\"collapseAnimation\":\"{\\\"duration\\\":450}\",\"expandAnimation\":\"{\\\"duration\\\":450}\",\"itemData\":[{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"NoFilter\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"Contains\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"DoesNotContain\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"StartsWith\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"EndsWith\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"EqualTo\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"NotEqualTo\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"GreaterThan\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"LessThan\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"GreaterThanOrEqualTo\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"LessThanOrEqualTo\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"Between\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"NotBetween\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"IsEmpty\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"NotIsEmpty\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"IsNull\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"NotIsNull\"},{\"attributes\":{\"columnUniqueName\":\"\",\"tableID\":\"\"},\"postBack\":0,\"value\":\"Custom\"}],\"targets\":[],\"webServiceSettings\":\"{\\\"ODataSettings\\\":{\\\"InitialContainerName\\\":\\\"\\\",\\\"ResponseType\\\":0,\\\"Entities\\\":[],\\\"EntityContainer\\\":[]},\\\"Path\\\":\\\"\\\",\\\"Method\\\":\\\"\\\",\\\"UseHttpGet\\\":false,\\\"ViewState\\\":{}}\"},
+        null, null, $get(\"ctl00_MainContent_grdCandidates_rfltMenu\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadGrid, {\"ClientID\":\"ctl00_MainContent_grdCandidates\",\"ClientSettings\":{\"AllowAutoScrollOnDragDrop\":true,\"ShouldCreateRows\":true,\"DataBinding\":{},\"Selecting\":{\"CellSelectionMode\":0},\"Scrolling\":{},\"Resizing\":{},\"ClientMessages\":{},\"KeyboardNavigationSettings\":{\"AllowActiveRowCycle\":false,\"EnableKeyboardShortcuts\":true,\"FocusKey\":89,\"InitInsertKey\":73,\"RebindKey\":82,\"ExitEditInsertModeKey\":27,\"UpdateInsertItemKey\":13,\"DeleteActiveRow\":127,\"ExpandDetailTableKey\":39,\"CollapseDetailTableKey\":37,\"MoveDownKey\":40,\"MoveUpKey\":38,\"SaveChangesKey\":85,\"CancelChangesKey\":81},\"Animation\":{},\"Virtualization\":{}},\"Skin\":\"Default\",\"SortingSettings\":{\"SortToolTip\":\"Click
+        here to sort\",\"SortedAscToolTip\":\"Sorted asc\",\"SortedDescToolTip\":\"Sorted
+        desc\",\"SortedBackColor\":{\"R\":0,\"G\":0,\"B\":0,\"A\":0,\"IsKnownColor\":false,\"IsEmpty\":true,\"IsNamedColor\":false,\"IsSystemColor\":false,\"Name\":\"0\"},\"EnableSkinSortStyles\":true,\"ViewState\":{}},\"UniqueID\":\"ctl00$MainContent$grdCandidates\",\"_activeRowIndex\":\"\",\"_controlToFocus\":\"\",\"_currentPageIndex\":0,\"_defaultDateTimeFormat\":\"M/d/yyyy
+        h:mm:ss tt\",\"_editIndexes\":\"[]\",\"_embeddedSkin\":true,\"_freezeText\":\"Freeze\",\"_gridTableViewsData\":\"[{\\\"ClientID\\\":\\\"ctl00_MainContent_grdCandidates_ctl00\\\",\\\"UniqueID\\\":\\\"ctl00$MainContent$grdCandidates$ctl00\\\",\\\"PageSize\\\":50,\\\"PageCount\\\":1,\\\"EditMode\\\":\\\"EditForms\\\",\\\"AllowPaging\\\":true,\\\"CurrentPageIndex\\\":0,\\\"VirtualItemCount\\\":0,\\\"AllowMultiColumnSorting\\\":false,\\\"AllowNaturalSort\\\":true,\\\"AllowFilteringByColumn\\\":true,\\\"PageButtonCount\\\":10,\\\"HasDetailTables\\\":false,\\\"HasMultiHeaders\\\":false,\\\"CheckListWebServicePath\\\":\\\"\\\",\\\"GroupLoadMode\\\":\\\"Server\\\",\\\"PagerAlwaysVisible\\\":false,\\\"IsItemInserted\\\":false,\\\"clientDataKeyNames\\\":[],\\\"hasDetailItemTemplate\\\":false,\\\"_dataBindTemplates\\\":false,\\\"_selectedItemStyle\\\":\\\"\\\",\\\"_selectedItemStyleClass\\\":\\\"rgSelectedRow\\\",\\\"isFilterItemExpanded\\\":true,\\\"_columnsData\\\":[{\\\"UniqueName\\\":\\\"Race\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"Race\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":1,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"Contains\\\",\\\"DataField\\\":\\\"Race\\\",\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"CandidateName\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":false,\\\"SortExpression\\\":\\\"CandidateName\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":1,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"Contains\\\",\\\"DataField\\\":\\\"CandidateName\\\",\\\"ReadOnly\\\":true,\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"PoliticalPartyID\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"PoliticalPartyID\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":1,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"Contains\\\",\\\"DataField\\\":\\\"PoliticalPartyID\\\",\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"PetitionFilingDate\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"PetitionFilingDate\\\",\\\"DataTypeName\\\":\\\"System.DateTime\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"EqualTo\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"PetitionFilingDate\\\",\\\"DataFormatString\\\":\\\"{0:MM/dd/yyyy}\\\",\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"Jurisdiction\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":false,\\\"SortExpression\\\":\\\"Jurisdiction\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":1,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"Contains\\\",\\\"DataField\\\":\\\"Jurisdiction\\\",\\\"ReadOnly\\\":true,\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"BallotOrder\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"BallotOrder\\\",\\\"DataTypeName\\\":\\\"System.Int32\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"EqualTo\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"BallotOrder\\\",\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"WithdrawnDate\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"WithdrawnDate\\\",\\\"DataTypeName\\\":\\\"System.DateTime\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"EqualTo\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"WithdrawnDate\\\",\\\"DataFormatString\\\":\\\"{0:MM/dd/yyyy}\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"MailingAddress\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"\\\",\\\"Display\\\":true},{\\\"UniqueName\\\":\\\"OfficeSeqNum\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"OfficeSeqNum\\\",\\\"DataTypeName\\\":\\\"System.Int32\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"EqualTo\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"OfficeSeqNum\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"elFirstName\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"elFirstName\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"elFirstName\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"elMiddleName\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"elMiddleName\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"elMiddleName\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"elLastName\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"elLastName\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"elLastName\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"elSuffix\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"elSuffix\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"elSuffix\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"Status\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"Status\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"Status\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"elType\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"elType\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"elType\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"eldate\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"eldate\\\",\\\"DataTypeName\\\":\\\"System.DateTime\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"EqualTo\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"eldate\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"elAddress1\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"elAddress1\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"elAddress1\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"elAddress2\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"elAddress2\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"elAddress2\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"elCity\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"elCity\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"elCity\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"elState\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"elState\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"elState\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"elZip\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"elZip\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"elZip\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"DistrictType\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"DistrictType\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"DistrictType\\\",\\\"Display\\\":false},{\\\"UniqueName\\\":\\\"Elector1\\\",\\\"Resizable\\\":true,\\\"Reorderable\\\":true,\\\"Selectable\\\":true,\\\"Groupable\\\":true,\\\"ColumnType\\\":\\\"GridBoundColumn\\\",\\\"ColumnGroupName\\\":\\\"\\\",\\\"Editable\\\":true,\\\"SortExpression\\\":\\\"Elector1\\\",\\\"DataTypeName\\\":\\\"System.String\\\",\\\"FilterListOptions\\\":0,\\\"CurrentFilterFunction\\\":0,\\\"CurrentFilterValue\\\":\\\"\\\",\\\"AndCurrnetFilterFunction\\\":0,\\\"AndCurrentFilterValue\\\":\\\"\\\",\\\"Acff\\\":\\\"Contains\\\",\\\"CurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"AndCurrentFilterFunctionName\\\":\\\"NoFilter\\\",\\\"DataField\\\":\\\"Elector1\\\",\\\"Display\\\":false}]}]\",\"_masterClientID\":\"ctl00_MainContent_grdCandidates_ctl00\",\"_shouldFocusOnPage\":false,\"_unfreezeText\":\"Unfreeze\",\"allowMultiRowSelection\":false,\"clientStateFieldID\":\"ctl00_MainContent_grdCandidates_ClientState\",\"expandItems\":{},\"renderMode\":1},
+        null, null, $get(\"ctl00_MainContent_grdCandidates\"));\r\n});\r\nSys.Application.add_init(function()
+        {\r\n    $create(Telerik.Web.UI.RadAjaxPanel, {\"clientEvents\":{OnRequestStart:\"\",OnResponseEnd:\"\"},\"enableAJAX\":true,\"enableHistory\":false,\"links\":[],\"loadingPanelID\":\"MainContent_RadAjaxLoadingPanel1\",\"styles\":[],\"uniqueID\":\"ctl00$MainContent$RadAjaxPanel1\"},
+        null, null, $get(\"ctl00_MainContent_RadAjaxPanel1\"));\r\n});\r\n//]]>\r\n</script>\r\n</form>\r\n</body>\r\n</html>\r\n"
+    headers:
+      CF-RAY:
+      - a58c18b9e953e769-DEN
+      Cache-Control:
+      - private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Wed, 11 Nov 2026 08:58:42 GMT
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-AspNet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '97465'
+    status:
+      code: 200
+      message: OK
+version: 1
