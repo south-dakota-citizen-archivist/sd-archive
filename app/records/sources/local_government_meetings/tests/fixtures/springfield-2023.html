@@ -1,0 +1,747 @@
+
+
+<!DOCTYPE html>
+<html>
+<head><title>
+	Local Government Boards and Commissions | Meetings
+</title><!--%@ Page Language="C#" AutoEventWireup="true" CodeBehind="scripts.aspx.cs" Inherits="BoardsCommissions.cms.inc.scripts" %-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1" /><meta http-equiv="X-UA-Compatible" content="IE=Edge" /><meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Cache-Control" content="no-cache,no-Store" />
+
+<script src="https://cdn.sd.gov/lib/jquery/jquery.min.js"></script>
+<script src="/inc/scripts/flowtype.js"></script>
+<script src="/inc/scripts/site.js"></script>
+
+<link href="/inc/styles/styles.css" rel="stylesheet" type="text/css" /><link rel="stylesheet" href="https://cdn.sd.gov/css/font-awesome/css/font-awesome.min.css" /><link rel="icon" type="image/png" href="/img/favicon.png" /><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
+    <script type="text/javascript">
+        function convertDates() {
+            var DateTime = luxon.DateTime;
+            var uploadDate = document.querySelectorAll(".dayt");
+            var format = 'MM/dd/yyyy h:mm:ss a';
+            function addLeadingZeros(dateString) {
+                var parts = dateString.split(/[/ :]/);
+                var [month, day, year, hour, minute, second, period] = parts;
+                var formattedMonth = month.padStart(2, '0');
+                var formattedDay = day.padStart(2, '0');
+                return `${formattedMonth}/${formattedDay}/${year} ${hour}:${minute}:${second} ${period}`;
+            };
+            uploadDate.forEach(function (element) {
+                var formattedDate = addLeadingZeros(element.textContent);
+                var utcDate = DateTime.fromFormat(formattedDate, format, { zone: 'utc' });
+                var localDate = utcDate.setZone(DateTime.local().zoneName);
+                var readableDate = localDate.toLocaleString(DateTime.DATETIME_FULL);
+                element.textContent = readableDate;
+            });
+        }
+        $(document).ready(function () {
+            convertDates();
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            prm.add_endRequest(function () {
+                convertDates();
+            })
+        });
+    </script>
+</head>
+<body>
+    <form method="post" action="./Meetings.aspx?BoardID=339" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'header_imgbutton1')" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZAkmDnD_iiT9ldWizZSWubL4xBxOMyOITSa31BaACowXNOUgaA2&amp;t=639256397480000000" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=NJmAwtEo3Ipnlaxl6CMhvp3A5K5sInlo7eARx-DySx0D8RPgHqyNunRqQot7VaXYROZ44yKLjTlwF7FyVw4JnrHaMdgM3JGRV583ASM-Y8rgXw8F7gfxwZLDB5YNHGM9p9koQTiP-Ez7B4b4i5NZ4ttjlMU1&amp;t=ffffffffa1bf0f7b" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=dwY9oWetJoJoVpgL6Zq8OGACnYTuNy3aNX2r0Bfsqox1DUiaxVKRHbMeTEwIPGDUx2KXupVkI8REHzwdF14GyOiOukLdZLPlXRPSQ-oMewSmrTZ5W5hxZCuiD0vYUbw4Te8JERrnJrnkgcNJiY6G2NjoclY1&amp;t=ffffffffa1bf0f7b" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="E9E861D8" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="egiS2v6M5ojJPp+Lq9RHozYCGwqyAAR27gGuBGi0T0XpgN7ROZtrQOov0rQe8nqu9eX4sjyiobpJQ0w7LUeNdvlQlCeKHSoc9hTEHGuVTFvc89RkBkUI4v4HEUaXzKna2ZOt7eML6GnFVdftEI/5Q2fw9eZg70UZ/WhOPb1ouYlYasdLdTnNpY+nNx9Kdyp45/ji3Ap7fp7KS5tqJcRjPdFTg/3c/PPv9Gg0O5HSxeq2YflFsOe5VT5BCGMU6mIVvlzsB6xhFzd5KuJojwiS1eFpGauI+RAntPAk+1Md32+cvBD6alR0WbIaG4qXFYXiaAc4VKlOAknGXn6xogXiaWqzoS8SoezT9Y57c/CfMpyQJleuoOVsQBUKXUlDUZhQcnEZN5yaCRmgUPoS5NwaScrVMwY=" />
+</div>
+        <header>
+            
+
+
+
+<div id="logo" >
+    <a href="/">
+        <img src="/img/localGov-logo.png" />
+    </a>
+</div>
+<div id="logoEntities">
+    <div id="entityNames">
+        <a href="https://www.sdmunicipalleague.org/" target="_blank" rel="noreferrer noopener">SD Municipal League</a>
+        <a href="https://www.sdcounties.org/" target="_blank" rel="noreferrer noopener">SD Association of County Officials</a>
+        <a href="https://sdcountycommissioners.org/" target="_blank" rel="noreferrer noopener">SD Association of County Commissioners</a>
+        <a href="https://asbsd.org/" target="_blank" rel="noreferrer noopener">Associated School Boards of SD</a>
+    </div>
+</div>
+
+<div id="search">
+    <div id="searchCont">
+        <div id="searchTitle"><a href="#">Find a Board or Commission</a></div>
+        <div id="findBC">
+
+            <a id="listALL" href="SearchResults.aspx?Letter=ALL">List All Boards and Commissions</a>
+            <div id="keyWRD">
+                <table class="findTable">
+                    <tr>
+                        <td>
+                            <label for="header_txtKeyword">Search:</label>
+                            <input name="header$txtKeyword" type="text" id="header_txtKeyword" />
+                        </td>
+                        <td>
+                            <input type="image" name="header$imgbutton1" id="header_imgbutton1" src="/img/search.png" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="byAgcy">
+                Search By: 
+                <select name="header$ddlAgency" onchange="javascript:setTimeout(&#39;WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;header$ddlAgency&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))&#39;, 0)" id="header_ddlAgency" class="ddlagency">
+	<option selected="selected" value="0">- Select -</option>
+	<option value="3">Cities</option>
+	<option value="2">Counties</option>
+	<option value="1">School Boards</option>
+	<option value="3">Cities</option>
+	<option value="2">Counties</option>
+	<option value="1">School Boards</option>
+
+</select>
+            </div>
+
+
+            <div id="findBCBTTM">
+                <ul id="letters">
+                    <li id="letterTitle">By Letter:</li>
+                    <li><a href="SearchResults.aspx?Letter=A">A</a></li>
+                    <li><a href="SearchResults.aspx?Letter=B">B</a></li>
+                    <li><a href="SearchResults.aspx?Letter=C">C</a></li>
+                    <li><a href="SearchResults.aspx?Letter=D">D</a></li>
+                    <li><a href="SearchResults.aspx?Letter=E">E</a></li>
+                    <li><a href="SearchResults.aspx?Letter=F">F</a></li>
+                    <li><a href="SearchResults.aspx?Letter=G">G</a></li>
+                    <li><a href="SearchResults.aspx?Letter=H">H</a></li>
+                    <li><a href="SearchResults.aspx?Letter=I">I</a></li>
+                    <li><a href="SearchResults.aspx?Letter=J">J</a></li>
+                    <li><a href="SearchResults.aspx?Letter=K">K</a></li>
+                    <li><a href="SearchResults.aspx?Letter=L">L</a></li>
+                    <li><a href="SearchResults.aspx?Letter=M">M</a></li>
+                    <li><a href="SearchResults.aspx?Letter=N">N</a></li>
+                    <li><a href="SearchResults.aspx?Letter=O">O</a></li>
+                    <li><a href="SearchResults.aspx?Letter=P">P</a></li>
+                    <li><a href="SearchResults.aspx?Letter=Q">Q</a></li>
+                    <li><a href="SearchResults.aspx?Letter=R">R</a></li>
+                    <li><a href="SearchResults.aspx?Letter=S">S</a></li>
+                    <li><a href="SearchResults.aspx?Letter=T">T</a></li>
+                    <li><a href="SearchResults.aspx?Letter=U">U</a></li>
+                    <li><a href="SearchResults.aspx?Letter=V">V</a></li>
+                    <li><a href="SearchResults.aspx?Letter=W">W</a></li>
+                    <li><a href="SearchResults.aspx?Letter=X">X</a></li>
+                    <li><a href="SearchResults.aspx?Letter=Y">Y</a></li>
+                    <li><a href="SearchResults.aspx?Letter=Z">Z</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+		jQuery(document).ready(function () {
+
+            //find a board/commission search open/close
+            $("#findBC").hide();
+            $("#searchTitle").on("click touchstart", function (e) {
+                $("#geninfo").slideUp();
+                $("#findBC").slideToggle();
+                e.stopPropagation();
+            });
+
+		});
+    </script>
+        </header>
+        
+
+<div id="mainNav">
+    <div id="mainNavCont">
+        <div id="boardTitle">
+            <a id="boardmenu_lnkBoard" target="_blank" style="text-decoration:none;">Springfield</a> 
+            <a href="tel:01605-369-2309" id="boardmenu_contactCall" class="contactCard" title="Call: 605-369-2309">Call</a>
+            
+            <div id="boardmenu_boardType" class="boardType"></div>
+        </div>
+        <div id="navbutton" class="nav-button browsernoshow">MENU</div>
+        <ul class="primary-nav">
+            <li><a href="Meetings.aspx?BoardID=339">Meetings</a></li>
+            <li><a href="publicdocuments.aspx?BoardID=339">Reports & Links</a></li>
+            <li id="boardmenu_memberBoard"><a href="boardmembers.aspx?BoardID=339">Members</a></li>            
+            <li><a href="Information.aspx?BoardID=339">About</a></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+$(document).ready(function () { /*doc ready start*/
+
+    //mobile menu open/close
+    $("#navbutton").on("click touchstart", function (e) {
+        $("#mainNavCont ul").toggleClass("open");
+        e.stopPropagation();
+    });
+
+}); /*doc ready end*/
+</script>
+        <div id="content">
+            <div id="templatecontent">
+                <div class="eventhead">
+                    <a id="upcomingLink" href="#">Upcoming Meetings</a>
+                    <a id="archiveLink" class="inactive" href="#">Archived Meetings</a>
+                </div>
+                <div id="meetingsContain">
+                    <div id="events">
+                        <h2 class="eventsHead">Upcoming Meetings</h2>
+                        <span id="lblError" style="color:Red;"></span>
+                        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('scmAccordionManager', 'form1', ['tupdatePanel','updatePanel'], [], [], 90, '');
+//]]>
+</script>
+
+                        <span id="lblNoMeetings"></span>
+                        <!-- Bootstrap Accordion for Upcoming Meetings -->
+                        
+                                <div class="accordion" id="upcomingAccordion">
+                            
+                                <div class="card">
+                                    <div class="card-header" id="headingUpcoming1738">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseUpcoming1738" aria-expanded="false" aria-controls="collapseUpcoming1738">
+                                                12/07/2026 | Regular Meeting of the Common Council
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseUpcoming1738" class="collapse" aria-labelledby="headingUpcoming1738" data-parent="#upcomingAccordion">
+                                        <div class="card-body">
+                                            <strong>Start Date/Time:</strong> 12/07/2026 06:30 PM<br />
+                                            <strong>End Date/Time:</strong> 12/07/2026 07:30 PM<br />
+                                            <strong>Time Zone:</strong> Central Standard Time<br />
+                                            <strong>Description:</strong> Regular Meeting of the Common Council<br />
+                                            <strong>Location:</strong> Springfield Community Services Center<br />
+                                            <strong>Documents:</strong>
+                                            <div>
+	<table cellspacing="0" id="rptUpcomingMeetings_gvDocuments_0" style="border-collapse:collapse;">
+		<tr>
+			<td colspan="4">There are no documents for this meeting.</td>
+		</tr>
+	</table>
+</div>
+                                            <strong>Links:</strong>
+                                            <div>
+	<table cellspacing="0" id="rptUpcomingMeetings_gvLinks_0" style="border-collapse:collapse;">
+		<tr>
+			<td colspan="2">There are no links for this meeting.</td>
+		</tr>
+	</table>
+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                </div>
+                            
+                    </div>
+                    <div id="updatePanel">
+	
+                            <div id="archives" style="display:block;">
+                                <h2 class="eventsHead">Archived Meetings</h2>
+                                <div class="archiveshead">Archive</div>
+                                <div class="archivePick">
+                                    Select Year: 
+                                    <select name="ddlArchiveYear" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ddlArchiveYear\&#39;,\&#39;\&#39;)&#39;, 0)" id="ddlArchiveYear" class="yearDDL">
+		<option value="2026">2026</option>
+		<option value="2025">2025</option>
+		<option value="2024">2024</option>
+		<option selected="selected" value="2023">2023</option>
+		<option value="2022">2022</option>
+
+	</select>
+                                </div>
+                                
+                                <br />
+                                <br />
+                                <span id="lblErrorArchive" style="color:Red;"></span>
+                                <!-- Bootstrap Accordion for Archived Meetings -->
+                                
+                                        <div class="accordion" id="archiveAccordion">
+                                    
+                                        <div class="card">
+                                            <div class="card-header" id="headingArchive738">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseArchive738" aria-expanded="false" aria-controls="collapseArchive738">
+                                                        12/28/2023 | Special Meeting of the Common Council
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseArchive738" class="collapse" aria-labelledby="headingArchive738" data-parent="#archiveAccordion">
+                                                <div class="card-body">
+                                                    <strong>Start Date/Time:</strong> 12/28/2023 06:30 PM<br />
+                                                    <strong>End Date/Time:</strong> 12/28/2023 07:30 PM<br />
+                                                    <strong>Time Zone:</strong> Central Standard Time<br />
+                                                    <strong>Description:</strong> Tentative - Special Meeting of the Common Council of the City of Springfield to conduct Fiscal Year Closeout<br />
+                                                    <strong>Location:</strong> Springfield Community Services Center<br />
+                                                    <strong>Documents:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvDocuments_0" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="4">There are no documents for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                    <strong>Links:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvLinks_0" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">There are no links for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="card">
+                                            <div class="card-header" id="headingArchive737">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseArchive737" aria-expanded="false" aria-controls="collapseArchive737">
+                                                        12/04/2023 | Regular Meeting of the Common Council
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseArchive737" class="collapse" aria-labelledby="headingArchive737" data-parent="#archiveAccordion">
+                                                <div class="card-body">
+                                                    <strong>Start Date/Time:</strong> 12/04/2023 06:30 PM<br />
+                                                    <strong>End Date/Time:</strong> 12/04/2023 08:30 PM<br />
+                                                    <strong>Time Zone:</strong> Central Standard Time<br />
+                                                    <strong>Description:</strong> Regular Meeting of the Common Council of the City of Springfield<br />
+                                                    <strong>Location:</strong> Springfield Community Services Center<br />
+                                                    <strong>Documents:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvDocuments_1" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="4">There are no documents for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                    <strong>Links:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvLinks_1" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">There are no links for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="card">
+                                            <div class="card-header" id="headingArchive736">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseArchive736" aria-expanded="false" aria-controls="collapseArchive736">
+                                                        11/06/2023 | Regular Meeting of the Common Council
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseArchive736" class="collapse" aria-labelledby="headingArchive736" data-parent="#archiveAccordion">
+                                                <div class="card-body">
+                                                    <strong>Start Date/Time:</strong> 11/06/2023 06:30 PM<br />
+                                                    <strong>End Date/Time:</strong> 11/06/2023 08:30 PM<br />
+                                                    <strong>Time Zone:</strong> Central Standard Time<br />
+                                                    <strong>Description:</strong> Regular Meeting of the Common Council of the City of Springfield<br />
+                                                    <strong>Location:</strong> Springfield Community Services Center<br />
+                                                    <strong>Documents:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvDocuments_2" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="4">There are no documents for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                    <strong>Links:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvLinks_2" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">There are no links for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="card">
+                                            <div class="card-header" id="headingArchive735">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseArchive735" aria-expanded="false" aria-controls="collapseArchive735">
+                                                        10/02/2023 | Regular Meeting of the Common Council
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseArchive735" class="collapse" aria-labelledby="headingArchive735" data-parent="#archiveAccordion">
+                                                <div class="card-body">
+                                                    <strong>Start Date/Time:</strong> 10/02/2023 06:30 PM<br />
+                                                    <strong>End Date/Time:</strong> 10/02/2023 08:30 PM<br />
+                                                    <strong>Time Zone:</strong> Central Standard Time<br />
+                                                    <strong>Description:</strong> Regular Meeting of the Common Council of the City of Springfield<br />
+                                                    <strong>Location:</strong> Springfield Communty Services Center<br />
+                                                    <strong>Documents:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvDocuments_3" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="4">There are no documents for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                    <strong>Links:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvLinks_3" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">There are no links for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="card">
+                                            <div class="card-header" id="headingArchive734">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseArchive734" aria-expanded="false" aria-controls="collapseArchive734">
+                                                        09/07/2023 | Regular Meeting of the Common Council
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseArchive734" class="collapse" aria-labelledby="headingArchive734" data-parent="#archiveAccordion">
+                                                <div class="card-body">
+                                                    <strong>Start Date/Time:</strong> 09/07/2023 06:30 PM<br />
+                                                    <strong>End Date/Time:</strong> 09/07/2023 08:30 PM<br />
+                                                    <strong>Time Zone:</strong> Central Standard Time<br />
+                                                    <strong>Description:</strong> Regular Meeting of the Common Council of the City of Springfield<br />
+                                                    <strong>Location:</strong> Springfield Community Services Center<br />
+                                                    <strong>Documents:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvDocuments_4" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="4">There are no documents for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                    <strong>Links:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvLinks_4" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">There are no links for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="card">
+                                            <div class="card-header" id="headingArchive733">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseArchive733" aria-expanded="false" aria-controls="collapseArchive733">
+                                                        08/07/2023 | Regular Meeting of the Common Council
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseArchive733" class="collapse" aria-labelledby="headingArchive733" data-parent="#archiveAccordion">
+                                                <div class="card-body">
+                                                    <strong>Start Date/Time:</strong> 08/07/2023 06:30 PM<br />
+                                                    <strong>End Date/Time:</strong> 08/07/2023 08:30 PM<br />
+                                                    <strong>Time Zone:</strong> Central Standard Time<br />
+                                                    <strong>Description:</strong> Regular Meeting of the Common Council of th eCity of Springfield<br />
+                                                    <strong>Location:</strong> Springfield Community Services Center<br />
+                                                    <strong>Documents:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvDocuments_5" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="4">There are no documents for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                    <strong>Links:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvLinks_5" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">There are no links for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="card">
+                                            <div class="card-header" id="headingArchive732">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseArchive732" aria-expanded="false" aria-controls="collapseArchive732">
+                                                        07/06/2023 | Regular Meeting of the Common Council
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseArchive732" class="collapse" aria-labelledby="headingArchive732" data-parent="#archiveAccordion">
+                                                <div class="card-body">
+                                                    <strong>Start Date/Time:</strong> 07/06/2023 06:30 PM<br />
+                                                    <strong>End Date/Time:</strong> 07/06/2023 08:30 PM<br />
+                                                    <strong>Time Zone:</strong> Central Standard Time<br />
+                                                    <strong>Description:</strong> Regular Meeting of the Common Council<br />
+                                                    <strong>Location:</strong> Springfield Community Services Center<br />
+                                                    <strong>Documents:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvDocuments_6" style="border-collapse:collapse;">
+			<tr>
+				<th scope="col">Description</th><th scope="col">File Type</th><th scope="col">Upload Date</th>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=905&amp;preview=true" target="_blank">Agenda version2</a>
+                                                                </td><td>Agenda</td><td>
+                                                                    <div class="dayt">6/29/2023 6:45:18 PM</div>
+                                                                </td>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=906&amp;preview=true" target="_blank">Packet</a>
+                                                                </td><td>Document</td><td>
+                                                                    <div class="dayt">6/30/2023 3:09:25 PM</div>
+                                                                </td>
+			</tr>
+		</table>
+	</div>
+                                                    <strong>Links:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvLinks_6" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">There are no links for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="card">
+                                            <div class="card-header" id="headingArchive747">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseArchive747" aria-expanded="false" aria-controls="collapseArchive747">
+                                                        06/14/2023 | Special Meeting of the Comon Council
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseArchive747" class="collapse" aria-labelledby="headingArchive747" data-parent="#archiveAccordion">
+                                                <div class="card-body">
+                                                    <strong>Start Date/Time:</strong> 06/14/2023 06:30 PM<br />
+                                                    <strong>End Date/Time:</strong> 06/14/2023 07:00 PM<br />
+                                                    <strong>Time Zone:</strong> Central Standard Time<br />
+                                                    <strong>Description:</strong> Special Meeting of the Common Council of the City of Springfield to address a personnel item<br />
+                                                    <strong>Location:</strong> Springfield Community Services Center<br />
+                                                    <strong>Documents:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvDocuments_7" style="border-collapse:collapse;">
+			<tr>
+				<th scope="col">Description</th><th scope="col">File Type</th><th scope="col">Upload Date</th>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=893&amp;preview=true" target="_blank">Agenda</a>
+                                                                </td><td>Agenda</td><td>
+                                                                    <div class="dayt">6/12/2023 4:43:09 PM</div>
+                                                                </td>
+			</tr>
+		</table>
+	</div>
+                                                    <strong>Links:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvLinks_7" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">There are no links for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="card">
+                                            <div class="card-header" id="headingArchive724">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseArchive724" aria-expanded="false" aria-controls="collapseArchive724">
+                                                        06/05/2023 | Regular Meeting 
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseArchive724" class="collapse" aria-labelledby="headingArchive724" data-parent="#archiveAccordion">
+                                                <div class="card-body">
+                                                    <strong>Start Date/Time:</strong> 06/05/2023 06:30 PM<br />
+                                                    <strong>End Date/Time:</strong> 06/05/2023 08:00 PM<br />
+                                                    <strong>Time Zone:</strong> Central Standard Time<br />
+                                                    <strong>Description:</strong> Regular Meeting of the Common Council of the City of Springfield, SD<br />
+                                                    <strong>Location:</strong> Springfield Community Services Center<br />
+                                                    <strong>Documents:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvDocuments_8" style="border-collapse:collapse;">
+			<tr>
+				<th scope="col">Description</th><th scope="col">File Type</th><th scope="col">Upload Date</th>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=870&amp;preview=true" target="_blank">Agenda</a>
+                                                                </td><td>Agenda</td><td>
+                                                                    <div class="dayt">5/25/2023 8:35:37 PM</div>
+                                                                </td>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=878&amp;preview=true" target="_blank">AgendaV2</a>
+                                                                </td><td>Agenda</td><td>
+                                                                    <div class="dayt">6/1/2023 11:32:17 PM</div>
+                                                                </td>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=888&amp;preview=true" target="_blank">Minutes</a>
+                                                                </td><td>Minutes</td><td>
+                                                                    <div class="dayt">6/9/2023 4:35:08 PM</div>
+                                                                </td>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=879&amp;preview=true" target="_blank">Packet</a>
+                                                                </td><td>Document</td><td>
+                                                                    <div class="dayt">6/1/2023 11:32:58 PM</div>
+                                                                </td>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=873&amp;preview=true" target="_blank">Public Hearing Notices</a>
+                                                                </td><td>Document</td><td>
+                                                                    <div class="dayt">5/26/2023 8:45:26 PM</div>
+                                                                </td>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=889&amp;preview=true" target="_blank">Slide Deck</a>
+                                                                </td><td>Document</td><td>
+                                                                    <div class="dayt">6/9/2023 4:35:23 PM</div>
+                                                                </td>
+			</tr>
+		</table>
+	</div>
+                                                    <strong>Links:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvLinks_8" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">There are no links for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="card">
+                                            <div class="card-header" id="headingArchive465">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseArchive465" aria-expanded="false" aria-controls="collapseArchive465">
+                                                        05/01/2023 | Regular Meeting of the City Council
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseArchive465" class="collapse" aria-labelledby="headingArchive465" data-parent="#archiveAccordion">
+                                                <div class="card-body">
+                                                    <strong>Start Date/Time:</strong> 05/01/2023 06:30 PM<br />
+                                                    <strong>End Date/Time:</strong> 05/01/2023 08:00 PM<br />
+                                                    <strong>Time Zone:</strong> Central Standard Time<br />
+                                                    <strong>Description:</strong> Regular meeting of the Springfield Common Council.  This is the Municipal Year Reorganization meeting.<br />
+                                                    <strong>Location:</strong> Springfield Community Services Center<br />
+                                                    <strong>Documents:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvDocuments_9" style="border-collapse:collapse;">
+			<tr>
+				<th scope="col">Description</th><th scope="col">File Type</th><th scope="col">Upload Date</th>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=838&amp;preview=true" target="_blank">Agenda</a>
+                                                                </td><td>Agenda</td><td>
+                                                                    <div class="dayt">4/24/2023 4:46:47 PM</div>
+                                                                </td>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=839&amp;preview=true" target="_blank">Packet</a>
+                                                                </td><td>Document</td><td>
+                                                                    <div class="dayt">4/26/2023 10:00:14 PM</div>
+                                                                </td>
+			</tr><tr>
+				<td>
+                                                                    <a rel="noreferrer noopener" href="/DownloadFile.ashx?FileID=859&amp;preview=true" target="_blank">Slide Deck</a>
+                                                                </td><td>Document</td><td>
+                                                                    <div class="dayt">5/6/2023 2:55:10 PM</div>
+                                                                </td>
+			</tr>
+		</table>
+	</div>
+                                                    <strong>Links:</strong>
+                                                    <div>
+		<table cellspacing="0" id="rptArchiveMeetings_gvLinks_9" style="border-collapse:collapse;">
+			<tr>
+				<td colspan="2">There are no links for this meeting.</td>
+			</tr>
+		</table>
+	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        </div>
+                                    
+                                <br />
+                                <input type="submit" name="btnPrevArchive" value="Prev" id="btnPrevArchive" disabled="disabled" class="aspNetDisabled" />&nbsp;&nbsp;
+                                <span id="lblCurrentPage">Page: 1 of 2</span>&nbsp;&nbsp;
+                                <input type="submit" name="btnNextArchive" value="Next" id="btnNextArchive" />
+                                <br />
+                                <br />
+                            </div>
+                        
+</div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <a href="#" class="back-to-top"></a>
+        <!--%@ Page Language="C#" AutoEventWireup="true" CodeBehind="footer.aspx.cs" Inherits="BoardsCommissions.cms.inc.footer" %-->
+
+<footer>
+	<div id="copyright">&copy; 2026 | Powered by <a href="https://bit.sd.gov/" class="noIcon" target="_blank" rel="noreferrer noopener">BIT</a> | <a href="https://sd.gov/privacy.aspx" class="noIcon" target="_blank" rel="noreferrer noopener">Privacy Policy</a> | <a href="https://sd.gov/accpolicy.aspx" class="noIcon" target="_blank" rel="noreferrer noopener">Accessibility Policy</a> | <a href="https://sd.gov/disclaim.aspx" class="noIcon" target="_blank" rel="noreferrer noopener">Disclaimer</a></div>
+	<div id="footerlinks"><a href="https://sd.gov/" class="noIcon" target="_blank" rel="noreferrer noopener">sd.gov</a> | <a href="https://sdlegislature.gov/" class="noIcon" target="_blank" rel="noreferrer noopener">sdlegislature.gov</a></div>
+</footer></form>
+</body>
+</html>
