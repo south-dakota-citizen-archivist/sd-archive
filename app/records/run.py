@@ -82,15 +82,18 @@ def ensure_recordset(source: sources.Source) -> RecordSet:
 
     from census.models import Publisher
 
-    publisher = None
-    if source.publisher:
-        publisher, _ = Publisher.objects.get_or_create(
-            name=source.publisher, defaults={"slug": slugify(source.publisher)[:255]}
-        )
-    return RecordSet.objects.create(
-        slug=source.slug, name=source.name, dataset=source.dataset, publisher=publisher,
-        description=source.description, base_url=source.base_url, ingest=source.ingest,
-    )  # fmt: skip
+    # one transaction: the seed file is rewritten on commit, once the new publisher has its
+    # record set (a publisher of record sets only isn't listed there)
+    with transaction.atomic():
+        publisher = None
+        if source.publisher:
+            publisher, _ = Publisher.objects.get_or_create(
+                name=source.publisher, defaults={"slug": slugify(source.publisher)[:255]}
+            )
+        return RecordSet.objects.create(
+            slug=source.slug, name=source.name, dataset=source.dataset, publisher=publisher,
+            description=source.description, base_url=source.base_url, ingest=source.ingest,
+        )  # fmt: skip
 
 
 def raw_fetcher(slug: str):

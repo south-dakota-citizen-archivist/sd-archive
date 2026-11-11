@@ -43,9 +43,6 @@ name = "District 3 Planning and Development"
 [[publishers]]
 name = "State of South Dakota"
 
-[[publishers]]
-name = "South Dakota Bureau of Finance and Management"
-
 [[sources]]
 name = "1st District (16 counties + Lawrence)"
 slug = "1stdistrict"
