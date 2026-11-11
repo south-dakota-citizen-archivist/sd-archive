@@ -1,7 +1,8 @@
 """Felony offenders sentenced to the South Dakota Department of Corrections, from its offender
 locator (docadultlookup.sd.gov): one record per person, keyed by DOC number, with the name,
 demographics, current facility or parole office, correctional status and discharge date.
-A person held in a facility is tied to the facility's city.
+A person held in a facility is tied to the facility's city. The person is mentioned by the
+listed name and by each alias, for matching across record sets.
 
 The locator searches by last name prefix, so a run searches each letter, A to Z (in a Chrome
 window: the search has an "I'm not a robot" box), and reads every page of each letter's
@@ -20,6 +21,7 @@ import string
 from datetime import date
 from pathlib import Path
 
+from entities.mentions import from_text
 from records.sources import Found, Item, Source, Stopped
 from records.sources._places import city_place
 from records.sources._sdcfr import form_fields
@@ -144,8 +146,28 @@ def items(fetcher, today: date | None = None, details_per_run: int = DETAILS_PER
     return out
 
 
+def mentions(record) -> list:
+    """The person, by the name the locator lists and by each alias (family name first)."""
+    d = record.data
+    listed = f"{d['last_name']}, {d['first_name']} {d.get('middle_initial') or ''}".strip()
+    names = [("name", listed), *(("aliases", a) for a in d.get("aliases") or [])]
+    context = {"doc_number": d["doc_number"],
+               "status": (d.get("fields") or {}).get("Correctional Status")}  # fmt: skip
+    out, seen = [], set()
+    for field, name in names:
+        key = " ".join(name.replace(",", " ").replace(".", " ").upper().split())
+        if key in seen:
+            continue
+        seen.add(key)
+        out += from_text(name, dataset=record.recordset.dataset, record_key=str(record),
+                         field=field, role="offender", order="family_first", start=len(out),
+                         url=record.source_url, context=context)  # fmt: skip
+    return out
+
+
 SOURCE = Source(
-    slug="doc-offenders", items=items, name="Department of Corrections offenders",
+    slug="doc-offenders", items=items, mentions=mentions,
+    name="Department of Corrections offenders",
     dataset="doc-offenders", publisher="South Dakota Department of Corrections",
     base_url=parse.URL,
     description="Felony offenders sentenced to the Department of Corrections (prison), past "

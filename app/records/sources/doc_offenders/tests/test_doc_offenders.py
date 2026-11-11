@@ -2,6 +2,7 @@
 hand: completed sentence, in prison, on parole, no facility), and runs with the search window
 stood in for."""
 
+import io
 from pathlib import Path
 
 import pytest
@@ -104,6 +105,19 @@ def test_a_run(db, sd_places, searcher, tmp_path):
     assert person.data["last_name"] == "Quakenbush"
     assert person.data["fields"]["Current Facility"] == "South Dakota State Penitentiary"
     assert person.places.filter(short_name="Sioux Falls").exists()
+    from entities.models import Mention
+
+    names = Mention.objects.filter(record_key="doc-offenders:25287").order_by("position")
+    assert [(m.field, m.original, m.role) for m in names] == [
+        ("name", "Quakenbush, David M.", "offender"),
+        ("aliases", "Quarles, Jacob Lee", "offender"),  # the fixture page is someone else's
+    ]  # fmt: skip
+    # rebuilt from the records, the same
+    from django.core.management import call_command
+
+    Mention.objects.filter(dataset="doc-offenders").delete()
+    call_command("rebuild_mentions", "doc-offenders", stdout=io.StringIO())
+    assert Mention.objects.filter(record_key="doc-offenders:25287").count() == 2
     # the same month again: nothing searched or read again
     searcher.letters = []
     fetcher.asked = []
