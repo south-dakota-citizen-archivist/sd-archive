@@ -69,6 +69,11 @@ publish-vendor-checkbook:
     {{manage}} export_vendor_checkbook
     gh release upload vendor-checkbook-data app/media/exports/vendor-checkbook/*.parquet --clobber
 
+# Write the lobbyist registrations as CSV files and replace them on the release
+publish-lobbyists:
+    {{manage}} export_lobbyists
+    gh release upload lobbyists-data app/media/exports/lobbyists/*.csv --clobber
+
 # Rebuild Tailwind CSS while editing templates
 css:
     npm run dev --prefix app

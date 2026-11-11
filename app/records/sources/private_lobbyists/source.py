@@ -7,7 +7,10 @@ keyed by its CN. The registration's filings (authorizations, expense reports) ar
 documents. The run is checked against the PDF: names and years found vs. listed.
 
 Detail pages for the last two years are fetched again each month; older ones are kept.
-Hand corrections (from the earlier standalone scraper) are in _lobbyist_fixes.json.
+Corrections to what the pages publish are in fixes.toml and kept on each record they change
+(corrections); names cut off in the PDF and registrations listed under the wrong kind are in
+_lobbyist_fixes.json. Each record is tied to the state and to the South Dakota cities of the
+lobbyist and the employer.
 """
 
 from __future__ import annotations
@@ -15,14 +18,18 @@ from __future__ import annotations
 import logging
 from collections import defaultdict
 from datetime import date
+from pathlib import Path
 
 import sdnames
 from entities.mentions import from_text
+from records import fixes
 from records.sources import DocumentLink, Found, Item, Source
 from records.sources import _lobbyists as L
+from records.sources._places import city_place
 
 logger = logging.getLogger(__name__)
 STATE = "0400000US46"
+FIXES = fixes.load(Path(__file__).with_name("fixes.toml"))
 
 
 def surnames(names: list[str]) -> list[str]:
@@ -44,6 +51,13 @@ def detail_page(fetcher, url: str, year: int, today: date) -> bytes:
     if getattr(fetcher, "store", None) is not None:
         return fetcher.fetch(url, name)
     return fetcher.request("GET", url).content
+
+
+def places(d: dict) -> list[str]:
+    """The state, and the lobbyist's and employer's South Dakota cities."""
+    cities = (city_place(d.get(f"{who}_address_city")) for who in ("lobbyist", "employer")
+              if d.get(f"{who}_address_state") == "SD")  # fmt: skip
+    return [STATE, *dict.fromkeys(c for c in cities if c)]
 
 
 def check(listed: list[dict], found: list[dict]) -> dict:
@@ -78,12 +92,16 @@ def items(fetcher, today: date | None = None) -> Found:
         if L.cn(url) in public:
             continue  # listed as private, but a public lobbyist's registration
         d = L.detail(detail_page(fetcher, url, year, today), url)
+        if corrections := fixes.apply(d, FIXES):
+            d["corrections"] = corrections
         details.append(d)
         docs = [DocumentLink(f["filing_url"], metadata={k: v for k, v in f.items()
                                                           if k != "filing_url"})
                 for f in d["filings"] if f["filing_url"]]  # fmt: skip
-        out.append(Item(key=url, data=d, source_url=url, documents=docs, places=[STATE]))
-    out.checks = check(listed, details)
+        out.append(Item(key=url, data=d, source_url=url, documents=docs, places=places(d)))
+    moved = {(f["lobbyist_name"], f["year"]) for f in L.FIXES["public_but_private"].values()}
+    out.checks = check([r for r in listed if (r["lobbyist_name"], r["year"]) not in moved],
+                       details)  # fmt: skip
     if out.checks["missing_count"]:
         logger.warning("private lobbyists: %d listed registrations not found",
                        out.checks["missing_count"])  # fmt: skip

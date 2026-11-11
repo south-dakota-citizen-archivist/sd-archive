@@ -1,0 +1,25 @@
+# Dates the registration pages publish with a mistyped year.
+
+[[fix]]
+where = {registration_guid = "235010251119037125098253179099079155010243079118"}
+field = "lobbyist_employment_date"
+published = "2105-04-13"
+corrected = "2015-04-13"
+reason = "The page gives the employment date's year as 2105."
+checked = 2026-11-11
+
+[[fix]]
+where = {registration_guid = "253020026218211199083085079151099144074091241104"}
+field = "employer_authorization_date"
+published = "2105-02-18"
+corrected = "2015-02-18"
+reason = "The page gives the authorization date's year as 2105."
+checked = 2026-11-11
+
+[[fix]]
+where = {registration_guid = "205172141183121147170207005254080105014191238205"}
+field = "employer_authorization_date"
+published = "2105-01-06"
+corrected = "2015-01-06"
+reason = "The page gives the authorization date's year as 2105."
+checked = 2026-11-11

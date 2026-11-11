@@ -4,8 +4,8 @@ record per transaction (sub_id), linked to the recipient's South Dakota city whe
 from __future__ import annotations
 
 from entities.mentions import from_text
-from records.sources import Item, Source, _fec
-from records.sources._fec_schedules import schedule
+from records.sources import Found, Item, Source, _fec
+from records.sources._fec_schedules import covering, schedule
 from records.sources.fec_contributions.source import places
 
 FIELDS = ["sub_id", "transaction_id", "file_number", "image_number", "report_type",
@@ -23,14 +23,18 @@ def row(t: dict) -> dict:
     return out
 
 
-def items(fetcher) -> list[Item]:
-    out = {}
-    for t in schedule(fetcher, "/schedules/schedule_b/", "schedule_b", "disbursement_date"):
+def items(fetcher) -> Found:
+    out, read = {}, set()
+    for t in schedule(
+        fetcher, "/schedules/schedule_b/", "schedule_b", "disbursement_date", read=read
+    ):
         d = row(t)
         url = d["pdf_url"] or f"{_fec.WEB}/disbursements/?committee_id={d['committee_id']}"
         where = places(d, "recipient_city", "recipient_state")
         out[d["sub_id"]] = Item(key=d["sub_id"], data=d, source_url=url, places=where)
-    return list(out.values())
+    found = Found(out.values())
+    found.covers = covering("fec-disbursements", read)
+    return found
 
 
 def mentions(record) -> list:
@@ -51,5 +55,5 @@ def from_legacy(data: dict) -> dict:
                                      "committee_id")}  # fmt: skip
 
 
-SOURCE = Source(slug="fec-disbursements", items=items, mentions=mentions, complete=False,
+SOURCE = Source(slug="fec-disbursements", items=items, mentions=mentions,
                 legacy_key=legacy_key, from_legacy=from_legacy)  # fmt: skip

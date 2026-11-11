@@ -2,7 +2,8 @@
 agency and year, from the Secretary of State's printer-friendly list: the only form the
 site gives them in (no detail pages). Keyed by year, name and agency: one person can
 lobby for several agencies in a year. Two registrations the site lists as private are
-public ones (_lobbyist_fixes.json) and are added here."""
+public ones (_lobbyist_fixes.json) and are added here. Each record is tied to the state and
+to the agency's South Dakota city."""
 
 from __future__ import annotations
 
@@ -11,6 +12,7 @@ from datetime import date
 from entities.mentions import from_text
 from records.sources import Item, Source
 from records.sources import _lobbyists as L
+from records.sources._places import city_place
 
 STATE = "0400000US46"
 
@@ -31,11 +33,15 @@ def items(fetcher, today: date | None = None) -> list[Item]:
     for fix in L.FIXES["public_but_private"].values():
         rows.append({"year": fix["year"], "lobbyist_name": fix["lobbyist_name"],
                      "lobbyist_name_address": "", "agency": fix["agency"],
-                     "agency_address": fix["agency_address"], "listed_as": "private"})  # fmt: skip
+                     "agency_address": fix["agency_address"], "listed_as": "private",
+                     **L.address_parts(fix["agency_address_lines"], "agency_address")})  # fmt: skip
     out = {}
     for row in rows:
         row = {**row, "year": int(row["year"])}
-        out[key(row)] = Item(key=key(row), data=row, source_url=L.SEARCH, places=[STATE])
+        city = (city_place(row.get("agency_address_city"))
+                if row.get("agency_address_state") == "SD" else None)  # fmt: skip
+        out[key(row)] = Item(key=key(row), data=row, source_url=L.SEARCH,
+                             places=[STATE, *([city] if city else [])])  # fmt: skip
     return list(out.values())
 
 

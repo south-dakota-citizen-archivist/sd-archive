@@ -5,8 +5,8 @@ when there's one."""
 from __future__ import annotations
 
 from entities.mentions import from_text
-from records.sources import Item, Source, _fec
-from records.sources._fec_schedules import schedule
+from records.sources import Found, Item, Source, _fec
+from records.sources._fec_schedules import covering, schedule
 from records.sources._places import city_place
 
 FIELDS = ["sub_id", "transaction_id", "file_number", "image_number", "report_type",
@@ -32,14 +32,18 @@ def places(d: dict, city_key: str, state_key: str) -> list[str]:
     return [_fec.STATE, *([city] if city else [])]
 
 
-def items(fetcher) -> list[Item]:
-    out = {}
-    for t in schedule(fetcher, "/schedules/schedule_a/", "schedule_a", "contribution_receipt_date"):
+def items(fetcher) -> Found:
+    out, read = {}, set()
+    for t in schedule(
+        fetcher, "/schedules/schedule_a/", "schedule_a", "contribution_receipt_date", read=read
+    ):
         d = row(t)
         url = d["pdf_url"] or f"{_fec.WEB}/receipts/?committee_id={d['committee_id']}"
         where = places(d, "contributor_city", "contributor_state")
         out[d["sub_id"]] = Item(key=d["sub_id"], data=d, source_url=url, places=where)
-    return list(out.values())
+    found = Found(out.values())
+    found.covers = covering("fec-contributions", read)
+    return found
 
 
 def mentions(record) -> list:
@@ -62,5 +66,5 @@ def from_legacy(data: dict) -> dict:
                                      "contribution_receipt_date", "committee_id")}  # fmt: skip
 
 
-SOURCE = Source(slug="fec-contributions", items=items, mentions=mentions, complete=False,
+SOURCE = Source(slug="fec-contributions", items=items, mentions=mentions,
                 legacy_key=legacy_key, from_legacy=from_legacy)  # fmt: skip

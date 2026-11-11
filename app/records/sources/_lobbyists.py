@@ -14,6 +14,7 @@ from __future__ import annotations
 import io
 import itertools
 import json
+import re
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import parse_qs, urljoin, urlsplit
@@ -34,6 +35,35 @@ COLUMNS = {
                 "employer": (343, 500), "status": (500, None)},
     "public": {"year": (0, 75), "lobbyist_name": (75, 305), "agency": (305, None)},
 }  # fmt: skip
+
+
+_CITY_LINE = re.compile(
+    r"^(?P<city>[^,]*?)\s*,\s*(?P<state>[A-Z]{2})?\s*(?P<zip>\d{5}(?:-\d{4})?)?$"
+)
+
+
+def _tidy(line: str) -> str:
+    """Repeated commas and states: "SIOUX FALLS, , SD 57105", "MILBANK, SD, SD 57252",
+    "PIERRE, SD 57501, SD 57501"."""
+    line = " ".join(re.sub(r"(?:\s*,)+", ", ", line).split()).rstrip(",")
+    line = re.sub(r", ([A-Z]{2}) (\d{5}), \1 \2$", r", \1 \2", line)
+    return re.sub(r", ([A-Z]{2}), \1\b", r", \1", line)
+
+
+def address_parts(lines: list[str], prefix: str) -> dict:
+    """An address's lines as written (street lines, then "CITY, ST ZIP", then the country)
+    split into {prefix}_street, _city, _state, _zip and _country; parts that are missing
+    are None."""
+    lines = [_tidy(line) for line in lines]
+    lines = [x for x in lines if x and x != "-"]
+    parts = dict.fromkeys(("street", "city", "state", "zip", "country"))
+    if len(lines) > 1 and not _CITY_LINE.match(lines[-1]) and not re.search(r"\d", lines[-1]):
+        parts["country"] = lines.pop().strip("()")
+    if lines and (m := _CITY_LINE.match(lines[-1])):
+        lines.pop()
+        parts |= {k: v or None for k, v in m.groupdict().items()}
+    parts["street"] = " ".join(lines) or None
+    return {f"{prefix}_{k}": v for k, v in parts.items()}
 
 
 class Session:
@@ -109,6 +139,8 @@ def pdf_rows(pdf_bytes: bytes, kind: str) -> list[dict]:
                     if field in ("lobbyist_name", "agency"):
                         row[field] = lines[0] if lines else ""
                         row[f"{field}_address"] = " ".join(lines[1:])
+                        if field == "agency":
+                            row |= address_parts(lines[1:], "agency_address")
                     else:
                         row[field] = " ".join(lines)
                 if kind == "private":
@@ -183,13 +215,13 @@ def detail(html: bytes, url: str) -> dict:
             d[field] = None
             continue
         if field.endswith("_address"):
-            d[field] = " ".join(t.strip() for t in found[0].itertext() if t.strip()).upper()
+            lines = [t.strip().upper() for t in found[0].itertext() if t.strip()]
+            d[field] = " ".join(lines)
+            d |= address_parts(lines, field)
         else:
             d[field] = text(found[0]).upper()
         if field.endswith("_date"):
             d[f"{field}_raw"], d[field] = d[field], _date(d[field])
-    d |= FIXES["date_fixes"].get(guid, {})
-    d["lobbyist_name"] = FIXES["name_fixes"].get(d["lobbyist_name"], d["lobbyist_name"])
     filings = []
     tables = root.cssselect("table")
     for tr in tables[0].cssselect("tr")[1:] if tables else []:
