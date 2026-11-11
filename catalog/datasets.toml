@@ -421,6 +421,17 @@ place_link = "city"
 source = "SD Department of Corrections offender locator"
 
 [[dataset]]
+id = "governors"
+name = "South Dakota governors"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "governor"
+entities = ["person"]
+place_link = "jurisdiction"
+source = "National Governors Association"
+
+[[dataset]]
 id = "beacon-parcels"
 name = "County parcels from Beacon (shape, owners, valuation)"
 project = "sd-archive"
