@@ -1,6 +1,7 @@
 """Form 990 returns: three real South Dakota returns (a 990, a 990-EZ and a 990-PF, checked by
 hand) read, and a run that finds them in a year's index and reads them out of a zip file by
-range requests, as it does from the IRS."""
+range requests, as it does from the IRS, and an earlier return from the mirror's index (a
+Parquet file read by range) and its file."""
 
 import io
 import zipfile
@@ -74,6 +75,30 @@ INDEX = (
     "4,EFILE,999999999,202312,2024,Not South Dakota,990,4,202499999999999999,x\n"
 )
 EO = "EIN,NAME\n460431867,A\n237137609,B\n871779895,C\n"
+MIRROR_KEY = "Indices/990xmls/index_all_years_efiledata_xmls_created_on_2024-12-23.parquet"
+MIRROR_LIST = (f"<ListBucketResult><Contents><Key>{MIRROR_KEY}</Key></Contents>"
+               "</ListBucketResult>")  # fmt: skip
+OLD = "201500000000000001"  # an earlier return of the 990-EZ's filer, only on the mirror
+
+
+def make_parquet() -> bytes:
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+
+    rows = [
+        {"EIN": "237137609", "ObjectId": OLD, "FormType": "990EZ", "TaxYear": "2014",
+         "TaxPeriod": "2015-08-31", "SubmittedOn": "2015-01-10"},
+        {"EIN": "460431867", "ObjectId": "202410169349302601", "FormType": "990",  # the IRS's
+         "TaxYear": "2022", "TaxPeriod": "2023-06-30", "SubmittedOn": "2024-01-10"},
+        {"EIN": "999999999", "ObjectId": "201500000000000002", "FormType": "990",
+         "TaxYear": "2014", "TaxPeriod": "2014-12-31", "SubmittedOn": "2015-02-01"},
+    ]  # fmt: skip
+    buf = io.BytesIO()
+    pq.write_table(pa.Table.from_pylist(rows), buf)
+    return buf.getvalue()
+
+
+PARQUET = make_parquet()
 
 
 class Response:
@@ -87,15 +112,21 @@ class FixtureFetcher:
     and a zip that answers range requests."""
 
     def __init__(self, store):
-        self.store, self.ranges = store, 0
+        self.store, self.ranges, self.mirror_files = store, 0, 0
 
     def request(self, method, url, headers=None, **kwargs):
-        if url == ZIP_URL and method == "HEAD":
-            return Response(headers={"content-length": str(len(ZIP))})
-        if url == ZIP_URL:
+        ranged = {ZIP_URL: ZIP, source.MIRROR + MIRROR_KEY: PARQUET}
+        if url in ranged and method == "HEAD":
+            return Response(headers={"content-length": str(len(ranged[url]))})
+        if url in ranged:
             start, end = map(int, headers["Range"].removeprefix("bytes=").split("-"))
             self.ranges += 1
-            return Response(ZIP[start : end + 1], 206)
+            return Response(ranged[url][start : end + 1], 206)
+        if url.startswith(source.MIRROR + "?list-type=2"):
+            return Response(MIRROR_LIST.encode())
+        if url == f"{source.MIRROR}EfileData/XmlFiles/{OLD}_public.xml":
+            self.mirror_files += 1
+            return Response(F990EZ)
         return Response({parse.DOWNLOADS: PAGE.encode(), source.EO_SD: EO.encode(),
                          INDEX_URL: INDEX.encode()}[url])  # fmt: skip
 
@@ -116,7 +147,12 @@ def test_run(db, sd_places, tmp_path):
     RecordSet.objects.create(slug="irs-990-returns", name="990s", dataset="irs-990-returns")
     fetcher = FixtureFetcher(Store(tmp_path))
     run = run_source("irs-990-returns", fetcher=fetcher)
-    assert run.added == 3 and run.checks["2024 returns"] == 3  # not the other state's
+    assert run.added == 4 and run.checks["2024 returns"] == 3  # not the other state's
+    assert run.checks["mirror returns not from the IRS"] == 1 and fetcher.mirror_files == 1
+    old = Record.objects.get(key=OLD)
+    assert old.data["origin"].startswith("GivingTuesday") and old.data["index"]["TaxYear"] == "2014"
+    assert old.source_url.endswith(f"/EfileData/XmlFiles/{OLD}_public.xml")
+    assert Record.objects.get(key="202410169349302601").data["origin"] == "irs"
     ret = Record.objects.get(key="202410169349302601")
     assert ret.data["index"]["TAXPAYER_NAME"] == "Cornerstones"
     assert ret.source_url == f"{ZIP_URL}#2024_TEOS_XML_01A/202410169349302601_public.xml"
@@ -127,4 +163,4 @@ def test_run(db, sd_places, tmp_path):
     # again: the returns are kept, so the zip isn't read
     before = fetcher.ranges
     run = run_source("irs-990-returns", fetcher=fetcher)
-    assert run.unchanged == 3 and fetcher.ranges == before
+    assert run.unchanged == 4 and fetcher.ranges == before and fetcher.mirror_files == 1

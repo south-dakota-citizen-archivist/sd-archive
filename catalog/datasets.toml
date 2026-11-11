@@ -462,7 +462,18 @@ coverage = ["0400000US46"]
 unit = "return (990, 990-EZ, 990-PF, 990-T)"
 entities = ["person", "organization"]
 place_link = "city"
-source = "IRS Form 990 series downloads (e-file XML, 2019 on)"
+source = "IRS Form 990 series downloads (e-file XML, 2019 on); GivingTuesday 990 data lake mirror before that"
+
+[[dataset]]
+id = "irs-990n-postcards"
+name = "Form 990-N e-Postcards of South Dakota's small exempt organizations"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "e-Postcard (organization and tax period)"
+entities = ["person", "organization"]
+place_link = "city"
+source = "IRS Form 990-N e-Postcard bulk download"
 
 [[dataset]]
 id = "beacon-parcels"
