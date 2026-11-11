@@ -21,6 +21,7 @@ from tenacity import RetryCallState, Retrying, retry_if_exception, stop_after_at
 from ._config import Config, load_config
 from ._ladder import DIRECT, HostMemory, RungUnavailable, get_strategy, ladder
 from ._pacing import Budget, check_window, jittered
+from ._redact import redact
 from ._store import Store
 from .session import CookieJar, LoginRequired, login_for, looks_logged_out
 
@@ -64,19 +65,19 @@ class Blocked(requests.RequestException):
     """The site answered with a challenge or block page instead of the content."""
 
     def __init__(self, url: str, reason: str, status: int | None = None):
-        super().__init__(f"{url}: {reason} (HTTP {status})")
+        super().__init__(f"{redact(url)}: {reason} (HTTP {status})")
         self.url, self.reason, self.status = url, reason, status
 
 
 class RetryableStatus(Exception):
     def __init__(self, response):
-        super().__init__(f"{response.url}: HTTP {response.status_code}")
+        super().__init__(f"{redact(response.url)}: HTTP {response.status_code}")
         self.response = response
 
 
 def http_error(resp) -> requests.HTTPError:
     """The same error for a bad status whichever rung fetched it."""
-    return requests.HTTPError(f"HTTP {resp.status_code} for {resp.url}", response=resp)
+    return requests.HTTPError(f"HTTP {resp.status_code} for {redact(resp.url)}", response=resp)
 
 
 def blocked(resp, phrases: Iterable[str] = ()) -> str | None:
@@ -478,12 +479,12 @@ class Fetcher:
                 )  # fmt: skip
             except Blocked as exc:
                 last = exc
-                logger.info("%s: blocked on %s via %s", url, rung, route)
+                logger.info("%s: blocked on %s via %s", redact(url), rung, route)
                 continue
             except RungUnavailable as exc:
                 if len(attempts) == 1:
                     raise
-                logger.warning("%s: %s (via %s)", url, exc, route)
+                logger.warning("%s: %s (via %s)", redact(url), exc, route)
                 last = last if isinstance(last, Blocked) else exc
                 continue
             except (requests.ConnectionError, requests.Timeout) as exc:
@@ -491,7 +492,7 @@ class Fetcher:
                 # the same route won't help, but another route might
                 if len(routes_tried) == 1:
                     raise
-                logger.warning("%s: route %s failed: %s", url, route, exc)
+                logger.warning("%s: route %s failed: %s", redact(url), route, exc)
                 last = last if isinstance(last, Blocked) else exc
                 dead_route = route
                 continue
@@ -518,9 +519,9 @@ class Fetcher:
             if not self._logging_in and phrases and looks_logged_out(resp, phrases):
                 if _relogged or login is None:
                     raise LoginRequired(
-                        f"{url}: logged out" + ("" if login else "; no login registered")
+                        f"{redact(url)}: logged out" + ("" if login else "; no login registered")
                     )
-                logger.info("%s: logged out; logging in", url)
+                logger.info("%s: logged out; logging in", redact(url))
                 self._logging_in = True
                 try:
                     login[0](self, url)

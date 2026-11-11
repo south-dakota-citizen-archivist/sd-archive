@@ -40,6 +40,8 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(200, b"finally")
         elif self.path == "/sorry":
             self._send(200, b"<p>We're sorry, the service is temporarily unavailable</p>")
+        elif self.path.startswith("/keyed"):
+            self._send(200, b"keyed")
         elif self.path == "/ua":
             self._send(200, self.headers["User-Agent"].encode())
         else:
@@ -208,3 +210,30 @@ def test_raise_errors_false_returns_the_response(tmp_path, server, waits):
     assert not f.store.has("missing.html")
     with pytest.raises(requests.HTTPError):
         f.request("GET", f"{server}/missing", raise_errors=True)
+
+
+@pytest.mark.parametrize(
+    ("url", "shown"),
+    [
+        (
+            "https://api.example.gov/v1/x?api_key=abc&page=2",
+            "https://api.example.gov/v1/x?api_key=REDACTED&page=2",
+        ),
+        ("https://x.gov/a?Token=abc", "https://x.gov/a?Token=REDACTED"),
+        ("socks5://user:pw@proxy.example.org:1080", "socks5://REDACTED@proxy.example.org:1080"),
+        ("https://x.gov/a?q=key", "https://x.gov/a?q=key"),
+        ("https://x.gov/a", "https://x.gov/a"),
+    ],
+)
+def test_redact(url, shown):
+    assert sdfetch.redact(url) == shown
+
+
+def test_credentials_stay_out_of_errors_and_the_manifest(tmp_path, server, waits):
+    f = sdfetch.Fetcher(tmp_path, delay=0, retries=1, sleep=waits.append)
+    with pytest.raises(requests.HTTPError) as err:
+        f.request("GET", f"{server}/missing", params={"api_key": "s3cret"})
+    assert "s3cret" not in str(err.value) and "api_key=REDACTED" in str(err.value)
+    f.fetch(f"{server}/keyed?api_key=s3cret", "keyed.html")
+    manifest = (tmp_path / "manifest.jsonl").read_text()
+    assert "s3cret" not in manifest and "api_key=REDACTED" in manifest

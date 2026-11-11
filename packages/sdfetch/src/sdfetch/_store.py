@@ -7,6 +7,8 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 
+from ._redact import redact
+
 
 class EmptyResponse(Exception):
     """A refresh came back empty, so the good copy already stored was kept."""
@@ -58,7 +60,9 @@ class Store:
         (EmptyResponse) unless allow_empty."""
         path = self.path(name)
         if not content and not allow_empty and path.exists() and path.stat().st_size:
-            raise EmptyResponse(f"{url or name}: empty response; kept the stored copy")
+            raise EmptyResponse(
+                f"{redact(url) if url else name}: empty response; kept the stored copy"
+            )
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_name(path.name + ".partial")
         tmp.write_bytes(content)
@@ -97,7 +101,7 @@ class Store:
 
     def _record(self, name, content, url, method, status, note) -> None:
         entry = {
-            "url": url,
+            "url": redact(url),
             "method": method,
             **({"status": status} if status is not None else {}),
             **(note or {}),

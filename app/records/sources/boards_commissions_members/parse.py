@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from urllib.parse import urljoin
 
-import sdplaces
+from records.sources._places import city_place
 from records.sources._tables import LayoutChanged, attr, document, text
 from sddocs.clean import parse_date
 
@@ -41,19 +41,6 @@ def board_ids(html: str | bytes) -> list[int]:
 def _drop_label(value: str, label: str) -> str:
     """'Biography: …' → '…' (the label as a prefix, not a set of characters)."""
     return value[len(label) :].strip() if value.startswith(label) else value
-
-
-def city_place(city: str | None) -> str | None:
-    """The fully qualified GEOID of the one South Dakota city, town or census designated place
-    with this name; None if there's none, or several (nothing is guessed)."""
-    if not city:
-        return None
-    for kind in ("place", "cdp"):
-        try:
-            return sdplaces.lookup(kind, city).geoidfq
-        except sdplaces.UnknownPlace:
-            continue
-    return None
 
 
 def members(html: str | bytes, board_id: int, base_url: str) -> list[Member]:

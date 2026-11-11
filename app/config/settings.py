@@ -124,6 +124,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 NOTIFY = env("SD_NOTIFY", "1") == "1"
 # Big downloads refuse to start, and `just status` warns, below this much free disk
 DISK_MIN_FREE_GB = float(env("SD_DISK_MIN_FREE_GB", "50"))
+# api.data.gov key for the FEC's API (FEC record sets); without one, FEC's shared DEMO_KEY
+FEC_API_KEY = env("FEC_API_KEY", "")
 # The OCR engine for documents without a text layer (sddocs.ocr); empty reads no scans
 OCR_ENGINE = env("SD_OCR_ENGINE", "rapidocr")
 # The nightly database dumps (ops/pg-nightly-dump.sh)

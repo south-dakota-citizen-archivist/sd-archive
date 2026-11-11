@@ -19,6 +19,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 from ._http import BLOCK_PATTERNS
+from ._redact import redact
 
 STRATEGIES = ("stealth", "patchright", "camoufox", "nodriver")
 
@@ -53,7 +54,9 @@ class BrowserResponse:
         if not self.ok:
             import requests
 
-            raise requests.HTTPError(f"HTTP {self.status_code} for {self.url}", response=self)
+            raise requests.HTTPError(
+                f"HTTP {self.status_code} for {redact(self.url)}", response=self
+            )
 
 
 def _challenged(html: str) -> bool:

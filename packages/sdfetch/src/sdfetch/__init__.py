@@ -18,6 +18,7 @@ from ._ladder import (
     unregister_strategy,
 )
 from ._pacing import BudgetSpent, NotNow, OutsideHours
+from ._redact import redact
 from ._store import EmptyResponse, Store
 from .har import har_requests
 from .session import (
@@ -74,5 +75,6 @@ __all__ = [
     "free_gb",
     "retry_after",
     "RungUnavailable",
+    "redact",
     "wayback",
 ]

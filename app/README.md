@@ -48,6 +48,8 @@ just manage createsuperuser           # for /admin/
 
 Database settings come from the usual `PG*` environment variables. The default database is `sd_gis_hub` on `localhost`.
 
+The FEC record sets read `FEC_API_KEY`, a free [api.data.gov key](https://api.open.fec.gov/developers/). Without one they use the FEC's shared `DEMO_KEY`, which allows only a few requests an hour.
+
 ## Running it
 
 ```sh
