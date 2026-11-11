@@ -82,3 +82,8 @@ css:
 dump:
     zsh ../ops/pg-nightly-dump.sh
     tail -n 4 ~/sd-backups/dump.log
+
+# Motor vehicle titles and registrations: fetch the Department of Revenue's reports, build the tables
+motor-vehicles:
+    uv run python pipelines/motor-vehicles/fetch.py
+    uv run python pipelines/motor-vehicles/build.py

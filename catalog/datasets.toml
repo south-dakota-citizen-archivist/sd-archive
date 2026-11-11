@@ -50,16 +50,15 @@ notes = "Candidates are named, as candidates (public role). Precinct boundaries 
 
 [[dataset]]
 id = "motor-vehicle-registrations"
-name = "Motor vehicle registrations by county and type"
-project = "south-dakota-motor-vehicle-stats"
+name = "Motor vehicle titles and registrations by county and type"
+project = "sd-archive (pipelines/motor-vehicles)"
 grain = "aggregate"
 coverage = ["0400000US46"]
-geography = ["county"]
-period = "calendar year"
-measures = ["registrations"]
+geography = ["state", "county"]
+period = "calendar year (2015 on) and month (2018 on)"
+measures = ["registrations", "titles"]
 dimensions = ["registration type"]
-source = "SD Department of Revenue, motor vehicle statistics (PDF)"
-notes = "Oglala Lakota rows 2015–2025 carry Shannon's retired FIPS 46113; correct to 46102."
+source = "SD Department of Revenue, title and registration statistics (PDF)"
 
 [[dataset]]
 id = "pistol-permits"
