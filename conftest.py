@@ -18,7 +18,7 @@ def vcr_config():
     kept in a cassette (request credentials, response cookies)."""
     return {
         "decode_compressed_response": True,
-        "filter_headers": ["authorization", "cookie", "set-cookie", "x-api-key"],
+        "filter_headers": ["authorization", "cookie", "set-cookie", "x-api-key", "x-usertoken"],
         "filter_query_parameters": ["key", "api_key", "token"],
         "before_record_response": _drop_response_cookies,
     }

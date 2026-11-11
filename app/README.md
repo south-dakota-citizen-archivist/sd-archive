@@ -66,6 +66,7 @@ just documents <slug>          # fetch, read, categorize and extract its documen
 just manage retry_documents    # send failed documents back to the step they failed at (--recordset, --dry-run)
 just manage compare_source <slug>  # what a run would change, compared with the stored records
 just manage adopt_legacy <slug>    # before a source's first run: give imported records its keys (--dry-run)
+just manage import_prl_snapshots <slug>  # an earlier system's snapshots of items it no longer kept, as dropped records
 just manage build_readme       # refresh the sources table above
 just status                    # what's running, stalled, failed or overdue; partial downloads; disk; backups
 ```
@@ -119,6 +120,7 @@ just status                    # what's running, stalled, failed or overdue; par
 
 **Records.**
 - Each record set's code is in `records/sources/<name>/`: `source.py` (its `Source`: how to fetch the items, each with the source's own key, its fields, its files' URLs and the places it's in; for documents, the categories, rules and Pydantic extraction schemas that read them; the named parties for mentions), `parse.py` (pure parsing, which raises rather than skip a row it can't read), `schema.py`, and `tests/` with fixtures cut from the real pages and a recording of the live site.
+- Each run fetches through a store of its own (`media/raw/<slug>/`, with a manifest of every response). Sources that make many requests store each response under the month, so a stopped run reuses what it already fetched.
 - Hand corrections to what a source publishes (a row linked to the wrong file) go in its `fixes.toml` (`records.fixes`): each names the row, the value published and the corrected one, and why. It's applied only while the source still publishes the value it corrects, and recorded on the record (`corrections`).
 - Places: each record links to the jurisdictions it's in or about (several for a registration spanning counties), by the GEOID sdplaces gives for the place in force on the record's date.
 - Records imported from an earlier system are checked against a source with `compare_source` (the source's `from_legacy` puts the old data in its shape) and given its keys with `adopt_legacy`, which keeps when each was first seen and merges imported duplicates of one item.

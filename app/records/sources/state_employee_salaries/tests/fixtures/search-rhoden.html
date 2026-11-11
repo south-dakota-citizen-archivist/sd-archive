@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+
+ 
+<html>
+<head><meta charset="utf-8" /><title>
+	Open SD
+</title><meta http-equiv="x-ua-compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta HTTP-EQUIV="Pragma" content="no-cache" /><meta HTTP-EQUIV="Cache-Control" content="no-cache,no-Store" /><link rel="icon" type="image/png" href="/img/favicon.png" />
+<SCRIPT language="JAVASCRIPT">
+
+    if (top.frames.length != 0)
+        top.location = self.document.location;
+
+</SCRIPT>
+
+
+   
+    <link href="/inc/styles/styles.css" type="text/css" rel="stylesheet" /> 
+    <script src="/inc/scripts/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="/inc/scripts/jquery-scrolltofixed-min.js" type="text/javascript">
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".nav-button").click(function () {
+            $("nav > #navigation > ul").toggleClass("open");
+        });
+
+        $("nav > #navigation > ul > li > a").click(function (e) {
+
+            if ($(this).parent("li").has("ul").length) {
+                e.preventDefault();
+                
+            }
+          //  else {
+             $("nav > #navigation > ul > li:hover > ul").toggleClass("open1");
+          //  }
+               // return;
+           
+        });
+
+        $("nav > #navigation > ul > li > ul > li").click(function () {
+            
+           $("nav > #navigation > ul > li > ul > li:hover > ul").toggleClass("open2");
+            $("nav > #navigation > ul > li:hover > ul").addClass("open1");
+        });
+
+        if ($(window).width() > 1000) {
+            var stickyNavTop = $('nav').offset().top;
+
+        var stickyNav = function () {
+            var scrollTop = $(window).scrollTop();
+
+            if (scrollTop > stickyNavTop) {
+                $('nav').addClass('sticky');
+            } else {
+                $('nav').removeClass('sticky');
+            }
+        };
+
+        stickyNav();
+
+        $(window).scroll(function () {
+            stickyNav();
+        });
+        }
+        else {
+            $('nav').removeClass('sticky');
+        }
+
+        SizeChange();
+        
+
+        if ($(window).width() <= 1000) {
+            $("#navigation > ul > li").each(function (index) {
+                if ($(this).children("ul").length > 0) {
+                  
+                }
+                else {
+                    $(this).children("a").css("width", "100%");
+    
+                }
+            });
+
+        }
+
+    });
+
+  
+ //   var listItems = $("#navigation > ul").children();
+  //  var count = listItems.length;
+
+var windowsize = $(window).width();
+
+    $(window).resize(function () {
+        var windowsize = $(window).width();
+        SizeChange();
+    });
+
+   
+    
+
+    function SizeChange() {  
+        if ($(window).width() <= 1000) {
+
+            $("nav > #navigation > ul > li").width("95%");
+        }
+        else {
+            var listItems = $("#navigation > ul").children();
+            var count = listItems.length;
+            $("nav > #navigation > ul > li").width(100 / count + "%");
+        }
+    }
+
+    </script>
+</head>
+<body>
+    <form method="post" action="./employees.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE1Njc3ODM3OTUPZBYCAgQPZBYGAgMPDxYCHgRUZXh0BYkYPHVsPjxsaT48YSBpZD0nNzknIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwOi8vYXRnLnNkLmdvdi9PcGVuR292ZXJubWVudC5hc3B4Jz5TdGF0dXRlcyBhbmQgUnVsZXM8L2E+PHVsPjxsaT48YSBpZD0nODEnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL3NkbGVnaXNsYXR1cmUuZ292L1N0YXR1dGVzLyc+U0QgU3RhdHV0ZXM8L2E+PC9saT48bGk+PGEgaWQ9JzgyJyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly9ydWxlcy5zZC5nb3YnPlByb3Bvc2VkIFJ1bGVzPC9hPjwvbGk+PGxpPjxhIGlkPSc4MycgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vc2RsZWdpc2xhdHVyZS5nb3YvUnVsZXMvJz5Qcm9tdWxnYXRlZCBSdWxlczwvYT48L2xpPjwvdWw+PC9saT48bGk+PGEgaWQ9Jzg1JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0nJz5Cb2FyZHMgJiBDb21taXNzaW9uczwvYT48dWw+PGxpPjxhIGlkPScxNTQnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwczovL2JvYXJkc2FuZGNvbW1pc3Npb25zLnNkLmdvdi8nPlN0YXRlIEdvdmVybm1lbnQ8L2E+PC9saT48bGk+PGEgaWQ9JzE1NScgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vc2Rsb2NhbGdvdi5hcHBzc2Quc2QuZ292Lyc+TG9jYWwgR292ZXJubWVudDwvYT48L2xpPjwvdWw+PC9saT48bGk+PGEgaWQ9Jzg2JyB0YXJnZXQ9JycgaHJlZj0nL0luZm9fcHIuYXNweCc+UGF5cm9sbDwvYT48dWw+PGxpPjxhIGlkPSc4NycgdGFyZ2V0PScnIGhyZWY9Jy9lbXBsb3llZXMuYXNweCc+RW1wbG95ZWUgU2FsYXJpZXM8L2E+PC9saT48bGk+PGEgaWQ9Jzg4JyB0YXJnZXQ9JycgaHJlZj0nL2V4ZWN1dGl2ZV9zYWxhcmllcy5hc3B4Jz5FeGVjdXRpdmUgU2FsYXJpZXM8L2E+PC9saT48bGk+PGEgaWQ9JzkwJyB0YXJnZXQ9JycgaHJlZj0nL1FUX1N0YWZmaW5nLmFzcHgnPkN1cnJlbnQgU3RhZmZpbmcgTGV2ZWw8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPSc5MScgdGFyZ2V0PScnIGhyZWY9Jyc+Q2hlY2tib29rPC9hPjx1bD48bGk+PGEgaWQ9JzkyJyB0YXJnZXQ9JycgaHJlZj0naHR0cHM6Ly9zb3V0aGRha290YS5zcGVuZGluZy5zb2NyYXRhLmNvbS8jIS95ZWFyLzIwMjYvJz5PcGVuIENoZWNrYm9vayAtIEludGVyYWN0aXZlPC9hPjwvbGk+PGxpPjxhIGlkPScxNTcnIHRhcmdldD0nJyBocmVmPSdodHRwczovL29wZW4uc2QuZ292L3ZlbmRvci5hc3B4Jz5WZW5kb3IgUGF5bWVudCBMaXN0aW5nIC0gNSB5cnM8L2E+PC9saT48bGk+PGEgaWQ9JzEzOScgdGFyZ2V0PScnIGhyZWY9J2h0dHBzOi8vb3Blbi5zZC5nb3YvY292aWQxOV9leHBlbmRpdHVyZXMuYXNweCc+QWxsIENPVklEIFNwZW5kaW5nPC9hPjwvbGk+PGxpPjxhIGlkPSc5MycgdGFyZ2V0PScnIGhyZWY9J2h0dHBzOi8vb3Blbi5zZC5nb3YvQ292aWQxOV9BTExfMjAwMC5hc3B4Jz5TZWFyY2ggQ09WSUQgU3RpbXVsdXMgVmVuZG9yIFBheW1lbnRzPC9hPjwvbGk+PC91bD48L2xpPjxsaT48YSBpZD0nOTQnIHRhcmdldD0nJyBocmVmPScjJz5Db250cmFjdHMvR3JhbnRzPC9hPjx1bD48bGk+PGEgaWQ9Jzk1JyB0YXJnZXQ9JycgaHJlZj0nL2NvbnRyYWN0cy5hc3B4Jz5Db250cmFjdC9HcmFudCBTZWFyY2g8L2E+PC9saT48bGk+PGEgaWQ9Jzk2JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly93d3cuc2QuZ292L2JocmE/aWQ9Y3Nfa2JfYXJ0aWNsZV92aWV3JnN5c3Bhcm1fYXJ0aWNsZT1LQjAwNDQ3ODcmc3lzX2tiX2lkPWY2NTcxNWQyOTc2MDdlOTA3ZmMxYjQ4MGYwNTNhZmZhJnNwYT0xJz5Db21tb2RpdHkgQ29udHJhY3QgTGlzdDwvYT48L2xpPjxsaT48YSBpZD0nMTMyJyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cHM6Ly9zb3VyY2luZy5lc21zb2x1dGlvbnMuY29tL3Bvc3Rpbmdib2FyZC9lbnRpdGllcy8zNDQ0YTQwNC0zODE4LTQ5NGYtODRjNS0yYTg1MGFjZDc3NzknPlJGUC9CaWQgU2VhcmNoPC9hPjwvbGk+PGxpPjxhIGlkPSc5NycgdGFyZ2V0PScnIGhyZWY9Jy9yZnAuYXNweCc+UkZQIFJlZ2lzdGVyIG9mIFByb3Bvc2FsczwvYT48L2xpPjwvdWw+PC9saT48bGk+PGEgaWQ9Jzk4JyB0YXJnZXQ9JycgaHJlZj0nIyc+U3RhdGUgQnVkZ2V0PC9hPjx1bD48bGk+PGEgaWQ9JzEzOCcgdGFyZ2V0PScnIGhyZWY9J2h0dHBzOi8vc291dGhkYWtvdGEuYnVkZ2V0LnNvY3JhdGEuY29tLyMhL3llYXIvZGVmYXVsdCc+T3BlbiBCdWRnZXQ8L2E+PC9saT48bGk+PGEgaWQ9Jzk5JyB0YXJnZXQ9J19ibGFuaycgaHJlZj0naHR0cDovL2JmbS5zZC5nb3YvYnVkZ2V0Jz5CdWRnZXQgRG9jdW1lbnRzPC9hPjwvbGk+PGxpPjxhIGlkPScxMDInIHRhcmdldD0nJyBocmVmPScvYnVkZ2V0dHJhbnNmZXJzLmFzcHgnPkJ1ZGdldCBUcmFuc2ZlcnM8L2E+PC9saT48bGk+PGEgaWQ9JzEwMycgdGFyZ2V0PScnIGhyZWY9Jy9UYXhfRXhwZW5kaXR1cmVzLmFzcHgnPlRheCBFeHBlbmRpdHVyZXM8L2E+PC9saT48L3VsPjwvbGk+PGxpPjxhIGlkPSc1JyB0YXJnZXQ9J2NvbnRlbnQnIGhyZWY9J2h0dHA6Ly93d3cuc3RhdGUuc2QudXMvYmZtL2xlZGdlci9pbmZvX2ZwLmh0bSc+RmluYW5jaWFsIFB1YmxpY2F0aW9uczwvYT48dWw+PGxpPjxhIGlkPScxMDUnIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwOi8vYmZtLnNkLmdvdi9kYXNoYm9hcmRzL0RlZmF1bHQuYXNweCc+RmluYW5jaWFsIE1ldHJpY3M8L2E+PC9saT48bGk+PGEgaWQ9JzEzMCcgdGFyZ2V0PSdfdGFyZ2V0JyBocmVmPSdodHRwOi8vYmZtLnNkLmdvdi9sdGZwLyc+TG9uZyBUZXJtIEZpbmFuY2lhbCBQbGFuPC9hPjwvbGk+PGxpPjxhIGlkPScxMDgnIHRhcmdldD0nJyBocmVmPScvSW5mb19iYi5hc3B4Jz5CdWRnZXQgaW4gQnJpZWY8L2E+PC9saT48bGk+PGEgaWQ9JzEwOScgdGFyZ2V0PScnIGhyZWY9Jy9JbmZvX2ZyLmFzcHgnPkFubnVhbCBGaW5hbmNpYWwgUmVwb3J0czwvYT48L2xpPjwvdWw+PC9saT48bGk+PGEgaWQ9JzExMCcgdGFyZ2V0PSdfYmxhbmsnIGhyZWY9J2h0dHBzOi8vc2RyZWFkeXRvd29yay5jb20vYWJvdXQtdXMvcHVibGljLXJlY29yZHMvJz5FY29ub21pYyBEZXZlbG9wbWVudDwvYT48L2xpPjwvdWw+ZGQCBg9kFgYCAQ8PFgIfAAW8AzxhIGNsYXNzPSd0aXRsZSc+RW1wbG95ZWU8L2E+PGRpdiBjbGFzcz0nZGVmaW5pdGlvbic+PGg0PkVtcGxveWVlPC9oND5JbiB0aGUgc3RhdGUncyBjZW50cmFsIHBheXJvbGwgc3lzdGVtLCBhbiBFbXBsb3llZSBpcyBhbnkgaW5kaXZpZHVhbCB3aG8gcHJvdmlkZXMgc2VydmljZSBmb3IgY29tcGVuc2F0aW9uIHdobyBpcyBoaXJlZCwgZWxlY3RlZCBvciBhcHBvaW50ZWQgdG8gYSBwb3NpdGlvbiB3aXRoaW4gc3RhdGUgZ292ZXJubWVudC4gIEFuIGVtcGxveWVlIGFuZCBhbiBGVEUgKGZ1bGwtdGltZSBlcXVpdmFsZW50KSBhcmUgbm90IHRoZSBzYW1lIHRoaW5nLiAgQW4gZW1wbG95ZWUgaXMgYSBwZXJzb24sIHdoaWxlIGFuIEZURSBpcyBlcXVpdmFsZW50IHRvIGEgY2VydGFpbiBudW1iZXIgb2YgaG91cnMgd29ya2VkIG9yIGF1dGhvcml6ZWQgdG8gYmUgd29ya2VkLjwvZGl2PmRkAgMPDxYCHwAFFTExLzEwLzIwMjYgMjowMTowNCBBTWRkAg8PDxYCHwAFuA08dGFibGUgaWQ9J3N0YXRlZW1wbG95ZWVzYWxhcnlsb29rdXAnPjx0aGVhZD48dHI+PHRoPjxhIGNsYXNzPSd0aXRsZSc+UG9zICM8L2E+PGRpdiBjbGFzcz0nZGVmaW5pdGlvbic+PGg0PlBvc2l0aW9uPC9oND5Qb3NpdGlvbnMgYXJlIGRlZmluZWQgYnkgU0RDTCAzLTZBLTIgYXMgImEgY29sbGVjdGlvbiBvZiBkdXRpZXMgYW5kIHJlc3BvbnNpYmlsaXRpZXMgYXNzaWduZWQgYnkgdGhlIGFwcG9pbnRpbmcgYXV0aG9yaXR5LiIgIFBvc2l0aW9ucyBhcmUgbmVpdGhlciBhcHByb3ByaWF0ZWQgbm9yIHJlc3RyaWN0ZWQgaW4gbnVtYmVyIGJ5IHRoZSBsZWdpc2xhdHVyZSwgYnV0IGluc3RlYWQgYXJlIGEgdG9vbCB1c2VkIHRvIG1hbmFnZSB0aGUgd29ya2ZvcmNlLiAgQSBwb3NpdGlvbiBpcyBub3QgdGhlIHNhbWUgYXMgYW4gZW1wbG95ZWUgb3IgYW4gRlRFLjwvZGl2PjwvdGg+PHRoPkxhc3QgTmFtZTwvdGg+PHRoPkZpcnN0IE5hbWU8L3RoPjx0aD5NSTwvdGg+PHRoPkFnZW5jeTwvdGg+PHRoPlRpdGxlPC90aD48dGggY2xhc3M9J21vbmV5Jz5TYWxhcnkvV2FnZTwvdGg+PHRoPjxhIGNsYXNzPSd0aXRsZSc+UGF5IEJhc2lzPC9hPjxkaXYgY2xhc3M9J2RlZmluaXRpb24nPjxoND5QYXkgQmFzaXM8L2g0PlN0YXRlIGVtcGxveWVlIHBheSBpcyB0eXBpY2FsbHkgcGFpZCBlaXRoZXIgb24gYW4gaG91cmx5IG9yIGFubnVhbCBiYXNpcy4gIEFuIGhvdXJseSBlbXBsb3llZSB3aWxsIGdldCB0aGVpciBob3VybHkgd2FnZSBmb3IgZWFjaCBob3VyIHdvcmtlZCwgd2hpbGUgYSBzYWxhcmllZCBlbXBsb3llZSB3aWxsIGdldCAxLzI0dGggb2YgdGhlaXIgYW5udWFsIHNhbGFyeSBlYWNoIHBheSBwZXJpb2QuICBUaGUgc2FsYXJ5IG9mIGVhY2ggbWVtYmVyIG9mIHRoZSBMZWdpc2xhdHVyZSBpcyBlcXVhbCB0byBvbmUtZmlmdGggb2YgdGhlIFNvdXRoIERha290YSBtZWRpYW4gaG91c2Vob2xkIGluY29tZSByZXBvcnRlZCBieSB0aGUgVW5pdGVkIFN0YXRlcyBDZW5zdXMgQ3VycmVudCBQb3B1bGF0aW9uIFN1cnZleSBhbmQgYW4gYWRkaXRpb25hbCBwZXIgZGllbSB3aGlsZSBpbiBzZXNzaW9uIGZvciByb29tIGFuZCBib2FyZC4gIFRoZSBzYWxhcnkgaXMgY29udmVydGVkIHRvIGEgZGFpbHkgcmF0ZSBmb3IgcHVycG9zZXMgb2YgcGF5aW5nIGxlZ2lzbGF0b3JzIGR1cmluZyBzZXNzaW9uLiAgRm9yIG5vbi1zZXNzaW9uIG1lZXRpbmdzLCBsZWdpc2xhdG9ycyBnZXQgYSBmbGF0IGRhaWx5IHJhdGU7IGFzIGRvIG1lbWJlcnMgb2YgYm9hcmRzIGFuZCBjb21taXNzaW9ucy48L2Rpdj48L3RoPjwvdHI+PC90aGVhZD48dHI+PHRkPjAxMDAwMSAgICAgICAgICAgICAgPC90ZD48dGQ+UmhvZGVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L3RkPjx0ZD5MYXJyeSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvdGQ+PHRkPlIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC90ZD48dGQ+PGEgY2xhc3M9J3RpdGxlJz5HT1YgIDwvYT48ZGl2IGNsYXNzPSdkZWZpbml0aW9uJz48aDQ+R09WICA8L2g0PkdvdmVybm9yJ3MgT2ZmaWNlPC9kaXY+PC90ZD48dGQ+R292ZXJub3IgICAgICAgICAgICAgICAgICAgICAgPC90ZD48dGQgY2xhc3M9J21vbmV5Jz4kMTQ4LDUyMi45MjwvdGQ+PHRkPkFubnVhbGx5PC90ZD48L3RyPjwvdGFibGU+ZGQCCA8PFgIeB1Zpc2libGVoZGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFC2NiX0luYWN0aXZlQPyMaO+RYq3qI4xRV//5Vikzhvc=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=J0lY-Py40kwqxX7F6n0JVVi9GY73ovbBljoBBJnBpB1pUs4IEGdeOr3nSkWr3Pc0uyogCvCppDQooOXxjBby0bWdta01&amp;t=639190653332169432" type="text/javascript"></script>
+
+
+<script src="/WebResource.axd?d=LXgMzIUPKGoLKdxHjITuriWYw3R4ORQavYeODdjlg8mU-6dC9J-4wBv0Xns1oO9maIi6jnxFS2lq45V-EH4k1wwfwyU1&amp;t=639190653332169432" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="74D7597C" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAWmrVVTIWwbEFf97X2bIGhdnSbtEqf7z5w+kPDQ6wkA4zwbQ24Pe+/AyjewMZGx5mUCqGvMnygdTteHAKeJkdH7fNMXRI0xHaBy7tmAtz6E5m34iRcLIo7II5HXQxzjW5ZXI0HX" />
+</div> 
+        <header>
+            <a id="logo" href="/">Open <span id="sd">SD</span></a>
+            <div id="title">South Dakota Transparency Website</div>
+            <div class="nav-button"><img src="/img/menu.png" alt="Menu Icon" /></div>
+        </header>  
+
+
+<nav>
+    <span id="navigation"><ul><li><a id='79' target='_blank' href='http://atg.sd.gov/OpenGovernment.aspx'>Statutes and Rules</a><ul><li><a id='81' target='_blank' href='https://sdlegislature.gov/Statutes/'>SD Statutes</a></li><li><a id='82' target='_blank' href='https://rules.sd.gov'>Proposed Rules</a></li><li><a id='83' target='_blank' href='https://sdlegislature.gov/Rules/'>Promulgated Rules</a></li></ul></li><li><a id='85' target='_blank' href=''>Boards & Commissions</a><ul><li><a id='154' target='_blank' href='https://boardsandcommissions.sd.gov/'>State Government</a></li><li><a id='155' target='_blank' href='https://sdlocalgov.appssd.sd.gov/'>Local Government</a></li></ul></li><li><a id='86' target='' href='/Info_pr.aspx'>Payroll</a><ul><li><a id='87' target='' href='/employees.aspx'>Employee Salaries</a></li><li><a id='88' target='' href='/executive_salaries.aspx'>Executive Salaries</a></li><li><a id='90' target='' href='/QT_Staffing.aspx'>Current Staffing Level</a></li></ul></li><li><a id='91' target='' href=''>Checkbook</a><ul><li><a id='92' target='' href='https://southdakota.spending.socrata.com/#!/year/2026/'>Open Checkbook - Interactive</a></li><li><a id='157' target='' href='https://open.sd.gov/vendor.aspx'>Vendor Payment Listing - 5 yrs</a></li><li><a id='139' target='' href='https://open.sd.gov/covid19_expenditures.aspx'>All COVID Spending</a></li><li><a id='93' target='' href='https://open.sd.gov/Covid19_ALL_2000.aspx'>Search COVID Stimulus Vendor Payments</a></li></ul></li><li><a id='94' target='' href='#'>Contracts/Grants</a><ul><li><a id='95' target='' href='/contracts.aspx'>Contract/Grant Search</a></li><li><a id='96' target='_blank' href='https://www.sd.gov/bhra?id=cs_kb_article_view&sysparm_article=KB0044787&sys_kb_id=f65715d297607e907fc1b480f053affa&spa=1'>Commodity Contract List</a></li><li><a id='132' target='_blank' href='https://sourcing.esmsolutions.com/postingboard/entities/3444a404-3818-494f-84c5-2a850acd7779'>RFP/Bid Search</a></li><li><a id='97' target='' href='/rfp.aspx'>RFP Register of Proposals</a></li></ul></li><li><a id='98' target='' href='#'>State Budget</a><ul><li><a id='138' target='' href='https://southdakota.budget.socrata.com/#!/year/default'>Open Budget</a></li><li><a id='99' target='_blank' href='http://bfm.sd.gov/budget'>Budget Documents</a></li><li><a id='102' target='' href='/budgettransfers.aspx'>Budget Transfers</a></li><li><a id='103' target='' href='/Tax_Expenditures.aspx'>Tax Expenditures</a></li></ul></li><li><a id='5' target='content' href='http://www.state.sd.us/bfm/ledger/info_fp.htm'>Financial Publications</a><ul><li><a id='105' target='_blank' href='http://bfm.sd.gov/dashboards/Default.aspx'>Financial Metrics</a></li><li><a id='130' target='_target' href='http://bfm.sd.gov/ltfp/'>Long Term Financial Plan</a></li><li><a id='108' target='' href='/Info_bb.aspx'>Budget in Brief</a></li><li><a id='109' target='' href='/Info_fr.aspx'>Annual Financial Reports</a></li></ul></li><li><a id='110' target='_blank' href='https://sdreadytowork.com/about-us/public-records/'>Economic Development</a></li></ul></span>
+            
+        </nav>
+        
+        <section id="main">
+            <div id="pnl_Lookup">
+	
+                <h2>State <span id="lbl_EmployeeTitle"><a class='title'>Employee</a><div class='definition'><h4>Employee</h4>In the state's central payroll system, an Employee is any individual who provides service for compensation who is hired, elected or appointed to a position within state government.  An employee and an FTE (full-time equivalent) are not the same thing.  An employee is a person, while an FTE is equivalent to a certain number of hours worked or authorized to be worked.</div></span> Salary Lookup</h2>
+                <h5>as of <span id="lbl_DateTime">11/10/2026 2:01:04 AM</span></h5>
+                <div class="fbox">
+                    <div class="lbox left">
+                        <strong>Last Name:</strong>
+                    </div>
+                    <div class="rbox">
+                        <input name="tb_LastName" type="text" value="Rhoden" id="tb_LastName" />
+                        <span id="rfv_lastname" class="required" style="display:inline-block;visibility:hidden;">A Last Name is Required<br/></span>
+                    </div>
+                </div>
+                <div class="fbox">
+                    <div class="lbox left">
+                        <strong>First Name:</strong>
+                    </div>
+                    <div class="rbox">
+                        <input name="tb_FirstName" type="text" id="tb_FirstName" />
+                    </div>
+                </div>
+                <div class="fbox">
+                    <div class="lbox left">
+                        <input id="cb_Inactive" type="checkbox" name="cb_Inactive" />
+                    </div>
+                    <div class="rbox">
+                        Show Inactive Employees
+                    </div>
+                </div>
+      
+                <br />
+                
+                <br />
+
+                <input type="submit" name="btn_Employee" value="Display Employee" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;btn_Employee&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="btn_Employee" /><br /><br />
+            
+
+                <span id="lbl_Employee"><table id='stateemployeesalarylookup'><thead><tr><th><a class='title'>Pos #</a><div class='definition'><h4>Position</h4>Positions are defined by SDCL 3-6A-2 as "a collection of duties and responsibilities assigned by the appointing authority."  Positions are neither appropriated nor restricted in number by the legislature, but instead are a tool used to manage the workforce.  A position is not the same as an employee or an FTE.</div></th><th>Last Name</th><th>First Name</th><th>MI</th><th>Agency</th><th>Title</th><th class='money'>Salary/Wage</th><th><a class='title'>Pay Basis</a><div class='definition'><h4>Pay Basis</h4>State employee pay is typically paid either on an hourly or annual basis.  An hourly employee will get their hourly wage for each hour worked, while a salaried employee will get 1/24th of their annual salary each pay period.  The salary of each member of the Legislature is equal to one-fifth of the South Dakota median household income reported by the United States Census Current Population Survey and an additional per diem while in session for room and board.  The salary is converted to a daily rate for purposes of paying legislators during session.  For non-session meetings, legislators get a flat daily rate; as do members of boards and commissions.</div></th></tr></thead><tr><td>010001              </td><td>Rhoden                                            </td><td>Larry                                             </td><td>R                                                 </td><td><a class='title'>GOV  </a><div class='definition'><h4>GOV  </h4>Governor's Office</div></td><td>Governor                      </td><td class='money'>$148,522.92</td><td>Annually</td></tr></table></span>
+
+                <span id="lbl_Salary"></span>
+            
+</div>
+           
+            
+
+        </section>
+        <div id="Popup">
+              <div id="PopupDef"></div>
+              <br clear="all"/><br /><span id="glossary"><a href="/glossary.aspx">Glossary</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="close">Close</span><br /><br />
+          </div>
+<footer>
+            &copy; Copyright 2019<br /><br />
+            <a href="http://sd.gov">SD.Gov</a> | <a href="mailto:bfminfo@state.sd.us?subject=OpenSD">Feedback</a> | <a href="http://bfm.sd.gov/ContactUs.aspx">Contact Us</a> | <a href="http://sd.gov/accpolicy.aspx">Accessibility</a> | <a href="http://sd.gov/disclaim.aspx">Disclaimer</a> | <a href="http://sd.gov/privacy.aspx">Privacy Policy</a>
+        </footer>
+
+ <script>
+
+        $(document).ready(function () {
+            $('div#Popup').hide();
+            $('.title').mousedown(function (e) {
+                var moveLeft = 10;
+                var moveDown = 20;
+                var htmlstring = $(this).next().html()
+                document.getElementById('PopupDef').innerHTML = htmlstring;
+                if (windowsize <= 1000) {
+                    
+                    $("div#Popup").css('top', e.pageY + moveDown).css('padding-left', moveLeft);
+                }
+                else {
+                    moveLeft = -50;
+                    $("div#Popup").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+                }
+                $('div#Popup').show();
+            });
+        });
+        $('#close').click(function () {
+            $("#Popup").hide();
+        });
+
+    </script>
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("rfv_lastname"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var rfv_lastname = document.all ? document.all["rfv_lastname"] : document.getElementById("rfv_lastname");
+rfv_lastname.controltovalidate = "tb_LastName";
+rfv_lastname.focusOnError = "t";
+rfv_lastname.errormessage = "A Last Name is Required<br/>";
+rfv_lastname.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+rfv_lastname.initialvalue = "";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+</form>
+    
+</body>
+</html>

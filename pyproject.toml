@@ -64,7 +64,7 @@ filterwarnings = [
     "ignore:The default scheme will be changed:django.utils.deprecation.RemovedInDjango60Warning",
 ]
 markers = [
-    "network: hits live servers every run, where a recording can't stand in (deselected by default; run with `-m network`)",
-    "browser: starts real browsers (slow; deselected by default; run with `-m browser`)",
+    "network: hits live servers every run, where a recording can't stand in (deselected by default; run with `just test-network`)",
+    "browser: starts real browsers (slow; deselected by default; run with `just test-network`)",
     "local_llm: calls a model on this machine through Ollama (deselected by default)",
 ]

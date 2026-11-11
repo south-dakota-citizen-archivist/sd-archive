@@ -21,6 +21,10 @@ check:
 test *args:
     uv run pytest {{args}}
 
+# Tests that need live servers or browsers, with the network allowed: `just test-network packages/sdfetch`
+test-network *args:
+    uv run pytest -o addopts="-ra" -m "network or browser" {{args}}
+
 # Record (or re-record) the live responses that @pytest.mark.vcr tests replay: `just record packages/sdgis -k live_layer`
 record *args:
     uv run pytest --record-mode=rewrite {{args}}

@@ -41,4 +41,4 @@ just check                 # every pre-commit hook on every file
 
 Python 3.12; every command goes through `uv run` or `just`. Database settings come from the usual `PG*` environment variables (default: `sd_gis_hub` on localhost).
 
-Tests never reach the internet: requests off this machine fail. Tests of real sites replay recorded responses (`@pytest.mark.vcr`, cassettes in each `tests/cassettes/`); `just record <tests>` records them again when a site changes. The few that can't be recorded are marked `network` (fetches through curl_cffi, fresh timestamps), and tests that start real browsers are marked `browser`. Both are skipped unless asked for (`uv run pytest -m network`).
+Tests never reach the internet: requests off this machine fail. Tests of real sites replay recorded responses (`@pytest.mark.vcr`, cassettes in each `tests/cassettes/`); `just record <tests>` records them again when a site changes. The few that can't be recorded are marked `network` (fetches through curl_cffi, fresh timestamps), and tests that start real browsers are marked `browser`. Both are skipped unless asked for: `just test-network` runs them with the network allowed.

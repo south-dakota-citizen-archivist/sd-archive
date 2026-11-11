@@ -65,6 +65,16 @@ def item_hash(item: Item) -> str:
     return digest.hexdigest()
 
 
+class Stopped(Exception):  # noqa: N818 (a signal, not an error)
+    """Raised by items() to end a run early but keep what it found: the site started refusing
+    requests, or the run used its budget. The items are stored as a partial run (nothing is
+    marked dropped) and the reason is logged on the run."""
+
+    def __init__(self, items: Iterable[Item], reason: str):
+        super().__init__(reason)
+        self.items, self.reason = list(items), reason
+
+
 @dataclass
 class Source:
     """A record set's source.

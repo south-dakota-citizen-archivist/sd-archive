@@ -1,0 +1,205 @@
+{
+ "result": {
+  "note": "the agency facet, cut from the page data",
+  "facets": [
+   {
+    "expanded": true,
+    "label": "Filter by Agency",
+    "choices": [
+     {
+      "name": "56a9ca6e1ba5b8101c4fa97ae54bcb0a",
+      "checked": false,
+      "label": "State Auditor",
+      "value": "56a9ca6e1ba5b8101c4fa97ae54bcb0a"
+     },
+     {
+      "name": "5f7f7c59db81b010b2fb93d4f3961971",
+      "checked": false,
+      "label": "Bureau of Human Resources",
+      "value": "5f7f7c59db81b010b2fb93d4f3961971"
+     },
+     {
+      "name": "707e7419db81b010b2fb93d4f396191c",
+      "checked": false,
+      "label": "Bureau of Finance and Management",
+      "value": "707e7419db81b010b2fb93d4f396191c"
+     },
+     {
+      "name": "7321a7afdbb83450b2fb93d4f3961971",
+      "checked": false,
+      "label": "Governor's Office of Economic Development",
+      "value": "7321a7afdbb83450b2fb93d4f3961971"
+     },
+     {
+      "name": "7721a7afdbb83450b2fb93d4f3961972",
+      "checked": false,
+      "label": "Department of Public Safety",
+      "value": "7721a7afdbb83450b2fb93d4f3961972"
+     },
+     {
+      "name": "7b21a7afdbb83450b2fb93d4f3961973",
+      "checked": false,
+      "label": "Department of Transportation",
+      "value": "7b21a7afdbb83450b2fb93d4f3961973"
+     },
+     {
+      "name": "7e780aea1ba5b8101c4fa97ae54bcb6d",
+      "checked": false,
+      "label": "School and Public Lands",
+      "value": "7e780aea1ba5b8101c4fa97ae54bcb6d"
+     },
+     {
+      "name": "7f21a7afdbb83450b2fb93d4f3961974",
+      "checked": false,
+      "label": "Department of Corrections",
+      "value": "7f21a7afdbb83450b2fb93d4f3961974"
+     },
+     {
+      "name": "88684eaa1ba5b8101c4fa97ae54bcb12",
+      "checked": false,
+      "label": "State Treasurer",
+      "value": "88684eaa1ba5b8101c4fa97ae54bcb12"
+     },
+     {
+      "name": "9a180aea1ba5b8101c4fa97ae54bcbd5",
+      "checked": false,
+      "label": "Governor's Office",
+      "value": "9a180aea1ba5b8101c4fa97ae54bcbd5"
+     },
+     {
+      "name": "9c703da81b3670101c4fa97ae54bcb7d",
+      "checked": false,
+      "label": "Unified Judicial System",
+      "value": "9c703da81b3670101c4fa97ae54bcb7d"
+     },
+     {
+      "name": "9e4039e81b3670101c4fa97ae54bcb43",
+      "checked": false,
+      "label": "Legislative Research Council",
+      "value": "9e4039e81b3670101c4fa97ae54bcb43"
+     },
+     {
+      "name": "b721a7afdbb83450b2fb93d4f3961971",
+      "checked": false,
+      "label": "Department of Health",
+      "value": "b721a7afdbb83450b2fb93d4f3961971"
+     },
+     {
+      "name": "bb21a7afdbb83450b2fb93d4f3961972",
+      "checked": false,
+      "label": "Department of Revenue",
+      "value": "bb21a7afdbb83450b2fb93d4f3961972"
+     },
+     {
+      "name": "bf21a7afdbb83450b2fb93d4f3961973",
+      "checked": false,
+      "label": "Department of Tribal Relations",
+      "value": "bf21a7afdbb83450b2fb93d4f3961973"
+     },
+     {
+      "name": "0b30b1e81b3670101c4fa97ae54bcb7d",
+      "checked": false,
+      "label": "Investment Council",
+      "value": "0b30b1e81b3670101c4fa97ae54bcb7d"
+     },
+     {
+      "name": "0b8842ea1ba5b8101c4fa97ae54bcbdf",
+      "checked": false,
+      "label": "Public Utilities Commission",
+      "value": "0b8842ea1ba5b8101c4fa97ae54bcbdf"
+     },
+     {
+      "name": "0de54b161b6ec910b9c24262f54bcb3e",
+      "checked": false,
+      "label": "Housing Development Authority",
+      "value": "0de54b161b6ec910b9c24262f54bcb3e"
+     },
+     {
+      "name": "143f3c19db81b010b2fb93d4f3961962",
+      "checked": false,
+      "label": "Bureau of Information and Telecommunications",
+      "value": "143f3c19db81b010b2fb93d4f3961962"
+     },
+     {
+      "name": "1dff7099db81b010b2fb93d4f39619e8",
+      "checked": false,
+      "label": "Department of Human Services",
+      "value": "1dff7099db81b010b2fb93d4f39619e8"
+     },
+     {
+      "name": "3321a7afdbb83450b2fb93d4f3961972",
+      "checked": false,
+      "label": "Department of Military",
+      "value": "3321a7afdbb83450b2fb93d4f3961972"
+     },
+     {
+      "name": "3721a7afdbb83450b2fb93d4f3961973",
+      "checked": false,
+      "label": "Department of Tourism",
+      "value": "3721a7afdbb83450b2fb93d4f3961973"
+     },
+     {
+      "name": "3750352c1b3670101c4fa97ae54bcb4e",
+      "checked": false,
+      "label": "South Dakota Retirement System",
+      "value": "3750352c1b3670101c4fa97ae54bcb4e"
+     },
+     {
+      "name": "3b21a7afdbb83450b2fb93d4f3961974",
+      "checked": false,
+      "label": "Department of Agriculture and Natural Resources",
+      "value": "3b21a7afdbb83450b2fb93d4f3961974"
+     },
+     {
+      "name": "3f21a7afdbb83450b2fb93d4f3961970",
+      "checked": false,
+      "label": "Department of Game Fish and Parks",
+      "value": "3f21a7afdbb83450b2fb93d4f3961970"
+     },
+     {
+      "name": "c994ad09db817010b2fb93d4f39619ad",
+      "checked": false,
+      "label": "Bureau of Administration",
+      "value": "c994ad09db817010b2fb93d4f39619ad"
+     },
+     {
+      "name": "dfc9c26e1ba5b8101c4fa97ae54bcbe3",
+      "checked": false,
+      "label": "Department of Legislative Audit",
+      "value": "dfc9c26e1ba5b8101c4fa97ae54bcbe3"
+     },
+     {
+      "name": "f321a7afdbb83450b2fb93d4f3961974",
+      "checked": false,
+      "label": "Department of Veterans Affairs",
+      "value": "f321a7afdbb83450b2fb93d4f3961974"
+     },
+     {
+      "name": "fb21a7afdbb83450b2fb93d4f396196f",
+      "checked": false,
+      "label": "Department of Education",
+      "value": "fb21a7afdbb83450b2fb93d4f396196f"
+     },
+     {
+      "name": "fb21a7afdbb83450b2fb93d4f3961971",
+      "checked": false,
+      "label": "Department of Labor and Regulation",
+      "value": "fb21a7afdbb83450b2fb93d4f3961971"
+     },
+     {
+      "name": "fb4802ea1ba5b8101c4fa97ae54bcbb6",
+      "checked": false,
+      "label": "Secretary of State",
+      "value": "fb4802ea1ba5b8101c4fa97ae54bcbb6"
+     },
+     {
+      "name": "ff21a7afdbb83450b2fb93d4f3961972",
+      "checked": false,
+      "label": "Department of Social Services",
+      "value": "ff21a7afdbb83450b2fb93d4f3961972"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -15,10 +15,10 @@ class Command(BaseCommand):
     def handle(self, *args, slug, examples, **options):
         if not RecordSet.objects.filter(slug=slug).exists():
             raise CommandError(f"unknown record set: {slug}")
-        from sdfetch import Fetcher
+        from records.run import raw_fetcher
 
         source = sources.get(slug)
-        with Fetcher() as fetcher:
+        with raw_fetcher(slug) as fetcher:
             items = list(source.items(fetcher))
         c = compare(slug, items, examples=examples)
         w = self.stdout.write

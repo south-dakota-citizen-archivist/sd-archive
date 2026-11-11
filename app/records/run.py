@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from pathlib import Path
 
 from django.db import transaction
 from django.utils import timezone
@@ -24,20 +25,26 @@ def run_source(slug: str, *, job: Job | None = None, fetcher=None, force: bool =
         if source.items is None:
             raise ValueError(f"{slug}: the source has no items() to fetch")
         if fetcher is None:
-            from sdfetch import Fetcher
-
-            fetcher = Fetcher()
-        items = list(source.items(fetcher))
+            fetcher = raw_fetcher(slug)
+        complete, stopped = source.complete, None
+        try:
+            items = list(source.items(fetcher))
+        except sources.Stopped as stop:
+            # the source stopped partway (a block, a daily budget): keep what it found, and
+            # since it didn't see everything, mark nothing as gone
+            items, complete, stopped = list(stop.items), False, stop.reason
         run.fetched_count = len(items)
         run.content_hash = ingest.run_hash(items)
-        if source.complete and not force:
+        if stopped:
+            run.checks = {"stopped": stopped}
+        elif complete and not force:
             run.checks = ingest.check_drop(
                 recordset.records.current().count(), len(items), source.max_drop
             )
-        elif source.complete:
+        elif complete:
             run.checks = {"drop": "skipped (forced)"}
         with transaction.atomic():
-            stored = ingest.store(run, items, complete=source.complete)
+            stored = ingest.store(run, items, complete=complete)
             if source.mentions and stored.written:
                 _mentions(source, recordset, stored.written)
             for key, value in stored.counts().items():
@@ -53,6 +60,16 @@ def run_source(slug: str, *, job: Job | None = None, fetcher=None, force: bool =
         raise
     logger.info("%s: %s", slug, stored.counts())
     return run
+
+
+def raw_fetcher(slug: str):
+    """A Fetcher whose stored responses go in media/raw/<slug>/ (kept, with a manifest), so a
+    source can reuse what a stopped run already fetched."""
+    from django.conf import settings
+
+    from sdfetch import Fetcher
+
+    return Fetcher(Path(settings.MEDIA_ROOT) / "raw" / slug)
 
 
 def _mentions(source: sources.Source, recordset: RecordSet, keys: list[str]) -> None:
