@@ -9,7 +9,11 @@ harvest is a Run. Direct-ingest rows are a Record's `data`; an Extraction is onl
 from a file.
 """
 
+from datetime import timedelta
+
 from django.contrib.gis.db import models
+from django.db.models import Count, Q
+from django.utils import timezone
 
 
 class RecordSet(models.Model):
@@ -93,6 +97,32 @@ class Run(models.Model):
         return bool(self.added or self.changed or self.removed)
 
 
+class RecordQuerySet(models.QuerySet):
+    def complete(self):
+        """Records with nothing left to read: no documents, or every document done."""
+        return self.exclude(documents__status__in=Document.NOT_DONE)
+
+    def incomplete(self):
+        return self.filter(documents__status__in=Document.NOT_DONE).distinct()
+
+    def stuck(self, hours: float = 24):
+        """Records that can't finish without someone acting: every document failed or waits
+        on a rejected or unreviewed reading, none is done, and nothing changed in `hours`."""
+        cutoff = timezone.now() - timedelta(hours=hours)
+        waiting = [Document.Status.FAILED, Document.Status.EXTRACTED]
+        return (
+            self.filter(updated_at__lt=cutoff)
+            .annotate(
+                n_docs=Count("documents", distinct=True),
+                n_waiting=Count(
+                    "documents", filter=Q(documents__status__in=waiting), distinct=True
+                ),
+            )
+            .filter(n_docs__gt=0, n_waiting=models.F("n_docs"))
+            .exclude(documents__updated_at__gte=cutoff)
+        )
+
+
 class Record(models.Model):
     """One item at the source, as of the latest run (no history: a change overwrites it, and
     an item gone from the source is deleted). A GIS feature is a record with a geometry."""
@@ -115,6 +145,8 @@ class Record(models.Model):
     )  # fmt: skip
     legacy = models.JSONField(default=dict, blank=True, help_text="IDs in the system it came from")
 
+    objects = RecordQuerySet.as_manager()
+
     class Meta:
         ordering = ["recordset", "key"]
         constraints = [models.UniqueConstraint(fields=["recordset", "key"], name="record_key")]
@@ -131,7 +163,8 @@ class Document(models.Model):
         STORED = "stored"
         READ = "read", "Read (text, form fields or OCR)"
         CATEGORIZED = "categorized"
-        EXTRACTED = "extracted"
+        EXTRACTED = "extracted", "Extracted (waiting on review)"
+        DONE = "done", "Done (reviewed, or nothing to extract)"
         FAILED = "failed"
 
     class Kind(models.TextChoices):
@@ -139,7 +172,8 @@ class Document(models.Model):
         NATIVE = "native", "Text layer"
         SCANNED = "scanned"
         MIXED = "mixed"
-        OTHER = "other", "Not a PDF"
+        IMAGE = "image", "Image"
+        OTHER = "other", "Not a PDF or image"
         UNKNOWN = "unknown", "Not typed yet"
 
     record = models.ForeignKey(Record, on_delete=models.CASCADE, related_name="documents")
@@ -164,8 +198,31 @@ class Document(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     legacy = models.JSONField(default=dict, blank=True)
 
+    NOT_DONE = [s for s in Status.values if s != "done"]
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["record", "url"], condition=~Q(url=""), name="document_url"
+            )
+        ]
+
     def __str__(self) -> str:
         return self.filename or self.url or f"document {self.pk}"
+
+    @property
+    def is_pdf(self) -> bool:
+        return self.mime_type == "application/pdf" or (
+            not self.mime_type and self.url.lower().split("?")[0].endswith(".pdf")
+        )
+
+    @property
+    def is_image(self) -> bool:
+        return self.mime_type.startswith("image/")
+
+    @property
+    def has_text_layer(self) -> bool:
+        return self.kind in (self.Kind.NATIVE, self.Kind.FORM, self.Kind.MIXED)
 
 
 class Extraction(models.Model):

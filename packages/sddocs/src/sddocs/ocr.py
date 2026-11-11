@@ -59,7 +59,7 @@ def render(pdf: str | Path, index: int, scale: float = SCALE):
 
 def _to_points(pieces: list[dict]) -> list[dict]:
     keys = ("x0", "x1", "top", "bottom")
-    return [{**p, **{k: p[k] / SCALE for k in keys}} for p in pieces]
+    return [{**p, **{k: float(p[k]) / SCALE for k in keys}} for p in pieces]
 
 
 def _rapidocr(image) -> list[dict]:
@@ -74,7 +74,8 @@ def _rapidocr(image) -> list[dict]:
         return []
     out = []
     for text, score, box in zip(result.txts, result.scores, result.boxes, strict=False):
-        xs, ys = [p[0] for p in box], [p[1] for p in box]
+        # plain floats, not numpy's, so pages can be cached as JSON
+        xs, ys = [float(p[0]) for p in box], [float(p[1]) for p in box]
         out.append({"text": text, "conf": round(float(score), 3), "x0": min(xs), "x1": max(xs),
                     "top": min(ys), "bottom": max(ys)})  # fmt: skip
     return out

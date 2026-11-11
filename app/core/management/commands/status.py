@@ -79,6 +79,24 @@ def staged() -> list[tuple[str, int, int]]:
     return out
 
 
+def documents() -> tuple[list[tuple[str, int]], int, int]:
+    """Failed documents by record set, records stuck without help, readings awaiting review."""
+    from django.db.models import Count
+
+    from records.models import Document, Extraction, Record
+
+    failed = list(
+        Document.objects.filter(status=Document.Status.FAILED)
+        .values("record__recordset__slug")
+        .annotate(n=Count("pk"))
+        .order_by("-n")
+        .values_list("record__recordset__slug", "n")
+    )
+    stuck = Record.objects.stuck().count()
+    waiting = Extraction.objects.filter(review=Extraction.Review.PENDING).count()
+    return failed, stuck, waiting
+
+
 def last_dumps() -> dict[str, str]:
     """The last line logged for each database by the nightly dump."""
     log = Path(settings.BACKUP_DIR) / "dump.log"
@@ -156,6 +174,20 @@ class Command(BaseCommand):
             w(f"  harvest of dataset {dataset_id}: {n} batch(es) saved ({size / 1e6:.1f} MB)")
         if not saved:
             w("  no partial downloads")
+
+        w(self.style.MIGRATE_HEADING("Documents"))
+        failed_docs, stuck, waiting = documents()
+        for slug, n in failed_docs[:10]:
+            w(warn(f"  {slug}: {n} failed document(s)"))
+        if failed_docs:
+            w("  `manage.py retry_documents --recordset <slug>` sends them back to try again.")
+        if stuck:
+            w(warn(f"  {stuck} record(s) stuck: every document failed or waits on a rejected or "
+                   "unreviewed reading"))  # fmt: skip
+        if waiting:
+            w(f"  {waiting} reading(s) waiting on review")
+        if not (failed_docs or stuck or waiting):
+            w(ok("  no failed documents, stuck records or readings to review"))
 
         w(self.style.MIGRATE_HEADING("Disk"))
         free = shutil.disk_usage(settings.MEDIA_ROOT if Path(settings.MEDIA_ROOT).exists()

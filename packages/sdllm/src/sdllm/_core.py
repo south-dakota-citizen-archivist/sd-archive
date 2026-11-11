@@ -7,6 +7,7 @@ import contextlib
 import hashlib
 import json
 import os
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Literal
@@ -83,12 +84,25 @@ def ask(
 
 
 def _json_part(text: str) -> str:
-    """The JSON in a reply, without a ```json fence some local models add."""
+    """The JSON in a reply. Local models sometimes wrap it in a ```json fence or in prose
+    ("Here is the data: {...} as requested"); this finds the first whole object. Text with
+    no JSON comes back as it was, to fail validation and be asked again."""
     t = text.strip()
-    if t.startswith("```"):
-        t = t.split("\n", 1)[1] if "\n" in t else t
-        t = t.rsplit("```", 1)[0]
-    return t.strip()
+    if fenced := re.search(r"```[a-zA-Z]*\n?(.*?)```", t, re.DOTALL):
+        t = fenced.group(1).strip()
+    try:
+        json.loads(t)
+        return t
+    except ValueError:
+        pass
+    decoder = json.JSONDecoder()
+    for start in (i for i, ch in enumerate(t) if ch in "{["):
+        try:
+            _, end = decoder.raw_decode(t, start)
+        except ValueError:
+            continue
+        return t[start:end]
+    return t
 
 
 # ---------------------------------------------------------------------------
@@ -101,12 +115,15 @@ def _norm(text: str) -> str:
 
 def quote_found(quote: str, source: str, threshold: float = 90) -> bool:
     """Whether a quote appears in the source: exactly (ignoring case and spacing), or, for
-    OCR'd text, as a near match of at least `threshold` (0-100)."""
+    OCR'd text, as a near match of at least `threshold` (0-100) whose digits appear in the
+    source exactly and in order. A near match can't change a number, a date or an amount."""
     q, s = _norm(quote), _norm(source)
     if not q:
         return False
     if q in s:
         return True
+    if (digits := re.sub(r"\D", "", q)) and digits not in re.sub(r"\D", "", s):
+        return False
     from rapidfuzz import fuzz
 
     return fuzz.partial_ratio(q, s) >= threshold

@@ -61,6 +61,9 @@ Without a worker, the buttons in the app queue jobs that wait on the Jobs page. 
 ```sh
 just crawl                     # crawl every active source (or: just crawl minnehaha sddot)
 just harvest                   # harvest every watched dataset (or: just harvest 641 --force)
+just scrape <slug>             # run a record set's source (--force past the drop guard)
+just documents <slug>          # fetch, read, categorize and extract its documents (--steps, --limit, --model)
+just manage retry_documents    # send failed documents back to the step they failed at (--recordset, --dry-run)
 just manage build_readme       # refresh the sources table above
 just status                    # what's running, stalled, failed or overdue; partial downloads; disk; backups
 ```
@@ -111,6 +114,17 @@ just status                    # what's running, stalled, failed or overdue; par
 - Hosted layers report when their data last changed. If that date and the count both match the last full harvest, the harvest is recorded as skipped instead of downloading again, with a full download at least weekly regardless. Most ArcGIS Server layers don't report the date, so they're always downloaded.
 - The archive stores raw codes. The table and record pages show each code's label next to it, and CSV downloads add a `FIELD_label` column.
 - The download is saved batch by batch (see "Stopping and starting again"); storing it commits or rolls back as one unit.
+
+**Records.**
+- Each record set's code is in `records/sources/<name>/`: its `Source` says how to fetch the items (each with the source's own key, its fields and its files' URLs), and for documents, the categories, rules and Pydantic extraction schemas that read them.
+- A run stores the items the same way a harvest stores features: unchanged ones are left alone, changed ones overwritten (keeping when each was first seen), and after a complete run, ones gone from the source deleted. A complete run that finds far fewer items than are stored is refused (`max_drop`). A record's documents follow its list of files.
+- Documents go through steps, each one moving a document on or marking it failed with the error, without stopping the rest:
+  - **fetch**: the file is stored once by its SHA-256 in `media/blobs/`, with every fetch logged in `media/manifest.jsonl`. A web page where a file was expected (an error page, a login form) isn't stored. The file type comes from the bytes, not the server's label.
+  - **read**: form fields or the text layer, else OCR (`SD_OCR_ENGINE`, rapidocr by default), page by page and cached in `media/pages/`. Images are read as one-page PDFs.
+  - **categorize**: the source's rule, else a model choosing among its categories. A category without a schema has nothing to extract, which finishes the document.
+  - **extract**: the category's fields, each with the quote it came from, checked against the text (sdllm). Fields without a found quote are flagged. A new reading replaces unreviewed ones and never touches reviewed ones.
+  - **review**: approving or correcting a reading finishes the document; rejecting it leaves it for a new reading.
+- A record is complete when every document is finished. `just status` lists failed documents, readings waiting on review, and records stuck for a day with every document failed or waiting.
 
 **Name search.**
 - After each harvest, the dataset's name fields go into `search_nameentry`, normalized by the SQL function `gis_hub_normalize_name()` (uppercase, accents removed, punctuation stripped) and indexed with `pg_trgm`.

@@ -63,7 +63,7 @@ RECORD_SETS = {
     "FEC Independent Expenditures (Schedule E)": ("fec-independent-expenditures", "fec"),
 }  # fmt: skip
 
-DOC_KIND = {"native_pdf": "native", "image_pdf": "scanned", "image": "other", "unknown": "unknown"}
+DOC_KIND = {"native_pdf": "native", "image_pdf": "scanned", "image": "image", "unknown": "unknown"}
 DOC_STATUS = {
     "PENDING": "pending", "DOWNLOADING": "pending", "DOWNLOADED": "stored",
     "CATEGORIZING": "stored", "CATEGORIZED": "categorized", "PROCESSING": "categorized",

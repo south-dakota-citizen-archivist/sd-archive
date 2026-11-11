@@ -33,8 +33,8 @@ sdllm.classify(
 
 ## What it does
 
-- **Schema-checked answers.** The model is asked for JSON matching a Pydantic model. An answer that doesn't validate is asked for again, once by default, with the validation error.
-- **Quotes checked against the source.** With `quote_required` (the default), the model returns a quote for each field it fills. Each quote must appear in the text: ignoring case and spacing, or as a 90% near match for OCR'd text.
+- **Schema-checked answers.** The model is asked for JSON matching a Pydantic model. JSON wrapped in a code fence or in prose is found (the first whole object). An answer that doesn't validate, or has no JSON, is asked for again, once by default, with the validation error.
+- **Quotes checked against the source.** With `quote_required` (the default), the model returns a quote for each field it fills. Each quote must appear in the text: ignoring case and spacing, or as a 90% near match for OCR'd text. A near match must still have the quote's digits exactly and in order, so it can't change a number, date or amount.
   - Fields without a found quote are listed in `unsupported`, and set to `None` with `drop_unsupported=True`.
   - A found quote shows the text exists in the document, not that it belongs in that field. Per-field evaluation catches that.
 - **Remote-call guard.** Only models on this machine are called unless `allow_remote=True` or `SDLLM_ALLOW_REMOTE=1`. That means a local LiteLLM provider such as `ollama_chat/…` or `lm_studio/…`, a localhost `api_base`, or a backend registered in code. Anything else raises `RemoteCallBlocked`.

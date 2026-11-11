@@ -36,8 +36,9 @@ def test_pages_choose_the_best_reading():
 
 
 @pytest.mark.skipif(not ocr.available("rapidocr"), reason="rapidocr isn't installed")
-def test_scanned_page_by_ocr():
-    [p2] = sddocs.pages(SPILL, only=[2])
+def test_scanned_page_by_ocr(tmp_path):
+    [p2] = sddocs.pages(SPILL, only=[2], cache=tmp_path / "cache")
+    assert [*sddocs.pages(SPILL, only=[2], cache=tmp_path / "cache")] == [p2]  # cached as JSON
     assert p2["method"] == "ocr" and p2["engine"] == "rapidocr"
     assert "NATURAL RESOURCES" in p2["text"] and p2["conf"] > 0.8
     w = p2["words"][0]

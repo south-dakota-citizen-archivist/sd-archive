@@ -2,6 +2,8 @@
 
 import pandas as pd
 
+from records import ingest
+
 
 class ValidationError(RuntimeError):
     """Raised when downloaded data doesn't look right."""
@@ -17,14 +19,8 @@ def validate(df: pd.DataFrame, expected: int, oid_field: str | None) -> dict:
 
 
 def check_drop(previous: int | None, current: int, max_drop: float) -> dict:
-    """Refuse to replace data when the feature count falls sharply, which
-    usually means a broken server or query rather than real deletions."""
-    if not previous:
-        return {"drop": None}
-    drop = (previous - current) / previous
-    if drop > max_drop:
-        raise ValidationError(
-            f"feature count fell from {previous} to {current} ({drop:.0%}), "
-            f"more than max_drop={max_drop:.0%}; harvest with force if this is expected"
-        )
-    return {"drop": round(drop, 4)}
+    """Refuse to replace a layer's features when their count falls sharply (records.ingest)."""
+    try:
+        return ingest.check_drop(previous, current, max_drop)
+    except ingest.DropTooLarge as e:
+        raise ValidationError(f"feature {e}") from None

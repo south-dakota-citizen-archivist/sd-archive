@@ -81,9 +81,18 @@ def test_drop_unsupported(fake):
 
 def test_ocr_quotes_match_loosely():
     assert sdllm.quote_found("release of diesel fuel at 1215 Main Street", LETTER)
-    assert sdllm.quote_found("release of diese1 fuel at 1215 Main Street", LETTER)  # OCR 1 for l
+    ocr = LETTER.replace("diesel", "diese1").replace("Street", "Strect")  # OCR misreads
+    assert sdllm.quote_found("release of diesel fuel at 1215 Main Street", ocr)
     assert not sdllm.quote_found("release of gasoline at 40 Elm Street", LETTER)
     assert not sdllm.quote_found("", LETTER)
+
+
+def test_a_near_match_cant_change_a_number():
+    assert sdllm.quote_found("File Number 2026.148", LETTER)
+    assert not sdllm.quote_found("File Number 2026.149", LETTER)
+    assert not sdllm.quote_found("September 27, 2026", LETTER)
+    assert not sdllm.quote_found("P.O. Box 1008", LETTER)
+    assert sdllm.quote_found("September 21 2026", LETTER)  # punctuation isn't a digit
 
 
 def test_cache(fake):
@@ -129,3 +138,48 @@ def test_local_model_extracts(tmp_path, monkeypatch):
     got = sdllm.extract(Letter, LETTER, model=sdllm.DEFAULT_MODEL)
     assert isinstance(got.data, Letter) and any(got.data.model_dump().values())
     assert set(got.evidence) | set(got.unsupported)  # quotes came back and were checked
+
+
+@pytest.mark.parametrize(
+    ("reply", "expected"),
+    [
+        ('{"name": "Alice", "year": 2024}', {"name": "Alice", "year": 2024}),
+        ('  \n{"key": "value"}\n  ', {"key": "value"}),
+        ('```json\n{"name": "Bob"}\n```', {"name": "Bob"}),
+        ('```\n{"name": "Carol"}\n```', {"name": "Carol"}),
+        ('```json\n{\n  "name": "Eve",\n  "year": 2023\n}\n```', {"name": "Eve", "year": 2023}),
+        ('Here is the data: {"name": "Dave"} as requested.', {"name": "Dave"}),
+        ('First: {"name": "Alice"} and second: {"name": "Bob"}', {"name": "Alice"}),
+        ('{"status": "ok"} — extracted from the document above.', {"status": "ok"}),
+        ('{"key": "value with } brace inside"}', {"key": "value with } brace inside"}),
+        (
+            '{"outer": {"inner": "value"}, "list": [1, 2, 3]}',
+            {"outer": {"inner": "value"}, "list": [1, 2, 3]},
+        ),
+        ('Sure! ```json\n{"name": "Fay"}\n``` Let me know.', {"name": "Fay"}),
+    ],
+)
+def test_json_part_finds_the_object(reply, expected):
+    from sdllm._core import _json_part
+
+    assert json.loads(_json_part(reply)) == expected
+
+
+@pytest.mark.parametrize("reply", ["", "I cannot extract structured data."])
+def test_json_part_leaves_text_without_json(reply):
+    from sdllm._core import _json_part
+
+    assert _json_part(reply) == reply.strip()
+
+
+def test_prose_wrapped_answer_validates(fake):
+    fake.answers.append('Here you go: {"label": "letter", "reason": "It is addressed."} Thanks!')
+    result = sdllm.classify(LETTER, ["letter", "form"], model="fake/x", cache=False)
+    assert result.label == "letter"
+
+
+def test_answer_without_json_is_asked_again(fake):
+    fake.answers += ["I can't tell.", {"label": "form", "reason": "Fields."}]
+    result = sdllm.classify(LETTER, ["letter", "form"], model="fake/x", cache=False)
+    assert result.label == "form"
+    assert len(fake.calls) == 2

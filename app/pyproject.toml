@@ -7,22 +7,31 @@ requires-python = ">=3.12"
 dependencies = [
     "celery[redis]>=5.5",
     "croniter>=6.0",
+    "cssselect>=1.2",
     "curl-cffi>=0.17.0",
     "django>=5.2,<6",
     "django-ninja>=1.4",
     "django-unfold>=0.70",
     "geopandas>=1.2.0",
+    "lxml>=5.3",
     "nodriver>=0.50.99",
+    "pillow>=11.0",
     "psycopg[binary]>=3.2",
     "pyarrow>=26.0.0",
     "requests>=2.32",
+    "sddocs[ocr]",
+    "sdfetch",
     "sdgis",
+    "sdllm[claude,local]",
     "sdnames",
     "sdplaces[geo]",
 ]
 
 [tool.uv.sources]
+sddocs = { workspace = true }
+sdfetch = { workspace = true }
 sdgis = { workspace = true }
+sdllm = { workspace = true }
 sdnames = { workspace = true }
 sdplaces = { workspace = true }
 

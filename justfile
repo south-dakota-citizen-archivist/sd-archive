@@ -52,6 +52,14 @@ crawl *slugs:
 harvest *args:
     caffeinate -i {{manage}} harvest {{args}}
 
+# Run record sets' sources now (`just scrape salaries phone-directory`); kept awake
+scrape *args:
+    caffeinate -i {{manage}} scrape {{args}}
+
+# Move a record set's documents through fetch, read, categorize, extract (`just documents oaths --limit 50`)
+documents *args:
+    caffeinate -i {{manage}} documents {{args}}
+
 # Rebuild Tailwind CSS while editing templates
 css:
     npm run dev --prefix app
