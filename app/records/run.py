@@ -31,7 +31,9 @@ def run_source(slug: str, *, job: Job | None = None, fetcher=None, force: bool =
         run.fetched_count = len(items)
         run.content_hash = ingest.run_hash(items)
         if source.complete and not force:
-            run.checks = ingest.check_drop(recordset.records.count(), len(items), source.max_drop)
+            run.checks = ingest.check_drop(
+                recordset.records.current().count(), len(items), source.max_drop
+            )
         elif source.complete:
             run.checks = {"drop": "skipped (forced)"}
         with transaction.atomic():

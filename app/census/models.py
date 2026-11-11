@@ -274,7 +274,7 @@ class Dataset(models.Model):
         """This layer's harvested features (its record set's records)."""
         from records.models import Record
 
-        return Record.objects.filter(recordset__gis_dataset=self)
+        return Record.objects.current().filter(recordset__gis_dataset=self)
 
     def __str__(self) -> str:
         return self.name

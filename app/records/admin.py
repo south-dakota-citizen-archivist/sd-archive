@@ -25,7 +25,8 @@ class RunAdmin(ModelAdmin):
 class RecordAdmin(ModelAdmin):
     list_display = ["key", "recordset", "first_seen", "updated_at"]
     list_filter = ["recordset__ingest"]
-    raw_id_fields = ["recordset", "run", "jurisdiction"]
+    raw_id_fields = ["recordset", "run"]
+    autocomplete_fields = ["places"]
     search_fields = ["key"]
     exclude = ["geometry"]
 

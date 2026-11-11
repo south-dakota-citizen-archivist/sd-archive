@@ -15,7 +15,7 @@ SELECT DISTINCT ON (f.key, fld, gis_hub_normalize_name(f.data ->> fld))
     gis_hub_normalize_name(f.data ->> fld)
 FROM records_record f JOIN records_recordset rs ON rs.id = f.recordset_id
 CROSS JOIN unnest(%(fields)s::text[]) AS fld
-WHERE rs.gis_dataset_id = %(dataset_id)s
+WHERE rs.gis_dataset_id = %(dataset_id)s AND f.dropped_at IS NULL
   AND gis_hub_normalize_name(f.data ->> fld) NOT IN ('', '0', 'NONE', 'NULL')
 """
 

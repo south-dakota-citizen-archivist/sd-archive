@@ -38,6 +38,7 @@ class Item:
     data: dict
     source_url: str = ""
     documents: list[DocumentLink] = field(default_factory=list)
+    places: list[str] = field(default_factory=list)  # fully qualified GEOIDs (sdplaces)
     geometry: bytes | None = None  # WKB, EPSG:4326
     content_hash: str = ""
 
@@ -55,6 +56,8 @@ def item_hash(item: Item) -> str:
         "source_url": item.source_url,
         "documents": [[d.url, d.filename, d.metadata] for d in item.documents],
     }
+    if item.places:
+        payload["places"] = sorted(item.places)
     digest = hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":"),
                                        default=str).encode())  # fmt: skip
     if item.geometry:
@@ -80,6 +83,9 @@ class Source:
     - model: the model for categorizing and extracting (sdllm's default if empty).
     - mentions(record): the named parties in a record, as unsaved entities.Mention rows
       (entities.mentions.from_text) with record_key=str(record), "<record set>:<key>".
+    - from_legacy(data): a stored record's data from an earlier system, in this source's
+      shape, so `compare_source` can tell real differences from a change of shape.
+      legacy_key(record): its key in this source's terms, when the key changed too.
     """
 
     slug: str
@@ -92,6 +98,8 @@ class Source:
     instructions: dict[str, str] = field(default_factory=dict)
     model: str = ""
     mentions: Callable[[Record], list] | None = None
+    from_legacy: Callable[[dict], dict] | None = None
+    legacy_key: Callable[[Record], str] | None = None
 
     def schema_for(self, category: str) -> type[BaseModel] | None:
         return self.schemas.get(category) or self.schemas.get("")

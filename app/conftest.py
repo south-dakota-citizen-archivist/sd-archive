@@ -115,3 +115,17 @@ def dataset(source, server):
     dataset.search_text = classify.search_text(dataset)
     dataset.save(update_fields=["search_text"])
     return dataset
+
+
+@pytest.fixture
+def sd_counties(state):
+    """Every South Dakota county sdplaces knows, current and former, without boundaries."""
+    import sdplaces
+    from places.models import Jurisdiction
+
+    return Jurisdiction.objects.bulk_create([
+        Jurisdiction(kind="county", geoid=p.geoid, geoidfq=p.geoidfq, name=p.name,
+                     short_name=p.short_name, slug=p.slug, parent=state, ocd_id=p.ocd_id,
+                     valid_from=p.valid_from, valid_to=p.valid_to)
+        for p in sdplaces.counties(include_historical=True)
+    ])  # fmt: skip

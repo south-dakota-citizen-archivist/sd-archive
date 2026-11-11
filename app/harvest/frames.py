@@ -14,7 +14,7 @@ from django.db import connection
 SQL = """
 SELECT f.key, f.data, ST_AsBinary(f.geometry) AS wkb
 FROM records_record f JOIN records_recordset rs ON rs.id = f.recordset_id
-WHERE rs.gis_dataset_id = %(dataset_id)s
+WHERE rs.gis_dataset_id = %(dataset_id)s AND f.dropped_at IS NULL
 ORDER BY length(f.key), f.key
 """
 

@@ -62,7 +62,7 @@ def iter_current(dataset_id: int, chunk: int = 2000) -> Iterator[tuple[str, dict
             SELECT r.key, r.data, ST_AsGeoJSON(r.geometry, 7)
             FROM records_record r
             JOIN records_recordset rs ON rs.id = r.recordset_id
-            WHERE rs.gis_dataset_id = %s
+            WHERE rs.gis_dataset_id = %s AND r.dropped_at IS NULL
             ORDER BY length(r.key), r.key
             """,
             [dataset_id],

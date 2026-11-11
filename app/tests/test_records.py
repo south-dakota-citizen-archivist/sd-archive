@@ -265,7 +265,32 @@ def test_store_adds_changes_and_removes(rs):
     a.refresh_from_db()
     assert a.data == {"name": "Alice Updated"} and a.run == second
     assert a.first_seen == first.started_at  # kept
-    assert set(rs.records.values_list("key", flat=True)) == {"a", "c"}
+    assert set(rs.records.current().values_list("key", flat=True)) == {"a", "c"}
+    b = Record.objects.get(key="b")  # gone from the source: kept, and marked
+    assert b.dropped_at == second.started_at and b.data == {"name": "Bob"}
+    assert list(rs.records.dropped()) == [b]
+
+
+def test_a_dropped_record_stays_dropped_until_it_comes_back(rs):
+    ingest.store(new_run(rs), [Item("a", {"v": 1}), Item("b", {"v": 1})])
+    dropped_by = new_run(rs)
+    ingest.store(dropped_by, [Item("a", {"v": 1})])
+    out = ingest.store(new_run(rs), [Item("a", {"v": 1})])
+    assert out.counts()["removed"] == 0  # already marked; not counted again
+    assert Record.objects.get(key="b").dropped_at == dropped_by.started_at
+
+    back = new_run(rs)
+    out = ingest.store(back, [Item("a", {"v": 1}), Item("b", {"v": 1})])  # back, unchanged
+    assert (out.changed, out.counts()["unchanged"]) == (["b"], 1)
+    b = Record.objects.get(key="b")
+    assert b.dropped_at is None and b.run == back
+
+
+def test_drop_guard_counts_current_records_only(rs):
+    ingest.store(new_run(rs), [Item(str(i), {}) for i in range(10)])
+    ingest.store(new_run(rs), [Item(str(i), {}) for i in range(6)])  # 4 dropped
+    assert rs.records.current().count() == 6
+    assert ingest.check_drop(rs.records.current().count(), 5, 0.5) == {"drop": 0.1667}
 
 
 def test_store_leaves_unchanged_items_alone(rs):
@@ -300,12 +325,30 @@ def test_documents_follow_their_item(rs):
     Document.objects.filter(pk=one.pk).update(status="done")
 
     ingest.store(new_run(rs), [Item("a", {}, documents=["https://x/1.pdf", "https://x/3.pdf"])])
-    assert set(record.documents.values_list("url", "status")) == {
+    two = record.documents.get(url="https://x/2.pdf")
+    assert two.dropped_at is not None  # no longer listed: kept, marked
+    assert set(record.documents.filter(dropped_at=None).values_list("url", "status")) == {
         ("https://x/1.pdf", "done"),
         ("https://x/3.pdf", "pending"),
     }  # kept, and added
     ingest.store(new_run(rs), [Item("b", {})])
-    assert not Document.objects.exists()  # the record left the source
+    # the record left the source: it and its files are kept
+    assert record.documents.count() == 3
+    ingest.store(new_run(rs), [Item("a", {}, documents=["https://x/2.pdf"]), Item("b", {})])
+    two.refresh_from_db()
+    assert two.dropped_at is None  # listed again
+
+
+def test_places_follow_their_item(rs, county, state):
+    ingest.store(new_run(rs), [Item("a", {}, places=["0500000US46999", "0400000US46"]),
+                               Item("b", {})])  # fmt: skip
+    a = Record.objects.get(key="a")
+    assert set(a.places.all()) == {county, state}
+    assert list(county.records.all()) == [a]
+    ingest.store(new_run(rs), [Item("a", {}, places=["0400000US46"]), Item("b", {})])
+    assert list(a.places.all()) == [state]
+    with pytest.raises(ValueError, match="unknown places"):
+        ingest.store(new_run(rs), [Item("a", {}, places=["0500000US46000"])])
 
 
 def test_check_drop():
@@ -390,6 +433,55 @@ def test_mentions_are_rebuilt_for_written_records(rows, rs):
 def test_a_source_without_items_fails(source):
     with pytest.raises(ValueError, match="no items"):
         run_source("orders", fetcher=Fetcher())
+
+
+def test_adopt_rekeys_imported_records_and_merges_duplicates(rs):
+    from records.compare import adopt
+
+    old = make_record(
+        rs,
+        "https://x/2024/roby.pdf",
+        data={"name": "Roby"},
+        first_seen=timezone.now() - timedelta(days=9),
+        legacy={"prl_record_id": 1},
+    )
+    make_doc(old, url="https://x/2024/roby.pdf")
+    new = make_record(rs, "https://x/2025/roby.pdf", data={"name": "Roby"},
+                      legacy={"prl_record_id": 2})  # fmt: skip
+    make_doc(new, url="https://x/2025/roby.pdf")
+    make_record(rs, "https://x/banks.pdf", data={"name": "Banks"})
+    make_record(rs, "Roby-taken", data={"name": "Taken"})  # old key = another's new key
+    new_keys = {"Roby": "Roby-taken", "Banks": "Banks", "Taken": "Taken"}
+    sources.register(Source(slug="orders", legacy_key=lambda r: new_keys[r.data["name"]]))
+    try:
+        assert adopt("orders", dry_run=True).merged == {
+            "Roby-taken": ["https://x/2024/roby.pdf", "https://x/2025/roby.pdf"]
+        }
+        assert rs.records.count() == 4
+        out = adopt("orders")
+    finally:
+        sources.unregister("orders")
+    assert out.rekeyed == 3
+    assert set(rs.records.values_list("key", flat=True)) == {"Roby-taken", "Banks", "Taken"}
+    roby = rs.records.get(key="Roby-taken")
+    assert roby.pk == old.pk  # the first seen is kept
+    assert set(roby.documents.values_list("url", flat=True)) == {
+        "https://x/2024/roby.pdf",
+        "https://x/2025/roby.pdf",
+    }
+    assert roby.legacy["merged"] == [{"key": "https://x/2025/roby.pdf", "prl_record_id": 2}]
+
+
+def test_adopt_only_before_the_first_run(rs):
+    from records.compare import adopt
+
+    sources.register(Source(slug="orders", legacy_key=lambda r: r.key))
+    new_run(rs)
+    try:
+        with pytest.raises(ValueError, match="has runs"):
+            adopt("orders")
+    finally:
+        sources.unregister("orders")
 
 
 # --- Fetch -----------------------------------------------------------------------------------

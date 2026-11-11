@@ -61,7 +61,7 @@ SQL = """
 SELECT DISTINCT btrim(f.data ->> %(field)s) AS pid
 FROM records_record f JOIN records_recordset rs ON rs.id = f.recordset_id
 JOIN census_dataset d ON d.id = rs.gis_dataset_id
-WHERE d.url = %(url)s
+WHERE d.url = %(url)s AND f.dropped_at IS NULL
   AND btrim(f.data ->> %(field)s) ~ '^[0-9][0-9A-Za-z.-]*$'
 ORDER BY pid
 """

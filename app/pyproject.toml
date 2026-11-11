@@ -19,7 +19,7 @@ dependencies = [
     "psycopg[binary]>=3.2",
     "pyarrow>=26.0.0",
     "requests>=2.32",
-    "sddocs[ocr]",
+    "sddocs[ocr,text]",
     "sdfetch",
     "sdgis",
     "sdllm[claude,local]",

@@ -39,7 +39,7 @@ def render() -> str:
             f"| {s.n:,} | {s.watched or ''} | {crawled} |"
         )
     live = Dataset.objects.filter(removed_at=None)
-    features = Record.objects.filter(recordset__gis_dataset__isnull=False).count()
+    features = Record.objects.current().filter(recordset__gis_dataset__isnull=False).count()
     counties = (
         Jurisdiction.objects.filter(
             kind="county", datasets__isnull=False, datasets__removed_at=None

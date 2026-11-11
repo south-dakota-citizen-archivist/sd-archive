@@ -9,12 +9,12 @@
   <div><dt class="text-gray-500">Features</dt><dd>{{ harvest.fetched_count|intcomma|default:"—" }} <span class="text-gray-400">/ {{ harvest.expected_count|intcomma|default:"?" }} expected</span></dd></div>
   <div><dt class="text-gray-500">Added</dt><dd class="text-green-700">{{ harvest.added|intcomma }}</dd></div>
   <div><dt class="text-gray-500">Changed</dt><dd class="text-amber-700">{{ harvest.changed|intcomma }}</dd></div>
-  <div><dt class="text-gray-500">Removed</dt><dd class="text-red-700">{{ harvest.removed|intcomma }}</dd></div>
+  <div><dt class="text-gray-500">Dropped</dt><dd class="text-red-700">{{ harvest.removed|intcomma }}</dd></div>
   <div><dt class="text-gray-500">Unchanged</dt><dd>{{ harvest.unchanged|intcomma }}</dd></div>
 </dl>
 {% if harvest.error %}<div class="mt-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">{{ harvest.error }}</div>{% endif %}
 
-{% if harvest.removed %}<p class="mt-4 text-sm text-gray-600">{{ harvest.removed|intcomma }} record{{ harvest.removed|pluralize }} left the source and {{ harvest.removed|pluralize:"was,were" }} removed.</p>{% endif %}
+{% if harvest.removed %}<p class="mt-4 text-sm text-gray-600">{{ harvest.removed|intcomma }} record{{ harvest.removed|pluralize }} left the source; {{ harvest.removed|pluralize:"it's,they're" }} kept and marked dropped.</p>{% endif %}
 
 {% for title, rows, total in sections %}
   {% if rows %}

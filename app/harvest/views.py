@@ -136,7 +136,7 @@ def dataset_map(request: HttpRequest, pk: int) -> HttpResponse:
                     SELECT ST_Extent(f.geometry) AS e
                     FROM records_record f
                     JOIN records_recordset rs ON rs.id = f.recordset_id
-                    WHERE rs.gis_dataset_id = %s
+                    WHERE rs.gis_dataset_id = %s AND f.dropped_at IS NULL
                 ) x
                 """,
                 [dataset.pk],
@@ -213,7 +213,9 @@ def download(request: HttpRequest, pk: int, fmt: str) -> HttpResponse:
 
 def feature_detail(request: HttpRequest, pk: int, key: str) -> HttpResponse:
     dataset = get_dataset(pk)
-    feature = dataset.features.filter(key=key).select_related("run").first()
+    feature = (  # a dropped feature keeps its page
+        Record.objects.filter(recordset__gis_dataset=dataset, key=key).select_related("run").first()
+    )
     if feature is None:
         raise Http404("no such feature (it may have left the source)")
     labels = Labels(dataset.fields)
@@ -258,6 +260,12 @@ def harvest_detail(request: HttpRequest, pk: int) -> HttpResponse:
     )
     added = [f for f in written if f.first_seen == harvest.started_at]
     changed = [f for f in written if f.first_seen != harvest.started_at]
+    # Records this harvest found gone and that haven't come back since
+    dropped = list(
+        harvest.recordset.records.filter(dropped_at=harvest.started_at)
+        .order_by("key")
+        .only("key", "data")
+    )
     labels = Labels(harvest.dataset.fields)
     limit = 500
     fields = label_fields(harvest.dataset)
@@ -280,6 +288,7 @@ def harvest_detail(request: HttpRequest, pk: int) -> HttpResponse:
             "sections": [
                 ("Changed records", labelled(changed), harvest.changed),
                 ("Added records", labelled(added), harvest.added),
+                ("Dropped records (gone from the source)", labelled(dropped), len(dropped)),
             ],
             "limit": limit,
             "first_harvest": first_harvest,
@@ -307,7 +316,7 @@ mvtgeom AS (
     SELECT ST_AsMVTGeom(ST_Transform(f.geometry, 3857), bounds.geom, 4096, 64, true) AS geom,
            f.key
     FROM records_record f JOIN records_recordset rs ON rs.id = f.recordset_id, bounds
-    WHERE rs.gis_dataset_id = %(dataset_id)s
+    WHERE rs.gis_dataset_id = %(dataset_id)s AND f.dropped_at IS NULL
       AND f.geometry && ST_Transform(bounds.geom, 4326)
 )
 SELECT ST_AsMVT(mvtgeom.*, 'features') FROM mvtgeom

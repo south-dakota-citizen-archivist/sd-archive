@@ -3,10 +3,10 @@ from pathlib import Path
 import geopandas as gpd
 import pytest
 
-from harvest import service, validate
+from harvest import export, frames, service, validate
 from records.models import Record, Run
+from sdgis.testing import IDS
 from search.models import NameEntry
-from tests.conftest import IDS
 
 
 def current(dataset) -> dict[str, Record]:
@@ -44,7 +44,7 @@ def test_unchanged_harvest_writes_nothing(dataset):
     assert dataset.features.count() == 10
 
 
-def test_changes_overwrite_and_removals_delete(dataset, server, media_root):
+def test_changes_overwrite_and_removals_are_marked_dropped(dataset, server, media_root):
     first = service.harvest_dataset(dataset)
     server.owners[2] = "DOE, JANE"  # sold
     server.moved.add(3)  # reshaped
@@ -57,7 +57,11 @@ def test_changes_overwrite_and_removals_delete(dataset, server, media_root):
     assert dataset.features.count() == len(features) == 10
     assert features["2"].data["OWNER_NAM"] == "DOE, JANE", "overwritten in place"
     assert features["2"].run == second and features["2"].first_seen == first.started_at
-    assert "5" not in features, "gone from the source, gone from the archive"
+    assert "5" not in features, "gone from the source: not current"
+    gone = Record.objects.get(recordset__gis_dataset=dataset, key="5")
+    assert gone.dropped_at == second.started_at, "kept, marked with when it went"
+    assert "5" not in {k for k, _, _ in export.iter_current(dataset.pk)}
+    assert "5" not in set(frames.load_dataset(dataset.pk)["_key"])
     assert features["144"].first_seen == second.started_at
 
     # one file per dataset: the latest

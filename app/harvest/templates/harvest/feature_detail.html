@@ -4,6 +4,7 @@
 {% block content %}
 <p class="text-sm text-gray-500"><a class="link" href="{{ dataset.get_absolute_url }}">{{ dataset.name }}</a>{% if dataset.jurisdiction %} · {{ dataset.jurisdiction }}{% endif %}</p>
 <h1 class="text-xl font-semibold mt-1">Record {{ key }}</h1>
+{% if feature.dropped_at %}<div class="mt-3 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">Gone from the source since {{ feature.dropped_at|date }}: this is how it was when last seen.</div>{% endif %}
 <p class="text-sm text-gray-600">
   First seen {{ feature.first_seen|date }}{% if feature.run_id %} · last written by <a class="link" href="{% url 'harvest:harvest_detail' feature.run_id %}">harvest #{{ feature.run_id }}</a>{% endif %}
 </p>

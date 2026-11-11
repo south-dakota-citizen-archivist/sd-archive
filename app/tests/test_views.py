@@ -64,6 +64,21 @@ def test_feature_page_shows_the_latest_record(client, harvested):
     assert client.get(f"/datasets/{harvested.pk}/features/999/").status_code == 404
 
 
+def test_a_dropped_feature_keeps_its_page(client, harvested):
+    from records.models import Record
+
+    latest = harvested.harvests.first()
+    Record.objects.filter(recordset__gis_dataset=harvested, key="3").update(
+        dropped_at=latest.started_at
+    )
+    body = client.get(f"/datasets/{harvested.pk}/features/3/").content.decode()
+    assert "Gone from the source since" in body
+    assert "Dropped records (gone from the source) (1" in client.get(
+        f"/harvests/{latest.pk}/").content.decode()  # fmt: skip
+    geojson = b"".join(client.get(f"/datasets/{harvested.pk}/download.geojson").streaming_content)
+    assert len(json.loads(geojson)["features"]) == 9
+
+
 def test_harvest_page_lists_changed_records(client, harvested):
     latest = harvested.harvests.first()
     body = client.get(f"/harvests/{latest.pk}/").content.decode()

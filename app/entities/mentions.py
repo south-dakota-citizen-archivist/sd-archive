@@ -18,9 +18,11 @@ def person_properties(name: str, order: str = "auto") -> dict:
 
 
 def from_text(text: str, *, dataset: str, record_key: str, field: str = "",
-              order: str = "auto", role: str = "", **extra) -> list[Mention]:  # fmt: skip
+              order: str = "auto", role: str = "", start: int = 0,
+              **extra) -> list[Mention]:  # fmt: skip
     """Unsaved mentions for every named party in text ("KOLBE, JANE B & ROBERT E" gives two).
-    Unnamed parties (ET AL) give none. extra: url, context, jurisdiction, properties,
+    Unnamed parties (ET AL) give none. start: the first position, for a field whose names
+    come in several strings (one per line). extra: url, context, jurisdiction, properties,
     valid_from, valid_to, gold_entity_id."""
     shared = extra.pop("properties", {})  # the record's (an address): every party gets them
     out = []
@@ -33,7 +35,7 @@ def from_text(text: str, *, dataset: str, record_key: str, field: str = "",
         out.append(Mention(
             schema=schema, name=party.name, normalized=sdnames.normalize(party.name),
             properties=properties, dataset=dataset, record_key=record_key, field=field,
-            position=position, role=party.role or role, original=text, **extra,
+            position=start + position, role=party.role or role, original=text, **extra,
         ))  # fmt: skip
     return out
 

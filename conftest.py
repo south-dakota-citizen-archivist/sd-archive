@@ -2,6 +2,8 @@
 
 import pytest
 
+import sdfetch
+
 
 def _drop_response_cookies(response):
     headers = response.get("headers", {})
@@ -20,3 +22,13 @@ def vcr_config():
         "filter_query_parameters": ["key", "api_key", "token"],
         "before_record_response": _drop_response_cookies,
     }
+
+
+@pytest.fixture(autouse=True)
+def isolated_sdfetch(tmp_path, monkeypatch):
+    """Every test gets its own sdfetch host memory and an empty private config, never the real
+    ones (~/.cache/sdfetch/hosts.json, ~/.config/sdfetch/hosts.toml), and starts without the
+    per-host pause that's shared across the process."""
+    sdfetch._http._host_next.clear()
+    monkeypatch.setenv("SDFETCH_CACHE", str(tmp_path / "sdfetch-cache"))
+    monkeypatch.setenv("SDFETCH_CONFIG", str(tmp_path / "sdfetch-hosts.toml"))

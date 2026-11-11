@@ -1,0 +1,1408 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://sdsos.gov/Business-Services/trademark-name-registration/farm-registrations.aspx
+  response:
+    body:
+      string: "\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n\r\n\t\t\t<meta
+        charset=\"utf-8\">\r\n        <meta name=\"HandheldFriendly\" content=\"True\">\r\n
+        \       <meta name=\"MobileOptimized\" content=\"320\">\r\n        <meta name=\"viewport\"
+        content=\"initial-scale=1.0, width=device-width\" />\r\n        <meta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=edge,chrome=1\">\r\n        \r\n        <META HTTP-EQUIV=\"Pragma\"
+        CONTENT=\"no-cache\">\r\n<META HTTP-EQUIV=\"Cache-Control\" CONTENT=\"no-cache,no-Store\">\r\n\t\t\r\n\t\t\r\n<!--
+        This is a default image that Facebook can use as a thumbnail when sharing
+        pages from this site -->\r\n<meta property=\"og:image\" content=\"/images/sos-logo-fb.jpg\">\r\n\t\r\n\t<!--
+        Place favicon.ico and apple-touch-icon.png in the images folder -->\r\n\t<link
+        rel=\"shortcut icon\" href=\"/images/favicon.ico\">\r\n\t<link rel=\"apple-touch-icon\"
+        href=\"/images/apple-touch-icon.png\"><!--60X60-->\r\n\t\r\n\t\r\n\t\r\n    \r\n
+        \   \r\n\t\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"/stylesheets/screen.css\"
+        media=\"screen\">\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"/stylesheets/user.css\"
+        media=\"screen\">\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"/stylesheets/print.css\"
+        media=\"print\">\r\n    \r\n\r\n    <!--[if lt IE 9]>\r\n    <link href=\"/stylesheets/screen-ie8.css\"
+        rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>\r\n    <![endif]-->\r\n
+        \   \r\n    \r\n    <!--[if lt IE 9]>\r\n\t<script src=\"/includes/Javascript/html5shiv/html5shiv.js\"></script>\r\n\t<![endif]-->\r\n\r\n\r\n\r\n<!--//
+        INCLUDE JQUERY //-->\r\n    <script type=\"text/javascript\" src=\"https://cdn.sd.gov/lib/jquery-3.6.4/jquery.min.js\"></script>\r\n
+        \   <script type=\"text/javascript\" src=\"/includes/Javascript/jquery-migrate.min.js\"></script>\r\n
+        \   <script type=\"text/javascript\" src=\"/includes/Javascript/jquery.easing.1.3.js\"></script>\r\n
+        \   \r\n    \r\n    \r\n\r\n<!-- SIDEBAR TREEVIEW -->\r\n\t<script src=\"/includes/Javascript/jquery-treeview/jquery.treeview.js\"></script>\r\n\r\n\r\n
+        \   \r\n\r\n<!-- RESPONSIVE SLIDESHOW -->\r\n\t<link rel=\"stylesheet\" type=\"text/css\"
+        href=\"/includes/Javascript/wow_slider/style.css\" />\r\n    <script src=\"/includes/Javascript/initialize_treeview.js\"></script>\r\n
+        \   \r\n    \r\n\t\r\n<!-- START FACEBOOK FEED -->\r\n    <script> $(document).ready(function(){
+        createAccessToken(); });\t</script>\r\n\r\n\r\n\r\n\r\n<!-- IMG SWAPPING FOR
+        HEADER LOGO -->\r\n<script src=\"/includes/Javascript/image_swap.js\"></script>\r\n\r\n\r\n\r\n\r\n<!--
+        IN_CONTENT IMAGE ROTATORS -->\r\n<script src=\"/includes/Javascript/image_rotators.js\"></script>\r\n\r\n\r\n<!--//INTERACTIVE
+        MAPs//-->\r\n\r\n<script src=\"/includes/Javascript/raphael.js\" type=\"text/javascript\"
+        charset=\"utf-8\"></script>\r\n<script src=\"/includes/_Map_Legislative_Districts.js\"></script>\r\n<script
+        src=\"/includes/_Map_Legislative_Districts_Numbers.js\"></script>\r\n<script
+        src=\"/includes/_Map_County_Lines.js\"></script>\r\n<script src=\"/includes/_Map_County_Names.js\"></script>\r\n<script
+        src=\"/includes/_Map_Legislative_Districts_Cities.js\"></script>\r\n<script
+        src=\"/includes/Javascript/setup_interactive_map_arrays.js\"></script>\r\n\r\n<!--//\r\n\r\n//-->\r\n\r\n<!--Cross
+        Frame Scripting Code from BIT-->\r\n<SCRIPT LANGUAGE = javascript>\r\nif (top.frames.length!=0)\r\ntop.location=self.document.location;\r\n</SCRIPT>\r\n\r\n\r\n\r\n<!--//RESPONSIE
+        CALENDAR//-->\r\n<link href='/includes/Javascript/fullcalendar/fullcalendar/fullcalendar2.css'
+        rel='stylesheet' />\r\n<link href='/includes/Javascript/fullcalendar/fullcalendar/fullcalendar.print.css'
+        rel='stylesheet' media='print' />\r\n\r\n\r\n\r\n\r\n<!--//respond.js to patch
+        html5-->\r\n<!--[if lt IE 9]>\r\n    <script src=\"/includes/Javascript/respond.src.js\"></script>\r\n<![endif]-->\r\n\r\n\r\n\r\n
+        \   \r\n    <!-- SEO TITLE AND DESCRIPTION HERE -->\r\n    <title>Farm/Ranch/Home:
+        South Dakota Secretary of State</title>\r\n    <meta name=\"description\"
+        content=\"\"/>\r\n\r\n</head>\r\n    \r\n<body class=\"level_three\">\r\n\r\n\r\n\t\t\t\t<script>\r\n
+        \   (function () {\r\n        var cx = '012382400048732927914:nqn5si4dtbg';\r\n
+        \       var gcse = document.createElement('script');\r\n        gcse.type
+        = 'text/javascript';\r\n        gcse.async = true;\r\n        gcse.src = (document.location.protocol
+        == 'https:' ? 'https:' : 'http:') +\r\n            '//www.google.com/cse/cse.js?cx='
+        + cx;\r\n        var s = document.getElementsByTagName('script')[0];\r\n        s.parentNode.insertBefore(gcse,
+        s);\r\n    })();\r\n</script>\r\n\r\n<script>\r\n    (function (i, s, o, g,
+        r, a, m) {\r\n        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function
+        () {\r\n            (i[r].q = i[r].q || []).push(arguments)\r\n        },
+        i[r].l = 1 * new Date(); a = s.createElement(o),\r\n        m = s.getElementsByTagName(o)[0];
+        a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)\r\n    })(window,
+        document, 'script', '//www.google-analytics.com/analytics.js', 'ga');\r\n\r\n
+        \   ga('create', 'UA-60581758-1', 'auto');\r\n    ga('send', 'pageview');\r\n\r\n</script>\r\n<div
+        class=\"wrapper\">\r\n    \r\n    \t\t\r\n           \r\n        <header class=\"clearfix\">\r\n
+        \             \t\t\t\r\n              \t\t\t<div id=\"blue_bar\" class=\"clearfix\">\r\n
+        \                       \t\t\r\n                                <div class=\"centerer\">\r\n
+        \                                        <a href=\"/default.aspx\" title=\"Home\"><img
+        src=\"/images/SOS_logo_REV.png\" alt=\"South Dakota Secretary of State logo\"
+        id=\"header_logo\" onMouseOver=\"MM_swapImage('header_logo','','/images/SOS_logo_REV_O.png',1)\"
+        onMouseOut=\"MM_swapImgRestore()\" /></a> \r\n                                         \r\n
+        \                                        \r\n                                \r\n
+        \                                       <!--BEGIN MOBILE MENU-->\r\n                                        <div
+        id=\"mobile_nav\" class=\"\">\r\n                                                <span
+        id=\"mobile_nav_icon\">MENU</span>\r\n                                        </div>\r\n
+        \                                       \r\n                                        <nav
+        class=\"mobile_nav_menu \">\r\n                                            <img
+        src=\"/images/mobile_arrow_up.png\" alt=\"arrow\" id=\"mobile_arrow\" />\r\n
+        \                                           <div id=\"mobile_menu_box\" class=\"\">\r\n
+        \                                               <ul class=\"mobilemenu treeview
+        clearfix\">\r\n                                                    <li class=\"\"><a
+        href=\"/default.aspx\" title=\"Home\">Home</a></li>\r\n                                                    <!--
+        most of the mobile menu is generated automatically, all you need to do is
+        add your main sections here as list items-->\r\n                                                    <li
+        ><a href=\"/elections-voting/default.aspx\" title=\"Elections & Voting\">Elections
+        &amp; Voting</a><ul class=\"\"><!-- Master Nav list for Elections section-->\r\n\r\n<!--
+        you break the columns out into even lists as needed, there are three columns.
+        NOTE: In mobile view, the columns are stacked on top of each other 1,2,3.
+        When the pages are wider, then the columns are next to each other left to
+        right 1,2,3. -->\r\n\r\n<!-- you can add images to any link, but you have
+        to use this format. The Images are hidden and the text is used instead, when
+        at mobile view. Images are shown when screens are larger and can accomodate
+        that. -->\r\n<!--  <a href=\"/path/to/file.aspx\"><img src=\"/images/where_do_i_vote.png\"
+        alt=\"Where do I vote?\" /><span>Where do I vote?</span></a>  -->\r\n<title>South
+        Dakota Legislative District Map</title>\r\n\r\n\r\n<div class=\"nav_col_1
+        clearfix\">\r\n\r\n    <!-- each of these main level list items (li) needs
+        to test the SubSection variable. The value of that variable determines which
+        of these main li will be given class of \"active_subsection\". That determines
+        which sidebar navigation is showing on third level pages and below. If the
+        wrong sidebar is showing, then it likely stems back to the value of SubSection
+        being wrong, which is set at the top if each aspx page. -->\r\n\r\n\r\n\r\n
+        \   <!-- this is a main subnav, if you want to add an item to the upper navigation,
+        or the footer list for this section, then it needs to be at this outer level-->\r\n\r\n
+        \   <!-- sub items are nested within each li, as applicable. The \"treeview\"
+        class is what gives this main sub nave the ability to have the +/- expanding/contracting
+        buttons in the sidebar-->\r\n\r\n    <!--here is a template you can use for
+        adding more top level list items with nested sub navs //\r\n                                                            <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a>\r\n                                                                <ul
+        class='treeview'>\r\n                                                                        <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a></li>\r\n
+        \                                                                       <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a>\r\n                                                                        \t<ul>\r\n
+        \                                                                                   <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a></li>\r\n
+        \                                                                                   <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a></li>\r\n
+        \                                                                                   <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a></li>\r\n
+        \                                                                           </ul>\r\n
+        \                                                                       </li>\r\n
+        \                                                                       <li><a
+        href='/path/to/file.aspx' title='Page Title' class=''>Page Title</a></li>\r\n
+        \                                                               </ul>\r\n
+        \                                                           </li>\r\n                                                            //-->\r\n<ul>\r\n
+        \       <li class=''><a\r\n            href='/elections-voting/upcoming-elections/general-information/default.aspx'
+        title='Upcoming Elections'>2026 Election Information</a>\r\n          <ul
+        class='treeview'>\r\n            <li><a href='/elections-voting/upcoming-elections/general-information/default.aspx'\r\n
+        \                   title='General Information'>Election Information</a>\r\n
+        \               <ul>\r\n                    <li><a href=\"https://vip.sdsos.gov/candidatelist.aspx?eid=774\">Candidate
+        List</a></li>\r\n                    <li><a\r\n                            href=\"https://sdsos.gov/elections-voting/upcoming-elections/general-information/2026
+        Election Information/2026-ballot-questions.aspx\">Ballot\r\n                            Questions</a></li>\r\n
+        \                   <li><a\r\n                            href=\"/elections-voting/upcoming-elections/general-information/2026-candidate-calendar.aspx\">Candidate\r\n
+        \                           Calendar</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/2026-Election-Information.aspx\">Election\r\n
+        \                           Calendar</a></li>\r\n                    <li><a
+        href=\"/elections-voting/upcoming-elections/general-information/2026-signature-requirements-candidates.aspx\">Number
+        of Signers Required for 2026 Candidate Petitions</a></a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/Circulate-2026-nominating-petitions-candidates.aspx\">Circulate\r\n
+        \                           a Nominating Petition for Statewide, Legislative
+        &amp; County Candidates </a></li>\r\n                    <li><a\r\n                            href=\"/elections-voting/upcoming-elections/general-information/2026-Independent-Candidate-Information.aspx\">Independent\r\n
+        \                           Candidate Information</a></li>\r\n                    <li><a
+        href=\"/elections-voting/assets/2026 Documents/2026CountyCandidatesCampaignGuide.pdf\">How
+        to be a\r\n                            County Candidate</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/2026-offices-to-be-filled.aspx\">Offices\r\n
+        \                           to be Filled in 2026</a></li>\r\n                    <li><a
+        href='/elections-voting/upcoming-elections/general-information/office-term-limits-and-qualifications.aspx'\r\n
+        \                           title='Qualifications to hold office &amp; term
+        limits'>Qualifications to Hold Office &amp;\r\n                            Term
+        Limits</a></li>\r\n                    <li><a\r\n                            href=\"/elections-voting/upcoming-elections/general-information/2026-candidate-withdrawal-info.aspx\">Candidate\r\n
+        \                           Withdrawal Information</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/2026-Election-Polling-Places.aspx\">2026\r\n
+        \                           Election Precincts &amp; Polling Places</a></li>\r\n\t\t\t
+        \ <li><a href=\"/elections-voting/upcoming-elections/general-information/2026-Election-Absentee-Data.aspx\">2026
+        Weekly Absentee Numbers</a></li>\r\n                    <li><a href=\"/elections-voting/upcoming-elections/general-information/information-on-election-equipment.aspx\">Election\r\n
+        \                           Equipment, Electronic Pollbooks, and Vote Center
+        Information</a></li>\r\n                </ul>\r\n            </li>\r\n        </ul>\r\n
+        \   </li>\r\n    <li><a\r\n            href=\"/elections-voting/upcoming-elections/general-information/2026-ballot-questions.aspx\">2026\r\n
+        \           Statewide Ballot Questions</a></li>\r\n    <li class=''><a\r\n
+        \           href='/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/default.aspx'\r\n            title='Ballot Question
+        Information'>Ballot Question Info</a>\r\n        <ul class=\"treeview\">\r\n
+        \           <li><a href='/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/default.aspx'\r\n                    title='Ballot
+        Question Information'>Ballot Question Information</a>\r\n                <ul>\r\n
+        \                   <li><a href='/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/signature-requirements-ballot-question-petitions.aspx'\r\n
+        \                           title='Signature requirements for ballot question
+        petitions'>Signature Requirements &amp;\r\n                            General
+        Information</a></li>\r\n                    <li><a href='/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/general-ballot-question-information.aspx'\r\n
+        \                           title='General ballot question information'>History
+        &amp; Past SD Ballot Questions</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/challenging-statewide-ballot-question.aspx\">Challenging\r\n
+        \                           a Statewide Ballot Question</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/upcoming-elections/general-information/2026
+        Ballot Question Information/Ballot-Measure-Signature-Withdrawal-Information.aspx\">Ballot\r\n
+        \                           Measure Signature Withdrawal Information</a></li>\r\n
+        \               </ul>\r\n            </li>\r\n        </ul>\r\n    </li>\r\n
+        \   <li class=''><a\r\n            href=\"/elections-voting/upcoming-elections/general-information/2026
+        Political Party Information/recognized-political-parties.aspx\"\r\n            title='Political
+        Party Information'>Political Party Info</a>\r\n        <ul class=\"treeview\">\r\n
+        \           <li><a href=\"/elections-voting/upcoming-elections/general-information/2026
+        Political Party Information/recognized-political-parties.aspx\"\r\n                    Title=\"Policitical
+        Party Information\">Political Party Information</a>\r\n                <ul>\r\n
+        \                   <li><a\r\n                            href=\"/elections-voting/upcoming-elections/general-information/2026
+        Political Party Information/form-a-new-political-party.aspx\">Forming\r\n
+        \                           A New Political Party</a></li>\r\n                    <li><a
+        href=\"/elections-voting/assets/2026 Documents/2026PolticalPartyFlowChart.pdf\">New
+        Party,\r\n                            Alternative Political Party Status,
+        and Recognized Party Requirements 2026</a></li>\r\n                    <li><a\r\n
+        \                           href=\"/elections-voting/election-resources/election-history/2024/2024-Political-Party-Conventions.aspx\">Political\r\n
+        \                           Party State Conventions and Certification of Nominated
+        Candidates </a></li>\r\n                </ul>\r\n            </li>\r\n        </ul>\r\n
+        \   </li>\r\n    <li class=''><a\r\n            href='/elections-voting/voting/help-america-vote-act.aspx'
+        title='Help America Vote Act (HAVA)'>Help America\r\n            Vote Act
+        (HAVA)</a> </li>\r\n    <li class=''><a\r\n            href=\"/elections-voting/election-resources/Election-Truth-and-Transparency-Page/default.aspx\">Election
+        Truth\r\n            &amp; Transparency</a></li>\r\n\r\n\r\n</ul>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--links
+        column two-->\r\n<div class=\"nav_col_2 clearfix\">\r\n<ul>\r\n        <li><a
+        href=\"https://vip.sdsos.gov/CountyAuditors.aspx\">County Auditor Contact
+        Information</a></li>\r\n    <li class=''><a\r\n            href='/elections-voting/campaign-finance/default.aspx'
+        title='Campaign Finance'>Campaign Finance</a>\r\n        <ul class=\"treeview\">\r\n
+        \           <li><a href=\"/elections-voting/campaign-finance/campaign-finance-faqs.aspx\">
+        Campaign Finance FAQs</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/default.aspx\"
+        title=\"Campaign Finance Guidelines\">Campaign\r\n                    Finance
+        Reporting System</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/Independent_expenditures.aspx\">Communication\r\n
+        \                   Expenditures</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/contribution-limits.aspx\">Contribution
+        Limits </a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/paper-forms.aspx\"
+        title=\"Paper Forms\">Paper Forms</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/important-dates.aspx\">Report
+        Deadlines and Who Files</a>\r\n            </li>\r\n            <li><a href=\"/elections-voting/campaign-finance/Search.aspx\">Search
+        Reports</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/Supplemental-Reports.aspx\">Supplemental
+        Reports</a></li>\r\n            <li><a href=\"/elections-voting/campaign-finance/campaign-finance-complaint-procedure.aspx\">Campaign
+        Finance\r\n                    Complaint Process</a></li>\r\n        </ul>\r\n
+        \   </li>\r\n\r\n    <li class=''><a\r\n            href='/elections-voting/financial-interest-statements/default.aspx'
+        title='Petitions'>Conflict of Interest /\r\n            Financial Interest
+        Statements</a>\r\n        <ul class=\"treeview\">\r\n            <li><a href='/elections-voting/financial-interest-statements/default.aspx'\r\n
+        \                   title='Financial Interest Statement Forms'>Forms</a></li>\r\n
+        \           <li><a href='/elections-voting/financial-interest-statements/search.aspx'\r\n
+        \                   title='Search Financial Interest Statements'>Search for
+        Financial Interest Statements (FIS) -\r\n                    Candidates</a></li>\r\n
+        \       </ul>\r\n    </li>\r\n\r\n    <li><a href='/about-the-office/board-of-elections/default.aspx'
+        title='Board of Elections'>Board of Elections</a>\r\n    </li>\r\n    <li
+        class=''><a\r\n            href='/elections-voting/nominating-petitions/download-nominating-petition.aspx
+        '\r\n            title='Petitions'>Petitions</a>\r\n        <ul class=\"treeview\">\r\n
+        \           <li><a href='/elections-voting/nominating-petitions/download-nominating-petition.aspx'\r\n
+        \                   title='Download nominating petition'>Download a Petition</a></li>\r\n
+        \           <li><a href='/elections-voting/nominating-petitions/request-petition-copies.aspx'\r\n
+        \                   title='Request Petition Copies'>Request Copies of Filed
+        Petitions</a></li>\r\n            <li><a href=\"/elections-voting/nominating-petitions/Challenging-a-petition.aspx\">Challenging
+        a Petition\r\n                    (excluding ballot question petitions)</a></li>\r\n
+        \       </ul>\r\n    </li>\r\n    <li><a href='/elections-voting/NVRA/NVRA.aspx'
+        title='NVRA'>National Voter Registration Act (NVRA)</a></li>\r\n\r\n</ul>\r\n</div>\r\n\r\n\r\n\r\n\r\n<!--links
+        column three-->\r\n<div class=\"nav_col_3 clearfix\">\r\n<ul>\r\n    \r\n
+        \   <li><a href=\"/elections-voting/voting/register-to-vote/default.aspx\"
+        title=\"Register to Vote\"\r\n            style=\"line-height: 1.5em;\">Register
+        to Vote<br>\r\n            Update Voter Registration<br>\r\n            Cancel
+        Voter Registration</a></li>\r\n    <li><a href='/elections-voting/upcoming-elections/voter-registration-totals/default.aspx'\r\n
+        \           title='Voter Registration Totals'>Voter Registration Totals</a></li>\r\n\r\n
+        \   <li class=''><a\r\n            href='/elections-voting/election-resources/default.aspx'
+        title='Election Resources'>Election Resources</a>\r\n        <ul class=\"treeview\">\r\n
+        \           <li><a href=\"/elections-voting/assets/Archive/Prior to 2026/LegislativeDist2023.pdf\"
+        title='South Dakota Legislative Districts'\r\n                    target=\"_blank\">South
+        Dakota Legislative Districts</a></li>\r\n            <li><a href='/elections-voting/election-resources/election-laws-and-administrative-rules.aspx'\r\n
+        \                   title='Election Laws and Administrative Rules'>Election
+        Laws and Administrative Rules</a></li>\r\n            <li><a href='/elections-voting/election-resources/election-history/default.aspx'\r\n
+        \                   title='Election History'>Election History</a></li>\r\n
+        \           <li><a href=\"/elections-voting/election-resources/current-elected-officials.aspx\">Current
+        Elected\r\n                    Officials</a></li>\r\n            <li><a\r\n
+        \                   href=\"/elections-voting/election-resources/county-auditor-resource-page-primary-general-elections.aspx\">County\r\n
+        \                   Auditors - Primary &amp; General Election Resources</a></li>\r\n\r\n
+        \       </ul>\r\n    </li>\r\n\r\n    <li><a href='/elections-voting/election-resources/county-auditor-resource-page-primary-general-elections.aspx'\r\n
+        \           title='Auditor Resources'>Auditor Resources</a></li>\r\n    <li><a
+        href='/elections-voting/upcoming-elections/municipal-school-information/default.aspx'\r\n
+        \           title='City/School Resources'>City/School Resources</a></li>\r\n
+        \   <li><a href='/elections-voting/upcoming-elections/Myths-vs-Facts-and-FAQS/faqs.aspx'
+        title-'FAQs'>Election FAQs</a></li>\r\n\r\n</ul>\r\n</div>\r\n\r\n\r\n<!--links
+        column four-->\r\n<div class=\"nav_col_4 clearfix\">\r\n<ul>\r\n    \r\n    <li><a
+        href='/elections-voting/voting/absentee-voting.aspx' title='Absentee Voting'>Absentee
+        Voting</a></li>\r\n\r\n\r\n    <li><a href=\"https://vip.sdsos.gov/VIPLogin.aspx\"
+        title=\"Where Do I Vote? View Sample Ballot Track Absentee Ballot\"\r\n            style=\"line-height:
+        1.5em; color: #870305;\"><strong>Voter Information Portal (VIP)</strong><br>\r\n
+        \           Where Do I Vote?<br />\r\n            View Sample Ballot<br />Track
+        Absentee Ballot<br />Check Voter Registration</a></li>\r\n\r\n    <li class=''><a\r\n
+        \           href='/elections-voting/voting/default.aspx' title='Voting'>Voting
+        Information</a>\r\n        <ul class='treeview'>\r\n            <li><a href='https://vip.sdsos.gov/VIPLogin.aspx'
+        title='Where do I vote?'>Where Do I Vote?</a></li>\r\n            <li><a href='/elections-voting/voting/register-to-vote/default.aspx'
+        title='Register to vote'>Register to\r\n                    Vote</a>\r\n                <ul>\r\n
+        \                   <li><a href='/elections-voting/voting/register-to-vote/residency-qualification.aspx'\r\n
+        \                           title='Residency Qualification'>Residency Qualification</a></li>\r\n
+        \                   <li><a href=\"/elections-voting/voting/register-to-vote/voter-challenge-information.aspx\">Voter
+        Registration Challenges</a></li>\r\n                    <li><a href='/elections-voting/voting/register-to-vote/felony-convictions.aspx'\r\n
+        \                           title='Felony Convictions'>Felony Convictions</a></li>\r\n
+        \                   <li><a href='/elections-voting/voting/register-to-vote/voter-registration-drive-instructions.aspx'\r\n
+        \                           title='Voter Registration Drive Instructions'>Voter
+        Registration Drive Instructions</a></li>\r\n                    <li class=\"last\"><a
+        href='/elections-voting/voting/register-to-vote/forms.aspx'\r\n                            title='Forms'>Forms</a></li>\r\n
+        \               </ul>\r\n            </li>\r\n            <li><a href='https://sdsos.gov/elections-voting/NVRA/NVRA.aspx'>National
+        Voter Registration Act (NVRA)</a>\r\n                <ul>\r\n                    <li><a
+        href='https://sdsos.gov/elections-voting/NVRA/coordinator-contacts.aspx'>Voter
+        Registration\r\n                            Agency (VRA) Contacts</a></li>\r\n
+        \                   <li><a href=https://sdsos.gov/elections-voting/NVRA/agency-voter-reg.aspx\r\n
+        \                           title='Agency Voter Registration Material'>Agency
+        Voter Registration Material</a></li>\r\n                    <li><a href='https://sdsos.gov/elections-voting/NVRA/monthly-activity.aspx'>Monthly
+        Voter\r\n                            Registration Activity</a></li>\r\n                    <li><a
+        href='https://sdsos.gov/elections-voting/NVRA/policies-and-procedures.aspx'>Policies
+        and\r\n                            Procedures</a></li>\r\n                    <li><a
+        href='https://sdsos.gov/elections-voting/NVRA/Training.aspx'>Training</a></li>\r\n
+        \               </ul>\r\n            <li><a href='/elections-voting/voting/registration-changes.aspx'
+        title='Registration Changes'>Registration\r\n                    Changes</a></li>\r\n
+        \           <li><a href='/elections-voting/voting/polling-place-accessibility.aspx'\r\n
+        \                   title='Polling Place Accessibility'>Polling Place Accessibility</a></li>\r\n
+        \           <li><a href='/elections-voting/voting/military-members.aspx' title='Military
+        Members'>Military Members</a>\r\n            </li>\r\n            <li><a href='/elections-voting/voting/overseas-citizen-voter.aspx'
+        title='Overseas Citizen Voter'>Overseas\r\n                    Citizen Voter</a></li>\r\n\r\n
+        \           <li><a href='/elections-voting/voting/absentee-voting.aspx' title='Absentee
+        Voting'>Absentee Voting</a></li>\r\n            <li><a href='/elections-voting/voting/help-america-vote-act.aspx'
+        title='Absentee Voting'>Help America Vote\r\n                    Act (HAVA)</a></li>\r\n
+        \           <li><a href='/elections-voting/voting/kids-voting-southdakota.aspx'
+        title='Kids Voting South Dakota'>Kids\r\n                    Voting South
+        Dakota</a></li>\r\n            <li><a href='/elections-voting/voting/college-students.aspx'
+        title='College Students'>College Students</a></li>\r\n            <li><a href=\"/elections-voting/voting/sos-awards.aspx\">Secretary
+        of State Awards</a></li>\r\n            <li><a href=\"/elections-voting/voting/Secure-Active-Designation.aspx\">Address
+        Confidentiality</a></li>\r\n\r\n        </ul>\r\n    </li>\r\n\r\n    <li><a
+        href='/elections-voting/election-resources/election-history/default.aspx'
+        title='Election History'>Election\r\n            History</a></li>\r\n    <li><a
+        href=\"/elections-voting/voting/sos-awards.aspx\">Secretary of State Awards</a></li>\r\n\r\n\r\n</ul>\r\n</div></ul></li>\r\n
+        \                                                   <li ><a href=\"/Business-Services/default.aspx\"
+        title=\"Business Services\">Business Services</a><ul class=\"\"> <!-- Master
+        Nav list for BUSINESS SERVICES section-->\r\n                             \r\n
+        \                                    \t\r\n                                           \r\n<div
+        class=\"nav_col_1 clearfix\">\r\n<ul>\r\n\t    <li class=''><a href=\"https://sosenterprise.sd.gov/BusinessServices/Business/RegistrationInstr.aspx\"
+        title=\"Start a New Business\">Register a Business<br>\r\n    </a>\r\n    <ul
+        class=\"treeview\">\r\n        <li><a href=\"/Business-Services/corporations/corporate-forms/default.aspx\"
+        title=\"Business Forms\">Business Forms</a>\r\n          <ul>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/business-corporations.aspx\"
+        title=\"Business Corporations\">Business Corporations</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/limited-liability-companies.aspx\"
+        title=\"Limited Liability Companies\">Limited Liability Companies</a></li>\r\n
+        \           <li><a href=\"/Business-Services/corporations/corporate-forms/series-llc.aspx\"
+        title=\"Series LLCs\">Series LLCs</a></li>\r\n            <li><a href=\"/Business-Services/corporations/corporate-forms/nonprofit-corporations.aspx\"
+        title=\"Nonprofit Corporations\">Nonprofit Corporations</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/limited-liability-partnerships.aspx\"
+        title=\"Limited Liability Partnerships\">Limited Liability Partnerships</a></li>\r\n
+        \           <li><a href=\"/Business-Services/corporations/corporate-forms/limited-partnerships.aspx\"
+        title=\"Limited Partnerships\">Limited Partnerships</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/cooperatives.aspx\"
+        title=\"Cooperatives\">Cooperatives</a></li>\r\n            <li><a href=\"/Business-Services/corporations/corporate-forms/business-trusts.aspx\"
+        title=\"Business Trusts\">Business Trusts</a></li>\r\n            <li><a href=\"/Business-Services/corporations/corporate-forms/miscellaneous-forms.aspx\"
+        title=\"Miscellaneous Forms\">Miscellaneous Forms</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/commercial-registered-agents.aspx\"
+        title=\"Commercial Registered Agents\">Commercial Registered Agents</a></li>\r\n
+        \         </ul>\r\n        </li>\r\n      </ul>\r\n\t\t\r\n    <li><a href=\"https://sosenterprise.sd.gov/ucc/\">File
+        a UCC/EFS</a></li>\r\n\t<li><a href=\"http://sdsos.gov/Business-Services/trademark-name-registration/default.aspx\">File
+        a Trademark</a></li>\r\n\t<li><a href=\"https://sosenterprise.sd.gov/BusinessServices/Fictitious/FictitiousHome.aspx\">File
+        a DBA</a></li>  \r\n\t<li><a href=\"/Business-Services/corporations/corporate-forms/default.aspx\">Business
+        Paper Forms</a></li>\r\n</ul>\r\n</div>       \r\n                                            \r\n<!--links
+        column two-->\r\n<div class=\"nav_col_2 clearfix\">\r\n<ul>\r\n\t\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/AnnualReportInstr.aspx\">File
+        an Annual Report<br></a></li>\r\n\t<li ><a href=\"https://sosenterprise.sd.gov/BusinessServices/Business/SOCInstr.aspx\"
+        title=\"File a Registered Agent Statement of Change\">File a Registered Agent
+        Change</a></li>\r\n\t<li ><a href=\"https://sosenterprise.sd.gov/BusinessServices/Business/ReinstatementInstr.aspx\"
+        title=\"File a Reinstatement\">Prepare a Reinstatement</a></li>\r\n\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/CertOfExistenceInstr.aspx\"
+        title=\"Certificates of Good Standing/Existence\">Certificates of Good Standing/Existence</a></li>\r\n</ul>\r\n</div>\r\n\r\n\r\n<!--links
+        column three-->\r\n<div class=\"nav_col_3 clearfix\">\r\n<ul>\r\n\t\t<li class=''><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/FilingSearch.aspx\"
+        title=\"Search for a Busineses\">Search for a Business</a></li>\r\n\t<li ><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/NameAvailability.aspx\"
+        title=\"Name Availability Search\">Search Business Name Availability</a>   </li>\r\n\t\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/RaSearch.aspx\">Search
+        Business by Registered Agent</a></li>\r\n\t\t<li><a href=\"/Business-Services/assets/ForeignBeneficialOwnersofAgriculturalLand.pdf\">Foreign
+        Beneficial Owner Report</a></li>\r\n</ul>\r\n</div>\r\n\r\n<!--links column
+        four-->\r\n<div class=\"nav_col_4 clearfix\">\r\n<ul>\r\n\t\t<li class=''><a
+        href=\"/Business-Services/BusinessResources/business-resources.aspx\" title=\"UCC
+        Filings\">Business Resources</a>\r\n\t<ul class=\"treeview\">\r\n\t  <li><a
+        href=\"https://sosenterprise.sd.gov/ucc/\" title=\"UCC & EFS Forms\">UCC &amp;
+        EFS Forms</a></li>\r\n\t\t\r\n\t  <li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/default.aspx\"
+        title=\"UCC Information\">UCC Information</a> \r\n\t\t<ul>\r\n\t\t\t<li><a
+        href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/where-to-file.aspx\"
+        title=\"Where to File\">Where to File</a> </li>\r\n\t\t\t<li><a href=\"/general-information/filing-fees.aspx\"
+        target=\"_blank\" title=\"Fee Schedule\">Fee Schedule</a></li>\r\n\t\t\t<li><a
+        href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/caretaker.aspx\">Livestock
+        Caretaker Filings</a></li>\r\n\t\t\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/cheyenne-river-sioux-tribe-compact.aspx\"
+        title=\"Cheyenne River Sioux Tribe Compact\">Cheyenne River Sioux Tribe Compact</a>
+        </li>\r\n\t\t\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/oglala-sioux-tribe-compact.aspx\"
+        title=\"Oglala Sioux Tribe Compact\">Oglala Sioux Tribe Compact</a> </li>\r\n\t\t</ul>\r\n\t
+        \ </li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t             \r\n\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/efsforms.aspx\">EFS
+        Paper Forms</a></li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t             \r\n\t<li><a
+        href=\"/Business-Services/uniform-commercial-code/sd-laws-administrative-rules.aspx\"
+        title=\"South Dakota Laws and Administrative Rules\">South Dakota Laws and
+        Administrative Rules</a>  </li>\r\n\t<li><a href=\"/Business-Services/uniform-commercial-code/docs/NEWUCCSubscriptionForm.pdf\"
+        target=\"_blank\" title=\"Subscribe to UCC Filing System\">Subscribe to UCC
+        Filing System</a></li>\r\n\t<li><a href=\"/Business-Services/database-downloads.aspx\"
+        target=\"_blank\" title=\"Download UCC Database\">Subscribe to  UCC &amp;
+        EFS Databases</a></li>\r\n\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/contact.aspx\"
+        title=\"Contact Us & FAQs\">Contact Us &amp; FAQs</a></li>\r\n\t</ul>\r\n\t</li>\r\n\r\n<!--
+        ------------START OF TRADEMARKS SECTION-------------------------- -->  \r\n<li
+        class='active_subsection'><a href=\"https://sdsos.gov/general-information/filing-fees.aspx\"
+        title=\"Trademarks\">Fee Schedule</a> \r\n\t<ul class=\"treeview\">\r\n\t\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/TrademarkSearch.aspx\"
+        title=\"Trademark Search\">Search for a Trademark</a></li>\r\n\t\t<li><a href=\"/Business-Services/trademark-name-registration/trade-marks.aspx\"
+        title=\"Trademarks\">Trademark Forms</a></li>\r\n\t\t<li><a href=\"/Business-Services/trademark-name-registration/emblems.aspx\"
+        title=\"Emblems\">Emblem Forms</a></li>\r\n\t\t<li><a href=\"/Business-Services/trademark-name-registration/farm-ranch-home-names.aspx\"
+        title=\"Farm/Ranch Home Names\">Farm/Ranch/Home Name Forms</a></li>\r\n\t\t<li><a
+        href=\"/Business-Services/database-downloads.aspx\">Request Trademark Database
+        Download</a></li>\r\n\t\t<!--<li><a href=\"/business-services/trademark-name-registration/docs/trademark_application_booklet_2015.pdf\"
+        target=\"_blank\" title=\"Handbook\">Handbook</a></li>-->\r\n\t</ul>\r\n</li>\r\n
+        <!-- ------------END OF TRADEMARKS SECTION-------------------------- -->\r\n<li
+        ><a href=\"http://sdsos.gov/Business-Services/corporations/contact.aspx\">Frequently
+        Asked Questions</a></li>\r\n<li ><a href=\"/Business-Services/uniform-commercial-code/docs/NEWUCCSubscriptionForm.pdf\">Become
+        a UCC Subscriber</a></li>\r\n</ul>\r\n</div>\r\n                                           \r\n
+        \                                          </ul></li>\r\n                                                    <li
+        ><a href=\"/general-services/default.aspx\" title=\"Services for Individuals\">General
+        Services</a><ul class=\"\"><!-- Master Nav list for INDIVIDUALS section-->\r\n\r\n<div
+        class=\"nav_col_1 clearfix\">\r\n<ul>\r\n        <li class=''><a href=\"/general-services/concealed-pistol-permits/cc-default.aspx\"
+        title=\"Pistol Permits\">Pistol Permits</a>\r\n        <ul class='treeview'>\r\n
+        \           <li><a href=\"/general-services/concealed-pistol-permits/cc-permit-types.aspx\"
+        title=\"Concealed Carry Types\">Types of Concealed Carry Permits</a></li>\r\n\t\t\t<li><a
+        href=\"/general-services/concealed-pistol-permits/cc-application.aspx\" title=\"Concealed
+        Carry Application Process\">How to Apply for a Permit</a></li>\r\n\t\t\t<li><a
+        href=\"/general-services/concealed-pistol-permits/cc-replacement.aspx\" title=\"Concealed
+        Carry Replacement\">Request Replacement Permit</a></li>\r\n\t\t\t<li><a href=\"/general-services/concealed-pistol-permits/cc-reciprocity.aspx\"
+        title=\"Concealed Carry Reciprocity\">Concealed Carry Reciprocity</a></li>\r\n\t\t\t<li><a
+        href=\"/general-services/concealed-pistol-permits/cc-handgun-course.aspx\"
+        title=\"Enhanced Permit Handgun Course\">Enhanced Permit Handgun Course</a></li>\r\n\t\t\t<li><a
+        href=\"/general-services/concealed-pistol-permits/cc-law-enforcement.aspx\"
+        title=\"Law Enforcement Officers Safety Act\">Law Enforcement Officers <br>\r\n\t\t\t&emsp;Safety
+        Act</a></li>\r\n\t\t\t<li><a href=\"/general-services/concealed-pistol-permits/cc-active-duty.aspx\"
+        title=\"Active Duty Military & Spouses\">Active Duty Military & Spouses</a></li>\r\n
+        \           <li><a href=\"/general-services/concealed-pistol-permits/cc-faqs.aspx\"
+        title=\"Frequently Asked Pistol Permit Questions\">Frequently Asked Pistol
+        Permit <br>&emsp;Questions</a></li>\r\n            <li><a href=\"/general-services/concealed-pistol-permits/docs/FirearmHandbook.pdf\"
+        target=\"_blank\" title=\"South Dakota Firearm Laws\">South Dakota Firearm
+        Laws <br>\r\n\t\t\t&emsp;Handbook</a></li>\r\n\t\t\t<li><a href=\"/general-services/concealed-pistol-permits/pistolstatistics.aspx\"
+        title=\"\">Pistol Permit Statistics</a></li>\r\n        </ul>\r\n    </li>\r\n
+        \ <li><a href=\"/general-services/concealed-pistol-permits/cc-reciprocity.aspx\"
+        title=\"Pistol Permit Reciprocity\">Pistol Permit Reciprocity</a></li>\r\n\t<li><a
+        href=\"/general-services/concealed-pistol-permits/cc-faqs.aspx\" title=\"Pistol
+        Permit FAQs\">Pistol Permit FAQs</a></li>\r\n\t  <li><a href=\"https://sdsos.gov/general-information/postsecondary-education/default.aspx\"
+        title=\"Postsecondary Education\">Postsecondary Education</a></li>\r\n\r\n<!--Start
+        of Board of Finance Section-->\r\n\t<li class=''><a href=\"/about-the-office/board-of-finance/default.aspx\"
+        title=\"State Board of Finance\">State Board of Finance</a>\r\n\t\t<ul class=\"treeview\">\r\n\t\t\t<li><a
+        href=\"https://boardsandcommissions.sd.gov/Meetings.aspx?BoardID=121\" title=\"Board
+        of Finance Meetings\">Monthly Meeting Information</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-perdiem.aspx\" title=\"Board
+        of Finance Per Diem Information\">Per Diem Information</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-household-moving.aspx\" title=\"Board
+        of Finance Household Moving Allowances\">Household Moving Allowance</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-state-hosting.aspx\" title=\"Board
+        of Finance State Hosting Requests\">State Hosting Requests</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-home-station.aspx\" title=\"Board
+        of Finance Home Station Requests\">Home Station Requests</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-debt-write-off.aspx\" title=\"Board
+        of Finance Debt Write-Off Requests\">Debt Write-Off Requests</a></li>\r\n\t\t\t<li><a
+        href=\"/about-the-office/board-of-finance/bof-appeal.aspx\" title=\"Board
+        of Finance Appeal Process\">Appeal Process</a></li>\r\n\t\t</ul>\r\n  </li>\r\n<!--End
+        of Board of Finance Section-->\r\n\r\n</ul>\r\n</div>\r\n\r\n\r\n<!--links
+        column two-->\r\n<div class=\"nav_col_2 clearfix\">\r\n<ul>\r\n            <li
+        class=''><a href=\"https://sosenterprise.sd.gov/BusinessServices/Notary/Default.aspx\"
+        title=\"Notary Public\">Notary Public</a>\r\n        <ul class='treeview'>\r\n
+        \           <li><a href=\"/general-services/notary-public/how-become-notary.aspx\"
+        title=\"Becoming a Notary Public\">Becoming a Notary Public</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/getting-notary-seal.aspx\" title=\"Getting
+        a Notary Seal\">About the Notary Seal</a></li>\r\n\t\t\t<li><a href=\"/general-services/notary-public/enotary.aspx\">E-Notary</a></li>\r\n
+        \           <li><a href=\"/general-services/notary-public/complete-notarization.aspx\"
+        title=\"Components of a Complete Notarization\">Components of a Complete Notarization</a></li>\r\n
+        \           <li><a href=\"/general-services/notary-public/important-concepts.aspx\"
+        title=\"Eight Important Concepts\">Eight Important Concepts</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/dos-donts.aspx\" title=\"Dos &amp;
+        Don'ts\">Dos and Don'ts</a></li>\r\n            <li><a href=\"/general-services/notary-public/notary-procedures.aspx\"
+        title=\"Notary Procedures\">Notary Procedures</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/notaryfaqs.aspx\" title=\"Frequently
+        Asked Questions\">Frequently Asked Questions</a></li>\r\n            <li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Notary/NotarySearch.aspx\"
+        title=\"Search Notary Database\">Search Notary Database</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/glossary-terms.aspx\" title=\"Glossary
+        of Terms\">Glossary of Terms</a></li>\r\n            <li><a href=\"/general-services/notary-public/acknowledgements.aspx\"
+        title=\"Acknowledgements/Affidavits\">Acknowledgements/Affidavits</a></li>\r\n
+        \           <li><a href=\"/general-services/notary-public/lost-stolen-seal.aspx\"
+        title=\"Lost or Stolen Seal\">Lost or Stolen Seal</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/commission-expiration-dates.aspx\"
+        title=\"Commission and Expiration Dates\">Commission and Expiration Dates</a></li>\r\n
+        \           <li><a href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=18-1\"
+        target=\"_blank\" title=\"Notary Laws SDCL 18-1\">Notary Laws SDCL 18-1</a></li>\r\n
+        \           <li><a href=\"http://sdlegislature.gov/Statutes/Codified_Laws/DisplayStatute.aspx?Type=Statute&Statute=18-5\"
+        target=\"_blank\" title=\"Uniform Acknowledgement SDCL 18-5\">Uniform Acknowledgement
+        SDCL 18-5</a></li>\r\n            <li><a href=\"/general-services/notary-public/what-if-move.aspx\"
+        title=\"What if I move?\">What if I move?</a></li>\r\n            <li><a href=\"/general-services/notary-public/name-changes.aspx\"
+        title=\"What if my name changes?\">What if my name changes?</a></li>\r\n            <li><a
+        href=\"/general-services/notary-public/renewal.aspx\" title=\"Notary Commission
+        Renewal\">Notary Commission Renewal</a></li>\r\n            <li><a href=\"/general-services/notary-public/docs/SDNotaryPublicHandbook.pdf\"
+        target=\"_blank\" title=\"Notary Handbook\">Notary Handbook</a></li>\r\n        </ul>\r\n
+        \   </li>\r\n\r\n    <li><a href=\"https://sosenterprise.sd.gov/BusinessServices/Notary/NotarySearch.aspx\"
+        title=\"Notary Public Searches\">Notary Public Searches</a></li>\r\n    <li><a
+        href=\"/general-services/notary-public/notaryfaqs.aspx\" title=\"Notary Public
+        FAQs\">Notary Public FAQs</a></li>\r\n\t<li><a href=\"/general-services/apostilles-authentications.aspx\"
+        title=\"Apostilles / Authentications\">Apostilles &amp; Authentications</a></li>\r\n
+        \   <li><a href=\"/general-information/executive-actions/raffle-requests/default.aspx\"
+        title=\"Raffle Requests\">Raffle Requests</a></li>    \r\n</ul>\r\n</div>\r\n\r\n\r\n<!--links
+        column three-->\r\n<div class=\"nav_col_3 clearfix\">\r\n<ul>\r\n    \t<li
+        class=''><a href=\"https://sosenterprise.sd.gov/businessservices/lobbyist/default.aspx\"
+        title=\"Lobbyist\">Lobbyists</a>    </li>\r\n\r\n    <li><a href=\"https://sosenterprise.sd.gov/businessservices/lobbyist/default.aspx\"
+        title=\"Lobbyist Searches\">Lobbyist Searches</a></li>\r\n    <li><a href=\"/general-information/executive-actions/general-appointments/search/\"
+        title=\"General Appointments\">General Appointments</a></li>\r\n\t<li><a href=\"/general-information/executive-actions/oaths-of-office/search/Default.aspx\"
+        title=\"Oaths of Office\">Oaths of Office</a></li>\r\n    <li><a href=\"/general-information/executive-actions/elected-officials-fis/search/Default.aspx\"
+        title=\"Financial Interest Statements Elected Officials\">Financial Interest
+        Statements <br>\r\n    Elected Officials</a></li>\r\n\r\n</ul>\r\n</div>\r\n<div
+        class=\"nav_col_4 clearfix\">\r\n<ul>\r\n    \t<li><a href=\"/general-information/executive-actions/executive-orders/search/Default.aspx\"
+        title=\"Executive Orders\">Executive Orders</a></li>\r\n    <li><a href=\"/general-information/executive-actions/gubernatorial-proclamations/search/Default.aspx\"
+        title=\"Executive Proclamations\">Executive Proclamations</a></li>\r\n    <li
+        class=\"nav_box_drop\"><a href=\"#\" title=\"General Information\" aria-haspopup=\"true\">General
+        Information</a>\r\n        <!--<ul class=\"ddList\">\r\n            <li><a
+        href=\"/general-information/about-state-south-dakota/default.aspx\" title=\"About
+        South Dakota\">About South Dakota</a></li>\r\n            <li><a href=\"/general-information/about-state-south-dakota/summary-south-dakota-state-government/default.aspx
+        \" title=\"Summary of State Government\">Summary of State Government</a></li>\r\n
+        \           <li><a href=\"/general-information/blue-book-legislative-manual.aspx\"
+        title=\"Blue Book Legislative Manual\">Blue Book Legislative Manual</a></li>\r\n
+        \           <li><a href=\"/general-information/publications/default.aspx\"
+        title=\"Economic Reports\">Economic Reports</a></li>\r\n            <li><a
+        href=\"/general-information/filing-fees.aspx\" title=\"Filing Fees\">Filing
+        Fees</a></li>\r\n            <li><a href=\"/general-information/about-state-south-dakota/honoring-our-flag.aspx\"
+        title=\"Honoring the Flag\">Honoring the Flag</a></li>\r\n            <li><a
+        href=\"/general-information/loading-acrobat-reader.aspx\" title=\"Loading
+        Acrobat Reader\">Loading Acrobat Reader</a></li>\r\n            <li><a href=\"/general-information/about-state-south-dakota/state-constitution.aspx\"
+        title=\"State Constitution\">State Constitution</a></li>\r\n            <li><a
+        href=\"http://www.sdcounties.org/\" title=\"South Dakota Association of County
+        Officials\">South Dakota Association of County Officials</a></li>\r\n            <li><a
+        href=\"/general-information/about-state-south-dakota/state-seal-symbols.aspx\"
+        title=\"State Seal and Symbols\">State Seal and Symbols</a></li>\r\n        </ul>-->\r\n
+        \       <ul class=\"ddlist\">\r\n        <li><a href=\"/general-information/about-state-south-dakota/default.aspx\"
+        title=\"About the state of South Dakota\">About South Dakota</a> </li>\r\n\t\t<li><a
+        href=\"https://sdsos.gov/about-the-office/about-secretary-johnson.aspx\" title=\"About
+        Secretary Monae L. Johnson\">About Secretary Johnson</a> </li>\r\n        <li><a
+        href=\"/general-information/about-state-south-dakota/summary-south-dakota-state-government/default.aspx\"
+        title=\"A summary of South Dakota State Government\">A Summary of South Dakota<br
+        /> State Government</a></li>\r\n        <li><a href=\"/general-information/administrative-rules/search/\"
+        title=\"Administrative Rules\">Administrative Rules</a></li>\r\n        <li><a
+        href=\"/general-information/blue-book-legislative-manual.aspx\" title=\"Blue
+        Book Legislative Manual\">Blue Book Legislative Manual</a></li>\r\n        <li><a
+        href=\"/general-information/publications/default.aspx\" title=\"Publications\">Economic
+        Reports</a></li>\r\n        <li><a href=\"/general-information/executive-actions/oaths-of-office/search/\"
+        title=\"Executive Orders\">Executive Appointments</a></li>\r\n        <li><a
+        href=\"/general-information/executive-actions/executive-orders/search/Default.aspx\"
+        target=\"_blank\" title=\"Executive Orders\">Executive Orders</a></li>\r\n
+        \       <li><a href=\"/general-information/executive-actions/gubernatorial-proclamations/search/Default.aspx\"
+        target=\"_blank\" title=\"Executive Proclamations\">Executive Proclamations</a></li>\r\n
+        \   <li><a href=\"/general-information/filing-fees.aspx\" target=\"_blank\"
+        title=\"Filing Fees\">Filing Fees</a></li>\r\n    <li><a href=\"/general-information/about-state-south-dakota/honoring-our-flag.aspx\"
+        title=\"Honoring our flag\">Honoring Our flag</a></li>\r\n    <li><a href=\"/general-information/loading-acrobat-reader.aspx\"
+        title=\"Loading Acrobat Reader\">Loading Acrobat Reader</a></li>\r\n    <li><a
+        href='http://www.nass.org/' target=\"_blank\" title='National Association
+        of Secretaries of State'>National Association of<br /> Secretaries of State</a></li>\r\n
+        \   <li><a href='/about-the-office/other-secretary-of-state-websites.aspx'
+        title='Other Secretary of State websites'>Other Secretary of State Websites</a></li>\r\n
+        \   <li><a href='/about-the-office/board-of-elections/default.aspx' title='State
+        Board of Elections'>State Board of Elections</a>    </li>\r\n    \r\n    <li><a
+        href=\"/elections-voting/assets/Archive/Prior to 2026/2025 South Dakota Constitution
+        20250919.pdf\" title=\"State Constitution\">State Constitution</a></li>\r\n
+        \   <li><a href=\"/general-information/about-state-south-dakota/state-seal-symbols.aspx\"
+        title=\"State seal and symbols\">State Seal and Emblems</a></li>\r\n            </ul>\r\n
+        \   </li>\r\n\r\n    <li class=\"nav_box_drop\"><a href=\"#\" title=\"Other
+        Filings\" aria-haspopup=\"true\">Other Filings</a>\r\n        <ul class=\"ddList\">\r\n
+        \           <li><a href=\"/general-information/about-state-south-dakota/use-of-state-seal.aspx\">Use
+        of the State Seal</a></li>\r\n            <li><a href=\"/general-information/miscellaneous-forms/athletic-agent-registration.aspx\"
+        title=\"Athlete Agent Registration\">Athlete Agent Registration</a></li>\r\n
+        \           <li><a href=\"/general-information/miscellaneous-forms/environmental-covenant-registry.aspx\"
+        title=\"Environmental Covenant Registry\">Environmental Covenant Registry</a></li>\r\n
+        \           <li><a href=\"/general-information/miscellaneous-forms/local-bond-information-statements.aspx\"
+        title=\"Local Bond Information Statements\">Local Bond Information Statements</a></li>\r\n
+        \           <li><a href=\"/general-information/miscellaneous-forms/newspaper-ownership-circulation-statment.aspx\"
+        title=\"Newspaper Ownership and Circulation\">Newspaper Ownership and Circulation</a></li>\r\n
+        \           <li><a href=\"/general-information/about-state-south-dakota/personality_right_publicity.aspx\"
+        title=\"Personality's Right of Publicity\">Personality's Right of Publicity</a></li>\r\n
+        \           <li><a href=\"/general-information/postsecondary-education/default.aspx\"
+        title=\"Postsecondary Education\">Postsecondary Education</a></li>\r\n            <li><a
+        href=\"/general-information/summons-complaint.aspx\" title=\"Summons and Complaints\">Summons
+        and Complaints</a></li>\r\n        </ul>\r\n    </li>\r\n\r\n</ul>\r\n</div>\r\n\r\n</ul></li>\r\n
+        \                                                   \r\n                                                </ul>\r\n
+        \                                           </div>\r\n                                        </nav>\r\n
+        \                                       \r\n                                        <!--END
+        MOBILE MENU-->\r\n                                       \r\n                                        \r\n
+        \                                       <div id=\"header_krebs\">\r\n                                            <!--
+        Monae L. Johnson -->\r\n                                            <div></div>\r\n
+        \                                       </div>\r\n                                        \r\n
+        \                                       \r\n                                        <nav
+        id=\"header_contact\" class=\"tertiary\">\r\n                                            <ul
+        class=\"\" id=\"\">\r\n                                               <li
+        class=\"\"><a href=\"/contacts/default.aspx\" title=\"Contact Us\" class=\"\">Contact
+        Us</a>\r\n                                                 <ul class=\"contact_nav\"><!--
+        Master Nav list for CONTACT section-->\r\n\r\n<div class=\"nav_col_1 clearfix\">\r\n
+        \   <ul>\r\n        <li class=\"active_subsection\">\r\n            <a href=\"/contacts/default.aspx\"
+        title=\"Contact Us\">Contact Us</a>\r\n            <ul class=\"treeview\">\r\n
+        \               <li><a href='https://vip.sdsos.gov/CountyAuditors.aspx' title='County
+        Auditors'>County Auditors</a></li>\r\n                <li><a href='/contacts/assets/SDCountyROD.pdf'
+        title='County Registers of Deeds'>County Registers of\r\n                        Deeds</a></li>\r\n
+        \               <li><a href='http://www.sdmunicipalleague.org/' title='Municipal
+        Finance Officers'>Municipal Finance\r\n                        Officers</a></li>\r\n
+        \               <li><a href='http://asbsd.org/' title='School Business Managers'>School
+        Business Managers</a></li>\r\n            </ul>\r\n        </li>\r\n    </ul>\r\n</div></ul><img
+        src=\"/images/pointer.png\" class=\"header_contact_icon\" alt=\"pointer arrow
+        icon\" /></li>\r\n                                            </ul>\r\n                                        </nav>\r\n
+        \                                       \r\n                                \r\n
+        \                                       \r\n                                </div>\r\n
+        \                              \r\n                          </div>      \r\n
+        \                         \r\n                          \r\n                          <!--
+        this adds the grey bar sub navigation to all interior pages-->\r\n                          <div
+        id='grey_bar' class='clearfix'><nav class='centerer'><ul><li><a href='/elections-voting/default.aspx'
+        title='Elections and Voting' class=''><img src='/images/elections_icon_tiny.png'
+        alt='Elections and Voting' />Elections &amp; Voting</a></li><li><a href='/business-services/default.aspx'
+        title='Business Services' class=''><img src='/images/business_icon_tiny.png'
+        alt='Business Services' />Business Services</a></li><li><a href='/general-services/default.aspx'
+        title='General Services' class=''><img src='/images/individuals_icon_tiny.png'
+        alt='General Services' />General Services</a></li></ul></nav></div>\r\n                          \r\n
+        \                             \r\n                          \r\n                          \r\n
+        \                         \r\n                        <div class=\"centerer\">\r\n
+        \                       \r\n                        <!--comment out this section
+        when you want the election button turned off-->\r\n                        \r\n
+        \                     \r\n                        \r\n                        \r\n
+        \                       \r\n                        \r\n                        <div
+        id=\"red_drop\" class=\"clearfix\" >\r\n                         \t\t\r\n
+        \                                       <nav class=\"secondary\">\r\n                                            <ul
+        class=\"\" id=\"\">\r\n                                            \t\r\n
+        \                                               <!-- these items are automatically
+        appended to the mobile menu, if you don't want one to show in the mobile menu
+        then add the class mobile_omit to the containing li -->\r\n\t\t\t\t\t\t\t\t\t\t
+        \    <li><a href=\"https://vip.sdsos.gov/\"><strong>Voter Information Portal
+        (VIP)</strong></a></li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<li><a href=\"https://electionresults.sd.gov/Default.aspx\"><strong>General
+        Election Results</strong></a></li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<!--<li><a href=\"https://sdsos.gov/elections-voting/voting/register-to-vote/default.aspx\"><strong>Register
+        to Vote</strong></a></li>-->\r\n\t\t\t\t\t\t\t\t\t\t\t\t<li><a href=\"https://vip.sdsos.gov/candidatelist.aspx?eid=774\"><strong>Candidate
+        List</strong></a></li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<li><a href=\"https://sosenterprise.sd.gov/businessservices/lobbyist/default.aspx\"><strong>Lobbyist</strong></a></li>\r\n
+        \                                              <!-- <li><a href=\"https://sdsos.gov/Business-Services/default.aspx\"><strong>Business
+        Filings</strong></a></li>-->\r\n                                               <!--
+        <li><a href=\"https://sdsos.gov/elections-voting/upcoming-elections/general-information/2026/2026-ballot-questions.aspx\"><strong>2026
+        Ballot Questions</strong></a></li>-->\r\n                                             <!--
+        \  <li><a href=\"/general-services/concealed-pistol-permits/cc-default.aspx\"><strong>Pistol
+        Permits</strong></a></li>-->\r\n                                                <li><a
+        href=\"https://sdcfr.sdsos.gov/\" class=\"\"><strong>Campaign Finance Reports</strong></a></li>\r\n
+        \                                               <li class=\"\"><a href=\"/a-z-topics/default.aspx\"
+        title=\"Search By Subject\"><strong>Search by Subject</strong></a></li>\r\n
+        \                                               \r\n                                               \r\n
+        \                                             \r\n                                               \r\n\t\t\t\t\t\t\t\t\t\t\t
+        \  \r\n                                            </ul>\r\n                                         </nav>\r\n
+        \                                        \r\n                                         <!--
+        keep this here, even though it is empty. Items are added and deleted from
+        this container at various screen sizes-->\r\n                                         <nav
+        class=\"secondary_expanded\">\r\n                                            <ul
+        class=\"\" id=\"\">\r\n                                            \t\r\n
+        \                                           </ul>\r\n                                         </nav>\r\n
+        \                              </div>\r\n                         </div>\r\n\t\t</header>\r\n
+        \       \r\n       \r\n        \r\n        <!-- this is turned off for interior
+        pages, via CSS -->\r\n     \r\n        \r\n        \r\n       \r\n        \r\n
+        \       \r\n        <section id=\"middle\" class=\"clearfix\"><div id=\"header_business\"
+        class=\"interior_header clearfix\">\r\n\r\n\r\n        <div class=\"centerer
+        clearfix\">\r\n                <div id=\"logo_box\" class=\"clearfix\" style=\"width:
+        100%;\">\r\n                        <a href=\"/Business-Services/default.aspx\"><img
+        src=\"/images/business.png\"\r\n                                        alt=\"Business
+        Services\" id=\"section_logo\" /></a>\r\n                        <p role=\"region\"
+        aria-label=\"Business Services: South Dakota Secretary of State\" align=\"left\">\r\n
+        \                               <span style=\"color: white\"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select
+        a box and SCROLL\r\n                                                DOWN</strong></span></p><BR>\r\n
+        \               </div>\r\n                <div style=\"clear: both;\"></div>\r\n
+        \               <div id=\"nav_box_4col\" class=\"clearfix\" style=\"padding-top:0;\">\r\n
+        \                       <nav class=\"business_nav section_nav_list clearfix\">\r\n\r\n\r\n\r\n
+        \                               <div class=\"main_level clearfix\">\r\n                                         <!--
+        Master Nav list for BUSINESS SERVICES section-->\r\n                             \r\n
+        \                                    \t\r\n                                           \r\n<div
+        class=\"nav_col_1 clearfix\">\r\n<ul>\r\n\t    <li class=''><a href=\"https://sosenterprise.sd.gov/BusinessServices/Business/RegistrationInstr.aspx\"
+        title=\"Start a New Business\">Register a Business<br>\r\n    </a>\r\n    <ul
+        class=\"treeview\">\r\n        <li><a href=\"/Business-Services/corporations/corporate-forms/default.aspx\"
+        title=\"Business Forms\">Business Forms</a>\r\n          <ul>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/business-corporations.aspx\"
+        title=\"Business Corporations\">Business Corporations</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/limited-liability-companies.aspx\"
+        title=\"Limited Liability Companies\">Limited Liability Companies</a></li>\r\n
+        \           <li><a href=\"/Business-Services/corporations/corporate-forms/series-llc.aspx\"
+        title=\"Series LLCs\">Series LLCs</a></li>\r\n            <li><a href=\"/Business-Services/corporations/corporate-forms/nonprofit-corporations.aspx\"
+        title=\"Nonprofit Corporations\">Nonprofit Corporations</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/limited-liability-partnerships.aspx\"
+        title=\"Limited Liability Partnerships\">Limited Liability Partnerships</a></li>\r\n
+        \           <li><a href=\"/Business-Services/corporations/corporate-forms/limited-partnerships.aspx\"
+        title=\"Limited Partnerships\">Limited Partnerships</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/cooperatives.aspx\"
+        title=\"Cooperatives\">Cooperatives</a></li>\r\n            <li><a href=\"/Business-Services/corporations/corporate-forms/business-trusts.aspx\"
+        title=\"Business Trusts\">Business Trusts</a></li>\r\n            <li><a href=\"/Business-Services/corporations/corporate-forms/miscellaneous-forms.aspx\"
+        title=\"Miscellaneous Forms\">Miscellaneous Forms</a></li>\r\n            <li><a
+        href=\"/Business-Services/corporations/corporate-forms/commercial-registered-agents.aspx\"
+        title=\"Commercial Registered Agents\">Commercial Registered Agents</a></li>\r\n
+        \         </ul>\r\n        </li>\r\n      </ul>\r\n\t\t\r\n    <li><a href=\"https://sosenterprise.sd.gov/ucc/\">File
+        a UCC/EFS</a></li>\r\n\t<li><a href=\"http://sdsos.gov/Business-Services/trademark-name-registration/default.aspx\">File
+        a Trademark</a></li>\r\n\t<li><a href=\"https://sosenterprise.sd.gov/BusinessServices/Fictitious/FictitiousHome.aspx\">File
+        a DBA</a></li>  \r\n\t<li><a href=\"/Business-Services/corporations/corporate-forms/default.aspx\">Business
+        Paper Forms</a></li>\r\n</ul>\r\n</div>       \r\n                                            \r\n<!--links
+        column two-->\r\n<div class=\"nav_col_2 clearfix\">\r\n<ul>\r\n\t\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/AnnualReportInstr.aspx\">File
+        an Annual Report<br></a></li>\r\n\t<li ><a href=\"https://sosenterprise.sd.gov/BusinessServices/Business/SOCInstr.aspx\"
+        title=\"File a Registered Agent Statement of Change\">File a Registered Agent
+        Change</a></li>\r\n\t<li ><a href=\"https://sosenterprise.sd.gov/BusinessServices/Business/ReinstatementInstr.aspx\"
+        title=\"File a Reinstatement\">Prepare a Reinstatement</a></li>\r\n\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/CertOfExistenceInstr.aspx\"
+        title=\"Certificates of Good Standing/Existence\">Certificates of Good Standing/Existence</a></li>\r\n</ul>\r\n</div>\r\n\r\n\r\n<!--links
+        column three-->\r\n<div class=\"nav_col_3 clearfix\">\r\n<ul>\r\n\t\t<li class=''><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/FilingSearch.aspx\"
+        title=\"Search for a Busineses\">Search for a Business</a></li>\r\n\t<li ><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/NameAvailability.aspx\"
+        title=\"Name Availability Search\">Search Business Name Availability</a>   </li>\r\n\t\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/RaSearch.aspx\">Search
+        Business by Registered Agent</a></li>\r\n\t\t<li><a href=\"/Business-Services/assets/ForeignBeneficialOwnersofAgriculturalLand.pdf\">Foreign
+        Beneficial Owner Report</a></li>\r\n</ul>\r\n</div>\r\n\r\n<!--links column
+        four-->\r\n<div class=\"nav_col_4 clearfix\">\r\n<ul>\r\n\t\t<li class=''><a
+        href=\"/Business-Services/BusinessResources/business-resources.aspx\" title=\"UCC
+        Filings\">Business Resources</a>\r\n\t<ul class=\"treeview\">\r\n\t  <li><a
+        href=\"https://sosenterprise.sd.gov/ucc/\" title=\"UCC & EFS Forms\">UCC &amp;
+        EFS Forms</a></li>\r\n\t\t\r\n\t  <li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/default.aspx\"
+        title=\"UCC Information\">UCC Information</a> \r\n\t\t<ul>\r\n\t\t\t<li><a
+        href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/where-to-file.aspx\"
+        title=\"Where to File\">Where to File</a> </li>\r\n\t\t\t<li><a href=\"/general-information/filing-fees.aspx\"
+        target=\"_blank\" title=\"Fee Schedule\">Fee Schedule</a></li>\r\n\t\t\t<li><a
+        href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/caretaker.aspx\">Livestock
+        Caretaker Filings</a></li>\r\n\t\t\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/cheyenne-river-sioux-tribe-compact.aspx\"
+        title=\"Cheyenne River Sioux Tribe Compact\">Cheyenne River Sioux Tribe Compact</a>
+        </li>\r\n\t\t\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/oglala-sioux-tribe-compact.aspx\"
+        title=\"Oglala Sioux Tribe Compact\">Oglala Sioux Tribe Compact</a> </li>\r\n\t\t</ul>\r\n\t
+        \ </li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t             \r\n\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/efsforms.aspx\">EFS
+        Paper Forms</a></li>\r\n\t\t\t\t\t\t\t\t\t\t\t\t             \r\n\t<li><a
+        href=\"/Business-Services/uniform-commercial-code/sd-laws-administrative-rules.aspx\"
+        title=\"South Dakota Laws and Administrative Rules\">South Dakota Laws and
+        Administrative Rules</a>  </li>\r\n\t<li><a href=\"/Business-Services/uniform-commercial-code/docs/NEWUCCSubscriptionForm.pdf\"
+        target=\"_blank\" title=\"Subscribe to UCC Filing System\">Subscribe to UCC
+        Filing System</a></li>\r\n\t<li><a href=\"/Business-Services/database-downloads.aspx\"
+        target=\"_blank\" title=\"Download UCC Database\">Subscribe to  UCC &amp;
+        EFS Databases</a></li>\r\n\t<li><a href=\"/Business-Services/uniform-commercial-code/ucc-efs-information/contact.aspx\"
+        title=\"Contact Us & FAQs\">Contact Us &amp; FAQs</a></li>\r\n\t</ul>\r\n\t</li>\r\n\r\n<!--
+        ------------START OF TRADEMARKS SECTION-------------------------- -->  \r\n<li
+        class='active_subsection'><a href=\"https://sdsos.gov/general-information/filing-fees.aspx\"
+        title=\"Trademarks\">Fee Schedule</a> \r\n\t<ul class=\"treeview\">\r\n\t\t<li><a
+        href=\"https://sosenterprise.sd.gov/BusinessServices/Business/TrademarkSearch.aspx\"
+        title=\"Trademark Search\">Search for a Trademark</a></li>\r\n\t\t<li><a href=\"/Business-Services/trademark-name-registration/trade-marks.aspx\"
+        title=\"Trademarks\">Trademark Forms</a></li>\r\n\t\t<li><a href=\"/Business-Services/trademark-name-registration/emblems.aspx\"
+        title=\"Emblems\">Emblem Forms</a></li>\r\n\t\t<li><a href=\"/Business-Services/trademark-name-registration/farm-ranch-home-names.aspx\"
+        title=\"Farm/Ranch Home Names\">Farm/Ranch/Home Name Forms</a></li>\r\n\t\t<li><a
+        href=\"/Business-Services/database-downloads.aspx\">Request Trademark Database
+        Download</a></li>\r\n\t\t<!--<li><a href=\"/business-services/trademark-name-registration/docs/trademark_application_booklet_2015.pdf\"
+        target=\"_blank\" title=\"Handbook\">Handbook</a></li>-->\r\n\t</ul>\r\n</li>\r\n
+        <!-- ------------END OF TRADEMARKS SECTION-------------------------- -->\r\n<li
+        ><a href=\"http://sdsos.gov/Business-Services/corporations/contact.aspx\">Frequently
+        Asked Questions</a></li>\r\n<li ><a href=\"/Business-Services/uniform-commercial-code/docs/NEWUCCSubscriptionForm.pdf\">Become
+        a UCC Subscriber</a></li>\r\n</ul>\r\n</div>\r\n                                           \r\n
+        \                                          \r\n                                </div>\r\n\r\n\r\n
+        \                       </nav>\r\n\r\n\r\n\r\n                </div>\r\n        </div>\r\n\r\n</div>\r\n\t\t\t\t\r\n\t\t\t\t\r\n
+        \              \r\n                \r\n        \t\t<section class=\"centerer\"
+        \ role=\"region\" aria-label=\"Business Services: South Dakota Secretary of
+        State\">\r\n                  <div class=\"clearfix content_block cke_focus\"
+        style=\"width: auto; position: relative; margin-left: 0%\" >\r\n                    <h1>Farm,
+        Ranch, Home Name Registrations</h1>\r\n\r\n<p>Below is a listing of the currently
+        registered Farm, Ranch and Home Names. A registered name cannot be used by
+        another person for any other farm, ranch or home in the same county. This
+        registration is perpetual and does not expire.</p>\r\n<p>For questions regarding
+        Farm, Ranch, Home Name Registrations, please contact our Trademark office
+        at <a href=\"/cdn-cgi/l/email-protection#5521273431303834273e1526213421307b26317b2026\"><span
+        class=\"__cf_email__\" data-cfemail=\"285c5a494c4d45495a43685b5c495c4d065b4c065d5b\">[email&#160;protected]</span></a>
+        or via phone at (605)773.2797.</p>\r\n<table border=\"1\">\r\n  <tbody>\r\n
+        \   <tr>\r\n      <th width=\"599\" scope=\"col\">Farm, Ranch, Home Name</th>\r\n
+        \     <th width=\"278\" scope=\"col\">Owner(s)</th>\r\n      <th width=\"138\"
+        scope=\"col\">Date Registered</th>\r\n      <th width=\"82\" scope=\"col\">County</th>\r\n
+        \     <th width=\"121\" scope=\"col\">Image</th>\r\n    </tr>\r\n    <tr>\r\n
+        \     <td>PIERSOL FARM (THE)</td>\r\n      <td>Lawrence L. Piersol</td>\r\n
+        \     <td>Jan 17, 1975</td>\r\n      <td>Clay</td>\r\n      <td><a href=\"docs/farmranchdocs/piersol-farm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LAZY H FARMS</td>\r\n      <td>Houston
+        Haugo</td>\r\n      <td>Oct 28, 1975</td>\r\n      <td>Lincoln</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/lazy-h-farms.PDF\">Certificate</a></td>\r\n    </tr>\r\n
+        \   <tr>\r\n      <td>J AND R RANCH</td>\r\n      <td>Jens Christensen<br>\r\n
+        \       Robert Christensen</td>\r\n      <td>May 21, 1976</td>\r\n      <td>Jerauld</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/j-and-r-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ELM HILL FARM</td>\r\n      <td>Max E.
+        Horsley<br>\r\n        Bertha L. Horsley</td>\r\n      <td>May 21, 1976</td>\r\n
+        \     <td>Jones</td>\r\n      <td><a href=\"docs/farmranchdocs/elm-hill-farm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SHADY LAWN ANGUS FARM</td>\r\n      <td>Harvey
+        J. Kohl</td>\r\n      <td>May 28, 1976</td>\r\n      <td>Roberts</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/shady-lawn-angus.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>HELL CANYON RANCH</td>\r\n      <td>Northwest
+        Realty Company</td>\r\n      <td>Jun 15, 1976</td>\r\n      <td>Minnehaha</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/hell-canyon-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LUELLA B SINKULAR</td>\r\n      <td>Luella
+        B. Sinkular</td>\r\n      <td>Jun 17, 1976</td>\r\n      <td>Gregory</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/luella-b-sinkular.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BLACK HILLS RANCH</td>\r\n      <td>Lester
+        Clark<br>\r\n        George E. Clark<br>\r\n        David L. Clark<br>\r\n
+        \       C. C. Cattle Company</td>\r\n      <td>Jun 24, 1976</td>\r\n      <td>Fall
+        River</td>\r\n      <td><a href=\"docs/farmranchdocs/black-hills-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>B.R.O.C. FARMS</td>\r\n      <td>Mrs. A.M.
+        Odland</td>\r\n      <td>Jul 15, 1976</td>\r\n      <td>Marshall</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/broc-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>OAK ISLAND RANCH</td>\r\n      <td>Harley
+        J. Niles<br>\r\n        Joyce G. Niles</td>\r\n      <td>Jul 15, 1976</td>\r\n
+        \     <td>Roberts</td>\r\n      <td><a href=\"docs/farmranchdocs/oak-island-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>PRAIRIE HEIGHTS RANCH</td>\r\n      <td>Conrad
+        E. Jensen<br>\r\n        Eunice M. Jensen</td>\r\n      <td>Jul 22, 1976</td>\r\n
+        \     <td>Spink</td>\r\n      <td><a href=\"docs/farmranchdocs/prairie-heights-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ALPINE ACRES</td>\r\n      <td>Frank L.
+        Whitney</td>\r\n      <td>Aug 5, 1976</td>\r\n      <td>Pennington</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/alpine-acres.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>D-J RANCH</td>\r\n      <td>Richard Andrew
+        Jones<br>\r\n        Helen M. Jones</td>\r\n      <td>Aug 17, 1976</td>\r\n
+        \     <td>Hutchinson</td>\r\n      <td><a href=\"docs/farmranchdocs/dj-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>FIRESTEAL HEREFORD FARMS</td>\r\n      <td>Elmer
+        Fink<br>\r\n        Elmer Fink, Jr.<br>\r\n        Edward Fink</td>\r\n      <td>Nov
+        5, 1976</td>\r\n      <td>Aurora</td>\r\n      <td><a href=\"docs/farmranchdocs/firesteal-hereford-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>A J BAR RANCH</td>\r\n      <td>Jerry Bennett</td>\r\n
+        \     <td>Dec 8, 1976</td>\r\n      <td>Jerauld</td>\r\n      <td><a href=\"docs/farmranchdocs/aj-bar-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>WIND CAVE RANCH</td>\r\n      <td>Fredric
+        John Stephan<br>\r\n        Helen Julia Moles Stephan</td>\r\n      <td>Mar
+        2, 1977</td>\r\n      <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/wind-cave-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SHIRTTAIL CANYON RANCH</td>\r\n      <td>Fredric
+        John Stephan<br>\r\n        Helen Julia Moles Stephan</td>\r\n      <td>Apr
+        5, 1977</td>\r\n      <td>Fall River</td>\r\n      <td><a href=\"docs/farmranchdocs/shirttail-canyon.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BUCKHORN MOUNTAIN RANCH</td>\r\n      <td>Fredric
+        John Stephan<br>\r\n        Helen Julia Moles Stephan</td>\r\n      <td>Apr
+        28, 1977</td>\r\n      <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/buckhorn-mountain.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>WINEGAR FARMS</td>\r\n      <td>Ralph L.Winegar<br>\r\n
+        \       Judy K. Winegar</td>\r\n      <td>Nov 15, 1977</td>\r\n      <td>Jerauld</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/winegar-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>WENZEL CATTLE COMPANY</td>\r\n      <td>Joe
+        Wenzel, Jr.</td>\r\n      <td>Jun 19, 1978</td>\r\n      <td>Jerauld</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/wenzel-cattle-co.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>TWIN OAKS</td>\r\n      <td>James R. Reynolds</td>\r\n
+        \     <td>Oct 31, 1978</td>\r\n      <td>Minnehaha</td>\r\n      <td><a href=\"docs/farmranchdocs/twin-oaks.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ASPEN HILL</td>\r\n      <td>John E. Simko
+        Jr.</td>\r\n      <td>Oct 31, 1978</td>\r\n      <td>Minnehaha</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/aspen-hill.PDF\">Certificate</a></td>\r\n    </tr>\r\n
+        \   <tr>\r\n      <td>BLACKACRE</td>\r\n      <td>Paul O. Godtland<br>\r\n
+        \       Nancy Adair</td>\r\n      <td>Oct 29, 1980</td>\r\n      <td>Brule</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/blackacre.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ROLING ACRES FARMS</td>\r\n      <td>Eugene
+        W. Roling<br>\r\n        Shyrlee Roling</td>\r\n      <td>Dec 16, 1980</td>\r\n
+        \     <td>Lake</td>\r\n      <td><a href=\"docs/farmranchdocs/roling-acres-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ROLING ACRES</td>\r\n      <td>David I.
+        Roling<br>\r\n        Dori Ann Roling</td>\r\n      <td>Dec 16, 1980</td>\r\n
+        \     <td>Lake</td>\r\n      <td><a href=\"docs/farmranchdocs/roling-acres.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>HORSESHOE T RANCH</td>\r\n      <td>E.M.
+        Eisenbraun<br>\r\n        Linda M. Eisenbraun</td>\r\n      <td>Jan 22, 1981</td>\r\n
+        \     <td>Pennington</td>\r\n      <td><a href=\"docs/farmranchdocs/horseshoe-t-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BELL BAR RANCH</td>\r\n      <td>Norman
+        A. Geigle</td>\r\n      <td>Jan 22, 1981</td>\r\n      <td>Pennington</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/bell-bar-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>MEADOW WAY RANCH</td>\r\n      <td>David
+        A. Richards</td>\r\n      <td>Feb 3, 1981</td>\r\n      <td>Meade</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/meadow-way-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>FOX DEN</td>\r\n      <td>Mr. Robert Fox</td>\r\n
+        \     <td>Dec 21, 1981</td>\r\n      <td>Miner</td>\r\n      <td><a href=\"docs/farmranchdocs/fox-den.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>WESTKOTA RANCHES</td>\r\n      <td>R. A.
+        Smiley<br>\r\n        Mary H. Smiley</td>\r\n      <td>Nov 29, 1982</td>\r\n
+        \     <td>Butte</td>\r\n      <td><a href=\"docs/farmranchdocs/westkota-ranches.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>WESTKOTA GELBVIEHS</td>\r\n      <td>R.
+        A. Smiley<br>\r\n        Mary H. Smiley</td>\r\n      <td>Nov 29, 1982</td>\r\n
+        \     <td>Butte</td>\r\n      <td><a href=\"docs/farmranchdocs/westkota-gelbviehs.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>DIAMOND S</td>\r\n      <td>Stanley Schaible<br>\r\n
+        \       Shirley Schaible</td>\r\n      <td>Jan 31, 1983</td>\r\n      <td>McPherson</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/diamond-s.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>HILLTOP RANCH</td>\r\n      <td>Thomasina
+        Parker</td>\r\n      <td>Mar 31, 1983</td>\r\n      <td>Todd</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/hilltop-ranch.PDF\">Certificate</a></td>\r\n    </tr>\r\n
+        \   <tr>\r\n      <td>BEAVER CREEK RANCH</td>\r\n      <td>Paul Lowham<br>\r\n
+        \       W. N. Barnard<br>\r\n        R. N. Barnard</td>\r\n      <td>Mar 5,
+        1984</td>\r\n      <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/beaver-creek-1984.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>GRASS ROOTS FARMS COMPANY</td>\r\n      <td>James
+        L. Cihak<br>\r\n        Sharon K. Cihak</td>\r\n      <td>Dec 27, 1984</td>\r\n
+        \     <td>Charles Mix</td>\r\n      <td><a href=\"docs/farmranchdocs/grass-roots-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SIOUX VALLEY RANCH</td>\r\n      <td>George
+        F. Surgent</td>\r\n      <td>Feb 26, 1987</td>\r\n      <td>Codington</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/sioux-valley-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BEAVER CREEK RANCH</td>\r\n      <td>O.
+        Duane Bonham<br>\r\n        Carol R. Bonham</td>\r\n      <td>Jan 12, 1989</td>\r\n
+        \     <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/beaver-creek-1989.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>TRAILS END RANCH</td>\r\n      <td>Kirby
+        Briggs<br>\r\n        Lillian Briggs</td>\r\n      <td>Apr 11, 1990</td>\r\n
+        \     <td>Stanley</td>\r\n      <td><a href=\"docs/farmranchdocs/trails-end-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>WOLFSTHORPE</td>\r\n      <td>Richard C.
+        Reed<br>\r\n        Susan J. Reed</td>\r\n      <td>Feb 8, 1993</td>\r\n      <td>Minnehaha</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/wolfsthorpe.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>REDROCK FARM</td>\r\n      <td>Kristi S.
+        Quaintance<br>\r\n        John C. Quaintance</td>\r\n      <td>Jul 14, 1993</td>\r\n
+        \     <td>Minnehaha</td>\r\n      <td><a href=\"docs/farmranchdocs/redrock-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>TOPKOG</td>\r\n      <td>Sylvan TeKrony</td>\r\n
+        \     <td>Nov 21, 1994</td>\r\n      <td>Deuel</td>\r\n      <td><a href=\"docs/farmranchdocs/topkog.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>STAGECOACH SPRINGS RANCH</td>\r\n      <td>Richard
+        Wayne Eudy<br>\r\n        Sheri Lynn Eudy</td>\r\n      <td>Nov 18, 1996</td>\r\n
+        \     <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/stagecoach-springs-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>DAKOTA BUFFALO COMPANY</td>\r\n      <td>Greg
+        Smeenk<br>\r\n        Sherry Smeenk</td>\r\n      <td>Jul 18, 1997</td>\r\n
+        \     <td>Butte</td>\r\n      <td><a href=\"docs/farmranchdocs/dakota-buffalo-company.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>THUNDER CANYON BUFFALO</td>\r\n      <td>Greg
+        Smeenk<br>\r\n        Sherry Smeenk</td>\r\n      <td>Jul 18, 1997</td>\r\n
+        \     <td>Butte</td>\r\n      <td><a href=\"docs/farmranchdocs/thunder-canyon-buffalo.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>STANLEYLAND</td>\r\n      <td>Stanley B.
+        Altman</td>\r\n      <td>Aug 7, 1997</td>\r\n      <td>Brown</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/stanleyland.PDF\">Certificate</a></td>\r\n    </tr>\r\n
+        \   <tr>\r\n      <td>RED HILL RANCH</td>\r\n      <td>Joanne Nicholas<br>\r\n
+        \       Darrell Nicholas<br>\r\n        Jason Nicholas</td>\r\n      <td>Jan
+        28, 1998</td>\r\n      <td>Lawrence</td>\r\n      <td><a href=\"docs/farmranchdocs/red-hill-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>CASTLE ROCK BUFFALO</td>\r\n      <td>Kevin
+        Paul Deschamps<br>\r\n        Elena Marie Deschamps</td>\r\n      <td>Jan
+        5, 1999</td>\r\n      <td>Butte</td>\r\n      <td><a href=\"docs/farmranchdocs/castlerock-buffalo.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BATTLE CREEK BUFFALO</td>\r\n      <td>Kevin
+        Paul Deschamps<br>\r\n        Elena Marie Deschamps</td>\r\n      <td>Jan
+        5, 1999</td>\r\n      <td>Butte</td>\r\n      <td><a href=\"docs/farmranchdocs/battle-creek-buffalo.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>HIGH PLAINS BUFFALO COMPANY</td>\r\n      <td>Kevin
+        Paul Deschamps<br>\r\n        Elena Marie Deschamps</td>\r\n      <td>Jan
+        5, 1999</td>\r\n      <td>Butte</td>\r\n      <td><a href=\"docs/farmranchdocs/high-plains-buffalo.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>TIMBERVALLEY RANCH</td>\r\n      <td>Louis
+        K. Freiberg</td>\r\n      <td>Jun 30, 1999</td>\r\n      <td>Meade</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/timbervalley-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>JUMPOFF BUFFALO RANCH</td>\r\n      <td>Scott
+        Peterson</td>\r\n      <td>Oct 3, 2000</td>\r\n      <td>Butte</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/jumpoff-buffalo-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>CEDAR CREST</td>\r\n      <td>Arlen L.
+        Hauge</td>\r\n      <td>May 25, 2001</td>\r\n      <td>McCook</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/cedar-crest.PDF\">Certificate</a></td>\r\n    </tr>\r\n
+        \   <tr>\r\n      <td>TURTLE PEAK RANCH</td>\r\n      <td>Randy Shultz</td>\r\n
+        \     <td>Feb 7, 2002</td>\r\n      <td>Jerauld</td>\r\n      <td><a href=\"docs/farmranchdocs/turtle-peak-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LOG CABIN ESTATES</td>\r\n      <td>Andrew
+        Hubbeling</td>\r\n      <td>Jul 29, 2002</td>\r\n      <td>Pennington</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/log-cabin-estates.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ROSANA</td>\r\n      <td>Paul Hubbeling</td>\r\n
+        \     <td>Jul 29, 2002</td>\r\n      <td>Lawrence</td>\r\n      <td><a href=\"docs/farmranchdocs/rosana.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>DACOTAH PRAIRIE FARMS</td>\r\n      <td>Jason
+        Haskell</td>\r\n      <td>Jul 31, 2002</td>\r\n      <td>Brown</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/dacotah-prairie-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>MILL CREEK RANCH</td>\r\n      <td>Charles
+        W. Nicholas<br>\r\n        Sallie J. Nicholas<br>\r\n        Charles V. Nicholas<br>\r\n
+        \       Verla J. Nicholas</td>\r\n      <td>Sep 12, 2002</td>\r\n      <td>Lawrence</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/mill-creek-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BEAR RIDGE RANCH</td>\r\n      <td>Charles
+        W. Nicholas<br>\r\n        Sallie J. Nicholas<br>\r\n        Charles V. Nicholas<br>\r\n
+        \       Verla J. Nicholas</td>\r\n      <td>Sep 12, 2002</td>\r\n      <td>Lawrence</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/bear-ridge-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>S N RANCH</td>\r\n      <td>Charles W.
+        Nicholas<br>\r\n        Sallie J. Nicholas<br>\r\n        Charles V. Nicholas<br>\r\n
+        \       Verla J. Nicholas</td>\r\n      <td>Sep 12, 2002</td>\r\n      <td>Lawrence</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/s-n-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SHALOM VALLEY</td>\r\n      <td>Mark J.
+        Sperlich</td>\r\n      <td>Apr 9, 2003</td>\r\n      <td>Douglas</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/shalom-valley.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>FOUR ROSES RANCH</td>\r\n      <td>Lynn
+        Waddell<br>\r\n        Holly Waddell</td>\r\n      <td>May 22, 2003</td>\r\n
+        \     <td>Perkins</td>\r\n      <td><a href=\"docs/farmranchdocs/four-roses-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ST. MICHAEL HOUSE HERMITAGE</td>\r\n      <td>Order
+        of the Legion of St. Michael, Inc.</td>\r\n      <td>May 28, 2003</td>\r\n
+        \     <td>Edmunds</td>\r\n      <td><a href=\"docs/farmranchdocs/st-michael-house.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>JOHNSON BAR 5 RANCH</td>\r\n      <td>Charles
+        W. Johnson<br>\r\n        Eunice G. Johnson</td>\r\n      <td>May 30, 2003</td>\r\n
+        \     <td>Pennington</td>\r\n      <td><a href=\"docs/farmranchdocs/johnson-bar-5-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>M LAZY V RANCH</td>\r\n      <td>Mark DeVries<br>\r\n
+        \       Nicole L. DeVries</td>\r\n      <td>Jul 15, 2003</td>\r\n      <td>Jackson</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/m-lazy-v-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LAUING MILL IRON L RANCH</td>\r\n      <td>Denny
+        Lauing<br>\r\n        Doris Lauing</td>\r\n      <td>Jul 16, 2003</td>\r\n
+        \     <td>Hughes</td>\r\n      <td><a href=\"docs/farmranchdocs/lauing-mill-iron-l.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BRULE CREEK FARM</td>\r\n      <td>Daniel
+        Gillespie<br>\r\n        Margaret Gillespie</td>\r\n      <td>Aug 25, 2003</td>\r\n
+        \     <td>Lincoln</td>\r\n      <td><a href=\"docs/farmranchdocs/brule-creek-farm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>DANIEL P. HORN HOMESTEAD</td>\r\n      <td>Daniel
+        P. Horn</td>\r\n      <td>Sep 19, 2003</td>\r\n      <td>Beadle</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/daniel-p-horn.PDF\">Certificate</a></td>\r\n    </tr>\r\n
+        \   <tr>\r\n      <td>SEVEN DIAMOND RANCH</td>\r\n      <td>Martin W. Jurisch<br>\r\n
+        \       Patricia M. Jurisch</td>\r\n      <td>Jan 28, 2004</td>\r\n      <td>Meade</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/seven-diamond-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>FULL CIRCLE GARDENS</td>\r\n      <td>April
+        A. Zumbaum</td>\r\n      <td>May 5, 2004</td>\r\n      <td>Yankton</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/full-circle-gardens.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>CIRCLE 2 RANCH</td>\r\n      <td>Brian
+        VanderAarde<br>\r\n        Pepper Wolf</td>\r\n      <td>May 19, 2004</td>\r\n
+        \     <td>Minnehaha</td>\r\n      <td><a href=\"docs/farmranchdocs/circle-2-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>RKO RANCH (O UNDER R)</td>\r\n      <td>Ray
+        O'Day<br>\r\n        Karla O'Day</td>\r\n      <td>Nov 12, 2004</td>\r\n      <td>Hughes</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/r-k-o-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ROCK CREEK RANCH</td>\r\n      <td>John
+        Chauncey</td>\r\n      <td>Jan 5, 2005</td>\r\n      <td>Todd</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/rock-creek-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LA MAISON D'AMOUR</td>\r\n      <td>Thomas
+        C. Richards</td>\r\n      <td>Feb 2, 2005</td>\r\n      <td>Brown</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/la-maison-damour.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>CIRCLE ARROW RANCH</td>\r\n      <td>Brett
+        P. Schmidt<br>\r\n        Rochelle S. Schmidt</td>\r\n      <td>Feb 18, 2005</td>\r\n
+        \     <td>Clark</td>\r\n      <td><a href=\"docs/farmranchdocs/circle-arrow-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SILVER DOLLAR CATTLE RANCH</td>\r\n      <td>Brett
+        P. Schmidt<br>\r\nRochelle S. Schmidt</td>\r\n      <td>Feb 18, 2005</td>\r\n
+        \     <td>Clark</td>\r\n      <td><a href=\"docs/farmranchdocs/silver-dollar-cattle.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>THE SWEET SACRED AND THE DAM CLOSE RANCH</td>\r\n
+        \     <td>Ronald M. De Long<br>\r\n        Sunceeray S. De Long</td>\r\n      <td>Mar
+        17, 2005</td>\r\n      <td>Butte</td>\r\n      <td><a href=\"docs/farmranchdocs/sweet-sacred-dam-close.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SOUTHGATE<br>&nbsp; &nbsp;&nbsp;&nbsp;Amended
+        5/17/2010</td>\r\n      <td>Lazy P6 Land Co., Inc.</td>\r\n      <td>May 31,
+        2005</td>\r\n      <td>Pennington</td>\r\n      <td><a href=\"docs/farmranchdocs/southgate-2005.PDF\">Certificate\r\n
+        \     </a><br>\r\n      <a href=\"docs/farmranchdocs/southgate-2010.PDF\">Amendment</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>IVERSEN ANGUS RANCH</td>\r\n      <td>Eric
+        J. Iversen</td>\r\n      <td>Jul 5, 2005</td>\r\n      <td>Jones</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/iversen-angus-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BUCKHORN SHADOWS ESTATE</td>\r\n      <td>Larry
+        Weelborg<br>\r\n        Jane Weelborg</td>\r\n      <td>Sep 30, 2005</td>\r\n
+        \     <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/buckhorn-shadows-estate.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BUCKHORN SHADOWS</td>\r\n      <td>Larry
+        Weelborg<br>\r\nJane Weelborg</td>\r\n      <td>Sep 30, 2005</td>\r\n      <td>Custer</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/buckhorn-shadows.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>STAR OF THE WEST</td>\r\n      <td>Raymond
+        L. Hardin</td>\r\n      <td>Dec 1, 2005</td>\r\n      <td>Pennington</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/star-of-the-west.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BUTTE VISTA FARM</td>\r\n      <td>Douglas
+        J. Pavel<br>\r\n        Carol L. Pavel</td>\r\n      <td>Feb 2, 2006</td>\r\n
+        \     <td>Lawrence</td>\r\n      <td><a href=\"docs/farmranchdocs/butte-vista-farm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ROCKLAND PINES</td>\r\n      <td>Patty
+        Booze</td>\r\n      <td>Feb 13, 2006</td>\r\n      <td>Meade</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/rockland-pines.PDF\">Certificate</a></td>\r\n    </tr>\r\n
+        \   <tr>\r\n      <td>RIVER DIAMOND RANCH</td>\r\n      <td>Joan Elayne Powell</td>\r\n
+        \     <td>Mar 10, 2006</td>\r\n      <td>Ziebach</td>\r\n      <td><a href=\"docs/farmranchdocs/river-diamond-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>FINK POLLED HEREFORDS</td>\r\n      <td>Mike
+        C. Fink<br>\r\n        Valerie L. Marsh</td>\r\n      <td>Oct 20, 2006</td>\r\n
+        \     <td>McCook</td>\r\n      <td><a href=\"docs/farmranchdocs/fink-polled-herefords.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>DUSTY ROADS FARM</td>\r\n      <td>Carine
+        L. Sperlich<br>\r\n        Gail J. Sperlich</td>\r\n      <td>Dec 8, 2006</td>\r\n
+        \     <td>Douglas</td>\r\n      <td><a href=\"docs/farmranchdocs/dusty-roads-farm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SOUTH DAKOTA RUNNING WATER RANCH</td>\r\n
+        \     <td>Gregory Schimkat</td>\r\n      <td>Dec 18, 2006</td>\r\n      <td>Bon
+        Homme</td>\r\n      <td><a href=\"docs/farmranchdocs/south-dakota-running-water.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>GRAND RIVER RANCH</td>\r\n      <td>Alton
+        Treib<br>\r\n        Esther Treib<br>\r\n        Nickolas Treib</td>\r\n      <td>Oct
+        4, 2007</td>\r\n      <td>Perkins</td>\r\n      <td><a href=\"docs/farmranchdocs/grand-river-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>MOEN GROVE</td>\r\n      <td>Elizabeth
+        Hughes</td>\r\n      <td>Oct 24, 2007</td>\r\n      <td>Yankton</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/moen-grove.PDF\">Certificate</a></td>\r\n    </tr>\r\n
+        \   <tr>\r\n      <td>INDIAN CANYON RANCH</td>\r\n      <td>Ted W. Hinesley</td>\r\n
+        \     <td>Nov 15, 2007</td>\r\n      <td>Fall River</td>\r\n      <td><a href=\"docs/farmranchdocs/indian-canyon-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>STEINKE RANCH</td>\r\n      <td>Alan R.
+        Steinke</td>\r\n      <td>Jan 23, 2008</td>\r\n      <td>Tripp</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/steinke-ranch.PDF\">Certificate</a></td>\r\n    </tr>\r\n
+        \   <tr>\r\n      <td>BORKHUIS FAMILY FARM</td>\r\n      <td>Larry Borkhuis<br>\r\n
+        \       Deb Borkhuis</td>\r\n      <td>Jan 29, 2008</td>\r\n      <td>Codington</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/borkhuis-family-farm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>FAIRVIEW FARMS</td>\r\n      <td>Ferlyn
+        Hofer<br>\r\n        Karen Hofer</td>\r\n      <td>Jun 16, 2008</td>\r\n      <td>McCook</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/fairview-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>VALLEY VIEW FARM</td>\r\n      <td>Allen
+        A. Schmidt Living Trust</td>\r\n      <td>Feb 11, 2009</td>\r\n      <td>Grant</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/valley-view-farm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SOUKUP HOMESTEAD (THE)</td>\r\n      <td>Tom
+        Soukup<br>\r\n        Linda Soukup</td>\r\n      <td>Apr 2, 2009</td>\r\n
+        \     <td>Charles Mix</td>\r\n      <td><a href=\"docs/farmranchdocs/soukup-homestead.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>FLYING B RANCH</td>\r\n      <td>Larry
+        D. Henderson<br>\r\n        Bonnie Henrikson</td>\r\n      <td>May 11, 2009</td>\r\n
+        \     <td>Meade</td>\r\n      <td><a href=\"docs/farmranchdocs/flying-b-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>HOMESTEADS AT CANYON RIM RANCH (THE)</td>\r\n
+        \     <td>CBJJ, LLC</td>\r\n      <td>Jun 1, 2009</td>\r\n      <td>Custer</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/homesteads-at-canyon-rim.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LAYTON CANYON RANCH</td>\r\n      <td>Paul
+        Van Bockern</td>\r\n      <td>Jul 12, 2010</td>\r\n      <td>Minnehaha</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/layton-canyon-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>IRELAND ANGUS RANCH</td>\r\n      <td>Forrest
+        H. Ireland</td>\r\n      <td>Aug 24, 2010</td>\r\n      <td>Jackson</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/ireland-angus.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SPLIT ROCK CATTLE COMPANY</td>\r\n      <td>Jarrod
+        R. Johnson</td>\r\n      <td>Dec 22, 2010</td>\r\n      <td>Minnehaha</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/split-rock-cattle.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SPRING ON THE HILL RANCH</td>\r\n      <td>Barton
+        Adrian</td>\r\n      <td>Sep 20, 2011</td>\r\n      <td>Custer</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/spring-on-the-hill.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>TRIPLE V ANGUS</td>\r\n      <td>Dean Vig</td>\r\n
+        \     <td>Sep 30, 2011</td>\r\n      <td>Meade</td>\r\n      <td><a href=\"docs/farmranchdocs/triple-v-angus.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>TRIPLE J RANCH</td>\r\n      <td>James
+        P. Jarding, Sr.<br>\r\n        Jonell M. Jarding</td>\r\n      <td>Jan 24,
+        2012</td>\r\n      <td>Minnehaha</td>\r\n      <td><a href=\"docs/farmranchdocs/triple-j-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>KITZAN SHEEP</td>\r\n      <td>Dwight Kitzan<br>\r\n
+        \       Gwendolyn Kitzan</td>\r\n      <td>Oct 24, 2012</td>\r\n      <td>Butte</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/kitzan-sheep.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>PHEASANTRY LODGE</td>\r\n      <td>James
+        R. Stephens<br>\r\n        Rona Stephens</td>\r\n      <td>Nov 6, 2012</td>\r\n
+        \     <td>Hughes</td>\r\n      <td><a href=\"docs/farmranchdocs/pheasantry-lodge.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SAGE HILLS RANCH</td>\r\n      <td>Dustin
+        Tenold<br>\r\n        Donna Tenold</td>\r\n      <td>Nov 16, 2012</td>\r\n
+        \     <td>Harding</td>\r\n      <td><a href=\"docs/farmranchdocs/sage-hills-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>DAM RANCH (THE)</td>\r\n      <td>The Dam
+        Ranch, L.L.C.</td>\r\n      <td>May 30, 2013</td>\r\n      <td>Todd</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/dam-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ROCK HILLS RANCH</td>\r\n      <td>Lyle
+        Perman</td>\r\n      <td>Oct 3, 2013</td>\r\n      <td>Walworth</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/rock-hills-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>BERT FINK JOINTLY WITH J@T INVESTMENTS
+        TRUSTEES JENETT FINK @ ELMER FINK JR.</td>\r\n      <td>Bert Fink Jointly
+        with J@T Investments, Unit    10</td>\r\n      <td>May 19, 2014</td>\r\n      <td>Aurora</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/bert-fink-jointly.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>GENESIS FARMS</td>\r\n      <td>Matthew
+        D. Jungers</td>\r\n      <td>Aug 4, 2014</td>\r\n      <td>Codington</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/genesis-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>MORNING STAR RANCH</td>\r\n      <td>Albert
+        White Hat<br>\r\n        Jessie White Hat</td>\r\n      <td>Dec 4, 2014</td>\r\n
+        \     <td>Todd</td>\r\n      <td><a href=\"docs/farmranchdocs/morning-star-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>ROCKIN B FEEDERS</td>\r\n      <td>Rockin
+        B LLC<br>\r\n        Tyrel Bonnet</td>\r\n      <td>Jan 14, 2015</td>\r\n
+        \     <td>Butte</td>\r\n      <td><a href=\"docs/farmranchdocs/rockin-b-feeders.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>DESJARLAIS FARMS</td>\r\n      <td>Joe
+        P. DesJarlais</td>\r\n      <td>Feb 18, 2015</td>\r\n      <td>Meade</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/desjarlais-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LAKNER FARMS LLC</td>\r\n      <td>Jeffrey
+        M. Lakner</td>\r\n      <td>Jun 5, 2015</td>\r\n      <td>Beadle</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/lakner-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>MAPLE LEAF HIDEAWAY</td>\r\n      <td>Mallory
+        J. Wriedt</td>\r\n      <td>Jun 24, 2015</td>\r\n      <td>Bon Homme</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/maple-leaf-hideaway.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>GRUMMIT CANYON RANCH</td>\r\n      <td>Scott
+        Stave<br>\r\n        Sue Stave</td>\r\n      <td>Sep 16, 2015</td>\r\n      <td>Butte</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/grummit-canyon.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>HAY CREEK RANCH</td>\r\n      <td>Scott
+        Stave<br>\r\nSue Stave</td>\r\n      <td>Sep 16, 2015</td>\r\n      <td>Butte</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/hay-creek.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SHIPPY CATTLE COMPANY</td>\r\n      <td>Todd
+        A. Shippy</td>\r\n      <td>Nov 24, 2015</td>\r\n      <td>Tripp</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/shippy-cattle-co.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>NEW HOPE HORSE SHELTER</td>\r\n      <td>Greg
+        Schjodt</td>\r\n      <td>Jan 15, 2016</td>\r\n      <td>Minnehaha</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/new-hope-horse-shelter.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>WILLOW CREEK LODGE</td>\r\n      <td>Jody
+        Femrite<br>\r\n        Rosemary Femrite</td>\r\n      <td>Mar 21, 2016</td>\r\n
+        \     <td>Codington</td>\r\n      <td><a href=\"docs/farmranchdocs/willow-creek-lodge.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>HUSS CATTLE COMPANY</td>\r\n      <td>Huss
+        Cattle, LLC<br>\r\n        Kelsey Huss<br>\r\n        Amanda Huss</td>\r\n
+        \     <td>May 2, 2016</td>\r\n      <td>Faulk</td>\r\n      <td><a href=\"docs/farmranchdocs/huss-cattle-co.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LEGACY FARMS</td>\r\n      <td>Vic Toscana</td>\r\n
+        \     <td>Jul 19, 2016</td>\r\n      <td>Sully</td>\r\n      <td><a href=\"docs/farmranchdocs/legacy-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>COTEAU RIDGE FARMS</td>\r\n      <td>Michelle
+        Neumiller</td>\r\n      <td>Sep 21, 2016</td>\r\n      <td>Marshall</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/coteau-ridge-farms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>KONTZ LAND AND CATTLE</td>\r\n      <td>Jason
+        Kontz<br>\r\n        Morgan Kontz</td>\r\n      <td>Oct 7, 2016</td>\r\n      <td>Moody</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/kontz-land-cattle.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SCOT GIANNONATTI RANCH</td>\r\n      <td>Carol
+        Giannonatti</td>\r\n      <td>Dec 13, 2016</td>\r\n      <td>Harding</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/scot-giannonatti-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>FAIR WINDS</td>\r\n      <td>Mark Marty<br>\r\n
+        \       Barbara Marty</td>\r\n      <td>Dec 30, 2016</td>\r\n      <td>Bon
+        Homme</td>\r\n      <td><a href=\"docs/farmranchdocs/fair-winds.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>L BAR M HOMESTEAD</td>\r\n      <td>Martin
+        E. Freidel</td>\r\n      <td>May 19, 2017</td>\r\n      <td>Custer</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/l-bar-m-honestead.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>SILVER CREEK RANCH</td>\r\n      <td>Pamela
+        K. Oster</td>\r\n      <td>May 31, 2017</td>\r\n      <td>Butte</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/silver-creek-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>GEAR HEAD RANCH</td>\r\n      <td>Richard
+        Dusenbury</td>\r\n      <td>Jun 26, 2017</td>\r\n      <td>Custer</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/gear-head-ranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>M&amp;M HEREFORDS</td>\r\n      <td>Mike
+        Medricky<br>\r\n        Miranda Medricky</td>\r\n      <td>Feb 8, 2018</td>\r\n
+        \     <td>Charles Mix</td>\r\n      <td><a href=\"docs/farmranchdocs/m-m-herefords.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>WHITE THUNDER ORGANICS</td>\r\n      <td>Dominic
+        Harmon</td>\r\n      <td>Feb 15, 2018</td>\r\n      <td>Mellette</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/white-thunder-organics.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LAZY FY CATTLE COMPANY</td>\r\n      <td>Taylor
+        Oster</td>\r\n      <td>Apr 9, 2018</td>\r\n      <td>Walworth</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/lazy-fy-cattle.PDF\">Certificate</a></td>\r\n    </tr>\r\n
+        \   <tr>\r\n      <td>DAKOTAS HORSES</td>\r\n      <td>Sandra Scotting</td>\r\n
+        \     <td>Apr 19, 2018</td>\r\n      <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/DakotasHorses.pdf\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LORDS LAKE RANCH</td>\r\n      <td>Joel
+        Wiedebush<br>\r\n\t\t\tStacie Wiedebush</td>\r\n      <td>Jan 8, 2019</td>\r\n
+        \     <td>Brown</td>\r\n      <td><a href=\"docs/farmranchdocs/lordslakeranch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>LAKOTA OYATE WOWAKAN EPISCOPAL CHURCH</td>\r\n
+        \     <td>Gail Richard</td>\r\n      <td>Feb 5, 2019</td>\r\n      <td>Oglala
+        Lakota</td>\r\n      <td><a href=\"docs/farmranchdocs/LakotaOyateWowakanEpiscopalChurch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n    <tr>\r\n      <td>CAMP CREEK RANCH</td>\r\n      <td>James
+        F. Patterson</td>\r\n      <td>Mar 26, 2019</td>\r\n      <td>Meade</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/CampCreekRanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>J BAR A FARMS</td>\r\n      <td>Jeffrey Pinter<br>\r\n
+        \       Anne Pinter</td>\r\n      <td>Apr 2, 2019</td>\r\n      <td>Tripp</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/JBarAFarms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>SACRED HONOR RANCH</td>\r\n      <td>Gary
+        Stoddard<br>\r\n        Melissa Stoddard</td>\r\n      <td>Apr 23, 2019</td>\r\n
+        \     <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/SacredHonorRanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>TR COUNTRY HOMESTEAD</td>\r\n      <td>Tianna
+        M. Peters</td>\r\n      <td>Apr 26, 2019</td>\r\n      <td>Mellette</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/TRCountryHomestead.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>HOFER HERITAGE FARM</td>\r\n      <td>Patrick
+        Michael Hofer</td>\r\n      <td>Jun 27, 2019</td>\r\n      <td>Hutchinson</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/HoferHeritageFarm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>A2Z CATTLE CO</td>\r\n      <td>Ashlyn Zens</td>\r\n
+        \     <td>Sep 19, 2019</td>\r\n      <td>Spink</td>\r\n      <td><a href=\"docs/farmranchdocs/A2ZCattleCo.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>BROKEN ARROW FARM</td>\r\n      <td>Mark
+        Limmer</td>\r\n      <td>Dec 02, 2019</td>\r\n      <td>Lake</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/BrokenArrowFarm.PDF\">Certificate</a></td>\r\n    </tr>\r\n\t<tr>\r\n
+        \     <td>CASTLE BUTTE ANGUS RANCH</td>\r\n      <td>Cory Jacob Christman</td>\r\n
+        \     <td>December 30, 2020</td>\r\n      <td>Perkins</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/CastleButteAngusRanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>PRAIRIESUN ORGANIC FARM</td>\r\n      <td>Angela
+        Jackson</td>\r\n      <td>Jan 31, 2020</td>\r\n      <td>Clay</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/PrairiesunOganicFarm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>TWISTED I RANCH</td>\r\n      <td>Nick Ingraham<br>\r\n\t\tKasie
+        Ingraham</td>\r\n      <td>Feb 25, 2020</td>\r\n      <td>Clark</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/TwistedIRanch.PDF\">Certificate</a></td>\r\n    </tr>\r\n\t<tr>\r\n
+        \     <td>SUMPTION FARMS</td>\r\n      <td>Taylor Sumption</td>\r\n      <td>Mar
+        10, 2020</td>\r\n      <td>Brown<br>\r\n\t\tMcPherson</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/SumptionFarms.PDF\">Certificate</a></td>\r\n    </tr>\r\n\t
+        <tr>\r\n      <td>SUGAR MOUNTAIN</td>\r\n      <td>Danielle Schade</td>\r\n
+        \     <td>Jul 21, 2020</td>\r\n      <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/SugarMountain.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t <tr>\r\n      <td>AHLGREN ACRES</td>\r\n      <td>Jason Ahlgren</td>\r\n
+        \     <td>Aug 14, 2020</td>\r\n      <td>Marshall</td>\r\n      <td><a href=\"docs/farmranchdocs/AhlgrenAcres.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>CROSSMAN CATTLE COMPANY</td>\r\n      <td>Jim
+        Montieth<br>\r\n\t\tTamara Montieth</td>\r\n      <td>Sep 04, 2020</td>\r\n
+        \     <td>Clay</td>\r\n      <td><a href=\"docs/farmranchdocs/CrossmanCattleCompany.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>SAND CREEK RANCH</td>\r\n      <td>Sand Creek
+        Land & Livestock Company, LLC</td>\r\n      <td>Sep 08, 2020</td>\r\n      <td>Fall
+        River</td>\r\n      <td><a href=\"docs/farmranchdocs/SandCreekRanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>PRAIRIE ELK FARM DBA CROOKED CREEK HOMESTEAD</td>\r\n
+        \     <td>Syrina Fields<br>\r\n\t\tJordan Fields</td>\r\n      <td>Sep 14,
+        2020</td>\r\n      <td>Pennington</td>\r\n      <td><a href=\"docs/farmranchdocs/PrairieElkFarmdbaCrookedCreekHomestead.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>WILLOW MEADOWS</td>\r\n      <td>Clinton
+        Hubers<br>\r\n\t\tKim Hubers</td>\r\n      <td>Sep 30, 2020</td>\r\n      <td>Minnehaha</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/WillowMeadows.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>ROCKING 'O' RANCH</td>\r\n      <td>Kenneth
+        Orrock</td>\r\n      <td>Dec 10, 2020</td>\r\n      <td>Pennington</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/RockingORanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>GEM-I ACRES</td>\r\n      <td>Carcee Munsterteiger</td>\r\n
+        \     <td>Dec 29, 2020</td>\r\n      <td>Brown</td>\r\n      <td><a href=\"docs/farmranchdocs/GEM-IACRES.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>MF RANCH</td>\r\n      <td>Bammerlin Ranch,
+        LLC</td>\r\n      <td>Jan 4, 2021</td>\r\n      <td>Tripp</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/MFRanch.PDF\">Certificate</a></td>\r\n    </tr>\r\n\t<tr>\r\n
+        \     <td>LIVING WATERS FARM</td>\r\n      <td>Jonathan Snell<br>\r\n\t\t\tBrandi
+        Snell</td>\r\n      <td>Mar 29, 2021</td>\r\n      <td>Union</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/LivingWatersFarm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>CLEAR SPRINGS FARM</td>\r\n      <td>Philip
+        Wirth<br>\r\n\t\t\tPamela Wirth</td>\r\n      <td>Apr 7, 2021</td>\r\n      <td>Turner</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/ClearSpringsFarm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>THE BULLDOG RANCH</td>\r\n      <td>Melanie
+        Bond</td>\r\n      <td>Jun 10, 2021</td>\r\n      <td>Lawrence</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/TheBulldogRanch.PDF\">Certificate</a></td>\r\n    </tr>\r\n\t<tr>\r\n
+        \     <td>HILLSVIEW FARM</td>\r\n      <td>Jason Boke<br>\r\n\t\t\tDana Boke</td>\r\n
+        \     <td>Jul 14, 2021</td>\r\n      <td>Lawrence</td>\r\n      <td><a href=\"docs/farmranchdocs/HillsviewFarm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>LOST CAJUN CHATEAUX</td>\r\n      <td>Rick
+        Bergeron<br>\r\n\t\t\tKathleen Bergeron</td>\r\n      <td>Jul 30, 2021</td>\r\n
+        \     <td>McCook</td>\r\n      <td><a href=\"docs/farmranchdocs/LostCajunChateaux.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>NORTH STAR RANCH</td>\r\n      <td>Wm. Scott
+        Phillips<br>\r\n\t\t\tPaula Phillips</td>\r\n      <td>Aug 05, 2021</td>\r\n
+        \     <td>Meade</td>\r\n      <td><a href=\"docs/farmranchdocs/NorthStarRanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>HERR FARMS</td>\r\n      <td>LaRon Herr</td>\r\n
+        \     <td>Aug 16, 2021</td>\r\n      <td>Day<br>\r\n\t\t\tClay</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/HerrFarms.PDF\">Certificate</a></td>\r\n    </tr>\r\n\t<tr>\r\n
+        \     <td>SHELDON FAMILY FARMS, LLC</td>\r\n      <td>Preston R. Sheldon</td>\r\n
+        \     <td>Aug 23, 2021</td>\r\n      <td>Pennington</td>\r\n      <td><a href=\"docs/farmranchdocs/SheldonFamilyFarms.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>PRAIRIE ROSE RIDGE</td>\r\n      <td>Justin
+        Richardson<br>\r\n\t\t\tJael Richardson</td>\r\n      <td>Aug 26, 2021</td>\r\n
+        \     <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/PrairieRoseRidge.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>RIMFIRE RANCH</td>\r\n      <td>Fredrick
+        T. Weber<br>\r\n\t\t\tSuzanne R. Weber</td>\r\n      <td>Sep 17, 2021</td>\r\n
+        \     <td>Fall River</td>\r\n      <td><a href=\"docs/farmranchdocs/RimfireRanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>ROCKN DOUBLE A RANCH</td>\r\n      <td>Allan
+        Dale Moreland<br>\r\n\t\t\tAnnamarie Lita Alderette-Moreland</td>\r\n      <td>Oct
+        18, 2021</td>\r\n      <td>Lyman</td>\r\n      <td><a href=\"docs/farmranchdocs/RocknDoubleARanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>ROCK CREEK CATTLE RANCH</td>\r\n      <td>William
+        F. Cumbow<br>\r\n\t\t\tVicky L. Cumbow</td>\r\n      <td>Nov 8, 2021</td>\r\n
+        \     <td>Todd</td>\r\n      <td><a href=\"docs/farmranchdocs/RockCreekCattleRanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>RUN A MUCK ACRES RANCH</td>\r\n      <td>Bill
+        Neuendorf<br>\r\n\t\t\tJann Nueuendorf</td>\r\n      <td>Nov 17, 2021</td>\r\n
+        \     <td>Butte</td>\r\n      <td><a href=\"docs/farmranchdocs/RunAMuckAcresRanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>DOG STAR RANCH</td>\r\n      <td>Cheryl Cobb</td>\r\n
+        \     <td>Nov 19, 2021</td>\r\n      <td>Custer</td>\r\n      <td><a href=\"docs/farmranchdocs/DogStarRanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>LONESOME GROVE</td>\r\n      <td>Tena Schroeder<br>\r\n\t\tDean
+        Schroeder</td>\r\n      <td>Dec 23, 2021</td>\r\n      <td>Bon Homme</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/LonesomeGrove.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>FREEDOM ABOVE ALL</td>\r\n      <td>Freedom
+        Above All, LLC</td>\r\n      <td>Jan 18, 2022</td>\r\n      <td>Pennington</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/FreedomAboveAll.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>THE KING RANCH</td>\r\n      <td>Matt King</td>\r\n
+        \     <td>Jan 26, 2022</td>\r\n      <td>Meade</td>\r\n      <td><a href=\"docs/farmranchdocs/KingRanch.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>MB GENETICS INC.</td>\r\n      <td>Michael
+        Bishop</td>\r\n      <td>Feb 03, 2022</td>\r\n      <td>Hanson</td>\r\n      <td><a
+        href=\"docs/farmranchdocs/MBGenetics.PDF\">Certificate</a></td>\r\n    </tr>\r\n\t<tr>\r\n
+        \     <td>NOSSA FAZENDA, LLC</td>\r\n      <td>Mariana ESR Garner</td>\r\n
+        \     <td>Mar 30, 2022</td>\r\n      <td>Moody</td>\r\n      <td><a href=\"docs/farmranchdocs/NossaFazenda.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>SHAGGY COW FARM</td>\r\n      <td>Mary Elizabeth
+        Gardner</td>\r\n      <td>June 09, 2022</td>\r\n      <td>Lawrence</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/ShaggyCowFarm.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n      <td>BANNWARTH AG</td>\r\n      <td>Brian Bannwarth</td>\r\n
+        \     <td>Oct 17, 2022</td>\r\n      <td>Davison<br>\r\n\t\t\tHanson</td>\r\n
+        \     <td><a href=\"docs/farmranchdocs/BannwarthAG.PDF\">Certificate</a></td>\r\n
+        \   </tr>\r\n\t<tr>\r\n\t  <td>LAS ANGUS</td>\r\n\t  <td>Chase Sanftner<br>\r\n\t\t
+        \ Elaine Sanftner</td>\r\n\t  <td>Oct 27. 2025</td>\r\n\t  <td>Pennington<br>\r\n\t\t
+        \ Butte<br>\r\n\t\t  Meade</td>\r\n\t  <td><a href=\"docs/farmranchdocs/LASAngus.pdf\">Certificate</a></td>\r\n\t
+        \ </tr>\r\n\t<tr>\r\n\t  <td>RAHN RANCH</td>\r\n\t  <td>Bernard J. Rahn<br>\r\n\t\t
+        \ Christopher J. Rahn<br>\r\n\t\t  Bernard W.H. Rahn</td>\r\n\t  <td>July
+        2, 2026</td>\r\n\t  <td>Todd</td>\r\n\t  <td><a href=\"docs/farmranchdocs/RahnRanch.pdf\">Certificate</a></td>\r\n\t
+        \ </tr>\r\n\t<tr>\r\n\t  <td>SPRING ON HILL RANCH</td>\r\n\t  <td>David L.
+        Long<br>\r\n\t    Boren Long</td>\r\n\t  <td>July 10, 2026</td>\r\n\t  <td>Custer</td>\r\n\t
+        \ <td><a href=\"docs/farmranchdocs/SpringOnHillRanch.pdf\">Certificate</a></td>\r\n\t
+        \ </tr>\r\n\t<tr>\r\n\t  <td>JASPER FARM</td>\r\n\t  <td>Jennifer L. Jasper<br>\r\n\t
+        \     Trustee of Jennifer Lei Jasper Rev. Liv. Trust<br>\r\n\t\t  James T.
+        Jasper II<br>\r\n\t\t  Trustee of James T. Jasper II Rev. Liv. Trust</td>\r\n\t
+        \ <td>September 21, 2026</td>\r\n\t  <td>Gregory</td>\r\n\t  <td><a href=\"docs/farmranchdocs/JasperFarm.pdf\">Certificate</a></td>\r\n\t
+        \ </tr>\r\n\t</tbody>\r\n</table>\r\n<p>\r\n  \r\n</p>\r\n                  </div></section>\r\n
+        \     \t \t\t\r\n               \r\n                   \r\n\r\n                </section><!--#middle-->\r\n
+        \   \r\n    \r\n    \r\n    <footer>  \r\n    \t\r\n        <div id=\"gold_band\"></div>
+        \    \r\n    \t<section class=\"centerer clearfix\">\r\n        \t\t\r\n                \r\n
+        \               \t\t\t\r\n                \r\n                  <section id=\"footer_bottom\"
+        class=\"clearfix\">\r\n                \r\n                \t\r\n                 \r\n
+        \                     <a href=\"https://www.sd.gov/cs?id=sc_cat_item&sys_id=f7f939eddbd4b150b2fb93d4f39619c0\"
+        target=\"_blank\" rel=\"noreferrer noopener\">Request Public Records</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href=\"http://sd.gov/privacy.aspx\" target=\"_blank\" title=\"Privacy Policy\">Privacy
+        Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"http://sd.gov/disclaim.aspx\"
+        target=\"_blank\" title=\"Information Accuracy\">Information Accuracy</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href=\"http://sd.gov/\" title=\"State Homepage\" target=\"_blank\">State Homepage</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a
+        href=\"http://sd.gov/accpolicy.aspx\">Accessibility Policy</a></section>\r\n
+        \               \r\n\t\t\t\r\n\t\t\t      </section>\r\n        \r\n        \r\n
+        \       \r\n    </footer>\r\n\r\n\r\n</div><!--#wrapper-->\r\n\t\r\n    <script
+        data-cfasync=\"false\" src=\"/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js\"></script><script>\r\n
+        \ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\r\n
+        \ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\n
+        \ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\n
+        \ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');\r\n\r\n
+        \ ga('create', 'UA-24951685-11', 'sdsos.gov');\r\n  ga('send', 'pageview');\r\n\r\n</script>\r\n<script>\r\n
+        \   (function (i, s, o, g, r, a, m) {\r\n        i['GoogleAnalyticsObject']
+        = r; i[r] = i[r] || function () {\r\n            (i[r].q = i[r].q || []).push(arguments)\r\n
+        \       }, i[r].l = 1 * new Date(); a = s.createElement(o),\r\n        m =
+        s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a,
+        m)\r\n    })(window, document, 'script', '//www.google-analytics.com/analytics.js',
+        'ga');\r\n\r\n    ga('create', 'UA-60581758-1', 'auto');\r\n    ga('send',
+        'pageview');\r\n\r\n</script>\r\n \r\n\r\n    \r\n<!-- RIGHT SLIDER NAV -->\r\n<script
+        src=\"/includes/Javascript/right_slider_navs.js\"></script>\r\n \r\n \r\n
+        \r\n \r\n<!-- RESPONSIVE SLIDESHOWS -->\r\n<script type=\"text/javascript\"
+        src=\"/includes/Javascript/wow_slider/wowslider.js\"></script>\r\n<script
+        type=\"text/javascript\" src=\"/includes/Javascript/wow_slider/script.js\"></script>\r\n<script
+        type=\"text/javascript\">\r\n\t\tif ($('.wowslider').length) { // implies
+        *not* zero\r\n\t\t\t<!--settings for homepage slideshow-->\r\n\t\t\t//jQuery(\".wowslider\").wowSlider({effect:\"blinds\",prev:\"\",next:\"\",duration:600,delay:8000,width:1000,height:420,autoPlay:true,playPause:false,stopOnHover:true,loop:false,bullets:true,caption:true,captionEffect:\"fade\",controls:true,onBeforeStep:0,images:0});\r\n\t\t\t\r\n\t\t\tjQuery(\".wowslider\").wowSlider({effect:\"basic\",prev:\"\",next:\"\",duration:20*100,delay:80*100,width:1000,height:420,autoPlay:true,playPause:false,stopOnHover:true,loop:false,bullets:true,caption:true,captionEffect:\"fade\",controls:true,onBeforeStep:0,images:0});\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t\r\n\t\t
+        \ } \r\n</script>\r\n    \r\n    \r\n   \r\n    \r\n   \r\n\r\n<!--CUSTOM
+        FACEBOOK FEED-->\r\n<link href=\"/includes/Javascript/jquery.neosmart.fb.wall/jquery.neosmart.fb.wall.css\"
+        rel=\"stylesheet\" type=\"text/css\"/>\r\n<script src=\"/includes/Javascript/jquery.neosmart.fb.wall/jquery.neosmart.fb.wall.js\"
+        type=\"text/javascript\"></script>\r\n<script type=\"text/javascript\">\r\n/***************************************************************************************************\r\n
+        * fb.wall plugin page\r\n***************************************************************************************************/\r\n</script>\r\n
+        \   \r\n    \r\n  \r\n  \r\n  \r\n  \r\n  \r\n  \r\n<!--CREATE RED DROP NAVS
+        AT DIFFERENT SCREEN SIZES-->  \r\n<script src=\"/includes/Javascript/red_drop_nav.js\"></script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!---INITIALIZE
+        SIDEBAR TREEVIEW---->\r\n\r\n<script>\r\n$(document).ready(function(){\r\n\t//
+        second example\r\n\t\r\n\tif ($('.sidebar .treeview').length > 0) { \r\n\t\t$(\".sidebar
+        .treeview\").treeview({\r\n\t\t\tanimated: \"fast\",\r\n\t\t\t\t collapsed:
+        true,\r\n\t\t\t\t control: \"#treecontrol\",\r\n\t\t\t\t persist: \"location\"\r\n\t\t\t\t
+        //unique: true\r\n\t\t});\r\n\t}\r\n\r\n\r\n\tif ($('.mobile_nav_menu .treeview').length
+        > 0) { \r\n\t\t$(\".mobile_nav_menu .treeview\").treeview({\r\n\t\t\tanimated:
+        \"fast\",\r\n\t\t\t\t collapsed: true,\r\n\t\t\t\t control: \"#treecontrol\",\r\n\t\t\t\t
+        persist: \"location\"\r\n\t\t\t\t //unique: true\r\n\t\t});\r\n\t}\r\n\t\r\n});\r\n</script>\r\n
+        \  \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--GENERATE BREADCRUMBS-->\r\n<script
+        src=\"/includes/Javascript/generate_breadcrumbs.js\"></script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--
+        INTERACTIVE, RESPONSIVE TABLES -->\r\n\r\n<!--IF using IE8 or 9, then we'll
+        use this version of responsive tables-->\r\n<!--[if lte IE 9]>\r\n<script>\r\n$(
+        \"table:not(#election_history_data_table):not(#active_voter_totals)\" ).each(function(
+        index ) {\r\n\t\t\t\t\tif ($(this).hasClass(\"responsiveness\")) {\r\n\t\t\t\t\t\t//do
+        nothing\r\n\t\t\t\t\t} else {\r\n\t\t\t\t\t\t$(this).addClass(\"responsiveness\");\r\n\t\t\t\t\t}\r\n\t\t\t\t});\r\n
+        \               </script>\r\n<link rel=\"stylesheet\" href=\"/includes/Javascript/zurb-responsive-tables/responsive-tables.css\">\r\n<script
+        src=\"/includes/Javascript/zurb-responsive-tables/responsive-tables.js\"></script>\r\n\r\n<![endif]-->\r\n\r\n\r\n\r\n<!--IF
+        NOT IE at all, (IE10 will also use this set because it ignores conditional
+        comments), then use this version of repsonsive tables -- SAME AS greater than
+        IE9 ones above-->\r\n<!--[if !IE]> -->\r\n\r\n<!-- <![endif]-->\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+        \  \r\n   \r\n<!--sort election history table-->\r\n<link href=\"/includes/Javascript/SortTables_Responsive/css/styleRespScroll.css\"
+        rel=\"stylesheet\" type=\"text/css\" />\r\n<script type=\"text/javascript\"
+        src=\"/includes/Javascript/SortTables_Responsive/script.js\"></script>\r\n<script
+        src=\"/includes/Javascript/initialize_election_history_table.js\"></script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--COUNTY
+        INTERACTIVE MAP-->  \r\n<script src=\"/includes/Javascript/county_map.js\"></script>\r\n\r\n
+        \ \r\n<!--LEGISLATIVE DISTRICTS INTERACTIVE MAP-->  \r\n<script src=\"/includes/Javascript/legislative_districts_map.js\"></script>\r\n\r\n\r\n<!--DOWNLOAD
+        TABLES IN EXCEL FORMAT-->\r\n<script src=\"/includes/Javascript/download_excel.js\"></script>\r\n\r\n\r\n<script>\r\n/*\r\n$(
+        \"#download_county_data\" ).click(function() {\r\n\t\tdownload(\"Statewide
+        Voter Registration by County\", \"county_map_data_table\");\r\n});\r\n//download
+        link for IE users\r\n$( \"#download_county_data_ie\" ).click(function() {\r\n\t\twriteToExcel(\"county_map_data_table\");\r\n});\r\n\r\n\r\n\r\n$(
+        \"#download_district_data\" ).click(function() {\r\n\t\tdownload(\"Statewide
+        Voter Registration by Legislative District\", \"distrit_map_data_table\");\r\n});\r\n//download
+        link for IE users\r\n$( \"#download_district_data_ie\" ).click(function()
+        {\r\n\t\twriteToExcel(\"distrit_map_data_table\");\r\n});\r\n\r\n\r\n\r\n$(
+        \"#download_auditor_data\" ).click(function() {\r\n\t\tdownload(\"SD County
+        Auditors\", \"county_auditor_table\");\r\n});\r\n//download link for IE users\r\n$(
+        \"#download_auditor_data_ie\" ).click(function() {\r\n\t\twriteToExcel(\"county_auditor_table\");\r\n});*/\r\n</script>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--
+        OPEN EXTERNAL LINKS IN NEW WINDOW AUTOMATICALLY -->\r\n<script>\r\n$('a:not([href^=\"https://sdsos.gov\"]):not([href^=\"http://dev.sos.sd.gov/\"]):not([href^=\"#\"]):not([href^=\"/\"]):not([href^=\"mailto:\"])').attr(\"target\",\"_blank\");\r\n\r\n/*\r\nvar
+        width = $(window).width();\r\nvar height = $(window).height();\r\n\r\n\r\n$('a:not([href^=\"http://sdsos.insightmarketingdesign.com\"]):not([href^=\"#\"]):not([href^=\"/\"]):not([href^=\"mailto:\"])').click(function()
+        {\r\n        window.open($(this).attr('href'),'title', 'width='+width+', height='+height+'');\r\n
+        \       return false;\r\n    });   \r\n\t*/\r\n</script>\r\n\r\n\r\n\r\n\r\n<!--//RESPONSIVE
+        CALENDAR//-->\r\n<script src='/includes/Javascript/fullcalendar/fullcalendar/fullcalendar-list2.js'></script>\r\n<script
+        src='/includes/Javascript/fullcalendar/fullcalendar/gcal.js'></script>\r\n<script
+        src=\"/includes/Javascript/initialize_calendar.js\"></script>\r\n\r\n<!--
+        Siteimprove Analytics -->\r\n<script async src=\"https://siteimproveanalytics.com/js/siteanalyze_2183.js\"></script>\r\n</body>\r\n</html>"
+    headers:
+      CF-RAY:
+      - a589a83abe417987-DEN
+      Cache-Control:
+      - public
+      Connection:
+      - keep-alive
+      Content-Security-Policy:
+      - default.src 'self';
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Wed, 11 Nov 2026 01:52:22 GMT
+      Expires:
+      - Wed, 11 Nov 2026 02:52:22 GMT
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '118047'
+    status:
+      code: 200
+      message: OK
+version: 1

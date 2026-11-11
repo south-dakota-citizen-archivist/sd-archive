@@ -72,7 +72,9 @@ class Run(models.Model):
     fetched_count = models.PositiveIntegerField(null=True, blank=True)
     added = models.PositiveIntegerField(default=0)
     changed = models.PositiveIntegerField(default=0)
-    removed = models.PositiveIntegerField(default=0)
+    removed = models.PositiveIntegerField(
+        default=0, help_text="Gone from the source: marked dropped"
+    )
     unchanged = models.PositiveIntegerField(default=0)
     content_hash = models.CharField(max_length=64, blank=True)
     export = models.FileField(
@@ -98,6 +100,13 @@ class Run(models.Model):
 
 
 class RecordQuerySet(models.QuerySet):
+    def current(self):
+        """Records still at the source (not dropped)."""
+        return self.filter(dropped_at=None)
+
+    def dropped(self):
+        return self.exclude(dropped_at=None)
+
     def complete(self):
         """Records with nothing left to read: no documents, or every document done."""
         return self.exclude(documents__status__in=Document.NOT_DONE)
@@ -124,8 +133,9 @@ class RecordQuerySet(models.QuerySet):
 
 
 class Record(models.Model):
-    """One item at the source, as of the latest run (no history: a change overwrites it, and
-    an item gone from the source is deleted). A GIS feature is a record with a geometry."""
+    """One item at the source, as of the latest run (no history: a change overwrites it). An
+    item gone from the source is kept, marked with when it was first found gone (dropped_at).
+    A GIS feature is a record with a geometry."""
 
     recordset = models.ForeignKey(RecordSet, on_delete=models.CASCADE, related_name="records")
     key = models.CharField(max_length=500, help_text="The source's own key for the item")
@@ -133,11 +143,15 @@ class Record(models.Model):
     geometry = models.GeometryField(srid=4326, null=True, blank=True)
     content_hash = models.CharField(max_length=64)
     source_url = models.URLField(max_length=2000, blank=True)
-    jurisdiction = models.ForeignKey(
-        "places.Jurisdiction", null=True, blank=True, on_delete=models.SET_NULL,
-        related_name="records",
+    places = models.ManyToManyField(
+        "places.Jurisdiction", blank=True, related_name="records",
+        help_text="The places it's in or about (several for a multi-county registration)",
     )  # fmt: skip
     first_seen = models.DateTimeField(help_text="When a run first found it")
+    dropped_at = models.DateTimeField(
+        null=True, blank=True, db_index=True,
+        help_text="When a run first found it gone from the source; cleared if it comes back",
+    )  # fmt: skip
     updated_at = models.DateTimeField(auto_now=True)
     run = models.ForeignKey(
         Run, null=True, blank=True, on_delete=models.SET_NULL, related_name="records",
@@ -193,6 +207,10 @@ class Document(models.Model):
     text = models.TextField(blank=True, help_text="For search")
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
     error = models.TextField(blank=True)
+    dropped_at = models.DateTimeField(
+        null=True, blank=True,
+        help_text="When its record stopped listing the file; the stored file is kept",
+    )  # fmt: skip
     metadata = models.JSONField(default=dict, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

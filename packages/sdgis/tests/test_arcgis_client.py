@@ -1,7 +1,7 @@
 import pytest
 
 from sdgis.arcgis import client
-from tests.conftest import IDS, LAYER_URL, FakeResponse, FakeServer
+from sdgis.testing import IDS, LAYER_URL, FakeResponse, FakeServer
 
 
 def fetch(server: FakeServer, where: str = "1=1", batch_size: int | None = None):

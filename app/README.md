@@ -64,6 +64,8 @@ just harvest                   # harvest every watched dataset (or: just harvest
 just scrape <slug>             # run a record set's source (--force past the drop guard)
 just documents <slug>          # fetch, read, categorize and extract its documents (--steps, --limit, --model)
 just manage retry_documents    # send failed documents back to the step they failed at (--recordset, --dry-run)
+just manage compare_source <slug>  # what a run would change, compared with the stored records
+just manage adopt_legacy <slug>    # before a source's first run: give imported records its keys (--dry-run)
 just manage build_readme       # refresh the sources table above
 just status                    # what's running, stalled, failed or overdue; partial downloads; disk; backups
 ```
@@ -108,16 +110,18 @@ just status                    # what's running, stalled, failed or overdue; par
 - It's then compared with the archive:
   - unchanged records are left alone
   - a changed record is overwritten
-  - a record missing from the source is deleted
-- Only the latest data is kept: no earlier versions.
+  - a record missing from the source is kept and marked *dropped*, with when it was first found gone; it's unmarked if it comes back
+- Only the latest version of each record is kept: no earlier versions. Maps, tables, downloads, counts and name search show current records; a dropped record keeps its page, which says when it went, and each harvest's page lists the records it dropped.
 - Each harvest that changes something also rewrites the dataset's GeoParquet file (`media/exports/<dataset>/latest.parquet`).
 - Hosted layers report when their data last changed. If that date and the count both match the last full harvest, the harvest is recorded as skipped instead of downloading again, with a full download at least weekly regardless. Most ArcGIS Server layers don't report the date, so they're always downloaded.
 - The archive stores raw codes. The table and record pages show each code's label next to it, and CSV downloads add a `FIELD_label` column.
 - The download is saved batch by batch (see "Stopping and starting again"); storing it commits or rolls back as one unit.
 
 **Records.**
-- Each record set's code is in `records/sources/<name>/`: its `Source` says how to fetch the items (each with the source's own key, its fields and its files' URLs), and for documents, the categories, rules and Pydantic extraction schemas that read them.
-- A run stores the items the same way a harvest stores features: unchanged ones are left alone, changed ones overwritten (keeping when each was first seen), and after a complete run, ones gone from the source deleted. A complete run that finds far fewer items than are stored is refused (`max_drop`). A record's documents follow its list of files.
+- Each record set's code is in `records/sources/<name>/`: `source.py` (its `Source`: how to fetch the items, each with the source's own key, its fields, its files' URLs and the places it's in; for documents, the categories, rules and Pydantic extraction schemas that read them; the named parties for mentions), `parse.py` (pure parsing, which raises rather than skip a row it can't read), `schema.py`, and `tests/` with fixtures cut from the real pages and a recording of the live site.
+- Places: each record links to the jurisdictions it's in or about (several for a registration spanning counties), by the GEOID sdplaces gives for the place in force on the record's date.
+- Records imported from an earlier system are checked against a source with `compare_source` (the source's `from_legacy` puts the old data in its shape) and given its keys with `adopt_legacy`, which keeps when each was first seen and merges imported duplicates of one item.
+- A run stores the items the same way a harvest stores features: unchanged ones are left alone, changed ones overwritten (keeping when each was first seen), and after a complete run, ones gone from the source kept and marked dropped (`Record.objects.current()` and `.dropped()`). A complete run that finds far fewer items than are stored is refused (`max_drop`). A record's documents follow its list of files; a file it stops listing is kept and marked dropped.
 - Documents go through steps, each one moving a document on or marking it failed with the error, without stopping the rest:
   - **fetch**: the file is stored once by its SHA-256 in `media/blobs/`, with every fetch logged in `media/manifest.jsonl`. A web page where a file was expected (an error page, a login form) isn't stored. The file type comes from the bytes, not the server's label.
   - **read**: form fields or the text layer, else OCR (`SD_OCR_ENGINE`, rapidocr by default), page by page and cached in `media/pages/`. Images are read as one-page PDFs.
