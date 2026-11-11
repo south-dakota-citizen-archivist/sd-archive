@@ -588,3 +588,15 @@ unit = "case decision"
 entities = ["person"]
 place_link = "county"
 source = "SD Board of Pardons and Paroles"
+
+[[dataset]]
+id = "property-sales"
+name = "Property sales reported for the sales ratio study"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "sale (one or more parcels), by equalization year"
+entities = ["property"]
+place_link = "county"
+source = "SD Department of Revenue, property tax data page (sdproptax.info/DataLink/Data), sales detail CSVs"
+notes = "Equalization years 2021 on. The files name no buyers or sellers. The published ratio is sale price ÷ assessed value in 2021–2022 and assessed value ÷ sale price from 2023; assessment_ratio is the latter for every year."
