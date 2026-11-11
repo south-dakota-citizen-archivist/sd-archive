@@ -1,0 +1,340 @@
+ 
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Boards and Commissions</title>
+
+	<!--%@ Page Language="C#" AutoEventWireup="true" CodeBehind="scripts.aspx.cs" Inherits="BoardsCommissions.cms.inc.scripts" %-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache,no-Store">
+
+<script src="https://cdn.sd.gov/lib/jquery/jquery.min.js"></script>
+<script src="/inc/scripts/flowtype.js"></script>
+<script src="/inc/scripts/site.js"></script>
+<link href="/inc/styles/styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<form method="post" action="./boardmembers.aspx?BoardID=13" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'header_imgbutton1')" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=xTu2RYL3V36WVnJklGe5tB1RmUbRJpScDgvejmyGVhuTJ2p6mf9M_PUbEvcbYhR274-F0M8iGjlPmJFINRJbPpRQRmk1&amp;t=639190653332169432" type="text/javascript"></script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="15110D8F" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="6wfjuzUE7svRZL2WCODSUK2Uv3wDWfvk/44ZJJvyqqG8lTxLSq1KzMQN0AIpnQwYB/wu/VRbqk+pvbtdm8RzcebAETgpfRqBn5BkGCbfugpafJKS8D0ivaypZFNt+I2jDboYAupI2AS1r9wTCCg6a1ssr0rnxInS/FP+n1r6jALrU+mVAM1UUaATDRiAbmTCqm27ERW8a0O4YGw84Hp13g3VEFElIYQBGNx/rhW5io0JOP8FNJeLwiFn//j2keYLW7QSr5BxjjSiLq6P4vb75VNBJuAph8TAld+NIQWB6TeWC4GbbHqOyw5kXPBhOteT0SginZbFr7+c9CZEHq7QFNE5wlsHyHPpz47ERuseB1tYv1ZvZyl/yvo7TNLk8Uk1LTdOmyiXtfs6kE8twNaKX9v7g02nXb+XpXaizrNWeIg3KymvqbY3CksMJRweE20ecXMfyi6shlqxFqQnugJKNqX0XtOatPwqDI2Hpe/NFQ5C5MIvc9szX8p67/0zYrXFbjj/YB0oC9Mw5fLdAc+9lu4sjtK+tiVNXjFw0Fqc5Pu8H/y6qVlAPBooajFH/DNzPKAGuIWydRVl8zOuqm0pU6WUAE7SxL0sLwTDLUKxcForBO3rL9h7jJt+58RhUFnjCFVjSQ+Q5HgvWhXwRXJxpsWQHGHQDpmnwt6/+yLjZi6dYwIh2wVbOXQczNsnlgU3Hx2H9g9TjC6RDQBTKCzNmAaJuycM/TuLf7b1JInCs8ZtWk+tqu9xPvlNmZIOF9PSU3BFI0mQXaoJGuBgDWlXkQueZcY=" />
+</div>
+        <header>
+            
+
+<div id="seal">
+    <img src="img/BW_Seal_Vector.png" />
+</div>
+
+<div id="logo">
+    <a href="/">
+        <img src="/img/logo.png" />
+    </a>
+</div>
+
+<div id="discloseLink">
+    <a href="http://atg.sd.gov/legal/opengovernment/authorityboardcommission.aspx">ANNUAL DISCLOSURE</a>
+</div>
+
+<div id="search">
+    <div id="searchCont">
+        
+        <div id="geninfoTitle"><a href="#">General Information</a></div>
+        <div id="searchTitle"><a href="#">Find a Board or Commission</a></div>
+        <div id="geninfo">
+            <ul>
+                <li><a href="information/BCMeetingGuidelinesSD.pdf">Boards and Commissions Manual</a></li>
+                <li><a href="https://bfm.sd.gov/budget/boardcompensation.pdf" target="_blank" rel="noopener noreferrer nofollow">Board Compensation</a></li>
+            </ul>
+        </div>
+        <div id="findBC">
+
+            <a id="listALL" href="SearchResults.aspx?Letter=ALL">List All Boards and Commissions</a>
+            <div id="keyWRD">
+                <table class="findTable">
+                    <tr>
+                        <td>
+                            <label for="header_txtKeyword">Search:</label>
+                            <input name="header$txtKeyword" type="text" id="header_txtKeyword" />
+                        </td>
+                        <td>
+                            <input type="image" name="header$imgbutton1" id="header_imgbutton1" src="/img/search.png" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="byAgcy">
+                By Agency: 
+                <select name="header$ddlAgency" onchange="javascript:setTimeout(&#39;WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;header$ddlAgency&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))&#39;, 0)" id="header_ddlAgency" class="ddlagency">
+	<option selected="selected" value="0">--Select Agency--</option>
+	<option value="22">Attorney General</option>
+	<option value="38">Board of Regents</option>
+	<option value="3">Bureau of Administration</option>
+	<option value="1">Bureau of Finance and Management</option>
+	<option value="4">Bureau of Human Resources</option>
+	<option value="2">Bureau of Information and Telecommunications</option>
+	<option value="5">Department of Ag and Natural Resources</option>
+	<option value="6">Department of Corrections</option>
+	<option value="7">Department of Education</option>
+	<option value="9">Department of Game, Fish, and Parks</option>
+	<option value="10">Department of Health</option>
+	<option value="11">Department of Human Services</option>
+	<option value="12">Department of Labor and Regulation</option>
+	<option value="13">Department of Public Safety</option>
+	<option value="14">Department of Revenue</option>
+	<option value="15">Department of Social Services</option>
+	<option value="18">Department of Tourism</option>
+	<option value="16">Department of Transportation</option>
+	<option value="33">Department of Tribal Relations</option>
+	<option value="17">Governor&#39;s Office of Economic Development </option>
+	<option value="24">Office of the Governor</option>
+	<option value="27">Public Utilities Commission</option>
+	<option value="30">School and Public Lands</option>
+	<option value="29">Secretary of State</option>
+	<option value="37">South Dakota Housing Authority</option>
+	<option value="28">South Dakota Retirement System</option>
+	<option value="32">State Treasurer</option>
+	<option value="36">Unified Judicial System</option>
+
+</select>
+            </div>
+
+
+            <div id="findBCBTTM">
+                <ul id="letters">
+                    <li id="letterTitle">By Letter:</li>
+                    <li><a href="SearchResults.aspx?Letter=A">A</a></li>
+                    <li><a href="SearchResults.aspx?Letter=B">B</a></li>
+                    <li><a href="SearchResults.aspx?Letter=C">C</a></li>
+                    <li><a href="SearchResults.aspx?Letter=D">D</a></li>
+                    <li><a href="SearchResults.aspx?Letter=E">E</a></li>
+                    <li><a href="SearchResults.aspx?Letter=F">F</a></li>
+                    <li><a href="SearchResults.aspx?Letter=G">G</a></li>
+                    <li><a href="SearchResults.aspx?Letter=H">H</a></li>
+                    <li><a href="SearchResults.aspx?Letter=I">I</a></li>
+                    <li><a href="SearchResults.aspx?Letter=J">J</a></li>
+                    <li>K</li>
+                    <li><a href="SearchResults.aspx?Letter=L">L</a></li>
+                    <li><a href="SearchResults.aspx?Letter=M">M</a></li>
+                    <li><a href="SearchResults.aspx?Letter=N">N</a></li>
+                    <li><a href="SearchResults.aspx?Letter=O">O</a></li>
+                    <li><a href="SearchResults.aspx?Letter=P">P</a></li>
+                    <li><a href="SearchResults.aspx?Letter=Q">Q</a></li>
+                    <li><a href="SearchResults.aspx?Letter=R">R</a></li>
+                    <li><a href="SearchResults.aspx?Letter=S">S</a></li>
+                    <li><a href="SearchResults.aspx?Letter=T">T</a></li>
+                    <li><a href="SearchResults.aspx?Letter=U">U</a></li>
+                    <li><a href="SearchResults.aspx?Letter=V">V</a></li>
+                    <li><a href="SearchResults.aspx?Letter=W">W</a></li>
+                    <li>X</li>
+                    <li>Y</li>
+                    <li>Z</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="share" class="a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_blogger_post"></a>
+    <a class="a2a_button_linkedin"></a>
+    <a class="a2a_button_email"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+
+
+
+<script>
+		jQuery(document).ready(function () {
+
+            //find a board/commission search open/close
+            $("#findBC").hide();
+            $("#geninfo").hide();
+            $("#searchTitle").on("click touchstart", function (e) {
+                $("#geninfo").slideUp();
+                $("#findBC").slideToggle();
+                e.stopPropagation();
+            });
+            $("#geninfoTitle").on("click touchstart", function (e) {
+                $("#findBC").slideUp();
+                $("#geninfo").slideToggle();
+                e.stopPropagation();
+            });
+
+		});
+    </script>
+        </header>
+
+        
+
+<div id="mainNav">
+    <div id="mainNavCont">
+        <div id="boardTitle">
+            <a id="boardmenu_lnkBoard" href="http://www.sd.gov/sdbrandboard" target="_blank" style="text-decoration:none;">Brand Board</a> 
+            <a href="tel:01605-773-3324" id="boardmenu_contactCall" class="contactCard" title="605-773-3324">Call</a>
+            <a href="mailto:Shawn.Bowles@state.sd.us?subject=Brand Board" id="boardmenu_contactEmail" class="contactCard" title="Shawn.Bowles@state.sd.us">Email</a>
+            <div id="agencyAffiliation">
+                Agency Affiliation:
+                <a id="boardmenu_lnkAgency" href="https://danr.sd.gov/" target="blank" style="text-decoration:none;">Department of Ag and Natural Resources</a>
+            </div>
+        </div>
+        <div id="navbutton" class="nav-button browsernoshow">MENU</div>
+        <ul class="primary-nav">
+            
+            <li><a href="Meetings.aspx?BoardID=13">Meetings</a></li>
+            <li><a href="FinancialInformation.aspx?BoardID=13">Financials/Audits</a></li>
+            <li><a href="publicdocuments.aspx?BoardID=13">Reports & Links</a></li>
+            <li><a href="boardmembers.aspx?BoardID=13">Members</a></li>
+            <li><a href="Information.aspx?BoardID=13">About</a></li>
+            
+            
+            <li>
+                <a id="boardmenu_lnkSignUpLink" class="emailUp" href="https://listserv.sd.gov/scripts/wa.exe?SUBED1=SDBRANDBOARD&amp;A=1" target="blank" style="text-decoration:none;">SIGN UP FOR EMAIL UPDATES</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<script>
+$(document).ready(function () { /*doc ready start*/
+
+    //mobile menu open/close
+    $("#navbutton").on("click touchstart", function (e) {
+        $("#mainNavCont ul").toggleClass("open");
+        e.stopPropagation();
+    });
+
+}); /*doc ready end*/
+</script>
+
+		<div id="content">
+              
+			<div id="templatecontent">
+
+				<span id="lblError" style="color:Red;"></span>
+
+                <h1>Member Information</h1>
+				<div>
+	<table cellspacing="0" rules="rows" border="1" id="gvBoardMembers" style="border-collapse:collapse;">
+		<tr>
+			<td class="picTD" align="left" style="width:220px;"><span class="boardPic"></span></td><td>
+                                <strong>Name:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberFirstName_0">Kory  Bierle</span></strong>
+                                <br />
+                                Position:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberposition_0">Board Member</span>
+                                <br />
+                                City:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberCity_0">Midland</span>
+                                <br />
+                                Term End Date:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberTermEnd_0"></span>
+                                <br />
+                                <span id="gvBoardMembers_lblAdditionalInfo_0"></span>
+                                <div id="gvBoardMembers_dvParty_0">Political Party:<span id="lblParty"></span></div>
+                            </td>
+		</tr><tr>
+			<td class="picTD" align="left" style="width:220px;"><span class="boardPic"></span></td><td>
+                                <strong>Name:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberFirstName_1">Ross Cuny</span></strong>
+                                <br />
+                                Position:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberposition_1">Board Member</span>
+                                <br />
+                                City:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberCity_1">Buffalo Gap</span>
+                                <br />
+                                Term End Date:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberTermEnd_1"></span>
+                                <br />
+                                <span id="gvBoardMembers_lblAdditionalInfo_1"></span>
+                                <div id="gvBoardMembers_dvParty_1">Political Party:<span id="lblParty"></span></div>
+                            </td>
+		</tr><tr>
+			<td class="picTD" align="left" style="width:220px;"><img class="boardPic" src="https://boardsandcommissions.sd.gov/bcuploads/Jarrod%20Johnson.jpg" alt="Board Member Photo" /></td><td>
+                                <strong>Name:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberFirstName_2">Jarrod Johnson</span></strong>
+                                <br />
+                                Position:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberposition_2">Board Member</span>
+                                <br />
+                                City:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberCity_2">Garretson</span>
+                                <br />
+                                Term End Date:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberTermEnd_2">1/3/2027</span>
+                                <br />
+                                <span id="gvBoardMembers_lblAdditionalInfo_2"></span>
+                                <div id="gvBoardMembers_dvParty_2">Political Party:<span id="lblParty">Republican</span></div>
+                            </td>
+		</tr><tr>
+			<td class="picTD" align="left" style="width:220px;"><img class="boardPic" src="https://boardsandcommissions.sd.gov/bcuploads/Jake%20Longbrake.jpg" alt="Board Member Photo" /></td><td>
+                                <strong>Name:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberFirstName_3">Jesse  Jake Longbrake</span></strong>
+                                <br />
+                                Position:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberposition_3">Board Member</span>
+                                <br />
+                                City:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberCity_3">Dupree</span>
+                                <br />
+                                Term End Date:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberTermEnd_3">1/3/2027</span>
+                                <br />
+                                <span id="gvBoardMembers_lblAdditionalInfo_3"></span>
+                                <div id="gvBoardMembers_dvParty_3">Political Party:<span id="lblParty">Democrat</span></div>
+                            </td>
+		</tr><tr>
+			<td class="picTD" align="left" style="width:220px;"><img class="boardPic" src="https://boardsandcommissions.sd.gov/bcuploads/Stuck.jpg" alt="Board Member Photo" /></td><td>
+                                <strong>Name:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberFirstName_4">Haven Stuck</span></strong>
+                                <br />
+                                Position:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberposition_4">Board Member</span>
+                                <br />
+                                City:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberCity_4">Rapid City </span>
+                                <br />
+                                Term End Date:&nbsp;&nbsp;<span id="gvBoardMembers_lblMemberTermEnd_4">1/3/2028</span>
+                                <br />
+                                <span id="gvBoardMembers_lblAdditionalInfo_4"></span>
+                                <div id="gvBoardMembers_dvParty_4">Political Party:<span id="lblParty">Democrat</span></div>
+                            </td>
+		</tr>
+	</table>
+</div>
+				<br />
+			</div>
+
+			&nbsp;
+            <br />
+			<br />
+		</div>
+		<a href="#" class="back-to-top"></a>
+		<!--%@ Page Language="C#" AutoEventWireup="true" CodeBehind="footer.aspx.cs" Inherits="BoardsCommissions.cms.inc.footer" %-->
+
+<footer>
+	<div id="copyright">&copy; 2026 | Powered by <a href="http://bit.sd.gov/" target="_blank" rel="noreferrer noopener">BIT</a> | <a href="http://sd.gov/" target="_blank" rel="noreferrer noopener">State of South Dakota</a></div>
+	<div id="footerlinks"><a href="http://sd.gov/" target="_blank" rel="noreferrer noopener">sd.gov</a> | <a href="http://sdlegislature.gov/" target="_blank" rel="noreferrer noopener">sdlegislature.gov</a> | <a href="mailto:bandc@state.sd.us?subject=General Inquiry">email us</a></div>
+</footer></form>
+
+</body>
+</html>

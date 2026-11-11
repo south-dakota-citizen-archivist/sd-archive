@@ -3,6 +3,7 @@ every row or an error, and cell text, lines and links as published."""
 
 from __future__ import annotations
 
+import re
 from urllib.parse import quote, urljoin
 
 import lxml.html
@@ -10,6 +11,23 @@ import lxml.html
 
 class LayoutChanged(ValueError):
     """The page isn't laid out the way the parser expects."""
+
+
+def document(html: str | bytes):
+    """Parse a page. Bytes are decoded as the page declares (UTF-8 when it doesn't say,
+    Windows-1252 if that fails), never left for lxml to read as Latin-1."""
+    if isinstance(html, bytes):
+        declared = re.search(rb"""charset=["']?([\w-]+)""", html[:4096], re.I)
+        try:
+            html = html.decode(declared[1].decode() if declared else "utf-8")
+        except (UnicodeDecodeError, LookupError):
+            html = html.decode("cp1252", errors="replace")
+    return lxml.html.fromstring(html)
+
+
+def attr(el, name: str) -> str | None:
+    """An attribute with its spacing normalized (non-breaking spaces too); None if empty."""
+    return " ".join((el.get(name) or "").split()) or None
 
 
 def text(cell) -> str:
@@ -36,7 +54,7 @@ def _cells(tr) -> list:
 def table(html: str | bytes, columns: list[str]) -> list[tuple[int, list]]:
     """The page's one table: (row number, cells) for each row after the header, which must be
     `columns`. Empty spacer rows are skipped; a row with the wrong number of cells raises."""
-    tables = lxml.html.fromstring(html).cssselect("table")
+    tables = document(html).cssselect("table")
     if len(tables) != 1:
         raise LayoutChanged(f"expected one table, found {len(tables)}")
     trs = tables[0].cssselect("tr")

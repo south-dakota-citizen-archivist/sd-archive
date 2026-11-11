@@ -78,7 +78,8 @@ def adopt(slug: str, *, dry_run: bool = False) -> Adoption:
     """Give records imported from an earlier system the source's keys, in place, before the
     source's first run, so that run matches them (keeping when each was first seen) instead
     of adding them again. Imported records that are the same item (the earlier system kept
-    one per URL, and the URL changed) merge into the first seen, taking its files."""
+    one per URL, and the URL changed) merge into the first seen, taking its files; each merged
+    record's key, data, URL and dates are kept in the survivor's legacy["merged"]."""
     source = sources.get(slug)
     if source.legacy_key is None:
         raise ValueError(f"{slug}: the source has no legacy_key")
@@ -101,7 +102,9 @@ def adopt(slug: str, *, dry_run: bool = False) -> Adoption:
         for other in others:
             urls = set(keep.documents.values_list("url", flat=True))
             other.documents.exclude(url__in=urls).update(record=keep)
-            merged = [*keep.legacy.get("merged", []), {"key": other.key, **other.legacy}]
+            merged = [*keep.legacy.get("merged", []),
+                      {"key": other.key, "data": other.data, "source_url": other.source_url,
+                       "first_seen": other.first_seen.isoformat(), **other.legacy}]  # fmt: skip
             keep.legacy = {**keep.legacy, "merged": merged}
             other.delete()
         Record.objects.filter(pk=keep.pk).update(key=f"~adopting~{keep.pk}", legacy=keep.legacy)

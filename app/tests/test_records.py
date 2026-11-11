@@ -469,7 +469,13 @@ def test_adopt_rekeys_imported_records_and_merges_duplicates(rs):
         "https://x/2024/roby.pdf",
         "https://x/2025/roby.pdf",
     }
-    assert roby.legacy["merged"] == [{"key": "https://x/2025/roby.pdf", "prl_record_id": 2}]
+    [merged] = roby.legacy["merged"]
+    assert (merged["key"], merged["data"], merged["prl_record_id"]) == (
+        "https://x/2025/roby.pdf",
+        {"name": "Roby"},
+        2,
+    )
+    assert merged["first_seen"] == new.first_seen.isoformat()
 
 
 def test_adopt_only_before_the_first_run(rs):
