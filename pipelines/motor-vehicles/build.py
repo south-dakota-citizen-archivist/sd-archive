@@ -150,7 +150,8 @@ def build(reports: dict[str, bytes], urls: dict[str, str]) -> tuple[pd.DataFrame
     later = totals_df[~totals_df.year.isin(covered)].copy()
     annual = pd.concat([hist_df, later], ignore_index=True).drop(columns=["month"])
     annual["year_to_date"] = annual.year.map(lambda y: through.get(y, 12) < 12 and y not in covered)
-    annual["through_month"] = annual.year.map(lambda y: None if y in covered else through.get(y))
+    annual["through_month"] = annual.year.map(
+        lambda y: None if y in covered else through.get(y)).astype("Int64")  # fmt: skip
     annual = annual.sort_values(["year", "geography", "area", "measure"],
                                 ascending=[False, False, True, True])  # fmt: skip
     monthly_df = monthly_df.sort_values(["year", "month", "geography", "area", "measure"],

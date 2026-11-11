@@ -74,6 +74,11 @@ publish-lobbyists:
     {{manage}} export_lobbyists
     gh release upload lobbyists-data app/media/exports/lobbyists/*.csv --clobber
 
+# Build the motor vehicle tables and replace them on their GitHub release
+publish-motor-vehicles: motor-vehicles
+    cd .cache/motor-vehicles/build && for f in annual.csv annual.parquet monthly.csv monthly.parquet; do cp "$f" "motor-vehicles-$f"; done
+    gh release upload motor-vehicles-data .cache/motor-vehicles/build/motor-vehicles-* --clobber
+
 # Rebuild Tailwind CSS while editing templates
 css:
     npm run dev --prefix app
