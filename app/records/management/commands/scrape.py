@@ -1,8 +1,11 @@
+import contextlib
+
 from django.core.management.base import BaseCommand, CommandError
 
 from core.jobs import create_job, run_job
+from records import sources
 from records.models import RecordSet
-from records.run import run_source
+from records.run import ensure_recordset, run_source
 
 
 class Command(BaseCommand):
@@ -16,6 +19,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, slugs, force, **options):
         recordsets = {rs.slug: rs for rs in RecordSet.objects.filter(slug__in=slugs)}
+        for slug in set(slugs) - set(recordsets):
+            # a source new to the archive declares its record set
+            with contextlib.suppress(ModuleNotFoundError, RecordSet.DoesNotExist):
+                recordsets[slug] = ensure_recordset(sources.get(slug))
         if unknown := sorted(set(slugs) - set(recordsets)):
             raise CommandError(f"unknown record set(s): {', '.join(unknown)}")
         failed = 0

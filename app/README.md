@@ -121,6 +121,7 @@ just status                    # what's running, stalled, failed or overdue; par
 - The download is saved batch by batch (see "Stopping and starting again"); storing it commits or rolls back as one unit.
 
 **Records.**
+- A new source declares its record set (name, catalog dataset, publisher, description) on its `Source`; the first `just scrape <slug>` makes it. Add the dataset to `catalog/datasets.toml` first.
 - Each record set's code is in `records/sources/<name>/`: `source.py` (its `Source`: how to fetch the items, each with the source's own key, its fields, its files' URLs and the places it's in; for documents, the categories, rules and Pydantic extraction schemas that read them; the named parties for mentions), `parse.py` (pure parsing, which raises rather than skip a row it can't read), `schema.py`, and `tests/` with fixtures cut from the real pages and a recording of the live site.
 - Each run fetches through a store of its own (`media/raw/<slug>/`, with a manifest of every response). Sources that make many requests store each response under the month, so a stopped run reuses what it already fetched.
 - Hand corrections to what a source publishes (a row linked to the wrong file) go in its `fixes.toml` (`records.fixes`): each names the row, the value published and the corrected one, and why. It's applied only while the source still publishes the value it corrects, and recorded on the record (`corrections`).

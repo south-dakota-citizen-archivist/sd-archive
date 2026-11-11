@@ -1,0 +1,511 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/157.0.0.0 Safari/537.36
+      sec-ch-ua:
+      - '"Google Chrome";v="157", "Chromium";v="157", "Not_A Brand";v="24"'
+      sec-ch-ua-mobile:
+      - ?0
+      sec-ch-ua-platform:
+      - '"macOS"'
+    method: GET
+    uri: https://doe.sd.gov/professionalpractices/EDA.aspx
+  response:
+    body:
+      string: "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n<head>\r\n  <meta charset=\"utf-8\">\r\n
+        \ <title>SD Department of Education</title>\r\n  <meta name=\"viewport\" content=\"width=device-width,
+        initial-scale=1.0\" />\r\n  <meta name=\"description\" content=\"\" />\r\n
+        \ <meta name=\"author\" content=\"\" />\r\n<script src=\"https://kit.fontawesome.com/d7969d6e33.js\"></script>\r\n\r\n\r\n<!--
+        Google tag (gtag.js) -->\r\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-3K53N0JNJG\"></script>\r\n<script>\r\n
+        \ window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments);}\r\n
+        \ gtag('js', new Date());\r\n\r\n  gtag('config', 'G-3K53N0JNJG');\r\n</script>\r\n\r\n\r\n
+        \ <!-- css -->\r\n<link href=\"/layout/styles/main.css\" rel=\"stylesheet\"
+        type=\"text/css\" media=\"all\">\r\n <link href=\"https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700\"
+        rel=\"stylesheet\">\r\n \r\n  <link href=\"/css/bootstrap-responsive.css\"
+        rel=\"stylesheet\" />\r\n  <link href=\"/css/fancybox/jquery.fancybox.css\"
+        rel=\"stylesheet\">\r\n  <link href=\"/css/jcarousel.css\" rel=\"stylesheet\"
+        />\r\n  <link href=\"/css/flexslider.css\" rel=\"stylesheet\" />\r\n  <link
+        href=\"/css/style.css\" rel=\"stylesheet\" />\r\n  \r\n  <!-- boxed bg -->\r\n
+        \ <link id=\"bodybg\" href=\"/bodybg/bg1.css\" rel=\"stylesheet\" type=\"text/css\"
+        />\r\n  <!-- Fav and touch icons -->\r\n  <link rel=\"apple-touch-icon-precomposed\"
+        sizes=\"144x144\" href=\"/ico/apple-touch-icon-144-precomposed.png\" />\r\n
+        \ <link rel=\"apple-touch-icon-precomposed\" sizes=\"114x114\" href=\"/ico/apple-touch-icon-114-precomposed.png\"
+        />\r\n  <link rel=\"apple-touch-icon-precomposed\" sizes=\"72x72\" href=\"/ico/apple-touch-icon-72-precomposed.png\"
+        />\r\n  <link rel=\"apple-touch-icon-precomposed\" href=\"/ico/apple-touch-icon-57-precomposed.png\"
+        />\r\n  <link rel=\"shortcut icon\" href=\"/ico/favicon.png\" />\r\n    <link
+        href=\"K-bootstrap-4.4.1.css\" rel=\"stylesheet\">\r\n\r\n<!-- Global site
+        tag (gtag.js) - Google Analytics -->\r\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-21098380-1\"></script>\r\n<script>\r\n
+        \ window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments);}\r\n
+        \ gtag('js', new Date());\r\n\r\n  gtag('config', 'UA-21098380-1');\r\n</script>\r\n\r\n\r\n<style>\r\ndiv.search
+        {\r\n  max-width: 400px;\r\n    position: absolute;\r\n    top: -50px;\r\n
+        \   right: 0px;\r\n}\r\n\r\n\r\na {\r\n  color: #990000;\r\ntext-decoration:
+        underline;\r\n\r\n}\r\n\r\na:focus {\r\n  outline-width: 2px;\r\n  outline-style:
+        solid;\r\n  outline-color: orange;\r\n}\r\n\r\n\r\n</style>\r\n\r\n</head>\r\n\r\n<body>\r\n
+        \ <div id=\"wrapper\">\r\n    <br><br>\r\n    <!-- start header -->\r\n    <header>\r\n
+        \    \r\n  \r\n\r\n\r\n\r\n\r\n <div class=\"span1\">\r\n&nbsp;\r\n</div>\r\n\r\n<div
+        class=\"span7\">\r\n<a href=\"/\"><img src=\"/images/logo.png\" alt=\"South
+        Dakota Department of Education Logo. Link to homepage.\"></a>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href=\"/a-z.aspx\" aria-label=\"A to Z Index\"><font color=\"#990000\"><strong>A-Z
+        Index</strong></font></a> &nbsp;&nbsp; &nbsp; \r\n<a href=\"/about.aspx\"><font
+        color=\"#990000\"><strong>Contact Us </strong></font></a>    \r\n</div>\r\n\r\n<div
+        class=\"span4\">\r\n<script async src=\"https://cse.google.com/cse.js?cx=016343866066245393528:svrbuhrdfwi\">\r\n</script>\r\n<div
+        class=\"gcse-search\"></div>\r\n</div>\r\n\r\n\r\n\r\n<br><br>\r\n<br><br>\r\n<hr>\r\n\r\n\r\n\r\n\r\n
+        \   </header>\r\n    <!-- end header -->\r\n\r\n\r\n    <section id=\"content\">\r\n
+        \     <div class=\"container\">\r\n        <div class=\"row\">\r\n  <div class=\"span1\"></div>\r\n
+        \         <div class=\"span11\">\r\n            <h2><strong>Educator Disciplinary
+        Action</strong></h2>\r\n           \r\n<p>\r\nPursuant to the authority granted
+        to the Secretary of the Department of Education by <a href=\"https://sdlegislature.gov/Statutes/Codified_Laws/2042502\"
+        target=\"_blank\">SDCL Chapter 13-42</a>, the Secretary may refuse to issue,
+        renew, revoke, or suspend a certificate. The final decision of the Secretary
+        regarding a certificate, along with the Findings of Fact and Conclusions of
+        Law, are a public record (<a href=\"https://sdlegislature.gov/Statutes/Codified_Laws/2042502\"
+        target=\"_blank\">SDCL 13-42-17.1</a>). If disciplinary action is imposed
+        by the Secretary or a Professional Practices Commission, pursuant to <a href=\"https://www.sdlegislature.gov/Statutes/Codified_Laws/2042502\"
+        target=\"_blank\">SDCL Chapter 13-42</a> and <a href=\"https://www.sdlegislature.gov/Statutes/Codified_Laws/2042573\"
+        target=\"_blank\">13-43</a>, the written record and evidence from the hearing
+        may be disclosed to authorities within this state, another state, the District
+        of Columbia, \r\nor a territory or country in which the applicant or certficate
+        holder holds a certificate or has applied for a certificate (<a href=\"https://sdlegislature.gov/Statutes/Codified_Laws/2042476\"
+        target=\"_blank\">SDCL 13-42-17.1</a>). Records of revocation and suspension
+        are provided to the National Association of State Directors of Teacher Education
+        and Certification (NASDTEC) clearinghouse.\r\n</p>\r\n \r\n<p>\r\nFor more
+        information about the complaint process or to file a complaint, visit <a href=\"https://doe.sd.gov/professionalpractices/\"
+        target=\"_blank\">doe.sd.gov/professionalpractices/</a>.<br>\r\nIf you wish
+        to report an educator for violating the code of ethics, please email: <a href=\"mailto:DOEEducatorEthics@state.sd.us\">DOEEducatorEthics@state.sd.us</a>.\r\n</p>\r\n
+        \r\n<p>\r\nThe following individuals have action taken on their educator application
+        or certification. No public or accredited school in South Dakota may <strong>employ</strong>
+        an individual whose certificate has been revoked or suspended, unless they
+        have been reinstated (<a href=\"https://sdlegislature.gov/Statutes/Codified_Laws/2042510\"
+        target=\"_blank\">SDCL 13-43-5.1</a>). A revocation or suspension includes
+        refusal to issue or renew a certificate. If any of these individuals present
+        an educator certificate from any state to a school official, please notify
+        the South Dakota Department of Education.\r\n</p>\r\n \r\n<p>\r\nThese files
+        are dated from Jan. 1, 2010 to Aug. 5, 2026. Consult <a href=\"https://www.sd.gov/411\"
+        target=\"_blank\">Educator 411</a> to confirm if an individual has an educator
+        certification in South Dakota.\r\n</p>\r\n<br><br>\r\n\r\n<h5>Educator Disciplinary
+        Actions</h5>  \r\n\r\n<table class=\"table table-striped\" border=\"1\">\r\n
+        \           <thead>\r\n                <tr>\r\n      <th><strong>Name </strong></th>\r\n
+        \     <th><strong>File Number </strong></th>\r\n      <th><strong>Action </strong></th>\r\n
+        \     <th><strong>Date Effective </strong></th>\r\n      <th><strong>Date
+        Reinstated (if applicable) </strong></th>\r\n            </thead>\r\n            <tbody>\r\n\r\n\r\n\r\n<tr>\r\n<td>
+        Gordon Hooks-Williams </td>\r\n<td> <a href=\"documents/EDA/DSE-2026-01.pdf\">DSE
+        2026-01 </a></td>\r\n<td> Application denied; Permanent revocation </td>\r\n<td>
+        07/07/2026 </td>\r\n<td> N/A </td>\r\n</tr>\r\n\r\n<tr>\r\n<td> Eriq Swiftwater
+        </td>\r\n<td> <a href=\"documents/EDA/DSE-2025-13.pdf\">DSE 2025-13 </a></td>\r\n<td>\tApplication
+        denied </td>\r\n<td> 06/25/2026 </td>\r\n<td> N/A </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>
+        Tawny Davis </td>\r\n<td> <a href=\"documents/EDA/DSE-2026-05.pdf\">DSE 2026-05
+        </a></td>\r\n<td> Application denied; cannot reapply for a period of three
+        years</td>\r\n<td> 05/14/2026</td>\r\n<td>  </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>
+        Stephen Dolan </td>\r\n<td> <a href=\"documents/EDA/DSE-2026-03.pdf\">DSE
+        2026-03 </a></td>\r\n<td>Permanent revocation</td>\r\n<td> 02/19/2026</td>\r\n<td>
+        N/A </td>\r\n</tr>\r\n\r\n<tr>\r\n<td> Zachary Kaderabek </td>\r\n<td> <a
+        href=\"documents/EDA/DSE-2026-04.pdf\">DSE 2026-04 </a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td> 02/19/2026</td>\r\n<td> N/A </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>
+        Grant Lolley </td>\r\n<td> <a href=\"documents/EDA/DSE-2026-02.pdf\">DSE 2026-02
+        </a></td>\r\n<td> Suspension for three years</td>\r\n<td> 01/26/2026</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n<tr>\r\n<td> Justin Preuschl </td>\r\n<td> <a href=\"documents/EDA/DSE-2025-14.pdf\">DSE
+        2025-14</a></td>\r\n<td>\tApplication denied </td>\r\n<td> 12/16/2025 </td>\r\n<td>
+        N/A </td>\r\n</tr>\r\n\r\n<tr>\r\n<td> Thomas Graves </td>\r\n<td> <a href=\"documents/EDA/DSE-2025-12.pdf\">DSE
+        2025-12 </a></td>\r\n<td>\tApplication denied </td>\r\n<td> 12/10/2025 </td>\r\n<td>
+        N/A </td>\r\n</tr>\r\n\r\n<tr>\r\n<td> Kali Lamp </td>\r\n<td> <a href=\"documents/EDA/DSE-2025-15.pdf\">DSE
+        2025-15</a></td>\r\n<td>Suspension for three years </td>\r\n<td> 12/10/2025</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>\r\nSanjay Thakur</td>\r\n<td>\t<a href=\"documents/EDA/DSE-2025-09.pdf\">DSE
+        2025-09</a></td>\r\n<td>\tApplication denied </td>\r\n<td>11/05/2025</td>\r\n<td>
+        N/A </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Remi Vardoux</td>\r\n<td>\t<a href=\"documents/EDA/DSE-2024-19.pdf\">DSE
+        2024-19</a></td>\r\n<td>\tApplication denied; cannot reapply for a period
+        of five years </td>\r\n<td>11/03/2025</td>\r\n<td>  </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Mike
+        Mavity</td>\r\n<td>\t<a href=\"documents/EDA/DSE-2025-08.pdf\">DSE 2025-08</a></td>\r\n<td>\tApplication
+        denied; cannot reapply for a period of five years </td>\r\n<td>10/29/2025</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Jordan Bakken</td>\r\n<td>\t<a href=\"documents/EDA/DSE-2025-11.pdf\">DSE
+        2025-11</a></td>\r\n<td>\tPermanent revocation </td>\r\n<td>10/29/2025</td>\r\n<td>
+        N/A </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Maria Love</td>\r\n<td>\t<a href=\"documents/EDA/DSE-2025-06.pdf\">DSE
+        2025-06</a></td>\r\n<td>\tSuspension for six months </td>\r\n<td>07/30/2025</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Troy Engel</td>\r\n<td>\t<a href=\"documents/EDA/DSE-2025-07.pdf\">
+        DSE 2025-07</a></td>\r\n<td>\tPermanent revocation </td>\r\n<td>07/22/2025</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Faith Isidto </td>\r\n<td>\t<a href=\"documents/EDA/DSE2025-03.pdf\">DSE
+        2025-03</a></td>\r\n<td>\tSuspension for one year</td>\r\n<td>07/07/2025</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Malou Jubay </td>\r\n<td>\t<a href=\"documents/EDA/DSE2025-02.pdf\">DSE
+        2025-02</a></td>\r\n<td>\tApplication denied; cannot reapply for a period
+        of one year</td>\r\n<td>07/07/2025</td>\r\n<td>  </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lorelie
+        Rojas</td>\r\n<td>\t<a href=\"documents/EDA/DSE2025-01.pdf\">DSE 2025-01</a></td>\r\n<td>\tApplication
+        denied; cannot reapply for a period of one year</td>\r\n<td>07/07/2025</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Jeromy Loken </td>\r\n<td>\t<a href=\"documents/EDA/DSE2025-05.pdf\">DSE
+        2025-05</a></td>\r\n<td>\tPermanent revocation</td>\r\n<td>06/26/2025</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Clive Bremser </td>\r\n<td>\t<a href=\"documents/EDA/DSE2024-12b.pdf\">DSE
+        2024-12</a></td>\r\n<td>\tApplication denied; cannot reapply for a period
+        of eighteen months</td>\r\n<td>06/09/2025</td>\r\n<td>  </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Joel
+        Johnson </td>\r\n<td>\t<a href=\"documents/EDA/DSE2024-21.pdf\">DSE 2024-21</a></td>\r\n<td>\tApplication
+        denied</td>\r\n<td>03/20/2025</td>\r\n<td> N/A </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Emilio
+        DuBray </td>\r\n<td>\t<a href=\"documents/EDA/DSE2024-13.pdf\">DSE 2024-13</a></td>\r\n<td>\tApplication
+        denied; cannot reapply for a period of five years</td>\r\n<td>03/06/2025</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Jennifer Jungwirth</td>\r\n<td>\t<a
+        href=\"documents/EDA/DSE2024-14.pdf\">DSE 2024-14</a></td>\r\n<td>\tApplication
+        denied; cannot reapply for a period of two years</td>\r\n<td>12/05/2024</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Jamie Keller</td>\r\n<td>\t<a href=\"documents/EDA/DSE2024-09.pdf\">\tDSE
+        2024-09</a></td>\r\n<td>\tApplication denied; cannot reapply for a period
+        of two years</td>\r\n<td>12/04/2024</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Mabel
+        Howe</td>\r\n<td>\t<a href=\"documents/EDA/DSE2024-01.pdf\">DSE 2024-01</a></td>\r\n<td>\tApplication
+        denied; cannot reapply until July 1, 2026</td>\r\n<td>11/26/2024</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n\r\n\r\n<tr>\r\n<td>Chris West</td>\r\n<td>\t<a href=\"documents/EDA/DSE2024-11.pdf\">\tDSE
+        2024-11</a></td>\r\n<td>\tPermanent revocation</td>\r\n<td>08/29/2024</td>\r\n<td>N/A
+        </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Keiton Guess</td>\r\n<td>\t<a href=\"documents/EDA/DSE
+        2024-10.pdf\">\tDSE 2024-10</a></td>\r\n<td>\tPermanent revocation</td>\r\n<td>08/22/2024</td>\r\n<td>N/A
+        </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Michelle Pliska</td>\r\n<td>\t<a href=\"documents/EDA/Pliska.pdf\">Professional
+        Practices</a></td>\r\n<td>\tPublic Reprimand</td>\r\n<td>08/06/2024</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Shana Legg</td>\r\n<td>\t<a href=\"documents/EDA/Legg.pdf\">Professional
+        Practices</a></td>\r\n<td>\tPublic Reprimand</td>\r\n<td>06/21/2024</td>\r\n<td>
+        \ </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Michael Morran</td>\r\n<td>\t<a href=\"documents/EDA/DSE2024-06.pdf\">DSE
+        2024-06</a></td>\r\n<td>\tSuspension until July 2, 2028</td>\r\n<td>07/02/2024</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Scott Klaudt</td>\r\n<td>\t<a href=\"documents/EDA/DSE2024-08.pdf\">DSE
+        2024-08</a></td>\r\n<td>Suspension until June 30, 2025</td>\r\n<td>06/25/2024</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n\r\n\r\n<tr>\r\n<td>Tamara Merrill</td>\r\n<td>\t<a
+        href=\"documents/EDA/DSE2023-22.pdf\">DSE 2023-22</a></td>\r\n<td>Conditional
+        permit issued</td>\r\n<td>06/25/2024</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n\r\n\r\n<tr>\r\n<td>Bille
+        Jo Sazue</td>\r\n<td>\t<a href=\"documents/EDA/DSE2024-07.pdf\">DSE 2024-07</a></td>\r\n<td>Conditional
+        permit issued</td>\r\n<td>06/24/2024</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n\r\n<tr>\r\n<td>Roxanne
+        Bobby</td>\r\n<td>\t<a href=\"documents/EDA/DSE2023-19.pdf\">DSE 2023-19</a></td>\r\n<td>Application
+        withdrew; Cannot reapply before July 1, 2024</td>\r\n<td>06/06/2024</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Larry Telkamp</td>\r\n<td>\t<a href=\"documents/EDA/DSE2024-03.pdf\">DSE
+        2024-03</a></td>\r\n<td>Permanent revocation</td>\r\n<td>04/26/2024</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Michael
+        Ruth</td>\r\n<td>\t<a href=\"documents/EDA/Ruth.pdf\">Professional Practices</a></td>\r\n<td>\tPublic
+        Reprimand</td>\r\n<td>04/18/2024</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n\r\n\r\n<tr>\r\n<td>Alex
+        C. Johnson</td>\r\n<td>\t<a href=\"documents/EDA/DSE2023-23.pdf\">DSE 2023-23</a></td>\r\n<td>\tConditional
+        permit issued</td>\r\n<td>04/02/2024</td>\r\n<td> </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Jared
+        Davis</td>\r\n<td>\t<a href=\"documents/EDA/DSE2023-18.pdf\">\tDSE 2023-18</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>02/20/2024</td>\r\n<td> </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Rubenia
+        Franco</td>\r\n<td>\t<a href=\"documents/EDA/DSE2023-12.pdf\">DSE 2023-12</a></td>\r\n<td>Application
+        denied; cannot reapply until completion of an educator preparation program
+        or for one year</td>\r\n<td>02/15/2024</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Brian
+        Sieh</td>\r\n<td>\t<a href=\"documents/EDA/DSE2023-07.pdf\">\tDSE 2023-07</a></td>\r\n<td>Application
+        denied; cannot reapply before January 1, 2027</td>\r\n<td>01/25/2024</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Joanie E. Schiffner</td>\r\n<td>\t<a
+        href=\"documents/EDA/DSE2023-24.pdf\">DSE 2023-24</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>\t01/10/2024</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Justin
+        Marsh</td>\r\n<td>\t<a href=\"documents/EDA/DSE2023-11.pdf\">\tDSE 2023-11</a></td>\r\n<td>Suspension;
+        cannot reapply before July 2, 2025</td>\r\n<td>01/08/2024</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Hunter
+        Nedland</td>\r\n<td>\t<a href=\"documents/EDA/DSE2023-08.pdf\">DSE 2023-08</a></td>\r\n<td>Application
+        withdrew; cannot reapply before July 1, 2024</td>\r\n<td>01/05/2024</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Maria LaDoucer</td>\r\n<td>\t<a href=\"documents/EDA/DSE2023-25.pdf\">DSE
+        2023-25</a></td>\r\n<td>Suspension for 18 months</td>\r\n<td>12/21/2023</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Piper Thorpe</td>\r\n<td>\t<a href=\"documents/EDA/DSE2022-08.pdf\">DSE
+        2022-08</a></td>\r\n<td>Application denied</td>\r\n<td>11/30/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Niklaus
+        Towne</td>\r\n<td><a href=\"documents/EDA/DSE2023-03.pdf\">DSE 2023-03</a></td>\r\n<td>Application
+        denied; cannot reapply before May 2, 2024</td>\r\n<td>11/21/2023</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Nathan Frisch</td>\r\n<td><a href=\"documents/EDA/DSE2023-15.pdf\">DSE
+        2023-15</a></td>\r\n<td>Permanent revocation</td>\r\n<td>10/18/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Charles
+        Reambonanza</td>\r\n<td><a href=\"documents/EDA/DSE2023-16.pdf\">DSE 2023-16</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>10/18/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Paul
+        McLaughlin</td>\r\n<td><a href=\"documents/EDA/DSE2023-17.pdf\">DSE 2023-17</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>10/18/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lanny
+        Gabbert</td>\r\n<td><a href=\"documents/EDA/DSE2023-10.pdf\">DSE 2023-10</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>08/25/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Shanna
+        Ries</td>\r\n<td><a href=\"documents/EDA/DSE2023-09.pdf\">DSE 2023-09</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>08/25/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Adam
+        Zabih</td>\r\n<td><a href=\"documents/EDA/DSE2023-06.pdf\">DSE 2023-06</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>08/16/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Jessica
+        L. Smith</td>\r\n<td><a href=\"documents/EDA/DSE2022-22.pdf\">DSE 2022-22</a></td>\r\n<td>Conditional
+        one-year certificate</td>\r\n<td>08/10/2023</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Sadie
+        In The Woods</td>\r\n<td><a href=\"documents/EDA/DSE2022-17.pdf\">DSE 2022-17</a></td>\r\n<td>Application
+        denied; cannot reapply before July 1, 2027</td>\r\n<td>05/30/2023</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Helena Danielson</td>\r\n<td><a href=\"documents/EDA/DSE2022-16a.pdf\">DSE
+        2022-16</a></td>\r\n<td>Application denied; cannot reapply before December
+        31, 2025</td>\r\n<td>05/26/2023</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Ryan
+        Bruns</td>\r\n<td><a href=\"documents/EDA/DSE2023-04.pdf\">DSE 2023-04</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>04/03/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Oscela
+        BlueHorse</td>\r\n<td><a href=\"documents/EDA/DSE2022-06.pdf\">DSE 2022-06</a></td>\r\n<td>Application
+        denied; cannot reapply before December 31, 2023</td>\r\n<td>04/06/2023</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Dana Strong</td>\r\n<td><a href=\"documents/EDA/DSE2022-15.pdf\">DSE
+        2022-15</a></td>\r\n<td>Application denied</td>\r\n<td>04/07/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Gayle
+        Cady</td>\r\n<td><a href=\"documents/EDA/DSE2023-02.pdf\">DSE 2023-02</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>01/20/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>David
+        Deshler</td>\r\n<td><a href=\"documents/EDA/DSE2022-10.pdf\">DSE 2022-10</a></td>\r\n<td>Application
+        denial</td>\r\n<td>01/13/2023</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Rebecca
+        Westra</td>\r\n<td><a href=\"documents/EDA/DSE2022-11.pdf\">DSE 2022-11</a></td>\r\n<td>Application
+        withdrew; cannot reapply before July 1, 2024</td>\r\n<td>01/09/2023</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n\r\n\r\n<tr>\r\n<td>Michael Koranda</td>\r\n<td><a href=\"documents/EDA/DSE2022-21.pdf\">DSE
+        2022-21</a></td>\r\n<td>Suspension for five years</td>\r\n<td>12/12/2022</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n\r\n<tr>\r\n<td>Todd
+        Palmer</td>\r\n<td><a href=\"documents/EDA/DSE2022-20.pdf\">DSE 2022-20</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>12/12/2022</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n\r\n<tr>\r\n<td>Jeickson
+        Pichardo-Castillo</td>\r\n<td><a href=\"documents/EDA/DDSE2022-19.pdf\">DSE
+        2022-19</a></td>\r\n<td>Permanent revocation</td>\r\n<td>12/12/2022</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n\r\n\r\n<tr>\r\n<td>Nathan
+        Tweten</td>\r\n<td><a href=\"documents/EDA/DSE2022-09a.pdf\">DSE 2022-09</a></td>\r\n<td>Application
+        denied</td>\r\n<td>12/05/2022</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Adam
+        Stratmeyer</td>\r\n<td><a href=\"documents/EDA/DSE2022-13.pdf\">DSE 2022-13</a></td>\r\n<td>Application
+        denied</td>\r\n<td>12/05/2022</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>John
+        Paul Lowthian</td>\r\n<td><a href=\"documents/EDA/DSE2022-07.pdf\">DSE 2022-07</a></td>\r\n<td>Application
+        denied</td>\r\n<td>10/17/2022</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n\r\n<tr>\r\n<td>Haley
+        Ringkob</td>\r\n<td><a href=\"documents/EDA/DSE2022-14b.pdf\">DSE 2022-14</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>09/28/2022</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n\r\n<tr>\r\n<td>Christopher
+        Albert</td>\r\n<td><a href=\"documents/EDA/DSE2022-05.pdf\">DSE 2022-05</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>07/18/2022</td>\r\n<td>N/A </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Lori
+        Tvedt</td>\r\n<td><a href=\"documents/EDA/DSE2021-17.pdf\">DSE 2021-17</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>05/18/2022</td>\r\n<td> </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Emma
+        Harrison</td>\r\n<td><a href=\"documents/EDA/DSE2022-16.pdf\">DSE 2021-16</a></td>\r\n<td>Application
+        denied; cannot reapply before July 1, 2023</td>\r\n<td>02/08/2022 </td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Nicole Twiss</td>\r\n<td><a href=\"documents/EDA/DSE2021-15.pdf\">DSE
+        2021-15</a></td>\r\n<td>Application denied, cannot reapply before Dec. 15,
+        2025</td>\r\n<td>04/20/2022</td>\r\n<td> </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Allison
+        DeGroot</td>\r\n<td><a href=\"documents/EDA/DSE2022-09.pdf\">DSE 2021-09</a></td>\r\n<td>Application
+        denied; cannot reapply before July 1, 2023</td>\r\n<td>02/08/2022</td>\r\n<td>
+        </td>\r\n</tr>\r\n\r\n\r\n\r\n\r\n\r\n<tr>\r\n<td>Jalen Boyd</td>\r\n<td><a
+        href=\"documents/EDA/DSE2022-03.pdf\">DSE 2022-03</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>02/04/2022</td>\r\n<td> N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Kenneth
+        Jones</td>\r\n<td><a href=\"documents/EDA/DSE2022-02.pdf\">DSE 2022-02</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>01/26/2022</td>\r\n<td> N/A</td>\r\n</tr>\r\n\r\n\r\n\r\n\r\n<tr>\r\n<td>Thad
+        Caldwell</td>\r\n<td><a href=\"documents/EDA/DSE2022-01.pdf\">DSE 2022-01</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>01/20/2022</td>\r\n<td> N/A</td>\r\n</tr>\r\n\r\n\r\n\r\n\r\n\r\n<tr>\r\n<td>Todd
+        Gannon</td>\r\n<td><a href=\"documents/EDA/DSE2021-14.pdf\">DSE 2021-14</a></td>\r\n<td>Conditional
+        three-year certificate issued</td>\r\n<td>09/29/2021</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Emily
+        Ayres</td>\r\n<td><a href=\"documents/EDA/DSE2021-13.pdf\">DSE 2021-13</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>09/16/2021</td>\r\n<td> N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Kathryn
+        Baird</td>\r\n<td><a href=\"documents/EDA/DSE2021-12.pdf\">DSE 2021-12</a></td>\r\n<td>Conditional
+        one-year certificate issued</td>\r\n<td>09/08/2021</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>William
+        Massey</td>\r\n<td><a href=\"documents/EDA/DSE2021-08.pdf\">DSE 2021-08</a></td>\r\n<td>Application
+        withdrew; cannot reapply before April 1, 2022</td>\r\n<td>10/20/2021</td>\r\n<td>4/13/2022</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Sandra
+        Ames-Clark</td>\r\n<td><a href=\"documents/EDA/DSE2021-07.pdf\">DSE 2021-07</a></td>\r\n<td>Application
+        denied; prohibited from reapplying</td>\r\n<td>09/03/2021</td>\r\n<td> N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>James
+        Klages</td>\r\n<td><a href=\"documents/EDA/DSE2021-06.pdf\">DSE 2021-06</a></td>\r\n<td>Conditional
+        one-year certificate issued</td>\r\n<td>05/21/2021</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n\r\n\r\n\r\n<tr>\r\n<td>Shea
+        Lauren Lindsey</td>\r\n<td><a href=\"documents/EDA/DSE2021-01.pdf\">DSE 2021-01</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>01/20/2021</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Grant
+        Lolley</td>\r\n<td><a href=\"documents/EDA/DSE2020-07.pdf\">DSE 2020-07</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>07/14/2020</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Doyle
+        Johnson</td>\r\n<td><a href=\"documents/EDA/DSE2020-03.pdf\">DSE 2020-03</a></td>\r\n<td>Application
+        denied; cannot reapply before July 1, 2021</td>\r\n<td>12/01/2020</td>\r\n<td></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Christina
+        A. Stark</td>\r\n<td><a href=\"documents/EDA/DSE2020-10.pdf\">DSE 2020-10</a></td>\r\n<td>Suspension
+        for four years</td>\r\n<td>10/13/2020</td>\r\n<td></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Daylan
+        Scott Fargo</td>\r\n<td><a href=\"documents/EDA/DSE2020-09.pdf\">DSE 2020-09</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>08/25/2020</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Eriq
+        Swiftwater</td>\r\n<td><a href=\"documents/EDA/DSE2020-04.pdf\">DSE 2020-04</a></td>\r\n<td>Application
+        denied; cannot reapply for five years</td>\r\n<td>06/16/2020</td>\r\n<td></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Bradley
+        Jay Miedema</td>\r\n<td><a href=\"documents/EDA/DSE2019-09.pdf\">DSE 2019-09</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>01/27/2020</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Maddison
+        M. Brown</td>\r\n<td><a href=\"documents/EDA/DSE2019-05.pdf\">DSE 2019-05</a></td>\r\n<td>Application
+        denied; cannot reapply until June 8, 2022</td>\r\n<td>02/19/2020</td>\r\n<td>08/09/2022</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Justin
+        Marsh</td>\r\n<td><a href=\"documents/EDA/DSE2019-11a.pdf\">DSE 2019-11</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>01/06/2020</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Ryan
+        A. Brewer</td>\r\n<td><a href=\"documents/EDA/DSE2017-11.pdf\">DSE 2017-11</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>11/12/2019</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Abigail
+        Bulock</td>\r\n<td><a href=\"documents/EDA/DSE2019-06.pdf\">DSE 2019-06</a></td>\r\n<td>Application
+        denied</td>\r\n<td>10/23/2019</td>\r\n<td>  </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Lori
+        Ann Tvedt</td>\r\n<td><a href=\"documents/EDA/DSE2018-06.pdf\">DSE 2018-06</a></td>\r\n<td>Application
+        denied</td>\r\n<td>10/23/2019</td>\r\n<td> </td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Derrik
+        John Nelson</td>\r\n<td><a href=\"documents/EDA/DSE2019-10.pdf\">DSE 2019-10</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>10/02/2019</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Rick
+        Meyerink</td>\r\n<td><a href=\"documents/EDA/DSE2019-07.pdf\">DSE 2019-07</a></td>\r\n<td>Suspension
+        for five years</td>\r\n<td>08/26/2019</td>\r\n<td></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Keenan
+        Soyland</td>\r\n<td><a href=\"documents/EDA/DSE2019-03.pdf\">DSE 2019-03</a></td>\r\n<td>Suspension
+        for five years</td>\r\n<td>06/20/2019</td>\r\n<td></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Tamara
+        Lile</td>\r\n<td><a href=\"documents/EDA/DSE2018-02.pdf\">DSE 2018-02</a></td>\r\n<td>Application
+        denied</td>\r\n<td>06/08/2019</td>\r\n<td></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Cheyenne
+        P. Ziegler</td>\r\n<td><a href=\"documents/EDA/DSE2018-08.pdf\">DSE 2018-08</a></td>\r\n<td>Application
+        denied; cannot reapply before June 30, 2021</td>\r\n<td>04/04/2019</td>\r\n<td>09/16/2021</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Kenneth
+        Waterbury</td>\r\n<td><a href=\"documents/EDA/DSE2019-01.pdf\">DSE 2019-01</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>02/06/2019</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Dana
+        K. Heidrich</td>\r\n<td><a href=\"documents/EDA/DSE2017-08.pdf\">DSE 2017-08</a></td>\r\n<td>Application
+        denied; cannot reapply before December 31, 2020</td>\r\n<td>10/12/2018</td>\r\n<td></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Christopher
+        Borchardt</td>\r\n<td><a href=\"documents/EDA/DSE2018-09.pdf\">DSE 2018-09</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>09/21/2018</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Brian
+        Sieh</td>\r\n<td><a href=\"documents/EDA/DSE2018-04.pdf\">DSE 2018-04</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>06/01/2018</td>\r\n<td> </td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Paul
+        M. Mulloy</td>\r\n<td><a href=\"documents/EDA/DSE2018-01.pdf\">DSE 2018-01</a></td>\r\n<td>Application
+        denied; cannot reapply for three years</td>\r\n<td>06/01/2018</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n\r\n<tr>\r\n<td>Jana
+        L. Tufty</td>\r\n<td><a href=\"documents/EDA/DSE2017-09.pdf\">DSE 2017-09</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>10/18/2017</td>\r\n<td></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Tabor
+        White Buffalo</td>\r\n<td><a href=\"documents/EDA/DSE2017-01.pdf\">DSE 2017-01</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>07/26/2017</td>\r\n<td></td>\r\n</tr>\r\n\r\n<tr>\r\n<td>Kory
+        S. Foss</td>\r\n<td><a href=\"documents/EDA/DSE2017-04.pdf\">DSE 2017-04</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>05/25/2017</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n\r\n<tr>\r\n<td>Arlene
+        Maxfield</td>\r\n<td><a href=\"documents/EDA/DSE2017-02.pdf\">DSE 2017-02</a></td>\r\n<td>Suspension
+        for five years</td>\r\n<td>02/02/2017</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Joseph
+        C. Thompson</td>\r\n<td><a href=\"documents/EDA/DSE2016-12.pdf\">DSE 2016-12</a></td>\r\n<td>Application
+        denied; cannot reapply for five years</td>\r\n<td>02/08/2017</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Kyle
+        M. Brees</td>\r\n<td><a href=\"documents/EDA/DSE2016-10.pdf\">DSE 2016-10</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>09/10/2016</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Nicole
+        B. Twiss</td>\r\n<td><a href=\"documents/EDA/DSE2016-09.pdf\">DSE 2016-09</a></td>\r\n<td>Application
+        denied; cannot reaply before August 1, 2018</td>\r\n<td>02/15/2017</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Brian
+        J. Smith</td>\r\n<td><a href=\"documents/EDA/DSE2016-08.pdf\">DSE 2016-08</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>07/05/2016</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Dallas
+        Wilkinson</td>\r\n<td><a href=\"documents/EDA/DSE2016-07.pdf\">DSE 2016-07</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>07/05/2016</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Erica
+        Coughlin</td>\r\n<td><a href=\"documents/EDA/DSE2016-06.pdf\">DSE 2016-06</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>07/01/2016</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Kevin
+        Shot With Arrow</td>\r\n<td><a href=\"documents/EDA/DSE2016-05.pdf\">DSE 2016-05</a></td>\r\n<td>Conditional
+        one-year certificate extension</td>\r\n<td>03/28/2016</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Jordan
+        Tuntland</td>\r\n<td><a href=\"documents/EDA/DSE2016-04.pdf\">DSE 2016-04</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>04/04/2016</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Mark
+        Griebel</td>\r\n<td><a href=\"documents/EDA/DSE2016-03.pdf\">DSE 2016-03</a></td>\r\n<td>Suspension
+        for two years</td>\r\n<td>04/06/2016</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Christopher
+        R. Bartling</td>\r\n<td><a href=\"documents/EDA/DSE2016-02.pdf\">DSE 2016-02</a></td>\r\n<td>Application
+        denied; cannot reapply for seven year</td>\r\n<td>06/30/2016</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Rhonda
+        Good Shield</td>\r\n<td><a href=\"documents/EDA/DSE2016-01.pdf\">DSE 2016-01\t</a></td>\r\n<td>Conditional
+        five-year certificate issued\t</td>\r\n<td>01/12/2016</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Julie
+        Lakota</td>\r\n<td><a href=\"documents/EDA/DSE2015-20.pdf\">DSE 2015-20\t</a></td>\r\n<td>Application
+        denied; cannot reapply before December 31, 2017\t</td>\r\n<td>05/23/2016</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Tonya
+        Marie Drueppel</td>\r\n<td><a href=\"documents/EDA/DSE2015-19.pdf\">DSE 2015-19\t</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>12/14/2015</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Christia
+        Ault</td>\r\n<td><a href=\"documents/EDA/DSE2015-18.pdf\">DSE 2015-18</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>12/14/2015</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Jessica
+        Nielsen</td>\r\n<td><a href=\"documents/EDA/DSE2015-17.pdf\">DSE 2015-17</a></td>\r\n<td>Permanent
+        revocation</td>\t\r\n<td>12/21/2015</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Memoree
+        M. Skinner</td>\r\n<td><a href=\"documents/EDA/DSE2015-14.pdf\">DSE 2015-14</a></td>\r\n<td>Conditional
+        one-year certificate issued</td>\r\n<td>07/21/2015</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Brian
+        Sieh</td>\r\n<td><a href=\"documents/EDA/DSE2015-13.pdf\">DSE 2015-13</a></td>\r\n<td>Application
+        denied; cannot reapply before December 31, 2017</td>\r\n<td>03/21/2016</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Rodd
+        Bauck</td>\r\n<td><a href=\"documents/EDA/DSE2015-11.pdf\">DSE 2015-11</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>06/25/2015</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Thomas
+        Mark Wendelgass</td>\r\n<td><a href=\"documents/EDA/DSE2015-10.pdf\">DSE 2015-10</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>07/23/2015</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Brent
+        V. Brewer\t</td>\r\n<td><a href=\"documents/EDA/DSE2015-09.pdf\">DSE 2015-09</a></td>\r\n<td>Application
+        denied; cannot reapply before December 31, 2016</td>\r\n<td>10/30/2015</td>\r\n<td>10/31/2022</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Karen
+        Abbot\t</td>\r\n<td><a href=\"documents/EDA/DSE2015-07.pdf\">DSE 2015-07</a></td>\r\n<td>Conditional
+        ten-year certificate issued</td>\r\n<td>10/28/2014</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Justin
+        Dean Kiefer\t</td>\r\n<td><a href=\"documents/EDA/DSE2015-06.pdf\">DSE 2015-06</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>04/27/2015</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Hayli
+        DeJong\t</td>\r\n<td><a href=\"documents/EDA/DSE2015-05.pdf\">DSE 2015-05</a></td>\r\n<td>Conditional
+        five-year certificate issued</td>\r\n<td>01/02/2015</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Sarah
+        Schmasow\t</td>\r\n<td><a href=\"documents/EDA/DSE2015-03.pdf\">DSE 2015-03</a></td>\r\n<td>Suspension
+        for one year</td>\r\n<td>07/01/2015</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Frank
+        Howard Summers\t</td>\r\n<td><a href=\"documents/EDA/DSE2015-02.pdf\">DSE
+        2015-02</a></td>\r\n<td>Conditional one-year certificate issued</td>\r\n<td>07/01/2014</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Gregg
+        Wilson\t</td>\r\n<td><a href=\"documents/EDA/DSE2014-16.pdf\">DSE 2014-16</a></td>\r\n<td>Suspension
+        for two years</td>\r\n<td>11/23/2014</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Jessica
+        R. Colombe\t</td>\r\n<td><a href=\"documents/EDA/DSE2014-14.pdf\">DSE 2014-14</a></td>\r\n<td>Application
+        denied</td>\r\n<td>05/29/2015</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Matthew
+        John Meyer\t</td>\r\n<td><a href=\"documents/EDA/DSE2014-12.pdf\">DSE 2014-12</a></td>\r\n<td>Application
+        denied</td>\r\n<td>12/04/2014</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Michael
+        Dean Reinhiller\t</td>\r\n<td><a href=\"documents/EDA/DSE2014-10.pdf\">DSE
+        2014-10</a></td>\r\n<td>Suspension for five years</td>\r\n<td>09/05/2014</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Kandice
+        Schlagel</td>\t\r\n<td><a href=\"documents/EDA/DSE2014-07.pdf\">DSE 2014-07</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>07/31/2014</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Paul
+        E. Hildebrant</td>\t\r\n<td><a href=\"documents/EDA/DSE2014-04.pdf\">DSE 2014-04</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>08/19/2021</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Lynes
+        Vincent End Of Horn</td>\t\r\n<td><a href=\"documents/EDA/DSE2014-02.pdf\">DSE
+        2014-02</a></td>\r\n<td>Application denied</td>\r\n<td>06/17/2014</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Brian
+        Charles Sieh</td>\t\r\n<td><a href=\"documents/EDA/DSE2013-07.pdf\">DSE 2013-07</a></td>\r\n<td>Suspension
+        for two years</td>\r\n<td>05/02/2014</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Judy
+        Henderson\t</td>\r\n<td><a href=\"documents/EDA/DSE2013-05.pdf\">DSE 2013-05</a></td>\r\n<td>Application
+        denied</td>\r\n<td>12/08/2013</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Andrea
+        Royer\t</td>\r\n<td><a href=\"documents/EDA/DSE2013-04.pdf\">DSE 2013-04</a></td>\r\n<td>Application
+        denied; cannot reapply for two years</td>\r\n<td>10/11/2013</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Kyle
+        John Keegan</td>\t\r\n<td><a href=\"documents/EDA/DSE2013-03.pdf\">DSE 2013-03</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>06/14/2013</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Matthew
+        Campagna</td>\t\r\n<td><a href=\"documents/EDA/OSE2012-04.pdf\">OSE 2012-04</a></td>\r\n<td>Application
+        denied</td>\r\n<td>11/07/2012</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Susan
+        M. Bartscher</td>\t\r\n<td><a href=\"documents/EDA/OSE2012-03.pdf\">OSE 2012-03</a></td>\r\n<td>Suspension
+        for one year\t</td>\r\n<td>07/01/2012</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>George
+        Sazama\t</td>\r\n<td><a href=\"documents/EDA/OSE2012-02.pdf\">OSE 2012-02</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>04/18/2012</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Lisa
+        Robinson</td>\t\r\n<td><a href=\"documents/EDA/OSE2012-01.pdf\">OSE 2012-01</a></td>\r\n<td>Suspension
+        for two years</td>\r\n<td>04/10/2012</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Nicolas
+        Lee Jastorff</td>\t\r\n<td><a href=\"documents/EDA/TR2011-11.pdf\">TR 2011-11</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>06/30/2011</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Terry
+        W. Olson\t</td>\r\n<td><a href=\"documents/EDA/TR2010-10.pdf\">TR 2010-10</a></td>\r\n<td>Suspension
+        for five years</td>\r\n<td>12/29/2010</td>\r\n<td></td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Patrick
+        Ngufor\t</td>\r\n<td><a href=\"documents/EDA/TR2010-09.pdf\">TR 2010-09</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>09/07/2010</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Joni
+        Adele Kanable</td>\t\r\n<td><a href=\"documents/EDA/TR2010-07.pdf\">TR 2010-07</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>08/10/2010</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Gerry
+        J. Heck\t</td>\r\n<td><a href=\"documents/EDA/TR2010-06.pdf\">TR 2010-06</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>08/10/2010</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Wade
+        A. Mackey</td>\t\r\n<td><a href=\"documents/EDA/TR2010-04.pdf\">TR 2010-04</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>10/14/2009</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Scott
+        Raue</td>\t\r\n<td><a href=\"documents/EDA/TR2010-03.pdf\">TR 2010-03</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>09/02/2009</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Brady
+        V. Hastings\t</td>\r\n<td><a href=\"documents/EDA/TR2010-02.pdf\">TR 2010-02</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>09/02/2009</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n\r\n<tr>\r\n<td>Daniel
+        Schuknecht</td>\t\r\n<td><a href=\"documents/EDA/TR2010-01.pdf\">TR 2010-01</a></td>\r\n<td>Permanent
+        revocation</td>\r\n<td>09/02/2009</td>\r\n<td>N/A</td>\r\n</tr>\r\n\r\n</tbody>\r\n</table>\r\n
+        \  \r\n        </div>\r\n      </div>\r\n    </section>\r\n    <footer>\r\n
+        \       \r\n\r\n\r\n\r\n\r\n\r\n<div class=\"row\">\r\n\r\n\r\n\t\r\n <div
+        class=\"span2\">\r\n</div>\r\n\r\n\r\n <div class=\"span2\">\r\n<font color=\"#ffffff\"><strong>Related
+        Sites </strong></font><br>\r\n                 \t<a href=\"https://www.sd.gov/411\"
+        target=\"_blank\" rel=\"noopener noreferrer\"  color=\"ffffff\"><font color=\"#ffffff\"
+        size=\"-1\">Educator 411</font></a><br>\r\n\t\t\t\t\t\t<a href=\"http://www.k12.sd.us/\"
+        style=\"color:add_white\" target=\"_blank\" rel=\"noopener noreferrer\"><font
+        color=\"#ffffff\" size=\"-1\">K-12 Data Center</font></a><br>\r\n\t\t\t\t\t\t<a
+        href=\"https://sdtribalrelations.sd.gov/indian-education/indian-education.aspx
+        \  \" target=\"_blank\" rel=\"noopener noreferrer\"><font color=\"#ffffff\"
+        size=\"-1\">Indian Education</font></a><br>\r\n\t\t\t\t\t\t<a href=\"https://sdmylife.com/\"
+        target=\"_blank\" rel=\"noopener noreferrer\"><font color=\"#ffffff\" size=\"-1\">SDMyLife</font>
+        </a><br>\r\n\t\t\t\t\t\t<a href=\"http://library.sd.gov/\" target=\"_blank\"
+        rel=\"noopener noreferrer\"><font color=\"#ffffff\" size=\"-1\">SD State Library</font></a><br>\r\n
+        \                                       \t<a href=\"http://history.sd.gov/\"
+        target=\"_blank\"><font color=\"#ffffff\" size=\"-1\">State Historical Society</font></a><br>\r\n\t
+        \                                       <a href=\"https://sdcve.k12.sd.us/\"
+        target=\"_blank\" rel=\"noopener noreferrer\"><font color=\"#ffffff\" size=\"-1\">South
+        Dakota Center for Virtual Education</font></a><br>\r\n                     \r\n\r\n</div>\r\n\r\n\t\r\n\r\n
+        <div class=\"span3\">\r\n<font color=\"#ffffff\"><strong>Notices</strong></font><br>\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t<a
+        href=\"https://boardsandcommissions.sd.gov/\" target=\"_blank\" rel=\"noopener
+        noreferrer\"><font color=\"#ffffff\" size=\"-1\">Boards and Commissions</font></a><br>\r\n\t
+        \                                       <a href=\"/Accessibility.aspx\"><font
+        color=\"#ffffff\" size=\"-1\">Notice of Accessibility</font></a><br>\r\n\t
+        \                                       <a href=\"/Nondiscrimination.aspx\"><font
+        color=\"#ffffff\" size=\"-1\">Notice of Nondiscrimination</font></a><br>\r\n\t
+        \                                       <a href=\"/Disclaimer.aspx\"><font
+        color=\"#ffffff\" size=\"-1\">Online Disclaimer and Limitation of Liability</font></a><br>\r\n\t\t\t\t\t\t<a
+        href=\"/pressroom/\"><font color=\"#ffffff\" size=\"-1\">Press Releases</font></a><br>\r\n\t\t\t\t\t\t\r\n\r\n</div>\r\n\r\n\r\n
+        <div class=\"span2\">\r\n<font color=\"#ffffff\"><strong>State Government</strong></font><br>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n
+        \                                          <a href=\"https://rules.sd.gov/default.aspx\"
+        target=\"_blank\" rel=\"noopener noreferrer\"><font color=\"#ffffff\" size=\"-1\">Administrative
+        Rule</font> </a><br>\r\n                                           <a href=\"https://sdlegislature.gov/\"
+        target=\"_blank\" rel=\"noopener noreferrer\"><font color=\"#ffffff\" size=\"-1\">Codified
+        Laws</font></a><br>\r\n\t\t\t\t\t   <a href=\"https://open.sd.gov/\" target=\"_blank\"
+        rel=\"noopener noreferrer\"><font color=\"#ffffff\" size=\"-1\">Open SD </font></a><br>\r\n\t\t\t\t\t
+        \  <a href=\"http://bhr.sd.gov/workforus\" target=\"_blank\" rel=\"noopener
+        noreferrer\"><font color=\"#ffffff\" size=\"-1\">State Government Jobs </font></a><br>\r\n\t\t\t\t\t
+        \  <a href=\"https://sd.gov/\" target=\"_blank\" rel=\"noopener noreferrer\"><font
+        color=\"#ffffff\" size=\"-1\">State Homepage</font></a>\r\n\r\n</div>\r\n\r\n\r\n\r\n
+        <div class=\"span3\">\r\n<font color=\"#ffffff\"><strong>Contact Us</strong></font><br>\r\n\t\t\t\t\t<p><strong><font
+        color=\"#ffffff\" size=\"-1\">South Dakota Department of Education</strong><br>\r\n\t\t\t\t\t\t800
+        Governors Dr., Pierre, SD </font></p>\r\n\t\t\t\t\t<p><font color=\"#ffffff\"
+        size=\"-1\">(605) 773-3134</a><br>\r\n\t\t\t\t\t\t<a href=\"/about.aspx\">
+        <font color=\"#ffffff\" size=\"-1\">Contact Us</font></a>\r\n\r\n\r\n\r\n</p>\r\n\r\n</div>\r\n\r\n\r\n</div>\r\n\r\n\r\n<div
+        class=\"row\">\r\n<br><br>\r\n <div class=\"span12\">\r\n<br><br>\r\n<center>\t\t\t\r\n\t\t<font
+        color=\"#ffffff\"><a href=\"/\"><font color=\"#ffffff\"  size=\"-1\">&copy;
+        2026 South Dakota Department of Education</a> |</font> <a href=\"https://www.sd.gov/cs?id=sc_cat_item&sys_id=f7f939eddbd4b150b2fb93d4f39619c0\"
+        target=\"_blank\" rel=\"noreferrer noopener\">Request Public Records</a> |
+        <a href=\"/Accessibility.aspx\"><font color=\"#ffffff\"  size=\"-1\">Accessibility
+        Policy</font></a> <font color=\"#ffffff\">|</font> <a href=\"/Disclaimer.aspx\"><font
+        color=\"#ffffff\"  size=\"-1\">Disclaimer</font></a> <font color=\"#ffffff\">|</font>
+        <a href=\"https://www.sd.gov/cs/kb?id=kb_article_view&sysparm_article=KB0010220&sys_kb_id=36d91b371b49c51062c8a8eae54bcb9f&spa=1\"
+        target=\"_blank\"><font color=\"#ffffff\"  size=\"-1\">Privacy Policy</font></a></font>\r\n<center>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n
+        \   </footer>\r\n  </div>\r\n \r\n  <!-- javascript\r\n    ==================================================
+        -->\r\n\r\n\r\n<script>window.jQuery || document.write('<script src=\"../layout/scripts/jquery-latest.min.js\"><\\/script>\\\r\n<script
+        src=\"../layout/scripts/jquery-ui.min.js\"><\\/script>')</script>\r\n<script>jQuery(document).ready(function($){
+        $('img').removeAttr('width height'); });</script>\r\n<script src=\"../layout/scripts/jquery-mobilemenu.min.js\"></script>\r\n<script
+        src=\"../layout/scripts/custom.js\"></script>\r\n\r\n\r\n</body>\r\n\r\n</html>\r\n"
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '40668'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Wed, 11 Nov 2026 07:23:35 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

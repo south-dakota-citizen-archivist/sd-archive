@@ -96,6 +96,8 @@ class Source:
     - from_legacy(data): a stored record's data from an earlier system, in this source's
       shape, so `compare_source` can tell real differences from a change of shape.
       legacy_key(record): its key in this source's terms, when the key changed too.
+    - name, dataset (catalog/datasets.toml id), publisher (its name), description,
+      base_url, ingest: the record set, made on the source's first run if it doesn't exist.
     - covers(key): which stored records a complete run speaks for, when a record set holds
       items from somewhere this source doesn't read (an older system); the rest are never
       marked dropped by it. Default: all of them.
@@ -114,6 +116,13 @@ class Source:
     from_legacy: Callable[[dict], dict] | None = None
     legacy_key: Callable[[Record], str] | None = None
     covers: Callable[[str], bool] | None = None
+    # The record set, for a source new to the archive (made on its first run)
+    name: str = ""
+    dataset: str = ""
+    publisher: str = ""
+    description: str = ""
+    base_url: str = ""
+    ingest: str = "rows"
 
     def schema_for(self, category: str) -> type[BaseModel] | None:
         return self.schemas.get(category) or self.schemas.get("")

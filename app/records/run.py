@@ -19,7 +19,7 @@ def run_source(slug: str, *, job: Job | None = None, fetcher=None, force: bool =
     """Fetch the record set's items and store them as one Run. A failure is logged on the
     run and raised; nothing it fetched is stored."""
     source = sources.get(slug)
-    recordset = RecordSet.objects.get(slug=slug)
+    recordset = ensure_recordset(source)
     run = Run.objects.create(recordset=recordset, job=job, forced=force)
     try:
         if source.items is None:
@@ -63,6 +63,28 @@ def run_source(slug: str, *, job: Job | None = None, fetcher=None, force: bool =
         raise
     logger.info("%s: %s", slug, stored.counts())
     return run
+
+
+def ensure_recordset(source: sources.Source) -> RecordSet:
+    """The source's record set; made from what the source declares if it's new."""
+    try:
+        return RecordSet.objects.get(slug=source.slug)
+    except RecordSet.DoesNotExist:
+        if not (source.name and source.dataset):
+            raise
+    from django.utils.text import slugify
+
+    from census.models import Publisher
+
+    publisher = None
+    if source.publisher:
+        publisher, _ = Publisher.objects.get_or_create(
+            name=source.publisher, defaults={"slug": slugify(source.publisher)[:255]}
+        )
+    return RecordSet.objects.create(
+        slug=source.slug, name=source.name, dataset=source.dataset, publisher=publisher,
+        description=source.description, base_url=source.base_url, ingest=source.ingest,
+    )  # fmt: skip
 
 
 def raw_fetcher(slug: str):

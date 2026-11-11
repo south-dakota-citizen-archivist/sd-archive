@@ -289,6 +289,17 @@ place_link = "address"
 source = "SD Secretary of State, sosenterprise.sd.gov"
 
 [[dataset]]
+id = "educator-disciplinary-actions"
+name = "Educator disciplinary actions (certificate denials, suspensions, revocations)"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "disciplinary action"
+entities = ["person"]
+place_link = "none"
+source = "SD Department of Education, Professional Practices and Standards"
+
+[[dataset]]
 id = "athletic-agents"
 name = "Athletic agent registrations"
 project = "public-records-liberator"
