@@ -18,9 +18,12 @@ from dataclasses import dataclass, field
 
 from .crawl import Page
 
-# name: (URL pattern, what it usually holds, the record set or project already reading it)
+# name: (URL pattern, what it usually holds, the record set or project already reading it).
+# EXTRACTORS: the platforms a generic source reads for any government in
+# records.sources._governments (adding the government there is all it takes).
 PLATFORMS = {
     "CivicClerk": (r"civicclerk\.com", "meeting agendas, minutes and files", None),
+    "Thrillshare (Apptegy)": (r"thrillshare\.com|apptegy", "school district documents", None),
     "Granicus / Legistar": (r"granicus\.com|legistar\.com", "meeting agendas, minutes, video",
                             None),
     "CivicPlus Agenda Center": (r"/AgendaCenter", "meeting agendas and minutes", None),
@@ -49,6 +52,9 @@ PLATFORMS = {
     "SD local government portal": (r"sdlocalgov\.appssd\.sd\.gov", "meetings",
                                    "local-government-meetings"),
 }  # fmt: skip
+
+EXTRACTORS = {"CivicClerk": "civicclerk-meetings", "CivicPlus Agenda Center": "civicplus-agendas",
+              "Thrillshare (Apptegy)": "thrillshare-documents"}  # fmt: skip
 
 # record type: words in titles, headings and link texts that name it
 RECORD_TYPES = {
@@ -84,6 +90,7 @@ class Candidate:
     name: str
     hint: str = ""  # what it usually holds
     covered_by: str | None = None
+    extractor: str | None = None  # a generic source that reads it, once the government is added
     urls: list[str] = field(default_factory=list)
     evidence: list[str] = field(default_factory=list)  # titles, headings, link texts
     files: int = 0
@@ -111,7 +118,8 @@ def platforms(pages: list[Page]) -> list[Candidate]:
         for link in [*page.external, *page.links, *page.files]:
             for name, (pattern, hint, covered) in PLATFORMS.items():
                 if re.search(pattern, link.url, re.I):
-                    c = found.setdefault(name, Candidate("platform", name, hint, covered))
+                    c = found.setdefault(name, Candidate("platform", name, hint, covered,
+                                                         EXTRACTORS.get(name)))  # fmt: skip
                     if link.url not in c.urls:
                         c.urls.append(link.url)
                     c.evidence += [x for x in (link.text, f"linked from: {page.title}") if x]

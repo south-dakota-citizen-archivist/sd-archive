@@ -486,6 +486,17 @@ place_link = "geometry"
 source = "BurialSearch (CIMS) cemetery maps: Bear Butte, Britton, Belle Fourche, Rose Hill"
 
 [[dataset]]
+id = "school-district-documents"
+name = "School district documents (board agendas and minutes, policies, reports)"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "document"
+entities = ["government"]
+place_link = "jurisdiction"
+source = "School district websites on Thrillshare (Apptegy)"
+
+[[dataset]]
 id = "beacon-parcels"
 name = "County parcels from Beacon (shape, owners, valuation)"
 project = "sd-archive"

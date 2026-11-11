@@ -23,9 +23,17 @@ def report_markdown(site: str, start: str, pages: int, suggestions: list[dict],
 
     def line(s):
         where = s["urls"][0] if s.get("urls") else s.get("url", "")
+        add = (
+            (
+                f"; generic extractor: add the government to records.sources._governments for "
+                f"{s['extractor']}"
+            )
+            if s.get("extractor")
+            else ""
+        )
         return (f"- **{s['title']}** ({s['kind']}, {s['how_to_get']}, still produced: "
                 f"{s['still_produced']}) — {s['description']} [{where}]({where})\n"
-                f"  - found as: {s['candidate']}; why: {s['reason']}; "
+                f"  - found as: {s['candidate']}{add}; why: {s['reason']}; "
                 f"quote: “{s['evidence_quote']}”"
                 f"{'' if s['quote_checked'] else ' (NOT FOUND)'}")  # fmt: skip
 
@@ -74,6 +82,7 @@ class Command(BaseCommand):
         suggestions, named = [], []
         for c in found[:max_candidates]:
             base = {"candidate": f"{c.kind}: {c.name}", "covered_by": c.covered_by,
+                    "extractor": c.extractor,
                     "urls": c.urls[:5], "files": c.files,
                     "years": [min(c.years), max(c.years)] if c.years else None}  # fmt: skip
             if no_review:
