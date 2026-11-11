@@ -18,17 +18,11 @@ from datetime import date
 
 import sdnames
 from entities.mentions import from_text
-from records.sources import DocumentLink, Item, Source
+from records.sources import DocumentLink, Found, Item, Source
 from records.sources import _lobbyists as L
 
 logger = logging.getLogger(__name__)
 STATE = "0400000US46"
-
-
-class Found(list):
-    """Items, with the run's checks against the PDF."""
-
-    checks: dict
 
 
 def surnames(names: list[str]) -> list[str]:

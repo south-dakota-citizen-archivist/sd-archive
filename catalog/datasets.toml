@@ -269,13 +269,24 @@ source = "sd.gov phone book"
 [[dataset]]
 id = "vendor-checkbook"
 name = "State vendor payments"
-project = "south-dakota-vendor-checkbook"
+project = "sd-archive"
 grain = "records"
 coverage = ["0400000US46"]
 unit = "payment"
 entities = ["person", "organization", "government"]
 place_link = "none"
-source = "open.sd.gov vendor checkbook"
+source = "open.sd.gov vendor checkbook (BFM's rolling three-year files, kept permanently; July 2020 on)"
+
+[[dataset]]
+id = "state-vendors"
+name = "State vendors (who the state pays, and how much a year)"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "vendor"
+entities = ["person", "organization", "government"]
+place_link = "city"
+source = "SD Bureau of Finance and Management vendor file"
 
 [[dataset]]
 id = "lobbyists"

@@ -26,10 +26,11 @@ def run_source(slug: str, *, job: Job | None = None, fetcher=None, force: bool =
             raise ValueError(f"{slug}: the source has no items() to fetch")
         if fetcher is None:
             fetcher = raw_fetcher(slug)
-        complete, stopped, own_checks = source.complete, None, {}
+        complete, stopped, own_checks, covers = source.complete, None, {}, source.covers
         try:
             found = source.items(fetcher)
             own_checks = getattr(found, "checks", None) or {}  # a source's own checks
+            covers = getattr(found, "covers", None) or covers  # what this run speaks for
             items = list(found)
         except sources.Stopped as stop:
             # the source stopped partway (a block, a daily budget): keep what it found, and
@@ -41,13 +42,17 @@ def run_source(slug: str, *, job: Job | None = None, fetcher=None, force: bool =
         if stopped:
             run.checks["stopped"] = stopped
         elif complete and not force:
-            run.checks |= ingest.check_drop(
-                recordset.records.current().count(), len(items), source.max_drop
-            )
+            current = recordset.records.current()
+            if covers is None:
+                previous = current.count()
+            else:  # only the records this run speaks for
+                previous = sum(1 for k in current.values_list("key", flat=True).iterator()
+                               if covers(k))  # fmt: skip
+            run.checks |= ingest.check_drop(previous, len(items), source.max_drop)
         elif complete:
             run.checks["drop"] = "skipped (forced)"
         with transaction.atomic():
-            stored = ingest.store(run, items, complete=complete, covers=source.covers)
+            stored = ingest.store(run, items, complete=complete, covers=covers)
             if source.mentions and stored.written:
                 _mentions(source, recordset, stored.written)
             for key, value in stored.counts().items():

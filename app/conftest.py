@@ -129,3 +129,17 @@ def sd_counties(state):
                      valid_from=p.valid_from, valid_to=p.valid_to)
         for p in sdplaces.counties(include_historical=True)
     ])  # fmt: skip
+
+
+@pytest.fixture
+def sd_places(state):
+    """Every South Dakota city, town and census designated place sdplaces knows."""
+    import sdplaces
+    from places.models import Jurisdiction
+
+    return Jurisdiction.objects.bulk_create([
+        Jurisdiction(kind=p.kind, geoid=p.geoid, geoidfq=p.geoidfq, name=p.name,
+                     short_name=p.short_name, slug=f"{p.kind}-{p.slug}", ocd_id=p.ocd_id,
+                     valid_from=p.valid_from, valid_to=p.valid_to)
+        for kind in ("place", "cdp") for p in sdplaces.all_places(kind)
+    ])  # fmt: skip

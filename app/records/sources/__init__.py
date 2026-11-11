@@ -30,6 +30,14 @@ class DocumentLink:
     metadata: dict = field(default_factory=dict)
 
 
+class Found(list):
+    """Items, with what the run found out about them: `checks` (logged on the run) and
+    `covers` (which stored keys this run speaks for, when that depends on what it fetched)."""
+
+    checks: dict
+    covers: Callable[[str], bool] | None = None
+
+
 @dataclass
 class Item:
     """One item at the source, keyed by the source's own key."""
