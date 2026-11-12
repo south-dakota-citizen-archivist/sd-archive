@@ -288,6 +288,11 @@
     path.setAttribute("role", "button");
     path.setAttribute("aria-label", `${path.dataset.name} County`);
     path.addEventListener("click", () => choose(path.dataset.geoid));
+    path.addEventListener("pointerenter", () => {
+      const selected = path.parentNode.querySelector("path.selected");
+      path.parentNode.append(path);
+      if (selected && selected !== path) path.parentNode.append(selected);
+    });
     path.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(path.dataset.geoid); }
     });
@@ -319,8 +324,12 @@
     $("chart-title").textContent = `${name}: ${state.mode === "percent"
       ? "share of active voters by party" : "active voters by party"}`;
     $("map-title").textContent = state.place ? `${name} selected` : "Choose a county";
-    document.querySelectorAll(".map path").forEach((p) =>
-      p.classList.toggle("selected", p.dataset.geoid === state.place));
+    document.querySelectorAll(".map path").forEach((p) => {
+      const selected = p.dataset.geoid === state.place;
+      p.classList.toggle("selected", selected);
+      p.setAttribute("aria-pressed", selected);
+      if (selected) p.parentNode.append(p); // on top, so its outline isn't under a neighbor's
+    });
     renderTiles(rows);
     renderChart(rows);
     renderTable(rows);

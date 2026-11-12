@@ -14,9 +14,10 @@
   --republican: #e34948;
   --democratic: #2a78d6;
   --other: #eda100;
-  --county-fill: #e9e8e4;
-  --county-hover: #d5d3cd;
-  --county-selected: #141413;
+  --county-fill: #e7e6e2;
+  --county-hover: #dcdad4;
+  --county-selected: #c4c1b9;
+  --county-outline: #141413;
   --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     sans-serif;
 }
@@ -35,9 +36,10 @@
     --republican: #e34948;
     --democratic: #3987e5;
     --other: #c98500;
-    --county-fill: #2c2c29;
-    --county-hover: #45453f;
-    --county-selected: #f0efec;
+    --county-fill: #262624;
+    --county-hover: #30302d;
+    --county-selected: #4a4a45;
+    --county-outline: #f0efec;
   }
 }
 :root[data-theme="dark"] {
@@ -54,9 +56,10 @@
   --republican: #e34948;
   --democratic: #3987e5;
   --other: #c98500;
-  --county-fill: #2c2c29;
-  --county-hover: #45453f;
-  --county-selected: #f0efec;
+  --county-fill: #262624;
+  --county-hover: #30302d;
+  --county-selected: #4a4a45;
+  --county-outline: #f0efec;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -169,11 +172,12 @@ h2 { font-size: 20px; margin: 40px 0 12px; }
 .tooltip .t-row b { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 600; }
 .map svg { display: block; width: 100%; height: auto; }
 .map path {
-  fill: var(--county-fill); stroke: var(--surface-1); stroke-width: 1.2;
+  fill: var(--county-fill); stroke: var(--surface-1); stroke-width: 1;
+  vector-effect: non-scaling-stroke; stroke-linejoin: round;
   cursor: pointer; transition: fill 120ms;
 }
-.map path:hover, .map path:focus-visible { fill: var(--county-hover); outline: none; }
-.map path.selected { fill: var(--county-selected); }
+.map path:hover, .map path:focus-visible { fill: var(--county-hover); stroke: var(--text-muted); outline: none; }
+.map path.selected, .map path.selected:hover { fill: var(--county-selected); stroke: var(--county-outline); stroke-width: 2; }
 
 /* table */
 .table-wrap { overflow-x: auto; }
