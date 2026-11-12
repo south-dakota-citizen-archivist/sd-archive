@@ -4,9 +4,10 @@ its historical sales tax reports page.
     uv run python pipelines/sales-tax/fetch.py
 
 Saves reports.json (every report on the page: the year section, the report, the link's text
-and URL, and the month the file is for) and the municipal tax by city and SIC code files
-(Excel) as .cache/sales-tax/raw/municipal-by-sic/<yyyy-mm>.xlsx. A month already saved isn't
-fetched again, except the two latest (in case the Department revises them).
+and URL, and the month the file is for), and each month's file of the reports read here
+(KINDS) as .cache/sales-tax/raw/<kind>/<yyyy-mm>.<xlsx|pdf>, with <kind>.json. A month
+already saved isn't fetched again, except the two latest (in case the Department revises
+them).
 """
 
 from __future__ import annotations
@@ -54,38 +55,55 @@ def listing(html: str) -> list[dict]:
     return out
 
 
-def municipal_by_sic(files: list[dict]) -> dict[str, str]:
-    """yyyy-mm → URL of each month's municipal tax by city and SIC code workbook."""
+# what's saved: kind → (report heading on the page, file format)
+KINDS = {
+    "municipal-by-sic": (MUNICIPAL_BY_SIC, "xlsx"),
+    "tourism": ("Tourism Tax Report", "pdf"),
+    "city-tax-due": ("Municipal Tax Due per City – Comparison", "pdf"),
+}
+
+
+def monthly(files: list[dict], report: str, fmt: str) -> dict[str, str]:
+    """yyyy-mm → URL of each month's file of a report (annual files left out)."""
     out = {}
     for f in files:
-        if f["report"] == MUNICIPAL_BY_SIC and f["format"] == "xlsx" and f["month"]:
+        if f["report"] == report and f["format"] == fmt and f["month"]:
             if out.get(f["month"], f["url"]) != f["url"]:
-                raise ValueError(f"two workbooks for {f['month']}: {out[f['month']]}, {f['url']}")
+                raise ValueError(f"two {report} files for {f['month']}: {out[f['month']]}, "
+                                 f"{f['url']}")  # fmt: skip
             out[f["month"]] = f["url"]
     return dict(sorted(out.items()))
 
 
-def fetch(fetcher) -> dict[str, str]:
+def municipal_by_sic(files: list[dict]) -> dict[str, str]:
+    return monthly(files, MUNICIPAL_BY_SIC, "xlsx")
+
+
+def fetch(fetcher) -> dict[str, dict[str, str]]:
     files = listing(fetcher.request("GET", PAGE, timeout=60).text)
-    months = municipal_by_sic(files)
-    if not months:
-        raise ValueError("no municipal tax workbooks on the page")
-    latest = sorted(months)[-2:]
-    for month, url in months.items():
-        name = f"municipal-by-sic/{month}.xlsx"
-        if month in latest or not fetcher.store.has(name):
-            fetcher.store.save(name, fetcher.request("GET", url, timeout=300).content, url)
+    out = {}
+    for kind, (report, fmt) in KINDS.items():
+        months = monthly(files, report, fmt)
+        if not months:
+            raise ValueError(f"no {report} files on the page")
+        latest = sorted(months)[-2:]
+        for month, url in months.items():
+            name = f"{kind}/{month}.{fmt}"
+            if month in latest or not fetcher.store.has(name):
+                fetcher.store.save(name, fetcher.request("GET", url, timeout=300).content, url)
+        (RAW / f"{kind}.json").write_text(json.dumps(months, indent=1))
+        out[kind] = months
     (RAW / "reports.json").write_text(json.dumps(files, indent=1))
-    (RAW / "municipal-by-sic.json").write_text(json.dumps(months, indent=1))
-    return months
+    return out
 
 
 def main() -> None:
     from sdfetch import Fetcher
 
     with Fetcher(RAW) as fetcher:
-        months = fetch(fetcher)
-    print(f"municipal tax by SIC: {len(months)} months ({min(months)} to {max(months)})")
+        found = fetch(fetcher)
+    for kind, months in found.items():
+        print(f"{kind}: {len(months)} months ({min(months)} to {max(months)})")
 
 
 if __name__ == "__main__":

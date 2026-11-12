@@ -146,14 +146,155 @@ def build(months: dict[str, str], read) -> tuple[dict[str, pd.DataFrame], dict]:
     return {"city_sic": df[cols], "city_taxes": city_taxes}, dict(checks)
 
 
+@cache
+def county_geoid(name: str | None) -> str | None:
+    if not name:
+        return None
+    try:
+        return sdplaces.lookup("county", name).geoidfq
+    except (sdplaces.UnknownPlace, sdplaces.AmbiguousPlace):
+        return None
+
+
+TOURISM_RATE = 0.015  # the tourism tax, 1.5% of taxable sales
+
+
+def build_tourism(months: dict[str, str], read) -> tuple[pd.DataFrame, dict]:
+    checks: dict[str, list] = defaultdict(list)
+    rows = []
+    for month, url in sorted(months.items()):
+        found, unread = parse.tourism(read(month), month, f"{month}.pdf")
+        rows += [{**r, "source_url": url} for r in found]
+        checks["tourism lines not read"] += unread
+    df = pd.DataFrame(rows)
+    df["county_geoid"] = df.county.map(county_geoid)
+    for county in sorted(df[df.county.notna() & df.county_geoid.isna()].county.unique()):
+        checks["tourism counties without a GEOID"].append({"county": county})
+    lines = df[df.level != "state total"]
+    states = df[df.level == "state total"].set_index("month")
+    for month in sorted(set(df.month)):
+        if month not in states.index:
+            checks["tourism months without a state total"].append({"month": month})
+            continue
+        disclosed = lines[lines.month == month][["taxable", "tax_due"]].sum()
+        state = states.loc[month]
+        if disclosed.taxable > state.taxable + CENTS * len(lines):
+            checks["tourism counties add up to more than the state"].append(
+                {"month": month, "counties": round(disclosed.taxable, 2), "state": state.taxable}
+            )
+    rated = lines.dropna(subset=["taxable", "tax_due"])
+    off = rated[(rated.tax_due - rated.taxable * TOURISM_RATE).abs()
+                > 0.01 + rated.taxable.abs() * 1e-4]  # fmt: skip
+    for r in off.itertuples():
+        checks["tourism tax due isn't 1.5% of taxable sales"].append(
+            {"month": r.month, "county": r.county, "code": r.code, "taxable": r.taxable,
+             "tax_due": r.tax_due, "page": r.page})  # fmt: skip
+    cols = [
+        "month",
+        "county",
+        "county_geoid",
+        "level",
+        "code",
+        "description",
+        "taxable",
+        "tax_due",
+        "suppressed",
+        "file",
+        "page",
+        "source_url",
+    ]
+    return df[cols], dict(checks)
+
+
+def build_city_tax_due(months: dict[str, str], read,
+                       city_taxes: pd.DataFrame | None) -> tuple[pd.DataFrame, dict]:  # fmt: skip
+    checks: dict[str, list] = defaultdict(list)
+    rows = []
+    for month, url in sorted(months.items()):
+        found, unread = parse.city_tax_due(read(month), month, f"{month}.pdf")
+        rows += [{**r, "source_url": url} for r in found]
+        checks["city tax due lines not read"] += unread
+    df = pd.DataFrame(rows)
+    df["city_geoid"] = df.city.map(place_geoid)
+    # the ten largest cities are in a table repeated at the top of each page (and not in
+    # the alphabetical list): keep one copy, after checking the copies agree
+    largest = df[df.listing == "largest"]
+    for (month, city), g in largest.groupby(["month", "city"]):
+        if g[["tax_due", "tax_due_year_before"]].nunique(dropna=False).max() > 1:
+            checks["city tax due: the largest cities' table differs between pages"].append(
+                {"month": month, "city": city, "tax_due": g.tax_due.tolist()}
+            )
+    df = pd.concat([largest.drop_duplicates(["month", "city"]), df[df.listing == "all"]],
+                   ignore_index=True).sort_values(["month", "city"])  # fmt: skip
+    dup = df[df.duplicated(["month", "city"], keep=False)]
+    for (month, city), _ in dup.groupby(["month", "city"]):
+        checks["city tax due: a city twice in a month"].append({"month": month, "city": city})
+    # the year before's figure against that month's own report: a revision since
+    once = df.drop_duplicates(["month", "city"], keep=False)
+    earlier = once[["month", "city", "tax_due"]].assign(
+        month=lambda d: (d.month.str[:4].astype(int) + 1).astype(str) + d.month.str[4:]
+    )
+    joined = once.dropna(subset=["tax_due_year_before"]).merge(
+        earlier, on=["month", "city"], suffixes=("", "_reported_then")
+    )
+    different = joined[(joined.tax_due_year_before - joined.tax_due_reported_then).abs() > CENTS]
+    checks["city tax due: the year before's figure against that month's report"].append(
+        {
+            "compared": len(joined),
+            "different": len(different),
+            "examples": different.head(5)[
+                ["month", "city", "tax_due_year_before", "tax_due_reported_then"]
+            ].to_dict("records"),
+        }
+    )
+    if city_taxes is not None:
+        totals = city_taxes[city_taxes.tax == "all"].set_index(["month", "city"]).tax_due
+        joined = df.join(
+            totals[~totals.index.duplicated(keep=False)].rename("workbook"),
+            on=["month", "city"],
+            how="inner",
+        )
+        differ = joined[(joined.tax_due - joined.workbook).abs() > CENTS]
+        checks["city tax due against the SIC workbook's city total"].append(
+            {"compared": len(joined), "different": len(differ),
+             "examples": differ.head(5)[["month", "city", "tax_due", "workbook"]
+                                        ].to_dict("records")})  # fmt: skip
+    cols = [
+        "month",
+        "city",
+        "city_geoid",
+        "tax_due",
+        "tax_due_year_before",
+        "percent_change",
+        "listing",
+        "file",
+        "page",
+        "source_url",
+    ]
+    return df[cols], dict(checks)
+
+
 def main() -> None:
     months = json.loads((RAW / "municipal-by-sic.json").read_text())
     tables, checks = build(months, lambda m: (RAW / "municipal-by-sic" / f"{m}.xlsx").read_bytes())
+    for kind, fn in (("tourism", build_tourism), ("city-tax-due", build_city_tax_due)):
+        listed = json.loads((RAW / f"{kind}.json").read_text())
+
+        def read(m, kind=kind):
+            return (RAW / kind / f"{m}.pdf").read_bytes()
+
+        if kind == "tourism":
+            table, more = fn(listed, read)
+        else:
+            table, more = fn(listed, read, tables["city_taxes"])
+        tables[kind.replace("-", "_")] = table
+        checks.update(more)
     BUILD.mkdir(parents=True, exist_ok=True)
     for name, df in tables.items():
         df.to_parquet(BUILD / f"{name}.parquet", index=False)
         print(f"{name}: {len(df):,} rows ({df.month.min()} to {df.month.max()})")
-    tables["city_taxes"].to_csv(BUILD / "city_taxes.csv", index=False)
+    for name in ("city_taxes", "tourism", "city_tax_due"):
+        tables[name].to_csv(BUILD / f"{name}.csv", index=False)
     (BUILD / "checks.json").write_text(json.dumps(checks, indent=1, default=str))
     for name, found in checks.items():
         print(f"  {name}: {len(found)}")

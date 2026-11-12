@@ -621,8 +621,21 @@ project = "sd-archive (pipelines/sales-tax)"
 grain = "aggregate"
 coverage = ["0400000US46"]
 geography = ["place"]
-period = "month (returns filed), January 2022 on"
+period = "month (returns filed): tax due January 2020 on; by tax and industry January 2022 on"
 measures = ["taxable sales", "tax due"]
 dimensions = ["tax (general, gross receipts)", "SIC division, major group and industry"]
 suppression = "N/A where fewer than three licenses report in a classification; totals include the suppressed amounts"
-source = "SD Department of Revenue, historical sales tax statistical reports: Municipal Taxable Sales per City by SIC Code (Excel)"
+source = "SD Department of Revenue, historical sales tax statistical reports: Municipal Taxable Sales per City by SIC Code (Excel), Municipal Tax Due per City (PDF)"
+
+[[dataset]]
+id = "tourism-tax"
+name = "Tourism tax: taxable sales and tax due by county, month and SIC industry"
+project = "sd-archive (pipelines/sales-tax)"
+grain = "aggregate"
+coverage = ["0400000US46"]
+geography = ["state", "county"]
+period = "month (returns filed), January 2020 on"
+measures = ["taxable sales", "tax due"]
+dimensions = ["SIC industry"]
+suppression = "N/A where fewer than three licenses report; grouped as Other, which the state total includes"
+source = "SD Department of Revenue, historical sales tax statistical reports: Tourism Tax Report (PDF)"

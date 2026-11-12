@@ -125,3 +125,109 @@ def read(content: bytes, month: str, file: str) -> list[dict]:
         else:
             raise LayoutChanged(f"{file} row {n}: unknown line {a!r}")
     return out
+
+
+# --- PDF reports ---------------------------------------------------------------------------
+
+
+def pdf_lines(content: bytes) -> list[tuple[int, str]]:
+    """(page number, line) for each line of a PDF's text, spaces closed up."""
+    import pypdfium2 as pdfium
+
+    doc = pdfium.PdfDocument(content)
+    try:
+        out = []
+        for i in range(len(doc)):
+            text = doc[i].get_textpage().get_text_bounded().replace("\r", "")
+            out += [(i + 1, " ".join(x.split())) for x in text.splitlines() if x.strip()]
+        return out
+    finally:
+        doc.close()
+
+
+AMOUNT = r"-?[\d,]+\.\d\d"
+RETURNS_FILED = re.compile(r"Returns Filed:? (?:in )?([A-Z][a-z]+ \d{4})")
+TOURISM_LINE = re.compile(rf"^(?:(?P<code>\d{{3,4}}) (?P<name>.+?)|(?P<other>Other)) "
+                          rf"(?P<taxable>{AMOUNT}|N/A) (?P<tax_due>{AMOUNT}|N/A)$")  # fmt: skip
+TOURISM_STATE = re.compile(rf"^Total for State (?P<taxable>{AMOUNT}) (?P<tax_due>{AMOUNT})$")
+COUNTY = re.compile(r"^(?P<county>[A-Z][A-Za-z .]+) County$")
+
+
+def _pdf_money(v: str) -> tuple[float | None, bool]:
+    return money(v)
+
+
+def tourism(content: bytes, month: str, file: str) -> tuple[list[dict], list[dict]]:
+    """The tourism tax report: each county's taxable sales and tax due by industry, "Other"
+    (suppressed where N/A), and the state's total. Also the lines with amounts that weren't
+    read."""
+    out, unread, county = [], [], None
+    for page, line in pdf_lines(content):
+        if m := RETURNS_FILED.search(line):
+            filed = m[1]
+            if _month(filed) != month:
+                raise LayoutChanged(f"{file}: returns filed {filed}, not {month}")
+            continue
+        if m := COUNTY.match(line):
+            county = m["county"]
+        elif m := TOURISM_STATE.match(line):
+            out.append({"month": month, "county": None, "level": "state total", "code": None,
+                        "description": None, "taxable": money(m["taxable"])[0],
+                        "tax_due": money(m["tax_due"])[0], "suppressed": False,
+                        "file": file, "page": page})  # fmt: skip
+        elif (m := TOURISM_LINE.match(line)) and county:
+            (t, ts), (d, ds) = money(m["taxable"]), money(m["tax_due"])
+            out.append({"month": month, "county": county,
+                        "level": "other" if m["other"] else "industry", "code": m["code"],
+                        "description": m["name"] or "Other", "taxable": t, "tax_due": d,
+                        "suppressed": ts or ds, "file": file, "page": page})  # fmt: skip
+        elif re.search(AMOUNT + r"$", line):
+            unread.append({"file": file, "page": page, "line": line})
+    return out, unread
+
+
+# a city, its tax due, and (unless it had none) the year before's and the change; a
+# negative amount can run into the next ("-5,499.10-398.68")
+CITY_DUE = re.compile(rf"(?P<city>[A-Z][A-Za-z.' -]*?) (?P<now>{AMOUNT})(?: ?(?P<before>{AMOUNT})"
+                      rf" ?(?P<change>-?[\d,]+\.\d+|N/A)?)?(?= [A-Z]|$)")  # fmt: skip
+CITY_DUE_TITLE = re.compile(r"Municipal Tax Due for Returns Filed in ([A-Z][a-z]+) ?(\d{4}) and "
+                            r"(\d{4})")  # fmt: skip
+
+
+def _month(text: str) -> str:
+    from datetime import datetime
+
+    return datetime.strptime(text, "%B %Y").strftime("%Y-%m")
+
+
+def city_tax_due(content: bytes, month: str, file: str) -> tuple[list[dict], list[dict]]:
+    """Each city's municipal tax due (general and gross receipts) for the month, and for the
+    same month a year before as this report gives it, with the percent change."""
+    out, unread, titled, listing = [], [], False, None
+    for page, line in pdf_lines(content):
+        if m := CITY_DUE_TITLE.search(line):
+            if _month(f"{m[1]} {m[2]}") != month:
+                raise LayoutChanged(f"{file}: returns filed {m[1]} {m[2]}, not {month}")
+            titled = True
+            continue
+        if line.startswith("CITY "):
+            # the ten largest cities first ("% Change"), then every city alphabetically
+            listing = "largest" if "% Change" in line else "all"
+            continue
+        if not titled or line.startswith(("Figures compiled", "The dollar amounts",
+                                          "These figures")):  # fmt: skip
+            continue
+        found = list(CITY_DUE.finditer(line))
+        if not found or "".join(x[0] for x in found).replace(" ", "") != line.replace(" ", ""):
+            unread.append({"file": file, "page": page, "line": line})
+            continue
+        for m in found:
+            out.append({"month": month, "city": m["city"].strip(), "listing": listing,
+                        "tax_due": money(m["now"])[0],
+                        "tax_due_year_before": money(m["before"])[0] if m["before"] else None,
+                        "percent_change": (None if m["change"] in (None, "N/A")
+                                           else float(m["change"].replace(",", ""))),
+                        "file": file, "page": page})  # fmt: skip
+    if not titled:
+        raise LayoutChanged(f"{file}: no 'Municipal Tax Due for Returns Filed in' title")
+    return out, unread

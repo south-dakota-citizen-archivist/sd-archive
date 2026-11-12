@@ -101,3 +101,60 @@ def test_a_total_that_doesnt_add_up_is_found():
         checks,
     )
     assert [(c["major_group"], c["column"]) for c in checks["x"]] == [("59", "taxable")]
+
+
+FIXTURES = Path(__file__).parent / "fixtures"
+
+
+def test_tourism():
+    rows, unread = parse.tourism((FIXTURES / "tourism-2020-01.pdf").read_bytes(), "2020-01", "x")
+    assert unread == []
+    aurora = [r for r in rows if r["county"] == "Aurora"]
+    assert (aurora[0]["code"], aurora[0]["taxable"], aurora[0]["tax_due"]) == (
+        "7011",
+        91929.93,
+        1378.96,
+    )
+    assert aurora[-1]["description"] == "Other" and aurora[-1]["suppressed"]
+    hunting = next(r for r in rows if r["code"] == "971")  # three-digit SIC codes
+    assert hunting["county"] == "Brown"
+    state = next(r for r in rows if r["level"] == "state total")
+    assert (state["taxable"], state["tax_due"]) == (56338338.11, 845077.72)
+    assert any(r["county"] == "Out of State" for r in rows)
+
+
+def test_tourism_build():
+    table, checks = build.build_tourism(
+        {"2020-01": "https://example/t.pdf"},
+        lambda m: (FIXTURES / "tourism-2020-01.pdf").read_bytes(),
+    )
+    assert "tourism tax due isn't 1.5% of taxable sales" not in checks
+    assert "tourism counties add up to more than the state" not in checks
+    assert checks["tourism counties without a GEOID"] == [{"county": "Out of State"}]
+    assert table[table.county == "Aurora"].county_geoid.iloc[0] == "0500000US46003"
+
+
+def test_city_tax_due():
+    rows, unread = parse.city_tax_due((FIXTURES / "city-tax-due-2020-01.pdf").read_bytes(),
+                                      "2020-01", "x")  # fmt: skip
+    assert unread == []
+    sioux_falls = next(r for r in rows if r["city"] == "Sioux Falls")
+    assert (sioux_falls["tax_due"], sioux_falls["tax_due_year_before"],
+            sioux_falls["percent_change"], sioux_falls["listing"]) == (
+        14533425.17, 13516240.79, 7.53, "largest")  # fmt: skip
+    white = next(r for r in rows if r["city"] == "White")  # "-5,499.10-398.68"
+    assert (white["tax_due_year_before"], white["percent_change"]) == (-5499.10, -398.68)
+    rows, _ = parse.city_tax_due((FIXTURES / "city-tax-due-2020-02.pdf").read_bytes(),
+                                 "2020-02", "x")  # fmt: skip
+    chip = next(r for r in rows if r["city"] == "Buffalo Chip")  # nothing the year before
+    assert chip["tax_due"] == 3825.15 and chip["tax_due_year_before"] is None
+
+
+def test_city_tax_due_build():
+    files = {"2020-01": "city-tax-due-2020-01.pdf", "2020-02": "city-tax-due-2020-02.pdf"}
+    table, checks = build.build_city_tax_due(files, lambda m: (FIXTURES / files[m]).read_bytes(),
+                                             None)  # fmt: skip
+    assert not table.duplicated(["month", "city"]).any()  # the largest cities' table, once
+    assert "city tax due: the largest cities' table differs between pages" not in checks
+    assert table[(table.month == "2020-01")].city.nunique() == len(table[table.month == "2020-01"])
+    assert len(table[table.month == "2020-01"]) > 250
