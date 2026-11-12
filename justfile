@@ -79,6 +79,11 @@ property-tax:
     uv run python pipelines/property-tax/fetch.py
     uv run python pipelines/property-tax/build.py
 
+# Municipal sales tax by city and SIC code: fetch the Department of Revenue's monthly workbooks, build the tables
+sales-tax:
+    uv run python pipelines/sales-tax/fetch.py
+    uv run python pipelines/sales-tax/build.py
+
 # Build the motor vehicle tables and replace them on their GitHub release
 publish-motor-vehicles: motor-vehicles
     cd .cache/motor-vehicles/build && for f in annual.csv annual.parquet monthly.csv monthly.parquet; do cp "$f" "motor-vehicles-$f"; done

@@ -613,3 +613,16 @@ measures = ["taxable valuation", "levy (dollars per $1,000)", "tax"]
 dimensions = ["district type", "fund", "property class", "taxing entity (PT-74)"]
 source = "SD Department of Revenue: property tax data page (sdproptax.info/DataLink/Data) recaps (Excel) and PT-74 (CSV); Property Tax Statistical Reports (PDF)"
 notes = "The older recaps give the payable year, the state system's files the assessment year; no Excel recap covers payable 2023 (the 2023 statistical report does). The 2023–2024 school recaps aren't broken down by fund and total about half of other years' school taxes (close to the General fund alone); don't compare them with other years' totals."
+
+[[dataset]]
+id = "municipal-sales-tax"
+name = "Municipal sales tax: taxable sales and tax due by city, month and SIC industry"
+project = "sd-archive (pipelines/sales-tax)"
+grain = "aggregate"
+coverage = ["0400000US46"]
+geography = ["place"]
+period = "month (returns filed), January 2022 on"
+measures = ["taxable sales", "tax due"]
+dimensions = ["tax (general, gross receipts)", "SIC division, major group and industry"]
+suppression = "N/A where fewer than three licenses report in a classification; totals include the suppressed amounts"
+source = "SD Department of Revenue, historical sales tax statistical reports: Municipal Taxable Sales per City by SIC Code (Excel)"
