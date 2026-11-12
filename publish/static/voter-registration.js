@@ -283,20 +283,40 @@
   });
   $("statewide").addEventListener("click", () => choose(null));
 
-  document.querySelectorAll(".map path").forEach((path) => {
+  // Outlines for the hovered and selected counties, drawn over the map and ignoring the
+  // pointer, so the counties themselves never move (moving one under the pointer would
+  // swallow the click)
+  const mapSvg = document.querySelector(".map svg");
+  const makeRing = (cls) => {
+    const r = document.createElementNS(SVGNS, "path");
+    r.setAttribute("class", `ring ${cls}`);
+    r.setAttribute("aria-hidden", "true");
+    r.style.display = "none";
+    return r;
+  };
+  const hoverRing = makeRing("ring-hover"), selectedRing = makeRing("ring-selected");
+  function ring(r, path) {
+    if (!mapSvg) return;
+    if (!path) { r.style.display = "none"; return; }
+    r.setAttribute("d", path.getAttribute("d"));
+    r.style.display = "";
+  }
+
+  document.querySelectorAll(".map path[data-geoid]").forEach((path) => {
     path.setAttribute("tabindex", "0");
     path.setAttribute("role", "button");
     path.setAttribute("aria-label", `${path.dataset.name} County`);
     path.addEventListener("click", () => choose(path.dataset.geoid));
-    path.addEventListener("pointerenter", () => {
-      const selected = path.parentNode.querySelector("path.selected");
-      path.parentNode.append(path);
-      if (selected && selected !== path) path.parentNode.append(selected);
-    });
+    path.addEventListener("pointerenter", () => ring(hoverRing, path));
+    path.addEventListener("pointerleave", () => ring(hoverRing, null));
+    path.addEventListener("focus", () => ring(hoverRing, path));
+    path.addEventListener("blur", () => ring(hoverRing, null));
     path.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(path.dataset.geoid); }
     });
   });
+
+  if (mapSvg) mapSvg.append(hoverRing, selectedRing);
 
   document.querySelectorAll(".segmented button").forEach((b) => {
     b.addEventListener("click", () => {
@@ -324,12 +344,14 @@
     $("chart-title").textContent = `${name}: ${state.mode === "percent"
       ? "share of active voters by party" : "active voters by party"}`;
     $("map-title").textContent = state.place ? `${name} selected` : "Choose a county";
-    document.querySelectorAll(".map path").forEach((p) => {
+    let chosen = null;
+    document.querySelectorAll(".map path[data-geoid]").forEach((p) => {
       const selected = p.dataset.geoid === state.place;
       p.classList.toggle("selected", selected);
       p.setAttribute("aria-pressed", selected);
-      if (selected) p.parentNode.append(p); // on top, so its outline isn't under a neighbor's
+      if (selected) chosen = p;
     });
+    ring(selectedRing, chosen);
     renderTiles(rows);
     renderChart(rows);
     renderTable(rows);

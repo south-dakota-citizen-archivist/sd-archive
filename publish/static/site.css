@@ -176,8 +176,11 @@ h2 { font-size: 20px; margin: 40px 0 12px; }
   vector-effect: non-scaling-stroke; stroke-linejoin: round;
   cursor: pointer; transition: fill 120ms;
 }
-.map path:hover, .map path:focus-visible { fill: var(--county-hover); stroke: var(--text-muted); outline: none; }
-.map path.selected, .map path.selected:hover { fill: var(--county-selected); stroke: var(--county-outline); stroke-width: 2; }
+.map path:hover, .map path:focus-visible { fill: var(--county-hover); outline: none; }
+.map path.selected { fill: var(--county-selected); }
+.map path.ring { fill: none; pointer-events: none; cursor: default; }
+.map path.ring-hover { stroke: var(--text-muted); stroke-width: 1; }
+.map path.ring-selected { stroke: var(--county-outline); stroke-width: 2; }
 
 /* table */
 .table-wrap { overflow-x: auto; }
