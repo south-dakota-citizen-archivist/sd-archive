@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block main %}
+<h1>{{ site_name }}</h1>
+<p class="dek">Public records about South Dakota and its places, gathered from the state and local
+agencies that publish them, checked, and kept with the documents they come from.</p>
+
+<h2>Data</h2>
+<ul class="datasets">
+  {% for page in pages %}
+  <li class="card">
+    <h3><a href="{{ root }}{{ page.path }}">{{ page.title }}</a></h3>
+    <p class="small" style="margin:0 0 10px">{{ page.summary }}</p>
+    <dl class="facts">
+      <dt>Where it comes from</dt><dd>{{ page.source|safe }}</dd>
+      <dt>Covers</dt><dd>{{ page.covers }}</dd>
+      <dt>Latest</dt><dd>{{ page.latest }}</dd>
+    </dl>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

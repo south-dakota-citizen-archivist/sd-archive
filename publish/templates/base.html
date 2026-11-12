@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site_name }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ site_description }}{% endblock %}">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23141413'/%3E%3Cpath d='M4 11h8M4 8h8M4 5h5' stroke='%23fcfcfb' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="{{ root }}static/site.css?v={{ build_id }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <header class="site-header"><a href="{{ root }}">{{ site_name }}</a></header>
+  <main id="main">
+    {% block main %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <p>Public records about South Dakota, gathered from the agencies that publish them and kept with
+    their sources. Every figure links to the report it comes from.</p>
+    <p class="muted">Built {{ built }} · <a href="https://github.com/south-dakota-citizen-archivist/sd-archive">Source code</a></p>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

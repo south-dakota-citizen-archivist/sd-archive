@@ -1,0 +1,732 @@
+{
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty12.2.2015.pdf": {
+  "report_date": "2015-12-02",
+  "link_date": "2015-12-02",
+  "link_text": "December 2, 2015",
+  "read": "by hand: the report's layout isn't one parse.py reads"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty1.8.2016.pdf": {
+  "report_date": "2016-01-08",
+  "link_date": "2016-01-08",
+  "link_text": "January 8, 2016",
+  "read": "by hand: the report's layout isn't one parse.py reads"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty02.01.2016.pdf": {
+  "report_date": "2016-02-01",
+  "link_date": "2016-02-01",
+  "link_text": "February 1, 2016",
+  "read": "by hand: the report's layout isn't one parse.py reads"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty3.2.2016.pdf": {
+  "report_date": "2016-03-02",
+  "link_date": "2016-03-02",
+  "link_text": "March 2, 2016",
+  "read": "by hand: the report's layout isn't one parse.py reads"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty4.6.2016.pdf": {
+  "report_date": "2016-04-06",
+  "link_date": "2016-04-06",
+  "link_text": "April 6, 2016"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty05.02.2016.pdf": {
+  "report_date": "2016-05-02",
+  "link_date": "2016-05-02",
+  "link_text": "May 2, 2016",
+  "read": "by hand: the report's layout isn't one parse.py reads"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty06.01.2016.pdf": {
+  "report_date": "2016-06-01",
+  "link_date": "2016-06-01",
+  "link_text": "June 1, 2016",
+  "read": "by hand: the report's layout isn't one parse.py reads"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCountybyParty_06.07.2016.pdf": {
+  "report_date": "2016-06-07",
+  "link_date": "2016-06-07",
+  "link_text": "Official Voter Registration Numbers for the June 7, 2016 Primary Election",
+  "read": "by hand: the report's layout isn't one parse.py reads"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty07.05.2016.pdf": {
+  "report_date": "2016-07-05",
+  "link_date": "2016-07-05",
+  "link_text": "July 5, 2016"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty8.04.2016.pdf": {
+  "report_date": "2016-08-04",
+  "link_date": "2016-08-04",
+  "link_text": "August 4, 2016"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty9.01.2016.pdf": {
+  "report_date": "2016-09-01",
+  "link_date": "2016-09-01",
+  "link_text": "September 1, 2016"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty10.04.2016.pdf": {
+  "report_date": "2016-10-04",
+  "link_date": "2016-10-04",
+  "link_text": "October 4, 2016"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty11.01.2016.pdf": {
+  "report_date": "2016-11-01",
+  "link_date": "2016-11-01",
+  "link_text": "November 1, 2016"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCountybyParty_11.8.2016.pdf": {
+  "report_date": "2016-11-08",
+  "link_date": "2016-11-08",
+  "link_text": "Official Voter Registration Numbers for the November 8, 2016 General Election"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty12.1.2016.pdf": {
+  "report_date": "2016-12-01",
+  "link_date": "2016-12-01",
+  "link_text": "December 1, 2016",
+  "read": "by hand: the report's layout isn't one parse.py reads"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_1.3.2017.pdf": {
+  "report_date": "2017-01-03",
+  "link_date": "2017-01-03",
+  "link_text": "January 3, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_2.1.2017.pdf": {
+  "report_date": "2017-02-01",
+  "link_date": "2017-02-01",
+  "link_text": "February 1, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_3.1.2017.pdf": {
+  "report_date": "2017-03-01",
+  "link_date": "2017-03-01",
+  "link_text": "March 1, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty4.10.2017.pdf": {
+  "report_date": "2017-04-10",
+  "link_date": "2017-04-10",
+  "link_text": "April 10, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_5.1.2017.pdf": {
+  "report_date": "2017-05-01",
+  "link_date": "2017-05-01",
+  "link_text": "May 1, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_6.1.2017.pdf": {
+  "report_date": "2017-06-01",
+  "link_date": "2017-06-01",
+  "link_text": "June 1, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_7.5.2017.pdf": {
+  "report_date": "2017-07-05",
+  "link_date": "2017-07-05",
+  "link_text": "July 5, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_8.1.2017.pdf": {
+  "report_date": "2017-08-01",
+  "link_date": "2017-08-01",
+  "link_text": "August 1, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_9.1.2017.pdf": {
+  "report_date": "2017-09-01",
+  "link_date": "2017-09-01",
+  "link_text": "September 1, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_10.03.2017.pdf": {
+  "report_date": "2017-10-03",
+  "link_date": "2017-10-03",
+  "link_text": "October 3, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.1.2017.pdf": {
+  "report_date": "2017-11-01",
+  "link_date": "2017-11-01",
+  "link_text": "November 1, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_12.1.2017.pdf": {
+  "report_date": "2017-12-01",
+  "link_date": "2017-12-01",
+  "link_text": "December 1, 2017"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_1.2.2018.pdf": {
+  "report_date": "2018-01-02",
+  "link_date": "2018-01-02",
+  "link_text": "January 2, 2018"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_2.1.2018.pdf": {
+  "report_date": "2018-02-01",
+  "link_date": "2018-02-01",
+  "link_text": "February 1, 2018"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_3.1.2018.pdf": {
+  "report_date": "2018-03-01",
+  "link_date": "2018-03-01",
+  "link_text": "March 1, 2018"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_4.3.2018.pdf": {
+  "report_date": "2018-04-03",
+  "link_date": "2018-04-03",
+  "link_text": "April 3, 2018"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_5.1.2018.pdf": {
+  "report_date": "2018-05-01",
+  "link_date": "2018-05-01",
+  "link_text": "May 1, 2018",
+  "read": "by hand: the PDF's text layer is garbled in places"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_6.1.2018.pdf": {
+  "report_date": "2018-06-01",
+  "link_date": "2018-06-01",
+  "link_text": "June 1, 2018"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_06.05.2018_PrimaryElection.pdf": {
+  "report_date": "2018-06-05",
+  "link_date": "2018-06-05",
+  "link_text": "June 5, 2018 - Primary Election"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_7.2.2018.pdf": {
+  "report_date": "2018-07-02",
+  "link_date": "2018-07-02",
+  "link_text": "July 2, 2018"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_08.1.2018.pdf": {
+  "report_date": "2018-08-01",
+  "link_date": "2018-08-01",
+  "link_text": "August 1, 2018"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_09.4.2018.pdf": {
+  "report_date": "2018-09-04",
+  "link_date": "2018-09-04",
+  "link_text": "September 4, 2018"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_10.2.2018.pdf": {
+  "report_date": "2018-10-02",
+  "link_date": "2018-10-02",
+  "link_text": "October 2, 2018",
+  "read": "by hand: the report doesn't add up: Bennett County's parties total 1,826 against 1,827 active voters; the snapshot keeps the report's figures"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.2.2018.pdf": {
+  "report_date": "2018-11-02",
+  "link_date": "2018-11-02",
+  "link_text": "November 2, 2018"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.6.2018.pdf": {
+  "report_date": "2018-11-06",
+  "link_date": "2018-11-06",
+  "link_text": "Official Voter Registration Numbers for the November 6, 2018 General Election"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.20.2018.pdf": {
+  "report_date": "2018-11-20",
+  "link_date": "2018-11-14",
+  "link_text": "Pursuant to SDCL 12-5-1.5 and 12-1-3, the Constitution Party lost party status on November 14, 2018."
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_12.3.2018.pdf": {
+  "report_date": "2018-12-03",
+  "link_date": "2018-12-03",
+  "link_text": "December 3, 2018"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_1.2.2019.pdf": {
+  "report_date": "2019-01-02",
+  "link_date": "2019-01-02",
+  "link_text": "January 2, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_2.7.2019.pdf": {
+  "report_date": "2019-02-07",
+  "link_date": "2019-02-07",
+  "link_text": "February 7, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_3.1.2019.pdf": {
+  "report_date": "2019-03-01",
+  "link_date": "2019-03-01",
+  "link_text": "March 1, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_4.1.2019.pdf": {
+  "report_date": "2019-04-01",
+  "link_date": "2019-04-01",
+  "link_text": "April 1, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_5.1.2019.pdf": {
+  "report_date": "2019-05-01",
+  "link_date": "2019-05-01",
+  "link_text": "May 1, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_6.3.2019.pdf": {
+  "report_date": "2019-06-03",
+  "link_date": "2019-06-03",
+  "link_text": "June 3, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_7.1.2019.pdf": {
+  "report_date": "2019-07-01",
+  "link_date": "2019-07-01",
+  "link_text": "July 1, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_8.1.2019.pdf": {
+  "report_date": "2019-08-01",
+  "link_date": "2019-08-01",
+  "link_text": "August 1, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_9.3.2019.pdf": {
+  "report_date": "2019-09-03",
+  "link_date": "2019-09-03",
+  "link_text": "September 3, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_10.1.2019.pdf": {
+  "report_date": "2019-10-01",
+  "link_date": "2019-10-01",
+  "link_text": "October 1, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.1.2019.pdf": {
+  "report_date": "2019-11-01",
+  "link_date": "2019-11-01",
+  "link_text": "November 1, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_12.2.2019.pdf": {
+  "report_date": "2019-12-02",
+  "link_date": "2019-12-02",
+  "link_text": "December 2, 2019"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_1.2.2020.pdf": {
+  "report_date": "2020-01-02",
+  "link_date": "2020-01-02",
+  "link_text": "January 2, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_2.3.2020.pdf": {
+  "report_date": "2020-02-03",
+  "link_date": "2020-02-03",
+  "link_text": "February 3, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_3.1.2020.pdf": {
+  "report_date": "2020-03-01",
+  "link_date": "2020-03-01",
+  "link_text": "March 1, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_4.1.2020.pdf": {
+  "report_date": "2020-04-01",
+  "link_date": "2020-04-01",
+  "link_text": "April 1, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_5.1.2020.pdf": {
+  "report_date": "2020-05-01",
+  "link_date": "2020-05-01",
+  "link_text": "May 1, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_6.1.2020.pdf": {
+  "report_date": "2020-06-01",
+  "link_date": "2020-06-01",
+  "link_text": "June 1, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_6.2.2020.pdf": {
+  "report_date": "2020-06-02",
+  "link_date": "2020-06-02",
+  "link_text": "June 2, 2020 - Primary Election"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_7.1.2020.pdf": {
+  "report_date": "2020-07-01",
+  "link_date": "2020-07-01",
+  "link_text": "July 1, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_8.3.2020.pdf": {
+  "report_date": "2020-08-03",
+  "link_date": "2020-08-03",
+  "link_text": "August 3, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_9.1.2020.pdf": {
+  "report_date": "2020-09-01",
+  "link_date": "2020-09-01",
+  "link_text": "September 1, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_10.1.2020.pdf": {
+  "report_date": "2020-10-01",
+  "link_date": "2020-10-01",
+  "link_text": "October 1, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.2.2020.pdf": {
+  "report_date": "2020-11-02",
+  "link_date": "2020-11-02",
+  "link_text": "November 2, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.3.2020.pdf": {
+  "report_date": "2020-11-03",
+  "link_date": "2020-11-03",
+  "link_text": "November 3, 2020 - General Election"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_12.1.2020.pdf": {
+  "report_date": "2020-12-01",
+  "link_date": "2020-12-01",
+  "link_text": "December 1, 2020"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_1.5.2021.pdf": {
+  "report_date": "2021-01-05",
+  "link_date": "2021-01-05",
+  "link_text": "January 5, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_2.1.2021.pdf": {
+  "report_date": "2021-02-01",
+  "link_date": "2021-02-01",
+  "link_text": "February 1, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_3.1.2021.pdf": {
+  "report_date": "2021-03-01",
+  "link_date": "2021-03-01",
+  "link_text": "March 1, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_4.1.2021.pdf": {
+  "report_date": "2021-04-01",
+  "link_date": "2021-04-01",
+  "link_text": "April 1, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_5.3.2021.pdf": {
+  "report_date": "2021-05-03",
+  "link_date": "2021-05-03",
+  "link_text": "May 3, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_6.1.2021.pdf": {
+  "report_date": "2021-06-01",
+  "link_date": "2021-06-01",
+  "link_text": "June 1, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_7.1.2021.pdf": {
+  "report_date": "2021-07-01",
+  "link_date": "2021-07-01",
+  "link_text": "July 1, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_8.2.2021.pdf": {
+  "report_date": "2021-08-02",
+  "link_date": "2021-08-02",
+  "link_text": "August 2, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_9.2.2021.pdf": {
+  "report_date": "2021-09-02",
+  "link_date": "2021-09-02",
+  "link_text": "September 2, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_10.1.2021.pdf": {
+  "report_date": "2021-10-01",
+  "link_date": "2021-10-01",
+  "link_text": "October 1, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.1.2021.pdf": {
+  "report_date": "2021-11-01",
+  "link_date": "2021-11-01",
+  "link_text": "November 1, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersbyCounty20211201.pdf": {
+  "report_date": "2021-12-01",
+  "link_date": "2021-12-01",
+  "link_text": "December 1, 2021"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersbyCounty20220103.pdf": {
+  "report_date": "2022-01-03",
+  "link_date": "2022-01-03",
+  "link_text": "January 3, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersbyCounty20220202.pdf": {
+  "report_date": "2022-02-01",
+  "link_date": "2022-02-01",
+  "link_text": "February 1, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20220301.pdf": {
+  "report_date": "2022-03-01",
+  "link_date": "2022-03-01",
+  "link_text": "March 1, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20220401.pdf": {
+  "report_date": "2022-04-01",
+  "link_date": "2022-04-01",
+  "link_text": "April 1, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersbyCounty20220502.pdf": {
+  "report_date": "2022-05-02",
+  "link_date": "2022-05-02",
+  "link_text": "May 2, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20220601.pdf": {
+  "report_date": "2022-06-01",
+  "link_date": "2022-06-01",
+  "link_text": "June 1, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersbyCounty20220607.pdf": {
+  "report_date": "2022-06-07",
+  "link_date": "2022-06-07",
+  "link_text": "June 7, 2022 - Primary Election"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20220701.pdf": {
+  "report_date": "2022-07-01",
+  "link_date": "2022-07-01",
+  "link_text": "July 1, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20220801.pdf": {
+  "report_date": "2022-08-01",
+  "link_date": "2022-08-01",
+  "link_text": "August 1, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20220901.pdf": {
+  "report_date": "2022-09-01",
+  "link_date": "2022-09-01",
+  "link_text": "September 1, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20221001.pdf": {
+  "report_date": "2022-10-03",
+  "link_date": "2022-10-03",
+  "link_text": "October 3, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20221101.pdf": {
+  "report_date": "2022-11-01",
+  "link_date": "2022-11-01",
+  "link_text": "November 1, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20221108.pdf": {
+  "report_date": "2022-11-08",
+  "link_date": "2022-11-08",
+  "link_text": "November 8, 2022 - General Election"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20221201.pdf": {
+  "report_date": "2022-12-01",
+  "link_date": "2022-12-01",
+  "link_text": "December 1, 2022"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty20230103.pdf": {
+  "report_date": "2023-01-03",
+  "link_date": "2023-01-03",
+  "link_text": "January 3, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_2.1.2023.pdf": {
+  "report_date": "2023-02-01",
+  "link_date": "2023-02-01",
+  "link_text": "February 1, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_3.1.2023.pdf": {
+  "report_date": "2023-03-01",
+  "link_date": "2023-03-01",
+  "link_text": "March 1, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_4.3.2023.pdf": {
+  "report_date": "2023-04-03",
+  "link_date": "2023-04-03",
+  "link_text": "April 3, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty%205.1.2023.pdf": {
+  "report_date": "2023-05-01",
+  "link_date": "2023-05-01",
+  "link_text": "May 1, 2023"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/assets/StatewideVotersByCounty_6.1.2023.pdf": {
+  "report_date": "2023-06-01",
+  "link_date": "2023-06-01",
+  "link_text": "June 1, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_7.5.2023.pdf": {
+  "report_date": "2023-07-05",
+  "link_date": "2023-07-05",
+  "link_text": "July 5, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty8.1.2023.pdf": {
+  "report_date": "2023-08-01",
+  "link_date": "2023-08-01",
+  "link_text": "August 1, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_9.1.2023.pdf": {
+  "report_date": "2023-09-01",
+  "link_date": "2023-09-01",
+  "link_text": "September 1, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_10.2.2023.pdf": {
+  "report_date": "2023-10-02",
+  "link_date": "2023-10-02",
+  "link_text": "October 2, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.1.2023.pdf": {
+  "report_date": "2023-11-01",
+  "link_date": "2023-11-01",
+  "link_text": "November 1, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_12.1.2023.pdf": {
+  "report_date": "2023-12-01",
+  "link_date": "2023-12-01",
+  "link_text": "December 1, 2023"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_1.2.2024.pdf": {
+  "report_date": "2024-01-02",
+  "link_date": "2024-01-02",
+  "link_text": "January 2, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_2.1.2024.pdf": {
+  "report_date": "2024-02-01",
+  "link_date": "2024-02-01",
+  "link_text": "February 1, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_3.1.2024.pdf": {
+  "report_date": "2024-03-01",
+  "link_date": "2024-03-01",
+  "link_text": "March 1, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_4.2.2024.pdf": {
+  "report_date": "2024-04-02",
+  "link_date": "2024-04-02",
+  "link_text": "April 2, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_5.1.2024.pdf": {
+  "report_date": "2024-05-01",
+  "link_date": "2024-05-01",
+  "link_text": "May 1, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_6.3.2024.pdf": {
+  "report_date": "2024-06-03",
+  "link_date": "2024-06-03",
+  "link_text": "June 3, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_6.4.2024.pdf": {
+  "report_date": "2024-06-04",
+  "link_date": "2024-06-04",
+  "link_text": "June 4, 2024 - Primary Election"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_7.1.2024.pdf": {
+  "report_date": "2024-07-01",
+  "link_date": "2024-07-01",
+  "link_text": "July 1, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_8.1.2024.pdf": {
+  "report_date": "2024-08-01",
+  "link_date": "2024-08-01",
+  "link_text": "August 1, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_9.3.2024.pdf": {
+  "report_date": "2024-09-03",
+  "link_date": "2024-09-03",
+  "link_text": "September 3, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_10.1.2024.pdf": {
+  "report_date": "2024-10-01",
+  "link_date": "2024-10-01",
+  "link_text": "October 1, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.1.2024.pdf": {
+  "report_date": "2024-11-01",
+  "link_date": "2024-11-01",
+  "link_text": "November 1, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.5.2024.pdf": {
+  "report_date": "2024-11-05",
+  "link_date": "2024-11-05",
+  "link_text": "November 5, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_12.2.2024.pdf": {
+  "report_date": "2024-12-02",
+  "link_date": "2024-12-02",
+  "link_text": "December 2, 2024"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_1.2.2025.pdf": {
+  "report_date": "2025-01-02",
+  "link_date": "2025-01-02",
+  "link_text": "January 2, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_2.3.2025.pdf": {
+  "report_date": "2025-02-03",
+  "link_date": "2025-02-03",
+  "link_text": "February 3, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_3.3.2025.pdf": {
+  "report_date": "2025-03-03",
+  "link_date": "2025-03-03",
+  "link_text": "March 3, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_4.1.2025.pdf": {
+  "report_date": "2025-04-01",
+  "link_date": "2025-04-01",
+  "link_text": "April 1, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_5.1.2025.pdf": {
+  "report_date": "2025-05-01",
+  "link_date": "2025-05-01",
+  "link_text": "May 1, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_6.2.2025.pdf": {
+  "report_date": "2025-06-02",
+  "link_date": "2025-06-02",
+  "link_text": "June 2, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_7.1.2025.pdf": {
+  "report_date": "2025-07-01",
+  "link_date": "2025-07-01",
+  "link_text": "July 1, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_8.1.2025.pdf": {
+  "report_date": "2025-08-01",
+  "link_date": "2025-08-01",
+  "link_text": "August 1, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_9.2.2025.pdf": {
+  "report_date": "2025-09-02",
+  "link_date": "2025-09-02",
+  "link_text": "September 2, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_10.1.2025.pdf": {
+  "report_date": "2025-10-01",
+  "link_date": "2025-10-01",
+  "link_text": "October 1, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_11.3.2025.pdf": {
+  "report_date": "2025-11-03",
+  "link_date": "2025-11-03",
+  "link_text": "November 3, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_12.1.2025.pdf": {
+  "report_date": "2025-12-01",
+  "link_date": "2025-12-01",
+  "link_text": "December 1, 2025"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_1.2.2026.pdf": {
+  "report_date": "2026-01-02",
+  "link_date": "2026-01-02",
+  "link_text": "January 2, 2026"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_2.2.2026.pdf": {
+  "report_date": "2026-02-02",
+  "link_date": "2026-02-02",
+  "link_text": "February 2, 2026"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_3.2.2026.pdf": {
+  "report_date": "2026-03-02",
+  "link_date": "2026-03-02",
+  "link_text": "March 2, 2026"
+ },
+ "https://sdsos.gov/elections-voting/assets/Archive/StatewideVoterRegistrationTotals/Archive/Prior%20to%202026/StatewideVotersByCounty_4.1.2026.pdf": {
+  "report_date": "2026-04-01",
+  "link_date": "2026-04-01",
+  "link_text": "April 1, 2026"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/2026%20Voter%20Registration/StatewideVotersByCounty_5.1.2026.pdf": {
+  "report_date": "2026-05-01",
+  "link_date": "2026-05-01",
+  "link_text": "May 1, 2026"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/2026%20Voter%20Registration/StatewideVotersByCounty_6.1.2026.pdf": {
+  "report_date": "2026-06-01",
+  "link_date": "2026-06-01",
+  "link_text": "June 1, 2026"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/2026%20Voter%20Registration/StatewideVotersByCounty_6.2.2026.pdf": {
+  "report_date": "2026-06-02",
+  "link_date": "2026-06-02",
+  "link_text": "June 2, 2026 Primary Election"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/2026%20Voter%20Registration/StatewideVotersByCounty_7.1.2026.pdf": {
+  "report_date": "2026-07-01",
+  "link_date": "2026-07-01",
+  "link_text": "July 1, 2026"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/2026%20Voter%20Registration/StatewideVotersByCounty_7.28.2026.pdf": {
+  "report_date": "2026-07-28",
+  "link_date": "2026-07-28",
+  "link_text": "July 28, 2026"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/2026%20Voter%20Registration/StatewideVotersByCounty8.1.26.pdf": {
+  "report_date": "2026-07-31",
+  "link_date": "2026-08-01",
+  "link_text": "August 1, 2026"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/2026%20Voter%20Registration/StatewideVotersByCounty_9.1.2026.pdf": {
+  "report_date": "2026-09-01",
+  "link_date": "2026-09-01",
+  "link_text": "September 1, 2026"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/2026%20Voter%20Registration/StatewideVotersByCounty_10.2.2026.pdf": {
+  "report_date": "2026-10-02",
+  "link_date": "2026-10-02",
+  "link_text": "October 2, 2026"
+ }
+}

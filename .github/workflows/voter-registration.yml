@@ -1,0 +1,99 @@
+name: Voter registration
+
+# Daily: look for a new Secretary of State report. A new one is read and checked; one that
+# fails a check fails the run (nothing is published). A new report's snapshot is committed, its
+# PDF and the rebuilt tables go on their releases, and the site is rebuilt and pushed to the
+# org's GitHub Pages repo. A change to the pipeline or the site also rebuilds and publishes.
+
+on:
+  schedule:
+    - cron: "17 12 * * *"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Rebuild and publish the site even without a new report
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths:
+      - "publish/**"
+      - "pipelines/voter-registration/**"
+      - ".github/workflows/voter-registration.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voter-registration
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RAW: .cache/voter-registration/raw/pdfs
+      BUILD: .cache/voter-registration/build
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Install
+        run: uv sync --locked
+
+      - name: Look for new reports
+        id: fetch
+        run: |
+          uv run python pipelines/voter-registration/fetch.py | tee fetch.log
+          echo "added=$(sed -n 's/^added: //p' fetch.log)" >> "$GITHUB_OUTPUT"
+
+      - name: Build the tables
+        run: uv run python pipelines/voter-registration/build.py
+
+      - name: Keep the new reports
+        if: steps.fetch.outputs.added != 'none'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pipelines/voter-registration/snapshots pipelines/voter-registration/sources.json
+          git commit -m "Voter registration: ${{ steps.fetch.outputs.added }}"
+          git pull --rebase
+          git push
+          for date in $(echo "${{ steps.fetch.outputs.added }}" | tr ',' ' '); do
+            gh release upload voter-registration-sources "$RAW/$date.pdf" --clobber
+          done
+          gh release upload voter-registration-data "$BUILD/registration.csv" \
+            "$BUILD/registration.parquet" "$BUILD/registration-simplified.csv" \
+            "$BUILD/registration-simplified.parquet" --clobber
+
+      - name: Build the site
+        if: >-
+          steps.fetch.outputs.added != 'none' || github.event_name == 'push'
+          || inputs.publish
+        run: uv run python publish/build.py --out _site
+
+      - name: Publish the site
+        if: >-
+          steps.fetch.outputs.added != 'none' || github.event_name == 'push'
+          || inputs.publish
+        env:
+          DEPLOY_KEY: ${{ secrets.PAGES_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+          git clone --depth 1 \
+            git@github.com:south-dakota-citizen-archivist/south-dakota-citizen-archivist.github.io.git hub
+          rsync -a --delete --exclude .git _site/ hub/
+          cd hub
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "nothing changed"; exit 0; fi
+          git commit -m "Build from sd-archive ${GITHUB_SHA::7}"
+          git push

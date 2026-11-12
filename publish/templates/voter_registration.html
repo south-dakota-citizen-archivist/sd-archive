@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}South Dakota voter registration by party · {{ site_name }}{% endblock %}
+{% block description %}Registered voters by party in South Dakota and each of its counties, from the Secretary of State's reports, {{ first_year }} to {{ latest_label }}.{% endblock %}
+{% block main %}
+<p class="small muted" style="margin:0"><a href="{{ root }}">Data</a> / Voter registration</p>
+<h1>South Dakota voter registration by party</h1>
+<p class="dek">Registered voters by party, statewide and in each county, from {{ first_year }} to
+{{ latest_label }}, from the Secretary of State's reports. Pick a county to see its own.</p>
+
+<div class="tiles" id="tiles" aria-live="polite"></div>
+
+<div class="controls">
+  <div class="field">
+    <label for="county-input" id="county-label">County</label>
+    <div class="combo">
+      <input id="county-input" type="text" autocomplete="off" placeholder="Search counties"
+        role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="county-list"
+        aria-labelledby="county-label">
+      <ul id="county-list" role="listbox" aria-labelledby="county-label" hidden></ul>
+    </div>
+  </div>
+  <button class="button" id="statewide" type="button">Statewide</button>
+  <div class="field">
+    <span class="small muted" id="mode-label" style="display:block;margin-bottom:4px">Show</span>
+    <div class="segmented" role="group" aria-labelledby="mode-label">
+      <button type="button" data-mode="count" aria-pressed="true">Voters</button>
+      <button type="button" data-mode="percent" aria-pressed="false">Share of active voters</button>
+    </div>
+  </div>
+</div>
+
+<div class="viz">
+  <section class="card" aria-labelledby="chart-title">
+    <p class="chart-title" id="chart-title">Statewide</p>
+    <div class="legend" aria-hidden="true">
+      {% for p in parties %}<span><i class="swatch" style="background:var(--{{ p }})"></i>{{ p|title }}</span>{% endfor %}
+    </div>
+    <div class="chart" id="chart"></div>
+    <p class="small muted" style="margin:8px 0 0">Active voters only. "Other" is every party and
+    registration besides Republican and Democratic: Libertarian, independent, no party
+    affiliation and the rest. Each point is one report; the reports are monthly from December
+    2015, and for each election before that.</p>
+  </section>
+  <section class="card map" aria-labelledby="map-title">
+    <p class="chart-title" id="map-title">Choose a county</p>
+    {{ map_svg|safe }}
+  </section>
+</div>
+
+<h2 id="figures-title">Every report</h2>
+<div class="card table-wrap">
+  <div class="table-scroll">
+    <table aria-labelledby="figures-title">
+      <thead><tr>
+        <th class="left" scope="col">Report</th><th class="left" scope="col">Election</th>
+        {% for p in parties %}<th scope="col">{{ p|title }}</th>{% endfor %}
+        <th scope="col">Active voters</th><th class="left" scope="col">Source</th>
+      </tr></thead>
+      <tbody id="figures"></tbody>
+    </table>
+  </div>
+</div>
+
+<h2>Download the data</h2>
+<div class="prose">
+<ul>
+  <li><a href="{{ downloads.base }}/registration.csv">registration.csv</a>
+    (<a href="{{ downloads.base }}/registration.parquet">Parquet</a>): every county, party and
+    report as reported, with inactive voters and every party by name.</li>
+  <li><a href="{{ downloads.base }}/registration-simplified.csv">registration-simplified.csv</a>
+    (<a href="{{ downloads.base }}/registration-simplified.parquet">Parquet</a>): active voters by
+    Republican, Democratic and other, as shown here.</li>
+  <li><a href="{{ downloads.sources }}">Every report as a PDF</a>.</li>
+</ul>
+<p class="small">Columns: <code>date</code> (the date printed on the report), <code>county</code>,
+<code>county_geoid</code> (Census GEOID as of that date), <code>party</code>, <code>voters</code>,
+<code>election</code>, <code>source_url</code>, <code>archived_copy</code>.</p>
+</div>
+
+<h2>Where this comes from</h2>
+<div class="prose">
+<p>The South Dakota Secretary of State publishes the number of registered voters in each county
+by party: monthly since December 2015 on its
+<a href="https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/voter-registration-by-county.aspx">voter registration totals page</a>,
+and for each election from 1976 to 2014 in its
+<a href="https://sdsos.gov/elections-voting/election-resources/election-history/election-history-search.aspx">election history</a>.
+Each report here links to the Secretary of State's file and to a copy kept with this site.</p>
+
+<h2>How it's built</h2>
+<p>A new report is checked for every day. Each one is read from its PDF by its column headings
+(the parties change order from report to report) and checked before it's used: 66 counties,
+every party column adding up to the report's total, and each county's parties adding up to its
+total of active voters. A report that fails a check isn't added. The reports from 1976 to 2014,
+and a few monthly reports from 2015 to 2018 whose layout can't be read reliably, were entered by
+hand from the reports.</p>
+<ul>
+  <li>Counties are matched to their Census codes as of each report's date. Shannon County became
+  Oglala Lakota County in 2015; here its earlier figures are shown as Oglala Lakota's.
+  Washabaugh County, which joined Jackson County in 1983, is left out of the
+  Republican-Democratic-other view; some early reports count it with Jackson.</li>
+  <li>The September 1, 2026 report was first published with its Republican and Democratic
+  columns switched; the Secretary of State replaced it on September 14, and the corrected
+  figures are used. Both files are kept.</li>
+  <li>The figures for the 2014 general election carry no date in their source; they're shown
+  as October 20, 2014, two weeks before the election.</li>
+</ul>
+<p class="small muted">Latest report: {{ latest_label }} · {{ snapshots }} reports.</p>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>window.VR_DATA = "data.json?v={{ build_id }}";</script>
+<script src="app.js?v={{ build_id }}" defer></script>
+{% endblock %}

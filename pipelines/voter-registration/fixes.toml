@@ -1,0 +1,24 @@
+# Corrections to reports as published, applied when a report is read (fetch.py) and kept in
+# its snapshot. Each is keyed by the report's date.
+
+# (none now)
+#
+# The September 1, 2026 report was first published with its Republican and Democratic columns
+# headed the wrong way round (each county's "Democratic" count was its Republican
+# registrations). The Department replaced the file on September 14, 2026 with the columns
+# right; the snapshot matches the corrected report, and the first version is kept with the
+# reports as 2026-09-01-first-published.pdf.
+#
+# A correction looks like this (swapped columns):
+# ["2026-09-01"]
+# swap = ["democratic", "republican"]
+
+# Corrections made to snapshots typed in from the Secretary of State's election history
+# (1976–2014), each checked against the source page (kept with the reports):
+# - 1993-08-30: the rows were dated 1993-08-03; the page is "South Dakota Voter Registration
+#   on August 30, 1993" (a special election).
+# - 2014-10-20: the rows were dated 2014-11-04 (election day). The source page gives no date;
+#   the snapshot is dated by its file name and the election calendar (elections.json), the
+#   registration totals for the November 4, 2014 general election. Not confirmed.
+# - elections.json had the 1978 general election's snapshot as 1978-10-03; the report is
+#   "South Dakota Registration Figures for General Election, Compiled October 23, 1978".

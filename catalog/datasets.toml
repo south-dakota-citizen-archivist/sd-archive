@@ -26,7 +26,7 @@
 [[dataset]]
 id = "voter-registration"
 name = "Voter registration by county and party"
-project = "south-dakota-voter-registration-data"
+project = "sd-archive (pipelines/voter-registration; published at /voter-registration/)"
 grain = "aggregate"
 coverage = ["0400000US46"]
 geography = ["county", "state"]

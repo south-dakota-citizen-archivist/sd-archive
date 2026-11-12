@@ -54,7 +54,7 @@ select = ["E", "F", "W", "I", "B", "UP", "SIM", "PTH", "LOG", "G"]
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings"
 pythonpath = ["app"]
-testpaths = ["app/tests", "app/records/sources", "app/records/discovery", "packages/*/tests", "catalog/tests", "pipelines/elections/tests", "pipelines/motor-vehicles/tests", "pipelines/property-tax/tests", "pipelines/sales-tax/tests"]
+testpaths = ["app/tests", "app/records/sources", "app/records/discovery", "packages/*/tests", "catalog/tests", "pipelines/elections/tests", "pipelines/motor-vehicles/tests", "pipelines/property-tax/tests", "pipelines/sales-tax/tests", "pipelines/voter-registration/tests", "publish/tests"]
 # Recorded responses (tests/cassettes/) replay and nothing records; any other request off this
 # machine fails the test. Re-record with `just record <tests>`.
 addopts = """-ra -m 'not network and not browser and not local_llm'

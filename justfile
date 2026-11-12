@@ -84,6 +84,16 @@ sales-tax:
     uv run python pipelines/sales-tax/fetch.py
     uv run python pipelines/sales-tax/build.py
 
+# Voter registration: add any new Secretary of State reports, build the tables
+voter-registration:
+    uv run python pipelines/voter-registration/fetch.py
+    uv run python pipelines/voter-registration/build.py
+
+# Build the public site (from what the pipelines built) and serve it at http://localhost:8001
+site:
+    uv run python publish/build.py
+    uv run python -m http.server 8001 --directory .cache/publish/site
+
 # Build the motor vehicle tables and replace them on their GitHub release
 publish-motor-vehicles: motor-vehicles
     cd .cache/motor-vehicles/build && for f in annual.csv annual.parquet monthly.csv monthly.parquet; do cp "$f" "motor-vehicles-$f"; done
