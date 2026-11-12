@@ -3,9 +3,9 @@
 {% block description %}Registered voters by party in South Dakota and each of its counties, from the Secretary of State's reports, {{ first_year }} to {{ latest_label }}.{% endblock %}
 {% block main %}
 <p class="small muted" style="margin:0"><a href="{{ root }}">Data</a> / Voter registration</p>
-<h1>South Dakota voter registration by party</h1>
+<h1>South Dakota voter registration</h1>
 <p class="dek">Registered voters by party, statewide and in each county, from {{ first_year }} to
-{{ latest_label }}, from the Secretary of State's reports. Pick a county to see its own.</p>
+{{ latest_label }}.</p>
 
 <div class="tiles" id="tiles" aria-live="polite"></div>
 
@@ -47,12 +47,12 @@
   </section>
 </div>
 
-<h2 id="figures-title">Every report</h2>
+<h2 id="figures-title">Browse reports</h2>
 <div class="card table-wrap">
   <div class="table-scroll">
     <table aria-labelledby="figures-title">
       <thead><tr>
-        <th class="left" scope="col">Report</th><th class="left" scope="col">Election</th>
+        <th class="left" scope="col">Report date</th><th class="left" scope="col">Election</th>
         {% for p in parties %}<th scope="col">{{ p|title }}</th>{% endfor %}
         <th scope="col">Active voters</th><th class="left" scope="col">Source</th>
       </tr></thead>
