@@ -98,3 +98,24 @@ def test_fetcher_har_folder(server, tmp_path):
         f.fetch(f"{server}/table", "table.html")
     [har] = (tmp_path / "har").glob("*-stealth.har")
     assert any(r["url"].endswith("/data.json") for r in sdfetch.har_requests(har))
+
+
+def test_nodriver_inside_a_running_event_loop(server):
+    """A caller that's in asyncio already (an async job, a model client's loop) can still use
+    nodriver: it runs on a loop of its own."""
+    import asyncio
+
+    async def main():
+        with sdfetch.browser("nodriver") as b:
+            return b.get(f"{server}/page").text
+
+    assert "cf-chl" not in asyncio.run(main())
+
+
+def test_nodriver_after_a_playwright_browser(server):
+    """The ladder climbs from Playwright rungs to nodriver in one thread; a Playwright browser
+    left open there leaves a loop running, which nodriver must not need."""
+    with sdfetch.browser("patchright") as lower:
+        lower.get(f"{server}/data.json")
+        with sdfetch.browser("nodriver") as b:
+            assert "cf-chl" not in b.get(f"{server}/page").text

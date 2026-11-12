@@ -12,6 +12,8 @@ Playwright's Chromium.
 
 from __future__ import annotations
 
+import asyncio
+import threading
 import time
 from contextlib import contextmanager, suppress
 from dataclasses import dataclass, field
@@ -92,6 +94,34 @@ def _playwright_proxy(url: str | None) -> dict | None:
 
 def _native_ua(ua: str) -> str:
     return ua.replace("HeadlessChrome", "Chrome")
+
+
+class _LoopThread:
+    """An asyncio loop running in a thread of its own, for nodriver."""
+
+    def __init__(self):
+        self.loop = asyncio.new_event_loop()
+        self.thread = threading.Thread(target=self._serve, name="sdfetch-nodriver", daemon=True)
+        self.thread.start()
+
+    def _serve(self) -> None:
+        asyncio.set_event_loop(self.loop)
+        self.loop.run_forever()
+
+    def run(self, coro, timeout: float | None):
+        future = asyncio.run_coroutine_threadsafe(coro, self.loop)
+        try:
+            return future.result(timeout)
+        except TimeoutError:
+            future.cancel()
+            raise
+
+    def stop(self) -> None:
+        if self.loop.is_running():
+            self.loop.call_soon_threadsafe(self.loop.stop)
+        self.thread.join(10)
+        if not self.thread.is_alive():
+            self.loop.close()
 
 
 class Browser:
@@ -187,26 +217,31 @@ class Browser:
         import nodriver
 
         logging.getLogger("nodriver").setLevel(logging.WARNING)  # its INFO is process chatter
-        self._loop = nodriver.loop()
+        # nodriver is asyncio; it runs on a loop of its own in its own thread, so it works
+        # whatever the calling thread is doing (inside a running loop, or after a Playwright
+        # browser started there, both of which leave a loop running in the thread)
+        self._loop = _LoopThread()
+        self._stack.append(self._loop.stop)
         args = [f"--proxy-server={self.proxy['server']}"] if self.proxy else None
-        self._nd = self._loop.run_until_complete(
-            nodriver.start(headless=self.headless, browser_args=args)
-        )
+        self._nd = self._run(nodriver.start(headless=self.headless, browser_args=args))
 
-        def stop():
+        async def stop():
             import atexit
 
-            self._nd.stop()
+            self._nd.stop()  # closes its connection on the running loop, ends the process
             atexit.unregister(self._nd.stop)  # nodriver's own exit hook; it's stopped now
+            await asyncio.sleep(0.5)  # let the connection close
 
-        self._stack.append(stop)
-        ua = self._loop.run_until_complete(self._nd.main_tab.evaluate("navigator.userAgent"))
+        self._stack.append(lambda: self._run(stop(), timeout=30))
+        ua = self._run(self._nd.main_tab.evaluate("navigator.userAgent"))
         if "HeadlessChrome" in ua:
             from nodriver import cdp
 
-            self._loop.run_until_complete(
-                self._nd.main_tab.send(cdp.network.set_user_agent_override(_native_ua(ua)))
-            )
+            self._run(self._nd.main_tab.send(cdp.network.set_user_agent_override(_native_ua(ua))))
+
+    def _run(self, coro, timeout: float | None = None):
+        """Run a nodriver coroutine on its loop and wait for the result."""
+        return self._loop.run(coro, self.timeout + 60 if timeout is None else timeout)
 
     # Fetching -------------------------------------------------------------
 
@@ -260,7 +295,7 @@ class Browser:
                 html = await tab.get_content()
             return tab.url if hasattr(tab, "url") else url, html
 
-        final, html = self._loop.run_until_complete(go())
+        final, html = self._run(go(), timeout=self.timeout + challenge_wait + 30)
         # nodriver doesn't report the status; a page that's still a challenge is caught by
         # sdfetch's block check
         return BrowserResponse(str(final or url), 200, html.encode("utf-8"), {})
@@ -268,7 +303,7 @@ class Browser:
     def cookies(self) -> list[dict]:
         """The browser's cookies, as dicts (name, value, domain, path, expires, …)."""
         if self.strategy == "nodriver":
-            found = self._loop.run_until_complete(self._nd.cookies.get_all())
+            found = self._run(self._nd.cookies.get_all())
             return [
                 {"name": c.name, "value": c.value, "domain": c.domain, "path": c.path,
                  "expires": c.expires if c.expires and c.expires > 0 else None,
