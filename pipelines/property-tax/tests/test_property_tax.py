@@ -12,12 +12,13 @@ import pytest
 # before importing its own (each test module keeps the ones it imported).
 _HERE = str(Path(__file__).resolve().parents[1])
 sys.path.insert(0, _HERE)
-for _name in ("build", "parse", "fetch"):
+for _name in ("build", "parse", "fetch", "report"):
     sys.modules.pop(_name, None)
 
 import build  # noqa: E402
 import fetch  # noqa: E402
 import parse  # noqa: E402
+import report  # noqa: E402
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -133,7 +134,9 @@ def test_build():
              for k, y in [found]}  # fmt: skip
     tables, checks = build.build(files, read)
     levies = tables["levies"]
-    assert set(levies.tax_year) == {2021, 2022, 2023, 2025}
+    # the older files give the payable year, the state system's the assessment year
+    assert set(levies.assessment_year) == {2020, 2021, 2023, 2025}
+    assert (levies.payable_year == levies.assessment_year + 1).all()
     assert levies.county_geoid.notna().all()
     plankinton = levies[(levies.district == "Plankinton") & (levies.kind == "city_town")]
     assert plankinton.adds_up.all() and plankinton.district_geoid.notna().all()
@@ -144,3 +147,82 @@ def test_build():
     state = tables["county_recap"]
     assert set(state[state.geography == "state"].county_geoid) == {"0400000US46"}
     assert "tax isn't valuation × levy" in checks or levies.adds_up.dropna().all()
+
+
+def test_years():
+    assert parse.years(2022, "school-2022") == {"assessment_year": 2021, "payable_year": 2022}
+    assert parse.years(2023, "school-class") == {"assessment_year": 2023, "payable_year": 2024}
+    assert parse.years(2022, "county-recap")["payable_year"] == 2022
+
+
+def test_statistical_reports_listing():
+    import json
+
+    listing = json.loads((FIXTURES.parents[2] / "motor-vehicles" / "tests" / "fixtures"
+                          / "listing.json").read_text())  # fmt: skip
+    reports = fetch.statistical_reports(listing)
+    assert sorted(reports) == list(range(2018, 2025))  # 2018 and 2019 are in a second list
+    assert reports[2024].endswith("2024property-tax-statistical-report.pdf")
+
+
+def sample(year: int, part: str = "sample") -> list[str]:
+    return report.pages(read(f"statistical-report-{year}-{part}.pdf"))
+
+
+def test_report_schools():
+    rows, unread = report.schools(sample(2024, "schools"), "2024.pdf")
+    corsica = rows[0]
+    assert (corsica["payable_year"], corsica["county"], corsica["district"]) == (
+        2024,
+        "Aurora",
+        "CORSICA-STICKNEY",
+    )
+    assert corsica["value_agricultural"] == 196485836 and corsica["levy_other"] == 8.805
+    assert corsica["taxes"] == 1071284.77 and unread == []
+    plankinton = next(r for r in rows if r["district_number"] == "01-1")
+    assert plankinton["value_agricultural"] == 296584968  # = School Recap-2023.xlsx
+
+
+def test_report_municipalities():
+    rows, _ = report.municipalities(sample(2022), "2022.pdf")  # a rotated page
+    aberdeen = rows[0]
+    assert (aberdeen["municipality"], aberdeen["county"], aberdeen["population"]) == (
+        "Aberdeen",
+        "Brown",
+        26091,
+    )
+    assert aberdeen["school_general_ag_levy"] == 1.409  # a column only the 2022 report has
+    assert aberdeen["taxes_paid"] == 32692128.73
+    rows, _ = report.municipalities(sample(2024), "2024.pdf")
+    assert "school_general_ag_levy" not in rows[0] and rows[0]["total_rate_other"] == 20.445
+
+
+def test_report_county_recaps():
+    rows, skipped = report.county_recaps(sample(2022), "2022.pdf")
+    ag = rows[0]
+    assert (ag["county"], ag["description"], ag["valuation"], ag["tax"]) == (
+        "Aurora",
+        "AG PROPERTY - OUTSIDE CORP. LIMITS",
+        699624981,
+        5126767.08,
+    )
+    general = next(r for r in rows if r["description"] == "COUNTY GENERAL")
+    assert general["levy"] == 2.011
+    assert skipped  # lines with one amount (a valuation or a tax) aren't guessed at
+    rows, _ = report.county_recaps(sample(2024), "2024.pdf")
+    assert rows[0]["description"] == "Agricultural-Inside Corporate limits"
+
+
+def test_report_county_tables():
+    texts = sample(2018)
+    ratios = report.sales_ratios(texts, "2018.pdf", 2018)
+    assert len(ratios) == 67  # the counties and the state
+    aurora = ratios[0]
+    assert (aurora["ratio_ag"], aurora["ratio_non_ag"], aurora["sales_years"]) == (
+        55.9,
+        94.5,
+        "2016, 2017",
+    )
+    land = report.ag_land(texts, "2018.pdf")
+    assert {r["county"] for r in land} >= {"Oglala Lakota", "Union"}  # decimals, no commas
+    assert land[0]["dollars_per_acre"] == 1827.01

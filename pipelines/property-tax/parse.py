@@ -166,9 +166,26 @@ def sheet(content: bytes) -> tuple[tuple, Iterator[tuple[int, dict]]]:
     return header, body()
 
 
+# The year a file gives: the year taxes are payable in the older layouts (a file's name),
+# the assessment year in the state system's layouts (the TaxYear column, also in PT-74).
+# Checked against the statistical reports, which say both: the 2022 school recap is the
+# 2021 assessment, taxes payable 2022; the 2023 school recap is the 2023 assessment,
+# taxes payable 2024. So no recap here has the 2022 assessment (payable 2023) but
+# Other Recap-2022.
+PAYABLE_YEAR_LAYOUTS = {"city-2021", "road-2021", "township-2021", "township-2022",
+                        "school-2021", "school-2022"}  # fmt: skip
+
+
+def years(year: int, layout: str) -> dict:
+    year = int(year)
+    if layout in PAYABLE_YEAR_LAYOUTS or layout == "county-recap":
+        return {"assessment_year": year - 1, "payable_year": year}
+    return {"assessment_year": year, "payable_year": year + 1}
+
+
 def _levy(file: str, n: int, layout: str, year, county, district_type, district, fund,
           klass, valuation, levy, tax, **extra) -> dict:  # fmt: skip
-    return {"tax_year": int(year), "county": county, "district_type": district_type,
+    return {**years(year, layout), "county": county, "district_type": district_type,
             "district": district, "fund": fund,
             "property_class": CLASSES[klass] if klass is not None else None,
             "class_as_published": klass, "valuation": valuation, "levy": levy, "tax": tax,
@@ -258,7 +275,8 @@ def levies(file: str, year: int, content: bytes) -> tuple[str, list[dict], list[
 
 
 def county_recap(file: str, year: int, content: bytes) -> list[dict]:
-    """A county recap (one row per county, a column per figure) as one row per county ×
+    """A county recap (one row per county, a column per figure; the file's year is the year
+    taxes are payable) as one row per county ×
     field, the field named as published."""
     header, body = sheet(content)
     if not header or header[0] != "COUNTY" or len(header) != 89:
@@ -275,7 +293,7 @@ def county_recap(file: str, year: int, content: bytes) -> list[dict]:
             v = r[field]
             if v is None:
                 continue
-            out.append({"tax_year": year, "county": county, "field": field,
+            out.append({**years(year, "county-recap"), "county": county, "field": field,
                         "value": v if isinstance(v, int | float) else None,
                         "text": v if isinstance(v, str) else None,
                         "file": file, "row": n})  # fmt: skip
@@ -299,7 +317,7 @@ def pt74(file: str, content: bytes) -> list[dict]:
             return float(r[k]) if r[k] not in ("", "NULL") else None
 
         out.append({
-            "tax_year": int(r["TaxYear"]), "county": r["County"],
+            **years(r["TaxYear"], "pt74"), "county": r["County"],
             "district_type": r["DistrictType"], "district": " ".join(r["DistrictName"].split()),
             "fund": r["FundType"], "taxing_entity_id": int(r["TaxingEntityId"]),
             "district_id": int(r["DistrictId"]), "fund_id": int(r["FundId"]),

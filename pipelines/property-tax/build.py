@@ -166,7 +166,7 @@ def build_levies(files: dict, read) -> tuple[pd.DataFrame, dict]:
             )
     # a district can have several funds of one type (bond issues, opt-outs), told apart by
     # the fund ID in the files that give one
-    key = ["tax_year", "kind", "county", "district_type", "district", "fund", "fund_id",
+    key = ["assessment_year", "kind", "county", "district_type", "district", "fund", "fund_id",
            "property_class"]  # fmt: skip
     for _, g in df[df.duplicated(key, keep=False)].groupby(key, dropna=False):
         checks["more than one row for a district, fund and class"].append(
@@ -177,8 +177,9 @@ def build_levies(files: dict, read) -> tuple[pd.DataFrame, dict]:
             ["kind", "county", "district"]):  # fmt: skip
         checks["districts without a place"].append(
             {"kind": kind, "county": county, "district": name,
-             "years": sorted(set(g.tax_year))})  # fmt: skip
-    cols = ["tax_year", "kind", "county", "county_geoid", "district_type", "district",
+             "years": sorted(set(g.assessment_year))})  # fmt: skip
+    cols = ["assessment_year", "payable_year", "kind", "county", "county_geoid", "district_type",
+            "district",
             "district_geoid", "school_district_code", "fund", "property_class",
             "class_as_published", "valuation", "levy", "tax", "tax_computed", "adds_up", "discount",
             "tif",
@@ -186,7 +187,7 @@ def build_levies(files: dict, read) -> tuple[pd.DataFrame, dict]:
             "file", "row", "source_url"]  # fmt: skip
     df = df.reindex(columns=cols)
     df = df.sort_values(
-        ["tax_year", "kind", "county", "district", "fund", "property_class"],
+        ["assessment_year", "kind", "county", "district", "fund", "property_class"],
         ascending=[False, True, True, True, True, True],
         na_position="first",
     )
@@ -206,28 +207,31 @@ def build_county_recap(files: dict, read) -> tuple[pd.DataFrame, dict]:
                                        else county_geoid(c))  # fmt: skip
     parts = df.field.str.extract(CLASS_FIELD)
     df["property_class"] = parts[0].map(RECAP_CLASS)
-    df["in_out"] = parts[1]  # as published; the files don't say what IN and OUT are
+    # IN and OUT: inside and outside corporate (city) limits, as the statistical reports'
+    # county recaps label the same figures (AG_OUT_VAL = "AG PROPERTY - OUTSIDE CORP. LIMITS")
+    df["inside_corporate_limits"] = parts[1].map({"IN": True, "OUT": False})
     df["measure"] = parts[2].map({"VAL": "valuation", "VA": "valuation", "TAX": "tax",
                                   "TA": "tax"})  # fmt: skip
     for r in df[df.county_geoid.isna()][["file", "county"]].drop_duplicates().itertuples():
         checks["unknown counties"].append({"file": r.file, "county": r.county})
 
     counties = df[df.geography == "county"]
-    state = df[df.geography == "state"].set_index(["tax_year", "field"]).value
-    total = counties.groupby(["tax_year", "field"]).value.sum()
+    state = df[df.geography == "state"].set_index(["assessment_year", "field"]).value
+    total = counties.groupby(["assessment_year", "field"]).value.sum()
     for k, v in state.items():
         if abs(total.get(k, 0) - v) > 1:
             checks["STATE SUMMARY ≠ the counties' sum"].append(
-                {"tax_year": k[0], "field": k[1], "state": v, "counties": total.get(k, 0)}
+                {"assessment_year": k[0], "field": k[1], "state": v, "counties": total.get(k, 0)}
             )
     cols = [
-        "tax_year",
+        "assessment_year",
+        "payable_year",
         "geography",
         "county",
         "county_geoid",
         "field",
         "property_class",
-        "in_out",
+        "inside_corporate_limits",
         "measure",
         "value",
         "text",
@@ -235,7 +239,7 @@ def build_county_recap(files: dict, read) -> tuple[pd.DataFrame, dict]:
         "row",
         "source_url",
     ]
-    df = df[cols].sort_values(["tax_year", "geography", "county", "row"],
+    df = df[cols].sort_values(["assessment_year", "geography", "county", "row"],
                               ascending=[False, False, True, True])  # fmt: skip
     return df.reset_index(drop=True), dict(checks)
 
@@ -274,31 +278,33 @@ def build_pt74(files: dict, read, levies: pd.DataFrame) -> tuple[pd.DataFrame, d
     # against the recaps, by county, district type, district and fund
     sums = (
         df.assign(valuation=df[VALUES].fillna(0).sum(axis=1))
-        .groupby(["tax_year", "county", "district_type", "district", "fund"])[["valuation", "tax"]]
+        .groupby(["assessment_year", "county", "district_type", "district", "fund"])[
+            ["valuation", "tax"]
+        ]
         .sum()
     )
-    recap = levies[levies.tax_year.isin(set(df.tax_year)) & levies.fund.notna()
+    recap = levies[levies.assessment_year.isin(set(df.assessment_year)) & levies.fund.notna()
                    & levies.property_class.isna()]  # fmt: skip
-    for (year, kind), g in recap.groupby(["tax_year", "kind"]):
+    for (year, kind), g in recap.groupby(["assessment_year", "kind"]):
         joined = g.merge(
             sums.add_suffix("_pt74"),
             how="left",
             right_index=True,
-            left_on=["tax_year", "county", "district_type", "district", "fund"],
+            left_on=["assessment_year", "county", "district_type", "district", "fund"],
         )
         found = joined.valuation_pt74.notna()
         checks["PT-74 against the recaps"].append({
-            "tax_year": int(year), "recap": kind, "recap_rows": len(g),
+            "assessment_year": int(year), "recap": kind, "recap_rows": len(g),
             "in_pt74": int(found.sum()),
             "valuation_equal": int(((joined.valuation - joined.valuation_pt74).abs() <= 1).sum()),
             "tax_within_half_a_percent": int(((joined.tax - joined.tax_pt74).abs()
                                               <= joined.tax.abs() * 0.005 + 5).sum()),
         })  # fmt: skip
     # the recaps' class valuations (where they give fund IDs and classes) against PT-74's
-    by_class = df.groupby(["tax_year", "county", "district", "fund_id"])[VALUES].sum()
+    by_class = df.groupby(["assessment_year", "county", "district", "fund_id"])[VALUES].sum()
     classed = levies[levies.fund_id.notna() & levies.property_class.notna()]
     for (year, county, district, fund_id), g in classed.groupby(
-            ["tax_year", "county", "district", "fund_id"]):  # fmt: skip
+            ["assessment_year", "county", "district", "fund_id"]):  # fmt: skip
         if (year, county, district, fund_id) not in by_class.index:
             continue
         pt = by_class.loc[(year, county, district, fund_id)]
@@ -306,36 +312,177 @@ def build_pt74(files: dict, read, levies: pd.DataFrame) -> tuple[pd.DataFrame, d
         wrong = sorted(k for k, v in recap.items() if abs(v - pt[f"value_{k}"]) > 1)
         if wrong:
             checks["recap class valuations ≠ PT-74"].append(
-                {"tax_year": int(year), "county": county, "district": district,
+                {"assessment_year": int(year), "county": county, "district": district,
                  "fund_id": int(fund_id), "classes": wrong,
                  "recap": {k: recap[k] for k in wrong},
                  "pt74": {k: float(pt[f"value_{k}"]) for k in wrong}})  # fmt: skip
-    cols = ["tax_year", "county", "county_geoid", "district_type", "district", "fund",
+    cols = ["assessment_year", "payable_year", "county", "county_geoid", "district_type",
+            "district", "fund",
             "taxing_entity_id", "rate_agricultural", "rate_owner_occupied", "rate_other",
             "rate_utility", *VALUES, "district_id", "fund_id", "county_id",
             "district_type_id", "fund_type_id", "alternate_id", "task_id", "file", "row",
             "source_url"]  # fmt: skip
-    return df[cols].sort_values(["tax_year", "county", "district_type", "district", "fund",
+    return df[cols].sort_values(["assessment_year", "county", "district_type", "district", "fund",
                                  "taxing_entity_id"],
                                 ascending=[False, True, True, True, True, True]
                                 ).reset_index(drop=True), dict(checks)  # fmt: skip
 
 
-def build(files: dict, read) -> tuple[dict[str, pd.DataFrame], dict]:
+def _years_from_payable(df: pd.DataFrame) -> pd.DataFrame:
+    df.insert(0, "assessment_year", df.payable_year - 1)
+    return df
+
+
+def build_reports(reports: dict[int, str], read_report,
+                  levies: pd.DataFrame, county_recap: pd.DataFrame
+                  ) -> tuple[dict[str, pd.DataFrame], dict]:  # fmt: skip
+    """The statistical reports' tables, with what wasn't read and what doesn't agree."""
+    import report
+
+    checks: dict[str, list] = defaultdict(list)
+    found: dict[str, list] = defaultdict(list)
+    for year, url in sorted(reports.items()):
+        file = f"{year}.pdf"
+        texts = report.pages(read_report(year))
+        for n in report.no_text(texts, file):
+            checks["report pages without text (not read)"].append({"file": file, "page": n})
+        rows, unread = report.schools(texts, file)
+        found["schools"] += rows
+        checks["report lines not read"] += unread
+        rows, unread = report.municipalities(texts, file)
+        found["municipalities"] += rows
+        checks["report lines not read"] += unread
+        rows, skipped = report.county_recaps(texts, file)
+        found["county_recaps"] += rows
+        if skipped:
+            checks["report recap lines with one amount (not read)"].append(
+                {"file": file, "lines": skipped}
+            )
+        found["sales_ratios"] += report.sales_ratios(texts, file, year)
+        found["ag_land"] += report.ag_land(texts, file)
+        for name in ("schools", "municipalities", "county_recaps", "sales_ratios", "ag_land"):
+            for r in found[name]:
+                r.setdefault("source_url", url) if r["file"] == file else None
+
+    tables = {}
+    for name, rows in found.items():
+        df = pd.DataFrame(rows)
+        if df.empty:
+            continue
+        if "payable_year" in df:
+            df = _years_from_payable(df)
+        elif "assessment_year" in df:
+            df.insert(1, "payable_year", df.assessment_year + 1)
+        df["county_geoid"] = df.county.map(
+            lambda c: STATE_GEOID if c == parse.STATE_SUMMARY else county_geoid(c)
+        )
+        tables[f"report_{name}"] = df
+
+    # counties missing from a county table
+    for name in ("report_sales_ratios", "report_ag_land"):
+        df = tables.get(name)
+        if df is None:
+            continue
+        for file, g in df.groupby("file"):
+            missing = sorted(set(c.short_name for c in sdplaces.counties()) - set(g.county))
+            if missing:
+                checks["counties missing from a report table"].append(
+                    {"table": name, "file": file, "missing": missing}
+                )
+    recaps = tables.get("report_county_recaps")
+    if recaps is not None:
+        for file, g in recaps.groupby("file"):
+            missing = sorted(set(c.short_name for c in sdplaces.counties()) - set(g.county))
+            if missing:
+                checks["counties missing from a report table"].append(
+                    {"table": "report_county_recaps", "file": file, "missing": missing}
+                )
+
+    # schools: the report's method (ag levy × ag, owner-occupied levy × owner-occupied, the
+    # other levy × the rest)
+    schools = tables.get("report_schools")
+    if schools is not None:
+        f = schools.fillna(0)
+        computed = (
+            f.levy_agricultural * f.value_agricultural
+            + f.levy_owner_occupied * f.value_owner_occupied
+            + f.levy_other * (f.value_other_non_ag + f.value_centrally_assessed)
+        ) / 1000
+        off = (computed - f.taxes).abs() > (f.taxes.abs() * 0.001 + 5)
+        for r, c in zip(schools[off].itertuples(), computed[off], strict=True):
+            checks["report school taxes ≠ valuation × levies"].append(
+                {"file": r.file, "page": r.page, "county": r.county, "district": r.district,
+                 "taxes": r.taxes, "computed": round(c, 2)})  # fmt: skip
+        schools["district_geoid"] = [
+            district_geoid("school", None, d, n)
+            for d, n in zip(schools.district, schools.district_number, strict=True)
+        ]
+        # against the Excel school recaps for the same payable year
+        excel = levies[(levies.kind == "school") & (levies.property_class == "agricultural")
+                       & (levies.fund.isna() | (levies.fund == "General"))]  # fmt: skip
+        for year, g in schools.groupby("payable_year"):
+            e = excel[excel.payable_year == year]
+            if e.empty:
+                continue
+            have = set(zip(e.county.str.upper(), e.valuation.round(0), strict=True))
+            same = sum((c.upper(), v) in have for c, v in zip(g.county, g.value_agricultural,
+                                                              strict=True))  # fmt: skip
+            checks["report schools against the Excel recaps"].append(
+                {"payable_year": int(year), "report_rows": len(g), "excel_rows": len(e),
+                 "same_ag_valuation": same})  # fmt: skip
+    munis = tables.get("report_municipalities")
+    if munis is not None:
+        munis["municipality_geoid"] = [
+            district_geoid("city_town", c, m, None)
+            for c, m in zip(munis.county, munis.municipality, strict=True)
+        ]
+    if recaps is not None and not county_recap.empty:
+        # the report's county recap against the Excel county recap (same payable year)
+        ag_out = recaps[recaps.description.str.upper() == "AG PROPERTY - OUTSIDE CORP. LIMITS"]
+        excel = county_recap[county_recap.field == "AG_OUT_VAL"]
+        for year, g in ag_out.groupby("payable_year"):
+            e = excel[excel.payable_year == year]
+            if e.empty:
+                continue
+            have = dict(zip(e.county.str.upper(), e.value, strict=False))
+            same = sum(have.get(str(c).upper()) == v for c, v in zip(g.county, g.valuation,
+                                                                    strict=True))  # fmt: skip
+            checks["report county recaps against the Excel county recaps"].append(
+                {"payable_year": int(year), "counties": len(g), "same_ag_valuation": same}
+            )
+    return tables, dict(checks)
+
+
+def build(files: dict, read, reports: dict | None = None,
+          read_report=None) -> tuple[dict[str, pd.DataFrame], dict]:  # fmt: skip
     levies, c1 = build_levies(files, read)
     county, c2 = build_county_recap(files, read)
     pt74, c3 = build_pt74(files, read, levies)
-    return {"levies": levies, "county_recap": county, "pt74": pt74}, {**c1, **c2, **c3}
+    tables = {"levies": levies, "county_recap": county, "pt74": pt74}
+    c4 = {}
+    if reports:
+        more, c4 = build_reports(reports, read_report, levies, county)
+        tables.update(more)
+    return tables, {**c1, **c2, **c3, **c4}
 
 
 def main() -> None:
     files = json.loads((RAW / "files.json").read_text())
-    tables, checks = build(files, lambda name: (RAW / "files" / name).read_bytes())
+    reports_file = RAW / "statistical-reports.json"
+    reports = ({int(k): v for k, v in json.loads(reports_file.read_text()).items()}
+               if reports_file.exists() else {})  # fmt: skip
+    tables, checks = build(
+        files,
+        lambda name: (RAW / "files" / name).read_bytes(),
+        reports,
+        lambda year: (RAW / "statistical-reports" / f"{year}.pdf").read_bytes(),
+    )
     BUILD.mkdir(parents=True, exist_ok=True)
     for name, df in tables.items():
         df.to_parquet(BUILD / f"{name}.parquet", index=False)
         df.to_csv(BUILD / f"{name}.csv", index=False)
-        print(f"{name}: {len(df):,} rows ({df.tax_year.min()}–{df.tax_year.max()})")
+        years = df.payable_year if "payable_year" in df else df.report_year
+        print(f"{name}: {len(df):,} rows (payable {years.min()}–{years.max()})")
     (BUILD / "checks.json").write_text(json.dumps(checks, indent=1, default=str))
     for name, found in checks.items():
         print(f"  {name}: {len(found)}")

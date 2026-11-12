@@ -1,13 +1,16 @@
 """Download the Department of Revenue's property tax levy files from its data page
 (sdproptax.info/DataLink/Data): the county, city/town, township, road district, other
 district and school district recaps (Excel), and the PT-74 files (CSV). The page's sales
-files are a record set of their own (property-sales), not read here.
+files are a record set of their own (property-sales), not read here. Also the annual
+Property Tax Statistical Reports (PDF), listed on the Department's statistics page.
 
     uv run python pipelines/property-tax/fetch.py
 
 Saves each file in .cache/property-tax/raw/files/, and files.json: each file's URL, the
 section of the page it's listed under, and the date the page says that section was last
 updated. Every file is fetched again each run (the Department revises them in place).
+The statistical reports go in .cache/property-tax/raw/statistical-reports/<year>.pdf (with
+statistical-reports.json); a report already saved isn't fetched again.
 """
 
 from __future__ import annotations
@@ -21,6 +24,7 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 RAW = REPO / ".cache" / "property-tax" / "raw"
 PAGE = "https://sdproptax.info/DataLink/Data"
+STATISTICS = "https://sddor.seamlessdocs.com/sc/api/folders/v2/statistics/active-details"
 
 # file name → (kind, year)
 KINDS = {
@@ -64,6 +68,39 @@ def listing(html: str) -> dict[str, dict]:
     return out
 
 
+def statistical_reports(listing: dict) -> dict[int, str]:
+    """Year → URL of each Property Tax Statistical Report on the statistics page: the links
+    in the lists under its heading, up to the next heading."""
+    import lxml.html
+
+    root = lxml.html.fromstring(listing["welcomeLetter"]["content"])
+    heading = next((h for h in root.iter("h1", "h2", "h3", "h4")
+                    if " ".join(h.text_content().split()).lower()
+                    == "property tax statistical reports"), None)  # fmt: skip
+    if heading is None:
+        raise ValueError("no Property Tax Statistical Reports list on the statistics page")
+    out = {}
+    el = heading.getnext()
+    while el is not None and el.tag not in ("h1", "h2", "h3", "h4"):
+        for a in el.iter("a"):
+            if (m := re.fullmatch(r"\s*(\d{4})\s*", a.text_content())) and a.get("href"):
+                out[int(m[1])] = a.get("href")
+        el = el.getnext()
+    return out
+
+
+def fetch_reports(fetcher) -> dict[int, str]:
+    reports = statistical_reports(fetcher.request("GET", STATISTICS, timeout=60).json())
+    if not reports:
+        raise ValueError("no statistical reports on the statistics page")
+    for year, url in reports.items():
+        name = f"statistical-reports/{year}.pdf"
+        if not fetcher.store.has(name):
+            fetcher.store.save(name, fetcher.request("GET", url, timeout=300).content, url)
+    (RAW / "statistical-reports.json").write_text(json.dumps(reports, indent=1))
+    return reports
+
+
 def fetch(fetcher) -> dict[str, dict]:
     files = listing(fetcher.request("GET", PAGE, timeout=60).text)
     if not files:
@@ -80,8 +117,14 @@ def main() -> None:
 
     with Fetcher(RAW) as fetcher:
         files = fetch(fetcher)
+        reports = fetch_reports(fetcher)
     for name in sorted(files):
         print(f"{name}: {(RAW / 'files' / name).stat().st_size:,} bytes")
+    for year in sorted(reports):
+        print(
+            f"statistical report {year}: "
+            f"{(RAW / 'statistical-reports' / f'{year}.pdf').stat().st_size:,} bytes"
+        )
 
 
 if __name__ == "__main__":
