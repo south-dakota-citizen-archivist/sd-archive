@@ -728,5 +728,15 @@
   "report_date": "2026-10-02",
   "link_date": "2026-10-02",
   "link_text": "October 2, 2026"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/2026%20Voter%20Registration/StatewideVotersByCounty_11.2.2026.pdf": {
+  "report_date": "2026-11-02",
+  "link_date": "2026-11-02",
+  "link_text": "November 2, 2026"
+ },
+ "https://sdsos.gov/elections-voting/upcoming-elections/voter-registration-totals/2026%20Voter%20Registration/StatewideVotersByCounty_11.3.2026.pdf": {
+  "report_date": "2026-11-03",
+  "link_date": "2026-11-03",
+  "link_text": "November 3, 2026"
  }
 }
