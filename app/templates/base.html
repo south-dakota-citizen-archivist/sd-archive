@@ -13,6 +13,7 @@
       <div class="mx-auto max-w-7xl px-4 flex items-center gap-6 h-12 overflow-x-auto">
         <a href="{% url 'home' %}" class="font-semibold tracking-tight whitespace-nowrap hover:text-blue-700">SD GIS Hub</a>
         {% url 'search:name_search' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if request.path == u %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Name search</a>
+        {% url 'records:recordset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Records</a>
         {% url 'census:dataset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Datasets</a>
         {% url 'census:place_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Places</a>
         {% url 'census:coverage' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Coverage</a>

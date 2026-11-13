@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Records · SD GIS Hub{% endblock %}
+{% block content %}
+<h1 class="text-xl font-semibold">Records</h1>
+<p class="text-sm text-gray-600 mt-1">{{ rows|length }} record sets: {{ totals.current|intcomma }} current records, {{ totals.dropped|intcomma }} gone from their sources (kept), {{ totals.documents|intcomma }} documents.</p>
+
+<input id="filter" placeholder="Filter by name, slug, dataset or publisher…" class="mt-4 mb-3 w-96 max-w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm"
+       oninput="const q=this.value.toLowerCase();document.querySelectorAll('#sets tbody tr').forEach(r=>r.hidden=!r.dataset.text.includes(q))">
+<div class="card overflow-x-auto">
+  <table class="tbl" id="sets">
+    <thead><tr><th>Record set</th><th>Dataset</th><th>Publisher</th><th class="text-right">Records</th><th class="text-right">Gone</th><th class="text-right">Documents</th><th>Last run</th></tr></thead>
+    <tbody>
+      {% for rs, c in rows %}
+        <tr data-text="{{ rs.name|lower }} {{ rs.slug }} {{ rs.dataset }} {{ rs.publisher.name|default:''|lower }}">
+          <td><a class="link font-medium" href="{{ rs.get_absolute_url }}">{{ rs.name }}</a><div class="text-xs text-gray-400 font-mono">{{ rs.slug }}</div></td>
+          <td class="text-xs font-mono text-gray-600">{{ rs.dataset }}</td>
+          <td class="text-xs">{{ rs.publisher.name|default:"" }}</td>
+          <td class="text-right tabular-nums">{{ c.current|intcomma }}</td>
+          <td class="text-right tabular-nums text-gray-500">{% if c.dropped %}{{ c.dropped|intcomma }}{% endif %}</td>
+          <td class="text-right tabular-nums text-gray-500">{% if c.documents %}{{ c.documents|intcomma }}{% endif %}</td>
+          <td class="text-xs whitespace-nowrap">{% if rs.last_run_at %}{{ rs.last_run_at|date:"Y-m-d" }} <span class="pill">{{ rs.last_run_status }}</span>{% else %}<span class="text-gray-400">imported, not run</span>{% endif %}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

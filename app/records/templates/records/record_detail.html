@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ record.key }} · {{ recordset.name }} · SD GIS Hub{% endblock %}
+{% block extra_head %}{% if record.geometry %}{% include "_maplibre.html" %}{% endif %}{% endblock %}
+{% block content %}
+<p class="text-sm text-gray-500"><a class="link" href="{% url 'records:recordset_list' %}">Records</a> · <a class="link" href="{{ recordset.get_absolute_url }}">{{ recordset.name }}</a></p>
+<h1 class="text-xl font-semibold mt-1 font-mono break-all">{{ record.key }}</h1>
+{% if record.dropped_at %}<div class="mt-3 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">Gone from the source since {{ record.dropped_at|date }}: this is how it was when last seen.</div>{% endif %}
+<p class="text-sm text-gray-600 mt-1">
+  {% if record.source_url %}<a class="link" href="{{ record.source_url }}" rel="noopener">At the source</a> · {% endif %}
+  First seen {{ record.first_seen|date }} · updated {{ record.updated_at|date }}
+  {% if record.run_id %} · last written by <a class="link" href="{% url 'records:run_detail' record.run_id %}">a run on {{ record.run.started_at|date }}</a>{% endif %}
+  {% if recordset.gis_dataset %} · <a class="link" href="{% url 'harvest:feature_detail' recordset.gis_dataset.pk record.key %}">as a GIS feature</a>{% endif %}
+</p>
+
+<div class="grid gap-6 lg:grid-cols-3 mt-4">
+  <div class="lg:col-span-2 space-y-6">
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Fields</div>
+      <table class="tbl text-xs">
+        {% for f in fields %}
+          <tr><td class="font-mono text-gray-500 w-48">{{ f.name }}</td>
+              <td>{% if f.pre %}<details><summary class="cursor-pointer">{{ f.text|truncatechars:120 }}</summary><pre class="mt-2 overflow-x-auto">{{ f.json }}</pre></details>{% else %}<span class="whitespace-pre-wrap">{{ f.text }}</span>{% endif %}</td></tr>
+        {% empty %}<tr><td class="text-gray-500">No fields.</td></tr>{% endfor %}
+      </table>
+    </div>
+
+    {% if documents %}
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Documents</div>
+      <div class="divide-y divide-gray-100">
+        {% for d in documents %}
+          <div class="p-4 text-sm space-y-1">
+            <div>
+              {% if d.path or d.legacy.prl_file %}<a class="link font-medium" href="{% url 'records:document_file' d.pk %}">{{ d.filename|default:"the file" }}</a>{% else %}<span class="font-medium">{{ d.filename|default:"not stored" }}</span>{% endif %}
+              <span class="pill">{{ d.get_status_display }}</span>
+              {% if d.dropped_at %}<span class="pill">no longer listed</span>{% endif %}
+            </div>
+            <div class="text-xs text-gray-500">
+              {% if d.pages %}{{ d.pages }} page{{ d.pages|pluralize }} · {% endif %}{% if d.size %}{{ d.size|filesizeformat }} · {% endif %}{{ d.get_kind_display }}{% if d.category %} · {{ d.category }}{% endif %}
+              {% if d.url %} · <a class="link" href="{{ d.url }}" rel="noopener">published here</a>{% endif %}
+            </div>
+            {% if d.error %}<div class="text-xs text-red-700 whitespace-pre-wrap">{{ d.error|truncatechars:400 }}</div>{% endif %}
+            {% if d.text %}<details class="text-xs"><summary class="cursor-pointer text-gray-600">Text ({{ d.text|length|intcomma }} characters)</summary><pre class="mt-2 whitespace-pre-wrap max-h-96 overflow-y-auto">{{ d.text|truncatechars:20000 }}</pre></details>{% endif %}
+            {% for x in d.extractions.all %}
+              <details class="text-xs"><summary class="cursor-pointer text-gray-600">Extracted with {{ x.schema }} ({{ x.get_review_display }})</summary><pre class="mt-2 overflow-x-auto">{{ x.data|pprint }}</pre></details>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if links_out or links_in %}
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Linked records</div>
+      <table class="tbl text-xs">
+        {% for l in links_out %}
+          <tr><td class="w-48 text-gray-500">{{ l.kind }} {{ l.value }}</td><td><a class="link font-mono" href="{{ l.to_record.get_absolute_url }}">{{ l.to_record.key }}</a> in {{ l.to_record.recordset.name }} <span class="text-gray-400">({{ l.to_field }})</span></td></tr>
+        {% endfor %}
+        {% for l in links_in %}
+          <tr><td class="w-48 text-gray-500">{{ l.kind }} {{ l.value }}</td><td><a class="link font-mono" href="{{ l.from_record.get_absolute_url }}">{{ l.from_record.key }}</a> in {{ l.from_record.recordset.name }} <span class="text-gray-400">(its {{ l.from_field }})</span></td></tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="space-y-6">
+    {% if record.geometry %}<div class="card overflow-hidden"><div id="map" class="h-80"></div></div>{% endif %}
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Places</div>
+      <ul class="p-4 text-sm space-y-1">
+        {% for p in places %}<li><a class="link" href="{{ p.get_absolute_url }}">{{ p.name }}</a> <span class="text-xs text-gray-400">{{ p.kind }}</span></li>{% empty %}<li class="text-gray-400">Not tied to a place.</li>{% endfor %}
+      </ul>
+    </div>
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Names <span class="text-gray-400 font-normal">({{ mentions|length }})</span></div>
+      <ul class="p-4 text-sm space-y-1">
+        {% for m in mentions %}<li>{{ m.name }} <span class="text-xs text-gray-400">{{ m.get_schema_display }}{% if m.role %} · {{ m.role }}{% endif %}</span></li>{% empty %}<li class="text-gray-400">None.</li>{% endfor %}
+      </ul>
+    </div>
+    {% if legacy %}
+    <details class="card p-4 text-xs"><summary class="cursor-pointer text-gray-600">IDs in the system it came from</summary><pre class="mt-2 overflow-x-auto">{{ legacy }}</pre></details>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}{% if record.geometry %}
+<script>
+  const geometry = {{ geometry|safe }};
+  const bounds = boundsOf(geometry);
+  const map = hubMap("map", { bounds: bounds.toArray() });
+  map.fitBounds(bounds, { padding: 60, maxZoom: 15, duration: 0 });
+  map.on("load", () => { map.addSource("feature", { type: "geojson", data: geometry }); addFeatureLayers(map, "feature"); });
+</script>
+{% endif %}{% endblock %}

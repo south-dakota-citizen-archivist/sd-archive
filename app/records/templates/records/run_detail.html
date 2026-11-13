@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Run {{ run.pk }} · {{ recordset.name }} · SD GIS Hub{% endblock %}
+{% block content %}
+<p class="text-sm text-gray-500"><a class="link" href="{% url 'records:recordset_list' %}">Records</a> · <a class="link" href="{{ recordset.get_absolute_url }}">{{ recordset.name }}</a></p>
+<h1 class="text-xl font-semibold mt-1">Run of {{ run.started_at|date:"Y-m-d H:i" }}</h1>
+<p class="text-sm text-gray-600 mt-1">
+  <span class="pill">{{ run.get_status_display }}</span>
+  {% if run.finished_at %} · finished {{ run.finished_at|date:"Y-m-d H:i" }}{% endif %}
+  {% if run.forced %} · the drop guard was bypassed{% endif %}
+  {% if run.job %} · <a class="link" href="{% url 'job_detail' run.job.pk %}">job #{{ run.job.pk }}</a>{% endif %}
+</p>
+<div class="grid gap-4 md:grid-cols-4 mt-4">
+  <div class="card p-4"><div class="text-2xl font-semibold tabular-nums">{{ run.fetched_count|default_if_none:"–"|intcomma }}</div><div class="text-sm text-gray-500">found at the source{% if run.expected_count %} (of {{ run.expected_count|intcomma }} it lists){% endif %}</div></div>
+  <div class="card p-4"><div class="text-2xl font-semibold tabular-nums">{{ run.added|intcomma }}</div><div class="text-sm text-gray-500">added</div></div>
+  <div class="card p-4"><div class="text-2xl font-semibold tabular-nums">{{ run.changed|intcomma }}</div><div class="text-sm text-gray-500">changed</div></div>
+  <div class="card p-4"><div class="text-2xl font-semibold tabular-nums">{{ run.removed|intcomma }}</div><div class="text-sm text-gray-500">gone from the source</div></div>
+</div>
+{% if run.error %}<div class="mt-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800 whitespace-pre-wrap">{{ run.error }}</div>{% endif %}
+{% if checks %}
+<div class="card mt-4">
+  <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Checks</div>
+  <pre class="p-4 text-xs overflow-x-auto">{{ checks }}</pre>
+</div>
+{% endif %}
+{% endblock %}

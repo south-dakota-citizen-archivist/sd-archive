@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ recordset.name }} · Records · SD GIS Hub{% endblock %}
+{% block content %}
+{% include "records/_header.html" %}
+
+<div class="grid gap-4 md:grid-cols-4">
+  <div class="card p-4"><div class="text-2xl font-semibold tabular-nums">{{ current|intcomma }}</div><div class="text-sm text-gray-500">current records</div></div>
+  <div class="card p-4"><div class="text-2xl font-semibold tabular-nums">{{ dropped|intcomma }}</div><div class="text-sm text-gray-500">gone from the source (kept)</div></div>
+  <div class="card p-4 md:col-span-2">
+    <div class="text-sm font-medium mb-1">Documents</div>
+    {% for label, n in documents %}<span class="pill mr-1">{{ label }}: {{ n|intcomma }}</span>{% empty %}<span class="text-sm text-gray-400">none</span>{% endfor %}
+  </div>
+</div>
+
+<div class="grid gap-6 lg:grid-cols-2 mt-6">
+  <div class="card overflow-x-auto">
+    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Fields <span class="text-gray-400 font-normal">(from {{ fields|length }} found in a sample of records)</span></div>
+    <table class="tbl text-xs">
+      <thead><tr><th>Field</th><th class="text-right">Filled</th><th>Example</th></tr></thead>
+      <tbody>
+        {% for f in fields %}
+          <tr><td class="font-mono">{{ f.name }}{% if f.numeric %} <span class="text-gray-400">#</span>{% endif %}</td><td class="text-right tabular-nums">{{ f.share }}%</td><td class="max-w-xs truncate" title="{{ f.example|default:'' }}">{{ f.example|default:"" }}</td></tr>
+        {% empty %}<tr><td colspan="3" class="text-gray-500">No records.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="card overflow-x-auto">
+    <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Runs</div>
+    <table class="tbl text-xs">
+      <thead><tr><th>Started</th><th>Status</th><th class="text-right">Found</th><th class="text-right">Added</th><th class="text-right">Changed</th><th class="text-right">Gone</th></tr></thead>
+      <tbody>
+        {% for run in runs %}
+          <tr>
+            <td class="whitespace-nowrap"><a class="link" href="{% url 'records:run_detail' run.pk %}">{{ run.started_at|date:"Y-m-d H:i" }}</a></td>
+            <td><span class="pill">{{ run.get_status_display }}</span>{% if run.error %} <span class="text-red-700" title="{{ run.error }}">error</span>{% endif %}</td>
+            <td class="text-right tabular-nums">{{ run.fetched_count|default_if_none:""|intcomma }}</td>
+            <td class="text-right tabular-nums">{{ run.added|intcomma }}</td>
+            <td class="text-right tabular-nums">{{ run.changed|intcomma }}</td>
+            <td class="text-right tabular-nums">{{ run.removed|intcomma }}</td>
+          </tr>
+        {% empty %}<tr><td colspan="6" class="text-gray-500">No runs yet: these records were imported.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

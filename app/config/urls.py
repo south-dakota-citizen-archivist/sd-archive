@@ -12,6 +12,7 @@ urlpatterns = [
     path("jobs/<int:pk>/", core_views.job_detail, name="job_detail"),
     path("", include("census.urls")),
     path("", include("harvest.urls")),
+    path("records/", include("records.urls")),
     path("search/", include("search.urls")),
     path("api/v1/", api.urls),
     path("admin/", admin.site.urls),

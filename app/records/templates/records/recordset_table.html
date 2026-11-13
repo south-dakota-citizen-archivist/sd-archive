@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Table · {{ recordset.name }} · SD GIS Hub{% endblock %}
+{% block content %}
+{% include "records/_header.html" %}
+<form class="mb-3 flex flex-wrap gap-2 items-center" hx-get="{% url 'records:recordset_table' recordset.slug %}" hx-target="#table-body" hx-push-url="true" hx-trigger="input changed delay:500ms from:input, change from:select, submit">
+  <input type="hidden" name="sort" value="{{ sort }}"><input type="hidden" name="dir" value="{{ dir }}"><input type="hidden" name="cols" value="{{ cols }}">
+  <input name="q" value="{{ q }}" placeholder="Any field contains…" class="w-80 rounded-md border border-gray-300 px-3 py-1.5 text-sm">
+  <select name="field" class="rounded-md border border-gray-300 px-2 py-1.5 text-sm">
+    <option value="">— field —</option>
+    {% for f in fields %}<option value="{{ f.name }}"{% if f.name == field %} selected{% endif %}>{{ f.name }}</option>{% endfor %}
+  </select>
+  <input name="value" value="{{ value }}" placeholder="contains…" class="rounded-md border border-gray-300 px-3 py-1.5 text-sm">
+  <select name="show" class="rounded-md border border-gray-300 px-2 py-1.5 text-sm">
+    <option value="current"{% if show == "current" %} selected{% endif %}>Current records</option>
+    <option value="dropped"{% if show == "dropped" %} selected{% endif %}>Gone from the source</option>
+    <option value="all"{% if show == "all" %} selected{% endif %}>All</option>
+  </select>
+</form>
+<details class="mb-3 text-sm">
+  <summary class="cursor-pointer text-gray-600">Columns ({{ columns|length }} of {{ fields|length }} fields)</summary>
+  <form class="mt-2 flex flex-wrap gap-3" onsubmit="event.preventDefault();const c=[...this.querySelectorAll('input:checked')].map(i=>i.value).join(',');const u=new URL(location.href);u.searchParams.set('cols',c);u.searchParams.delete('page');location.href=u">
+    {% for f in fields %}<label class="text-xs font-mono"><input type="checkbox" value="{{ f.name }}"{% if f in columns %} checked{% endif %}> {{ f.name }}</label>{% endfor %}
+    <button class="btn">Show these</button>
+  </form>
+</details>
+<div id="table-body">{% include "records/_table_rows.html" %}</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% load humanize %}
+<p class="text-sm text-gray-500 mb-2">{{ page.paginator.count|intcomma }} record{{ page.paginator.count|pluralize }}. Click a column to sort; click a key for the record.</p>
+<div class="card overflow-x-auto">
+  <table class="tbl text-xs">
+    <thead>
+      <tr>
+        <th>Key</th>
+        {% for c in columns %}
+          <th><a class="hover:text-blue-700" href="#"
+                 hx-get="{% if sort == c.name and dir == 'asc' %}{% querystring sort=c.name dir='desc' page=None %}{% else %}{% querystring sort=c.name dir='asc' page=None %}{% endif %}"
+                 hx-target="#table-body" hx-push-url="true">{{ c.name }}{% if sort == c.name %} {% if dir == "desc" %}▼{% else %}▲{% endif %}{% endif %}</a></th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for record, values in rows %}
+        <tr{% if record.dropped_at %} class="opacity-60"{% endif %}>
+          <td class="whitespace-nowrap"><a class="link font-mono" href="{% url 'records:record_detail' recordset.slug record.key %}" title="{{ record.key }}">{{ record.key|truncatechars:24 }}</a>{% if record.dropped_at %} <span class="pill">gone</span>{% endif %}</td>
+          {% for v in values %}<td class="whitespace-nowrap max-w-xs truncate" title="{{ v }}">{{ v }}</td>{% endfor %}
+        </tr>
+      {% empty %}
+        <tr><td colspan="{{ columns|length|add:1 }}" class="text-gray-500">No matching records.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% if page.paginator.num_pages > 1 %}
+<div class="flex items-center gap-2 mt-3 text-sm">
+  {% if page.has_previous %}<a class="btn" href="#" hx-get="{% querystring page=page.previous_page_number %}" hx-target="#table-body" hx-push-url="true">← Previous</a>{% endif %}
+  <span class="text-gray-500">Page {{ page.number|intcomma }} of {{ page.paginator.num_pages|intcomma }}</span>
+  {% if page.has_next %}<a class="btn" href="#" hx-get="{% querystring page=page.next_page_number %}" hx-target="#table-body" hx-push-url="true">Next →</a>{% endif %}
+</div>
+{% endif %}

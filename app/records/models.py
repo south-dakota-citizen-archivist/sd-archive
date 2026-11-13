@@ -13,6 +13,7 @@ from datetime import timedelta
 
 from django.contrib.gis.db import models
 from django.db.models import Count, Q
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -47,6 +48,9 @@ class RecordSet(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def get_absolute_url(self) -> str:
+        return reverse("records:recordset_detail", args=[self.slug])
 
 
 class Run(models.Model):
@@ -170,6 +174,9 @@ class Record(models.Model):
 
     def __str__(self) -> str:
         return f"{self.recordset.slug}:{self.key}"
+
+    def get_absolute_url(self) -> str:
+        return reverse("records:record_detail", args=[self.recordset.slug, self.key])
 
 
 class RecordLink(models.Model):
