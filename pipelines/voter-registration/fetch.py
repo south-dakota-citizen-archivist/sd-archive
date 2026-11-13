@@ -27,6 +27,8 @@ import tomllib
 from pathlib import Path
 from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
 
+import parse  # this folder's parse.py (the script runs from here, so it's on the path)
+
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 RAW = REPO / ".cache" / "voter-registration" / "raw"
@@ -46,7 +48,6 @@ def reports(html: str) -> list[dict]:
     """The PDF links in the page's content section: URL and the date in the link's text (or
     None)."""
     import lxml.html
-    import parse
 
     root = lxml.html.fromstring(html)
     content = root.xpath("//section[contains(concat(' ', @class, ' '), ' centerer ')]")
@@ -85,8 +86,6 @@ def write_snapshot(date: str, parties: list[str], rows: list[dict]) -> Path:
 def update(fetcher, links: list[dict] | None = None) -> tuple[list[str], list[str]]:
     """Read the links not yet in sources.json, and add their reports not yet in snapshots/:
     (dates added, problems)."""
-    import parse
-
     links = links or reports(fetcher.request("GET", PAGE, timeout=60).text)
     if not links:
         raise ValueError("no reports on the page")
@@ -121,7 +120,6 @@ def update(fetcher, links: list[dict] | None = None) -> tuple[list[str], list[st
 def main() -> int:
     from sdfetch import Fetcher
 
-    sys.path.insert(0, str(HERE))
     with Fetcher(RAW) as fetcher:
         added, problems = update(fetcher)
     print(f"added: {', '.join(added) or 'none'}")

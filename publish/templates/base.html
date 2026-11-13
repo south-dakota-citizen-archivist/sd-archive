@@ -11,7 +11,19 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to main content</a>
-  <header class="site-header"><a href="{{ root }}">{{ site_name }}</a></header>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Site">
+      <a class="brand" href="{{ root }}">{{ site_name }}</a>
+      <ul>
+        {% for item in nav %}
+        <li><a href="{{ root }}{{ item.path }}"{% if item.path == current %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+      <ul class="end">
+        <li><a href="https://github.com/south-dakota-citizen-archivist/sd-archive">Source code</a></li>
+      </ul>
+    </nav>
+  </header>
   <main id="main">
     {% block main %}{% endblock %}
   </main>

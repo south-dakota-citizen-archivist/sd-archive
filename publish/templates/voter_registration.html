@@ -2,12 +2,12 @@
 {% block title %}South Dakota voter registration by party · {{ site_name }}{% endblock %}
 {% block description %}Registered voters by party in South Dakota and each of its counties, from the Secretary of State's reports, {{ first_year }} to {{ latest_label }}.{% endblock %}
 {% block main %}
-<p class="small muted" style="margin:0"><a href="{{ root }}">Data</a> / Voter registration</p>
 <h1>South Dakota voter registration</h1>
 <p class="dek">Registered voters by party, statewide and in each county, from {{ first_year }} to
 {{ latest_label }}.</p>
 
-<div class="tiles" id="tiles" aria-live="polite"></div>
+<p class="tiles-heading" id="tiles-heading" aria-live="polite">Statewide</p>
+<div class="tiles" id="tiles"></div>
 
 <div class="controls">
   <div class="field">

@@ -53,6 +53,8 @@ def build(out: Path = OUT, voter_registration: Path | None = None) -> dict:
               "site_description": "Public records about South Dakota and its places, kept with "
                                   "their sources."}  # fmt: skip
     templates = env()
+    common["nav"] = [{"path": "voter-registration/", "title": "Voter registration"},
+                     {"path": "about/", "title": "About"}]  # fmt: skip
 
     latest = data["dates"][-1]
     vr = out / "voter-registration"
@@ -60,7 +62,8 @@ def build(out: Path = OUT, voter_registration: Path | None = None) -> dict:
     (vr / "data.json").write_text(json.dumps(data, separators=(",", ":")))
     shutil.copy(HERE / "static" / "voter-registration.js", vr / "app.js")
     (vr / "index.html").write_text(templates.get_template("voter_registration.html").render(
-        **common, root="../", parties=data["parties"], map_svg=maps.county_svg(),
+        **common, root="../", current="voter-registration/", parties=data["parties"],
+        map_svg=maps.county_svg(),
         first_year=data["dates"][0][:4], latest_label=long_date(latest),
         snapshots=len(data["dates"]),
         downloads={"base": f"{RELEASES}/download/voter-registration-data",
@@ -77,7 +80,11 @@ def build(out: Path = OUT, voter_registration: Path | None = None) -> dict:
         "latest": long_date(latest),
     }]  # fmt: skip
     (out / "index.html").write_text(
-        templates.get_template("home.html").render(**common, root="", pages=pages)
+        templates.get_template("home.html").render(**common, root="", current="", pages=pages)
+    )
+    (out / "about").mkdir()
+    (out / "about" / "index.html").write_text(
+        templates.get_template("about.html").render(**common, root="../", current="about/")
     )
     (out / ".nojekyll").write_text("")
     health = {"built": built.isoformat(timespec="seconds"),

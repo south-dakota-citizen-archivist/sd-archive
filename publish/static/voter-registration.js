@@ -44,8 +44,11 @@
         <div class="value">${value}</div><div class="sub">${sub}</div>`;
       tiles.append(el);
     };
+    // the place and date go in the heading above, so each tile keeps one short line
     const where = state.place ? `${state.data.counties[state.place].name} County` : "Statewide";
-    add("Active voters", fmt.format(last.total), `${where}, ${longDate(last.date)}`);
+    $("tiles-heading").innerHTML = `<span>${where}</span> <span class="when"><span class="sep">· `
+      + `</span>latest report, ${longDate(last.date)}</span>`;
+    add("Active voters", fmt.format(last.total), "All parties");
     for (const p of PARTIES) {
       const v = last.values[p] ?? 0;
       add(LABEL[p], fmt.format(v), `${pct((100 * v) / last.total)} of active voters`, p);
@@ -341,8 +344,9 @@
   function render() {
     const rows = rowsFor(state.place);
     const name = state.place ? `${state.data.counties[state.place].name} County` : "Statewide";
-    $("chart-title").textContent = `${name}: ${state.mode === "percent"
-      ? "share of active voters by party" : "active voters by party"}`;
+    $("chart-title").innerHTML = `<span>${name}</span><span class="what"><span class="sep">: `
+      + `</span>${state.mode === "percent" ? "share of active voters by party"
+        : "active voters by party"}</span>`;
     $("map-title").textContent = state.place ? `${name} selected` : "Choose a county";
     let chosen = null;
     document.querySelectorAll(".map path[data-geoid]").forEach((p) => {

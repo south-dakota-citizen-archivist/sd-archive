@@ -39,3 +39,6 @@ def test_build(tmp_path, monkeypatch):
     home = (out / "index.html").read_text()
     assert 'href="voter-registration/"' in home and "2 reports since 1976" in home
     assert (out / ".nojekyll").exists() and (out / "_health.json").exists()
+    assert 'href="../voter-registration/" aria-current="page"' in page  # the navbar
+    about = (out / "about" / "index.html").read_text()
+    assert 'href="../about/" aria-current="page"' in about
