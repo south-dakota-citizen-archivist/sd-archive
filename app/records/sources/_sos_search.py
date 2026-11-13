@@ -10,7 +10,8 @@ filings all use one system.
   scanned page images, not a file. `assemble()` fetches the images in order and makes one PDF
   (or merges the PDF pages some filings are stored as). The DocGuid is the document's key.
   The images are served only to a session that has opened the search page and then the
-  viewer, so each document starts a fresh session that does both, in that order.
+  viewer. A batch is one session, as a person browsing filings would be: the search page is
+  opened once, then each document's viewer and its page images.
 - The server sometimes answers with a "we're sorry" page instead of results or a page image.
   A page image that gets one is asked for again after a wait (`IMAGE_RETRIES`); if it still
   does, that document fails (`PageUnavailable`: some documents' images are like that) and the
@@ -172,11 +173,17 @@ def parse_date(text: str | None) -> str | None:
 # --- the document ----------------------------------------------------------------------
 
 
-def _fresh_session(fetcher) -> None:
-    """Forget the cookies of the document before."""
-    session = getattr(fetcher, "session", None)
-    if session is not None:
-        session.cookies.clear()
+def _open_search(fetcher, search_url: str) -> None:
+    """The search page, once for the fetcher's session (each later document reuses it)."""
+    opened = getattr(fetcher, "_sos_opened", None)
+    if opened is None:
+        opened = set()
+        fetcher._sos_opened = opened
+    if search_url in opened:
+        return
+    _pace()
+    check_block(fetcher.request("GET", search_url, timeout=120).text, search_url)
+    opened.add(search_url)
 
 
 def _image(fetcher, url: str, viewer_url: str):
@@ -208,15 +215,13 @@ def _image(fetcher, url: str, viewer_url: str):
 
 
 def assemble(fetcher, viewer_url: str) -> bytes:
-    """A filing's scanned pages, from its viewer, as one PDF (each request paced): a fresh
-    session opens the search page, then the viewer, then each page image in order."""
+    """A filing's scanned pages, from its viewer, as one PDF (each request paced): the
+    search page (once a session), the viewer, then each page image in order."""
     import lxml.html
     from PIL import Image
 
-    _fresh_session(fetcher)
     search_url = urljoin(viewer_url, "Default.aspx")
-    _pace()
-    check_block(fetcher.request("GET", search_url, timeout=120).text, search_url)
+    _open_search(fetcher, search_url)
     _pace()
     page = fetcher.request("GET", viewer_url, timeout=120, headers={"Referer": search_url})
     if page.content[:5] == b"%PDF-":

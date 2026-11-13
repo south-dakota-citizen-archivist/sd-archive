@@ -129,6 +129,8 @@ def test_a_viewer_becomes_one_pdf():
     # the search page, the viewer, then the pages in order
     assert fetcher.asked[0][1].endswith("/Search/Default.aspx")
     assert [u[-7:] for _, u, _ in fetcher.asked[2:]] == ["Image=1", "Image=2"]
+    sos.assemble(fetcher, url)  # the next document: the same session, no search page again
+    assert sum(u.endswith("/Search/Default.aspx") for _, u, _ in fetcher.asked) == 1
     with pytest.raises(sos.Blocked):
         sos.assemble(FakeFetcher(error_page=True), url)
 
