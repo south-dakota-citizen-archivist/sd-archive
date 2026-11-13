@@ -639,3 +639,16 @@ measures = ["taxable sales", "tax due"]
 dimensions = ["SIC industry"]
 suppression = "N/A where fewer than three licenses report; grouped as Other, which the state total includes"
 source = "SD Department of Revenue, historical sales tax statistical reports: Tourism Tax Report (PDF)"
+
+[[dataset]]
+id = "gaming"
+name = "Licensed gaming (Deadwood) by month: handle, win and the gaming tax"
+project = "sd-archive (pipelines/gaming)"
+grain = "aggregate"
+coverage = ["0400000US46"]
+geography = ["state"]
+period = "month, January 2023 on"
+measures = ["handle", "statistical win", "payout percent", "units", "taxable adjusted gross revenue", "gaming tax and its distribution"]
+dimensions = ["slot denomination", "table game", "sport (sports wagering)"]
+source = "SD Commission on Gaming monthly statistics, on the Department of Revenue's gaming page (PDF)"
+notes = "Deadwood is the only place with licensed casino gaming, in Lawrence County, so the statewide figures are Deadwood's. Five months are scans read by OCR and used only if every check passes; August 2023, January 2024 and September 2024 are left out."

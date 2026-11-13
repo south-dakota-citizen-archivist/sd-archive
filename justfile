@@ -94,6 +94,11 @@ site:
     uv run python publish/build.py
     uv run python -m http.server 8001 --directory .cache/publish/site
 
+# Gaming (Deadwood): fetch the Commission on Gaming's monthly statistics, build the tables
+gaming:
+    uv run python pipelines/gaming/fetch.py
+    uv run python pipelines/gaming/build.py
+
 # Build the motor vehicle tables and replace them on their GitHub release
 publish-motor-vehicles: motor-vehicles
     cd .cache/motor-vehicles/build && for f in annual.csv annual.parquet monthly.csv monthly.parquet; do cp "$f" "motor-vehicles-$f"; done
