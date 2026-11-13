@@ -172,6 +172,27 @@ class Record(models.Model):
         return f"{self.recordset.slug}:{self.key}"
 
 
+class RecordLink(models.Model):
+    """One record naming another by an ID both carry: a property sale and the GIS feature of
+    a parcel it lists. Rebuilt in full by `manage.py link_records`; what matched is kept, so
+    every link can be checked against both records."""
+
+    from_record = models.ForeignKey(Record, on_delete=models.CASCADE, related_name="links_out")
+    to_record = models.ForeignKey(Record, on_delete=models.CASCADE, related_name="links_in")
+    kind = models.CharField(max_length=50, db_index=True, help_text="parcel")
+    from_field = models.CharField(max_length=100, help_text="Where the ID is (parcels)")
+    to_field = models.CharField(max_length=100, help_text="Where it matched (PARCELID)")
+    value = models.CharField(max_length=200, help_text="The ID as the first record gives it")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["from_record", "to_record", "kind"],
+                                               name="record_link")]  # fmt: skip
+
+    def __str__(self) -> str:
+        return f"{self.from_record} → {self.to_record} ({self.kind} {self.value})"
+
+
 class Document(models.Model):
     """A file belonging to a record, stored once by its SHA-256 (media/blobs/)."""
 
