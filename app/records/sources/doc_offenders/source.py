@@ -6,8 +6,10 @@ listed name and by each alias, for matching across record sets.
 
 The locator searches by last name prefix, so a run searches each letter, A to Z (in a Chrome
 window: the search has an "I'm not a robot" box), and reads every page of each letter's
-results (plain form posts). Searches are 15 to 30 minutes apart; in between, and after, it
-reads people's pages (plain links), at most `DETAILS_PER_RUN` new ones a run. Results and
+results (plain form posts). It goes at a person's pace: searches 40 to 80 minutes apart,
+results pages 5 to 12 seconds apart, and people's pages (plain links) 8 to 20 seconds apart,
+with a break of 3 to 10 minutes every 30 to 70 pages; people's pages are read between
+searches and after them, at most `DETAILS_PER_RUN` new ones a run. Results and
 people's pages are kept by month: a stopped run resumes, and the next month's run reads them
 again. A person whose page hasn't been read
 this month keeps the last one read; until every letter has been searched and every person
@@ -33,8 +35,13 @@ from . import parse
 logger = logging.getLogger(__name__)
 STATE = "0400000US46"
 LETTERS = string.ascii_uppercase
-DETAILS_PER_RUN = 20000
-SEARCH_GAP = (15 * 60.0, 30 * 60.0)  # seconds between searches
+DETAILS_PER_RUN = 5000
+# the pace, in seconds: a person's, not a program's
+SEARCH_GAP = (40 * 60.0, 80 * 60.0)  # between searches (each has the "I'm not a robot" box)
+PAGE_GAP = (5.0, 12.0)  # between a search's results pages
+DETAIL_GAP = (8.0, 20.0)  # between people's pages
+BREAK_EVERY = (30, 70)  # people's pages between breaks
+BREAK = (3 * 60.0, 10 * 60.0)  # a break
 
 
 def browser_profile() -> Path:
@@ -49,10 +56,11 @@ def _searcher():
     return Searcher(browser_profile())
 
 
-def letter_pages(fetcher, first: bytes) -> list[bytes]:
+def letter_pages(fetcher, first: bytes, sleep=time.sleep) -> list[bytes]:
     """Every page of one search's results, from its first page."""
     pages, html, n = [first], first, 1
     while arg := parse.next_page(html, n):
+        sleep(random.uniform(*PAGE_GAP))
         data = {k: v for k, v in form_fields(html).items() if k not in ("btnMission", "btnReset")}
         data |= {"__EVENTTARGET": parse.GRID, "__EVENTARGUMENT": arg}
         html = fetcher.request("POST", parse.URL, data=data, timeout=120).content
@@ -80,11 +88,13 @@ def latest_detail(store, month: str, doc: str) -> tuple[str | None, bytes | None
 class _People:
     """The people found so far, and reading their pages up to the run's budget."""
 
-    def __init__(self, fetcher, store, month: str, budget: int):
+    def __init__(self, fetcher, store, month: str, budget: int, sleep=time.sleep):
         self.fetcher, self.store, self.month, self.budget = fetcher, store, month, budget
+        self.sleep = sleep
         self.found: dict[str, dict] = {}
         self.todo: list[str] = []
         self.read = 0
+        self.until_break = random.randint(*BREAK_EVERY)
 
     def add(self, rows: list[dict]) -> None:
         new = [r for r in rows if r["doc_number"] not in self.found]
@@ -100,6 +110,12 @@ class _People:
         """Read one person's page; False if there's none to read or the budget is spent."""
         if not self.todo or self.read >= self.budget:
             return False
+        if self.read:
+            self.sleep(random.uniform(*DETAIL_GAP))
+            self.until_break -= 1
+            if self.until_break <= 0:
+                self.sleep(random.uniform(*BREAK))
+                self.until_break = random.randint(*BREAK_EVERY)
         doc = self.todo.pop()
         url = parse.detail_url(self.found[doc]["detail_id"])
         html = self.fetcher.request("GET", url, timeout=120).content
@@ -119,7 +135,7 @@ def items(fetcher, today: date | None = None, details_per_run: int | None = None
     search_gap = SEARCH_GAP if search_gap is None else search_gap
     month = f"{today or date.today():%Y-%m}"
     store = getattr(fetcher, "store", None)
-    people = _People(fetcher, store, month, details_per_run)
+    people = _People(fetcher, store, month, details_per_run, sleep)
     counts: dict[str, int] = {}
     stopped, searcher, next_search = None, None, clock()
     try:
@@ -139,7 +155,7 @@ def items(fetcher, today: date | None = None, details_per_run: int | None = None
                     stopped = str(e)
                     break
                 next_search = clock() + random.uniform(*search_gap)
-                pages = letter_pages(fetcher, first)
+                pages = letter_pages(fetcher, first, sleep)
                 if store is not None:
                     for i, page in enumerate(pages, start=1):
                         store.save(f"results/{month}/{letter}/page-{i:04d}.html", page,

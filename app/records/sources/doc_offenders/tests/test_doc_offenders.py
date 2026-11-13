@@ -93,7 +93,8 @@ class FixtureFetcher:
 def searcher(monkeypatch):
     FakeSearcher.letters, FakeSearcher.puzzle_at = [], None
     monkeypatch.setattr(source, "_searcher", FakeSearcher)
-    monkeypatch.setattr(source, "SEARCH_GAP", (0.0, 0.0))
+    for pace in ("SEARCH_GAP", "PAGE_GAP", "DETAIL_GAP", "BREAK"):
+        monkeypatch.setattr(source, pace, (0.0, 0.0))
     return FakeSearcher
 
 
@@ -189,3 +190,20 @@ def test_the_live_site(tmp_path):
     fetcher = sdfetch.Fetcher(tmp_path, delay=0)
     d = parse.detail(fetcher.request("GET", parse.detail_url("kPKnHBADcW0=")).content)
     assert d["fields"]["DOC Number"] == "25287" and d["name"].startswith("Quakenbush")
+
+
+def test_peoples_pages_are_read_at_a_persons_pace(tmp_path, monkeypatch):
+    """A gap before every page after the first, and a break every few pages."""
+    monkeypatch.setattr(source, "DETAIL_GAP", (5.0, 5.0))
+    monkeypatch.setattr(source, "BREAK_EVERY", (3, 3))
+    monkeypatch.setattr(source, "BREAK", (300.0, 300.0))
+    slept = []
+    rows = parse.results(page("results-q-1.html"))[:7]
+    people = source._People(FixtureFetcher(Store(tmp_path)), Store(tmp_path), "2026-11", 100,
+                            sleep=slept.append)  # fmt: skip
+    people.add(rows)
+    while people.read_one():
+        pass
+    assert people.read == 7
+    # 6 gaps (none before the first page), and a break after every 3rd gap
+    assert slept == [5.0, 5.0, 5.0, 300.0, 5.0, 5.0, 5.0, 300.0]
