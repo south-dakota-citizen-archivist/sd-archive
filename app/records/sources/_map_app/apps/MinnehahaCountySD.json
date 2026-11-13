@@ -1,0 +1,333 @@
+{
+  "map": {
+    "app_id": 1180,
+    "layer_id": 35026,
+    "layer": "Parcels",
+    "key_field": "BeaconID",
+    "srid": 32164,
+    "units": "ft",
+    "extent": {
+      "minx": 2134023.19,
+      "miny": 15812285.91,
+      "maxx": 2315274.07,
+      "maxy": 15933394.46
+    },
+    "report_url": "/Application.aspx?AppID=1180&LayerID=35026&PageTypeID=4&PageID=13301&KeyValue={0}",
+    "layers": [
+      {
+        "group": null,
+        "name": "School Districts",
+        "layer_id": 35073,
+        "key": "DISTRICTNAME"
+      },
+      {
+        "group": null,
+        "name": "Sioux Falls Zoning",
+        "layer_id": 35074,
+        "key": "OBJECTID"
+      },
+      {
+        "group": null,
+        "name": "Address Points",
+        "layer_id": 35075,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "Parcels",
+        "layer_id": 35026,
+        "key": "BeaconID"
+      },
+      {
+        "group": null,
+        "name": "Parcel Numbers",
+        "layer_id": 35063,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "County Tracts",
+        "layer_id": 36512,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "County Lots",
+        "layer_id": 36513,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "County Blocks",
+        "layer_id": 36514,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "Sioux Falls Subdivision Labels",
+        "layer_id": 36517,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "Sioux Falls Plats",
+        "layer_id": 36516,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "Sioux Falls Plat Labels",
+        "layer_id": 36515,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "Corporate Limits",
+        "layer_id": 35076,
+        "key": "FID"
+      },
+      {
+        "group": null,
+        "name": "Roads",
+        "layer_id": 35078,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "USA Major Highways",
+        "layer_id": 35064,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "Township",
+        "layer_id": 35079,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "Section",
+        "layer_id": 43443,
+        "key": "OBJECTID"
+      },
+      {
+        "group": null,
+        "name": "Quarter Sections",
+        "layer_id": 43442,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "Quarter Quarters (Sections)",
+        "layer_id": 43471,
+        "key": ""
+      },
+      {
+        "group": "Residential Sales 2021-2025",
+        "name": "Residential Sales 2025",
+        "layer_id": 47780,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Residential Sales 2021-2025",
+        "name": "Residential Sales 2024",
+        "layer_id": 43827,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Residential Sales 2021-2025",
+        "name": "Residential Sales 2023",
+        "layer_id": 39774,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Residential Sales 2021-2025",
+        "name": "Residential Sales 2022",
+        "layer_id": 35784,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Residential Sales 2021-2025",
+        "name": "Residential Sales 2021",
+        "layer_id": 35785,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Commercial Sales 2020-2025",
+        "name": "Commercial Sales 2025",
+        "layer_id": 47781,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Commercial Sales 2020-2025",
+        "name": "Commercial Sales 2024",
+        "layer_id": 43828,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Commercial Sales 2020-2025",
+        "name": "Commercial Sales 2023",
+        "layer_id": 39775,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Commercial Sales 2020-2025",
+        "name": "Commercial Sales 2022",
+        "layer_id": 35786,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Commercial Sales 2020-2025",
+        "name": "Commercial Sales 2021",
+        "layer_id": 35787,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Commercial Sales 2020-2025",
+        "name": "Commercial Sales 2020",
+        "layer_id": 35788,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Neighborhoods",
+        "name": "Residential Neighborhoods",
+        "layer_id": 35789,
+        "key": "OBJECTID"
+      },
+      {
+        "group": "Neighborhoods",
+        "name": "SF Commercial Neighborhoods",
+        "layer_id": 35790,
+        "key": "OBJECTID"
+      },
+      {
+        "group": null,
+        "name": "Soils",
+        "layer_id": 37147,
+        "key": "OBJECTID"
+      },
+      {
+        "group": null,
+        "name": "County Outlines",
+        "layer_id": 35065,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "2020 Aerial Photography",
+        "layer_id": 35096,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "2023 Aerial Photography",
+        "layer_id": 38457,
+        "key": ""
+      },
+      {
+        "group": "Assessment Layers",
+        "name": "Quality",
+        "layer_id": 43241,
+        "key": ""
+      },
+      {
+        "group": "Assessment Layers",
+        "name": "Year Built",
+        "layer_id": 43242,
+        "key": ""
+      },
+      {
+        "group": "Assessment Layers",
+        "name": "Building Type",
+        "layer_id": 43244,
+        "key": ""
+      },
+      {
+        "group": "Assessment Layers",
+        "name": "Condition",
+        "layer_id": 43243,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "County_Block",
+        "layer_id": 47779,
+        "key": ""
+      }
+    ]
+  },
+  "pages": 30,
+  "sections": {
+    "Summary": {
+      "kind": "fields",
+      "pages": 30,
+      "fields": {
+        "Parcel ID": 30,
+        "Property Address": 30,
+        "Sec/Twp/Rng": 30,
+        "Brief Tax Description": 30,
+        "Comments": 30,
+        "Class": 30,
+        "Tax District": 30,
+        "Gross Acres": 30,
+        "$/Acre": 30
+      }
+    },
+    "Valuation": {
+      "kind": "rows",
+      "pages": 30,
+      "fields": {
+        "Assessed Year": 30,
+        "Class": 30,
+        "Building Value": 30,
+        "Land Value": 30,
+        "Total Value": 30
+      }
+    },
+    "Taxation": {
+      "kind": "rows",
+      "pages": 30,
+      "fields": {
+        "year": 30,
+        "item": 30,
+        "1st Half": 30,
+        "2nd Half": 30,
+        "Full Year": 30
+      }
+    },
+    "Sales": {
+      "kind": "rows",
+      "pages": 29,
+      "fields": {
+        "Date": 29,
+        "Sequence": 29,
+        "Seller": 29,
+        "Buyer": 29,
+        "Book / Page": 29,
+        "Type": 29,
+        "Transfer Fee": 29,
+        "Sale Amount": 29,
+        "MultiParcel": 29
+      }
+    },
+    "Additional Parcels Involved in Sale": {
+      "kind": "lines",
+      "pages": 16,
+      "fields": {}
+    }
+  },
+  "restricted": {
+    "Land": 30,
+    "Comments": 30,
+    "Building": 26,
+    "Photos": 26,
+    "Sketches": 26
+  },
+  "empty": {},
+  "owners": {
+    "pages": 30,
+    "types": {
+      "Deed Holder": 33
+    }
+  }
+}

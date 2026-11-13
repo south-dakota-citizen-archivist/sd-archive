@@ -279,6 +279,12 @@
         "key": "FID"
       },
       {
+        "group": null,
+        "name": "County Boundary",
+        "layer_id": 38977,
+        "key": ""
+      },
+      {
         "group": "Aerial Imagery",
         "name": "2024 Aerial Imagery",
         "layer_id": 42685,
@@ -288,6 +294,12 @@
         "group": "Aerial Imagery",
         "name": "2016 Aerial Imagery",
         "layer_id": 42686,
+        "key": ""
+      },
+      {
+        "group": null,
+        "name": "Topographic Map",
+        "layer_id": 39181,
         "key": ""
       }
     ]

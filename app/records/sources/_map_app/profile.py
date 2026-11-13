@@ -41,10 +41,12 @@ def _fields(value) -> list[str]:
 
 
 def map_info(config: dict) -> dict:
-    groups = config.get("LayerView") or []
-    layers = [{"group": g.get("GroupName"), "name": layer["LayerName"],
+    # LayerView lists groups of layers, and layers on their own
+    entries = [(g.get("GroupName"), layer) for g in config.get("LayerView") or []
+               for layer in (g.get("Layers") or ([g] if "LayerName" in g else []))]  # fmt: skip
+    layers = [{"group": group, "name": layer["LayerName"],
                "layer_id": layer.get("LayerId"), "key": layer.get("MapKey")}
-              for g in groups for layer in g.get("Layers") or []]  # fmt: skip
+              for group, layer in entries]  # fmt: skip
     layer = next((x for x in layers if x["layer_id"] == config.get("LayerId")), {})
     return {"app_id": config.get("AppId"), "layer_id": config.get("LayerId"),
             "layer": layer.get("name"), "key_field": layer.get("key"),
