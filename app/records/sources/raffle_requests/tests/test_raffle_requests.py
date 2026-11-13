@@ -19,6 +19,7 @@ FORM = (b'<html><body><form method="post" action="./Default.aspx">'
 @pytest.fixture(autouse=True)
 def no_pause(monkeypatch):
     monkeypatch.setattr(sos, "_pace", lambda *a, **k: None)
+    monkeypatch.setattr(sos, "_sleep", lambda *a, **k: None)
 
 
 class Response:
@@ -36,14 +37,18 @@ class FakeFetcher:
 
     store = None
 
-    def __init__(self, images=None, error_page=False):
+    def __init__(self, images=None, error_page=False, sorry=0):
         self.asked, self.images, self.error_page = [], images or {}, error_page
+        self.sorry = sorry  # how many page image requests answer "we're sorry" first
 
     def request(self, method, url, data=None, **kwargs):
         self.asked.append((method, url, data))
         if self.error_page:
             return Response(b"<html>error</html>", "https://sdsos.gov/error.aspx?aspxerrorpath=/x")
         if "ShowImage.aspx" in url:
+            if self.sorry:
+                self.sorry -= 1
+                return Response(b"<html><body>We're sorry, try again later</body></html>", url)
             return Response(self.images[url[-1]], url, "image/jpeg")
         if "Document.aspx" in url:
             return Response((FIXTURES / "viewer.html").read_bytes(), url)
@@ -120,9 +125,22 @@ def test_a_viewer_becomes_one_pdf():
     pdf = sos.assemble(fetcher, url)
     with pdfplumber.open(io.BytesIO(pdf)) as doc:
         assert len(doc.pages) == 2
-    assert [u[-7:] for _, u, _ in fetcher.asked[1:]] == ["Image=1", "Image=2"]  # in order
+    # the search page, the viewer, then the pages in order
+    assert fetcher.asked[0][1].endswith("/Search/Default.aspx")
+    assert [u[-7:] for _, u, _ in fetcher.asked[2:]] == ["Image=1", "Image=2"]
     with pytest.raises(sos.Blocked):
         sos.assemble(FakeFetcher(error_page=True), url)
+
+
+def test_a_page_image_is_asked_for_again_after_a_sorry_page():
+    url = ("https://sdsos.gov/general-information/executive-actions/raffle-requests/Search/"
+           "Document.aspx?CabId=523E2A2A&DocGuid=20261002-1616-1055-5196-1879bb67d5de")  # fmt: skip
+    fetcher = FakeFetcher(images={"1": jpeg("white"), "2": jpeg("gray")}, sorry=2)
+    assert sos.assemble(fetcher, url)[:5] == b"%PDF-"
+    assert [u[-7:] for _, u, _ in fetcher.asked[2:]] == ["Image=1"] * 3 + ["Image=2"]
+    # one that keeps answering it is a block, and stops the batch
+    with pytest.raises(sos.Blocked):
+        sos.assemble(FakeFetcher(images={"1": jpeg("white")}, sorry=10), url)
 
 
 def test_imported_records():

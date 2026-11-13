@@ -9,8 +9,12 @@ filings all use one system.
 - Each row links to the document's viewer (`Document.aspx?CabId=…&DocGuid=…`): a page of
   scanned page images, not a file. `assemble()` fetches the images in order and makes one PDF
   (or merges the PDF pages some filings are stored as). The DocGuid is the document's key.
-- The server sometimes answers with a "we're sorry" page instead of results, or sends every
-  request to its error page (`Blocked`).
+  The images are served only to a session that has opened the search page and then the
+  viewer, so each document starts a fresh session that does both, in that order.
+- The server sometimes answers with a "we're sorry" page instead of results or a page image,
+  often only for a moment: a page image that gets one is asked for again after a longer wait
+  (`IMAGE_RETRIES`) before it counts as a block. When the server sends requests to its error
+  page, that's a block at once (`Blocked`).
 
 **The system goes down easily, so it's used slowly**: one request at a time, each waiting
 `PAUSE` after the one before, and the first block stops the run (and a document batch)
@@ -32,6 +36,8 @@ from urllib.parse import parse_qs, urljoin, urlsplit
 from records.sources import DocumentLink, Found, Item, Source
 
 PAUSE = (5.0, 5.0)  # seconds between any two requests to the search system
+IMAGE_RETRIES = (15.0, 45.0, 90.0)  # seconds to wait before asking for a page image again
+_sleep = time.sleep
 _last = [0.0]  # when the last request went out (time.monotonic)
 
 BLOCK_PHRASES = ("we're sorry", "we are sorry", "temporarily unavailable", "access denied",
@@ -155,13 +161,45 @@ def parse_date(text: str | None) -> str | None:
 # --- the document ----------------------------------------------------------------------
 
 
+def _fresh_session(fetcher) -> None:
+    """Forget the cookies of the document before."""
+    session = getattr(fetcher, "session", None)
+    if session is not None:
+        session.cookies.clear()
+
+
+def _image(fetcher, url: str, viewer_url: str):
+    """A page image, asked for again after a wait when the answer is a "we're sorry" page."""
+    for wait in (*IMAGE_RETRIES, None):
+        _pace()
+        resp = fetcher.request("GET", url, timeout=120, headers={"Referer": viewer_url})
+        body = resp.content
+        if not body[:200].lstrip().lower().startswith((b"<!doctype", b"<html")):
+            return resp
+        if "error.aspx" in str(getattr(resp, "url", url)).lower() or wait is None:
+            check_block(resp.text, url)
+            raise LayoutChanged(f"{url}: a web page, not a page image")
+        try:
+            check_block(resp.text, url)
+        except Blocked:
+            _sleep(wait)
+            continue
+        raise LayoutChanged(f"{url}: a web page, not a page image")
+    raise AssertionError("unreachable")
+
+
 def assemble(fetcher, viewer_url: str) -> bytes:
-    """A filing's scanned pages, from its viewer, as one PDF (each request paced)."""
+    """A filing's scanned pages, from its viewer, as one PDF (each request paced): a fresh
+    session opens the search page, then the viewer, then each page image in order."""
     import lxml.html
     from PIL import Image
 
+    _fresh_session(fetcher)
+    search_url = urljoin(viewer_url, "Default.aspx")
     _pace()
-    page = fetcher.request("GET", viewer_url, timeout=120)
+    check_block(fetcher.request("GET", search_url, timeout=120).text, search_url)
+    _pace()
+    page = fetcher.request("GET", viewer_url, timeout=120, headers={"Referer": search_url})
     if page.content[:5] == b"%PDF-":
         return page.content  # a link that serves the filing itself
     check_block(page.text, page.url)
@@ -179,15 +217,10 @@ def assemble(fetcher, viewer_url: str) -> bytes:
         raise LayoutChanged(f"{viewer_url}: no page images")
     images, pdfs = [], []
     for url in links:
-        _pace()
-        resp = fetcher.request("GET", url, timeout=120)
-        body = resp.content
+        body = _image(fetcher, url, viewer_url).content
         if body[:5] == b"%PDF-":
             pdfs.append(body)
             continue
-        if body[:200].lstrip().lower().startswith((b"<!doctype", b"<html")):
-            check_block(resp.text, url)
-            raise LayoutChanged(f"{url}: a web page, not a page image")
         images.append(Image.open(io.BytesIO(body)).convert("RGB"))
     if pdfs and images:
         raise LayoutChanged(f"{viewer_url}: both PDF and image pages")
