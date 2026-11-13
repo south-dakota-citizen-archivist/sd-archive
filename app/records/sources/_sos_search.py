@@ -12,9 +12,9 @@ filings all use one system.
 - The server sometimes answers with a "we're sorry" page instead of results, or sends every
   request to its error page (`Blocked`).
 
-**The system goes down easily, so it's used slowly**: every request waits `PAUSE` (a minute
-or two) after the one before, and the first block stops the run (and a document batch)
-rather than trying the next thing. Run one of these sources at a time, not one after another.
+**The system goes down easily, so it's used slowly**: one request at a time, each waiting
+`PAUSE` after the one before, and the first block stops the run (and a document batch)
+rather than trying the next thing.
 
 `search_source()` makes a record set's source from a search: its URL, its columns and the
 names it lists.
@@ -31,7 +31,7 @@ from urllib.parse import parse_qs, urljoin, urlsplit
 
 from records.sources import DocumentLink, Found, Item, Source
 
-PAUSE = (60.0, 150.0)  # seconds between any two requests to the search system
+PAUSE = (5.0, 5.0)  # seconds between any two requests to the search system
 _last = [0.0]  # when the last request went out (time.monotonic)
 
 BLOCK_PHRASES = ("we're sorry", "we are sorry", "temporarily unavailable", "access denied",
