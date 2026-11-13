@@ -15,7 +15,7 @@
     <tbody>
       {% for record, values in rows %}
         <tr{% if record.dropped_at %} class="opacity-60"{% endif %}>
-          <td class="whitespace-nowrap"><a class="link font-mono" href="{% url 'records:record_detail' recordset.slug record.key %}" title="{{ record.key }}">{{ record.key|truncatechars:24 }}</a>{% if record.dropped_at %} <span class="pill">gone</span>{% endif %}</td>
+          <td class="whitespace-nowrap"><a class="link font-mono" href="{% url 'records:record_detail' recordset.slug record.pk %}" title="{{ record.key }}">{{ record.key|truncatechars:24 }}</a>{% if record.dropped_at %} <span class="pill">gone</span>{% endif %}</td>
           {% for v in values %}<td class="whitespace-nowrap max-w-xs truncate" title="{{ v }}">{{ v }}</td>{% endfor %}
         </tr>
       {% empty %}

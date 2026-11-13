@@ -89,7 +89,10 @@ def test_a_record(client, made):
     assert made["parcel"].get_absolute_url() in page  # its link to the parcel
     page = client.get(made["parcel"].get_absolute_url()).content.decode()
     assert made["big"].get_absolute_url() in page  # and back
-    assert client.get("/records/sales/r/nope").status_code == 404
+    assert client.get("/records/sales/999999/").status_code == 404
+    # a record's ID under another record set isn't found there
+    assert client.get(f"/records/gis-data/{made['big'].pk}/").status_code == 404
+    assert made["big"].get_absolute_url() == f"/records/sales/{made['big'].pk}/"
 
 
 def test_a_documents_file(client, made):

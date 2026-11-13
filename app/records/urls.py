@@ -10,5 +10,5 @@ urlpatterns = [
     path("<slug:slug>/", views.recordset_detail, name="recordset_detail"),
     path("<slug:slug>/table/", views.recordset_table, name="recordset_table"),
     path("<slug:slug>/records.csv", views.recordset_csv, name="recordset_csv"),
-    path("<slug:slug>/r/<path:key>", views.record_detail, name="record_detail"),
+    path("<slug:slug>/<int:pk>/", views.record_detail, name="record_detail"),
 ]

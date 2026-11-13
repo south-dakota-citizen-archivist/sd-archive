@@ -257,11 +257,12 @@ def run_detail(request: HttpRequest, pk: int) -> HttpResponse:
 # --- a record --------------------------------------------------------------------------
 
 
-def record_detail(request: HttpRequest, slug: str, key: str) -> HttpResponse:
+def record_detail(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
+    """A record, by its ID in the archive (keys are whatever text the source uses)."""
     from entities.models import Mention
 
     recordset = get_recordset(slug)
-    record = Record.objects.filter(recordset=recordset, key=key).select_related("run").first()
+    record = Record.objects.filter(recordset=recordset, pk=pk).select_related("run").first()
     if record is None:
         raise Http404("no such record")
     fields = [{"name": name, "text": cell(value, None),

@@ -176,7 +176,7 @@ class Record(models.Model):
         return f"{self.recordset.slug}:{self.key}"
 
     def get_absolute_url(self) -> str:
-        return reverse("records:record_detail", args=[self.recordset.slug, self.key])
+        return reverse("records:record_detail", args=[self.recordset.slug, self.pk])
 
 
 class RecordLink(models.Model):
