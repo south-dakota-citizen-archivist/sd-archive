@@ -2,7 +2,7 @@
 keyed `<app>:<feature key>`, with its shape and whatever its report page shows publicly.
 
 A run reads each app in turn: every feature's key, shape and tooltip from the map (tiles),
-then each feature's report page, at most `reports_per_run` new ones a run across the apps.
+then each feature's report page, at most `reports_per_run` new ones a run for each app.
 Tiles and report pages are stored by app and month, so a stopped run resumes and the next
 month's run reads them again. A feature whose report hasn't been read this month keeps the
 last one read; until every feature has one, the run is partial (nothing is marked dropped).
@@ -134,12 +134,11 @@ def map_app_source(slug: str, apps: dict[str, str], *, name: str, publisher: str
     def items(fetcher, today: date | None = None) -> Found:
         month = f"{today or date.today():%Y-%m}"
         store = getattr(fetcher, "store", None)
-        out, checks, stops, budget = Found(), {}, [], reports_per_run
+        out, checks, stops = Found(), {}, []
         for app, county in apps.items():
-            found, app_checks, fetched, stopped = read_app(app, county, store, month, budget)
+            found, app_checks, _, stopped = read_app(app, county, store, month, reports_per_run)
             out += found
             checks[app] = app_checks
-            budget = max(0, budget - fetched)
             if stopped:
                 stops.append(stopped)
         out.checks = {"apps": checks, "features": len(out)}

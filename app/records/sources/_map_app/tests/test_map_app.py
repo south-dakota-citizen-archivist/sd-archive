@@ -219,11 +219,10 @@ def test_a_run(db, sd_counties, monkeypatch, tmp_path):
     fetcher = type("F", (), {"store": Store(tmp_path)})()
     RecordSet.objects.create(slug="gis-data", name="GIS data", dataset="gis-data")  # fmt: skip
     run = run_source("gis-data", fetcher=fetcher)
-    assert run.added == 3 and run.checks["apps"]["LawrenceCountySD"]["reports_read"] == 3
-    assert (
-        run.checks["apps"]["LawrenceCountySD"]["without_report"] == 0
-        and "stopped" not in run.checks
-    )
+    apps = run.checks["apps"]  # each app read in turn, each with its own report pages
+    assert run.added == 6 and [a["reports_read"] for a in apps.values()] == [3, 3]
+    assert [a["without_report"] for a in apps.values()] == [0, 0]
+    assert "stopped" not in run.checks
     record = Record.objects.get(key="LawrenceCountySD:17000-00503-280-00")
     assert record.geometry.geom_type == "MultiPolygon"
     assert record.data["sections"]["Summary"]["Zoning"] == "SRD"
@@ -231,7 +230,5 @@ def test_a_run(db, sd_counties, monkeypatch, tmp_path):
     assert sorted(record.places.values_list("geoid", flat=True)) == ["46", "46081"]
     # the next run in the same month reads nothing again
     run = run_source("gis-data", fetcher=fetcher)
-    assert (
-        run.checks["apps"]["LawrenceCountySD"]["reports_read"] == 0
-        and len(FakeSession.reports_asked) == 3
-    )
+    assert [a["reports_read"] for a in run.checks["apps"].values()] == [0, 0]
+    assert len(FakeSession.reports_asked) == 6
