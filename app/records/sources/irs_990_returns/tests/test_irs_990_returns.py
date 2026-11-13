@@ -190,3 +190,24 @@ def test_a_deflate64_member():
     archive = zipfile.ZipFile(io.BytesIO(deflate64_zip("x/1_public.xml", F990)))
     assert archive.getinfo("x/1_public.xml").compress_type == 9
     assert read_member(archive, "x/1_public.xml") == F990
+
+
+def test_a_title_longer_than_the_role_field():
+    """Officers' titles can run long; the role falls back to the category and the whole title
+    is kept in the mention's context."""
+    from types import SimpleNamespace
+
+    long_title = "PRESIDENT AND CHIEF EXECUTIVE OFFICER, SECRETARY OF THE BOARD (THROUGH 6/2024)"
+    record = SimpleNamespace(
+        data={"ein": "460000000", "name": "Example Foundation", "tax_year": "2024",
+              "people": [{"name": "Jane Doe", "kind": "person", "role": "officer",
+                          "title": long_title},
+                         {"name": "John Roe", "kind": "person", "role": "officer",
+                          "title": "Treasurer"}],
+              "signed_by": None, "preparer": None},
+        recordset=SimpleNamespace(dataset="irs-990-returns"),
+        source_url="https://example/x")  # fmt: skip
+    found = {m.original: m for m in source.mentions(record)}
+    assert found["Jane Doe"].role == "officer" and found["Jane Doe"].context["title"] == long_title
+    assert found["John Roe"].role == "Treasurer"
+    assert all(len(m.role) <= source.ROLE_LENGTH for m in found.values())

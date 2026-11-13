@@ -175,6 +175,10 @@ def items(fetcher, today: date | None = None, mirror: bool = True) -> Found:
     return out
 
 
+ROLE_LENGTH = 50  # entities.Mention.role's length; a longer title (officers' titles can run
+# to a paragraph) is kept whole in the mention's context
+
+
 def mentions(record) -> list:
     d = record.data
     common = {"dataset": record.recordset.dataset, "record_key": str(record),
@@ -182,13 +186,21 @@ def mentions(record) -> list:
               "context": {"ein": d["ein"], "organization": d["name"],
                           "tax_year": d["tax_year"]}}  # fmt: skip
     out = from_text(d["name"], field="name", role="filer", **common)
+
+    def titled(title, fallback):
+        """The title as the role when it fits the role field, else the fallback; the whole
+        title goes in the context either way."""
+        role = title if title and len(title) <= ROLE_LENGTH else fallback
+        ctx = {**common["context"], **({"title": title} if title else {})}
+        return {**common, "context": ctx, "role": role}
+
     for p in d["people"]:
-        out += from_text(p["name"], field="people", role=p["title"] or p["role"],
+        out += from_text(p["name"], field="people", **titled(p["title"], p["role"]),
                          order="given_first" if p["kind"] == "person" else "auto",
-                         start=len(out), **common)  # fmt: skip
+                         start=len(out))  # fmt: skip
     if (s := d.get("signed_by")) and s.get("name"):
-        out += from_text(s["name"], field="signed_by", role=s.get("title") or "signer",
-                         order="given_first", start=len(out), **common)  # fmt: skip
+        out += from_text(s["name"], field="signed_by", **titled(s.get("title"), "signer"),
+                         order="given_first", start=len(out))  # fmt: skip
     if (p := d.get("preparer")) and p.get("person"):
         out += from_text(p["person"], field="preparer", role="paid preparer",
                          order="given_first", start=len(out), **common)  # fmt: skip
