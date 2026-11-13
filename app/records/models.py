@@ -164,6 +164,9 @@ class Record(models.Model):
     class Meta:
         ordering = ["recordset", "key"]
         constraints = [models.UniqueConstraint(fields=["recordset", "key"], name="record_key")]
+        # counting a record set's current records reads this, not the table
+        indexes = [models.Index(fields=["recordset"], condition=models.Q(dropped_at=None),
+                                name="record_current_by_set")]  # fmt: skip
 
     def __str__(self) -> str:
         return f"{self.recordset.slug}:{self.key}"
