@@ -543,7 +543,8 @@ def png() -> bytes:
 
 
 def test_file_type_comes_from_the_bytes(rs):
-    doc = make_doc(make_record(rs), url="https://sdsos.gov/Document.aspx?DocGuid=1")
+    # sdcfr.sdsos.gov's Document.aspx serves the file itself (sdsos.gov's is a viewer)
+    doc = make_doc(make_record(rs), url="https://sdcfr.sdsos.gov/Document.aspx?DocGuid=1")
     documents.fetch(
         doc,
         Fetcher(

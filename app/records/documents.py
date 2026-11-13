@@ -43,10 +43,13 @@ MIME_SUFFIX = {
 
 
 def _setup_errors() -> tuple[type[BaseException], ...]:
+    """Errors that stop the whole batch instead of failing one document: a server refusing
+    us (the Secretary of State's system goes down easily: stop at once, don't try the next)."""
+    from records.sources._sos_search import Blocked
     from sdfetch import BudgetSpent, DiskSpaceLow, NotNow
     from sdllm import RemoteCallBlocked
 
-    return (NotNow, BudgetSpent, DiskSpaceLow, RemoteCallBlocked)
+    return (NotNow, BudgetSpent, DiskSpaceLow, RemoteCallBlocked, Blocked)
 
 
 def _fail(doc: Document, error: str) -> Document:
@@ -148,9 +151,17 @@ def fetch(doc: Document, fetcher, *, refresh: bool = False) -> Document:
         return doc
     if not doc.url:
         return _fail(doc, "No URL to fetch the file from")
+    from records.sources import _sos_search
+
     try:
-        resp = fetcher.request("GET", doc.url, timeout=120)
-        content = resp.content
+        if _sos_search.is_viewer(doc.url):
+            # the Secretary of State's viewer: scanned page images, made into one PDF
+            content = _sos_search.assemble(fetcher, doc.url)
+            resp = type("Assembled", (), {"headers": {"Content-Type": "application/pdf"},
+                                          "status_code": 200})()  # fmt: skip
+        else:
+            resp = fetcher.request("GET", doc.url, timeout=120)
+            content = resp.content
     except _setup_errors():
         raise
     except Exception as e:  # noqa: BLE001 (recorded on the document)

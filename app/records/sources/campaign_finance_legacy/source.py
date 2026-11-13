@@ -3,9 +3,8 @@
 record, keyed by its DocGuid, with the year, the filer's name and the committee's name as
 the search listed them. The filing (a scanned PDF) is its document.
 
-The system's search is down (2026-11-10), so there's no items() yet; the records came from
-the earlier archive (`split_legacy_campaign_finance`). Matching filings to committees and
-people is entity work, not structure.
+The search lists every filing (a blank search). Matching filings to committees and people is
+entity work, not structure.
 """
 
 from __future__ import annotations
@@ -14,6 +13,7 @@ from urllib.parse import parse_qs, urlsplit
 
 from entities.mentions import from_text
 from records.sources import Source
+from records.sources._sos_search import Column, SearchSpec, from_legacy_for, items_for, legacy_key
 
 STATE = "0400000US46"
 
@@ -50,4 +50,13 @@ def mentions(record) -> list:
     return out
 
 
-SOURCE = Source(slug="campaign-finance-legacy", mentions=mentions)
+SPEC = SearchSpec(
+    slug="campaign-finance-legacy",
+    url="https://sdsos.gov/elections-voting/campaign-finance/search/",
+    columns=[Column("Committee Name", "committee_name"), Column("Last Name", "last_name"),
+             Column("First Name", "first_name"), Column("Year", "year", "year")],
+)  # fmt: skip
+
+SOURCE = Source(slug="campaign-finance-legacy", items=items_for(SPEC), mentions=mentions,
+                publisher="South Dakota Secretary of State", base_url=SPEC.url,
+                from_legacy=from_legacy_for(SPEC), legacy_key=legacy_key)  # fmt: skip
