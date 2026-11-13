@@ -11,10 +11,12 @@ filings all use one system.
   (or merges the PDF pages some filings are stored as). The DocGuid is the document's key.
   The images are served only to a session that has opened the search page and then the
   viewer, so each document starts a fresh session that does both, in that order.
-- The server sometimes answers with a "we're sorry" page instead of results or a page image,
-  often only for a moment: a page image that gets one is asked for again after a longer wait
-  (`IMAGE_RETRIES`) before it counts as a block. When the server sends requests to its error
-  page, that's a block at once (`Blocked`).
+- The server sometimes answers with a "we're sorry" page instead of results or a page image.
+  A page image that gets one is asked for again after a wait (`IMAGE_RETRIES`); if it still
+  does, that document fails (`PageUnavailable`: some documents' images are like that) and the
+  batch goes on, unless the document before failed the same way, which makes it a block. A
+  "we're sorry" search page or viewer, or the server's error page, is a block at once
+  (`Blocked`).
 
 **The system goes down easily, so it's used slowly**: one request at a time, each waiting
 `PAUSE` after the one before, and the first block stops the run (and a document batch)
@@ -51,6 +53,15 @@ class Blocked(Exception):
 
 class LayoutChanged(Exception):
     pass
+
+
+class PageUnavailable(Exception):
+    """A document's page image kept answering "we're sorry": that document fails, and the
+    batch goes on."""
+
+
+SORRY_IN_A_ROW = 2  # documents whose page images keep answering "we're sorry", then a block
+_sorry = [0]  # documents in a row whose page images did
 
 
 def _pace(sleep=time.sleep, clock=time.monotonic) -> None:
@@ -176,8 +187,16 @@ def _image(fetcher, url: str, viewer_url: str):
         body = resp.content
         if not body[:200].lstrip().lower().startswith((b"<!doctype", b"<html")):
             return resp
-        if "error.aspx" in str(getattr(resp, "url", url)).lower() or wait is None:
+        if "error.aspx" in str(getattr(resp, "url", url)).lower():
             check_block(resp.text, url)
+        if wait is None:
+            try:
+                check_block(resp.text, url)
+            except Blocked as e:
+                _sorry[0] += 1
+                if _sorry[0] >= SORRY_IN_A_ROW:
+                    raise Blocked(f"{e} ({_sorry[0]} documents in a row)") from None
+                raise PageUnavailable(f"{e}, after {len(IMAGE_RETRIES) + 1} tries") from None
             raise LayoutChanged(f"{url}: a web page, not a page image")
         try:
             check_block(resp.text, url)
@@ -222,6 +241,7 @@ def assemble(fetcher, viewer_url: str) -> bytes:
             pdfs.append(body)
             continue
         images.append(Image.open(io.BytesIO(body)).convert("RGB"))
+    _sorry[0] = 0  # every page came: the next document starts the count again
     if pdfs and images:
         raise LayoutChanged(f"{viewer_url}: both PDF and image pages")
     if pdfs:

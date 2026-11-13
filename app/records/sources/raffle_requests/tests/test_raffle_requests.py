@@ -20,6 +20,7 @@ FORM = (b'<html><body><form method="post" action="./Default.aspx">'
 def no_pause(monkeypatch):
     monkeypatch.setattr(sos, "_pace", lambda *a, **k: None)
     monkeypatch.setattr(sos, "_sleep", lambda *a, **k: None)
+    monkeypatch.setattr(sos, "_sorry", [0])
 
 
 class Response:
@@ -138,9 +139,15 @@ def test_a_page_image_is_asked_for_again_after_a_sorry_page():
     fetcher = FakeFetcher(images={"1": jpeg("white"), "2": jpeg("gray")}, sorry=1)
     assert sos.assemble(fetcher, url)[:5] == b"%PDF-"
     assert [u[-7:] for _, u, _ in fetcher.asked[2:]] == ["Image=1"] * 2 + ["Image=2"]
-    # one that keeps answering it is a block, and stops the batch
+    # a document whose image keeps answering it fails, and the batch goes on ...
+    with pytest.raises(sos.PageUnavailable):
+        sos.assemble(FakeFetcher(images={"1": jpeg("white")}, sorry=10), url)
+    # ... unless the document before failed the same way: then it's a block
     with pytest.raises(sos.Blocked):
         sos.assemble(FakeFetcher(images={"1": jpeg("white")}, sorry=10), url)
+    from records.documents import _setup_errors
+
+    assert not issubclass(sos.PageUnavailable, _setup_errors())
 
 
 def test_imported_records():
