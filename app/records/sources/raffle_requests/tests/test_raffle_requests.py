@@ -135,9 +135,9 @@ def test_a_viewer_becomes_one_pdf():
 def test_a_page_image_is_asked_for_again_after_a_sorry_page():
     url = ("https://sdsos.gov/general-information/executive-actions/raffle-requests/Search/"
            "Document.aspx?CabId=523E2A2A&DocGuid=20261002-1616-1055-5196-1879bb67d5de")  # fmt: skip
-    fetcher = FakeFetcher(images={"1": jpeg("white"), "2": jpeg("gray")}, sorry=2)
+    fetcher = FakeFetcher(images={"1": jpeg("white"), "2": jpeg("gray")}, sorry=1)
     assert sos.assemble(fetcher, url)[:5] == b"%PDF-"
-    assert [u[-7:] for _, u, _ in fetcher.asked[2:]] == ["Image=1"] * 3 + ["Image=2"]
+    assert [u[-7:] for _, u, _ in fetcher.asked[2:]] == ["Image=1"] * 2 + ["Image=2"]
     # one that keeps answering it is a block, and stops the batch
     with pytest.raises(sos.Blocked):
         sos.assemble(FakeFetcher(images={"1": jpeg("white")}, sorry=10), url)
