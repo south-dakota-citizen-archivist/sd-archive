@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Table · {{ recordset.name }} · SD GIS Hub{% endblock %}
+{% block title %}Table · {{ recordset.name }} · S.D. Archive{% endblock %}
 {% block content %}
 {% include "records/_header.html" %}
 <form class="mb-3 flex flex-wrap gap-2 items-center" hx-get="{% url 'records:recordset_table' recordset.slug %}" hx-target="#table-body" hx-push-url="true" hx-trigger="input changed delay:500ms from:input, change from:select, submit">

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ key }} · {{ dataset.name }} · SD GIS Hub{% endblock %}
+{% block title %}{{ key }} · {{ dataset.name }} · S.D. Archive{% endblock %}
 {% block extra_head %}{% include "_maplibre.html" %}{% endblock %}
 {% block content %}
 <p class="text-sm text-gray-500"><a class="link" href="{{ dataset.get_absolute_url }}">{{ dataset.name }}</a>{% if dataset.jurisdiction %} · {{ dataset.jurisdiction }}{% endif %}</p>

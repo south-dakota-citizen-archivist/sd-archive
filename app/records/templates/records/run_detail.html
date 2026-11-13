@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load humanize %}
-{% block title %}Run {{ run.pk }} · {{ recordset.name }} · SD GIS Hub{% endblock %}
+{% block title %}Run {{ run.pk }} · {{ recordset.name }} · S.D. Archive{% endblock %}
 {% block content %}
 <p class="text-sm text-gray-500"><a class="link" href="{% url 'records:recordset_list' %}">Records</a> · <a class="link" href="{{ recordset.get_absolute_url }}">{{ recordset.name }}</a></p>
 <h1 class="text-xl font-semibold mt-1">Run of {{ run.started_at|date:"Y-m-d H:i" }}</h1>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load humanize %}
-{% block title %}{{ place.name }} · SD GIS Hub{% endblock %}
+{% block title %}{{ place.name }} · S.D. Archive{% endblock %}
 {% block extra_head %}{% include "_maplibre.html" %}{% endblock %}
 {% block content %}
 <p class="text-sm text-gray-500"><a class="link" href="{% url 'census:place_list' %}">Places</a>{% if place.parent %} · <a class="link" href="{{ place.parent.get_absolute_url }}">{{ place.parent }}</a>{% endif %}</p>

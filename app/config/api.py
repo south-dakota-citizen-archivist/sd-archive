@@ -14,7 +14,9 @@ from places.models import Jurisdiction
 from search import index
 
 api = NinjaAPI(
-    title="SD GIS Hub", version="1", description="Census and archive of South Dakota GIS data"
+    title="S.D. Archive",
+    version="1",
+    description="South Dakota public records and GIS data, with their sources",
 )
 
 MAX_FEATURES = 5000

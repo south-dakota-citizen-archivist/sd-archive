@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load humanize %}
-{% block title %}Records · SD GIS Hub{% endblock %}
+{% block title %}Records · S.D. Archive{% endblock %}
 {% block content %}
 <h1 class="text-xl font-semibold">Records</h1>
 <p class="text-sm text-gray-600 mt-1">{{ rows|length }} record sets: {{ totals.current|intcomma }} current records, {{ totals.dropped|intcomma }} gone from their sources (kept), {{ totals.documents|intcomma }} documents.</p>

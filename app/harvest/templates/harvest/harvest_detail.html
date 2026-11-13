@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load humanize %}
-{% block title %}Harvest #{{ harvest.pk }} · SD GIS Hub{% endblock %}
+{% block title %}Harvest #{{ harvest.pk }} · S.D. Archive{% endblock %}
 {% block content %}
 <p class="text-sm text-gray-500"><a class="link" href="{{ dataset.get_absolute_url }}">{{ dataset.name }}</a> · <a class="link" href="{% url 'harvest:dataset_changes' dataset.pk %}">all harvests</a></p>
 <h1 class="text-xl font-semibold mt-1">Harvest of {{ harvest.started_at|date:"M j, Y H:i" }}</h1>

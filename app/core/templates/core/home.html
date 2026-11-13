@@ -6,8 +6,8 @@
 <div class="grid gap-6 lg:grid-cols-5">
   <div class="lg:col-span-2 space-y-6">
     <div>
-      <h1 class="text-2xl font-semibold tracking-tight">South Dakota GIS Hub</h1>
-      <p class="mt-1 text-sm text-gray-600">A census of public GIS data published by South Dakota governments, with an archive of the datasets worth keeping.</p>
+      <h1 class="text-2xl font-semibold tracking-tight">S.D. Archive</h1>
+      <p class="mt-1 text-sm text-gray-600">South Dakota public records, kept with their sources: <a class="link" href="{% url 'records:recordset_list' %}">{{ stats.recordsets }} record sets</a> from state and local agencies, and a census of public GIS data with an archive of the datasets worth keeping.</p>
     </div>
 
     <form action="{% url 'search:name_search' %}" class="card p-4 space-y-2">

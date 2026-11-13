@@ -166,8 +166,8 @@ LOGGING = {
 }
 
 UNFOLD = {
-    "SITE_TITLE": "SD GIS Hub admin",
-    "SITE_HEADER": "SD GIS Hub",
+    "SITE_TITLE": "S.D. Archive admin",
+    "SITE_HEADER": "S.D. Archive",
     "SITE_URL": "/",
 }
 

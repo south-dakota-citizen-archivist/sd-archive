@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}SD GIS Hub{% endblock %}</title>
+    <title>{% block title %}S.D. Archive{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
     <script src="{% static 'vendor/htmx/htmx.min.js' %}" defer></script>
     {% block extra_head %}{% endblock %}
@@ -11,7 +11,7 @@
   <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
     <nav class="bg-white border-b border-gray-200">
       <div class="mx-auto max-w-7xl px-4 flex items-center gap-6 h-12 overflow-x-auto">
-        <a href="{% url 'home' %}" class="font-semibold tracking-tight whitespace-nowrap hover:text-blue-700">SD GIS Hub</a>
+        <a href="{% url 'home' %}" class="font-semibold tracking-tight whitespace-nowrap hover:text-blue-700">S.D. Archive</a>
         {% url 'search:name_search' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if request.path == u %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Name search</a>
         {% url 'records:recordset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Records</a>
         {% url 'census:dataset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Datasets</a>

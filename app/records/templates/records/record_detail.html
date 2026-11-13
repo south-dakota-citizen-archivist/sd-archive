@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load humanize %}
-{% block title %}{{ record.key }} · {{ recordset.name }} · SD GIS Hub{% endblock %}
+{% block title %}{{ record.key }} · {{ recordset.name }} · S.D. Archive{% endblock %}
 {% block extra_head %}{% if record.geometry %}{% include "_maplibre.html" %}{% endif %}{% endblock %}
 {% block content %}
 <p class="text-sm text-gray-500"><a class="link" href="{% url 'records:recordset_list' %}">Records</a> · <a class="link" href="{{ recordset.get_absolute_url }}">{{ recordset.name }}</a></p>

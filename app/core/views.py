@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, render
 from census.models import Crawl, Dataset, Source
 from core.models import Job
 from places.models import Jurisdiction
-from records.models import Record, Run
+from records.models import Record, RecordSet, Run
 from search.models import NameEntry
 
 
@@ -28,6 +28,7 @@ def home(request: HttpRequest) -> HttpResponse:
         "watched": live.filter(status=Dataset.Status.WATCHED).count(),
         "features": Record.objects.current().filter(recordset__gis_dataset__isnull=False).count(),
         "names": NameEntry.objects.count(),
+        "recordsets": RecordSet.objects.count(),
     }
     top_topics = (
         live.values("topics__name", "topics__slug")
