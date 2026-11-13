@@ -3,7 +3,7 @@
 import pytest
 from django.core.management import call_command
 
-from records import links
+from records import record_links as links
 
 
 def test_normalize():

@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from records.links import link_sales
+from records.record_links import link_sales
 
 
 class Command(BaseCommand):
