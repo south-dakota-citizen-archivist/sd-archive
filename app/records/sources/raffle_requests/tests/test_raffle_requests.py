@@ -164,3 +164,32 @@ def test_imported_records():
     assert source.SOURCE.from_legacy(imported.data) == {
         "year": 2026, "organization": "Corn Palace", "receive_date": "2026-08-17",
         "drawing_date": "2026-10-23"}  # fmt: skip
+
+
+def test_a_viewer_through_the_browser(monkeypatch):
+    """The window's navigations stand in for HTTP: the same document, the same order."""
+    from records.sources import _sos_browser
+
+    plain = FakeFetcher(images={"1": jpeg("white"), "2": jpeg("gray")})
+
+    class FakePage:
+        url = ""
+
+        def goto(self, url, wait_until, timeout, referer=None):
+            got = plain.request("GET", url)
+            self.url = got.url
+            return type("R", (), {"status": 200, "headers": got.headers,
+                                  "body": lambda self: got.content})()  # fmt: skip
+
+    window = _sos_browser.BrowserFetcher("unused")
+    window.page = FakePage()
+    monkeypatch.setattr(sos, "BROWSER", "headless")
+    monkeypatch.setattr(sos, "_window", [window])
+    url = ("https://sdsos.gov/general-information/executive-actions/raffle-requests/Search/"
+           "Document.aspx?CabId=523E2A2A&DocGuid=20261002-1616-1055-5196-1879bb67d5de")  # fmt: skip
+    unused = FakeFetcher()
+    assert sos.assemble(unused, url)[:5] == b"%PDF-"
+    assert unused.asked == []  # nothing over plain HTTP
+    assert [u[-7:] for _, u, _ in plain.asked[2:]] == ["Image=1", "Image=2"]
+    with pytest.raises(NotImplementedError):
+        window.request("POST", url)

@@ -11,7 +11,8 @@ filings all use one system.
   (or merges the PDF pages some filings are stored as). The DocGuid is the document's key.
   The images are served only to a session that has opened the search page and then the
   viewer. A batch is one session, as a person browsing filings would be: the search page is
-  opened once, then each document's viewer and its page images.
+  opened once, then each document's viewer and its page images. With `SOS_BROWSER` set
+  (headless or headed), documents are read through a Chrome window (`_sos_browser`).
 - The server sometimes answers with a "we're sorry" page instead of results or a page image.
   A page image that gets one is asked for again after a wait (`IMAGE_RETRIES`); if it still
   does, that document fails (`PageUnavailable`: some documents' images are like that) and the
@@ -29,7 +30,9 @@ names it lists.
 
 from __future__ import annotations
 
+import atexit
 import io
+import os
 import random
 import time
 from dataclasses import dataclass, field
@@ -42,6 +45,9 @@ PAUSE = (60.0, 60.0)  # seconds between any two requests to the search system
 IMAGE_RETRIES = (60.0,)  # seconds to wait before asking for a page image again
 _sleep = time.sleep
 _last = [0.0]  # when the last request went out (time.monotonic)
+# Documents through a Chrome window (_sos_browser): "headless", "headed", or "" for plain HTTP
+BROWSER = os.environ.get("SOS_BROWSER", "")
+_window: list = []
 
 BLOCK_PHRASES = ("we're sorry", "we are sorry", "temporarily unavailable", "access denied",
                  "too many requests", "please try again later")  # fmt: skip
@@ -214,12 +220,29 @@ def _image(fetcher, url: str, viewer_url: str):
     raise AssertionError("unreachable")
 
 
+def browser_fetcher():
+    """The batch's Chrome window (one for the process, closed when it exits)."""
+    if not _window:
+        from django.conf import settings
+
+        from records.sources._sos_browser import BrowserFetcher
+
+        window = BrowserFetcher(settings.MEDIA_ROOT / "browser" / "sos",
+                                headless=BROWSER != "headed")  # fmt: skip
+        atexit.register(window.close)
+        _window.append(window)
+    return _window[0]
+
+
 def assemble(fetcher, viewer_url: str) -> bytes:
     """A filing's scanned pages, from its viewer, as one PDF (each request paced): the
-    search page (once a session), the viewer, then each page image in order."""
+    search page (once a session), the viewer, then each page image in order. With BROWSER
+    set, through a Chrome window instead of the fetcher."""
     import lxml.html
     from PIL import Image
 
+    if BROWSER:
+        fetcher = browser_fetcher()
     search_url = urljoin(viewer_url, "Default.aspx")
     _open_search(fetcher, search_url)
     _pace()
