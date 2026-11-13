@@ -1,5 +1,5 @@
 """Address standardization. The first group is whats-up-in-spearfish's tests, unchanged:
-the cases local records actually contain (city permits, OpenGov, agendas, county parcels).
+the cases local records actually contain (city permits, OpenGov, agendas, county GIS data).
 The rest are what statewide use adds."""
 
 from __future__ import annotations

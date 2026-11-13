@@ -1,5 +1,5 @@
-"""Find out what a Beacon app shows: sample its parcels' report pages and write its profile
-(records/sources/_beacon/apps/<App>.json): the map's layers and settings, each report
+"""Find out what a county map app shows: sample its features' report pages and write its profile
+(records/sources/_map_app/apps/<App>.json): the map's layers and settings, each report
 section's shape and fields, and the sections that need an account."""
 
 import json
@@ -9,19 +9,19 @@ from pathlib import Path
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
-from records.sources._beacon import parse, profile, tiles
-from records.sources._beacon.session import Blocked, Session
+from records.sources._map_app import parse, profile, tiles
+from records.sources._map_app.session import Blocked, Session
 
 
 def browser_profile() -> Path:
-    return Path(settings.MEDIA_ROOT) / "browser" / "beacon"
+    return Path(settings.MEDIA_ROOT) / "browser" / "map-app"
 
 
 class Command(BaseCommand):
-    help = "Sample a Beacon app's report pages and write what its sections and fields are"
+    help = "Sample a county map app's report pages and write what its sections and fields are"
 
     def add_arguments(self, parser):
-        parser.add_argument("app", help='the app name in Beacon URLs, e.g. "LawrenceCountySD"')
+        parser.add_argument("app", help='the app name in its URLs, e.g. "LawrenceCountySD"')
         parser.add_argument("--sample", type=int, default=30, help="report pages to read")
         parser.add_argument("--stored", action="store_true",
                             help="use only report pages already stored; no requests")  # fmt: skip
@@ -29,7 +29,7 @@ class Command(BaseCommand):
     def handle(self, *args, app, sample, stored, **options):
         from sdfetch import Store
 
-        store = Store(Path(settings.MEDIA_ROOT) / "raw" / "beacon-discovery" / app)
+        store = Store(Path(settings.MEDIA_ROOT) / "raw" / "map-app-discovery" / app)
         if stored:
             pages = sorted(store.root.glob("reports/*.html"))
             if not pages:

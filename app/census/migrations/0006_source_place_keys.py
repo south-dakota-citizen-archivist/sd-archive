@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("census", "0005_beacon_platform"),
+        ("census", "0005_map_app_platform"),
     ]
 
     operations = [

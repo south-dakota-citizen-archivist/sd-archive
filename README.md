@@ -14,7 +14,7 @@ sd-archive/
 │   ├── sdllm/       language models for extraction and classification, quotes checked against the source
 │   ├── sdnames/     names: normalizing, kinds, owner strings split into parties, parsing, blocking keys
 │   ├── sdplaces/    places by Census GEOID, agency ID crosswalks, addresses, geocoding
-│   └── sdgis/       ArcGIS REST and Schneider Beacon clients
+│   └── sdgis/       ArcGIS REST and county map app clients
 ├── pipelines/
 │   └── elections/   precinct-level results from electionresults.sd.gov, 2008 on
 ├── catalog/         datasets.toml: every dataset, its kind (aggregate or records) and source
@@ -26,7 +26,7 @@ Every package works without Django. Each has its own README.
 ## Principles
 
 - **Primary sources.** Every published row links to where it came from, and every fetch is recorded in a manifest (URL, time, SHA-256).
-- **Two kinds of data.** In an *aggregate* dataset the place is the unit (voter registration by county, results by precinct). In a *records* dataset, things within a place are the unit (permits, parcels, filings). The kind decides how a dataset is stored and checked. `catalog/datasets.toml` records each dataset's kind.
+- **Two kinds of data.** In an *aggregate* dataset the place is the unit (voter registration by county, results by precinct). In a *records* dataset, things within a place are the unit (permits, map features, filings). The kind decides how a dataset is stored and checked. `catalog/datasets.toml` records each dataset's kind.
 - **Interruptible.** Every command can be stopped and run again. Downloads are skipped once stored, files are written whole or not at all, and long runs keep checkpoints.
 
 ## Setup

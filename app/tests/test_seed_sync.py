@@ -32,7 +32,7 @@ def test_dump_round_trips(source, county, seed_file):
         name_fields=["OWNER"],
         name_fields_manual=True,
     )
-    Source.objects.create(name="Beacon app", slug="b", url="https://b.example", platform="beacon")
+    Source.objects.create(name="Map app", slug="b", url="https://b.example", platform="map_app")
 
     assert seed.dump() is True
     assert seed.dump() is False, "unchanged content isn't rewritten"

@@ -59,7 +59,7 @@ def test_candidates():
     clerk = found[("platform", "CivicClerk")]
     assert clerk.urls == ["https://examplesd.portal.civicclerk.com/"]
     assert "Agendas and Minutes" in clerk.evidence
-    assert found[("platform", "Beacon")].covered_by == "beacon-parcels"
+    assert found[("platform", "County map app")].covered_by == "gis-data"
     audits = found[("collection", "Finance Office")]
     assert audits.files == 5 and (min(audits.years), max(audits.years)) == (2021, 2025)
     assert ("record type", "meeting agendas and minutes") in found

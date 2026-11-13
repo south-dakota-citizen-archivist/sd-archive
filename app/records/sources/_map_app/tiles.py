@@ -1,4 +1,4 @@
-"""Every feature of a Beacon layer, read by map extent.
+"""Every feature of a map app layer, read by map extent.
 
 GetVectorLayer answers at most LIMIT features for an extent (as many as fit, not a page of
 them), so the layer's extent is cut into a grid and any tile that comes back full is split

@@ -8,35 +8,35 @@ from urllib.parse import quote, urlencode
 from django.core.management.base import BaseCommand
 from django.db import connection
 
-from sdgis.beacon import BASE_URL
+from sdgis.mapapps import BASE_URL
 
 
 @dataclass(frozen=True)
-class ParcelLayer:
-    url: str  # parcel layer in the census
-    field: str  # field holding Beacon's KeyValue
+class KeyLayer:
+    url: str  # the layer in the census holding the keys
+    field: str  # field holding the map app's KeyValue
     layer: str | None  # Layer= in report links; some apps reject it
     confirmed: bool  # a generated link has been checked in a browser
     width: int = 0  # zero-pad keys to this many characters
     report: str = ""  # a report link with {key}, for apps where name-based links fail
 
 
-# Beacon source slug -> where its parcel IDs come from
-PARCEL_LAYERS = {
-    "lawrence-county-beacon": ParcelLayer(
+# map app source slug -> where its features' keys come from
+KEY_LAYERS = {
+    "lawrence-county-map-app": KeyLayer(
         "https://www.1stdistrict.org/arcgis/rest/services/Lawrence/lawrencemapnet2/FeatureServer/0",
         "PARCEL_ID",
         "Parcels",
         confirmed=True,
     ),
-    "meade-county-beacon": ParcelLayer(
+    "meade-county-map-app": KeyLayer(
         "https://gis.rcgov.org/server/rest/services/AGOL/AGOL/MapServer/20",
         "PARCELID",
         None,
         confirmed=True,
     ),
-    # Beacon's KeyValue is the county record ID (MRRDID), zero-padded: 84440 -> 084440
-    "minnehaha-county-beacon": ParcelLayer(
+    # the map app's KeyValue is the county record ID (MRRDID), zero-padded: 84440 -> 084440
+    "minnehaha-county-map-app": KeyLayer(
         "https://gis.minnehahacounty.gov/minnemap/rest/services"
         "/OpenData/MinnehahaCountyParcels/MapServer/0",
         "MRRDID",
@@ -48,7 +48,7 @@ PARCEL_LAYERS = {
             "&PageID=13301&KeyValue={key}"
         ),
     ),
-    "moody-county-beacon": ParcelLayer(
+    "moody-county-map-app": KeyLayer(
         "https://www.1stdistrict.org/arcgis/rest/services/Moody/moodymapnet/FeatureServer/7",
         "PIN",
         "Parcels",
@@ -56,7 +56,7 @@ PARCEL_LAYERS = {
     ),
 }
 
-# Real parcel IDs start with a digit; this drops blanks and placeholders like ROAD or LAKE
+# Real keys start with a digit; this drops blanks and placeholders like ROAD or LAKE
 SQL = """
 SELECT DISTINCT btrim(f.data ->> %(field)s) AS pid
 FROM records_record f JOIN records_recordset rs ON rs.id = f.recordset_id
@@ -67,49 +67,49 @@ ORDER BY pid
 """
 
 
-def report_url(source, parcels: ParcelLayer, key: str) -> str:
-    key = key.zfill(parcels.width)
-    if parcels.report:
-        return parcels.report.format(key=quote(key))
+def report_url(source, keys: KeyLayer, key: str) -> str:
+    key = key.zfill(keys.width)
+    if keys.report:
+        return keys.report.format(key=quote(key))
     query = {"App": source.url.split("App=")[1].split("&")[0]}
-    if parcels.layer:
-        query["Layer"] = parcels.layer
+    if keys.layer:
+        query["Layer"] = keys.layer
     query |= {"PageType": "Report", "KeyValue": key}
     return f"{BASE_URL}/Application.aspx?{urlencode(query)}"
 
 
 class Command(BaseCommand):
     help = (
-        "Write a CSV of Beacon parcel report links, built from parcel IDs in harvested ArcGIS "
-        "layers, for counties with both (see PARCEL_LAYERS)."
+        "Write a CSV of map app report links, built from feature keys in harvested ArcGIS "
+        "layers, for counties with both (see KEY_LAYERS)."
     )
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "sources", nargs="*", help="Beacon source slugs (default: all with confirmed links)"
+            "sources", nargs="*", help="map app source slugs (default: all with confirmed links)"
         )
         parser.add_argument("-o", "--output", help="CSV path (default: stdout)")
 
     def handle(self, *args, sources, output, **options):
         with contextlib.ExitStack() as stack:
             out = stack.enter_context(Path(output).open("w", newline="")) if output else sys.stdout
-            default = [slug for slug, p in PARCEL_LAYERS.items() if p.confirmed]
+            default = [slug for slug, p in KEY_LAYERS.items() if p.confirmed]
             self.write(csv.writer(out), sources or default)
 
     def write(self, writer, slugs: list[str]) -> None:
         from census.models import Source
 
-        writer.writerow(["county", "parcel_id", "report_url"])
+        writer.writerow(["county", "key", "report_url"])
         for slug in slugs:
             source = Source.objects.get(slug=slug)
-            parcels = PARCEL_LAYERS[slug]
-            if not parcels.confirmed:
+            keys = KEY_LAYERS[slug]
+            if not keys.confirmed:
                 self.stderr.write(f"{slug}: link format unconfirmed; check one before using these")
             with connection.cursor() as cursor:
-                cursor.execute(SQL, {"field": parcels.field, "url": parcels.url})
+                cursor.execute(SQL, {"field": keys.field, "url": keys.url})
                 ids = [row[0] for row in cursor.fetchall()]
             if not ids:
-                self.stderr.write(f"{slug}: no parcel IDs; is {parcels.url} harvested?")
+                self.stderr.write(f"{slug}: no keys; is {keys.url} harvested?")
             for pid in ids:
-                writer.writerow([source.jurisdiction.name, pid, report_url(source, parcels, pid)])
+                writer.writerow([source.jurisdiction.name, pid, report_url(source, keys, pid)])
             self.stderr.write(f"{source.jurisdiction.name}: {len(ids):,} links")

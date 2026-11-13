@@ -246,7 +246,7 @@ class FakeDirectory:
         return FakeResponse({"error": {"code": 500, "message": message, "details": []}})
 
 
-# --- Schneider Beacon's client picker (saved from beacon.schneidercorp.com) ---
+# --- a map app host's app picker (saved from its home page) ---
 
 PICKER = """
 <div id="areaMenuContent" role="listbox">

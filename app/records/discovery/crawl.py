@@ -1,7 +1,7 @@
 """Crawl a government's website within its own domain: every HTML page up to a page budget
 and depth, breadth first, each page kept, its links and file links (PDFs, spreadsheets…)
 noted but not downloaded. Links to other sites are kept too: a link to a portal on another
-domain (a meetings system, a parcel map) is often how the site points to its records."""
+domain (a meetings system, a county map) is often how the site points to its records."""
 
 from __future__ import annotations
 

@@ -14,7 +14,7 @@ def gis_layers_into_records(apps, schema_editor):
     for d in Dataset.objects.filter(pk__in=harvested).select_related("source"):
         RecordSet.objects.get_or_create(
             gis_dataset_id=d.pk,
-            defaults={"slug": f"gis-{d.pk}", "name": d.name[:255], "dataset": "gis-parcels",
+            defaults={"slug": f"gis-{d.pk}", "name": d.name[:255], "dataset": "gis-data",
                       "publisher_id": d.source.publisher_id, "base_url": d.url[:1000],
                       "ingest": "gis"},
         )  # fmt: skip

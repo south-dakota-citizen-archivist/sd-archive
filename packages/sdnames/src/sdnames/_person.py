@@ -102,7 +102,7 @@ def comma_order(text: str, order: Order = "auto") -> str:
 
 def person(text: str, order: Order = "auto") -> Person:
     """One person's name in parts. order="family_first" for sources that write LAST FIRST
-    MIDDLE without a comma (many parcel layers); a comma always means family first."""
+    MIDDLE without a comma (many GIS layers); a comma always means family first."""
     original = text
     principal, care_of = split_care_of(text)
     text = clean(strip_roles(principal or care_of)[0])

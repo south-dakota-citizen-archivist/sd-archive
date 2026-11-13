@@ -1,5 +1,5 @@
 """Street address standardization: the one place addresses are parsed and turned into keys
-for matching records across sources (permits, filings, agendas, county parcels).
+for matching records across sources (permits, filings, agendas, county GIS data).
 
 Needs the `address` extra (usaddress, usaddress-scourgify).
 

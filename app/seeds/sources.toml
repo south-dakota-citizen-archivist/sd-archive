@@ -27,7 +27,7 @@ jurisdiction = "south-dakota"
 [[publishers]]
 name = "Rapid City / Pennington County GIS"
 jurisdiction = "pennington-county"
-notes = "Joint city-county GIS division. Also hosts Meade County parcels."
+notes = "Joint city-county GIS division. Also hosts Meade County GIS data."
 
 [[publishers]]
 name = "Minnehaha County"

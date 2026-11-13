@@ -1,6 +1,6 @@
-"""Beacon: real report pages from four counties (each lays its report out differently, checked
-by hand), a real GetVectorLayer answer, the tiling, profiles, and a run of a county source
-against a stand-in for the browser."""
+"""County map apps: real report pages from four counties (each lays its report out
+differently, checked by hand), a real GetVectorLayer answer, the tiling, profiles, and a run
+of the source against a stand-in for the browser."""
 
 import json
 from pathlib import Path
@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 import shapely
 
-from records.sources._beacon import parse, profile, tiles
+from records.sources._map_app import parse, profile, tiles
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -210,23 +210,28 @@ class FakeSession:
 def test_a_run(db, sd_counties, monkeypatch, tmp_path):
     from records.models import Record, RecordSet
     from records.run import run_source
-    from records.sources._beacon import source as beacon
+    from records.sources._map_app import source as map_app
     from sdfetch import Store
 
-    monkeypatch.setattr(beacon, "Session", FakeSession)
+    monkeypatch.setattr(map_app, "Session", FakeSession)
     monkeypatch.setattr(profile, "load", lambda app: None)
     FakeSession.reports_asked = []
     fetcher = type("F", (), {"store": Store(tmp_path)})()
-    RecordSet.objects.create(slug="lawrence-county-parcels", name="Lawrence County parcels",
-                             dataset="beacon-parcels")  # fmt: skip
-    run = run_source("lawrence-county-parcels", fetcher=fetcher)
-    assert run.added == 3 and run.checks["reports_read"] == 3
-    assert run.checks["without_report"] == 0 and "stopped" not in run.checks
-    record = Record.objects.get(key="17000-00503-280-00")
+    RecordSet.objects.create(slug="gis-data", name="GIS data", dataset="gis-data")  # fmt: skip
+    run = run_source("gis-data", fetcher=fetcher)
+    assert run.added == 3 and run.checks["apps"]["LawrenceCountySD"]["reports_read"] == 3
+    assert (
+        run.checks["apps"]["LawrenceCountySD"]["without_report"] == 0
+        and "stopped" not in run.checks
+    )
+    record = Record.objects.get(key="LawrenceCountySD:17000-00503-280-00")
     assert record.geometry.geom_type == "MultiPolygon"
     assert record.data["sections"]["Summary"]["Zoning"] == "SRD"
     assert record.data["tooltip"]["Owner"].startswith("HOMESTAKE")
     assert sorted(record.places.values_list("geoid", flat=True)) == ["46", "46081"]
     # the next run in the same month reads nothing again
-    run = run_source("lawrence-county-parcels", fetcher=fetcher)
-    assert run.checks["reports_read"] == 0 and len(FakeSession.reports_asked) == 3
+    run = run_source("gis-data", fetcher=fetcher)
+    assert (
+        run.checks["apps"]["LawrenceCountySD"]["reports_read"] == 0
+        and len(FakeSession.reports_asked) == 3
+    )

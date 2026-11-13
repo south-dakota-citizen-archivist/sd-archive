@@ -1,4 +1,4 @@
-"""Reading what Beacon sends: the map configuration, vector features and report pages."""
+"""Reading what a map app sends: the map configuration, vector features and report pages."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from urllib.parse import urlsplit, urlunsplit
 
 from records.sources._tables import LayoutChanged, document
 
-# Report sections about the county or the site, not the parcel
+# Report sections about the county or the site, not the feature
 SKIP_SECTIONS = {"Contact Information", "Online Tax Payments"}
 _YEAR = re.compile(r"^\d{4}$")
 _TOGGLES = {"", "+", "-", "−", "="}  # expand/collapse and total markers
@@ -27,10 +27,10 @@ def map_config(html: str | bytes) -> dict:
 
 
 def report_url(config: dict, key: str) -> str:
-    """A parcel's report page, from DefaultReportUrl (its Q= parameter left out)."""
+    """A feature's report page, from DefaultReportUrl (its Q= parameter left out)."""
     from urllib.parse import quote
 
-    from records.sources._beacon import BASE_URL
+    from records.sources._map_app import BASE_URL
 
     template = config.get("DefaultReportUrl")
     if not template:
@@ -132,7 +132,7 @@ _OWNER_ROW = re.compile(r"_(?:rptOwner|lstOwner)_ctl(\d+)_(.+)$")
 
 
 def _owners(section) -> list[dict]:
-    """Owners, from either kind of owner list Beacon renders: a repeater of name spans and
+    """Owners, from either kind of owner list an app renders: a repeater of name spans and
     search links with an address block (…_rptOwner_ctl00_…), or a table of labeled spans
     (…_lstOwner_ctl00_NameLabel, Address1Label…, ZipCodeLabel)."""
     rows: dict[int, dict] = {}
@@ -182,7 +182,7 @@ def report(html: str | bytes) -> dict:
 
     - a two-column table as {label: value}; a grid as rows; a table with a column per year
       as a row per year; a table headed by a year as its rows, each with the year
-    - a section without tables (a list of parcels in a sale) as its lines of text
+    - a section without tables (a list of properties in a sale) as its lines of text
     - the owners (names, address lines and, where given, the kind of owner), the photos,
       and the sections that need an account to see
 
@@ -204,7 +204,7 @@ def report(html: str | bytes) -> dict:
             out["owners"] = _owners(section)
             continue
         if section.cssselect("input, select"):
-            continue  # a search form (recent sales nearby), not the parcel's data
+            continue  # a search form (recent sales nearby), not the feature's data
         if not section.cssselect("table") and section.cssselect('a[href*="/Account/"]'):
             continue  # log-in and subscription buttons
         tables = []

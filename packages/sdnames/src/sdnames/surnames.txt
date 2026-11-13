@@ -1,5 +1,5 @@
 # Multi-word family names that aren't particle names, one per line, each seen as a family
-# name in a South Dakota record (election results, lobbyist registrations, parcel owners).
+# name in a South Dakota record (election results, lobbyist registrations, property owners).
 # Particle names (VAN CAMP, MC PHERSON, LE BRUN, ST JOHN) and hyphenated names don't need
 # listing. Two ordinary surnames side by side (HERSETH SANDLIN) aren't listed: the first
 # could be a middle name.

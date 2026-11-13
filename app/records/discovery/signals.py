@@ -1,7 +1,7 @@
 """Rules that turn a crawled site into candidate record sets, each with its evidence.
 
 - Platforms: a link to (or page on) a known government records system, by URL: a meetings
-  portal, a permit system, a parcel map, a document repository, a code of ordinances.
+  portal, a permit system, a county map, a document repository, a code of ordinances.
 - Document collections: a page linking many documents (agendas, reports, budgets), with
   the years its file names and link texts mention.
 - Record types: pages whose titles, headings or links name a kind of record (permits,
@@ -37,7 +37,8 @@ PLATFORMS = {
     "Laserfiche WebLink": (r"/WebLink/|laserfiche", "a public document repository", None),
     "Municode": (r"municode\.com", "code of ordinances", None),
     "American Legal Publishing": (r"amlegal\.com", "code of ordinances", None),
-    "Beacon": (r"beacon\.schneidercorp\.com", "parcels, assessments, sales", "beacon-parcels"),
+    "County map app": (r"beacon\.schneidercorp\.com", "GIS data: map features and their details",
+                       "gis-data"),
     "ArcGIS": (r"arcgis\.com|/arcgis/rest/services|/portal/apps/", "GIS layers and maps",
                "GIS hub"),
     "OpenGov / ViewpointCloud": (r"viewpointcloud\.com|opengov\.com",

@@ -13,7 +13,9 @@ class Migration(migrations.Migration):
             model_name="source",
             name="external_id",
             field=models.CharField(
-                blank=True, help_text="The platform's own ID, e.g. a Beacon AppID", max_length=100
+                blank=True,
+                help_text="The platform's own ID, e.g. a map app's AppID",
+                max_length=100,
             ),
         ),
         migrations.AlterField(
@@ -23,7 +25,7 @@ class Migration(migrations.Migration):
                 choices=[
                     ("arcgis_server", "ArcGIS Server"),
                     ("arcgis_online", "ArcGIS Online"),
-                    ("beacon", "Schneider Beacon"),
+                    ("map_app", "County map app"),
                 ],
                 max_length=30,
             ),
@@ -36,7 +38,7 @@ class Migration(migrations.Migration):
                 choices=[
                     ("arcgis_server", "ArcGIS Server"),
                     ("arcgis_online", "ArcGIS Online"),
-                    ("beacon", "Schneider Beacon"),
+                    ("map_app", "County map app"),
                 ],
                 max_length=30,
             ),

@@ -1,4 +1,4 @@
-"""Read the list of Beacon clients (apps) from the client picker on Beacon's home page.
+"""Read the list of map apps from the app picker on the apps' host's home page.
 
 Save the picker's HTML from a browser (the `#areaMenuContent` element); each option looks like
 
@@ -12,13 +12,13 @@ from dataclasses import dataclass
 from html.parser import HTMLParser
 from urllib.parse import urlencode
 
-from sdgis.beacon import BASE_URL
+from sdgis.mapapps import BASE_URL
 
 
 @dataclass(frozen=True)
-class BeaconClient:
+class MapApp:
     app_id: int
-    key: str  # the App= value in Beacon URLs, e.g. "BrookingsCountySD"
+    key: str  # the App= value in the app's URLs, e.g. "BrookingsCountySD"
     name: str
     state: str
 
@@ -27,14 +27,14 @@ class BeaconClient:
 
 
 def app_url(key: str, page_type: str = "Map") -> str:
-    """Link to an app by its key; Beacon resolves the page IDs itself."""
+    """Link to an app by its key; the host resolves the page IDs itself."""
     return f"{BASE_URL}/Application.aspx?{urlencode({'App': key, 'PageType': page_type})}"
 
 
 class _PickerParser(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.clients: list[BeaconClient] = []
+        self.apps: list[MapApp] = []
         self.state = ""
         self.open: tuple[int, str] | None = None  # (app_id, key) of the option being read
         self.text: list[str] = []
@@ -58,23 +58,23 @@ class _PickerParser(HTMLParser):
         if tag == "div" and self.open:
             app_id, key = self.open
             name = " ".join("".join(self.text).split()).replace(" ,", ",")
-            self.clients.append(BeaconClient(app_id, key, name, self.state))
+            self.apps.append(MapApp(app_id, key, name, self.state))
             self.open = None
 
 
-def parse_clients(html: str, state: str | None = None) -> list[BeaconClient]:
+def parse_apps(html: str, state: str | None = None) -> list[MapApp]:
     parser = _PickerParser()
     parser.feed(html)
-    seen, clients = set(), []
-    for c in parser.clients:
+    seen, apps = set(), []
+    for c in parser.apps:
         if c.app_id in seen or (state and c.state != state):
             continue
         seen.add(c.app_id)
-        clients.append(c)
-    return clients
+        apps.append(c)
+    return apps
 
 
-def place_name(client: BeaconClient) -> str:
+def place_name(client: MapApp) -> str:
     """'Brookings County, SD' -> 'Brookings County'; 'City of Foley, AL' -> 'Foley'."""
     name = re.sub(r",\s*[A-Z]{2}$", "", client.name)
     return re.sub(r"^(City|Town|Village) of ", "", name)

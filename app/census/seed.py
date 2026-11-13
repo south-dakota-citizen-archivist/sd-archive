@@ -191,7 +191,7 @@ def render(path: Path | None = None) -> str:
         .order_by("pk")
     )
     used = {s.publisher_id for s in sources}
-    # Beacon's publishers come from seeds/beacon-clients.html instead
+    # map apps' publishers come from seeds/map-apps.html instead
     publishers = [
         p
         for p in Publisher.objects.select_related("jurisdiction").order_by("pk")

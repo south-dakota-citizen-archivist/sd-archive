@@ -54,10 +54,10 @@ def render() -> str:
         f"{features:,} features archived; "
         f"{NameEntry.objects.count():,} names indexed.",
     ]
-    beacon = Source.objects.filter(platform=Source.Platform.BEACON).order_by("name")
-    if beacon:
-        links = ", ".join(f"[{s.name.removesuffix(' (Beacon)')}]({s.url})" for s in beacon)
-        lines += ["", f"Listed but not crawled, on Schneider Beacon ({len(beacon)}): {links}."]
+    apps = Source.objects.filter(platform=Source.Platform.MAP_APP).order_by("name")
+    if apps:
+        links = ", ".join(f"[{s.name.removesuffix(' (map app)')}]({s.url})" for s in apps)
+        lines += ["", f"County map apps, listed but not crawled ({len(apps)}): {links}."]
     return "\n".join(lines)
 
 

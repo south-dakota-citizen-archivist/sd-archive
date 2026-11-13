@@ -13,7 +13,7 @@ from entities.models import Mention
 def test_one_mention_per_party(db):
     rows = mentions.from_text(
         "PENNOCK, SCOTT R & DOUGLASS, CLYDETTE D CO-TRUSTEES",
-        dataset="gis-parcels", record_key="641:17", field="OWNER_NAM",
+        dataset="gis-data", record_key="641:17", field="OWNER_NAM",
         url="https://example.gov/parcel/17", properties={"address": ["1 Main St, Lead SD"]},
     )  # fmt: skip
     assert [(m.name, m.position, m.role, m.schema) for m in rows] == [

@@ -3,7 +3,7 @@
 from records.models import RecordSet
 
 # The catalog dataset GIS layers belong to (catalog/datasets.toml)
-CATALOG_DATASET = "gis-parcels"
+CATALOG_DATASET = "gis-data"
 
 
 def recordset_for(dataset) -> RecordSet:

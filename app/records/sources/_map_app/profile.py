@@ -1,9 +1,9 @@
-"""What a Beacon app shows, found by sampling its report pages (`manage.py beacon_discover`).
+"""What a map app shows, found by sampling its report pages (`manage.py map_app_discover`).
 
 Every county sets up its own report: its sections, their labels and columns, and which ones
 need an account. A profile records, for one app:
 
-- map: the app and parcel layer IDs, the layer's key field, projection, extent, report URL,
+- map: the app and feature layer IDs, the layer's key field, projection, extent, report URL,
   and the app's other layers
 - sections: for each public section, its shape (a {label: value} table, rows, or lines of
   text), how many sampled pages had it, and its fields (labels or columns) with counts
@@ -45,9 +45,9 @@ def map_info(config: dict) -> dict:
     layers = [{"group": g.get("GroupName"), "name": layer["LayerName"],
                "layer_id": layer.get("LayerId"), "key": layer.get("MapKey")}
               for g in groups for layer in g.get("Layers") or []]  # fmt: skip
-    parcel = next((x for x in layers if x["layer_id"] == config.get("LayerId")), {})
+    layer = next((x for x in layers if x["layer_id"] == config.get("LayerId")), {})
     return {"app_id": config.get("AppId"), "layer_id": config.get("LayerId"),
-            "layer": parcel.get("name"), "key_field": parcel.get("key"),
+            "layer": layer.get("name"), "key_field": layer.get("key"),
             "srid": config.get("SRID"), "units": config.get("Units"),
             "extent": config.get("MaxExtent") or config.get("CurrentExtent"),
             "report_url": re.sub(r"&Q=-?\d+", "", config.get("DefaultReportUrl") or ""),

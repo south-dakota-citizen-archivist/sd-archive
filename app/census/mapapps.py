@@ -1,4 +1,5 @@
-"""Register Beacon apps as census sources, from the client list saved from Beacon's home page."""
+"""Register county map apps as census sources, from the app list saved from the host's home
+page."""
 
 from pathlib import Path
 
@@ -8,21 +9,21 @@ from django.utils.text import slugify
 
 from census.models import Publisher, Source
 from places.models import Jurisdiction
-from sdgis.beacon.clients import BeaconClient, parse_clients, place_name
+from sdgis.mapapps.clients import MapApp, parse_apps, place_name
 
-CLIENTS_FILE = Path(settings.BASE_DIR) / "seeds" / "beacon-clients.html"
+APPS_FILE = Path(settings.BASE_DIR) / "seeds" / "map-apps.html"
 NOTES = (
-    "Parcel search and map portal. Beacon puts every page, its API and its data extracts "
-    "behind a Cloudflare bot challenge, so the hub links to it but doesn't crawl it."
+    "A county map app: the county's GIS data and property records on a hosted site. The hub "
+    "links to it; its features are read by the gis-data record set, not crawled here."
 )
 
 
-def find_jurisdiction(client: BeaconClient) -> Jurisdiction | None:
+def find_jurisdiction(client: MapApp) -> Jurisdiction | None:
     return Jurisdiction.objects.filter(slug=slugify(place_name(client))).first()
 
 
 @transaction.atomic
-def register(clients: list[BeaconClient]) -> dict:
+def register(clients: list[MapApp]) -> dict:
     created, unmatched = 0, []
     for client in clients:
         place = find_jurisdiction(client)
@@ -33,17 +34,17 @@ def register(clients: list[BeaconClient]) -> dict:
             defaults={"jurisdiction": place},
         )
         _, new = Source.objects.update_or_create(
-            platform=Source.Platform.BEACON,
+            platform=Source.Platform.MAP_APP,
             external_id=str(client.app_id),
             defaults={
-                "name": f"{place_name(client)} (Beacon)",
-                "slug": f"{slugify(place_name(client))}-beacon",
+                "name": f"{place_name(client)} (map app)",
+                "slug": f"{slugify(place_name(client))}-map-app",
                 "url": client.url(),
                 "publisher": publisher,
                 "jurisdiction": place,
                 "crawl_schedule": "",
                 "crawl_counts": False,
-                "found_via": "Beacon client list (seeds/beacon-clients.html)",
+                "found_via": "map app list (seeds/map-apps.html)",
                 "notes": NOTES,
             },
         )
@@ -51,5 +52,5 @@ def register(clients: list[BeaconClient]) -> dict:
     return {"clients": len(clients), "created": created, "unmatched": unmatched}
 
 
-def load(path: Path = CLIENTS_FILE, state: str = "South Dakota") -> dict:
-    return register(parse_clients(path.read_text(), state=state))
+def load(path: Path = APPS_FILE, state: str = "South Dakota") -> dict:
+    return register(parse_apps(path.read_text(), state=state))

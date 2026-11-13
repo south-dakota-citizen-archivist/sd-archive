@@ -1,4 +1,4 @@
-"""One Chrome window on a Beacon app, reading it one request at a time.
+"""One Chrome window on a county map app, reading it one request at a time.
 
 The window is Google Chrome (patchright) with a browser profile kept between runs. The map
 page is opened, its terms and conditions accepted with a click on "Agree" (and any notice
@@ -6,7 +6,7 @@ after them closed), and then:
 
 - api(method, body): the map's API call, sent by the map page itself (same origin, cookies,
   headers and session key as the map's own scripts)
-- report(key): a parcel's report page, opened by navigating a second tab to it
+- report(key): a feature's report page, opened by navigating a second tab to it
 
 Between requests it waits a few seconds (jittered), and now and then for a few minutes. When
 the site refuses a request (HTTP 403, 429 or 503, or an interstitial page that doesn't go
@@ -22,7 +22,7 @@ import time
 from contextlib import suppress
 from pathlib import Path
 
-from records.sources._beacon import BASE_URL, parse
+from records.sources._map_app import BASE_URL, parse
 
 logger = logging.getLogger(__name__)
 
@@ -127,7 +127,7 @@ class Session:
             return False
         self.sleep(self.rng.uniform(2.0, 5.0))
         agree.click()
-        logger.info("beacon %s: accepted the terms", self.app)
+        logger.info("map app %s: accepted the terms", self.app)
         for _ in range(5):  # notices, one after another
             close = page.get_by_role("button", name="Close", exact=True).first
             try:
@@ -151,7 +151,7 @@ class Session:
         self.requests += 1
         if self.requests >= self._next_rest:
             pause = self.rng.uniform(*self.rest)
-            logger.info("beacon %s: resting %.0f s after %d requests", self.app, pause,
+            logger.info("map app %s: resting %.0f s after %d requests", self.app, pause,
                         self.requests)  # fmt: skip
             self.sleep(pause)
             self._next_rest = self.requests + self.rng.randint(*self.rest_every)
@@ -163,7 +163,7 @@ class Session:
         if self._blocks > self.max_blocks:
             raise Blocked(f"{self.app}: blocked {self._blocks} times in a row ({what})")
         pause = self.backoff * 2 ** (self._blocks - 1) * self.rng.uniform(0.8, 1.3)
-        logger.warning("beacon %s: blocked (%s); waiting %.0f min", self.app, what, pause / 60)
+        logger.warning("map app %s: blocked (%s); waiting %.0f min", self.app, what, pause / 60)
         self.sleep(pause)
         with suppress(_BlockPage):  # counted on the next try
             self.open_map()
@@ -197,7 +197,7 @@ class Session:
         return self._retrying(attempt)
 
     def report(self, key: str) -> bytes:
-        """A parcel's report page, opened in the second tab."""
+        """A feature's report page, opened in the second tab."""
         url = parse.report_url(self.config, key)
 
         def attempt():

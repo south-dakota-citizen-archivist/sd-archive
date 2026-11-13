@@ -50,9 +50,9 @@ class Source(models.Model):
     class Platform(models.TextChoices):
         ARCGIS_SERVER = "arcgis_server", "ArcGIS Server"
         ARCGIS_ONLINE = "arcgis_online", "ArcGIS Online"
-        BEACON = "beacon", "Schneider Beacon"
+        MAP_APP = "map_app", "County map app"
 
-    # Platforms the hub can list datasets from. Beacon is behind a bot challenge.
+    # Platforms the hub can list datasets from (map apps are listed, not crawled).
     CRAWLABLE = {Platform.ARCGIS_SERVER, Platform.ARCGIS_ONLINE}
 
     name = models.CharField(max_length=255)
@@ -60,7 +60,7 @@ class Source(models.Model):
     url = models.URLField(max_length=1000, unique=True)
     platform = models.CharField(max_length=30, choices=Platform.choices)
     external_id = models.CharField(
-        max_length=100, blank=True, help_text="The platform's own ID, e.g. a Beacon AppID"
+        max_length=100, blank=True, help_text="The platform's own ID, e.g. a map app's AppID"
     )
     publisher = models.ForeignKey(
         Publisher, null=True, blank=True, on_delete=models.SET_NULL, related_name="sources"

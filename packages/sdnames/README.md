@@ -1,6 +1,6 @@
 # sdnames
 
-Names of people and organizations as public records write them: parcel owners, filers, lobbyists, candidates. Plain Python, no Django.
+Names of people and organizations as public records write them: property owners, filers, lobbyists, candidates. Plain Python, no Django.
 
 ```python
 import sdnames

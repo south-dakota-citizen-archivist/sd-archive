@@ -386,15 +386,15 @@ place_link = "city"
 source = "SD Secretary of State"
 
 [[dataset]]
-id = "gis-parcels"
-name = "Harvested GIS layers (parcels and others), with history"
+id = "gis-data"
+name = "GIS data: map features with their shapes and details"
 project = "sd-archive/app (gis)"
 grain = "records"
 coverage = ["0400000US46"]
-unit = "feature (parcel, address point, …), with history"
+unit = "map feature (a layer's feature, or a county map app's feature and its report page)"
 entities = ["person", "organization", "government", "property"]
 place_link = "geometry"
-source = "county and regional ArcGIS servers"
+source = "state, county and regional GIS servers and county map apps"
 
 [[dataset]]
 id = "local-government-meetings"
@@ -496,17 +496,6 @@ place_link = "jurisdiction"
 source = "School district websites on Thrillshare (Apptegy)"
 
 [[dataset]]
-id = "beacon-parcels"
-name = "County parcels from Beacon (shape, owners, valuation)"
-project = "sd-archive"
-grain = "records"
-coverage = ["0500000US46081"]
-unit = "parcel"
-entities = ["person", "organization", "government", "property"]
-place_link = "geometry"
-source = "county Beacon apps (beacon.schneidercorp.com)"
-
-[[dataset]]
 id = "gis-census"
 name = "Census of public GIS datasets"
 project = "sd-archive/app (gis)"
@@ -595,7 +584,7 @@ name = "Property sales reported for the sales ratio study"
 project = "sd-archive"
 grain = "records"
 coverage = ["0400000US46"]
-unit = "sale (one or more parcels), by equalization year"
+unit = "sale (one or more properties), by equalization year"
 entities = ["property"]
 place_link = "county"
 source = "SD Department of Revenue, property tax data page (sdproptax.info/DataLink/Data), sales detail CSVs"

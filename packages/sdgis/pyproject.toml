@@ -1,7 +1,7 @@
 [project]
 name = "sdgis"
 version = "0.1.0"
-description = "Plain-Python clients for the platforms South Dakota GIS data is published on: ArcGIS REST services directories and layers, Schneider Beacon. No Django."
+description = "Plain-Python clients for the platforms South Dakota GIS data is published on: ArcGIS REST services directories and layers, and county map apps. No Django."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
