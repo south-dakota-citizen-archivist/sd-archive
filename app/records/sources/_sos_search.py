@@ -41,7 +41,7 @@ from urllib.parse import parse_qs, urljoin, urlsplit
 
 from records.sources import DocumentLink, Found, Item, Source
 
-PAUSE = (10.0, 10.0)  # seconds between any two requests to the search system
+PAUSE = (30.0, 30.0)  # seconds between any two requests to the search system
 IMAGE_RETRIES = (60.0,)  # seconds to wait before asking for a page image again
 _sleep = time.sleep
 _last = [0.0]  # when the last request went out (time.monotonic)
