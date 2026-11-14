@@ -1,5 +1,5 @@
 // South Dakota voter registration by party: tiles, a line chart (voters or share), a county
-// picker (search and map) and the table of every report. No dependencies.
+// picker (search, or a map shaded by leading party in any report) and the table of reports.
 (() => {
   "use strict";
   const PARTIES = ["republican", "democratic", "other"];
@@ -10,7 +10,10 @@
   const pct = (v) => `${v.toFixed(1)}%`;
   const $ = (id) => document.getElementById(id);
   const SVGNS = "http://www.w3.org/2000/svg";
-  const state = { data: null, place: null, mode: "count" };
+  const state = { data: null, place: null, mode: "count", report: null };
+  // steps of the leading party's lead (points of active voters), the same for every report
+  const LEAD_STEPS = [10, 25, 40, 55];
+  const RAMP = { republican: "rep", democratic: "dem" };
 
   const parseDate = (s) => new Date(`${s}T12:00:00`);
   const longDate = (s) => parseDate(s).toLocaleDateString("en-US",
@@ -308,12 +311,12 @@
   document.querySelectorAll(".map path[data-geoid]").forEach((path) => {
     path.setAttribute("tabindex", "0");
     path.setAttribute("role", "button");
-    path.setAttribute("aria-label", `${path.dataset.name} County`);
     path.addEventListener("click", () => choose(path.dataset.geoid));
-    path.addEventListener("pointerenter", () => ring(hoverRing, path));
-    path.addEventListener("pointerleave", () => ring(hoverRing, null));
-    path.addEventListener("focus", () => ring(hoverRing, path));
-    path.addEventListener("blur", () => ring(hoverRing, null));
+    path.addEventListener("pointerenter", (e) => { ring(hoverRing, path); showMapTip(path, e); });
+    path.addEventListener("pointermove", (e) => showMapTip(path, e));
+    path.addEventListener("pointerleave", () => { ring(hoverRing, null); hideMapTip(); });
+    path.addEventListener("focus", () => { ring(hoverRing, path); showMapTip(path); });
+    path.addEventListener("blur", () => { ring(hoverRing, null); hideMapTip(); });
     path.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(path.dataset.geoid); }
     });
@@ -328,6 +331,78 @@
         o.setAttribute("aria-pressed", o === b));
       render();
     });
+  });
+
+  // ---- map: each county shaded by its leading party in the chosen report ---------------
+  const mapTip = document.createElement("div");
+  mapTip.className = "tooltip";
+  mapTip.hidden = true;
+  $("map-chart")?.append(mapTip);
+
+  function standing(geoid, i) {
+    const c = state.data.counties[geoid];
+    if (!c) return null;
+    const values = Object.fromEntries(PARTIES.map((p) => [p, c[p][i]]));
+    if (PARTIES.some((p) => values[p] === null)) return null;
+    const total = PARTIES.reduce((a, p) => a + values[p], 0);
+    if (!total) return null;
+    const ranked = [...PARTIES].sort((a, b) => values[b] - values[a]);
+    const lead = (100 * (values[ranked[0]] - values[ranked[1]])) / total;
+    return { values, total, leader: ranked[0], runnerUp: ranked[1], lead };
+  }
+
+  function fillFor(s) {
+    if (!s) return "var(--county-fill)";
+    const ramp = RAMP[s.leader];
+    if (!ramp) return `var(--${s.leader})`;
+    const step = LEAD_STEPS.filter((t) => s.lead >= t).length + 1;
+    return `var(--${ramp}-${step})`;
+  }
+
+  const leadText = (s) => `${LABEL[s.leader]} by ${s.lead.toFixed(1)} points`;
+
+  function renderMap() {
+    const i = state.report;
+    const date = state.data.dates[i], election = state.data.elections[i];
+    const when = `${longDate(date)}${election ? ` (${ELECTION[election] || election})` : ""}`;
+    $("map-when").textContent = when;
+    $("report-out").textContent = when;
+    $("report-range").setAttribute("aria-valuetext", when);
+    $("report-latest").hidden = i === state.data.dates.length - 1;
+    document.querySelectorAll(".map path[data-geoid]").forEach((path) => {
+      const s = standing(path.dataset.geoid, i);
+      path.style.fill = fillFor(s);
+      path.setAttribute("aria-label", `${path.dataset.name} County: ${s ? leadText(s)
+        : "no figures in this report"}`);
+    });
+  }
+
+  function showMapTip(path, e) {
+    const s = standing(path.dataset.geoid, state.report);
+    mapTip.innerHTML = `<div class="t-head">${path.dataset.name} County</div>` + (s
+      ? PARTIES.map((p) => `<div class="t-row"><i class="swatch" style="background:var(--${p})">`
+        + `</i>${LABEL[p]}<b>${pct((100 * s.values[p]) / s.total)}</b></div>`).join("")
+        + `<div class="t-row muted">${LABEL[s.leader]} lead<b>${s.lead.toFixed(1)} pts</b></div>`
+      : '<div class="t-row muted">No figures in this report</div>');
+    mapTip.hidden = false;
+    const box = $("map-chart").getBoundingClientRect();
+    const r = path.getBoundingClientRect();
+    const x = e && e.clientX ? e.clientX - box.left : r.left + r.width / 2 - box.left;
+    const y = e && e.clientY ? e.clientY - box.top : r.top + r.height / 2 - box.top;
+    const w = mapTip.offsetWidth, h = mapTip.offsetHeight;
+    mapTip.style.left = `${Math.max(0, Math.min(x + 12, box.width - w))}px`;
+    mapTip.style.top = `${y + 16 + h > box.height ? Math.max(0, y - h - 12) : y + 16}px`;
+  }
+  const hideMapTip = () => { mapTip.hidden = true; };
+
+  $("report-range").addEventListener("input", (e) => {
+    state.report = Number(e.target.value);
+    renderMap();
+  });
+  $("report-latest").addEventListener("click", () => {
+    state.report = state.data.dates.length - 1;
+    $("report-range").value = state.report;
+    renderMap();
   });
 
   function choose(geoid) {
@@ -347,7 +422,6 @@
     $("chart-title").innerHTML = `<span>${name}</span><span class="what"><span class="sep">: `
       + `</span>${state.mode === "percent" ? "share of active voters by party"
         : "active voters by party"}</span>`;
-    $("map-title").textContent = state.place ? `${name} selected` : "Choose a county";
     let chosen = null;
     document.querySelectorAll(".map path[data-geoid]").forEach((p) => {
       const selected = p.dataset.geoid === state.place;
@@ -372,6 +446,8 @@
 
   fetch(window.VR_DATA).then((r) => r.json()).then((data) => {
     state.data = data;
+    state.report = data.dates.length - 1;
+    renderMap();
     const fips = new URLSearchParams(location.search).get("county");
     const geoid = fips && `0500000US${fips}`;
     state.place = geoid && data.counties[geoid] ? geoid : null;

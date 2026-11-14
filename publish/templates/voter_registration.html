@@ -42,8 +42,21 @@
     2015, and for each election before that.</p>
   </section>
   <section class="card map" aria-labelledby="map-title">
-    <p class="chart-title" id="map-title">Choose a county</p>
-    {{ map_svg|safe }}
+    <p class="chart-title" id="map-title">Leading party by county</p>
+    <p class="when-title" id="map-when" aria-live="polite"></p>
+    <div class="map-chart" id="map-chart">{{ map_svg|safe }}</div>
+    <div class="scale" aria-hidden="true">
+      <span class="name">Republican</span>{% for i in range(1, 6) %}<i style="background:var(--rep-{{ i }})"></i>{% endfor %}
+      <span class="name">Democratic</span>{% for i in range(1, 6) %}<i style="background:var(--dem-{{ i }})"></i>{% endfor %}
+      <span class="ticks"><span>&lt;10</span><span>10–25</span><span>25–40</span><span>40–55</span><span>55+</span></span>
+    </div>
+    <p class="small muted" style="margin:6px 0 0">A stronger color is a bigger lead: the leading party's
+    share of active voters minus the next party's, in points. Click a county to chart it.</p>
+    <div class="scrubber">
+      <label for="report-range"><span>Report</span><output id="report-out" for="report-range"></output></label>
+      <input type="range" id="report-range" min="0" max="{{ snapshots - 1 }}" step="1" value="{{ snapshots - 1 }}">
+      <div class="ends"><span>{{ first_year }}</span><button type="button" id="report-latest">Latest</button></div>
+    </div>
   </section>
 </div>
 
