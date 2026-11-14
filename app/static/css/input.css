@@ -10,3 +10,11 @@
   .tbl td { @apply border-b border-gray-100 px-3 py-2 align-top; }
   .link { @apply text-blue-700 hover:underline; }
 }
+
+/* MapLibre popups: room for the close button, which otherwise sits flush in the corner */
+.maplibregl-popup .maplibregl-popup-content { padding: 12px 30px 12px 12px; border-radius: 6px; }
+.maplibregl-popup .maplibregl-popup-close-button {
+  top: 6px; right: 6px; width: 20px; height: 20px; line-height: 18px;
+  font-size: 16px; border-radius: 4px; color: #6b7280; cursor: pointer;
+}
+.maplibregl-popup .maplibregl-popup-close-button:hover { background-color: #f3f4f6; color: #111827; }

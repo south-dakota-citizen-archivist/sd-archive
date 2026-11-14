@@ -35,12 +35,16 @@ function addFeatureLayers(map, sourceId, { sourceLayer, onClick } = {}) {
     paint: { "circle-color": ACCENT, "circle-radius": 4, "circle-stroke-color": "#fff", "circle-stroke-width": 1 },
   });
   if (onClick) {
-    for (const suffix of ["fill", "line", "point"]) {
-      const id = `${sourceId}-${suffix}`;
-      map.on("click", id, (e) => onClick(e.features[0], e.lngLat));
-      map.on("mouseenter", id, () => (map.getCanvas().style.cursor = "pointer"));
-      map.on("mouseleave", id, () => (map.getCanvas().style.cursor = ""));
-    }
+    // One handler for the three layers: per-layer enter/leave events fight each other where
+    // a polygon's fill meets its outline, and a click there would fire twice.
+    const layers = ["fill", "line", "point"].map((s) => `${sourceId}-${s}`);
+    const hit = (point) => map.queryRenderedFeatures(point, { layers })[0];
+    map.on("mousemove", (e) => (map.getCanvas().style.cursor = hit(e.point) ? "pointer" : ""));
+    map.on("mouseout", () => (map.getCanvas().style.cursor = ""));
+    map.on("click", (e) => {
+      const f = hit(e.point);
+      if (f) onClick(f, e.lngLat);
+    });
   }
 }
 
