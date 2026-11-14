@@ -7,6 +7,13 @@
   <meta name="description" content="{% block description %}{{ site_description }}{% endblock %}">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23141413'/%3E%3Cpath d='M4 11h8M4 8h8M4 5h5' stroke='%23fcfcfb' stroke-width='1.6'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="{{ root }}static/site.css?v={{ build_id }}">
+  <script>
+    // a theme chosen with the navbar button wins over the OS setting; set before the page paints
+    try {
+      const t = localStorage.getItem("theme");
+      if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
   {% block head %}{% endblock %}
 </head>
 <body>
@@ -21,6 +28,10 @@
       </ul>
       <ul class="end">
         <li><a href="https://github.com/south-dakota-citizen-archivist/sd-archive">Source code</a></li>
+        <li><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+          <svg class="icon-moon" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 9.6A5.6 5.6 0 0 1 6.4 2.5a5.6 5.6 0 1 0 7.1 7.1Z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M3 13l1.1-1.1M11.9 4.1 13 3"/></svg>
+        </button></li>
       </ul>
     </nav>
   </header>
@@ -32,6 +43,22 @@
     their sources. Every figure links to the report it comes from.</p>
     <p class="muted">Built {{ built }} · <a href="https://github.com/south-dakota-citizen-archivist/sd-archive">Source code</a></p>
   </footer>
+  <script>
+    (() => {
+      const root = document.documentElement, button = document.getElementById("theme-toggle");
+      const dark = () => root.dataset.theme ? root.dataset.theme === "dark"
+        : matchMedia("(prefers-color-scheme: dark)").matches;
+      const label = () => button.setAttribute("aria-label", `Switch to ${dark() ? "light" : "dark"} mode`);
+      label();
+      matchMedia("(prefers-color-scheme: dark)").addEventListener("change", label);
+      button.addEventListener("click", () => {
+        const next = dark() ? "light" : "dark";
+        root.dataset.theme = next;
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        label();
+      });
+    })();
+  </script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

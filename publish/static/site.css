@@ -100,6 +100,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .navbar ul a:hover { color: var(--text-primary); background: var(--surface-0); }
 .navbar ul a[aria-current="page"] { color: var(--text-primary); background: var(--surface-0); font-weight: 600; }
 .navbar .end { margin-left: auto; }
+.navbar .end { align-items: center; }
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px;
+  padding: 0; border: 0; border-radius: 6px; background: none; color: var(--text-secondary); cursor: pointer;
+}
+.theme-toggle:hover { color: var(--text-primary); background: var(--surface-0); }
+.theme-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.theme-toggle svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5;
+  stroke-linecap: round; stroke-linejoin: round; }
+.theme-toggle .icon-sun circle { fill: none; }
+/* the icon shows the mode a click switches to */
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+}
 @media (max-width: 560px) { .navbar { padding: 8px 16px; } .navbar .end { margin-left: 0; } }
 .site-footer {
   max-width: 1080px; margin: 48px auto 0; padding: 16px;
