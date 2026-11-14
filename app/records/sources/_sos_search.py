@@ -42,7 +42,8 @@ from urllib.parse import parse_qs, urljoin, urlsplit
 
 from records.sources import DocumentLink, Found, Item, Source
 
-PAUSE = (5.0, 8.0)  # seconds between any two requests to the search system
+# seconds between any two requests to the search system; SOS_PAUSE="8,12" to go slower
+PAUSE = tuple(float(s) for s in os.environ.get("SOS_PAUSE", "5,8").split(","))
 COOL_DOWN = (120.0, 300.0, 600.0)  # seconds before trying a document again after an error page
 _sleep = time.sleep
 _last = [0.0]  # when the last request went out (time.monotonic)
