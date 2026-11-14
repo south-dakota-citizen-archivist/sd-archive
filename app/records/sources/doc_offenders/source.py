@@ -6,13 +6,16 @@ listed name and by each alias, for matching across record sets.
 
 The locator searches by last name prefix, so a run searches each letter, A to Z (in a Chrome
 window: the search has an "I'm not a robot" box), and reads every page of each letter's
-results (plain form posts). It goes at a person's pace: searches 40 to 80 minutes apart,
-results pages 5 to 12 seconds apart, and people's pages (plain links) 8 to 20 seconds apart,
-with a break of 3 to 10 minutes every 30 to 70 pages; people's pages are read between
-searches and after them, at most `DETAILS_PER_RUN` new ones a run. Results and
-people's pages are kept by month: a stopped run resumes, and the next month's run reads them
-again. A person whose page hasn't been read
-this month keeps the last one read; until every letter has been searched and every person
+results (plain form posts). A letter with too many people for the locator (it answers
+"currently unavailable", as for H) is searched two letters at a time instead (HA, HB, … HZ,
+H'), and in later months too; a two-letter search that fails stops the run.
+
+It goes at a person's pace: searches 40 to 80 minutes apart, results pages 5 to 12 seconds
+apart, and people's pages (plain links) 8 to 20 seconds apart, with a break of 3 to 10
+minutes every 30 to 70 pages; people's pages are read between searches and after them, at
+most `DETAILS_PER_RUN` new ones a run. Results and people's pages are kept by month: a
+stopped run resumes, and the next month's run reads them again. A person whose page hasn't
+been read this month keeps the last one read; until every search is done and every person
 has a page, the run is partial (nothing is marked dropped).
 """
 
@@ -35,6 +38,7 @@ from . import parse
 logger = logging.getLogger(__name__)
 STATE = "0400000US46"
 LETTERS = string.ascii_uppercase
+SECOND = string.ascii_uppercase + "'"  # what follows the letter in a two-letter search (O'Brien)
 DETAILS_PER_RUN = 5000
 # the pace, in seconds: a person's, not a program's
 SEARCH_GAP = (40 * 60.0, 80 * 60.0)  # between searches (each has the "I'm not a robot" box)
@@ -58,6 +62,11 @@ def _searcher():
 
 class NotResults(Exception):
     """A search answered with something other than results (the locator unavailable)."""
+
+
+def split_before(store, letter: str) -> bool:
+    """Whether a run (this month or earlier) found the letter too big to search whole."""
+    return store is not None and any(store.root.glob(f"results/*/{letter}/split"))
 
 
 def letter_pages(fetcher, first: bytes, sleep=time.sleep) -> list[bytes]:
@@ -146,9 +155,16 @@ def items(fetcher, today: date | None = None, details_per_run: int | None = None
     store = getattr(fetcher, "store", None)
     people = _People(fetcher, store, month, details_per_run, sleep)
     counts: dict[str, int] = {}
+    split: list[str] = []
     stopped, searcher, next_search = None, None, clock()
+    queue = list(LETTERS)
     try:
-        for letter in LETTERS:
+        while queue:
+            letter = queue.pop(0)  # a letter, or two letters of one too big to search whole
+            if len(letter) == 1 and split_before(store, letter):
+                split.append(letter)
+                queue[:0] = [letter + c for c in SECOND]
+                continue
             pages = stored_letter(store, month, letter)
             if pages is None:
                 from .search import NeedsPerson
@@ -166,8 +182,16 @@ def items(fetcher, today: date | None = None, details_per_run: int | None = None
                 next_search = clock() + random.uniform(*search_gap)
                 try:
                     pages = letter_pages(fetcher, first, sleep)
-                except NotResults as e:  # nothing of this letter is stored; searched next run
-                    stopped = f"search {letter!r}, {e}"
+                except NotResults as e:  # nothing of this search is stored
+                    if len(letter) == 1:  # too many people for the locator: by two letters
+                        logger.warning("DOC search %r: %s; searching it two letters at a time",
+                                       letter, e)  # fmt: skip
+                        if store is not None:
+                            store.save(f"results/{month}/{letter}/split", b"", allow_empty=True)
+                        split.append(letter)
+                        queue[:0] = [letter + c for c in SECOND]
+                        continue
+                    stopped = f"search {letter!r}, {e}"  # searched again next run
                     break
                 if store is not None:
                     for i, page in enumerate(pages, start=1):
@@ -199,10 +223,13 @@ def items(fetcher, today: date | None = None, details_per_run: int | None = None
             missing += 1
         out.append(Item(key=doc, data=data, source_url=parse.detail_url(row["detail_id"]),
                         places=where))  # fmt: skip
-    out.checks = {"by_letter": counts, "people": len(out), "pages_read": fetched,
-                  "without_page": missing,
-                  "letters_searched": len(counts)}  # fmt: skip
-    if stopped or missing or len(counts) < len(LETTERS):
+    by_letter: dict[str, int] = {}
+    for searched, n in counts.items():
+        by_letter[searched[0]] = by_letter.get(searched[0], 0) + n
+    out.checks = {"by_letter": by_letter, "people": len(out), "pages_read": fetched,
+                  "without_page": missing, "letters_searched": len(by_letter),
+                  "searches": len(counts), "split": split}  # fmt: skip
+    if stopped or missing or queue:
         raise Stopped(out, stopped or f"{missing} people without a page read")
     return out
 

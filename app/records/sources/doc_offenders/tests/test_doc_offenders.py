@@ -59,7 +59,7 @@ class FakeSearcher:
 
     letters: list = []
     puzzle_at: str | None = None
-    unavailable_at: str | None = None
+    unavailable_at: set = set()
 
     def __enter__(self):
         return self
@@ -71,7 +71,7 @@ class FakeSearcher:
         if letter == FakeSearcher.puzzle_at:
             raise NeedsPerson("a picture puzzle")
         FakeSearcher.letters.append(letter)
-        if letter == FakeSearcher.unavailable_at:
+        if letter in FakeSearcher.unavailable_at:
             return UNAVAILABLE
         return page("results-q-1.html") if letter == "Q" else NO_ONE
 
@@ -99,7 +99,7 @@ class FixtureFetcher:
 
 @pytest.fixture
 def searcher(monkeypatch):
-    FakeSearcher.letters, FakeSearcher.puzzle_at, FakeSearcher.unavailable_at = [], None, None
+    FakeSearcher.letters, FakeSearcher.puzzle_at, FakeSearcher.unavailable_at = [], None, set()
     monkeypatch.setattr(source, "_searcher", FakeSearcher)
     for pace in ("SEARCH_GAP", "PAGE_GAP", "DETAIL_GAP", "BREAK"):
         monkeypatch.setattr(source, pace, (0.0, 0.0))
@@ -147,17 +147,48 @@ def test_a_picture_puzzle_stops_the_run_and_keeps_what_it_has(db, sd_places, sea
     assert Record.objects.filter(dropped_at__isnull=False).count() == 0
 
 
-def test_an_unavailable_locator_stops_the_run_and_stores_nothing_of_that_letter(
-        db, sd_places, searcher, tmp_path):  # fmt: skip
-    """The locator's "currently unavailable" page is not a search with no one in it."""
+def test_a_letter_too_big_for_the_locator_is_searched_two_letters_at_a_time(
+        db, sd_places, searcher, tmp_path, monkeypatch):  # fmt: skip
+    """The locator answers a search for H "currently unavailable" (too many people): H is
+    searched as HA to HZ and H', and in later months it goes straight to those."""
+    from datetime import date
+    from functools import partial
+
     RecordSet.objects.create(slug="doc-offenders", name="DOC", dataset="doc-offenders")
-    searcher.unavailable_at = "H"
+    searcher.unavailable_at = {"H"}
+    store = Store(tmp_path)
+    monkeypatch.setattr(source.SOURCE, "items", partial(source.items, today=date(2026, 11, 1)))
+    run = run_source("doc-offenders", fetcher=FixtureFetcher(store))
+    assert "stopped" not in run.checks and run.checks["split"] == ["H"]
+    hs = [x for x in searcher.letters if x.startswith("H")]
+    assert hs == ["H", "HA", "HB", *[f"H{c}" for c in "CDEFGHIJKLMNOPQRSTUVWXYZ'"]]
+    assert searcher.letters[searcher.letters.index("H'") + 1] == "I"  # then on to I
+    assert run.checks["letters_searched"] == 26 and run.checks["searches"] == 26 + 26
+    assert store.has("results/2026-11/H/split") and not store.has("results/2026-11/H/complete")
+    # next month: no search for H itself
+    searcher.letters = []
+    monkeypatch.setattr(source.SOURCE, "items", partial(source.items, today=date(2026, 12, 1)))
+    run_source("doc-offenders", fetcher=FixtureFetcher(store))
+    assert "H" not in searcher.letters and "HA" in searcher.letters
+
+
+def test_a_two_letter_search_the_locator_cant_answer_stops_the_run(db, sd_places, searcher,
+                                                                    tmp_path):  # fmt: skip
+    """The locator unavailable for a two-letter search too: it may be down; stop, store
+    nothing of that search, and search it again next run."""
+    RecordSet.objects.create(slug="doc-offenders", name="DOC", dataset="doc-offenders")
+    searcher.unavailable_at = {"H", "HE"}
     store = Store(tmp_path)
     run = run_source("doc-offenders", fetcher=FixtureFetcher(store))
-    assert "currently unavailable" in run.checks["stopped"]
-    assert run.checks["letters_searched"] == 7  # A to G
-    assert not store.has("results/" + f"{run.started_at:%Y-%m}" + "/H/complete")
+    assert "'HE'" in run.checks["stopped"] and "currently unavailable" in run.checks["stopped"]
+    month = f"{run.started_at:%Y-%m}"
+    assert store.has(f"results/{month}/HA/complete")
+    assert not store.has(f"results/{month}/HE/complete")
     assert Record.objects.filter(dropped_at__isnull=False).count() == 0
+    # the next run picks up at HE
+    searcher.letters, searcher.unavailable_at = [], {"H"}
+    run = run_source("doc-offenders", fetcher=FixtureFetcher(store))
+    assert searcher.letters[0] == "HE" and "stopped" not in run.checks
 
 
 def test_searches_are_spaced_and_pages_read_in_between(db, sd_places, searcher, tmp_path,
