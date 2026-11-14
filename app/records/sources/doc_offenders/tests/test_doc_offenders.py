@@ -59,6 +59,7 @@ class FakeSearcher:
 
     letters: list = []
     puzzle_at: str | None = None
+    unavailable_at: str | None = None
 
     def __enter__(self):
         return self
@@ -70,7 +71,14 @@ class FakeSearcher:
         if letter == FakeSearcher.puzzle_at:
             raise NeedsPerson("a picture puzzle")
         FakeSearcher.letters.append(letter)
-        return page("results-q-1.html") if letter == "Q" else b"<html><form></form></html>"
+        if letter == FakeSearcher.unavailable_at:
+            return UNAVAILABLE
+        return page("results-q-1.html") if letter == "Q" else NO_ONE
+
+
+NO_ONE = b'<html><form id="frmInmate"><table id="grvList"></table></form></html>'
+UNAVAILABLE = (b'<html><form id="frmInmate"><div id="pnlError">The Offender Locator is currently '
+               b"unavailable. Please check back at a later time.</div></form></html>")  # fmt: skip
 
 
 class FixtureFetcher:
@@ -91,7 +99,7 @@ class FixtureFetcher:
 
 @pytest.fixture
 def searcher(monkeypatch):
-    FakeSearcher.letters, FakeSearcher.puzzle_at = [], None
+    FakeSearcher.letters, FakeSearcher.puzzle_at, FakeSearcher.unavailable_at = [], None, None
     monkeypatch.setattr(source, "_searcher", FakeSearcher)
     for pace in ("SEARCH_GAP", "PAGE_GAP", "DETAIL_GAP", "BREAK"):
         monkeypatch.setattr(source, pace, (0.0, 0.0))
@@ -136,6 +144,19 @@ def test_a_picture_puzzle_stops_the_run_and_keeps_what_it_has(db, sd_places, sea
     run = run_source("doc-offenders", fetcher=FixtureFetcher(Store(tmp_path)))
     assert "picture puzzle" in run.checks["stopped"]
     assert run.added == 97 and run.checks["letters_searched"] == 17  # A to Q
+    assert Record.objects.filter(dropped_at__isnull=False).count() == 0
+
+
+def test_an_unavailable_locator_stops_the_run_and_stores_nothing_of_that_letter(
+        db, sd_places, searcher, tmp_path):  # fmt: skip
+    """The locator's "currently unavailable" page is not a search with no one in it."""
+    RecordSet.objects.create(slug="doc-offenders", name="DOC", dataset="doc-offenders")
+    searcher.unavailable_at = "H"
+    store = Store(tmp_path)
+    run = run_source("doc-offenders", fetcher=FixtureFetcher(store))
+    assert "currently unavailable" in run.checks["stopped"]
+    assert run.checks["letters_searched"] == 7  # A to G
+    assert not store.has("results/" + f"{run.started_at:%Y-%m}" + "/H/complete")
     assert Record.objects.filter(dropped_at__isnull=False).count() == 0
 
 

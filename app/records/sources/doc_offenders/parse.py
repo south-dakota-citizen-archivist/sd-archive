@@ -17,6 +17,17 @@ def detail_url(detail_id: str) -> str:
     return urljoin(URL, f"details/?id={detail_id}")
 
 
+def results_problem(html: bytes | str) -> str | None:
+    """Why a page isn't a page of search results (None when it is): the locator's
+    "currently unavailable" page, or anything else without the results table."""
+    raw = html if isinstance(html, str) else html.decode("utf-8", "replace")
+    if 'id="pnlError"' in raw or "currently unavailable" in raw.lower():
+        return "the locator answered that it is currently unavailable"
+    if f'id="{GRID}"' not in raw:
+        return "the page has no results table"
+    return None
+
+
 def results(html: bytes | str) -> list[dict]:
     """The people on one page of search results."""
     root = document(html)

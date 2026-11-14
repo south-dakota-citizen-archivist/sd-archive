@@ -56,15 +56,24 @@ def _searcher():
     return Searcher(browser_profile())
 
 
+class NotResults(Exception):
+    """A search answered with something other than results (the locator unavailable)."""
+
+
 def letter_pages(fetcher, first: bytes, sleep=time.sleep) -> list[bytes]:
-    """Every page of one search's results, from its first page."""
+    """Every page of one search's results, from its first page; NotResults if any page
+    isn't results (so a letter is never stored short)."""
     pages, html, n = [first], first, 1
+    if problem := parse.results_problem(first):
+        raise NotResults(f"page 1: {problem}")
     while arg := parse.next_page(html, n):
         sleep(random.uniform(*PAGE_GAP))
         data = {k: v for k, v in form_fields(html).items() if k not in ("btnMission", "btnReset")}
         data |= {"__EVENTTARGET": parse.GRID, "__EVENTARGUMENT": arg}
         html = fetcher.request("POST", parse.URL, data=data, timeout=120).content
         n += 1
+        if problem := parse.results_problem(html):
+            raise NotResults(f"page {n}: {problem}")
         pages.append(html)
     return pages
 
@@ -155,7 +164,11 @@ def items(fetcher, today: date | None = None, details_per_run: int | None = None
                     stopped = str(e)
                     break
                 next_search = clock() + random.uniform(*search_gap)
-                pages = letter_pages(fetcher, first, sleep)
+                try:
+                    pages = letter_pages(fetcher, first, sleep)
+                except NotResults as e:  # nothing of this letter is stored; searched next run
+                    stopped = f"search {letter!r}, {e}"
+                    break
                 if store is not None:
                     for i, page in enumerate(pages, start=1):
                         store.save(f"results/{month}/{letter}/page-{i:04d}.html", page,
