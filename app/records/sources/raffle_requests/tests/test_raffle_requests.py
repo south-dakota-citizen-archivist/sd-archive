@@ -147,10 +147,14 @@ def test_a_document_is_tried_again_after_an_error_page(monkeypatch):
     assert asked == ["Default.aspx", "Document.asp", "ShowImage.as",
                      "Default.aspx", "Document.asp", "ShowImage.as", "ShowImage.as"]  # fmt: skip
     assert waits == [sos.COOL_DOWN[0]]
-    # a document that fails through every cool-down fails, and the batch goes on ...
-    with pytest.raises(sos.PageUnavailable):
-        sos.assemble(FakeFetcher(images={"1": jpeg("white")}, sorry=10), url)
-    # ... unless the document before failed the same way: then it's a block
+    # a document that fails through every cool-down, while the search page still loads, is
+    # broken: it fails, and the batch goes on, even several in a row ...
+    for _ in range(sos.FAILED_IN_A_ROW - 1):
+        broken = FakeFetcher(images={"1": jpeg("white")}, sorry=10)
+        with pytest.raises(sos.PageUnavailable):
+            sos.assemble(broken, url)
+        assert broken.asked[-1][1].endswith("/Search/Default.aspx")  # the server checked
+    # ... up to FAILED_IN_A_ROW: then it's a block
     with pytest.raises(sos.Blocked):
         sos.assemble(FakeFetcher(images={"1": jpeg("white")}, sorry=10), url)
     # a search page that keeps failing is the server, not the document

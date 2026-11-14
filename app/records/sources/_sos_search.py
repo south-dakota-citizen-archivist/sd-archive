@@ -16,9 +16,11 @@ filings all use one system.
 - Now and then the server sends a request to its error page, or answers "we're sorry",
   instead of the page; a few minutes later the same request works. So a document that gets
   one is tried again from the start, in a fresh session, after a cool-down (`COOL_DOWN`:
-  minutes, longer each time). A document that still fails fails on its own
-  (`PageUnavailable`) and the batch goes on; two in a row, or a search page that keeps
-  failing (`ServerDown`), stop the batch (`Blocked`).
+  minutes, longer each time). When a document still fails, the search page is opened in a
+  fresh session to tell a broken document from a server that's down: if it loads, the
+  document fails on its own (`PageUnavailable`) and the batch goes on; if it doesn't
+  (`ServerDown`), or FAILED_IN_A_ROW documents fail one after another, the batch stops
+  (`Blocked`).
 
 **The system goes down easily**: one request at a time, each `PAUSE` after the one before,
 and a search (whose listing can be large) stops the run at the first error page.
@@ -70,7 +72,7 @@ class PageUnavailable(Exception):
     and the batch goes on."""
 
 
-FAILED_IN_A_ROW = 2  # documents failing through every cool-down, one after another: a block
+FAILED_IN_A_ROW = 5  # documents failing through every cool-down, one after another: a block
 _failed = [0]  # documents in a row that did
 
 
@@ -248,6 +250,9 @@ def assemble(fetcher, viewer_url: str) -> bytes:
             if wait is None:
                 if isinstance(e, ServerDown):
                     raise
+                # the server or the document? the search page answers for the server
+                _fresh_session(fetcher)
+                _open_search(fetcher, urljoin(viewer_url, "Default.aspx"))
                 _failed[0] += 1
                 if _failed[0] >= FAILED_IN_A_ROW:
                     raise Blocked(f"{e} ({_failed[0]} documents in a row)") from None
