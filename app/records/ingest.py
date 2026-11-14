@@ -46,9 +46,15 @@ class Stored:
         return self.added + self.changed
 
 
-def check_drop(previous: int | None, current: int, max_drop: float) -> dict:
-    """Refuse to replace a record set when a complete run finds sharply fewer items, which
-    usually means a broken source or query rather than real deletions."""
+MIN_GONE = 10
+
+
+def check_drop(previous: int | None, current: int, max_drop: float, gone: int = 0) -> dict:
+    """Refuse to replace a record set when a complete run finds sharply fewer items, or would
+    mark a large share of the stored records gone (gone: how many it doesn't find; at least
+    MIN_GONE, so one changed key in a tiny record set doesn't count). Either
+    usually means a broken source or query, or keys built a new way, rather than real
+    deletions."""
     if not previous:
         return {"drop": None}
     drop = (previous - current) / previous
@@ -57,7 +63,13 @@ def check_drop(previous: int | None, current: int, max_drop: float) -> dict:
             f"count fell from {previous} to {current} ({drop:.0%}), "
             f"more than max_drop={max_drop:.0%}; run with force if this is expected"
         )
-    return {"drop": round(drop, 4)}
+    if gone >= MIN_GONE and gone / previous > max_drop:
+        raise DropTooLarge(
+            f"{gone} of the {previous} stored records aren't in this run ({gone / previous:.0%}), "
+            f"more than max_drop={max_drop:.0%}: were the keys built a new way? "
+            "Run with force if this is expected"
+        )
+    return {"drop": round(drop, 4), "gone": gone}
 
 
 def run_hash(items: Iterable[Item]) -> str:

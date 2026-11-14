@@ -43,13 +43,11 @@ def run_source(slug: str, *, job: Job | None = None, fetcher=None, force: bool =
         if stopped:
             run.checks["stopped"] = stopped
         elif complete and not force:
-            current = recordset.records.current()
-            if covers is None:
-                previous = current.count()
-            else:  # only the records this run speaks for
-                previous = sum(1 for k in current.values_list("key", flat=True).iterator()
-                               if covers(k))  # fmt: skip
-            run.checks |= ingest.check_drop(previous, len(items), source.max_drop)
+            keys = recordset.records.current().values_list("key", flat=True).iterator()
+            stored_keys = [k for k in keys if covers is None or covers(k)]  # the run speaks for
+            found_keys = {i.key for i in items}
+            gone = sum(1 for k in stored_keys if k not in found_keys)
+            run.checks |= ingest.check_drop(len(stored_keys), len(items), source.max_drop, gone)
         elif complete:
             run.checks["drop"] = "skipped (forced)"
         with transaction.atomic():

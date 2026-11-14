@@ -290,7 +290,7 @@ def test_drop_guard_counts_current_records_only(rs):
     ingest.store(new_run(rs), [Item(str(i), {}) for i in range(10)])
     ingest.store(new_run(rs), [Item(str(i), {}) for i in range(6)])  # 4 dropped
     assert rs.records.current().count() == 6
-    assert ingest.check_drop(rs.records.current().count(), 5, 0.5) == {"drop": 0.1667}
+    assert ingest.check_drop(rs.records.current().count(), 5, 0.5) == {"drop": 0.1667, "gone": 0}
 
 
 def test_store_leaves_unchanged_items_alone(rs):
@@ -353,9 +353,13 @@ def test_places_follow_their_item(rs, county, state):
 
 def test_check_drop():
     assert ingest.check_drop(None, 5, 0.5) == {"drop": None}
-    assert ingest.check_drop(10, 6, 0.5) == {"drop": 0.4}
+    assert ingest.check_drop(10, 6, 0.5, 4) == {"drop": 0.4, "gone": 4}
     with pytest.raises(ingest.DropTooLarge, match="fell from 10 to 4"):
         ingest.check_drop(10, 4, 0.5)
+    # as many found as stored, but most under keys it doesn't have
+    with pytest.raises(ingest.DropTooLarge, match="90 of the 100 stored records"):
+        ingest.check_drop(100, 100, 0.5, 90)
+    assert ingest.check_drop(2, 2, 0.5, 2) == {"drop": 0.0, "gone": 2}  # too few to judge
 
 
 # --- Runs ------------------------------------------------------------------------------------
@@ -403,6 +407,17 @@ def test_run_refuses_a_large_drop_unless_forced(rows, rs):
     assert rs.records.count() == 2
     run = run_source("orders", fetcher=Fetcher(), force=True)
     assert run.removed == 2 and run.checks == {"drop": "skipped (forced)"}
+
+
+def test_run_refuses_new_keys_for_most_stored_records(rows, rs):
+    found, _ = rows
+    run_source("orders", fetcher=Fetcher())
+    found["items"] = [Item(str(i), {}) for i in range(20)]
+    run_source("orders", fetcher=Fetcher())
+    found["items"] = [Item(f"x{i}", {}) for i in range(20)]
+    with pytest.raises(ingest.DropTooLarge, match="keys built a new way"):
+        run_source("orders", fetcher=Fetcher())
+    assert rs.records.current().filter(key__startswith="x").count() == 0
 
 
 def test_mentions_are_rebuilt_for_written_records(rows, rs):
