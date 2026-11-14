@@ -20,7 +20,7 @@ FORM = (b'<html><body><form method="post" action="./Default.aspx">'
 def no_pause(monkeypatch):
     monkeypatch.setattr(sos, "_pace", lambda *a, **k: None)
     monkeypatch.setattr(sos, "_sleep", lambda *a, **k: None)
-    monkeypatch.setattr(sos, "_sorry", [0])
+    monkeypatch.setattr(sos, "_failed", [0])
 
 
 class Response:
@@ -135,18 +135,28 @@ def test_a_viewer_becomes_one_pdf():
         sos.assemble(FakeFetcher(error_page=True), url)
 
 
-def test_a_page_image_is_asked_for_again_after_a_sorry_page():
+def test_a_document_is_tried_again_after_an_error_page(monkeypatch):
+    waits = []
+    monkeypatch.setattr(sos, "_sleep", waits.append)
     url = ("https://sdsos.gov/general-information/executive-actions/raffle-requests/Search/"
            "Document.aspx?CabId=523E2A2A&DocGuid=20261002-1616-1055-5196-1879bb67d5de")  # fmt: skip
     fetcher = FakeFetcher(images={"1": jpeg("white"), "2": jpeg("gray")}, sorry=1)
     assert sos.assemble(fetcher, url)[:5] == b"%PDF-"
-    assert [u[-7:] for _, u, _ in fetcher.asked[2:]] == ["Image=1"] * 2 + ["Image=2"]
-    # a document whose image keeps answering it fails, and the batch goes on ...
+    # after the cool-down, a fresh session: the search page, the viewer, every page again
+    asked = [u.split("/")[-1][:12] for _, u, _ in fetcher.asked]
+    assert asked == ["Default.aspx", "Document.asp", "ShowImage.as",
+                     "Default.aspx", "Document.asp", "ShowImage.as", "ShowImage.as"]  # fmt: skip
+    assert waits == [sos.COOL_DOWN[0]]
+    # a document that fails through every cool-down fails, and the batch goes on ...
     with pytest.raises(sos.PageUnavailable):
         sos.assemble(FakeFetcher(images={"1": jpeg("white")}, sorry=10), url)
     # ... unless the document before failed the same way: then it's a block
     with pytest.raises(sos.Blocked):
         sos.assemble(FakeFetcher(images={"1": jpeg("white")}, sorry=10), url)
+    # a search page that keeps failing is the server, not the document
+    sos._failed[0] = 0
+    with pytest.raises(sos.ServerDown):
+        sos.assemble(FakeFetcher(error_page=True), url)
     from records.documents import _setup_errors
 
     assert not issubclass(sos.PageUnavailable, _setup_errors())

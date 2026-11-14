@@ -13,16 +13,15 @@ filings all use one system.
   viewer. A batch is one session, as a person browsing filings would be: the search page is
   opened once, then each document's viewer and its page images. With `SOS_BROWSER` set
   (headless or headed), documents are read through a Chrome window (`_sos_browser`).
-- The server sometimes answers with a "we're sorry" page instead of results or a page image.
-  A page image that gets one is asked for again after a wait (`IMAGE_RETRIES`); if it still
-  does, that document fails (`PageUnavailable`: some documents' images are like that) and the
-  batch goes on, unless the document before failed the same way, which makes it a block. A
-  "we're sorry" search page or viewer, or the server's error page, is a block at once
-  (`Blocked`).
+- Now and then the server sends a request to its error page, or answers "we're sorry",
+  instead of the page; a few minutes later the same request works. So a document that gets
+  one is tried again from the start, in a fresh session, after a cool-down (`COOL_DOWN`:
+  minutes, longer each time). A document that still fails fails on its own
+  (`PageUnavailable`) and the batch goes on; two in a row, or a search page that keeps
+  failing (`ServerDown`), stop the batch (`Blocked`).
 
-**The system goes down easily, so it's used slowly**: one request at a time, each waiting
-`PAUSE` after the one before, and the first block stops the run (and a document batch)
-rather than trying the next thing.
+**The system goes down easily**: one request at a time, each `PAUSE` after the one before,
+and a search (whose listing can be large) stops the run at the first error page.
 
 `search_source()` makes a record set's source from a search: its URL, its columns and the
 names it lists.
@@ -41,10 +40,8 @@ from urllib.parse import parse_qs, urljoin, urlsplit
 
 from records.sources import DocumentLink, Found, Item, Source
 
-# seconds between any two requests to the search system (at 10 or 30 it sends us to its error
-# page after about 20 requests; a minute has held)
-PAUSE = (60.0, 60.0)
-IMAGE_RETRIES = (60.0,)  # seconds to wait before asking for a page image again
+PAUSE = (5.0, 8.0)  # seconds between any two requests to the search system
+COOL_DOWN = (120.0, 300.0, 600.0)  # seconds before trying a document again after an error page
 _sleep = time.sleep
 _last = [0.0]  # when the last request went out (time.monotonic)
 # Documents through a Chrome window (_sos_browser): "headless", "headed", or "" for plain HTTP
@@ -64,13 +61,17 @@ class LayoutChanged(Exception):
     pass
 
 
+class ServerDown(Blocked):
+    """The search page itself kept failing: not one document, the server."""
+
+
 class PageUnavailable(Exception):
-    """A document's page image kept answering "we're sorry": that document fails, and the
-    batch goes on."""
+    """A document kept getting the error page through every cool-down: that document fails,
+    and the batch goes on."""
 
 
-SORRY_IN_A_ROW = 2  # documents whose page images keep answering "we're sorry", then a block
-_sorry = [0]  # documents in a row whose page images did
+FAILED_IN_A_ROW = 2  # documents failing through every cool-down, one after another: a block
+_failed = [0]  # documents in a row that did
 
 
 def _pace(sleep=time.sleep, clock=time.monotonic) -> None:
@@ -190,36 +191,31 @@ def _open_search(fetcher, search_url: str) -> None:
     if search_url in opened:
         return
     _pace()
-    check_block(fetcher.request("GET", search_url, timeout=120).text, search_url)
+    page = fetcher.request("GET", search_url, timeout=120)
+    try:
+        check_block(page.text, str(getattr(page, "url", search_url)))
+    except Blocked as e:
+        raise ServerDown(str(e)) from None
     opened.add(search_url)
 
 
+def _fresh_session(fetcher) -> None:
+    """Forget the session: its cookies, and that it has opened the search page."""
+    session = getattr(fetcher, "session", None)
+    if session is not None:
+        session.cookies.clear()
+    if getattr(fetcher, "_sos_opened", None) is not None:
+        fetcher._sos_opened.clear()
+
+
 def _image(fetcher, url: str, viewer_url: str):
-    """A page image, asked for again after a wait when the answer is a "we're sorry" page."""
-    for wait in (*IMAGE_RETRIES, None):
-        _pace()
-        resp = fetcher.request("GET", url, timeout=120, headers={"Referer": viewer_url})
-        body = resp.content
-        if not body[:200].lstrip().lower().startswith((b"<!doctype", b"<html")):
-            return resp
-        if "error.aspx" in str(getattr(resp, "url", url)).lower():
-            check_block(resp.text, url)
-        if wait is None:
-            try:
-                check_block(resp.text, url)
-            except Blocked as e:
-                _sorry[0] += 1
-                if _sorry[0] >= SORRY_IN_A_ROW:
-                    raise Blocked(f"{e} ({_sorry[0]} documents in a row)") from None
-                raise PageUnavailable(f"{e}, after {len(IMAGE_RETRIES) + 1} tries") from None
-            raise LayoutChanged(f"{url}: a web page, not a page image")
-        try:
-            check_block(resp.text, url)
-        except Blocked:
-            _sleep(wait)
-            continue
+    """A page image (an error or "we're sorry" page is Blocked)."""
+    _pace()
+    resp = fetcher.request("GET", url, timeout=120, headers={"Referer": viewer_url})
+    if resp.content[:200].lstrip().lower().startswith((b"<!doctype", b"<html")):
+        check_block(resp.text, str(getattr(resp, "url", url)))
         raise LayoutChanged(f"{url}: a web page, not a page image")
-    raise AssertionError("unreachable")
+    return resp
 
 
 def browser_fetcher():
@@ -238,20 +234,46 @@ def browser_fetcher():
 
 def assemble(fetcher, viewer_url: str) -> bytes:
     """A filing's scanned pages, from its viewer, as one PDF (each request paced): the
-    search page (once a session), the viewer, then each page image in order. With BROWSER
-    set, through a Chrome window instead of the fetcher."""
-    import lxml.html
-    from PIL import Image
+    search page (once a session), the viewer, then each page image in order. After an error
+    page, the document is tried again from the start in a fresh session, after each
+    COOL_DOWN. With BROWSER set, through a Chrome window instead of the fetcher."""
+    import logging
 
     if BROWSER:
         fetcher = browser_fetcher()
+    for wait in (*COOL_DOWN, None):
+        try:
+            pdf = _assemble_once(fetcher, viewer_url)
+        except Blocked as e:
+            if wait is None:
+                if isinstance(e, ServerDown):
+                    raise
+                _failed[0] += 1
+                if _failed[0] >= FAILED_IN_A_ROW:
+                    raise Blocked(f"{e} ({_failed[0]} documents in a row)") from None
+                raise PageUnavailable(f"{e}, after {len(COOL_DOWN) + 1} tries") from None
+            logging.getLogger(__name__).warning(
+                "SOS error page (%s); trying the document again in %d minutes",
+                e, wait // 60)  # fmt: skip
+            _sleep(wait)
+            _fresh_session(fetcher)
+            continue
+        _failed[0] = 0
+        return pdf
+    raise AssertionError("unreachable")
+
+
+def _assemble_once(fetcher, viewer_url: str) -> bytes:
+    import lxml.html
+    from PIL import Image
+
     search_url = urljoin(viewer_url, "Default.aspx")
     _open_search(fetcher, search_url)
     _pace()
     page = fetcher.request("GET", viewer_url, timeout=120, headers={"Referer": search_url})
     if page.content[:5] == b"%PDF-":
         return page.content  # a link that serves the filing itself
-    check_block(page.text, page.url)
+    check_block(page.text, str(page.url))
     if "document thumbnails" not in page.text.lower():
         raise LayoutChanged(f"{viewer_url}: not a document viewer page")
     root = lxml.html.fromstring(page.content)
@@ -271,7 +293,6 @@ def assemble(fetcher, viewer_url: str) -> bytes:
             pdfs.append(body)
             continue
         images.append(Image.open(io.BytesIO(body)).convert("RGB"))
-    _sorry[0] = 0  # every page came: the next document starts the count again
     if pdfs and images:
         raise LayoutChanged(f"{viewer_url}: both PDF and image pages")
     if pdfs:
