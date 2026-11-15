@@ -81,3 +81,58 @@ def boundaries(kind: str, year: int = YEAR) -> gpd.GeoDataFrame:
         rows.append({c: getattr(p, c) for c in COLUMNS} | {"geometry": geom})
     out = gpd.GeoDataFrame(rows, columns=[*COLUMNS, "geometry"], geometry="geometry", crs=4326)
     return out.sort_values("name", ignore_index=True)
+
+
+# --- legislative districts of each redistricting plan, from census blocks -----------------
+
+BLOCK_FILES = {  # each census's block shapes
+    2000: "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2000/tl_2010_46_tabblock00.zip",
+    2010: "https://www2.census.gov/geo/tiger/TIGER2010/TABBLOCK/2010/tl_2010_46_tabblock10.zip",
+    2020: "https://www2.census.gov/geo/tiger/TIGER2020/TABBLOCK20/tl_2020_46_tabblock20.zip",
+}
+PLAN_CENSUS = {"2001": 2000, "2005": 2000, "2011": 2010, "2021": 2020}
+
+
+def block_file(year: int) -> Path:
+    """A census's block shapes for South Dakota, downloaded once into the cache."""
+    url = BLOCK_FILES[year]
+    path = cache_dir() / "blocks" / str(year) / url.rsplit("/", 1)[-1]
+    if path.exists():
+        return path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + ".partial")
+    req = urllib.request.Request(url, headers=BROWSER_HEADERS)
+    with urllib.request.urlopen(req, timeout=600) as resp, tmp.open("wb") as f:
+        while chunk := resp.read(1 << 20):
+            f.write(chunk)
+    tmp.replace(path)
+    return path
+
+
+def plan_blocks(plan: str):
+    """A redistricting plan's blocks: a DataFrame of block (GEOID), senate, senate_from,
+    house, house_from (how each block was placed: by the act's own words, or from a
+    reference file where the act describes streets)."""
+    import pandas as pd
+
+    path = Path(__file__).parent / "data" / "plans" / f"{plan}.csv.gz"
+    if not path.exists():
+        raise ValueError(f"no plan {plan!r}; plans: {sorted(PLAN_CENSUS)}")
+    return pd.read_csv(path, dtype=str, keep_default_na=False)
+
+
+def plan_boundaries(plan: str, kind: str = "sldu") -> gpd.GeoDataFrame:
+    """A plan's districts (kind "sldu" or "sldl"), each the union of its census blocks, in
+    EPSG:4326: district, geometry."""
+    import geopandas as gpd
+
+    if kind not in ("sldu", "sldl"):
+        raise ValueError('kind must be "sldu" or "sldl"')
+    blocks = plan_blocks(plan)
+    district = dict(zip(blocks["block"], blocks["senate" if kind == "sldu" else "house"],
+                        strict=True))  # fmt: skip
+    shapes = gpd.read_file(f"zip://{block_file(PLAN_CENSUS[plan])}")
+    gid = [c for c in shapes.columns if c.startswith(("GEOID", "BLKIDFP"))][0]
+    shapes["district"] = shapes[gid].map(district)
+    out = shapes.dropna(subset=["district"])[["district", "geometry"]].dissolve(by="district")
+    return out.reset_index().to_crs(4326)

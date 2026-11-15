@@ -45,7 +45,8 @@ def test_the_repository_keeps_the_address_the_api_dropped(db, sd_places, raw):
     assert old["earlier"]["home_address1"] == {"value": "521 N. Prairie", "from": repo_url}
     assert old["session_year"] == 2016 and old["legislator_id"] == 3830
     assert by_key["999"].places[1] == "1600000US4659020"  # Sioux Falls, from the address
-    assert len(by_key["999"].places) == 2  # no district: sdplaces has 2021's only
+    # elected in 2014: District 15 as the 2011 plan drew it
+    assert by_key["999"].places[2] == "610U900US46015-2011"
     new = by_key["4731"]
     assert new.places[-1] == "620L900US46010" and "earlier" not in new.data
     assert new.source_url == "https://sdlegislature.gov/Legislators/Profile/4731/Detail"

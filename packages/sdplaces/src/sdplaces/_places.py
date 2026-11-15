@@ -78,8 +78,18 @@ def _float(value: str) -> float | None:
 
 @cache
 def _table() -> tuple[Place, ...]:
-    with resources.files("sdplaces").joinpath("data/places.csv").open(newline="") as f:
-        return tuple(
+    """places.csv, then districts.csv: earlier redistricting plans' legislative districts."""
+    out = []
+    for name in ("places.csv", "districts.csv"):
+        path = resources.files("sdplaces").joinpath(f"data/{name}")
+        if path.is_file():
+            out += _read(path)
+    return tuple(out)
+
+
+def _read(path) -> list[Place]:
+    with path.open(newline="") as f:
+        return list(
             Place(
                 kind=r["kind"],
                 geoid=r["geoid"],
@@ -206,6 +216,9 @@ def lookup(
                 )
                 raise NotInForce(f"{name!r} didn't exist as a {kind} on {on} ({ranges})")
             matches = in_force
+        if len(matches) > 1 and on is None:  # no date: today's, if just one is in force
+            today = [p for p in matches if not p.historical]
+            matches = today if len(today) == 1 else matches
         if len(matches) > 1:
             raise AmbiguousPlace(f"{name!r} matches several {kind} records", matches)
         place = matches[0]

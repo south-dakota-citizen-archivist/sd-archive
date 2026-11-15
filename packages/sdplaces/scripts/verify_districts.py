@@ -58,9 +58,18 @@ def lead(text: str) -> str:
 
 def words(text: str) -> list[str]:
     """A name's words, camel case split ("AberdeenWard3" → aberdeen, ward, 3)."""
-    text = re.sub(r"\b(Voting District|VTD|Precinct)\b", " ", text)
-    text = re.sub(r"(?<=[a-z])(?=[A-Z0-9])|(?<=[0-9])(?=[A-Za-z])", " ", text)
-    return [w.lower() for w in re.findall(r"[A-Za-z]+|[0-9]+", text)]
+    text = re.sub(
+        r"(?<=[a-z])(?=[A-Z0-9])|(?<=[0-9])(?=[A-Za-z])|(?<=[A-Z])(?=[A-Z][a-z])", " ", text
+    )
+    drop = {"voting", "district", "vtd", "precinct", "prec"}
+    out = [w.lower() for w in re.findall(r"[A-Za-z]+|[0-9]+", text) if w.lower() not in drop]
+    return [COMPASS.get(w, w) for w in out]
+
+
+# compass points as Census abbreviates them (Sturgis Northwest / SturgisNW, W.BlackHawk)
+COMPASS = {"northwest": "nw", "northeast": "ne", "southwest": "sw", "southeast": "se",
+           "north": "n", "south": "s", "east": "e", "west": "w",
+           "nth": "n", "sth": "s"}  # fmt: skip
 
 
 def _shortens(short: str, full: str) -> bool:
@@ -71,20 +80,52 @@ def _shortens(short: str, full: str) -> bool:
     return all(c in it for c in short)
 
 
-def abbreviates(census: str, act: str) -> float:
-    """How well the Census file's (abbreviated) name lines up with the act's: the share of
-    the Census name's words that shorten the act's words, in order."""
+def abbreviates(census: str, act: str) -> tuple[float, float]:
+    """How well the Census file's (abbreviated) name lines up with the act's: (the share of
+    words that pair up, how closely). A Census word pairs with an act word it shortens
+    ("WHnson" → West Hanson) or nearly matches (Brotherfield / Brothersfield), in order;
+    if that pairs too few, in any order (NWSturgis / Sturgis Northwest)."""
+    import difflib
+
     short, full = words(census), words(act)
-    if not short:
-        return 0.0
-    i = hits = 0
-    for w in short:
-        j = i
-        while j < len(full) and not _shortens(w, full[j]):
-            j += 1
-        if j < len(full):
-            hits, i = hits + 1, j + 1
-    return hits / max(len(short), len(full))
+    if not short or not full:
+        return 0.0, 0.0
+
+    def close(w: str, x: str) -> float:
+        if w == x:
+            return 1.0
+        ratio = difflib.SequenceMatcher(None, w, x).ratio()
+        if _shortens(w, x):
+            return max(ratio, 0.5)
+        return ratio if ratio >= (0.75 if min(len(w), len(x)) >= 4 else 0.85) else 0.0
+
+    def pair(ordered: bool) -> tuple[float, float]:
+        left, hits, tight, at = list(full), 0, 0.0, 0
+        for w in short:
+            pool = range(at, len(left)) if ordered else range(len(left))
+            best = max(pool, key=lambda k: close(w, left[k]), default=None)
+            if best is not None and close(w, left[best]) > 0:
+                hits, tight = hits + 1, tight + close(w, left[best])
+                if ordered:
+                    at = best + 1
+                else:
+                    left.pop(best)
+        n = max(len(short), len(full))
+        return hits / n, tight / n
+
+    ordered = pair(True)
+    return ordered if ordered[0] >= 0.75 else max(ordered, pair(False))
+
+
+def tail(text: str) -> str:
+    """A VTD's code at the end of its name ("Rapid City Voting District 2-3A" → "2-3a",
+    "Watertown Precinct E-1" → "e1"; a dash after a letter doesn't count: Census writes E1)."""
+    m = re.search(r"\b([A-Za-z]?-?\d+(?:-\d+)?[A-Za-z]?)\s*$", text.strip())
+    return vtd_code(m.group(1)) if m else ""
+
+
+def vtd_code(text: str) -> str:
+    return re.sub(r"(?<=[a-z])-(?=\d)", "", text.lower().strip())
 
 
 @dataclass
@@ -100,7 +141,7 @@ class District:
 def district_texts(act: str, house: bool) -> dict[str, str]:
     """Each district's text. For the House: the senatorial districts, with those split into
     single-member house districts (26A, 26B, 28A, 28B) in their place."""
-    out = _texts(act, r"\(\d+\)\s*District No\. (\d+)\s*:")
+    out = _texts(act, r"\(\d+\)\s*District (?:No\. )?(\d+)\s*:")  # 2001's (28) has no "No."
     if house:
         split = _texts(act, r"District No\. (\d+[AB])\s*:")
         for n in {re.match(r"\d+", k)[0] for k in split}:
@@ -121,8 +162,8 @@ def _texts(act: str, marker: str) -> dict[str, str]:
 COUNTY = r"([A-Z][A-Za-z]+(?: [A-Z][A-Za-z]+)?) [Cc]ounty"
 # where a VTD's name ends and the description of the part of it ends
 CUT = (
-    r"\s+(?:except|that is|that are|located|consisting|surrounded|lying|north of|south of|"
-    r"east of|west of|bounded)\b"
+    r"\s*\(except\b|\s+(?:except|that is|that are|located|consisting|surrounded|lying|"
+    r"north of|south of|east of|west of|bounded|containing)\b"
 )
 
 
@@ -245,7 +286,7 @@ def main() -> None:
                             reverse=True)  # fmt: skip
             if (
                 scored
-                and scored[0][0] >= 0.75
+                and scored[0][0][0] >= 0.75
                 and (len(scored) == 1 or scored[1][0] < scored[0][0])
             ):
                 found = [scored[0][1]]

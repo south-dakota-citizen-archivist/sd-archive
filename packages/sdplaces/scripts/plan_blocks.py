@@ -40,7 +40,17 @@ import pandas as pd
 import sdplaces
 
 sys.path.insert(0, str(Path(__file__).parent))
-from verify_districts import COUNTY, CUT, _texts, abbreviates, items, key, lead  # noqa: E402
+from verify_districts import (  # noqa: E402
+    COUNTY,
+    CUT,
+    _texts,
+    abbreviates,
+    items,
+    key,
+    lead,
+    tail,
+    vtd_code,
+)  # fmt: skip
 
 BLOCK = r"46\d{13}"
 PORTION = r"that portion of [A-Z][A-Za-z]+(?: [A-Z][A-Za-z]+)? [Cc]ounty"
@@ -57,6 +67,7 @@ class Named:
     vtd_blocks: list[tuple[str, str, str]] = field(default_factory=list)  # county, VTD, "1239"
     by_streets: list[tuple[str, str]] = field(default_factory=list)
     tract_blocks: list[tuple[str, str, str]] = field(default_factory=list)  # county, tract, block
+    split_blocks: list[tuple[str, str, str]] = field(default_factory=list)  # split by streets
 
 
 def read(text: str) -> Named:
@@ -78,15 +89,23 @@ def read(text: str) -> Named:
                 out.blocks += re.findall(BLOCK, rest)
                 continue
             last = ""
+            streets_listed = "containing the streets" in rest
             for item in items(rest):
-                m2 = re.match(r"Tract (\d{6})/Block (\d{4})", item)
-                if m2:  # 2001: "Tract 011003/Block 3005"
-                    out.tract_blocks.append((county, m2.group(1), m2.group(2)))
+                m2 = re.search(r"Tract (\d{6})/Block (\d{4})", item)
+                if m2 and re.match(
+                    r"(?:that portion of )?Tract|(?:[A-Z][a-z]+ )+Census Blocks", item
+                ):
+                    # 2001: "Tract 011003/Block 3005"; "that portion of Tract …/Block … containing
+                    # the streets of …" is a block split by streets: it goes where the reference puts it  # noqa: E501
+                    split = item.startswith("that portion")
+                    (out.split_blocks if split else out.tract_blocks).append(
+                        (county, m2.group(1), m2.group(2))
+                    )
                     continue
-                if re.match(r"[A-Z][a-z]+ Census Blocks consisting of Tract", item):
-                    m2 = re.search(r"Tract (\d{6})/Block (\d{4})", item)
-                    out.tract_blocks.append((county, m2.group(1), m2.group(2)))
-                    continue
+                if streets_listed and not re.search(
+                    r"\d|Voting|VTD|Precinct|Ward|Township|Twp", item
+                ):
+                    continue  # a street of the block before it ("…, Hanks Drive, …")
                 if re.match(r"Block \d+", item):  # a block of the split VTD before it
                     if last:
                         out.vtd_blocks.append((county, last, item.split()[1]))
@@ -143,7 +162,7 @@ def main() -> None:
         population = dict(zip(counts["block"], counts[total].fillna(0).astype(int), strict=True))
 
     act = " ".join(args.act.read_text().split())
-    senate = _texts(act, r"\(\d+\)\s*District No\. (\d+)\s*:")
+    senate = _texts(act, r"\(\d+\)\s*District (?:No\. )?(\d+)\s*:")  # 2001's (28) has no "No."
     house_split = _texts(act, r"District No\. (\d+[AB])\s*:")
     house = {
         n: t for n, t in senate.items() if n not in {k[:-1] for k in house_split}
@@ -194,7 +213,8 @@ def main() -> None:
     def find(county: str, text: str) -> str | None:
         options = vtd_names.get(county, [])
         for test in (lambda c, n: key(n) == key(text) or key(c) == key(text),
-                     lambda c, n: lead(n) == lead(text)):  # fmt: skip
+                     lambda c, n: lead(n) == lead(text),
+                     lambda c, n: bool(tail(text)) and vtd_code(c) == tail(text)):  # fmt: skip
             found = [c for c, n in options if test(c, n)]
             if len(found) == 1:
                 return found[0]
@@ -203,7 +223,7 @@ def main() -> None:
             if len(found) == 1:
                 return found[0]
         scored = sorted(((abbreviates(n, text), c) for c, n in options), reverse=True)
-        if scored and scored[0][0] >= 0.75 and (len(scored) == 1 or scored[1][0] < scored[0][0]):
+        if scored and scored[0][0][0] >= 0.75 and (len(scored) == 1 or scored[1][0] < scored[0][0]):
             return scored[0][1]
         return None
 
@@ -220,11 +240,14 @@ def main() -> None:
             levels[level][b] = n
 
         streets = defaultdict(set)  # (county, VTD code) → districts that take part of it by streets
+        split_block = defaultdict(set)  # a block the act splits by streets → its districts
         rest_of = defaultdict(set)
         for n, text in texts.items():
             named = read(text)
             for b in named.blocks:
                 put("act: block", b, n, f"block {b}")
+            for county, tract, block in named.split_blocks:
+                split_block[f"46{fips[county]}{tract}{block}"].add(n)
             for county, tract, block in named.tract_blocks:
                 b = f"46{fips[county]}{tract}{block}"
                 if b not in block_vtd:
@@ -267,6 +290,9 @@ def main() -> None:
                 if b in levels[level]:
                     out[b], how[b] = levels[level][b], level
                     break
+        for b, districts in split_block.items():  # split between districts by streets
+            if reference and reference.get(b) in districts | {out.get(b)}:
+                out[b], how[b] = reference[b], "reference: block split by streets"
         for b, (county, code) in block_vtd.items():
             if b in out:
                 continue
@@ -286,13 +312,27 @@ def main() -> None:
             people = Counter()
             for b, n in out.items():
                 people[n] += population.get(b, 0)
-            for b in missing:
-                around = {out.get(x) for x in neighbors.get(b, ())} - {None}
-                if len(around) == 1:  # surrounded by one district
-                    out[b], how[b] = around.pop(), "omitted, attached"
-                elif around and population:  # touching several: the least populous
-                    least = min(sorted(around), key=lambda n: people[n])
-                    out[b], how[b] = least, "omitted, attached to the least populous"
+            # an omitted area (blocks next to each other) goes as a whole: to the district
+            # around it, or if it touches several, the one with the least population
+            left = set(missing)
+            while left:
+                area, edge = set(), [left.pop()]
+                while edge:
+                    b = edge.pop()
+                    area.add(b)
+                    nxt = [x for x in neighbors.get(b, ()) if x in left]
+                    left -= set(nxt)
+                    edge += nxt
+                around = {out.get(x) for b in area for x in neighbors.get(b, ())} - {None}
+                if len(around) == 1:
+                    n, label = around.pop(), "omitted, attached"
+                elif around and population:
+                    n = min(sorted(around), key=lambda d: people[d])
+                    label = "omitted, attached to the least populous"
+                else:
+                    continue
+                for b in area:
+                    out[b], how[b] = n, label
             still = [b for b in block_vtd if b not in out]
             if still:
                 by_vtd = Counter(block_vtd[b] for b in still)
@@ -314,8 +354,11 @@ def main() -> None:
     for label, how in (("Senate", sen_how), ("House", hou_how)):
         print(f"{label}: {len(how)} of {len(block_vtd)} blocks; {dict(Counter(how.values()))}")
     if population:
-        ideal = re.search(r"ideal population of a senatorial district[^,]*, is ([\d,]+)", act)
-        ideal = int(ideal.group(1).replace(",", "")) if ideal else None
+        # "…the ideal population of a senatorial district, based on the official 2010 federal
+        # census, is 23,262 people" (2021's text keeps the struck figure too: the last wins)
+        ideals = re.findall(r"ideal population of a senatorial district.{0,80}?is ([\d,]+)", act)
+        ideal = ideals[-1] if ideals else None
+        ideal = int(ideal.replace(",", "")) if ideal else None
         people = Counter()
         for b, n in sen.items():
             people[n] += population.get(b, 0)

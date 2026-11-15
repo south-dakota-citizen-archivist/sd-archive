@@ -9,7 +9,7 @@ Census designated places and tribal areas. See README.md.
     sdplaces.boundaries("county")                     # GeoDataFrame (the `geo` extra)
 """
 
-from ._boundaries import boundaries
+from ._boundaries import boundaries, plan_blocks, plan_boundaries
 from ._pandas import add_geoid
 from ._places import (
     KINDS,
@@ -43,6 +43,8 @@ __all__ = [
     "add_geoid",
     "all_places",
     "boundaries",
+    "plan_blocks",
+    "plan_boundaries",
     "children",
     "counties",
     "county",

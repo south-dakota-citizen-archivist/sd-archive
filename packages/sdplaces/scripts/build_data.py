@@ -26,6 +26,7 @@ from sdfetch import BROWSER_HEADERS
 
 STATE_FIPS = "46"
 DATA = Path(__file__).resolve().parents[1] / "src" / "sdplaces" / "data"
+DISTRICTS_FROM = "2022-06-07"
 OCD_CSV = "https://raw.githubusercontent.com/opencivicdata/ocd-division-ids/master/identifiers/country-us.csv"
 # NCES Common Core of Data district directory, via the Urban Institute's Education Data API
 CCD = "https://educationdata.urban.org/api/v1/school-districts/ccd/directory/{year}/?fips=46"
@@ -145,6 +146,9 @@ def build(year: int) -> list[dict]:
         for r in read(base, f"cb_{year}_{STATE_FIPS}_{kind}_500k.zip").itertuples():
             slug = slugify(f"{chamber} district {r.NAME}")
             add(kind, r, f"State {chamber} District {r.NAME}", r.NAME, slug, STATE_FIPS, r.geometry)
+            # the 2021 plan's districts, from the first primary under it; earlier plans'
+            # districts are in districts.csv (scripts/build_plans.py)
+            rows[-1]["valid_from"] = DISTRICTS_FROM
 
     with (DATA / "historical.csv").open(newline="") as f:
         for h in csv.DictReader(f):

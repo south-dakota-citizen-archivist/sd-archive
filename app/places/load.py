@@ -4,7 +4,8 @@ Rows (GEOIDs, names, slugs, parents, OCD IDs, dates in force, successors) come f
 sdplaces' places.csv, so former places load too. Shapes come from the Census cartographic
 boundary files sdplaces caches; a former place takes its shape from an older year's file
 where one has it (Shannon County from 2014), and has none otherwise (Washabaugh County,
-merged in 1983).
+merged in 1983). An earlier redistricting plan's legislative districts take theirs from the
+plan's census blocks (sdplaces.plan_boundaries).
 """
 
 import logging
@@ -34,6 +35,10 @@ def multipolygon(geom) -> MultiPolygon:
 def shapes(kind: str, places: list) -> dict:
     """GEOID → geometry for these places: this year's file, then older ones for the rest."""
     found = {r.geoid: r.geometry for r in sdplaces.boundaries(kind).itertuples()}
+    if kind in ("sldu", "sldl"):  # earlier plans' districts ("46015-2011"): from their blocks
+        for plan in sorted({p.geoid.split("-", 1)[1] for p in places if "-" in p.geoid}):
+            for r in sdplaces.plan_boundaries(plan, kind).itertuples():
+                found[f"46{r.district.zfill(3)}-{plan}"] = r.geometry
     for year in OLDER_YEARS:
         missing = {p.geoid for p in places} - found.keys()
         if not missing:

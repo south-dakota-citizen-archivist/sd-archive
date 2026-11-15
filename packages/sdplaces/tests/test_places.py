@@ -240,8 +240,12 @@ def test_unknown_crosswalk_system():
 def test_district_counts():
     current = [p for p in sdplaces.all_places("school_district") if not p.historical]
     assert len(current) == 148
-    assert len(sdplaces.all_places("sldu")) == 35
-    assert len(sdplaces.all_places("sldl")) == 37  # 26 and 28 are split into A and B
+    assert len(sdplaces.all_places("sldu", include_historical=False)) == 35
+    assert len(sdplaces.all_places("sldl", include_historical=False)) == 37  # 26A/B, 28A/B
+    # earlier plans: 2001's 35 and 36 (one House District 26), the court's four redrawn
+    # districts and two House halves of 26 (2005), 2011's 35 and 37
+    assert len(sdplaces.all_places("sldu")) == 35 + 35 + 3 + 35
+    assert len(sdplaces.all_places("sldl")) == 37 + 36 + 4 + 37
 
 
 def test_school_districts_by_name_and_doe_number():
@@ -291,3 +295,41 @@ def test_ocd_ids():
     assert sdplaces.county("Oglala Lakota").ocd_id.endswith("/county:oglala_lakota")
     assert sdplaces.senate_district(1).ocd_id.endswith("/sldu:1")
     assert sdplaces.house_district("26A").ocd_id.endswith("/sldl:26a")
+
+
+# --- Legislative districts across redistricting plans ---------------------------------------
+
+
+def test_a_district_number_means_todays_district_unless_a_date_says_otherwise():
+    assert sdplaces.senate_district("15").geoid == "46015"  # the 2021 plan's
+    assert sdplaces.senate_district("15", as_of="2008-11-04").geoid == "46015-2001"
+    assert sdplaces.senate_district("15", as_of="2016-11-08").geoid == "46015-2011"
+    assert sdplaces.senate_district("15", as_of="2024-11-05").geoid == "46015"
+
+
+def test_the_court_redrew_three_2001_districts_for_2006():
+    assert sdplaces.senate_district("26", as_of="2004-11-02").geoid == "46026-2001"
+    assert sdplaces.senate_district("26", as_of="2008-11-04").geoid == "46026-2005"
+    assert sdplaces.senate_district("15", as_of="2004-11-02").geoid == "46015-2001"  # unchanged
+    assert sdplaces.house_district("26A", as_of="2008-11-04").geoid == "4626A-2005"
+    with pytest.raises(sdplaces.NotInForce):  # the 2001 act had one District 26 in the House
+        sdplaces.house_district("26A", as_of="2004-11-02")
+
+
+def test_earlier_plans_districts_carry_their_census_population():
+    import csv
+    from importlib import resources
+
+    path = resources.files("sdplaces").joinpath("data/districts.csv")
+    rows = list(csv.DictReader(path.open()))
+    by_plan = {}
+    for r in rows:
+        if r["kind"] == "sldu" and r["plan"] in ("2001", "2011"):
+            by_plan[r["plan"]] = by_plan.get(r["plan"], 0) + int(r["people"])
+    assert by_plan == {"2001": 754_844, "2011": 814_180}  # South Dakota in 2000 and 2010
+
+
+def test_plan_blocks():
+    blocks = sdplaces.plan_blocks("2011")
+    assert len(blocks) == 88_360 and set(blocks["senate"]) == {str(n) for n in range(1, 36)}
+    assert "4626A" not in set(blocks["house"]) and "26A" in set(blocks["house"])

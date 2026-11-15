@@ -10,14 +10,16 @@ the legislature data repository (1997–2024) and the records imported from the 
 system (state email and Capitol phone). Those values are kept in each record's `earlier`,
 with where they came from (`_legislature.build.keep_earlier`).
 
-A member is tied to the state, the city of their home address, and (from the 2023 session,
-the districts in sdplaces) their House or Senate district.
+A member is tied to the state, the city of their home address, and their House or Senate
+district as drawn when the session's members were elected (sdplaces has the plans from 2001
+on: sessions from 2003).
 """
 
 from __future__ import annotations
 
 import contextlib
 import re
+from datetime import date
 
 from entities.mentions import from_text
 from records.sources import Found, Item, Source, item_hash
@@ -59,7 +61,12 @@ PRL_FIELDS = {"phone_capitol": "capitol_phone", "phone_home": "home_phone",
 # For a past session the API shows a legislator's current occupation, photo, term label and
 # district; the repository has them as listed then (kept in `earlier` where they differ)
 AS_LISTED = ("occupation", "picture", "term", "district")
-FIRST_DISTRICT_SESSION_YEAR = 2023  # sdplaces has the districts drawn in 2021
+
+
+def elected(session_year: int) -> date:
+    """The general election that seated a session's members: the November before an
+    odd-year session, two Novembers before an even-year one (two-year terms)."""
+    return date(session_year - (1 if session_year % 2 else 2), 11, 1)
 
 
 def profile_url(member_id: int) -> str:
@@ -126,11 +133,11 @@ def places(data: dict) -> list[str]:
     out = [STATE]
     if city := city_place(value(data, "home_city")):
         out.append(city)
-    year = data.get("session_year") or 0
-    if year >= FIRST_DISTRICT_SESSION_YEAR and data.get("district"):
+    year = data.get("session_year")
+    if year and data.get("district"):  # the district as drawn when its members were elected
         kind = sdplaces.house_district if data["chamber"] == "House" else sdplaces.senate_district
-        with contextlib.suppress(sdplaces.UnknownPlace):
-            out.append(kind(data["district"]).geoidfq)
+        with contextlib.suppress(sdplaces.UnknownPlace):  # before 2002: no plan in sdplaces yet
+            out.append(kind(data["district"], as_of=elected(year)).geoidfq)
     return out
 
 
