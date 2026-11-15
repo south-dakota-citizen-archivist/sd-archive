@@ -1,10 +1,11 @@
-"""The Secretary of State's document viewers, read through a Chrome window.
+"""The Secretary of State's searches and document viewers, read through a Chrome window.
 
 `BrowserFetcher.request("GET", url)` opens the URL in the window and answers with what the
 browser got: the body of the page (or page image) it navigated to, the URL it ended up at
 (an error page after a redirect), the status and headers. So every request is the browser's
 own, with its cookies, Referer and connection, and `_sos_search.assemble()` works on it as on
-plain HTTP.
+plain HTTP. `submit(fields)` fills in the open search page and clicks Search, as a person
+would, and answers with the results page the same way.
 
 The window is Google Chrome (patchright) with a profile kept between runs, headless or not
 (`SOS_BROWSER=headless` or `headed`). It lives on a thread of its own: Playwright's sync API
@@ -71,6 +72,22 @@ class BrowserFetcher:
         if method != "GET":
             raise NotImplementedError("the window only opens pages (GET)")
         return self._on_thread(self._get, url, timeout, (headers or {}).get("Referer"))
+
+    def submit(self, fields: dict[str, str], *, timeout: float = 300) -> Page:
+        """On the page the window has open (a search), fill in fields (by input name) and
+        click Search: the results page it goes to."""
+        return self._on_thread(self._submit, dict(fields), timeout)
+
+    def _submit(self, fields: dict[str, str], timeout: float) -> Page:
+        for name, value in fields.items():
+            self.page.fill(f'[name="{name}"]', value)
+        with self.page.expect_navigation(wait_until="load", timeout=timeout * 1000) as nav:
+            self.page.click('[name="cmdSubmit"]')
+        response = nav.value
+        if response is None:
+            return Page(self.page.content().encode(), self.page.url, 0, {})
+        return Page(response.body(), self.page.url, response.status,
+                    {k.title(): v for k, v in response.headers.items()})  # fmt: skip
 
     def _get(self, url: str, timeout: float, referer: str | None) -> Page:
         if self.page is None:

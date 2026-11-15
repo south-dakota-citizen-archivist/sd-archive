@@ -12,18 +12,18 @@ filings all use one system.
   The images are served only to a session that has opened the search page and then the
   viewer. A batch is one session, as a person browsing filings would be: the search page is
   opened once, then each document's viewer and its page images. With `SOS_BROWSER` set
-  (headless or headed), documents are read through a Chrome window (`_sos_browser`).
+  (headless or headed), searches and documents go through a Chrome window (`_sos_browser`).
 - Now and then the server sends a request to its error page, or answers "we're sorry",
   instead of the page; a few minutes later the same request works. So a document that gets
   one is tried again from the start, in a fresh session, after a cool-down (`COOL_DOWN`:
-  minutes, longer each time). When a document still fails, the search page is opened in a
-  fresh session to tell a broken document from a server that's down: if it loads, the
-  document fails on its own (`PageUnavailable`) and the batch goes on; if it doesn't
-  (`ServerDown`), or FAILED_IN_A_ROW documents fail one after another, the batch stops
-  (`Blocked`).
+  minutes, longer each time), and so is a search. When a document still fails, the search
+  page is opened in a fresh session to tell a broken document from a server that's down: if
+  it loads, the document fails on its own (`PageUnavailable`) and the batch goes on; if it
+  doesn't (`ServerDown`), or FAILED_IN_A_ROW documents fail one after another, the batch
+  stops (`Blocked`).
 
 **The system goes down easily**: one request at a time, each `PAUSE` after the one before,
-and a search (whose listing can be large) stops the run at the first error page.
+and a search that still gets the error page after every cool-down stops the run.
 
 `search_source()` makes a record set's source from a search: its URL, its columns and the
 names it lists.
@@ -47,7 +47,8 @@ PAUSE = tuple(float(s) for s in os.environ.get("SOS_PAUSE", "5,8").split(","))
 COOL_DOWN = (120.0, 300.0, 600.0)  # seconds before trying a document again after an error page
 _sleep = time.sleep
 _last = [0.0]  # when the last request went out (time.monotonic)
-# Documents through a Chrome window (_sos_browser): "headless", "headed", or "" for plain HTTP
+# Searches and documents through a Chrome window (_sos_browser): "headless", "headed", or ""
+# for plain HTTP
 BROWSER = os.environ.get("SOS_BROWSER", "")
 _window: list = []
 
@@ -117,23 +118,60 @@ def cab_id(url: str) -> str | None:
 
 
 def search(fetcher, url: str, fields: dict[str, str] | None = None) -> bytes:
-    """The search's results page: the form posted back with fields (by input name)."""
+    """The search's results page: the form posted back with fields (by input name). After an
+    error page, the search is tried again from the start in a fresh session, after each
+    COOL_DOWN; one that fails through all of them is the server down (ServerDown)."""
+    import logging
+
+    once = _search_in_window if BROWSER else _search_once
+    for wait in (*COOL_DOWN, None):
+        try:
+            return once(fetcher, url, fields)
+        except Blocked as e:
+            if wait is None:
+                raise ServerDown(f"{e}, after {len(COOL_DOWN) + 1} tries") from None
+            logging.getLogger(__name__).warning(
+                "SOS error page (%s); searching again in %d minutes", e, wait // 60
+            )
+            _sleep(wait)
+            _fresh_session(fetcher)
+    raise AssertionError("unreachable")
+
+
+def _form_data(page, url: str, fields: dict[str, str] | None) -> dict[str, str]:
+    """The search page's form as it would be posted, with fields filled in."""
     import lxml.html
 
-    _pace()
-    page = fetcher.request("GET", url, timeout=120)
-    check_block(page.text, page.url)
     forms = lxml.html.fromstring(page.content).forms
     if not forms:
         raise LayoutChanged(f"{url}: no search form")
-    form = forms[0]
-    data = {el.get("name"): el.get("value") or "" for el in form.inputs
+    data = {el.get("name"): el.get("value") or "" for el in forms[0].inputs
             if el.get("name") and el.get("type") not in ("submit", "button")}  # fmt: skip
     for name, value in (fields or {}).items():
         if name not in data:
             raise LayoutChanged(f"{url}: no field {name!r} in the form ({sorted(data)})")
         data[name] = value
-    data["cmdSubmit"] = "Search"
+    return data
+
+
+def _search_in_window(fetcher, url: str, fields: dict[str, str] | None) -> bytes:
+    """The search in the Chrome window: the page opened, the fields typed in, Search clicked."""
+    window = browser_fetcher()
+    _pace()
+    page = window.request("GET", url, timeout=120)
+    check_block(page.text, page.url)
+    _form_data(page, url, fields)  # the fields are on the form
+    _pace()
+    results = window.submit(fields or {}, timeout=300)
+    check_block(results.text, results.url)
+    return results.content
+
+
+def _search_once(fetcher, url: str, fields: dict[str, str] | None) -> bytes:
+    _pace()
+    page = fetcher.request("GET", url, timeout=120)
+    check_block(page.text, page.url)
+    data = _form_data(page, url, fields) | {"cmdSubmit": "Search"}
     _pace()
     results = fetcher.request("POST", page.url, data=data, timeout=300,
                               headers={"Referer": page.url})  # fmt: skip

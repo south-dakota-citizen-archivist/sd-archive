@@ -105,8 +105,26 @@ def test_items():
     assert found.checks["listed"] == {"all": len(found)}
 
 
+def test_a_search_is_tried_again_after_an_error_page(monkeypatch):
+    waits = []
+    monkeypatch.setattr(sos, "_sleep", waits.append)
+
+    class OnceError(FakeFetcher):
+        def request(self, method, url, data=None, **kwargs):
+            if method == "POST" and not any(m == "POST" for m, _, _ in self.asked):
+                self.asked.append((method, url, data))
+                return Response(b"<html>error</html>", "https://sdsos.gov/error.aspx?x=/y")
+            return super().request(method, url, data, **kwargs)
+
+    fetcher = OnceError()
+    sos.search(fetcher, source.SPEC.url)
+    # the page, the search (an error page), a cool-down, then both again
+    assert [m for m, _, _ in fetcher.asked] == ["GET", "POST", "GET", "POST"]
+    assert waits == [sos.COOL_DOWN[0]]
+
+
 def test_the_error_page_stops_everything():
-    with pytest.raises(sos.Blocked):
+    with pytest.raises(sos.ServerDown):  # after every cool-down
         source.SOURCE.items(FakeFetcher(error_page=True))
     from records.documents import _setup_errors
 
@@ -207,3 +225,50 @@ def test_a_viewer_through_the_browser(monkeypatch):
     assert [u[-7:] for _, u, _ in plain.asked[2:]] == ["Image=1", "Image=2"]
     with pytest.raises(NotImplementedError):
         window.request("POST", url)
+
+
+def test_a_search_through_the_browser(monkeypatch):
+    """The window opens the search page, types the fields in and clicks Search."""
+    from records.sources import _sos_browser
+
+    typed = []
+
+    class Navigation:
+        results = (FIXTURES / "results.html").read_bytes()
+        value = type(
+            "R", (), {"status": 200, "headers": {}, "body": lambda self: Navigation.results}
+        )()
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+    class FakePage:
+        url = ""
+
+        def goto(self, url, wait_until, timeout, referer=None):
+            self.url = url
+            return type("R", (), {"status": 200, "headers": {}, "body": lambda self: FORM})()
+
+        def fill(self, selector, value):
+            typed.append((selector, value))
+
+        def click(self, selector):
+            typed.append((selector, "click"))
+
+        def expect_navigation(self, wait_until, timeout):
+            return Navigation()
+
+    window = _sos_browser.BrowserFetcher("unused")
+    window.page = FakePage()
+    monkeypatch.setattr(sos, "BROWSER", "headed")
+    monkeypatch.setattr(sos, "_window", [window])
+    unused = FakeFetcher()
+    html = sos.search(unused, source.SPEC.url, {"FD_A723A07D": "2"})
+    assert sos.rows(html, source.SPEC.url)[1]  # the results
+    assert typed == [('[name="FD_A723A07D"]', "2"), ('[name="cmdSubmit"]', "click")]
+    assert unused.asked == []  # nothing over plain HTTP
+    with pytest.raises(sos.LayoutChanged):
+        sos.search(unused, source.SPEC.url, {"FD_NOSUCH": "x"})
