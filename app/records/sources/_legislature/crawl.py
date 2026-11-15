@@ -208,9 +208,10 @@ class Crawl:
     def step_statutes(self) -> None:
         titles = [str(t["Statute"]) for t in self.get("Statutes/Title", changing=True) or []]
         logger.info("legislature: %d statute nodes", self._walk(titles, "Statutes/Statute/{}"))
-        articles = [
-            str(a["Statute"]) for a in self.get("Statutes/Constitution", changing=True) or []
-        ]
+        # the constitution's articles and sections, asked for as the site's page does: without
+        # the "0N-" its listing gives ("0N-12" is asked as Constitution/12, then Next: "12-1")
+        articles = [str(a["Statute"]).removeprefix("0N-")
+                    for a in self.get("Statutes/Constitution", changing=True) or []]  # fmt: skip
         logger.info("legislature: %d constitution nodes",
                     self._walk(articles, "Statutes/Constitution/{}"))  # fmt: skip
 

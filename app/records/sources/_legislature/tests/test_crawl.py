@@ -80,7 +80,9 @@ def test_sessions_walk_bills_votes_members_and_committees(tmp_path):
 def test_statutes_follow_next_links_from_every_title(tmp_path):
     answers = {
         "Statutes/Title": [{"Statute": "1"}, {"Statute": "2"}],
-        "Statutes/Constitution": [],
+        "Statutes/Constitution": [{"Statute": "0N-12"}],
+        "Statutes/Constitution/12": {"Statute": "0N-12", "Next": "12-1"},
+        "Statutes/Constitution/12-1": {"Statute": "0N-12-1", "Next": None},
         "Statutes/Statute/1": {"Next": "1-1"},
         "Statutes/Statute/1-1": {"Next": "1-1-1"},
         "Statutes/Statute/1-1-1": {"Next": None},  # a gap: title 2 isn't linked from here
@@ -92,6 +94,9 @@ def test_statutes_follow_next_links_from_every_title(tmp_path):
     walked = [p for p in api.asked if p.startswith("Statutes/Statute/")]
     assert walked == ["Statutes/Statute/1", "Statutes/Statute/1-1", "Statutes/Statute/1-1-1",
                       "Statutes/Statute/2", "Statutes/Statute/2-1"]  # fmt: skip
+    # the constitution as the site's page asks for it: without the listing's "0N-"
+    assert [p for p in api.asked if p.startswith("Statutes/Constitution/")] == [
+        "Statutes/Constitution/12", "Statutes/Constitution/12-1"]  # fmt: skip
 
 
 def test_other_errors_stop_the_crawl(tmp_path):

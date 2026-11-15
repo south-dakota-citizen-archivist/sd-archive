@@ -481,7 +481,7 @@ def statutes(fetcher=None) -> Found:
         yield from _tree("Statutes/Statute", "Statute", "-",
                          lambda n: f"{SITE}Statutes/{n}")  # fmt: skip
         yield from _tree("Statutes/Constitution", "Statute", "-",
-                         lambda n: f"{SITE}Constitution/{n}")  # fmt: skip
+                         lambda n: f"{SITE}Constitution/{n.removeprefix('0N-')}")  # fmt: skip
 
     return _found(build())
 
