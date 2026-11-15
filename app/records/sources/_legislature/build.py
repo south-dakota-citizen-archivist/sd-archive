@@ -91,27 +91,6 @@ def crosswalk() -> dict[int, int]:
             if r["legislator_id_canon"].strip()}  # fmt: skip
 
 
-def legislator_id(session_member_id: int, member_id: int | None,
-                  by_member_id: dict[int, int]) -> tuple[int | None, str | None]:  # fmt: skip
-    """The legislator a session profile is, and how that's known: "crosswalk" (by hand), or
-    "member_id" (the API's MemberId, which the crosswalk shows is always one person, though a
-    person can have two; by_member_id from member_ids()). (None, None) when neither knows."""
-    if (found := crosswalk().get(session_member_id)) is not None:
-        return found, "crosswalk"
-    if member_id is not None and member_id in by_member_id:
-        return by_member_id[member_id], "member_id"
-    return None, None
-
-
-def member_ids(listings: list[dict]) -> dict[int, int]:
-    """MemberId → legislator, from the session listings' profiles the crosswalk has."""
-    out: dict[int, set] = {}
-    for m in listings:
-        if (found := crosswalk().get(m["SessionMemberId"])) is not None and m.get("MemberId"):
-            out.setdefault(m["MemberId"], set()).add(found)
-    return {k: next(iter(v)) for k, v in out.items() if len(v) == 1}
-
-
 def empty(value) -> bool:
     return value is None or value == "" or value == [] or value == "None"
 

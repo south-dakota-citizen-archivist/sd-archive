@@ -2,8 +2,8 @@
 API's SessionMemberId), from the crawl's stored `SessionMembers/Session/{session}` listings
 and each member's `SessionMembers/Detail/{id}`. `legislator_id` is the legislator (the
 Historical Listing's ID), shared by every session the person served: from the hand-checked
-crosswalk (1997–2024), or for later sessions through the API's MemberId, which always
-belongs to one legislator (`legislator_id_from` says which).
+crosswalk (1997–2024), else matched against the Historical Listing (`_legislature.match`),
+else from another profile with the same API MemberId (`legislator_id_from` says which).
 
 The API now leaves members' home addresses, phones and email empty. Earlier copies had them:
 the legislature data repository (1997–2024) and the records imported from the earlier
@@ -20,7 +20,7 @@ import contextlib
 import re
 
 from entities.mentions import from_text
-from records.sources import Found, Item, Source
+from records.sources import Found, Item, Source, item_hash
 from records.sources._legislature.build import (
     SITE,
     STATE,
@@ -31,10 +31,9 @@ from records.sources._legislature.build import (
     empty,
     keep_earlier,
     last_run,
-    legislator_id,
-    member_ids,
     stored,
-)  # fmt: skip
+)
+from records.sources._legislature.match import assign_legislators  # fmt: skip
 from records.sources._places import city_place
 
 SLUG = "legislature-legislators-by-term"
@@ -133,7 +132,6 @@ def items(fetcher=None) -> Found:
     sessions = sorted(api("Sessions") or [], key=lambda s: s["SessionId"])
     listings = {s["SessionId"]: api(f"SessionMembers/Session/{s['SessionId']}") or []
                 for s in sessions}  # fmt: skip
-    by_member_id = member_ids([m for listing in listings.values() for m in listing])
     out = Found()
     checks = {"sessions": 0, "without_detail": 0, "earlier": {}, "legislator_id": {}}
     for listing in listings.values():
@@ -143,11 +141,6 @@ def items(fetcher=None) -> Found:
             detail = api(f"SessionMembers/Detail/{mid}")
             checks["without_detail"] += detail is None
             data = member_data(listed, detail)
-            data["legislator_id"], data["legislator_id_from"] = legislator_id(
-                mid, listed.get("MemberId"), by_member_id
-            )
-            how = data["legislator_id_from"] or "unknown"
-            checks["legislator_id"][how] = checks["legislator_id"].get(how, 0) + 1
             record = before.get(str(mid))
             if record is not None and "legislator_url" in record.data:  # imported, not yet run
                 copies, carried = [prl_copy(record), repo_copy(mid)], None
@@ -159,6 +152,11 @@ def items(fetcher=None) -> Found:
                 checks["earlier"][field] = checks["earlier"].get(field, 0) + 1
             out.append(Item(key=str(mid), data=data, source_url=profile_url(mid),
                             places=places(data)))  # fmt: skip
+    assign_legislators([i.data for i in out])
+    for item in out:
+        how = (item.data["legislator_id_from"] or "unknown").split(" (")[0]
+        checks["legislator_id"][how] = checks["legislator_id"].get(how, 0) + 1
+        item.content_hash = item_hash(item)  # the data changed after the item was made
     out.checks = checks | {"members": len(out)}
     return out
 

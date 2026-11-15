@@ -25,9 +25,14 @@ def raw(settings, tmp_path):
     (tmp_path / "raw" / "legislature-archive" / "manifest.jsonl").write_text(
         f'{{"path": "{REPO_FILE}", "url": "https://github.com/x/blob/abc/{REPO_FILE}"}}\n'
     )
-    build._archive_urls.cache_clear()
+    from records.sources._legislature import match
+
+    caches = (build._archive_urls, build.crosswalk, match.people)
+    for c in caches:
+        c.cache_clear()
     yield tmp_path
-    build._archive_urls.cache_clear()
+    for c in caches:
+        c.cache_clear()
 
 
 def test_the_repository_keeps_the_address_the_api_dropped(db, sd_places, raw):
