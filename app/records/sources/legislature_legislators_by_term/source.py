@@ -39,7 +39,8 @@ from records.sources._places import city_place
 SLUG = "legislature-legislators-by-term"
 CHAMBERS = {"H": "House", "S": "Senate"}
 CONTACT = ("home_address1", "home_address2", "home_city", "home_state", "home_zip",
-           "home_phone", "capitol_phone", "business_phone", "cell_phone", "email")  # fmt: skip
+           "home_phone", "capitol_phone", "business_phone", "cell_phone", "email",
+           "occupation")  # fmt: skip
 API_FIELDS = {  # API name → ours
     "HomeAddress1": "home_address1", "HomeAddress2": "home_address2", "HomeCity": "home_city",
     "HomeState": "home_state", "HomeZip": "home_zip", "HomePhone": "home_phone",
@@ -50,7 +51,7 @@ REPO_FIELDS = {  # the repository's name → ours
     "address1": "home_address1", "address2": "home_address2", "city": "home_city",
     "state": "home_state", "zipcode": "home_zip", "phone_home": "home_phone",
     "phone_capitol": "capitol_phone", "phone_biz": "business_phone", "phone_cell": "cell_phone",
-    "email": "email",
+    "email": "email", "occupation": "occupation",
 }  # fmt: skip
 PRL_FIELDS = {"phone_capitol": "capitol_phone", "phone_home": "home_phone",
               "phone_cell": "cell_phone", "email": "email"}  # fmt: skip

@@ -48,6 +48,9 @@ ROOTS = [
 ]  # fmt: skip
 
 # Per session ({s} = SessionId)
+SESSION_DOCUMENTS = (
+    "Documents/DocumentType?Type=24&Type=68&Type=60&Type=71&Type=72&Type=73&Type=74&SessionIds={s}"
+)
 PER_SESSION = [
     "Sessions/{s}", "Sessions/General/{s}", "Bills/Session/{s}", "Bills/BillStatus/{s}",
     "Bills/PrisonJail/{s}", "SessionMembers/Session/{s}", "SessionCommittees/Session/{s}",
@@ -58,6 +61,9 @@ PER_SESSION = [
     "Documents/DocumentTypeHearings?SessionIds={s}", "DocumentHearings/HasDocuments?SessionIds={s}",
     "Documents/Menu?sessionId={s}", "Documents/DocumentType?Type=16&SessionIds={s}",
     "Documents/DocumentType?Type=72&Type=73&Type=74&SessionIds={s}",
+    # a session's own documents (directory, rules, calendar, seating chart, session laws
+    # foreword, index): a type asked without SessionIds lists only the current session's
+    SESSION_DOCUMENTS,
 ]  # fmt: skip
 
 PER_BILL = ["Bills/{b}", "Bills/Versions/{b}", "Bills/ActionLog/{b}", "Bills/Amendments/{b}",
