@@ -1,0 +1,292 @@
+variable,table,label
+H001001,H1,Total
+H001002,H1,Total!!Occupied
+H001003,H1,Total!!Vacant
+P001001,P1,Total
+P001002,P1,Total!!Population of one race
+P001003,P1,Total!!Population of one race!!White alone
+P001004,P1,Total!!Population of one race!!Black or African American alone
+P001005,P1,Total!!Population of one race!!American Indian and Alaska Native alone
+P001006,P1,Total!!Population of one race!!Asian alone
+P001007,P1,Total!!Population of one race!!Native Hawaiian and Other Pacific Islander alone
+P001008,P1,Total!!Population of one race!!Some Other Race alone
+P001009,P1,Total!!Two or More Races
+P001010,P1,Total!!Two or More Races!!Population of two races
+P001011,P1,Total!!Two or More Races!!Population of two races!!White; Black or African American
+P001012,P1,Total!!Two or More Races!!Population of two races!!White; American Indian and Alaska Native
+P001013,P1,Total!!Two or More Races!!Population of two races!!White; Asian
+P001014,P1,Total!!Two or More Races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander
+P001015,P1,Total!!Two or More Races!!Population of two races!!White; Some Other Race
+P001016,P1,Total!!Two or More Races!!Population of two races!!Black or African American; American Indian and Alaska Native
+P001017,P1,Total!!Two or More Races!!Population of two races!!Black or African American; Asian
+P001018,P1,Total!!Two or More Races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander
+P001019,P1,Total!!Two or More Races!!Population of two races!!Black or African American; Some Other Race
+P001020,P1,Total!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Asian
+P001021,P1,Total!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P001022,P1,Total!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Some Other Race
+P001023,P1,Total!!Two or More Races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander
+P001024,P1,Total!!Two or More Races!!Population of two races!!Asian; Some Other Race
+P001025,P1,Total!!Two or More Races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some Other Race
+P001026,P1,Total!!Two or More Races!!Population of three races
+P001027,P1,Total!!Two or More Races!!Population of three races!!White; Black or African American; American Indian and Alaska Native
+P001028,P1,Total!!Two or More Races!!Population of three races!!White; Black or African American; Asian
+P001029,P1,Total!!Two or More Races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander
+P001030,P1,Total!!Two or More Races!!Population of three races!!White; Black or African American; Some Other Race
+P001031,P1,Total!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Asian
+P001032,P1,Total!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P001033,P1,Total!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Some Other Race
+P001034,P1,Total!!Two or More Races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander
+P001035,P1,Total!!Two or More Races!!Population of three races!!White; Asian; Some Other Race
+P001036,P1,Total!!Two or More Races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001037,P1,Total!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian
+P001038,P1,Total!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P001039,P1,Total!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some Other Race
+P001040,P1,Total!!Two or More Races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander
+P001041,P1,Total!!Two or More Races!!Population of three races!!Black or African American; Asian; Some Other Race
+P001042,P1,Total!!Two or More Races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001043,P1,Total!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P001044,P1,Total!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Asian; Some Other Race
+P001045,P1,Total!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001046,P1,Total!!Two or More Races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001047,P1,Total!!Two or More Races!!Population of four races
+P001048,P1,Total!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian
+P001049,P1,Total!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P001050,P1,Total!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some Other Race
+P001051,P1,Total!!Two or More Races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander
+P001052,P1,Total!!Two or More Races!!Population of four races!!White; Black or African American; Asian; Some Other Race
+P001053,P1,Total!!Two or More Races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001054,P1,Total!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P001055,P1,Total!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some Other Race
+P001056,P1,Total!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001057,P1,Total!!Two or More Races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001058,P1,Total!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P001059,P1,Total!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some Other Race
+P001060,P1,Total!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001061,P1,Total!!Two or More Races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001062,P1,Total!!Two or More Races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001063,P1,Total!!Two or More Races!!Population of five races
+P001064,P1,Total!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P001065,P1,Total!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some Other Race
+P001066,P1,Total!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001067,P1,Total!!Two or More Races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001068,P1,Total!!Two or More Races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001069,P1,Total!!Two or More Races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P001070,P1,Total!!Two or More Races!!Population of six races
+P001071,P1,Total!!Two or More Races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002001,P2,Total
+P002002,P2,Total!!Hispanic or Latino
+P002003,P2,Total!!Not Hispanic or Latino
+P002004,P2,Total!!Not Hispanic or Latino!!Population of one race
+P002005,P2,Total!!Not Hispanic or Latino!!Population of one race!!White alone
+P002006,P2,Total!!Not Hispanic or Latino!!Population of one race!!Black or African American alone
+P002007,P2,Total!!Not Hispanic or Latino!!Population of one race!!American Indian and Alaska Native alone
+P002008,P2,Total!!Not Hispanic or Latino!!Population of one race!!Asian alone
+P002009,P2,Total!!Not Hispanic or Latino!!Population of one race!!Native Hawaiian and Other Pacific Islander alone
+P002010,P2,Total!!Not Hispanic or Latino!!Population of one race!!Some Other Race alone
+P002011,P2,Total!!Not Hispanic or Latino!!Two or More Races
+P002012,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races
+P002013,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!White; Black or African American
+P002014,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!White; American Indian and Alaska Native
+P002015,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!White; Asian
+P002016,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander
+P002017,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!White; Some Other Race
+P002018,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Black or African American; American Indian and Alaska Native
+P002019,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Black or African American; Asian
+P002020,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander
+P002021,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Black or African American; Some Other Race
+P002022,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Asian
+P002023,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P002024,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Some Other Race
+P002025,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander
+P002026,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Asian; Some Other Race
+P002027,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some Other Race
+P002028,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races
+P002029,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Black or African American; American Indian and Alaska Native
+P002030,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Black or African American; Asian
+P002031,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander
+P002032,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Black or African American; Some Other Race
+P002033,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Asian
+P002034,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P002035,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Some Other Race
+P002036,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander
+P002037,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Asian; Some Other Race
+P002038,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002039,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian
+P002040,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P002041,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some Other Race
+P002042,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander
+P002043,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; Asian; Some Other Race
+P002044,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002045,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P002046,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Asian; Some Other Race
+P002047,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002048,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002049,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races
+P002050,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian
+P002051,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P002052,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some Other Race
+P002053,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander
+P002054,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; Asian; Some Other Race
+P002055,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002056,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P002057,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some Other Race
+P002058,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002059,P2,"Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander, Some Other Race"
+P002060,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P002061,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some Other Race
+P002062,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002063,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002064,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002065,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races
+P002066,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P002067,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some Other Race
+P002068,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002069,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002070,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002071,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P002072,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of six races
+P002073,P2,Total!!Not Hispanic or Latino!!Two or More Races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003001,P3,Total
+P003002,P3,Total!!Population of one race
+P003003,P3,Total!!Population of one race!!White alone
+P003004,P3,Total!!Population of one race!!Black or African American alone
+P003005,P3,Total!!Population of one race!!American Indian and Alaska Native alone
+P003006,P3,Total!!Population of one race!!Asian alone
+P003007,P3,Total!!Population of one race!!Native Hawaiian and Other Pacific Islander alone
+P003008,P3,Total!!Population of one race!!Some Other Race alone
+P003009,P3,Total!!Two or More Races
+P003010,P3,Total!!Two or More Races!!Population of two races
+P003011,P3,Total!!Two or More Races!!Population of two races!!White; Black or African American
+P003012,P3,Total!!Two or More Races!!Population of two races!!White; American Indian and Alaska Native
+P003013,P3,Total!!Two or More Races!!Population of two races!!White; Asian
+P003014,P3,Total!!Two or More Races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander
+P003015,P3,Total!!Two or More Races!!Population of two races!!White; Some Other Race
+P003016,P3,Total!!Two or More Races!!Population of two races!!Black or African American; American Indian and Alaska Native
+P003017,P3,Total!!Two or More Races!!Population of two races!!Black or African American; Asian
+P003018,P3,Total!!Two or More Races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander
+P003019,P3,Total!!Two or More Races!!Population of two races!!Black or African American; Some Other Race
+P003020,P3,Total!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Asian
+P003021,P3,Total!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P003022,P3,Total!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Some Other Race
+P003023,P3,Total!!Two or More Races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander
+P003024,P3,Total!!Two or More Races!!Population of two races!!Asian; Some Other Race
+P003025,P3,Total!!Two or More Races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some Other Race
+P003026,P3,Total!!Two or More Races!!Population of three races
+P003027,P3,Total!!Two or More Races!!Population of three races!!White; Black or African American; American Indian and Alaska Native
+P003028,P3,Total!!Two or More Races!!Population of three races!!White; Black or African American; Asian
+P003029,P3,Total!!Two or More Races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander
+P003030,P3,Total!!Two or More Races!!Population of three races!!White; Black or African American; Some Other Race
+P003031,P3,Total!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Asian
+P003032,P3,Total!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P003033,P3,Total!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Some Other Race
+P003034,P3,Total!!Two or More Races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander
+P003035,P3,Total!!Two or More Races!!Population of three races!!White; Asian; Some Other Race
+P003036,P3,Total!!Two or More Races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003037,P3,Total!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian
+P003038,P3,Total!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P003039,P3,Total!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some Other Race
+P003040,P3,Total!!Two or More Races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander
+P003041,P3,Total!!Two or More Races!!Population of three races!!Black or African American; Asian; Some Other Race
+P003042,P3,Total!!Two or More Races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003043,P3,Total!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P003044,P3,Total!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Asian; Some Other Race
+P003045,P3,Total!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003046,P3,Total!!Two or More Races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003047,P3,Total!!Two or More Races!!Population of four races
+P003048,P3,Total!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian
+P003049,P3,Total!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P003050,P3,Total!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some Other Race
+P003051,P3,Total!!Two or More Races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander
+P003052,P3,Total!!Two or More Races!!Population of four races!!White; Black or African American; Asian; Some Other Race
+P003053,P3,Total!!Two or More Races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003054,P3,Total!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P003055,P3,Total!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some Other Race
+P003056,P3,Total!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003057,P3,Total!!Two or More Races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003058,P3,Total!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P003059,P3,Total!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some Other Race
+P003060,P3,Total!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003061,P3,Total!!Two or More Races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003062,P3,Total!!Two or More Races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003063,P3,Total!!Two or More Races!!Population of five races
+P003064,P3,Total!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P003065,P3,Total!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some Other Race
+P003066,P3,Total!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003067,P3,Total!!Two or More Races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003068,P3,Total!!Two or More Races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander;  Some Other Race
+P003069,P3,Total!!Two or More Races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P003070,P3,Total!!Two or More Races!!Population of six races
+P003071,P3,Total!!Two or More Races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004001,P4,Total
+P004002,P4,Total!!Hispanic or Latino
+P004003,P4,Total!!Not Hispanic or Latino
+P004004,P4,Total!!Not Hispanic or Latino!!Population of one race
+P004005,P4,Total!!Not Hispanic or Latino!!Population of one race!!White alone
+P004006,P4,Total!!Not Hispanic or Latino!!Population of one race!!Black or African American alone
+P004007,P4,Total!!Not Hispanic or Latino!!Population of one race!!American Indian and Alaska Native alone
+P004008,P4,Total!!Not Hispanic or Latino!!Population of one race!!Asian alone
+P004009,P4,Total!!Not Hispanic or Latino!!Population of one race!!Native Hawaiian and Other Pacific Islander alone
+P004010,P4,Total!!Not Hispanic or Latino!!Population of one race!!Some Other Race alone
+P004011,P4,Total!!Not Hispanic or Latino!!Two or More Races
+P004012,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races
+P004013,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!White; Black or African American
+P004014,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!White; American Indian and Alaska Native
+P004015,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!White; Asian
+P004016,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander
+P004017,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!White; Some Other Race
+P004018,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Black or African American; American Indian and Alaska Native
+P004019,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Black or African American; Asian
+P004020,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander
+P004021,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Black or African American; Some Other Race
+P004022,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Asian
+P004023,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P004024,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!American Indian and Alaska Native; Some Other Race
+P004025,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander
+P004026,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Asian; Some Other Race
+P004027,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some Other Race
+P004028,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races
+P004029,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Black or African American; American Indian and Alaska Native
+P004030,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Black or African American; Asian
+P004031,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander
+P004032,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Black or African American; Some Other Race
+P004033,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Asian
+P004034,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P004035,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; American Indian and Alaska Native; Some Other Race
+P004036,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander
+P004037,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Asian; Some Other Race
+P004038,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004039,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian
+P004040,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P004041,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some Other Race
+P004042,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander
+P004043,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; Asian; Some Other Race
+P004044,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004045,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P004046,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Asian; Some Other Race
+P004047,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004048,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004049,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races
+P004050,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian
+P004051,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
+P004052,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some Other Race
+P004053,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander
+P004054,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; Asian; Some Other Race
+P004055,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004056,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P004057,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some Other Race
+P004058,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004059,P4,"Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander, Some Other Race"
+P004060,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P004061,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some Other Race
+P004062,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004063,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004064,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004065,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races
+P004066,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
+P004067,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some Other Race
+P004068,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004069,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004070,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004071,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race
+P004072,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of six races
+P004073,P4,Total!!Not Hispanic or Latino!!Two or More Races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some Other Race

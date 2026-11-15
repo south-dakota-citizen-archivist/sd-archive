@@ -28,6 +28,7 @@ import argparse
 import csv
 import json
 import os
+import re
 import time
 from datetime import date
 from pathlib import Path
@@ -92,8 +93,9 @@ def build(year: int, store: sdfetch.Store) -> Path:
     labels, blocks = {}, {}
     for dataset, table in TABLES[year]:
         names = variables(year, dataset, table)
-        # the counts (2020 also lists an annotation column for each, ending in NA)
-        counts = sorted(k for k in names if k not in ("GEO_ID", "NAME") and not k.endswith("NA"))
+        # the counts (P1_001N, P001001, PL001001, H001001), not the notes beside them (2020's
+        # P1_001NA, 2010's P001001ERR)
+        counts = sorted(k for k in names if re.fullmatch(r"[A-Z]+\d+(?:_\d+N)?", k))
         for k in counts:
             labels[k] = (table, names[k])
         for county in counties(year):
