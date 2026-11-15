@@ -333,10 +333,41 @@ def _years_from_payable(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def _recap_lines(recaps: pd.DataFrame, checks: dict) -> list[str | None]:
+    """Each recap row's line as the reports with text spell it ("AG PROPERTY - OUTSIDE CORP.
+    LIMITS"), so a scan's reading ("AG PROPERTY- CUTSIDE CORP. LIMITS") lines up with other
+    years: the same letters and digits, or else the one clearly closest spelling."""
+    import difflib
+
+    def key(s: str) -> str:
+        return re.sub(r"[^A-Z0-9]", "", s.upper())
+
+    text = recaps[recaps.read_from == "text"].description
+    spelled = text.groupby(text.map(key)).agg(lambda s: s.value_counts().index[0]).to_dict()
+    lines: dict[str, str | None] = {}
+    for d in recaps.description.unique():
+        if (k := key(d)) in spelled:
+            lines[d] = spelled[k]
+            continue
+        ratios = sorted(((difflib.SequenceMatcher(None, k, c).ratio(), c) for c in spelled),
+                        reverse=True)  # fmt: skip
+        best, runner_up = ratios[0], ratios[1] if len(ratios) > 1 else (0, None)
+        if best[0] >= 0.85 and best[0] - runner_up[0] >= 0.05:
+            lines[d] = spelled[best[1]]
+            checks["report recap lines matched by closest spelling"].append(
+                {"read": d, "line": lines[d], "ratio": round(best[0], 3)})  # fmt: skip
+        else:
+            lines[d] = None
+            checks["report recap lines not matched"].append(
+                {"read": d, "closest": spelled[best[1]], "ratio": round(best[0], 3)})  # fmt: skip
+    return [lines[d] for d in recaps.description]
+
+
 def build_reports(reports: dict[int, str], read_report,
                   levies: pd.DataFrame, county_recap: pd.DataFrame
                   ) -> tuple[dict[str, pd.DataFrame], dict]:  # fmt: skip
     """The statistical reports' tables, with what wasn't read and what doesn't agree."""
+    import ocr
     import report
 
     checks: dict[str, list] = defaultdict(list)
@@ -344,13 +375,21 @@ def build_reports(reports: dict[int, str], read_report,
     for year, url in sorted(reports.items()):
         file = f"{year}.pdf"
         texts = report.pages(read_report(year))
+        scanned = set()  # pages read by OCR (ocr.py), for rows' read_from
         for n in report.no_text(texts, file):
-            checks["report pages without text (not read)"].append({"file": file, "page": n})
+            if (page := ocr.stored(year, n)) is not None:
+                texts[n - 1] = ocr.page_text(page)
+                scanned.add(n)
+            else:
+                checks["report pages without text (not read)"].append({"file": file, "page": n})
         rows, unread = report.schools(texts, file)
         found["schools"] += rows
         checks["report lines not read"] += unread
         rows, unread = report.municipalities(texts, file)
         found["municipalities"] += rows
+        checks["report lines not read"] += unread
+        rows, unread = report.townships(texts, file)
+        found["townships"] += rows
         checks["report lines not read"] += unread
         rows, skipped = report.county_recaps(texts, file)
         found["county_recaps"] += rows
@@ -360,9 +399,18 @@ def build_reports(reports: dict[int, str], read_report,
             )
         found["sales_ratios"] += report.sales_ratios(texts, file, year)
         found["ag_land"] += report.ag_land(texts, file)
-        for name in ("schools", "municipalities", "county_recaps", "sales_ratios", "ag_land"):
+        for name in (
+            "schools",
+            "municipalities",
+            "townships",
+            "county_recaps",
+            "sales_ratios",
+            "ag_land",
+        ):
             for r in found[name]:
-                r.setdefault("source_url", url) if r["file"] == file else None
+                if r["file"] == file:
+                    r.setdefault("source_url", url)
+                    r.setdefault("read_from", "ocr" if r.get("page") in scanned else "text")
 
     tables = {}
     for name, rows in found.items():
@@ -397,6 +445,7 @@ def build_reports(reports: dict[int, str], read_report,
                 checks["counties missing from a report table"].append(
                     {"table": "report_county_recaps", "file": file, "missing": missing}
                 )
+        recaps["line"] = _recap_lines(recaps, checks)
 
     # schools: the report's method (ag levy × ag, owner-occupied levy × owner-occupied, the
     # other levy × the rest)
@@ -430,23 +479,61 @@ def build_reports(reports: dict[int, str], read_report,
             checks["report schools against the Excel recaps"].append(
                 {"payable_year": int(year), "report_rows": len(g), "excel_rows": len(e),
                  "same_ag_valuation": same})  # fmt: skip
+        # each Excel school recap against every report year: which year its figures are
+        # (School Recap-2021's match the 2019 report's, not 2021's)
+        for file, e in excel.groupby("file"):
+            have = set(zip(e.county.str.upper(), e.valuation.round(0), strict=True))
+            by_year = {int(y): sum((c.upper(), v) in have
+                                   for c, v in zip(g.county, g.value_agricultural, strict=True))
+                       for y, g in schools.groupby("payable_year")}  # fmt: skip
+            best = max(by_year, key=by_year.get)
+            named = int(e.payable_year.iloc[0])
+            if by_year[best] >= len(e) / 2 and best != named:  # most of its rows, not a few
+                checks["Excel school recap matching another year's report"].append(
+                    {"file": file, "payable_year_by_name": named, "best_report_year": best,
+                     "same_ag_valuation_by_report_year": by_year})  # fmt: skip
     munis = tables.get("report_municipalities")
     if munis is not None:
         munis["municipality_geoid"] = [
             district_geoid("city_town", c, m, None)
             for c, m in zip(munis.county, munis.municipality, strict=True)
         ]
+        # each total rate is the city's + the county's + the school's levy, or that and one
+        # more levy, the same for every class (some counties' rates carry another); rates
+        # that differ by class from the sums are a misread (or a misprint)
+        munis["rates_check"] = [report.rates_check(r) for r in
+                                munis.astype(object).where(munis.notna(), None)
+                                .to_dict("records")]  # fmt: skip
+        for r in munis[munis.rates_check == "doesn't add up"].itertuples():
+            checks["report municipal total rates ≠ the levies' sums"].append(
+                {"file": r.file, "page": r.page, "municipality": r.municipality,
+                 "county": r.county, "read_from": r.read_from})  # fmt: skip
+        if "read_as" not in munis:
+            munis["read_as"] = None
+        for r in munis[munis.read_as.fillna("") != ""].itertuples():
+            checks["report municipal rows read with a blank or a lost point"].append(
+                {"file": r.file, "page": r.page, "municipality": r.municipality,
+                 "county": r.county, "read_as": r.read_as})  # fmt: skip
+    towns = tables.get("report_townships")
+    if towns is not None:
+        computed = towns.taxable_value * towns.levy / 1000
+        towns["adds_up"] = ((computed - towns.taxes).abs() <= (towns.taxes.abs() * 0.01)
+                            .clip(lower=5)) | towns.levy.isna()  # fmt: skip
+        for r in towns[~towns.adds_up].itertuples():
+            checks["report township taxes ≠ taxable value × levy"].append(
+                {"file": r.file, "page": r.page, "county": r.county, "township": r.township,
+                 "taxable_value": r.taxable_value, "levy": r.levy, "taxes": r.taxes,
+                 "read_from": r.read_from})  # fmt: skip
     if recaps is not None and not county_recap.empty:
         # the report's county recap against the Excel county recap (same payable year)
-        ag_out = recaps[recaps.description.str.upper() == "AG PROPERTY - OUTSIDE CORP. LIMITS"]
+        ag_out = recaps[recaps.line == "AG PROPERTY - OUTSIDE CORP. LIMITS"]
         excel = county_recap[county_recap.field == "AG_OUT_VAL"]
         for year, g in ag_out.groupby("payable_year"):
             e = excel[excel.payable_year == year]
             if e.empty:
                 continue
-            have = dict(zip(e.county.str.upper(), e.value, strict=False))
-            same = sum(have.get(str(c).upper()) == v for c, v in zip(g.county, g.valuation,
-                                                                    strict=True))  # fmt: skip
+            have = dict(zip(e.county_geoid, e.value, strict=True))
+            same = sum(have.get(c) == v for c, v in zip(g.county_geoid, g.valuation, strict=True))
             checks["report county recaps against the Excel county recaps"].append(
                 {"payable_year": int(year), "counties": len(g), "same_ag_valuation": same}
             )

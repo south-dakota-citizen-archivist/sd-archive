@@ -10,10 +10,14 @@ Department of Revenue's [property tax data page](https://sdproptax.info/DataLink
 2018 on).
 
 ```sh
-just property-tax                                     # both steps
+just property-tax                                     # all three steps
 uv run python pipelines/property-tax/fetch.py         # the files → .cache/property-tax/raw/
+uv run python pipelines/property-tax/ocr.py           # the reports' scanned pages → .cache/property-tax/ocr/
 uv run python pipelines/property-tax/build.py         # tables + checks → .cache/property-tax/build/
 ```
+
+`ocr.py` needs the OCR engine (sddocs' `ocr` extra: rapidocr on ONNX Runtime). It reads
+only pages it hasn't read yet, at about a minute a page, so the first run takes hours.
 
 ## What the Department publishes
 
@@ -63,17 +67,27 @@ the code.
 - `pt74`: one row per year × district fund × taxing entity, with the four published rates
   and six published valuations.
 
-From the statistical reports (each row names its report file and page):
+From the statistical reports (each row names its report file and page, and says whether it
+was read from the PDF's text or from OCR of a scanned page: `read_from` is `text` or `ocr`):
 
 - `report_schools`: each school district's part of a county, with valuations (ag,
   owner-occupied, other non-ag, centrally assessed), the ag, owner-occupied and other levies
-  **for all funds**, and the taxes. It covers payable 2018 and 2022–2024, and fills the 2023
+  **for all funds**, and the taxes. It covers payable 2018–2024, and fills the 2023
   gap and the funds the 2023–2024 school recaps leave out.
 - `report_municipalities`: each city or town (its part of each county it's in), with
   population, valuation, the city, county and school levies, total tax rates by class and
-  taxes paid. It covers payable 2022–2024.
+  taxes paid. It covers payable 2019–2024 (the 2018 report has no such table).
+  `rates_check` compares each row's total rates with its levies: `adds up`, `another levy
+  of N` (every class's rate is N above the levies' sum: some counties' rates carry a levy
+  the table doesn't show), `doesn't add up`, or empty (a levy that couldn't be read).
+  `read_as` notes a row read with a blank cell or a lost decimal point (below).
+- `report_townships`: each township's taxable value, mill levy and taxes, by county, for
+  payable 2018–2024. A township that levied nothing has its levy and taxes blank; a county
+  with no organized townships has one row, `ALL UNORGANIZED`. `adds_up` says whether the
+  taxes are the value × the levy (within 1%).
 - `report_county_recaps`: each county's recap lines with a valuation and a tax (and a levy
-  where given), for payable 2018 and 2022–2024.
+  where given), for payable 2018–2024. `description` is the line as read; `line` is the
+  same line as the reports with text spell it, so the years line up.
 - `report_sales_ratios`: each county's assessment-to-sales ratio (percent; ag and non-ag),
   and the sales years it's based on, for every report 2018–2024.
 - `report_ag_land`: each county's ag valuation, acres and assessed dollars per acre, for
@@ -91,6 +105,11 @@ Every row names its file, its row in that file and the file's URL.
   higher of the two in every row, the reverse of every other year. `levies` assigns them the
   way that adds up. That file gives only a total tax, so its per-class taxes are computed
   (`tax_computed`) and add up to that total in every row.
+- **School Recap-2021's figures look like taxes payable 2019, not 2021.** Its agricultural
+  valuations match 330 of the 2019 statistical report's 338 school rows, and only 1 of the 2021
+  report's (the reports' county recaps agree with the Excel county recaps year for year).
+  `levies` keeps the year the file's name gives (payable 2021); `checks.json` has the
+  comparison.
 - **The 2023–2024 school recaps aren't broken down by fund, and don't cover every fund.** Their
   school taxes total about $420 million a year, against $800 million to $1 billion in the
   other years. That is close to PT-74's General fund alone. Most of their levies match a
@@ -112,20 +131,41 @@ Every row names its file, its row in that file and the file's URL.
   rural service district ("Elkton RSD") isn't the city, so it gets no place GEOID. One county
   recap cell has the county's name twice ("MARSHALL" and "Marshall" on two lines); it is read
   as one.
-- **The statistical reports aren't all text.** The 2019–2021 reports' district tables
-  (schools, municipalities, townships, cities, county recaps) are scanned, and so are 18
-  pages of the 2018 report. Some 2024 tables (effective tax rates, ag dollars per acre) are
-  pictures. These aren't read yet (`checks.json` lists every page without text), nor are
-  the reports' township, city, valuation and effective-rate tables.
-- **Report lines not read:** a county recap line with one amount (a valuation or a tax, but
-  the text doesn't say which) isn't read. Ten table rows are listed in `checks.json`: six 2018
-  school rows with only three of four valuations, and four 2022 municipality rows with no
-  population.
-- **Report school taxes are a little above valuation × levies** (779 rows; the median is
-  0.7% above, and 95% are within 4%). The report notes that bond levies aren't always
-  included in the levies it gives, since districts overlap.
+- **The 2019–2021 reports' tables are scanned** (schools, municipalities, townships, cities,
+  county recaps), and so are 18 pages of the 2018 report (townships). `ocr.py` reads them,
+  keeping every text box with its position and confidence, and the tables are read from
+  that text (`read_from` is `ocr`). OCR can misread a digit. The checks that catch
+  misreads: county recaps against the Excel county recaps (ag valuation: 66 of 66 counties
+  in 2019, 67 of 67 in 2021); school taxes against valuation × levies; municipal rates
+  against levies; township taxes against value × levy. Some pages without text are still
+  unread: the reports' covers, and two 2024 tables (effective tax rates, ag dollars per
+  acre). The city, valuation and effective-rate tables aren't read.
+- **OCR fixes, each one certain from the page itself:** a letter O in a number is a zero; an
+  S before a number is a dollar sign; a whole-dollar amount in groups of three digits with
+  periods ("$54.693,169") has its periods read as commas (amounts with cents end in two
+  digits); a star or another mark alone where the asterisk goes is the asterisk.
+- **Municipal rows with a blank cell or a lost decimal point** (54 rows, 52 of them scanned;
+  each has `read_as`). A blank population, a blank levy, or a levy of 100 or more (no levy is
+  that high: its decimal point was lost, "2645") is placed only when exactly one placement
+  makes every total rate the sum of its levies and the taxes fit the valuation. A lost
+  point that no placement confirms leaves that levy blank. Rows where the blank could be
+  the city's levy or the county's (the rates show only their sum) aren't read.
+- **Report lines not read** (24, listed in `checks.json`): six 2018 school rows with only
+  three of four valuations, and 18 municipal rows with a blank cell: 13 in 2019 the rates
+  can't place, and five (2020–2022) whose rates don't add up or whose total was misread. A county recap line with one amount (a valuation or a
+  tax, but the text doesn't say which) isn't read either.
+- **Municipal rates that don't add up:** 10 rows (eight scanned 2020 rows, likely misreads,
+  and one each in 2022 and 2023). They're kept, with `rates_check` `doesn't add up`.
+- **Report school taxes are a little above valuation × levies** (1,292 rows: about 256 a
+  year in every report from 2019 on except 2020, text and scanned alike; the median is
+  0.7% above). The report notes that bond levies aren't always included in the levies it
+  gives, since districts overlap.
+- **Township taxes aren't always value × levy** (108 rows, in text and scanned years
+  alike).
 - **The reports against the Excel files**, for the same payable year: the school tables match
   in ag valuation for 325 of 340 rows (2022) and 213 of 339 (2024). The county recaps match
-  for 64 of 67 counties (2018) and 65 of 67 (2022).
+  in ag valuation (outside city limits) for 66 of 67 counties (2018), 66 of 66 (2019), 63 of
+  66 (2020: Custer's valuation and tax both differ, and two counties are missing from the
+  Excel file), 67 of 67 (2021) and 65 of 67 (2022).
 - The county recap's `STATE SUMMARY` row differs from the counties' sum for a few fields,
   mostly by a few dollars of rounding, and once by exactly 1,000.

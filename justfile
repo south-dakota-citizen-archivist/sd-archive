@@ -77,6 +77,7 @@ publish-lobbyists:
 # Property tax levies: fetch the Department of Revenue's recaps and PT-74 files, build the tables
 property-tax:
     uv run python pipelines/property-tax/fetch.py
+    uv run python pipelines/property-tax/ocr.py
     uv run python pipelines/property-tax/build.py
 
 # Municipal sales tax by city and SIC code: fetch the Department of Revenue's monthly workbooks, build the tables

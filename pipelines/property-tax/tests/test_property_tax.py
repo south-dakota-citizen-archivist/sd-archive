@@ -1,6 +1,7 @@
 """Property tax levies: trimmed copies of the Department's files (real rows, each layout),
 with values checked by hand against the originals."""
 
+import json
 import sys
 from pathlib import Path
 
@@ -226,3 +227,114 @@ def test_report_county_tables():
     land = report.ag_land(texts, "2018.pdf")
     assert {r["county"] for r in land} >= {"Oglala Lakota", "Union"}  # decimals, no commas
     assert land[0]["dollars_per_acre"] == 1827.01
+
+
+def test_ocr_township_columns():
+    """A scanned township page is read a column at a time: a left-column amount that runs
+    up to the page's middle ("$9,700.14") stays on its row."""
+    sys.modules.pop("ocr", None)
+    import ocr
+
+    page = json.loads((FIXTURES / "ocr-2021-p26-townships.json").read_text())
+    text = ocr.page_text(page)
+    assert "KENNEDY $39,431,368 0.246 $9,700.14" in text.splitlines()
+    rows, _ = report.townships([text], "2021.pdf")
+    assert ("KENNEDY", 39431368, 0.246, 9700.14) in [
+        (r["township"], r["taxable_value"], r["levy"], r["taxes"]) for r in rows
+    ]
+
+
+def test_ocr_clean():
+    sys.modules.pop("ocr", None)
+    import ocr
+
+    assert ocr._clean("$o 1,2O4 Baltic-RS ★ OAKLAKE") == "$0 1,204 Baltic-RS * OAKLAKE"
+    # periods read for commas in a whole-dollar valuation; S for $; cents left alone
+    assert ocr._clean("COUNTY GENERAL $1.369,891.623 4.1 $5,616.55") == (
+        "COUNTY GENERAL $1,369,891,623 4.1 $5,616.55")  # fmt: skip
+    assert ocr._clean("LIBRARY s0 TELEPHONE S16.239 RS 101-50") == (
+        "LIBRARY $0 TELEPHONE $16,239 RS 101-50")  # fmt: skip
+
+
+def test_report_townships_blank_cells():
+    """A township that levied nothing has blank levy and taxes (checked on the 2018 scan);
+    2018's unorganized counties have no figures at all."""
+    text = "\n".join([
+        "TOWNSHIP VALUATION, LEVY, AND TAXES - PAYABLE 2018",
+        "BRULE", "CLEVELAND $39,293,251", "EAGLE $35,828,991 0.120 $4,299.55",
+        "BENNETT", "ALL UNORGANIZED", "PENNINGTON", "FLAT BUTTE $3,093,937 $0.00",
+        "TAXABLE VALUE MILL LEVY TAXES",
+    ])  # fmt: skip
+    rows, unread = report.townships([text], "2018.pdf")
+    assert [(r["county"], r["township"], r["taxable_value"], r["levy"], r["taxes"])
+            for r in rows] == [
+        ("Brule", "CLEVELAND", 39293251, None, None),
+        ("Brule", "EAGLE", 35828991, 0.12, 4299.55),
+        ("Bennett", "ALL UNORGANIZED", None, None, None),
+        ("Pennington", "FLAT BUTTE", 3093937, None, 0.0),
+    ]  # fmt: skip
+    assert unread == []
+
+
+# lines of the scanned 2019 and 2020 municipal tables, as OCR read them
+MUNICIPAL_2020 = "\n".join([
+    "MUNICIPALITIES - VALUATIONS, LEVIES, AND TAXES - 2019 PAY 2020",
+    "Located in School Population County SCHOOL SCHOOL SCHOOL Total Tax Total Tax Total Tax "
+    "Total Tax Grand Total",
+    "Taxing District Name County District Census Total Valuation City Levy Levy TOTAL AG "
+    "TOTAL OO TOTAL OTH RATE AG RATE OO RATE OTH RATE UTIL Taxes",
+    # a levy read without its point (2.645)
+    "Akaska Walworth 62-5 42 12,061,426 3.995 2645 3.157 5.551 10.182 9.797 12.191 16.822 "
+    "16.822 181,964.85",
+    # a blank population
+    "Arlington Kingsbury 38-1 50,682,264 5.039 1.811 6.782 9.045 13.423 13.632 15.895 20.273 "
+    "20.273 894,801.06",
+    # whole rates (the report leaves off zeros) and stray digits before the name
+    "2 Yankton Yankton 63-3 14454 903,626,027 4.592 3.129 5.927 7.751 11.279 13.648 15.472 "
+    "19 19 15,102,832.53",
+    # the asterisk read as another mark
+    "Iroquois Kingsbury 2-3 × 8,190,016 7.556 1.884 3.885 6.976 12.955 13.325 16.416 22.395 "
+    "22.395 148,455.25",
+])  # fmt: skip
+MUNICIPAL_2019_AMBIGUOUS = "\n".join([
+    "Municipalities - Valuations, Levies, and Taxes - 2018 Payable 2019",
+    "City Name County District Census Total Valuation City Levy Levy AG 00 OTH RATE AG RATE OO "
+    "RATE OTH RATE UTIL Taxes",
+    # the city's or the county's levy is blank: the rates can't tell which
+    "Badger Kingsbury 38-1 107 6,768,118 1.779 6.728 9.054 13.553 8.507 10.833 15.332 15.332 "
+    "$ 81,067.26",
+])  # fmt: skip
+
+
+def test_report_municipalities_scanned():
+    rows, unread = report.municipalities([MUNICIPAL_2020], "2020.pdf")
+    by_name = {r["municipality"]: r for r in rows}
+    assert list(by_name) == ["Akaska", "Arlington", "Yankton", "Iroquois"] and unread == []
+    assert by_name["Akaska"]["county_levy"] == 2.645
+    assert by_name["Akaska"]["read_as"] == "county_levy 2645 → 2.645"
+    arlington = by_name["Arlington"]
+    assert (arlington["population"], arlington["valuation"], arlington["city_levy"]) == (
+        None, 50682264, 5.039)  # fmt: skip
+    assert arlington["read_as"] == "population blank"
+    yankton = by_name["Yankton"]
+    assert (yankton["population"], yankton["total_rate_other"]) == (14454, 19)
+    assert "read_as" not in yankton
+    assert by_name["Iroquois"]["population"] is None  # "*": population on the main row
+    assert report.rates_check(by_name["Akaska"]) == "adds up"
+
+    rows, unread = report.municipalities([MUNICIPAL_2019_AMBIGUOUS], "2019.pdf")
+    assert rows == [] and len(unread) == 1
+
+
+def test_rates_check():
+    row = {"city_levy": 5.083, "county_levy": 1.607, "school_ag_levy": 6.484,
+           "school_oo_levy": 8.697, "school_other_levy": 12.976, "total_rate_ag": 13.383,
+           "total_rate_oo": 15.596, "total_rate_other": 19.875}  # fmt: skip
+    assert report.rates_check(row) == "another levy of 0.209"  # Kingsbury, 2021
+    assert report.rates_check(row | {"total_rate_oo": 25.596}) == "doesn't add up"
+    assert (
+        report.rates_check(
+            row | {"county_levy": None, "read_as": "county_levy 1607 → left blank (point lost)"}
+        )
+        == ""
+    )
