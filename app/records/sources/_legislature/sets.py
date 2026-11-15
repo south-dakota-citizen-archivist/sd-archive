@@ -311,7 +311,8 @@ PER_INTERIM = {"Documents": "InterimCommittees/Documents/{}?Type=2&Type=4&Type=3
 
 def keep_dropped_members(data: dict, cid: int) -> None:
     """Members and staff the repository's committee file lists that the API no longer does,
-    in `earlier` as the repository wrote them."""
+    and the meeting days it had where the API now differs, in `earlier` as the repository
+    wrote them."""
     name = f"data/committees/sd-legislature-committee-{cid}.json"
     old = archive(name)
     if not old:
@@ -328,6 +329,11 @@ def keep_dropped_members(data: dict, cid: int) -> None:
     for field, value in dropped.items():
         if value:
             data.setdefault("earlier", {})[field] = {"value": value, "from": archive_url(name)}
+    # the API shows a committee's current meeting days for every session it met
+    days = (data.get("Committee") or {}).get("Days")
+    if old.get("committee_days") and days and old["committee_days"] != days:
+        data.setdefault("earlier", {})["Days"] = {"value": old["committee_days"],
+                                                  "from": archive_url(name)}  # fmt: skip
 
 
 def _committees(listing: str, key: str, detail: str, extra: dict, page: str,

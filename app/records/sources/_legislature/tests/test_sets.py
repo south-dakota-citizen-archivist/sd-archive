@@ -84,3 +84,18 @@ def test_imported_records_are_keyed_by_their_page():
                                       "notes": ("Notes", str)})  # fmt: skip
     assert from_legacy({"session_id": "71", "is_current_session": "True", "notes": "None"}) == {
         "SessionId": 71, "CurrentSession": True, "Notes": None}  # fmt: skip
+
+
+def test_earlier_copies_keep_what_the_api_dropped_or_now_shows_differently():
+    from records.sources._legislature.build import keep_changed, keep_earlier
+
+    data = {"email": None, "occupation": "Retired", "term": "Other House", "picture": "new.jpg"}
+    repo = ({"email": "a@b.gov", "occupation": "Carpenter/Retired", "term": "Other House",
+             "picture": None}, "repo")  # fmt: skip
+    keep_earlier(data, ["email"], repo)
+    keep_changed(data, ["occupation", "term", "picture"], repo)
+    assert data["earlier"] == {
+        "email": {"value": "a@b.gov", "from": "repo"},
+        "occupation": {"value": "Carpenter/Retired", "from": "repo"},
+    }
+    assert data["occupation"] == "Retired"  # the API's value stays the record's

@@ -61,6 +61,15 @@ def records(slug: str, fields=None) -> dict[str, dict]:
     return out
 
 
+def as_listed(data: dict, field: str, current=None):
+    """The value an earlier copy had where the API now shows another (`earlier`), else the
+    record's (or `current`)."""
+    found = (data.get("earlier") or {}).get(field)
+    if found is not None:
+        return found["value"]
+    return kept(data, field) if current is None else current
+
+
 def kept_list(data: dict, field: str) -> list:
     """The items a record keeps in `earlier` for a list the API has dropped some of."""
     return ((data.get("earlier") or {}).get(field) or {}).get("value") or []
@@ -177,12 +186,12 @@ class Command(BaseCommand):
                 "chamber": (CHAMBER.get(old.get("chamber"), old.get("chamber")), rec["chamber"]),
                 "session_id": (old.get("session_id"), rec.get("session_id")),
                 "year": (old.get("year"), rec.get("year")),
-                "district": (old.get("district"), rec.get("district")),
+                "district": (old.get("district"), as_listed(rec, "district")),
                 "party": (old.get("party"), rec.get("party")),
-                "term": (old.get("term"), rec.get("term")),
-                "occupation": (old.get("occupation"), kept(rec, "occupation")),
+                "term": (old.get("term"), as_listed(rec, "term")),
+                "occupation": (old.get("occupation"), as_listed(rec, "occupation")),
                 "counties": (old.get("counties"), rec.get("counties")),
-                "picture": (old.get("picture"), rec.get("picture")),
+                "picture": (old.get("picture"), as_listed(rec, "picture")),
                 "legislator_canonical_id": (old.get("legislator_canonical_id"),
                                             rec.get("legislator_id")),
                 **{theirs: (old.get(theirs), kept(rec, ours)) for theirs, ours in contact.items()},
@@ -288,7 +297,8 @@ class Command(BaseCommand):
             pairs = {
                 "committee_name": (old.get("committee_name"), committee.get("FullName")),
                 "committee_room": (old.get("committee_room"), committee.get("Room")),
-                "committee_days": (old.get("committee_days"), committee.get("Days")),
+                "committee_days": (old.get("committee_days"),
+                                   as_listed(rec, "Days", committee.get("Days"))),
                 "is_full_body": (old.get("is_full_body"), rec.get("FullBody")),
                 "committee_id_canon": (old.get("committee_id_canon"), rec.get("CommitteeId")),
                 "authority": (old.get("authority"), rec.get("Authority")),

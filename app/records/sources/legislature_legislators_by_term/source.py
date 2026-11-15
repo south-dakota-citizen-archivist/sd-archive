@@ -29,6 +29,7 @@ from records.sources._legislature.build import (
     archive,
     archive_url,
     empty,
+    keep_changed,
     keep_earlier,
     last_run,
     stored,
@@ -55,6 +56,9 @@ REPO_FIELDS = {  # the repository's name → ours
 }  # fmt: skip
 PRL_FIELDS = {"phone_capitol": "capitol_phone", "phone_home": "home_phone",
               "phone_cell": "cell_phone", "email": "email"}  # fmt: skip
+# For a past session the API shows a legislator's current occupation, photo, term label and
+# district; the repository has them as listed then (kept in `earlier` where they differ)
+AS_LISTED = ("occupation", "picture", "term", "district")
 FIRST_DISTRICT_SESSION_YEAR = 2023  # sdplaces has the districts drawn in 2021
 
 
@@ -67,7 +71,9 @@ def repo_copy(member_id: int) -> tuple[dict | None, str]:
     found = archive(name)
     if not found:
         return None, ""
-    return {ours: found.get(theirs) for theirs, ours in REPO_FIELDS.items()}, archive_url(name)
+    values = {ours: found.get(theirs) for theirs, ours in REPO_FIELDS.items()}
+    values |= {f: found.get(f) for f in AS_LISTED}
+    return values, archive_url(name)
 
 
 def prl_copy(record) -> tuple[dict | None, str]:
@@ -149,6 +155,7 @@ def items(fetcher=None) -> Found:
                 copies = [last_run(record), repo_copy(mid)]
                 carried = record.data.get("earlier") if record else None
             keep_earlier(data, CONTACT, *copies, carried=carried)
+            keep_changed(data, AS_LISTED, repo_copy(mid))
             for field in data.get("earlier") or {}:
                 checks["earlier"][field] = checks["earlier"].get(field, 0) + 1
             out.append(Item(key=str(mid), data=data, source_url=profile_url(mid),

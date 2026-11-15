@@ -115,6 +115,26 @@ def keep_earlier(data: dict, fields: Iterable[str], *copies: tuple[dict | None, 
     return data
 
 
+def keep_changed(data: dict, fields: Iterable[str], copy: tuple[dict | None, str]) -> dict:
+    """data with `earlier` holding, for each field the API now gives differently from an
+    earlier copy, that copy's value: for a past session, the API shows some things as they
+    are now (a legislator's current occupation and photo, a committee's current meeting
+    days), where the earlier copy has them as they were listed then. data keeps the API's
+    value. Returns data."""
+    values, source = copy
+    for field in fields:
+        theirs, ours = (values or {}).get(field), data.get(field)
+        if not empty(theirs) and not empty(ours) and _same(theirs) != _same(ours):
+            data.setdefault("earlier", {})[field] = {"value": theirs, "from": source}
+    if data.get("earlier"):
+        data["earlier"] = dict(sorted(data["earlier"].items()))
+    return data
+
+
+def _same(value) -> str:
+    return " ".join(str(value).replace("\xa0", " ").split())
+
+
 def stored(slug: str) -> dict:
     """The record set's current records, by key."""
     from records.models import Record
