@@ -36,6 +36,19 @@ dimensions = ["party", "status (active/inactive)"]
 source = "SD Secretary of State, voter registration by county reports (PDF)"
 
 [[dataset]]
+id = "census-blocks"
+name = "Census redistricting counts by block"
+project = "sd-archive/pipelines/census_blocks"
+grain = "aggregate"
+coverage = ["0400000US46"]
+geography = ["block"]
+period = "decennial censuses: 2000, 2010, 2020 (April 1)"
+measures = ["people", "people 18 and over", "people in group quarters (2020)", "housing units"]
+dimensions = ["race", "Hispanic or Latino", "group quarters type (2020)", "occupied/vacant"]
+source = "U.S. Census Bureau, PL 94-171 redistricting data (API), and 2000 Summary File 1 for housing units"
+notes = "Blocks are each census's own; they don't nest across years. Legislative district plans are built from them."
+
+[[dataset]]
 id = "election-results"
 name = "Election results by precinct"
 project = "sd-archive/pipelines/elections"

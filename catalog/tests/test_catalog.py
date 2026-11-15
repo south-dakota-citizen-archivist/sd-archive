@@ -20,6 +20,7 @@ GEOGRAPHIES = {
     "sldl",
     "sldu",
     "precinct",
+    "block",  # census blocks (2000, 2010, 2020), the unit plans and counts are built from
     "taxing_district",  # townships and special districts (fire, road, water…), by name and ID
 }
 ENTITIES = {"person", "organization", "government", "property"}
