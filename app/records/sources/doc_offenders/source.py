@@ -13,7 +13,9 @@ H'), and in later months too; a two-letter search that fails stops the run.
 It goes at a person's pace: searches 40 to 80 minutes apart, results pages 5 to 12 seconds
 apart, and people's pages (plain links) 8 to 20 seconds apart, with a break of 3 to 10
 minutes every 30 to 70 pages; people's pages are read between searches and after them, at
-most `DETAILS_PER_RUN` new ones a run. Results and people's pages are kept by month: a
+most `DETAILS_PER_RUN` new ones a run. A person's page answered "currently unavailable" is
+tried again after each `COOL_DOWN`; if the locator stays unavailable, the run stops (partial)
+and the rest are read next run. Results and people's pages are kept by month: a
 stopped run resumes, and the next month's run reads them again. A person whose page hasn't
 been read this month keeps the last one read; until every search is done and every person
 has a page, the run is partial (nothing is marked dropped).
@@ -46,6 +48,8 @@ PAGE_GAP = (5.0, 12.0)  # between a search's results pages
 DETAIL_GAP = (8.0, 20.0)  # between people's pages
 BREAK_EVERY = (30, 70)  # people's pages between breaks
 BREAK = (3 * 60.0, 10 * 60.0)  # a break
+# before reading a person's page again after the locator said it's unavailable
+COOL_DOWN = (15 * 60.0, 30 * 60.0, 60 * 60.0)
 
 
 def browser_profile() -> Path:
@@ -62,6 +66,10 @@ def _searcher():
 
 class NotResults(Exception):
     """A search answered with something other than results (the locator unavailable)."""
+
+
+class Unavailable(Exception):
+    """The locator kept answering "currently unavailable" for people's pages: it's down."""
 
 
 def split_before(store, letter: str) -> bool:
@@ -136,7 +144,16 @@ class _People:
                 self.until_break = random.randint(*BREAK_EVERY)
         doc = self.todo.pop()
         url = parse.detail_url(self.found[doc]["detail_id"])
-        html = self.fetcher.request("GET", url, timeout=120).content
+        for wait in (*COOL_DOWN, None):
+            html = self.fetcher.request("GET", url, timeout=120).content
+            if not parse.unavailable(html):
+                break
+            if wait is None:
+                self.todo.append(doc)  # read next run
+                raise Unavailable(f"the locator answered that it is currently unavailable "
+                                  f"(a person's page, {len(COOL_DOWN) + 1} tries)")  # fmt: skip
+            logger.warning("DOC locator unavailable; trying again in %d minutes", wait // 60)
+            self.sleep(wait)
         parse.detail(html)  # a page that isn't a person's stops the run here, not later
         if self.store is not None:
             self.store.save(f"people/{self.month}/{doc}.html", html, url)
@@ -201,11 +218,18 @@ def items(fetcher, today: date | None = None, details_per_run: int | None = None
             rows = [r for page in pages for r in parse.results(page)]
             counts[letter] = len(rows)
             people.add(rows)
+    except Unavailable as e:
+        stopped = down = str(e)
+    else:
+        down = None
     finally:
         if searcher is not None:
             searcher.__exit__(None, None, None)
-    while people.read_one():
-        pass
+    try:
+        while not down and people.read_one():
+            pass
+    except Unavailable as e:
+        stopped = stopped or str(e)
     if people.todo and not stopped:
         stopped = f"read {people.read} people's pages this run; {len(people.todo)} left"
     fetched = people.read

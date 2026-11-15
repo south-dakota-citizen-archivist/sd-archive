@@ -235,6 +235,32 @@ def test_a_run_reads_at_most_its_budget_of_pages(db, sd_places, searcher, tmp_pa
     assert "82 left" in run.checks["stopped"]
 
 
+def test_the_locator_unavailable_for_peoples_pages_waits_then_stops(
+        db, sd_places, searcher, tmp_path, monkeypatch):  # fmt: skip
+    """A person's page answered "currently unavailable": tried again after each cool-down;
+    still unavailable, the run stops (partial, nothing dropped) and reads it next run."""
+    RecordSet.objects.create(slug="doc-offenders", name="DOC", dataset="doc-offenders")
+    monkeypatch.setattr(source, "COOL_DOWN", (0.0, 0.0))
+
+    class Down(FixtureFetcher):
+        down_after = 5  # people's pages read before the locator goes down
+
+        def request(self, method, url, data=None, **kwargs):
+            if method == "GET" and sum(m == "GET" for m, _ in self.asked) >= self.down_after:
+                self.asked.append((method, url))
+                return type("R", (), {"content": UNAVAILABLE})()
+            return super().request(method, url, data, **kwargs)
+
+    store = Store(tmp_path)
+    run = run_source("doc-offenders", fetcher=Down(store))
+    assert "currently unavailable" in run.checks["stopped"]
+    assert run.checks["pages_read"] == 5 and run.checks["without_page"] == 92
+    assert Record.objects.filter(dropped_at__isnull=False).count() == 0
+    # back up: the next run reads the rest (the one that was unavailable too)
+    run = run_source("doc-offenders", fetcher=FixtureFetcher(store))
+    assert "stopped" not in run.checks and run.checks["without_page"] == 0
+
+
 @pytest.mark.vcr
 def test_the_live_site(tmp_path):
     import sdfetch
