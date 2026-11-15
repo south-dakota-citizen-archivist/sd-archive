@@ -11,7 +11,8 @@ fetching again. Responses that change (the current session, the top-level lists)
 fetched again when the stored copy is older than REFRESH; earlier sessions are kept. A URL
 that answers 404 is logged in missing.jsonl and not asked again.
 
-Document files (PDF, HTML, Word) and meeting audio aren't fetched: the JSON lists them
+Each bill version's text is fetched (`Bills/HTML/{DocumentId}`: the version's HTML inside
+JSON). Other document files (PDF, HTML, Word) and meeting audio aren't: the JSON lists them
 (document IDs, audio links and timestamps), and the files wait for a decision on storage.
 """
 
@@ -60,7 +61,7 @@ PER_SESSION = [
 ]  # fmt: skip
 
 PER_BILL = ["Bills/{b}", "Bills/Versions/{b}", "Bills/ActionLog/{b}", "Bills/Amendments/{b}",
-            "Bills/FiscalNotes/{b}", "Bills/Audio/{b}", "Bills/HTML/{b}",
+            "Bills/FiscalNotes/{b}", "Bills/Audio/{b}",
             "ConferenceCommittees/Bill/{b}"]  # fmt: skip
 PER_MEMBER = ["SessionMembers/Detail/{m}", "SessionMembers/Bills/{m}",
               "SessionMembers/Committees/{m}", "SessionMembers/Hearing/{m}"]  # fmt: skip
@@ -162,6 +163,9 @@ class Crawl:
             for bill in bills:
                 for path in PER_BILL:
                     self.get(path.format(b=bill["BillId"]), changing=current)
+                for version in self.get(f"Bills/Versions/{bill['BillId']}") or []:
+                    # each version's text, by its document ID (a version doesn't change)
+                    self.get(f"Bills/HTML/{version['DocumentId']}")
                 for vote_id in self.vote_ids(bill["BillId"], current):
                     self.get(f"Votes/{vote_id}", changing=current)
             for m in self.get(f"SessionMembers/Session/{sid}", changing=current) or []:

@@ -58,6 +58,7 @@ def test_sessions_walk_bills_votes_members_and_committees(tmp_path):
         "Sessions": [{"SessionId": 70}, {"SessionId": 71, "CurrentSession": True}],
         "Bills/Session/71": [{"BillId": 5}],
         "Bills/ActionLog/5": [{"Vote": {"VoteId": 9}}, {"Vote": None}, {"Vote": {"VoteId": 9}}],
+        "Bills/Versions/5": [{"DocumentId": 300}, {"DocumentId": 301}],
         "Votes/9": {"VoteId": 9},
         "SessionMembers/Session/71": [{"SessionMemberId": 3}],
         "SessionCommittees/Session/71": [{"SessionCommitteeId": 4}],
@@ -68,9 +69,11 @@ def test_sessions_walk_bills_votes_members_and_committees(tmp_path):
     crawl.Crawl(api).run(["sessions"], sessions=[71])
     for path in ("Bills/5", "Bills/Audio/5", "Votes/9", "SessionMembers/Detail/3",
                  "SessionCommittees/CommitteeAgendas/4", "InterimCommittees/Detail/6",
-                 "SessionLaws/SessionLaw/8", "Keywords?SessionId=71"):  # fmt: skip
+                 "SessionLaws/SessionLaw/8", "Keywords?SessionId=71",
+                 "Bills/HTML/300", "Bills/HTML/301"):  # fmt: skip
         assert path in api.asked, path
     assert api.asked.count("Votes/9") == 1
+    assert "Bills/HTML/5" not in api.asked, "the text is asked by version, not by bill"
     assert not any(p.endswith("/70") for p in api.asked), "only the session asked for"
 
 
