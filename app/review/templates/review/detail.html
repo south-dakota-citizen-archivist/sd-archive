@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}{{ first.title }} · Review · S.D. Archive{% endblock %}
+{% block content %}
+<p class="text-sm text-gray-500"><a class="link" href="{% url 'review:index' %}">Review</a> · <a class="link" href="{% url 'review:index' %}?source={{ provider.slug }}">{{ provider.name }}</a> · {{ position }} of {{ total }}
+  {% if previous %} · <a class="link" href="{% url 'review:detail' provider.slug previous %}">← previous</a>{% endif %}
+  {% if next %} · <a class="link" href="{% url 'review:detail' provider.slug next %}">next →</a>{% endif %}</p>
+<h1 class="text-xl font-semibold mt-1">{{ first.title }}</h1>
+<p class="text-sm text-gray-600">{{ first.subtitle }}{% for l in first.links %} · <a class="link" href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>{% endfor %}</p>
+<p class="text-xs text-gray-500 mt-1">Decisions go to <span class="font-mono">{{ provider.decisions.name }}</span> and apply {{ provider.applies }}.</p>
+
+<div class="grid gap-6 mt-4 {% if tables %}xl:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]{% else %}lg:grid-cols-2{% endif %}">
+  <div class="lg:sticky lg:top-4 self-start space-y-3 max-h-[90vh] overflow-auto">
+    {% if first.image.url %}
+    <a href="{{ first.image.url }}" target="_blank" rel="noopener" title="Open the image full size"><img src="{{ first.image.url }}" alt="{{ first.title }}" class="w-full border border-gray-200 rounded bg-white"></a>
+    {% else %}
+    {% for page in first.image.pages %}
+    {% url 'review:page_image' as img %}
+    <a href="{{ img }}?pdf={{ first.image.pdf|urlencode }}&page={{ page }}" target="_blank" rel="noopener" title="Open the page full size"><img src="{{ img }}?pdf={{ first.image.pdf|urlencode }}&page={{ page }}" alt="{{ first.title }}, page {{ page|add:1 }}" class="w-full border border-gray-200 rounded bg-white" loading="lazy"></a>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <div>
+    {% for p in picks %}
+    <form method="post" action="{% url 'review:decide' provider.slug first.key %}" class="review-pick card p-4 mb-4">
+      {% csrf_token %}
+      <input type="hidden" name="kind" value="pick">
+      <input type="hidden" name="field" value="{{ p.item.field }}">
+      <input type="hidden" name="from" value="{% if p.decision %}{{ p.decision.from }}{% else %}typed{% endif %}">
+      <h2 class="text-sm font-semibold capitalize">{{ p.item.label|default:p.item.field }}</h2>
+      {% for problem in p.item.problems %}<p class="text-xs text-amber-800">{{ problem }}</p>{% endfor %}
+      <table class="text-sm w-full mt-1">
+        {% for r in p.readings %}
+        <tr class="align-top">
+          <td class="pr-2 py-1 whitespace-nowrap text-gray-500 text-xs w-28">{{ r.key }}</td>
+          <td class="py-1">{{ r.marked }}</td>
+          <td class="py-1 pl-2 w-12 text-right">{% if r.value is not None and r.value != "" %}<button type="button" class="btn text-xs use" data-from="{{ r.key }}" data-value="{{ r.value }}">Use</button>{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% if p.decision %}
+      <p class="text-xs mt-2 rounded bg-green-50 border border-green-200 p-2">Decided: <b>{{ p.decision.value|default:"left empty" }}</b> ({{ p.decision.from }}) · {{ p.decision.reason }} · {{ p.decision.checked }}</p>
+      {% endif %}
+      <textarea name="value" rows="2" class="mt-2 w-full border border-gray-300 rounded p-2 text-sm" placeholder="What the page says">{{ p.decision.value|default:"" }}</textarea>
+      <input name="reason" required class="mt-1 w-full border border-gray-300 rounded p-1.5 text-sm" placeholder="Reason: what settles it (required)" value="{{ p.decision.reason|default:'' }}">
+      <div class="mt-2 flex gap-2">
+        <button class="btn btn-primary">Save</button>
+        <button class="btn" name="from" value="none" title="The page doesn't give it, or it can't be read">Leave empty</button>
+      </div>
+    </form>
+    {% if p.decision %}
+    <form method="post" action="{% url 'review:undo' provider.slug first.key %}" class="-mt-3 mb-4 text-right">{% csrf_token %}<input type="hidden" name="field" value="{{ p.item.field }}"><button class="text-xs link">Remove this decision</button></form>
+    {% endif %}
+    {% endfor %}
+
+    {% for t in tables %}
+    <form method="post" action="{% url 'review:decide' provider.slug first.key %}" class="review-table">
+      {% csrf_token %}
+      <input type="hidden" name="kind" value="table">
+      <div id="problems" class="mb-3">{% include "review/_problems.html" with problems=t.item.problems checked=False %}</div>
+      {% if t.decision %}<p class="text-xs mb-3 rounded bg-green-50 border border-green-200 p-2">Decided: the table as read is used · {{ t.decision.reason }} · {{ t.decision.checked }}</p>{% endif %}
+      <p class="text-xs text-gray-500 mb-2">Cells the readings disagree on are shaded; hover for every reading, or pick one from a cell's list. Cells settled by hand are outlined.</p>
+      {% for s in t.sections %}
+      <div class="card overflow-x-auto mb-3">
+        <table class="tbl text-sm">
+          <thead><tr><th>{{ s.name }}</th>{% for c in s.columns %}<th class="text-right">{{ c.label }}</th>{% endfor %}</tr></thead>
+          <tbody>
+          {% for row in s.rows %}
+            <tr>
+              <td class="whitespace-nowrap">{{ row.name }}</td>
+              {% for cell in row.cells %}
+              <td class="p-1">{% if cell %}
+                <input name="cell:{{ cell.field }}" value="{{ cell.text }}" list="o-{{ forloop.parentloop.counter }}-{{ forloop.counter }}-{{ s.name|slugify }}" title="{{ cell.title }}"
+                  class="w-full min-w-[7rem] text-right tabular-nums rounded border px-1.5 py-0.5 {% if cell.decision %}border-blue-500 ring-1 ring-blue-300{% else %}border-gray-300{% endif %} {% if cell.differs %}bg-amber-50{% endif %}">
+                <input type="hidden" name="was:{{ cell.field }}" value="{{ cell.text }}">
+                <datalist id="o-{{ forloop.parentloop.counter }}-{{ forloop.counter }}-{{ s.name|slugify }}">{% for o in cell.options %}<option value="{{ o }}">{% endfor %}</datalist>
+              {% endif %}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endfor %}
+      <input name="reason" required class="mt-1 w-full border border-gray-300 rounded p-1.5 text-sm" placeholder="Reason: what settles the problems (required)">
+      <div class="mt-2 flex flex-wrap gap-2">
+        <button type="button" class="btn" hx-post="{% url 'review:check' provider.slug first.key %}" hx-include="closest form" hx-target="#problems">Check these values</button>
+        <button class="btn btn-primary">Save</button>
+        <span class="text-xs text-gray-500 self-center">Saves the cells you changed; with none changed, that the table as read is right.</span>
+      </div>
+    </form>
+    <form method="post" action="{% url 'review:undo' provider.slug first.key %}" class="mt-2 text-right">{% csrf_token %}<input type="hidden" name="field" value="*all"><button class="text-xs link">Remove this document's decisions</button></form>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+document.addEventListener("click", (e) => {
+  const use = e.target.closest("button.use");
+  if (use) {
+    const form = use.closest("form");
+    form.querySelector("textarea[name=value]").value = use.dataset.value;
+    form.querySelector("input[name=from]").value = use.dataset.from;
+  }
+});
+document.addEventListener("input", (e) => {
+  if (e.target.matches(".review-pick textarea")) e.target.form.querySelector("input[name=from]").value = "typed";
+});
+</script>
+{% endblock %}

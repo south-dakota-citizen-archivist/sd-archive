@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import RedirectView
 
 from records import views
 from records.sources.legislature_blue_book_bios import review as bio_review
@@ -8,8 +9,10 @@ urlpatterns = [
     path("", views.recordset_list, name="recordset_list"),
     path("runs/<int:pk>/", views.run_detail, name="run_detail"),
     path("documents/<int:pk>/file/", views.document_file, name="document_file"),
-    path("legislature-blue-book-bios/review/", bio_review.page, name="bio_review"),
-    path("legislature-blue-book-bios/review/<int:pk>/", bio_review.decide, name="bio_decide"),
+    path(
+        "legislature-blue-book-bios/review/",
+        RedirectView.as_view(url="/review/?source=legislature-blue-book-bios"),
+    ),
     path(
         "legislature-blue-book-bios/images/<str:image_id>.webp", bio_review.image, name="bio_image"
     ),

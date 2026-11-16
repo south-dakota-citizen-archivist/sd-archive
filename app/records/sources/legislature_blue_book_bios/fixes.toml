@@ -1,0 +1,225 @@
+# Parts of Blue Book pages settled by hand against the page image, where the three readings
+# don't agree (sddocs.review; written by the review pages, can be edited by hand).
+
+[[reading]]
+key = "3389"
+field = "counties"
+value = "part of Pennington County"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "3406"
+field = "children"
+value = "Chris O. Rasmussen, Julia A. Hanssen, Robert Rasmussen and Alan W. Rasmussen"
+from = "typed"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "3406"
+field = "spouse"
+value = "Curtis O. Rasmussen"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "3596"
+field = "education"
+value = "South Dakota Family Business Council. State Representative 1993-1994. State Senator. 1995-present"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "3964"
+field = "address"
+value = "321 East 5th Ave., Miller 57362"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4126"
+field = "address"
+value = "101 W. 31st St., Yankton, SD 57078"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4137"
+field = "experience"
+value = "Associate Member, Remodeling Council & Homebuilders Association; 2004 Remodeling Council Member of the Year; past prison ministry; past independent home building and small business owner; Precinct Committeeman and State Central Committeeman, Lincoln County, Republican Party"
+from = "vision"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4160"
+field = "address"
+value = "20451 398th Ave., Huron, SD 57350"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4199"
+field = "spouse"
+from = "none"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4249"
+field = "experience"
+value = "Electronic Warfare Technician, U.S. Air Force, 1967-1971; Plant Manager, Sencore, Inc., 1971-1980; Teacher, National American University, Management Classes, 1978-1992; Teacher of Vocational Electronics, Lincoln High School, 1980-1982; Supervisor, Litton Microwave Cooking, 1981-1987; Systems Engineer, Radio Shack, 1989-1991; Network Services Coordinator, Precision Computer Systems/Fiserv, 1991- 2012"
+from = "vision"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4342"
+field = "experience"
+value = "SD Legislature Committee Secretary, 2009-2014; Local Board of Administration, Mitchell Wesleyan Church, 2010-Present; Director of Technology, Mitchell Wesleyan Church, 2011-Present; Board of Directors, 1st Circuit CASA, 2015-Present; Board of Directors, Mitchell Area Concert Series, 2015-Present; Local Advisory Board, Aurora Plains Academy, 2016-Present; Board of Directors, Dakota Counseling Institute, 2017-Present"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4375"
+field = "legislative_experience"
+value = "1st Term"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4451"
+field = "legislative_experience"
+value = "1st Term"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4484"
+field = "legislative_experience"
+value = "1st Term"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4507"
+field = "legislative_experience"
+value = "1st Term"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4508"
+field = "legislative_experience"
+value = "1st Term"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4530"
+field = "legislative_experience"
+value = "1st Term"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4542"
+field = "children"
+value = "Elizabeth, Jennifer, Annie"
+from = "typed"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4583"
+field = "address"
+value = "43410 188th St, Willow Lake 57278"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4586"
+field = "address"
+value = "29166 481st Ave., Hudson, 57034"
+from = "typed"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4635"
+field = "children"
+value = "Julie Skea, Kristen Fabrie, Karen Schut, and Jeffrey Van Etten"
+from = "legislature"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4684"
+field = "address"
+value = "12563 358th Ave., Ipswich 57451"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4717"
+field = "education"
+value = "South Dakota State University, Masters Degree in School Administration, 1981"
+from = "typed"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "4820"
+field = "birth"
+value = "April 14, 1983"
+from = "typed"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "5019"
+field = "address"
+value = "10215 Pioneer Ave. Rapid City, SD 57702"
+from = "legislature"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "5032"
+field = "address"
+value = "300-1/2 W. 4th St. Yankton, SD 57078"
+from = "ours"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "5043"
+field = "address"
+value = "PO Box 62 Lantry, SD 57636"
+from = "legislature"
+reason = "Checked against the page image."
+checked = 2026-11-16
+
+[[reading]]
+key = "5120"
+field = "committees"
+value = "Health and Human Services and Local Government"
+from = "legislature"
+reason = "Checked against the page image."
+checked = 2026-11-16

@@ -17,7 +17,7 @@ from pathlib import Path
 
 import pytest
 
-from records.sources.legislature_blue_book_bios import decisions, images, parse, source
+from records.sources.legislature_blue_book_bios import images, parse, review, source
 
 FIXTURES = Path(__file__).parent / "fixtures"
 MEMBERS = FIXTURES / "raw" / "legislature" / "api" / "Historical" / "Member"
@@ -155,6 +155,7 @@ def ewing_misread(raw) -> tuple[dict, dict]:
 
 
 def test_a_part_settled_by_hand(raw, tmp_path):
+    from sddocs import review as decisions
     from sdfetch import Store
 
     member, pic = ewing_misread(raw)
@@ -164,42 +165,47 @@ def test_a_part_settled_by_hand(raw, tmp_path):
     assert data["readings"]["spouse"] == {"legislature": "Sberry", "ours": "Sherry"}
 
     path = tmp_path / "fixes.toml"
-    decisions.save({"image": "5067", "part": "spouse", "value": 'Sherry "Sher"',
-                    "from": "typed", "reason": "Checked."}, path)  # fmt: skip
-    decided = decisions.load(path)
-    assert decided[("5067", "spouse")]["value"] == 'Sherry "Sher"'  # quotes survive the file
-    data = source.page_item(member, pic, store, decided=decided).data
+    decisions.save(path, {"key": "5067", "field": "spouse", "value": 'Sherry "Sher"',
+                          "from": "typed", "reason": "Checked."})  # fmt: skip
+    data = source.page_item(member, pic, store, decided=decisions.load(path)).data
     assert data["spouse"] == 'Sherry "Sher"' and data["unconfirmed"] == []
     assert data["by_hand"]["spouse"]["from"] == "typed"
     assert data["readings"]["spouse"]["legislature"] == "Sberry"  # the readings are kept
 
 
 def test_the_review_page(raw, tmp_path, db, client, monkeypatch):
-    from records.models import Record, RecordSet
+    from django.utils import timezone
 
-    monkeypatch.setattr(decisions, "PATH", tmp_path / "fixes.toml")
+    from records.models import Record, RecordSet
+    from sdfetch import Store
+
+    monkeypatch.setattr(source, "DECISIONS", tmp_path / "fixes.toml")
+    monkeypatch.setattr(review.REVIEW, "decisions", tmp_path / "fixes.toml")
     monkeypatch.setattr("records.ingest._sync_places", lambda *a: None)
+    monkeypatch.setattr("review.providers.REPO", tmp_path)  # no pipeline queues
     member, pic = ewing_misread(raw)
     rs = RecordSet.objects.create(slug="legislature-blue-book-bios", name="B",
                                   dataset="legislature")  # fmt: skip
-    from sdfetch import Store
-
     item = source.page_item(member, pic, Store(raw / "raw" / "legislature"))
-    from django.utils import timezone
-
     record = Record.objects.create(recordset=rs, key=item.key, data=item.data,
                                    content_hash=item.content_hash,
                                    first_seen=timezone.now())  # fmt: skip
-    url = "/records/legislature-blue-book-bios/review/"
+    assert "Bob Ewing" in client.get("/review/").content.decode()
+    url = "/review/legislature-blue-book-bios/5067/"
     page = client.get(url).content.decode()
-    assert "Bob Ewing" in page and '<mark class="bg-amber-100 rounded-sm">Sberry</mark>' in page
+    assert '<mark class="bg-amber-100 rounded-sm">Sberry</mark>' in page
     assert client.get("/records/legislature-blue-book-bios/images/5067.webp").status_code == 200
 
-    client.post(f"{url}{record.pk}/",
-                {"part": "spouse", "from": "ours", "value": "Sherry", "reason": ""})  # fmt: skip
+    # a reason is required
+    client.post(f"{url}decide/", {"field": "spouse", "from": "ours", "value": "Sherry"})
+    assert not (tmp_path / "fixes.toml").exists()
+    client.post(f"{url}decide/", {"field": "spouse", "from": "ours", "value": "Sherry",
+                                  "reason": "Printed Sherry."})  # fmt: skip
     record.refresh_from_db()
     assert record.data["spouse"] == "Sherry" and record.data["unconfirmed"] == []
-    assert record.data["by_hand"]["spouse"] == {
-        "from": "ours", "reason": "Checked against the page image.",
-        "checked": record.data["by_hand"]["spouse"]["checked"]}  # fmt: skip
-    assert "Nothing to check" in client.get(url).content.decode()
+    assert record.data["by_hand"]["spouse"]["reason"] == "Printed Sherry."
+    assert "Bob Ewing" not in client.get("/review/").content.decode()  # nothing waiting
+
+    client.post(f"{url}undo/", {"field": "spouse"})
+    record.refresh_from_db()
+    assert record.data["unconfirmed"] == ["spouse"]

@@ -1,0 +1,11 @@
+{% if problems is None %}
+<p class="text-sm text-gray-500">This source has no check to run.</p>
+{% elif problems %}
+<div class="rounded border border-amber-300 bg-amber-50 p-3 text-sm">
+  <p class="font-medium text-amber-900">{% if checked %}With these values, {% endif %}{{ problems|length }} check{{ problems|length|pluralize }} fail{{ problems|length|pluralize:"s," }}:</p>
+  <ul class="list-disc ml-5 mt-1 text-amber-900">{% for p in problems %}<li>{{ p }}</li>{% endfor %}</ul>
+  {% if checked %}<p class="mt-2 text-xs text-amber-800">You can still save: the reason is kept with the decisions, and what doesn't add up is noted in the source's checks.</p>{% endif %}
+</div>
+{% else %}
+<div class="rounded border border-green-300 bg-green-50 p-3 text-sm text-green-900">{% if checked %}With these values{% if changed %} ({{ changed }} changed){% endif %}, every check passes.{% else %}Every check passes.{% endif %}</div>
+{% endif %}

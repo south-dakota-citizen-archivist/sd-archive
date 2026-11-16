@@ -15,6 +15,7 @@ urlpatterns = [
     path("", include("harvest.urls")),
     path("records/", include("records.urls")),
     path("search/", include("search.urls")),
+    path("review/", include("review.urls")),
     path("api/v1/", api.urls),
     path("admin/", admin.site.urls),
     # the GIS pages' addresses before they moved under gis/

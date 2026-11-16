@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Review · S.D. Archive{% endblock %}
+{% block content %}
+<h1 class="text-xl font-semibold">Review</h1>
+<p class="text-sm text-gray-600 mt-1 max-w-3xl">What the readings of scanned documents leave unsettled, from every source that offers it. Open a document to see its page beside the readings and record what it says. Each decision needs a reason, is saved to the source's versioned decisions file, and is applied by the source under its own rules: anything that still doesn't add up is noted in its checks.</p>
+
+<div class="flex flex-wrap gap-4 border-b border-gray-200 mt-4 mb-4 text-sm">
+  <a href="?" class="pb-2 -mb-px {% if not chosen %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">All</a>
+  {% for s in sources %}
+  <a href="?source={{ s.slug }}" class="pb-2 -mb-px {% if chosen == s.slug %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">{{ s.name }} <span class="text-gray-500">{{ s.waiting }}</span></a>
+  {% endfor %}
+</div>
+
+{% for s in shown %}
+<section class="mb-8">
+  <h2 class="font-semibold">{{ s.name }}</h2>
+  <p class="text-xs text-gray-500 mb-2">{{ s.waiting }} waiting · {{ s.decided }} decision{{ s.decided|pluralize }} in <span class="font-mono">{{ s.decisions.name }}</span> · applied {{ s.applies }}</p>
+  {% if s.groups %}
+  <div class="card overflow-x-auto">
+    <table class="tbl">
+      <thead><tr><th>Document</th><th>What's waiting</th><th class="text-right">Decided</th></tr></thead>
+      <tbody>
+      {% for g in s.groups %}
+        <tr class="align-top">
+          <td><a class="link font-medium" href="{% url 'review:detail' s.slug g.key %}">{{ g.title }}</a>{% if g.subtitle %}<div class="text-xs text-gray-500">{{ g.subtitle }}</div>{% endif %}</td>
+          <td class="text-sm">{% for i in g.items %}{% if i.kind == "table" %}the table{% if i.problems %} ({{ i.problems|length }} problem{{ i.problems|length|pluralize }}){% endif %}{% else %}{{ i.label|default:i.field }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+          <td class="text-right tabular-nums text-sm">{{ g.decided }} of {{ g.fields }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="text-sm text-gray-500">Nothing waiting.</p>
+  {% endif %}
+</section>
+{% empty %}
+<p class="text-sm text-gray-500">No source has anything to review.</p>
+{% endfor %}
+{% endblock %}

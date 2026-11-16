@@ -16,6 +16,7 @@
         {% url 'records:recordset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Records</a>
         {% url 'census:dataset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if '/gis/' in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">GIS</a>
         {% url 'census:place_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Places</a>
+        {% url 'review:index' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Review</a>
         {% url 'job_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Jobs</a>
         <span class="flex-1"></span>
         <a href="/api/v1/docs" class="text-xs text-gray-400 hover:text-gray-600 whitespace-nowrap">API</a>

@@ -25,13 +25,14 @@ from __future__ import annotations
 import json
 import re
 from difflib import SequenceMatcher
+from pathlib import Path
 
 import sdplaces
 from entities.mentions import from_text
 from records.sources import Found, Item, Source
 from records.sources._legislature.build import SITE, raw_root
 
-from . import decisions, parse
+from . import parse
 from .images import image_id, image_name
 from .ocr import TIEBREAK, ocr_name
 
@@ -41,6 +42,7 @@ PARTS = ("party", "district", "counties", "address", "birth", "spouse", "childre
          "committees")  # fmt: skip
 AGREE = 0.9  # similarity of two readings' letters and digits, for a part to be kept
 COUNTY_NAMES = None
+DECISIONS = Path(__file__).with_name("fixes.toml")
 
 
 def kind_of(title: str) -> str:
@@ -97,10 +99,17 @@ def listing_party(member: dict, year: int | None) -> str | None:
     return None
 
 
+def load_decisions() -> dict[tuple[str, str], dict]:
+    """Parts settled by hand (the review pages), by image ID and part: fixes.toml."""
+    from sddocs import review
+
+    return review.load(DECISIONS)
+
+
 def page_item(member: dict, picture: dict, store, decided: dict | None = None) -> Item:
-    """One page's record. `decided`: the hand decisions (decisions.load()), by image and
+    """One page's record. `decided`: the hand decisions (load_decisions()), by image ID and
     part; one settles a part the readings leave unconfirmed."""
-    decided = decisions.load() if decided is None else decided
+    decided = load_decisions() if decided is None else decided
     mid, title = member["MemberId"], picture["Title"]
     year = int(title[:4]) if title[:4].isdigit() else None
     image = image_id(picture)
@@ -163,7 +172,7 @@ def items(fetcher=None) -> Found:
 
     store = Store(raw_root())
     out = Found()
-    decided = decisions.load()
+    decided = load_decisions()
     counts = {"pages": 0, "without_image": 0, "without_our_reading": 0, "party_disagrees": [],
               "unconfirmed_parts": 0, "by_hand": 0}  # fmt: skip
     used = set()

@@ -127,3 +127,36 @@ def test_as_text_spacing():
               {"text": "Lead", "x0": 200, "x1": 220, "top": 1, "bottom": 11}]  # fmt: skip
     assert ocr.as_text(pieces) == "Name: Jane Smith  Lead"
     assert ocr.as_text(pieces, spacing="  ") == "Name:  Jane  Smith  Lead"
+
+
+def test_review_decisions(tmp_path):
+    from sddocs import review
+
+    path = tmp_path / "fixes.toml"
+    path.write_text("# Hand decisions.\n")
+    review.save(path, {"key": "2022-04", "field": "table_games/Craps/units", "value": 3,
+                       "from": "typed", "reason": "Units printed above the row."})  # fmt: skip
+    review.save(path, {"key": "12", "field": "spouse", "value": 'Sherry "Sher"', "from": "ours",
+                       "reason": "On the page."})  # fmt: skip
+    review.save(path, {"key": "12", "field": "children", "value": "x", "from": "none",
+                       "reason": "Not on the page."})  # fmt: skip
+    found = review.load(path)
+    assert found[("2022-04", "table_games/Craps/units")]["value"] == 3
+    assert found[("12", "spouse")]["value"] == 'Sherry "Sher"'
+    assert "value" not in found[("12", "children")]  # none: left empty
+    assert path.read_text().startswith('# Hand decisions.\n\n[[reading]]\nkey = "12"')
+    assert review.remove(path, "12", "children") and ("12", "children") not in review.load(path)
+    with pytest.raises(review.ReviewError):
+        review.save(path, {"key": "1", "field": "f", "value": 1, "from": "typed", "reason": " "})
+
+
+def test_review_queue(tmp_path):
+    from sddocs import review
+
+    item = review.Item(source="gaming", key="2022-04", kind="pick", title="April 2022",
+                       field="tax/tax_due",
+                       readings={"rapidocr": 1.5, "Tesseract": 1.6})  # fmt: skip
+    review.queue(tmp_path / "review.json", source="gaming", name="Gaming",
+                 decisions="pipelines/gaming/fixes.toml", items=[item])  # fmt: skip
+    q = review.read_queue(tmp_path / "review.json")
+    assert q["items"][0] == item and q["decisions"] == "pipelines/gaming/fixes.toml"

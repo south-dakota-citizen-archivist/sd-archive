@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "census",
     "harvest",
     "search",
+    "review",
 ]
 
 MIDDLEWARE = [
