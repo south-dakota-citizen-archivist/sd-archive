@@ -13,7 +13,7 @@ import pytest
 # before importing its own (each test module keeps the ones it imported).
 _HERE = str(Path(__file__).resolve().parents[1])
 sys.path.insert(0, _HERE)
-for _name in ("build", "parse", "fetch", "report"):
+for _name in ("build", "parse", "fetch", "report", "hand", "ocr", "checks"):
     sys.modules.pop(_name, None)
 
 import build  # noqa: E402
@@ -338,3 +338,48 @@ def test_rates_check():
         )
         == ""
     )
+
+
+def test_rows_settled_by_hand():
+    import hand
+
+    line = {"file": "2018.pdf", "page": 45, "table": "schools", "county": "Gregory",
+            "payable_year": 2018,
+            "line": "GREGORY 26-4 $205,129,628 $43,096,593 $26,712,929 5.204 7.480 11.880 "
+                    "$1,707,212.46"}  # fmt: skip
+    key = hand.key_of_line(line)
+    assert key == "school 2018 p45 GREGORY 26-4"
+    assert hand.key_of_line({**line, "_n": 2}) == "school 2018 p45 GREGORY 26-4 #2"
+    decided = {c: {"value": v, "from": "typed", "reason": "From the page."} for c, v in {
+        "value_agricultural": 205129628.0, "value_owner_occupied": 43096593.0,
+        "value_other_non_ag": 26712929.0, "value_centrally_assessed": None,
+        "levy_agricultural": 5.204, "levy_owner_occupied": 7.48, "levy_other": 11.88,
+        "taxes": 1707212.46}.items()}  # fmt: skip
+    row = hand.row_from_line(line, decided)
+    assert (row["district"], row["district_number"], row["county"]) == ("GREGORY", "26-4",
+                                                                         "Gregory")  # fmt: skip
+    assert row["read_from"] == "by hand" and row["levy_other"] == 11.88
+    assert hand.row_from_line(line, {"*": {"reason": "Not a row."}}) is None
+    # the review page's check: these valuations and levies give the taxes printed
+    cells = {k: d["value"] for k, d in decided.items()}
+    assert hand.problems(key, cells) == []
+    assert hand.problems(key, {**cells, "levy_other": 1.188})  # a lost digit doesn't fit
+
+
+def test_a_municipal_row_settled_by_hand():
+    import hand
+
+    row = {"file": "2020.pdf", "page": 16, "municipality": "Hot Springs", "county": "Fall River",
+           "school_district_number": "23-2", "payable_year": 2020, "population": 371,
+           "valuation": 184049282, "city_levy": 6.427, "county_levy": 4.563,
+           "school_ag_levy": 5.849, "school_oo_levy": 7.694, "school_other_levy": 11.262,
+           "total_rate_ag": 16.832, "total_rate_oo": 18.684, "total_rate_other": 22.252,
+           "taxes_paid": 3709335.66}  # fmt: skip
+    key = hand.key_of_municipality(row)
+    assert key == "municipality 2020 p16 Hot Springs Fall River 23-2"
+    assert hand.problems(key, row)  # 6.427 + 4.563 + 5.849 isn't 16.832
+    # (made-up rates: the levies' sums, for a row that adds up once the ag rate is set)
+    hand.settle_municipality(row, {"total_rate_ag": {"value": 16.839, "from": "typed",
+                                                     "reason": "The sum."}})  # fmt: skip
+    assert row["total_rate_ag"] == 16.839 and row["by_hand"] == "total_rate_ag: The sum."
+    assert hand.problems(key, row) == []

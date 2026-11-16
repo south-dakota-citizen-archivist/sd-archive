@@ -25,6 +25,7 @@ import re
 from pathlib import Path
 
 import parse
+from checks import report_checks  # (at import: another pipeline has a checks.py too)
 
 HERE = Path(__file__).resolve().parent
 OCR_CACHE = HERE.parents[1] / ".cache" / "gaming" / "ocr"
@@ -223,7 +224,6 @@ def _report(month: str, parts: dict[tuple, object]) -> dict:
 
 def problems(r: dict) -> list[str]:
     """What keeps a report from being used: a part missing, or a check failing."""
-    from checks import report_checks
 
     missing = [k for k in ("slots_total", "table_games_total") if not r[k]]
     required = ("total_statistical_win", "taxable_adjusted_gross_revenue", "tax_due",

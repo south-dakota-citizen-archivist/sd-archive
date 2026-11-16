@@ -118,7 +118,8 @@ def remove(path: str | Path, key: str, field_: str) -> bool:
 
 def parse_value(text: str, kind: str = "text"):
     """A value typed into a table cell, as its kind: "int" ("1,988"), "money" ("$1,234.56",
-    "($3,967.70)" is negative), "pct" ("90.99%"; "N/A" or blank is None) or "text"."""
+    "($3,967.70)" is negative), "pct" ("90.99%"; "N/A" or blank is None), "number" (a plain
+    one: "3.530") or "text"."""
     t = (text or "").strip()
     if kind == "text":
         return t or None
@@ -128,6 +129,8 @@ def parse_value(text: str, kind: str = "text"):
     digits = t.strip("()").lstrip("-").replace("$", "").replace(",", "").rstrip("%").strip()
     if not re.fullmatch(r"\d+(\.\d+)?", digits):
         raise ReviewError(f"not a {kind}: {text!r}")
+    if kind not in ("int", "money", "pct", "number"):
+        raise ReviewError(f"unknown kind: {kind}")
     if kind == "int":
         if "." in digits:
             raise ReviewError(f"not a whole number: {text!r}")

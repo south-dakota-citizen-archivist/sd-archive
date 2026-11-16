@@ -367,11 +367,13 @@ def build_reports(reports: dict[int, str], read_report,
                   levies: pd.DataFrame, county_recap: pd.DataFrame
                   ) -> tuple[dict[str, pd.DataFrame], dict]:  # fmt: skip
     """The statistical reports' tables, with what wasn't read and what doesn't agree."""
+    import hand
     import ocr
     import report
 
     checks: dict[str, list] = defaultdict(list)
     found: dict[str, list] = defaultdict(list)
+    decided, queue = hand.decisions(), []
     for year, url in sorted(reports.items()):
         file = f"{year}.pdf"
         texts = report.pages(read_report(year))
@@ -384,10 +386,33 @@ def build_reports(reports: dict[int, str], read_report,
                 checks["report pages without text (not read)"].append({"file": file, "page": n})
         rows, unread = report.schools(texts, file)
         found["schools"] += rows
-        checks["report lines not read"] += unread
-        rows, unread = report.municipalities(texts, file)
-        found["municipalities"] += rows
-        checks["report lines not read"] += unread
+        munis, more = report.municipalities(texts, file)
+        unread += more
+        for r in munis:  # settled by hand, or waiting for review if its rates don't add up
+            k = hand.key_of_municipality(r)
+            if k in decided:
+                hand.settle_municipality(r, decided[k])
+            elif report.rates_check(r) == "doesn't add up":
+                columns = [c for c in [*report.MUNICIPAL_LEVIES_GEN, "total_rate_utility"]
+                           if c in r]  # fmt: skip
+                queue.append(hand.item_for_municipality({**r, "source_url": url}, columns,
+                                                        scanned, r.get("_line")))  # fmt: skip
+        found["municipalities"] += munis
+        for u in unread:
+            k = hand.key_of_line(u)
+            line = {"file": u["file"], "page": u["page"], "line": u["line"]}
+            if k in decided:
+                row = hand.row_from_line(u, decided[k])
+                if row is None:
+                    checks["report lines with no row, by hand"].append(
+                        {**line, "reason": decided[k]["*"]["reason"]})  # fmt: skip
+                else:
+                    found[u["table"]].append(row)
+                    checks["report rows entered by hand"].append(line)
+                continue
+            checks["report lines not read"].append(line)
+            if k:
+                queue.append(hand.item_for_line(u, scanned, url))
         rows, unread = report.townships(texts, file)
         found["townships"] += rows
         checks["report lines not read"] += unread
@@ -412,9 +437,10 @@ def build_reports(reports: dict[int, str], read_report,
                     r.setdefault("source_url", url)
                     r.setdefault("read_from", "ocr" if r.get("page") in scanned else "text")
 
-    tables = {}
+    tables = {"review": queue}
     for name, rows in found.items():
         df = pd.DataFrame(rows)
+        df = df.drop(columns=[c for c in df if c.startswith("_")])
         if df.empty:
             continue
         if "payable_year" in df:
@@ -565,6 +591,16 @@ def main() -> None:
         lambda year: (RAW / "statistical-reports" / f"{year}.pdf").read_bytes(),
     )
     BUILD.mkdir(parents=True, exist_ok=True)
+    import hand
+
+    from sddocs import review
+
+    items = tables.pop("review", [])
+    review.queue(BUILD / "review.json", source="property-tax",
+                 name="Property tax statistical reports",
+                 decisions=str(hand.BY_HAND.relative_to(REPO)),
+                 check=str((HERE / "checks.py").relative_to(REPO)), items=items)  # fmt: skip
+    print(f"review: {len(items)} waiting (review.json)")
     for name, df in tables.items():
         df.to_parquet(BUILD / f"{name}.parquet", index=False)
         df.to_csv(BUILD / f"{name}.csv", index=False)

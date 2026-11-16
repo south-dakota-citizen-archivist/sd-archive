@@ -111,7 +111,8 @@ def schools(texts: list[str], file: str) -> tuple[list[dict], list[dict]]:
                             "levy_other": number(m["oth_levy"]), "taxes": number(m["taxes"]),
                             "file": file, "page": n})  # fmt: skip
             elif re.search(r"\$[\d,]+", line):
-                unread.append({"file": file, "page": n, "line": line})
+                unread.append({"file": file, "page": n, "line": line, "table": "schools",
+                               "county": county, "payable_year": year})  # fmt: skip
     return out, unread
 
 
@@ -157,22 +158,30 @@ def municipalities(texts: list[str], file: str) -> tuple[list[dict], list[dict]]
         columns = MUNICIPAL_LEVIES_GEN if re.search(r"\bGEN AG\b", header) else MUNICIPAL_LEVIES
         if "RATE UTIL" in upper:  # 2019–2021: a total rate for utility property too
             columns = [*columns, "total_rate_utility"]
+        seen: dict[str, int] = {}  # lines on the page with the same name and school district
         for line in _lines(text):
             # a scan's asterisk can read as another mark ("×", "文"), alone between spaces
             line = re.sub(r"(?<= )[^\x00-\x7f](?= )", "*", line)
+            if named := re.match(r"^(?:\d+ )*(\D.*? \d{1,2}-\d{1,2})(?= )", line):
+                seen[named[1]] = seen.get(named[1], 0) + 1  # (stray digits before: "1 Sioux")
             m = MUNICIPAL_ROW.match(line)
             place = _split_place(m["rest"]) if m else None
             numbers = m["numbers"].split() if m else []
             row = _municipal_numbers(numbers, columns, number(m["total"])) if place else None
             if row is None:
                 if re.search(r"\d{1,2}-\d{1,2} ", line):
-                    unread.append({"file": file, "page": n, "line": line})
+                    unread.append({"file": file, "page": n, "line": line,
+                                   "table": "municipalities", "columns": columns,
+                                   "payable_year": year,
+                                   "_n": seen.get(named[1], 1) if named else 1})  # fmt: skip
                 continue
             # stray digits a scan put before the name ("17 16 Iroquois")
             name = re.sub(r"^(?:\d+ )+(?=\D)", "", place[0])
             out.append({"payable_year": year, "municipality": name, "county": place[1],
                         "school_district_number": m["sd"], **row,
-                        "taxes_paid": number(m["total"]), "file": file, "page": n})  # fmt: skip
+                        "taxes_paid": number(m["total"]), "file": file, "page": n,
+                        "_line": line, "_n": seen.get(named[1], 1) if named else 1})  # fmt: skip
+            # _line, _n (the line's place among those with its name): the review page's
     return out, unread
 
 

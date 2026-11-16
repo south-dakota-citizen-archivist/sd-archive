@@ -10,13 +10,13 @@
 
 <div class="grid gap-6 mt-4 {% if tables %}xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]{% else %}lg:grid-cols-2{% endif %}">
   <div class="lg:sticky lg:top-4 self-start space-y-3 max-h-[92vh] overflow-auto" id="pages">
-    <p class="text-xs text-gray-500">Click a page to zoom in or out.</p>
+    <p class="text-xs text-gray-500">Click a page to zoom in or out.{% if first.image.box %} The row in question is outlined in red.{% endif %}</p>
     {% if first.image.url %}
     <a href="{{ first.image.url }}" target="_blank" rel="noopener" title="Open the image full size"><img src="{{ first.image.url }}" alt="{{ first.title }}" class="w-full border border-gray-200 rounded bg-white"></a>
     {% else %}
     {% for page in first.image.pages %}
     {% url 'review:page_image' as img %}
-    <img src="{{ img }}?pdf={{ first.image.pdf|urlencode }}&page={{ page }}" alt="{{ first.title }}, page {{ page|add:1 }}" class="zoom w-full border border-gray-200 rounded bg-white cursor-zoom-in" loading="lazy">
+    <img src="{{ img }}?pdf={{ first.image.pdf|urlencode }}&page={{ page }}{% if first.image.rotation %}&rotation={{ first.image.rotation }}{% endif %}{% if first.image.box and forloop.first %}&box={{ first.image.box|join:',' }}{% endif %}" alt="{{ first.title }}, page {{ page|add:1 }}" class="zoom w-full border border-gray-200 rounded bg-white cursor-zoom-in" loading="lazy">
     {% endfor %}
     {% endif %}
   </div>
@@ -62,6 +62,23 @@
       {% if t.decision %}<p class="text-xs mb-3 rounded bg-green-50 border border-green-200 p-2">Decided: the table as read is used · {{ t.decision.reason }} · {{ t.decision.checked }}</p>{% endif %}
       <p class="text-xs text-gray-500 mb-2">Cells the readings disagree on are shaded; hover for every reading, or pick one from a cell's list. Cells settled by hand are outlined.</p>
       {% for s in t.sections %}
+      {% if s.vertical %}
+      <div class="card mb-3">
+        <table class="tbl text-sm">
+          <thead><tr><th>{{ s.name }}</th><th class="text-right">{{ s.rows.0.name }}</th></tr></thead>
+          <tbody>
+          {% for col, cell in s.pairs %}
+            <tr><td class="whitespace-nowrap">{{ col.label }}</td>
+              <td class="p-1">{% if cell %}
+                <input name="cell:{{ cell.field }}" value="{{ cell.text }}" title="{{ cell.title }}"
+                  class="w-full {% if cell.kind == 'text' %}text-left{% else %}text-right{% endif %} tabular-nums text-sm rounded border px-1.5 py-0.5 {% if cell.decision %}border-blue-500 ring-1 ring-blue-300{% else %}border-gray-300{% endif %} {% if cell.differs %}bg-amber-50{% endif %}">
+                <input type="hidden" name="was:{{ cell.field }}" value="{{ cell.text }}">
+              {% endif %}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
       <div class="card overflow-x-auto mb-3">
         <table class="tbl text-sm">
           <thead><tr><th>{{ s.name }}</th>{% for c in s.columns %}<th class="text-right">{{ c.label }}</th>{% endfor %}</tr></thead>
@@ -82,6 +99,7 @@
           </tbody>
         </table>
       </div>
+      {% endif %}
       {% endfor %}
       <input name="reason" required class="mt-1 w-full border border-gray-300 rounded p-1.5 text-sm" placeholder="Reason: what settles the problems (required)">
       <div class="mt-2 flex flex-wrap gap-2">

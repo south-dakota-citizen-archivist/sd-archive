@@ -45,8 +45,8 @@ def show(value, kind: str = "text") -> str:
         return f"(${-value:,.2f})" if value < 0 else f"${value:,.2f}"
     if kind == "pct":
         return f"{value:.2f}%"
-    if kind == "int":
-        return str(value)
+    if kind == "number":
+        return f"{value:.3f}" if isinstance(value, float) else str(value)
     return str(value)
 
 
@@ -123,7 +123,11 @@ def _table(item: review.Item, decided: dict) -> list[dict]:
                     }
                 )
             rows.append({"name": row["name"], "cells": cells})
-        out.append({**section, "rows": rows})
+        # one row of many columns reads better as a form: a column to a line
+        vertical = len(rows) == 1 and len(section["columns"]) > 5
+        out.append({**section, "rows": rows, "vertical": vertical,
+                    "pairs": list(zip(section["columns"], rows[0]["cells"], strict=True))
+                    if vertical else []})  # fmt: skip
     return out
 
 
@@ -252,19 +256,29 @@ def check(request: HttpRequest, source: str, key: str) -> HttpResponse:
 def page_image(request: HttpRequest) -> HttpResponse:
     """One page of a pipeline's stored PDF, as a PNG."""
     import pypdfium2 as pdfium
+    from PIL import ImageDraw
 
     try:
         path = pdf_path(request.GET.get("pdf", ""))
         index = int(request.GET.get("page", "0"))
+        rotation = int(request.GET.get("rotation", "0"))
+        box = [float(v) for v in request.GET["box"].split(",")] if request.GET.get("box") else None
     except ValueError as e:
         raise Http404 from e
+    if rotation not in (0, 90, 180, 270) or (box and len(box) != 4):
+        raise Http404
     doc = pdfium.PdfDocument(str(path))
     try:
         if not 0 <= index < len(doc):
             raise Http404
-        image = doc[index].render(scale=2).to_pil()
+        scale = 2
+        image = doc[index].render(scale=scale, rotation=rotation).to_pil().convert("RGB")
     finally:
         doc.close()
+    if box:  # the row in question (points on the page turned its way up), outlined
+        draw = ImageDraw.Draw(image)
+        x0, y0, x1, y1 = (v * scale for v in box)
+        draw.rectangle([x0 - 6, y0 - 4, x1 + 6, y1 + 4], outline=(220, 38, 38), width=4)
     buf = io.BytesIO()
     image.save(buf, "PNG", optimize=True)
     response = HttpResponse(buf.getvalue(), content_type="image/png")

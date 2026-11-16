@@ -105,10 +105,11 @@ def _clean(text: str) -> str:
                   lambda m: m[0].replace(".", ","), text)  # fmt: skip
 
 
-def _lines(boxes: list[list]) -> str:
+def _groups(boxes: list[list]) -> list[list[list]]:
+    """Boxes grouped into lines by their vertical middles (within half a line)."""
     boxes = sorted(boxes, key=lambda b: (b[1] + b[3]) / 2)
     if not boxes:
-        return ""
+        return []
     height = statistics.median(b[3] - b[1] for b in boxes)
     lines, current, middle = [], [], None
     for b in boxes:
@@ -119,8 +120,29 @@ def _lines(boxes: list[list]) -> str:
         current.append(b)
         middle = statistics.mean((x[1] + x[3]) / 2 for x in current)
     lines.append(current)
-    return "\n".join(_clean(" ".join(b[4] for b in sorted(line, key=lambda b: b[0])))
-                     for line in lines)  # fmt: skip
+    return lines
+
+
+def _line_text(line: list[list]) -> str:
+    return _clean(" ".join(b[4] for b in sorted(line, key=lambda b: b[0])))
+
+
+def _lines(boxes: list[list]) -> str:
+    return "\n".join(_line_text(line) for line in _groups(boxes))
+
+
+def line_box(page: dict, text: str) -> list[float] | None:
+    """Where a line of the page's text is, in points on the page turned its way up
+    ([x0, top, x1, bottom]): for showing it on the page image."""
+    want = " ".join(text.split())
+    for line in _groups(page["boxes"]):
+        if " ".join(_line_text(line).split()) == want:
+            scale = 72 / page.get("dpi", DPI)
+            return [round(min(b[0] for b in line) * scale, 1),
+                    round(min(b[1] for b in line) * scale, 1),
+                    round(max(b[2] for b in line) * scale, 1),
+                    round(max(b[3] for b in line) * scale, 1)]  # fmt: skip
+    return None
 
 
 def stored(year: int, page: int) -> dict | None:

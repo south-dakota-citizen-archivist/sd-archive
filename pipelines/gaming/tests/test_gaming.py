@@ -22,7 +22,7 @@ import pytest
 # before importing its own (each test module keeps the ones it imported).
 _HERE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(_HERE))
-for _name in ("build", "parse", "fetch", "scans", "annual"):
+for _name in ("build", "parse", "fetch", "scans", "annual", "checks"):
     sys.modules.pop(_name, None)
 
 import annual  # noqa: E402

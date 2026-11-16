@@ -95,6 +95,25 @@ was read from the PDF's text or from OCR of a scanned page: `read_from` is `text
 
 Every row names its file, its row in that file and the file's URL.
 
+## Review (`hand.py`)
+
+The build also writes `review.json`, the queue for the app's review pages (`/review/`): each
+statistical report line that wasn't read, and each municipal row whose total rates don't add
+up to its levies, as a one-row table beside its page (on a scanned page, the row is outlined
+where OCR found it). Decisions are saved to `fixes.toml` here (`sddocs.review`: the row's
+key, a column, the value, and a reason) and applied on every build:
+
+- a line that wasn't read becomes a row from the values entered (`read_from` `by hand`), or,
+  with a decision that it has no row, is listed as such in the checks;
+- a municipal row's cells are set to the values entered.
+
+Either way the row's `by_hand` says what was set and why, and the usual checks still run
+on it. A row's key is its kind, year, page, name and school district ("municipality 2020
+p16 Hot Springs Fall River 23-2"), with " #2", " #3"… for later lines on the page with the
+same name and district. The review page's check runs `checks.py`: total rates against the
+levies and the taxes against the valuation for a municipality; the taxes against the
+valuations × levies for a school district.
+
 ## Checks and caveats
 
 `checks.json` lists every finding:
