@@ -38,8 +38,6 @@ from pathlib import Path
 import pandas as pd
 import parse  # pipelines/gaming/parse.py (run as a script, so this folder is on the path)
 
-from sddocs.links import with_page_links
-
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 RAW = REPO / ".cache" / "gaming" / "raw"
@@ -150,16 +148,13 @@ def build(files: list[dict], read) -> tuple[dict[str, pd.DataFrame], dict]:
             reports.append({**r, "read": how, "file": f["file"], "source_url": f["url"]})
     reports.sort(key=lambda r: r["month"])
 
-    def rows(key, name_as, page):
-        """A report's table as rows; page: where the report prints it (the summary tables on
-        page 1, the sports detail on page 2)."""
+    def rows(key, name_as):
         out = []
         for r in reports:
             for x in r[key]:
                 out.append({"month": r["month"], name_as: x["name"],
                             **{k: v for k, v in x.items() if k != "name"},
-                            "read": r["read"], "source_url": r["source_url"],
-                            "page": page})  # fmt: skip
+                            "read": r["read"], "source_url": r["source_url"]})  # fmt: skip
         return pd.DataFrame(out)
 
     monthly = []
@@ -177,7 +172,7 @@ def build(files: list[dict], read) -> tuple[dict[str, pd.DataFrame], dict]:
             row[f"{slug}_year_to_date"] = hc[name]["handle_year_to_date"]
             row[f"{slug}_change_from_a_year_before"] = hc[name]["change_from_a_year_before"]
         row.update(r["tax"])
-        row.update({"read": r["read"], "source_url": r["source_url"], "page": 1})
+        row.update({"read": r["read"], "source_url": r["source_url"]})
         monthly.append(row)
     monthly_df = pd.DataFrame(monthly)
 
@@ -205,9 +200,9 @@ def build(files: list[dict], read) -> tuple[dict[str, pd.DataFrame], dict]:
         if month not in by_month:
             checks["months missing"].append({"month": month})
     return {
-        "slots": rows("slots", "denomination", 1),
-        "table_games": rows("table_games", "game", 1),
-        "sports": rows("sports", "sport", 2),
+        "slots": rows("slots", "denomination"),
+        "table_games": rows("table_games", "game"),
+        "sports": rows("sports", "sport"),
         "monthly": monthly_df,
     }, dict(checks)
 
@@ -216,7 +211,6 @@ def main() -> None:
     files = json.loads((RAW / "files.json").read_text())
     tables, checks = build(files, lambda name: (RAW / name).read_bytes())
     BUILD.mkdir(parents=True, exist_ok=True)
-    tables = {name: with_page_links(df) for name, df in tables.items()}  # PDF rows: #page=
     for name, df in tables.items():
         df.to_parquet(BUILD / f"{name}.parquet", index=False)
         df.to_csv(BUILD / f"{name}.csv", index=False)

@@ -16,10 +16,9 @@ Output (in .cache/voter-registration/build/, not committed):
 
 Each row has the county's Census GEOID as of the snapshot's date (via sdplaces: Shannon is
 46113 until 2015), the election the snapshot is for (if any), its source (the report on
-the Secretary of State's site; for 1976–2014, the election history page it was entered
-from, where its archived copy prints that page's address (history_pages.json: 23 election
-days, 1988–2010), otherwise the archived copy) and the archived copy of the report (the
-voter-registration-sources release).
+the Secretary of State's site; for 1976–2014, the archived copy of the election history page
+it was entered from) and the archived copy of the report (the voter-registration-sources
+release).
 """
 
 from __future__ import annotations
@@ -34,7 +33,6 @@ from pathlib import Path
 import pandas as pd
 
 import sdplaces
-from sddocs.links import with_page_links
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -71,14 +69,6 @@ def sources(path: Path) -> dict[str, dict]:
     for url, s in json.loads(path.read_text()).items():
         out.setdefault(s["report_date"], {"url": url, **s})
     return out
-
-
-def with_history_pages(by_date: dict[str, dict], path: Path) -> dict[str, dict]:
-    """Report sources plus, for election-day figures entered from the election history, the
-    page each came from (read off its archived copy's printed footer)."""
-    pages = {d: u for d, u in json.loads(path.read_text()).items() if not d.startswith("_")}
-    return {**{d: {"url": u, "read": "from the election history"} for d, u in pages.items()},
-            **by_date}  # fmt: skip
 
 
 def build(rows: list[dict], by_date: dict[str, dict], elections: dict[str, str]
@@ -173,12 +163,9 @@ def chart(simple: pd.DataFrame, by_date: dict[str, dict]) -> dict:
 def main() -> None:
     rows = snapshots(HERE / "snapshots")
     tables, data, checks = build(
-        rows,
-        with_history_pages(sources(HERE / "sources.json"), HERE / "history_pages.json"),
-        json.loads((HERE / "elections.json").read_text()),
+        rows, sources(HERE / "sources.json"), json.loads((HERE / "elections.json").read_text())
     )
     BUILD.mkdir(parents=True, exist_ok=True)
-    tables = {name: with_page_links(df) for name, df in tables.items()}  # PDF rows: #page=
     for name, df in tables.items():
         df.to_parquet(BUILD / f"{name}.parquet", index=False)
         df.to_csv(BUILD / f"{name}.csv", index=False)

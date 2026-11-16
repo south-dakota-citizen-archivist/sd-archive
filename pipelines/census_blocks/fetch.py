@@ -82,11 +82,6 @@ def variables(year: int, dataset: str, table: str) -> dict[str, str]:
     return {k: v["label"] for k, v in r.json()["variables"].items()}
 
 
-def group_url(year: int, dataset: str, table: str) -> str:
-    """The table's page on the Census API: its variables, labels and the query for them."""
-    return f"{API.format(year=year, dataset=dataset)}/groups/{table}.html"
-
-
 def block_id(row: dict, year: int) -> str:
     tract = row["tract"].ljust(6, "0") if year == 2000 and len(row["tract"]) == 4 else row["tract"]
     return f"46{row['county']}{tract}{row['block']}"
@@ -102,7 +97,7 @@ def build(year: int, store: sdfetch.Store) -> Path:
         # P1_001NA, 2010's P001001ERR)
         counts = sorted(k for k in names if re.fullmatch(r"[A-Z]+\d+(?:_\d+N)?", k))
         for k in counts:
-            labels[k] = (table, names[k], group_url(year, dataset, table))
+            labels[k] = (table, names[k])
         for county in counties(year):
             rows = fetch(store, year, dataset, table, county)
             head = rows[0]
@@ -120,9 +115,9 @@ def build(year: int, store: sdfetch.Store) -> Path:
     frame.to_parquet(out, index=False)
     with (DATA / f"variables_{year}.csv").open("w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["variable", "table", "label", "source_url"])
-        for k, (table, label, url) in sorted(labels.items()):
-            w.writerow([k, table, label, url])
+        w.writerow(["variable", "table", "label"])
+        for k, (table, label) in sorted(labels.items()):
+            w.writerow([k, table, label])
     return out
 
 

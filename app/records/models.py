@@ -260,12 +260,6 @@ class Document(models.Model):
         return self.filename or self.url or f"document {self.pk}"
 
     @property
-    def url_is_pdf(self) -> bool:
-        """Whether the published link is itself a PDF (so #page= opens a page there); the
-        Secretary of State's viewer pages aren't, though the stored file is."""
-        return self.url.lower().split("?")[0].split("#")[0].endswith(".pdf")
-
-    @property
     def is_pdf(self) -> bool:
         return self.mime_type == "application/pdf" or (
             not self.mime_type and self.url.lower().split("?")[0].endswith(".pdf")
@@ -310,16 +304,3 @@ class Extraction(models.Model):
 
     def __str__(self) -> str:
         return f"{self.schema} from {self.document}"
-
-    def checked_fields(self) -> list[dict]:
-        """Each extracted field with its quote and the page it's on (evidence given as a
-        quote alone, before pages were kept, has no page)."""
-        rows = []
-        for field, value in (self.data or {}).items():
-            found = (self.evidence or {}).get(field)
-            if isinstance(found, str):
-                found = {"quote": found, "page": None}
-            rows.append({"field": field, "value": value, "quote": (found or {}).get("quote"),
-                         "page": (found or {}).get("page"),
-                         "unsupported": field in (self.unsupported or [])})  # fmt: skip
-        return rows

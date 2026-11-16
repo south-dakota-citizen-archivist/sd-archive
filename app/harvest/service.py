@@ -122,7 +122,7 @@ def run(dataset: Dataset, harvest: Run, force: bool) -> None:
     if oid_field and oid_field in df.columns:
         df = df.sort_values(oid_field).reset_index(drop=True)
 
-    rows = store.prepare(df, oid_field, dataset.url)
+    rows = store.prepare(df, oid_field)
     harvest.content_hash = store.dataset_hash(rows)
     counts = store.apply(dataset, harvest, rows)
     for key, value in counts.items():

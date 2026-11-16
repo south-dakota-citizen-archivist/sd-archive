@@ -285,18 +285,3 @@ def test_aggregates_cover_their_places_only():
     elsewhere = type("P", (), {"kind": "place", "geoidfq": "1600000US4659020"})()
     ids = lambda place: {d["id"] for d in catalog.aggregates_for(place)}  # noqa: E731
     assert "library-circulation" in ids(spearfish) and "library-circulation" not in ids(elsewhere)
-
-
-def test_a_harvested_feature_links_to_itself_at_the_source():
-    import geopandas as gpd
-    from shapely.geometry import Point
-
-    from harvest import store
-
-    df = gpd.GeoDataFrame({"OBJECTID": [7], "NAME": ["Town"]}, geometry=[Point(-103, 44)],
-                          crs=4326)  # fmt: skip
-    layer = "https://gis.example.gov/arcgis/rest/services/Parcels/MapServer/0"
-    (item,) = store.prepare(df, "OBJECTID", layer)
-    assert item.source_url == f"{layer}/query?objectIds=7&outFields=*&f=html"
-    (no_layer,) = store.prepare(df, "OBJECTID")
-    assert no_layer.source_url == ""

@@ -36,7 +36,6 @@ import pandas as pd
 import parse  # pipelines/motor-vehicles/parse.py (run as a script, so this folder is on the path)
 
 import sdplaces
-from sddocs.links import with_page_links
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -165,7 +164,6 @@ def main() -> None:
     reports = {p.stem: p.read_bytes() for p in sorted((RAW / "reports").glob("*.pdf"))}
     annual, monthly, checks = build(reports, urls)
     BUILD.mkdir(parents=True, exist_ok=True)
-    annual, monthly = with_page_links(annual), with_page_links(monthly)  # #page= on each row
     for name, df in (("annual", annual), ("monthly", monthly)):
         df.to_parquet(BUILD / f"{name}.parquet", index=False)
         df.to_csv(BUILD / f"{name}.csv", index=False)
