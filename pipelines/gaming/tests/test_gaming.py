@@ -1,6 +1,16 @@
 """Gaming statistics: real monthly summaries (text, the label variants, and a scan read by OCR),
-with values checked by hand against the PDFs."""
+the yearly summary for 1989–2019, and the OCR pieces of three scanned months from the yearly
+files (so the readings don't depend on which engines are installed), with values checked by
+hand against the PDFs.
 
+- October 2018: rapidocr reads the table games' Totals units "99" as "66"; Tesseract's and
+  Vision's "99" is the one the rows add up to.
+- June 2021: the tax calculation runs onto page 2 ("9%" and Tax Due).
+- November 2022: the units and win columns are printed a little above the names, so the
+  rows are read column by column.
+"""
+
+import json
 import sys
 from pathlib import Path
 
@@ -12,12 +22,14 @@ import pytest
 # before importing its own (each test module keeps the ones it imported).
 _HERE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(_HERE))
-for _name in ("build", "parse", "fetch"):
+for _name in ("build", "parse", "fetch", "scans", "annual"):
     sys.modules.pop(_name, None)
 
+import annual  # noqa: E402
 import build  # noqa: E402
 import fetch  # noqa: E402
 import parse  # noqa: E402
+import scans  # noqa: E402
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -63,11 +75,12 @@ def test_adjustment_labels():
     assert build.report_checks(feb) == [] and build.report_checks(apr) == []
 
 
-def test_a_scan_is_read_by_ocr_and_checked():
+def test_a_scan_is_read_by_ocr_and_checked(tmp_path, monkeypatch):
+    monkeypatch.setattr(scans, "OCR_CACHE", tmp_path)
     content = report("October-2024")
     assert parse.is_scan(content)
-    r, how, problems = build.read_month(content)
-    assert how == "ocr (rapidocr)" and problems == []
+    r, how, problems = build.read_month(content, month="2024-10")
+    assert how.startswith("ocr (rapidocr, lines within 5 pt") and problems == []
     assert r["slots_total"]["handle"] == 139325652.41 and r["tax"]["tax_due"] == 1147312.26
 
 
@@ -94,3 +107,72 @@ def test_unreadable(bad, monkeypatch):
     monkeypatch.setattr(parse, "lines", lambda content, ocr=None: [[bad], []])
     with pytest.raises(parse.ReportProblem):
         parse.read(b"")
+
+
+def scanned(month: str, monkeypatch):
+    """A month of a yearly file, read from its stored OCR pieces."""
+    folder = FIXTURES / "ocr" / month
+    monkeypatch.setattr(scans, "engines", lambda: list(scans.ENGINES))
+    pages = sorted({int(p.name.split(".")[0]) for p in folder.glob("*.json")})
+    return scans.read_scan(Path("unused.pdf"), pages, month, get=lambda pdf, i, engine: (
+        json.loads((folder / f"{i}.{engine}.json").read_text())))  # fmt: skip
+
+
+def test_a_misread_total_is_taken_from_the_engine_the_rows_agree_with(monkeypatch):
+    r, how, problems = scanned("2018-10", monkeypatch)
+    assert problems == [] and "table games total from" in how
+    assert r["table_games_total"]["units"] == 99  # rapidocr: 66
+    assert [g["units"] for g in r["table_games"]] == [41, 27, 18, 5, 8]
+    assert r["table_games_total"]["handle"] == 5499833.25
+    assert r["sports_wagering_total"] is None  # no sports wagering until September 2021
+    assert r["tax"]["adjustments_amended_returns_and_audits"] == 22051.00  # "/Court Settlement"
+    assert r["tax"]["to_be_distributed"] == 711822.42  # the label is misspelled on the report
+
+
+def test_the_tax_calculation_runs_onto_page_two(monkeypatch):
+    r, how, problems = scanned("2021-06", monkeypatch)
+    assert problems == []
+    assert r["tax"]["taxable_adjusted_gross_revenue"] == 12559334.61
+    assert r["tax"]["tax_due"] == 1130340.11
+
+
+def test_columns_printed_out_of_line_are_read_by_column(monkeypatch):
+    r, how, problems = scanned("2022-11", monkeypatch)
+    assert problems == [] and how.startswith("ocr (rapidocr, by column")
+    craps, roulette = r["table_games"][3:5]
+    assert (craps["name"], craps["units"], craps["handle"], craps["statistical_win"]) == (
+        "Craps", 3, 405224.00, 92379.50)  # fmt: skip
+    assert (roulette["units"], roulette["statistical_win"]) == (7, 25227.00)
+    assert r["handle_comparison"]["Table Games"]["change_from_a_year_before"] == -11.29
+
+
+def test_a_figure_no_check_covers_is_confirmed_by_other_months():
+    def month(m, handle, ytd, change=None, unconfirmed=None):
+        return {"month": m, "read": "ocr", "unconfirmed": unconfirmed or {},
+                "handle_comparison": {"Table Games": {
+                    "handle": handle, "handle_year_to_date": ytd,
+                    "change_from_a_year_before": change, "year_to_date_change": None}}}  # fmt: skip
+
+    reports = [month("2018-06", 100.0, 1000.0), month("2019-05", 200.0, 900.0),
+               month("2019-06", 110.0, None, None,
+                     {("Table Games", "handle_year_to_date"): [101.0, 1010.0],
+                      ("Table Games", "change_from_a_year_before"): [-10.0, 10.0]})]  # fmt: skip
+    checks = {"handle comparison doesn't match other months": []}
+    build._confirm(reports, checks)
+    line = reports[2]["handle_comparison"]["Table Games"]
+    assert line["handle_year_to_date"] == 1010.0  # 900 + 110
+    assert line["change_from_a_year_before"] == 10.0  # 110 / 100 - 1
+    assert line["year_to_date_change"] is None and reports[2]["confirmed_by_other_months"]
+
+
+def test_the_yearly_summary():
+    games, years = annual.read(report("Gaming-Statistics-1989---2019"))
+    assert len(years) == 31 and len(games) == 31 * 14
+    blackjack_1989 = next(g for g in games if g["year"] == 1989 and g["game"] == "BLACK JACK")
+    assert (blackjack_1989["units"], blackjack_1989["drop"], blackjack_1989["hold_percent"]) == (
+        27, 1687524.70, 18.84)  # fmt: skip
+    poker = next(g for g in games if g["year"] == 2018 and g["game"] == "PLAYER BANKED POKER")
+    assert poker["avg_daily_hold_per_unit"] is None and "100.00%" in poker["note"]
+    assert years[-1]["handle"] == 1149838438.24 and years[-1]["retailers_reporting_revenue"] == 113
+    # the summary's own: $3 in 2006's table game revenue, $300 in 2017's total
+    assert len(annual.checks(games, years)) == 3

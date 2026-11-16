@@ -644,13 +644,13 @@ source = "SD Department of Revenue, historical sales tax statistical reports: To
 
 [[dataset]]
 id = "gaming"
-name = "Licensed gaming (Deadwood) by month: handle, win and the gaming tax"
+name = "Licensed gaming (Deadwood) by month and year: handle, win and the gaming tax"
 project = "sd-archive (pipelines/gaming)"
 grain = "aggregate"
 coverage = ["0400000US46"]
 geography = ["state"]
-period = "month, January 2023 on"
-measures = ["handle", "statistical win", "payout percent", "units", "taxable adjusted gross revenue", "gaming tax and its distribution"]
+period = "month, January 2018 on; calendar year, 1989–2019"
+measures = ["handle", "statistical win", "payout percent", "units", "drop", "coins in", "gross revenue", "hold percent", "taxable adjusted gross revenue", "gaming tax and its distribution"]
 dimensions = ["slot denomination", "table game", "sport (sports wagering)"]
-source = "SD Commission on Gaming monthly statistics, on the Department of Revenue's gaming page (PDF)"
-notes = "Deadwood is the only place with licensed casino gaming, in Lawrence County, so the statewide figures are Deadwood's. Five months are scans read by OCR and used only if every check passes; August 2023, January 2024 and September 2024 are left out."
+source = "SD Commission on Gaming monthly statistics and 1989–2019 summary by game, on the Department of Revenue's gaming page (PDF)"
+notes = "Deadwood is the only place with licensed casino gaming, in Lawrence County, so the statewide figures are Deadwood's. 2018–2022 and a few later months are scans, read by three OCR engines and used only where every check passes; nine months are left out (2021-04, 2021-08, 2021-09, 2022-03, 2022-04, 2022-05, 2022-07, 2022-09, 2024-01). 2018 and 2019 add up to the yearly summary to the cent."
