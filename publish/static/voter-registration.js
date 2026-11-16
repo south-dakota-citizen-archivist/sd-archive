@@ -73,6 +73,8 @@
     return node;
   }
 
+  let hideChartTip = () => {};  // the current chart's (renderChart sets it)
+
   function renderChart(rows) {
     const box = $("chart");
     box.innerHTML = "";
@@ -187,9 +189,15 @@
       return best;
     };
     svg.addEventListener("pointermove", (e) => show(nearest(e.clientX)));
-    svg.addEventListener("pointerleave", hide);
+    // a tap without a drag moves no pointer: show the report nearest the finger
+    svg.addEventListener("pointerdown", (e) => { if (e.pointerType === "touch") show(nearest(e.clientX)); });
+    // a finger lifting off "leaves" too: on a touch screen the tooltip stays until a tap
+    // elsewhere (below)
+    svg.addEventListener("pointerleave", (e) => { if (e.pointerType !== "touch") hide(); });
+    hideChartTip = hide;
     svg.tabIndex = 0;
-    svg.addEventListener("focus", () => show(rows.length - 1));
+    // from the keyboard only: a tap focuses the chart too, and nothing would close it
+    svg.addEventListener("focus", () => { if (svg.matches(":focus-visible")) show(rows.length - 1); });
     svg.addEventListener("blur", hide);
     svg.addEventListener("keydown", (e) => {
       if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
@@ -314,9 +322,14 @@
     path.addEventListener("click", () => choose(path.dataset.geoid));
     path.addEventListener("pointerenter", (e) => { ring(hoverRing, path); showMapTip(path, e); });
     path.addEventListener("pointermove", (e) => showMapTip(path, e));
-    path.addEventListener("pointerleave", () => { ring(hoverRing, null); hideMapTip(); });
-    path.addEventListener("focus", () => { ring(hoverRing, path); showMapTip(path); });
-    path.addEventListener("blur", () => { ring(hoverRing, null); hideMapTip(); });
+    path.addEventListener("pointerleave", (e) => {
+      if (e.pointerType !== "touch") { ring(hoverRing, null); hideMapTip(); }
+    });
+    path.addEventListener("focus", () => {
+      if (path.matches(":focus-visible")) { ring(hoverRing, path); showMapTip(path); }
+    });
+    // (only its own tooltip: tapping the next county moves focus after showing that one's)
+    path.addEventListener("blur", () => { if (mapTipFor === path) { ring(hoverRing, null); hideMapTip(); } });
     path.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(path.dataset.geoid); }
     });
@@ -377,7 +390,10 @@
     });
   }
 
+  let mapTipFor = null;  // the county the map's tooltip is showing
+
   function showMapTip(path, e) {
+    mapTipFor = path;
     const s = standing(path.dataset.geoid, state.report);
     mapTip.innerHTML = `<div class="t-head">${path.dataset.name} County</div>` + (s
       ? PARTIES.map((p) => `<div class="t-row"><i class="swatch" style="background:var(--${p})">`
@@ -393,7 +409,14 @@
     mapTip.style.left = `${Math.max(0, Math.min(x + 12, box.width - w))}px`;
     mapTip.style.top = `${y + 16 + h > box.height ? Math.max(0, y - h - 12) : y + 16}px`;
   }
-  const hideMapTip = () => { mapTip.hidden = true; };
+  const hideMapTip = () => { mapTip.hidden = true; mapTipFor = null; };
+
+  // A touch screen has no pointer to leave, and a tap on the page doesn't move focus off a
+  // county: a tap anywhere but a county (or the chart) closes their tooltips
+  document.addEventListener("pointerdown", (e) => {
+    if (!e.target.closest(".map path[data-geoid]")) { ring(hoverRing, null); hideMapTip(); }
+    if (!e.target.closest("#chart svg")) hideChartTip();
+  });
 
   $("report-range").addEventListener("input", (e) => {
     state.report = Number(e.target.value);
