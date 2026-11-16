@@ -2,12 +2,12 @@
 picture each, signatures removed; the page images; our OCR of them), checked by hand
 against the images.
 
-- Joanne Lockner, 1993 Blue Book: the run-on layout; the two readings disagree on the
-  spouse ("Frank 0" / "Frank O. Lockner").
+- Joanne Lockner, 1993 Blue Book: the run-on layout; the first two readings disagree on the
+  spouse ("Frank 0" / "Frank O. Lockner") and the third (Apple Vision) settles it.
 - James Putnam, 2011: the address on its own lines, unlabeled.
 - Bob Ewing, 2013: every part labeled.
 - Lee Schoenbeck, 2019: the legislature's OCR repeats each line; the image's crop takes in
-  another bio's committees, so the readings disagree there.
+  the end of the bio above (its committees), which is cut away before comparing.
 - Robert Dollard, Biographical Directory: prose, kept as text.
 """
 
@@ -78,12 +78,13 @@ def test_a_run(raw):
     assert (
         found["5067"].source_url == "https://sdlegislature.gov/Historical/Legislator/Profile/3849"
     )
-    lockner = found["3557"].data
-    assert lockner["spouse"] is None and lockner["readings"]["spouse"] == {
-        "legislature": "Frank 0", "ours": "Frank O. Lockner"}  # fmt: skip
+    lockner = found["3557"].data  # "Frank 0" / "Frank O. Lockner" / Vision's "Frank O. Lockner"
+    assert lockner["spouse"] == "Frank O. Lockner" and lockner["two_of_three"] == ["spouse"]
     assert len(found["3557"].places) == 7  # the state and six counties
     schoenbeck = found["4245"].data
-    assert "committees" in schoenbeck["unconfirmed"] and schoenbeck["committees"] is None
+    # our reading's image takes in the bio above's committees: cut to his own bio, they agree
+    assert schoenbeck["committees"] == "Commerce and Energy and Judiciary"
+    assert schoenbeck["two_of_three"] == ["experience"] and schoenbeck["unconfirmed"] == []
     dollard = found["1547"].data
     assert dollard["kind"] == "Biographical Directory" and "ROBERT DOLLARD" in dollard["text"]
     assert "party" not in dollard  # prose isn't read into parts
@@ -126,3 +127,17 @@ def test_images_are_fetched_once(raw):
     counts = images.fetch_images(fetcher, [3849])
     assert counts["images"] == 1 and counts["members_refreshed"] == 1 and image.exists()
     assert images.fetch_images(fetcher, [3849])["members_refreshed"] == 0  # stored: no refetch
+
+
+def test_a_reading_is_cut_to_the_legislators_own_bio():
+    text = ("Judiciary (Chair), Taxation. Lee Schoenbeck (R) District 5 Committees: Judiciary. "
+            "Tina Mulally (R) District 35 Email: y")  # fmt: skip
+    assert parse.own_bio(text, "Schoenbeck") == (
+        "Lee Schoenbeck (R) District 5 Committees: Judiciary.")  # fmt: skip
+    assert parse.own_bio("no header", "Smith") == "no header"
+
+
+def test_readings_agree_only_with_the_same_digits():
+    assert source.agree("4605 S. Graceland Court", "4605 S. Graceiand Court")  # a letter slip
+    assert not source.agree("13084 385th Avenue", "13034 385th Avenue")  # never a digit
+    assert not source.agree("Frank 0", "Frank O. Lockner")

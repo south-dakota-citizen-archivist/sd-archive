@@ -8,8 +8,11 @@ fetched here. Each page has two readings: the legislature's own OCR (the API's P
 and ours (rapidocr on the image). Blue Book pages are read into parts (party, district,
 counties, address, birth, spouse, children, email, committees, occupation, …; see parse.py)
 from both readings, and a part's value is kept only where the two readings agree. Where they
-don't, or only one has it, both readings are kept under `readings` and the part is listed in
-`unconfirmed`. The Biographical Directory's prose is kept as text.
+don't, the page is read a third time (Apple Vision) and a part two of the three agree on is
+kept and listed in `two_of_three`. Otherwise the readings are kept under `readings` and the
+part is listed in `unconfirmed`. Before comparing, each reading is cut to the legislator's own
+bio (parse.own_bio): an image can take in the end of the bio above or the start of the one
+below. The Biographical Directory's prose is kept as text.
 
 Party and counties are checked against the member's services in the Historical Listing for
 the book's year (`listing_party`, `party_agrees`). Records link to the member's profile
@@ -29,7 +32,7 @@ from records.sources._legislature.build import SITE, raw_root
 
 from . import parse
 from .images import image_id, image_name
-from .ocr import ocr_name
+from .ocr import TIEBREAK, ocr_name
 
 STATE = "0400000US46"
 PARTS = ("party", "district", "counties", "address", "birth", "spouse", "children", "email",
@@ -50,7 +53,11 @@ def _letters(value: str | None) -> str:
 
 
 def agree(a: str | None, b: str | None) -> bool:
+    """Two readings of a part agree: the same digits, in order (a house number, a date, a
+    district, never close enough), and the letters nearly the same (OCR's small slips)."""
     if not a or not b:
+        return False
+    if re.findall(r"\d", a) != re.findall(r"\d", b):
         return False
     a, b = _letters(a), _letters(b)
     return a == b or SequenceMatcher(None, a, b).ratio() >= AGREE
@@ -106,20 +113,32 @@ def page_item(member: dict, picture: dict, store) -> Item:
         "ocr_engine": ours["engine"] if ours else None,
     }  # fmt: skip
     if data["kind"] == "Blue Book":
-        first = parse.read(picture.get("ParsedText") or "")
-        second = parse.read(ours["text"]) if ours else {}
-        readings, unconfirmed = {}, []
+        last = (member.get("LastName") or "").split()[-1:] or [None]
+        tiebreak = (json.loads(store.read(ocr_name(image, TIEBREAK)))
+                    if store.has(ocr_name(image, TIEBREAK)) else None)  # fmt: skip
+        first = parse.read(picture.get("ParsedText") or "", last[0])
+        second = parse.read(ours["text"], last[0]) if ours else {}
+        third = parse.read(tiebreak["text"], last[0]) if tiebreak else None
+        readings, unconfirmed, two_of_three = {}, [], []
         for part in PARTS:
             a, b = first.get(part), second.get(part)
+            c = third.get(part) if third else None
             if agree(a, b):
                 data[part] = b
+            elif third and (agree(b, c) or agree(a, c)):
+                data[part] = b if agree(b, c) else a  # the two that agree
+                two_of_three.append(part)
             else:
                 data[part] = None
-                if a or b:
+                if a or b or c:
                     readings[part] = {"legislature": a, "ours": b}
+                    if third:
+                        readings[part]["vision"] = c
                     unconfirmed.append(part)
         data["name_as_printed"] = second.get("name") or first.get("name")
         data["readings"], data["unconfirmed"] = readings, unconfirmed
+        if two_of_three:  # settled by the third reading; every other kept part, by two
+            data["two_of_three"] = two_of_three
         data["listing_party"] = listing_party(member, year)
         data["party_agrees"] = (data["party"] == data["listing_party"]
                                 if data["party"] and data["listing_party"] else None)  # fmt: skip

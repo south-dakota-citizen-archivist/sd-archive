@@ -39,7 +39,7 @@ LABELS = {  # label as printed → part
     "E-Mail": "email", "E-mail": "email", "Email": "email", "Counties": "counties",
 }  # fmt: skip
 LABEL = re.compile(r"(?<![\w-])(" + "|".join(sorted(map(re.escape, LABELS), key=len,
-                   reverse=True)) + r")\s*:", re.I)  # fmt: skip
+                   reverse=True)) + r")\s*[:;]", re.I)  # fmt: skip  # OCR reads some colons as ;
 PARTIES = {"R": "Republican", "D": "Democrat", "I": "Independent", "L": "Libertarian"}
 PARTY_WORD = re.compile(r"\b(Republican|Democrat(?:ic)?|Independent|Libertarian)\b")
 PARTY_LETTER = re.compile(r"\(([RDIL])\)")
@@ -93,11 +93,45 @@ def _strip(value: str) -> str:
     return value.strip(" .;,").strip()
 
 
-def read(ocr: str) -> dict:
+HEADER = re.compile(
+    r"(?:^|(?<=[\s.]))(?P<name>[A-Z][A-Za-z.'’\"“”\- ]{2,60}?)\s*(?:"
+    r"\((?:R|D|I|L)\)\s*(?:District|Dist)"  # 2013-2023: Name (R) District
+    r"|[-–—]\s*(?:Republican|Democrat|Independent|Libertarian)\b"  # 1993-2009
+    r"|\s(?:Republican|Democrat|Independent|Libertarian)\.\s+(?:District|Dist)"  # 2011
+    r"|\.\s+Mailing Address)"  # 1991: NAME. Mailing Address
+)
+
+
+def _name_start(m: re.Match) -> int:
+    """Where a header's name starts: after any sentence of the bio before it that ran into
+    the match ("Transportation. J. Sam Marty (R)")."""
+    name = m["name"]
+    cut = max((i + 2 for i in range(len(name) - 2)
+               if name[i] == "." and name[i + 1] == " " and name[i + 2].isupper()
+               and not re.search(r"\b[A-Z]$", name[:i])), default=0)  # fmt: skip
+    return m.start("name") + cut
+
+
+def own_bio(text: str, last_name: str | None) -> str:
+    """The legislator's own bio in a page's text: from the header naming them to the next
+    legislator's header. A page image can take in the end of the bio above it or the start of
+    the one below; without a header naming them, the text is left whole."""
+    if not last_name:
+        return text
+    heads = list(HEADER.finditer(text))
+    own = next((i for i, h in enumerate(heads) if last_name.lower() in h["name"].lower()), None)
+    if own is None:
+        return text
+    start = _name_start(heads[own])
+    end = _name_start(heads[own + 1]) if own + 1 < len(heads) else len(text)
+    return text[start:end].strip()
+
+
+def read(ocr: str, last_name: str | None = None) -> dict:
     """A bio's parts: header (name, party, district, counties as printed), the labeled parts,
-    and the rest."""
+    and the rest. With the legislator's last name, text from a neighboring bio is left out."""
     lines = collapse_repeats(ocr.splitlines())
-    text = join_lines(lines)
+    text = own_bio(join_lines(lines), last_name)
     pieces = LABEL.split(text)
     head, parts = pieces[0], {}
     rest = []
@@ -138,7 +172,7 @@ def read(ocr: str) -> dict:
         elif in_head and after.strip():  # "District 2: Brown and Marshall."
             counties = after
     out["counties"] = _strip(counties) if counties else None
-    for name in ("spouse", "children"):  # before 2010 the paragraph runs on after them
+    for name in ("birth", "spouse", "children"):  # before 2010 the paragraph runs on after them
         if parts.get(name):
             value, more = first_sentence(parts[name])
             parts[name] = value
