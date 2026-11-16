@@ -166,7 +166,21 @@ class Session:
         logger.warning("map app %s: blocked (%s); waiting %.0f min", self.app, what, pause / 60)
         self.sleep(pause)
         with suppress(_BlockPage):  # counted on the next try
-            self.open_map()
+            try:
+                self.open_map()
+            except Exception as e:
+                if not _closed(e):
+                    raise
+                self._restart()
+
+    def _restart(self) -> None:
+        """Start the browser again: its window or tab was closed (or it quit)."""
+        logger.warning("map app %s: the browser closed; starting it again", self.app)
+        self.close()
+        self.map = self.tab = None
+        blocks = self._blocks
+        self.start()
+        self._blocks = blocks  # a fresh start doesn't clear the run of blocks
 
     def _retrying(self, attempt):
         while True:
@@ -174,6 +188,14 @@ class Session:
                 result = attempt()
             except _BlockPage as e:
                 self._blocked(str(e))
+                continue
+            except Exception as e:
+                if not _closed(e):
+                    raise
+                self._blocks += 1
+                if self._blocks > self.max_blocks:
+                    raise Blocked(f"{self.app}: the browser closed {self._blocks} times") from e
+                self._restart()
                 continue
             self._blocks = 0
             return result
@@ -223,6 +245,11 @@ class Session:
 
 class _BlockPage(Exception):
     pass
+
+
+def _closed(e: Exception) -> bool:
+    """The browser, its window or the tab went away (Playwright's and patchright's alike)."""
+    return type(e).__name__ == "TargetClosedError"
 
 
 def _goto(page, url: str, what: str):

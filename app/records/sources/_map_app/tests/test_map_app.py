@@ -265,3 +265,43 @@ def test_a_report_page_that_doesnt_load_is_waited_out_like_a_block():
     session.accept_terms = lambda tab, wait: True
     assert b"module-header" in session.report("041657")
     assert session.tab.tries == 2 and any(w >= 45 for w in waits)  # a back-off, then the page
+
+
+def test_a_closed_browser_is_started_again():
+    from records.sources._map_app.session import Session
+
+    class TargetClosedError(Exception):  # the browser library's, by name
+        pass
+
+    class Tab:
+        def __init__(self, closed):
+            self.closed = closed
+
+        def is_closed(self):
+            return False
+
+        def goto(self, url, **kwargs):
+            if self.closed:
+                raise TargetClosedError(
+                    "Page.goto: Target page, context or browser has been closed"
+                )
+            return type("Response", (), {"status": 200})()
+
+        def title(self):
+            return "Report"
+
+        def content(self):
+            return page("lawrence-report.html").decode()
+
+    session = Session("App", "profile", sleep=lambda s: None)
+    session.config, session.tab = CONFIG, Tab(closed=True)
+    session.accept_terms = lambda tab, wait: True
+    restarts = []
+
+    def restart():
+        restarts.append(1)
+        session.tab = Tab(closed=False)
+
+    session._restart = restart
+    assert b"module-header" in session.report("041657")
+    assert restarts == [1]
