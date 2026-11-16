@@ -111,11 +111,16 @@ def test_unreadable(bad, monkeypatch):
 
 def scanned(month: str, monkeypatch):
     """A month of a yearly file, read from its stored OCR pieces."""
+    return scanned_with(month, monkeypatch, None)
+
+
+def scanned_with(month: str, monkeypatch, decided):
     folder = FIXTURES / "ocr" / month
     monkeypatch.setattr(scans, "engines", lambda: list(scans.ENGINES))
     pages = sorted({int(p.name.split(".")[0]) for p in folder.glob("*.json")})
-    return scans.read_scan(Path("unused.pdf"), pages, month, get=lambda pdf, i, engine: (
-        json.loads((folder / f"{i}.{engine}.json").read_text())))  # fmt: skip
+    return scans.read_scan(Path("unused.pdf"), pages, month, decided=decided,
+                           get=lambda pdf, i, engine: json.loads(
+                               (folder / f"{i}.{engine}.json").read_text()))  # fmt: skip
 
 
 def test_a_misread_total_is_taken_from_the_engine_the_rows_agree_with(monkeypatch):
@@ -155,8 +160,10 @@ def test_a_figure_no_check_covers_is_confirmed_by_other_months():
 
     reports = [month("2018-06", 100.0, 1000.0), month("2019-05", 200.0, 900.0),
                month("2019-06", 110.0, None, None,
-                     {("Table Games", "handle_year_to_date"): [101.0, 1010.0],
-                      ("Table Games", "change_from_a_year_before"): [-10.0, 10.0]})]  # fmt: skip
+                     {("Table Games", "handle_year_to_date"):
+                          {"rapidocr": [101.0], "Tesseract": [1010.0]},
+                      ("Table Games", "change_from_a_year_before"):
+                          {"rapidocr": [-10.0], "Tesseract": [10.0]}})]  # fmt: skip
     checks = {"handle comparison doesn't match other months": []}
     build._confirm(reports, checks)
     line = reports[2]["handle_comparison"]["Table Games"]
@@ -176,3 +183,49 @@ def test_the_yearly_summary():
     assert years[-1]["handle"] == 1149838438.24 and years[-1]["retailers_reporting_revenue"] == 113
     # the summary's own: $3 in 2006's table game revenue, $300 in 2017's total
     assert len(annual.checks(games, years)) == 3
+
+
+def test_cells_name_every_figure(monkeypatch):
+    r, _, _ = scanned("2018-10", monkeypatch)
+    cells = scans.cells(r)
+    assert cells["table_games|Totals|units"] == 99 and cells["tax|tax_due|amount"] == 800800.22
+    assert scans.problems(scans.from_cells("2018-10", cells)) == []
+
+
+def test_a_month_settled_by_hand(monkeypatch):
+    def decided(value):
+        return {"table_games|Totals|units": {"value": value, "from": "typed",
+                                             "reason": "Totals units printed 99."}}  # fmt: skip
+
+    r, how, problems = scanned_with("2018-10", monkeypatch, decided(99))
+    assert problems == [] and "by hand: table_games|Totals|units" in how
+    assert r["by_hand"] == {"table_games|Totals|units": "Totals units printed 99."}
+    # a hand reading the checks don't bear out is still used, and what doesn't add up noted
+    r, how, problems = scanned_with("2018-10", monkeypatch, decided(98))
+    assert r["table_games_total"]["units"] == 98
+    assert problems == ["table games: units adds up to 99.00, Totals line 98.00"]
+
+
+def test_the_check_script():
+    import subprocess
+
+    r = parse.read(report("September-2026"))
+    cells = json.dumps({"key": "2026-09", "cells": scans.cells(r)})
+    found = subprocess.run([sys.executable, str(_HERE / "checks.py")], input=cells,
+                           capture_output=True, text=True, check=True)  # fmt: skip
+    assert json.loads(found.stdout) == []
+
+
+def test_a_left_out_month_for_review(monkeypatch):
+    attempt = {}
+    folder = FIXTURES / "ocr" / "2018-10"
+    monkeypatch.setattr(scans, "engines", lambda: ["rapidocr"])  # rapidocr alone: 66
+    r, _, problems = scans.read_scan(Path("unused.pdf"), [0], "2018-10", attempt=attempt,
+                                     get=lambda pdf, i, e: json.loads(
+                                         (folder / f"{i}.{e}.json").read_text()))  # fmt: skip
+    assert r is None and attempt["problems"] == problems
+    item = scans.table_item("2018-10", "October 2018", "", ".cache/x.pdf", [10], "u", attempt)
+    sections = {s["name"]: s for s in item.sections}
+    totals = sections["Table games"]["rows"][-1]["cells"]["units"]
+    assert totals["field"] == "table_games|Totals|units" and totals["value"] == 66
+    assert "Sports wagering" not in sections  # not until September 2021

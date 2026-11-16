@@ -72,6 +72,17 @@ to date runs on from it) or the same month a year before (the change) gives. A s
 figure that contradicts those is left empty. A month that no reading or combination gets
 through every check is left out.
 
+**Review.** The build also writes `review.json`, the queue for the app's review pages
+(`/review/`): each month left out, as its tables with the closest reading's figures, every
+engine's reading of each cell and the checks that fail; and each figure left unsettled.
+Decisions are saved to `fixes.toml` here (`sddocs.review`: the cell, the value, the reading
+it's from, and a reason) and applied on every build. A cell decided by hand is set in every
+reading. A month with decisions is used even if a check still fails: what doesn't add up is
+listed under "doesn't add up, settled by hand", and a figure settled by hand is kept when
+other months contradict it, and noted. The monthly table's `by_hand` column has each cell
+settled by hand and why; a decision on cell `*` says the table as read is right. The review
+page's checks run `checks.py`.
+
 OCR pieces are kept in `.cache/gaming/ocr/`, by file contents, so the parser can change
 without reading again. Without `textra` and Tesseract, fewer months get through.
 

@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 from importlib import import_module
 from pathlib import Path
 
@@ -40,7 +41,8 @@ class Provider:
 
 
 class PipelineProvider(Provider):
-    """A pipeline's queue, as its last build wrote it."""
+    """A pipeline's queue, as its last build wrote it. Its check script is run with the
+    app's Python, so it should need only the standard library."""
 
     def __init__(self, path: Path):
         self.path = path
@@ -56,7 +58,7 @@ class PipelineProvider(Provider):
     def check(self, item: review.Item, cells: dict) -> list[str] | None:
         if not self.check_script:
             return None
-        done = subprocess.run(["uv", "run", "python", str(self.check_script)],
+        done = subprocess.run([sys.executable, str(self.check_script)],
                               input=json.dumps({"key": item.key, "cells": cells}),
                               capture_output=True, text=True, cwd=REPO, timeout=60)  # fmt: skip
         if done.returncode:

@@ -4,7 +4,7 @@ summary, one or two pages, scanned and bound together) and the few scanned month
 A scan is read by three OCR engines (rapidocr; Apple Vision through `textra` and Tesseract,
 where installed), and each engine's pieces are grouped into lines at a few tolerances, since rows
 printed close together can run into each other or split apart. That makes several readings
-of a month. The first that passes every check (build.report_checks) is used.
+of a month. The first that passes every check (checks.report_checks) is used.
 
 When none does, the readings are combined: each row, Totals line, handle comparison line and
 tax line is taken from the first reading that has it, and where readings differ on one, the
@@ -223,59 +223,156 @@ def _report(month: str, parts: dict[tuple, object]) -> dict:
 
 def problems(r: dict) -> list[str]:
     """What keeps a report from being used: a part missing, or a check failing."""
-    import build
+    from checks import report_checks
 
     missing = [k for k in ("slots_total", "table_games_total") if not r[k]]
-    missing += [f"tax {k}" for k in ("total_statistical_win", "taxable_adjusted_gross_revenue",
-                                     "tax_due", "tax_collected") if k not in r["tax"]]  # fmt: skip
+    required = ("total_statistical_win", "taxable_adjusted_gross_revenue", "tax_due",
+                "tax_collected")  # fmt: skip
+    missing += [f"tax {k}" for k in required if r["tax"].get(k) is None]
     sections = 4 if r["sports_wagering_total"] else 3
     if len(r["handle_comparison"]) != sections:
         missing.append(f"handle comparison: {sorted(r['handle_comparison'])}")
     if r["sports_wagering_total"] and not r["sports_detail_total"] and r["sports"]:
         missing.append("sports detail Totals")
+    for kind in ("slots", "table_games", "sports"):
+        for row in [*r[kind], r[f"{kind}_total"] if kind != "sports" else r["sports_detail_total"]]:
+            for col in ("units", "handle", "statistical_win"):
+                if row and col in COLUMNS[kind] and row.get(col) is None:
+                    missing.append(f"{kind.replace('_', ' ')} {row['name']} {col}")
+    for name, line in r["handle_comparison"].items():
+        if line.get("handle") is None:
+            missing.append(f"handle comparison {name} handle")
     if missing:
         return [f"missing: {m}" for m in missing]
     try:
-        return build.report_checks(r)
+        return report_checks(r)
     except (KeyError, TypeError, ZeroDivisionError) as e:
         return [f"check failed to run: {e!r}"]
+
+
+# --- cells: a report's figures by name, for decisions and the review page ---------------
+
+SEP = "|"  # "slots|1 Cents|units"; a sport's name can have a slash ("MMA/UFC")
+COLUMNS = {"slots": ("units", "handle", "statistical_win", "payout_percent"),
+           "table_games": ("units", "handle", "statistical_win", "payout_percent"),
+           "sports": ("handle", "statistical_win", "payout_percent")}  # fmt: skip
+SPORTS_TOTAL = ("casinos_reporting", "handle", "statistical_win", "payout_percent")
+COMPARISON = ("handle", "change_from_a_year_before", "handle_year_to_date", "year_to_date_change")
+KINDS = {"units": "int", "casinos_reporting": "int", "handle": "money",
+         "statistical_win": "money", "payout_percent": "pct", "handle_year_to_date": "money",
+         "change_from_a_year_before": "pct", "year_to_date_change": "pct",
+         "amount": "money"}  # fmt: skip
+TOTALS = {"slots": "slots_total", "table_games": "table_games_total",
+          "sports": "sports_detail_total"}  # fmt: skip
+
+
+def cells(r: dict) -> dict[str, object]:
+    """Every figure in a report by its cell name."""
+    out = {}
+    for kind, cols in COLUMNS.items():
+        for row in [*r[kind], *([r[TOTALS[kind]]] if r[TOTALS[kind]] else [])]:
+            for col in cols:
+                out[SEP.join((kind, row["name"], col))] = row.get(col)
+    if r["sports_wagering_total"]:
+        for col in SPORTS_TOTAL:
+            out[SEP.join(("sports_wagering", "Totals", col))] = r["sports_wagering_total"][col]
+    for name, line in r["handle_comparison"].items():
+        for col in COMPARISON:
+            out[SEP.join(("handle_comparison", name, col))] = line.get(col)
+    for key, value in r["tax"].items():
+        out[SEP.join(("tax", key, "amount"))] = value
+    return out
+
+
+def set_cell(r: dict, field: str, value) -> None:
+    kind, name, col = field.split(SEP)
+    if kind == "tax":
+        r["tax"][name] = value
+    elif kind == "handle_comparison":
+        r["handle_comparison"].setdefault(name, {})[col] = value
+    elif kind == "sports_wagering":
+        r["sports_wagering_total"] = r["sports_wagering_total"] or {"name": "Totals"}
+        r["sports_wagering_total"][col] = value
+    elif name == "Totals":
+        r[TOTALS[kind]] = {**(r[TOTALS[kind]] or {"name": "Totals"}), col: value}
+    else:
+        rows = r[kind]
+        row = next((x for x in rows if x["name"] == name), None)
+        if row is None:
+            row = {"name": name}
+            rows.append(row)
+            known = KNOWN.get(kind)
+            if known:
+                rows.sort(key=lambda x: known.index(x["name"]) if x["name"] in known else 99)
+        row[col] = value
+
+
+def from_cells(month: str, values: dict[str, object]) -> dict:
+    """A report from cell values (the review page's table); a row with no figures is left
+    out."""
+    r = _report(month, {})
+    for field, value in values.items():
+        set_cell(r, field, value)
+    for kind in COLUMNS:
+        r[kind] = [x for x in r[kind] if any(x.get(c) is not None for c in COLUMNS[kind])]
+    return r
+
+
+def _hand(r: dict, hand: dict[str, object]) -> dict:
+    """A report with the cells decided by hand set (a copy)."""
+    import copy
+
+    r = copy.deepcopy(r)
+    for field, value in hand.items():
+        set_cell(r, field, value)
+    return r
 
 
 def _describe(key: tuple) -> str:
     return " ".join(str(k).replace("_", " ") for k in key)
 
 
-def _agreed(key: tuple, parsed: list[tuple[str, dict]]):
-    """A figure two engines read alike (None if no two do; a figure printed "N/A" is None
-    too, and stays None)."""
+def _engine(label: str) -> str:
+    return label.split(",")[0]
+
+
+def _agreed(key: tuple, parsed: list[tuple[str, dict]]) -> tuple[bool, object]:
+    """(whether two engines read the figure alike, and the figure: None for "N/A")."""
     by_engine: dict[str, set] = {}
     for label, parts in parsed:
         if key in parts:  # None: printed "N/A"
-            by_engine.setdefault(label.split(",")[0], set()).add(parts[key])
+            by_engine.setdefault(_engine(label), set()).add(parts[key])
     counts: dict = {}
     for values in by_engine.values():
         for v in values:
             counts[v] = counts.get(v, 0) + 1
     agreed = [v for v, n in counts.items() if n >= 2]
-    return agreed[0] if len(agreed) == 1 else None
+    return (True, agreed[0]) if len(agreed) == 1 else (False, None)
 
 
-def _combine(month: str, parsed: list[tuple[str, dict]]) -> tuple[dict | None, str]:
-    """Each part from the first reading that has it; where readings differ on a part, the
-    others' versions, up to MAX_SWAPS at a time, until every check passes."""
+def _candidates(parsed: list[tuple[str, dict]]) -> dict[tuple, list[tuple[str, object]]]:
     candidates: dict[tuple, list[tuple[str, object]]] = {}
     for label, parts in parsed:
         for key, value in parts.items():
             seen = candidates.setdefault(key, [])
             if all(value != v for _, v in seen):
                 seen.append((label, value))
+    return candidates
+
+
+def _combine(month: str, parsed: list[tuple[str, dict]],
+             hand: dict[str, object]) -> tuple[dict | None, str]:  # fmt: skip
+    """Each part from the first reading that has it; where readings differ on a part, the
+    others' versions, up to MAX_SWAPS at a time, until every check passes. Cells decided
+    by hand are set in every combination."""
+    candidates = _candidates(parsed)
     base = {k: v[0][1] for k, v in candidates.items()}
     differing = [k for k, v in candidates.items() if len(v) > 1 and k[-1] not in UNCHECKED]
     for n in range(MAX_SWAPS + 1):
         for keys in itertools.combinations(differing, n):
             for picks in itertools.product(*(candidates[k][1:] for k in keys)):
                 swapped = {k: v for k, (_, v) in zip(keys, picks, strict=True)}
-                r = _report(month, {**base, **swapped})
+                r = _hand(_report(month, {**base, **swapped}), hand)
                 if not problems(r):
                     how = "combined: " + parsed[0][0]
                     if keys:
@@ -286,9 +383,29 @@ def _combine(month: str, parsed: list[tuple[str, dict]]) -> tuple[dict | None, s
     return None, ""
 
 
-def read_scan(pdf: Path, pages: list[int], month: str,
-              get=None) -> tuple[dict | None, str, list[str]]:  # fmt: skip
-    """A scanned month: the report, how it was read, and (when it's left out) why."""
+def cell_readings(parsed: list[tuple[str, dict]]) -> dict[str, dict[str, list]]:
+    """Each cell's values in each engine's readings: {cell: {engine: [values]}}."""
+    out: dict[str, dict[str, list]] = {}
+    for label, parts in parsed:
+        for field, value in cells(_report("", parts)).items():
+            seen = out.setdefault(field, {}).setdefault(_engine(label), [])
+            if value not in seen:
+                seen.append(value)
+    return out
+
+
+def read_scan(pdf: Path, pages: list[int], month: str, get=None, decided: dict | None = None,
+              attempt: dict | None = None) -> tuple[dict | None, str, list[str]]:  # fmt: skip
+    """A scanned month: the report, how it was read, and what doesn't add up (when it's left
+    out, None and why).
+
+    `decided`: decisions from the review pages for this month ({cell: decision}; cell "*":
+    the table as read is right). A cell decided by hand is set in every reading; a month with
+    decisions is used even when its checks still fail (they're returned, to be noted).
+    `attempt` (a dict) is filled with the closest the readings come, for the review queue:
+    "report", "readings" (cell_readings) and "problems"."""
+    decided = decided or {}
+    hand = {f: d.get("value") for f, d in decided.items() if f != "*"}
     parsed, first_problems, chosen = [], None, None
     for label, found in readings(pdf, pages, get):
         try:
@@ -296,28 +413,92 @@ def read_scan(pdf: Path, pages: list[int], month: str,
         except parse.ReportProblem as e:
             first_problems = first_problems or [str(e)]
             continue
-        p = problems(r)
+        p = problems(_hand(r, hand))
         if not p and chosen is None:
-            chosen = (r, label)
+            chosen = (_hand(r, hand), label)
         first_problems = first_problems or p
         parsed.append((label, _parts(r), len(p)))
     # combining starts from the readings with the fewest problems
     parsed = [(label, parts) for label, parts, _ in sorted(parsed, key=lambda x: x[2])]
     if chosen is None and parsed:
-        chosen = _combine(month, parsed)
+        chosen = _combine(month, parsed, hand)
+    left = []
+    if (not chosen or chosen[0] is None) and parsed:
+        closest = _hand(_report(month, {k: v[0][1] for k, v in _candidates(parsed).items()}),
+                        hand)  # fmt: skip
+        left = problems(closest)
+        if attempt is not None:
+            attempt.update(report=closest, readings=cell_readings(parsed), problems=left)
+        if decided:  # settled by hand: used, with what still doesn't add up noted
+            chosen = (closest, "closest reading")
     if not chosen or chosen[0] is None:
-        return None, "ocr", first_problems or ["no reading"]
+        return None, "ocr", left or first_problems or ["no reading"]
     r, how = chosen
     # the figures no check within the month covers: kept where two engines read them alike;
-    # otherwise every reading's version is kept for build to confirm against other months
+    # otherwise every engine's version is kept for build to confirm against other months
     r["unconfirmed"] = {}
     for name, line in r["handle_comparison"].items():
         for field in UNCHECKED:
             key = ("handle_comparison", name, field)
-            agreed = _agreed(key, parsed)
-            line[field] = agreed
-            if agreed is None:
-                r["unconfirmed"][(name, field)] = sorted(
-                    {parts[key] for _, parts in parsed if key in parts},
-                    key=lambda v: (v is None, v))  # fmt: skip
-    return r, f"ocr ({how})", []
+            cell = SEP.join(("handle_comparison", name, field))
+            if cell in hand:
+                line[field] = hand[cell]
+                continue
+            found, line[field] = _agreed(key, parsed)
+            if not found:
+                by_engine: dict[str, list] = {}
+                for label, parts in parsed:
+                    if key in parts and parts[key] not in by_engine.get(_engine(label), []):
+                        by_engine.setdefault(_engine(label), []).append(parts[key])
+                r["unconfirmed"][(name, field)] = by_engine
+    if decided:
+        r["by_hand"] = {f: d["reason"] for f, d in decided.items()}
+        how += f"; by hand: {', '.join(sorted(decided))}"
+    return r, f"ocr ({how})", left
+
+
+def table_item(month: str, title: str, subtitle: str, pdf: str, pages: list[int], url: str,
+               attempt: dict):  # fmt: skip
+    """A left-out month for the review page: every cell with the closest reading's value and
+    each engine's, sections as the report prints them."""
+    from sddocs import review
+
+    r, readings_ = attempt["report"], attempt["readings"]
+
+    def cell(field):
+        return {"field": field, "value": cells(r).get(field), "readings": readings_.get(field, {})}
+
+    def names(kind, known=None):
+        found = {f.split(SEP)[1] for f in readings_ if f.startswith(kind + SEP)}
+        found |= {x["name"] for x in r[kind]}
+        found.discard("Totals")
+        if known:  # every row the report prints, read or not (keno: when a reading has it)
+            return [n for n in known if n != "Totals" and (n != "Keno" or n in found)]
+        return sorted(found)
+
+    def section(name, kind, rows, cols):
+        return {"name": name, "columns": [{"key": c, "label": c.replace("_", " ").capitalize(),
+                                           "kind": KINDS[c]} for c in cols],
+                "rows": [{"name": row, "cells": {c: cell(SEP.join((kind, row, c)))
+                                                 for c in cols}} for row in rows]}  # fmt: skip
+
+    sections = [
+        section("Slot machines", "slots", [*names("slots", parse.SLOT_NAMES), "Totals"],
+                COLUMNS["slots"]),
+        section("Table games", "table_games",
+                [*names("table_games", parse.GAME_NAMES), "Totals"], COLUMNS["table_games"]),
+    ]  # fmt: skip
+    if month >= "2021-09":
+        sections.append(section("Sports wagering", "sports_wagering", ["Totals"], SPORTS_TOTAL))
+        sections.append(section("Sports wagering by sport", "sports",
+                                [*names("sports"), "Totals"], COLUMNS["sports"]))  # fmt: skip
+    comparison = ["Slot Machines", "Table Games",
+                  *(["Sports Wagering"] if month >= "2021-09" else []), "Total Handle"]  # fmt: skip
+    sections.append(section("Handle comparison", "handle_comparison", comparison, COMPARISON))
+    tax = list(dict.fromkeys([*parse.TAX_LINES.values()]))
+    present = {f.split(SEP)[1] for f in readings_ if f.startswith("tax" + SEP)} | set(r["tax"])
+    sections.append(section("Tax", "tax", [t for t in tax if t in present], ("amount",)))
+    return review.Item(source="gaming", key=month, kind="table", title=title, subtitle=subtitle,
+                       links=[{"label": "the report", "url": url}],
+                       image={"pdf": pdf, "pages": pages}, problems=attempt["problems"],
+                       sections=sections)  # fmt: skip

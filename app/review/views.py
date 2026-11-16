@@ -139,11 +139,15 @@ def detail(request: HttpRequest, source: str, key: str) -> HttpResponse:
             tables.append({"item": item, "sections": _table(item, decided),
                            "decision": decided.get((key, "*"))})  # fmt: skip
             continue
-        values = list(item.readings.values())
-        picks.append({"item": item, "decision": decided.get((key, item.field)),
-                      "readings": [{"key": k, "value": v,
-                                    "marked": marked(v, [o for o in values if o is not v])}
-                                   for k, v in item.readings.items()]})  # fmt: skip
+        kind = item.context.get("kind", "text")
+        texts = {k: show(v, kind) for k, v in item.readings.items()}
+        decision = decided.get((key, item.field))
+        picks.append({"item": item, "decision": decision,
+                      "decided": show(decision.get("value"), kind) if decision else "",
+                      "readings": [{"key": k, "value": t,
+                                    "marked": marked(t, [o for j, o in texts.items() if j != k])
+                                    if t else marked(None, [])}
+                                   for k, t in texts.items()]})  # fmt: skip
     keys = [g["key"] for g in _groups(p)]
     at = keys.index(key)
     return render(request, "review/detail.html", {
@@ -198,13 +202,15 @@ def decide(request: HttpRequest, source: str, key: str) -> HttpResponse:
             if item is None:
                 raise review.ReviewError("that field isn't waiting for a decision")
             chose = request.POST.get("from") or review.FROM_TYPED
-            value = request.POST.get("value", "").strip()
+            kind = item.context.get("kind", "text")
+            text = request.POST.get("value", "").strip()
+            if chose != review.FROM_NONE and not text:
+                raise review.ReviewError("choose a reading, type the value, or leave it empty")
+            value = review.parse_value(text, kind) if chose != review.FROM_NONE else None
             if chose not in (review.FROM_NONE, review.FROM_TYPED) and (
-                str(item.readings.get(chose)) != value
+                item.readings.get(chose) != value
             ):
                 chose = review.FROM_TYPED  # a reading, edited
-            if chose != review.FROM_NONE and not value:
-                raise review.ReviewError("choose a reading, type the value, or leave it empty")
             review.save(p.decisions, {"key": key, "field": field,
                                       "value": value if chose != review.FROM_NONE else None,
                                       "from": chose, "reason": reason})  # fmt: skip

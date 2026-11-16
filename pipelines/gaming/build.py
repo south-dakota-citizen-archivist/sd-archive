@@ -40,88 +40,13 @@ import annual
 import pandas as pd
 import parse  # pipelines/gaming/parse.py (run as a script, so this folder is on the path)
 import scans
+from checks import SECTIONS, report_checks  # noqa: F401  (report_checks: the tests)
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 RAW = REPO / ".cache" / "gaming" / "raw"
 BUILD = REPO / ".cache" / "gaming" / "build"
-CENT = 0.011
-ADJUSTMENTS = ["less_non_cashable_promo_play", "plus_non_cashable_promo_wins",
-               "less_wide_area_progressive", "less_city_slots", "plus_expired_vouchers",
-               "less_federal_excise_tax", "adjustments_amended_returns_and_audits",
-               "plus_expired_vouchers_sports_wagering"]  # fmt: skip
-SECTIONS = {"Slot Machines": "slots_total", "Table Games": "table_games_total",
-            "Sports Wagering": "sports_wagering_total"}  # fmt: skip
-
-
-def report_checks(r: dict) -> list[str]:
-    """What doesn't add up within one month's report."""
-    out = []
-
-    def near(a, b, tol=CENT):
-        return a is not None and b is not None and abs(a - b) <= tol
-
-    for rows, total, label in (
-        (r["slots"], r["slots_total"], "slot machines"),
-        (r["table_games"], r["table_games_total"], "table games"),
-    ):
-        for key in ("units", "handle", "statistical_win"):
-            s = sum(x[key] for x in rows)
-            if not near(s, total[key], CENT * len(rows)):
-                out.append(f"{label}: {key} adds up to {s:,.2f}, Totals line {total[key]:,.2f}")
-    if r["sports"]:
-        for key in ("handle", "statistical_win"):
-            s = sum(x[key] for x in r["sports"])
-            if not near(s, r["sports_wagering_total"][key], CENT * len(r["sports"])):
-                out.append(f"sports: {key} adds up to {s:,.2f}, sports wagering total "
-                           f"{r['sports_wagering_total'][key]:,.2f}")  # fmt: skip
-
-    def payout(rows):  # over the rows that have a payout (player-banked poker is a rake: N/A)
-        paid = [x for x in rows if x["payout_percent"] is not None]
-        handle = sum(x["handle"] for x in paid)
-        return 100 * (handle - sum(x["statistical_win"] for x in paid)) / handle if handle else None
-
-    present = {n: k for n, k in SECTIONS.items() if r[k]}  # no sports wagering before 2021-09
-    for rows, total, label in ((r["slots"], r["slots_total"], "slots"),
-                               (r["table_games"], r["table_games_total"], "table games"),
-                               ([], r["sports_wagering_total"], "sports wagering")):  # fmt: skip
-        for x in [*rows, total] if total else []:
-            if x["payout_percent"] is None or not x["handle"]:
-                continue
-            want = (payout(rows) if x is total and rows
-                    else 100 * (x["handle"] - x["statistical_win"]) / x["handle"])  # fmt: skip
-            if abs(want - x["payout_percent"]) > 0.06:
-                out.append(f"{label} {x['name']}: payout {x['payout_percent']}%, "
-                           f"(handle - win) / handle is {want:.2f}%")  # fmt: skip
-    hc = r["handle_comparison"]
-    for name, key in present.items():
-        if not near(hc[name]["handle"], r[key]["handle"]):
-            out.append(f"handle comparison: {name} {hc[name]['handle']:,.2f}, section total "
-                       f"{r[key]['handle']:,.2f}")  # fmt: skip
-    total = sum(hc[n]["handle"] for n in present)
-    if not near(total, hc["Total Handle"]["handle"], 0.05):
-        out.append(f"total handle {hc['Total Handle']['handle']:,.2f}, sections {total:,.2f}")
-    t = r["tax"]
-    win = sum(r[k]["statistical_win"] for k in present.values())
-    if not near(win, t["total_statistical_win"], 0.05):
-        out.append(f"total statistical win {t['total_statistical_win']:,.2f}, sections "
-                   f"{win:,.2f}")  # fmt: skip
-    agr = t["total_statistical_win"] + sum(t.get(k, 0) for k in ADJUSTMENTS)
-    if not near(agr, t["taxable_adjusted_gross_revenue"], 0.05):
-        out.append(f"taxable AGR {t['taxable_adjusted_gross_revenue']:,.2f}, win and "
-                   f"adjustments {agr:,.2f}")  # fmt: skip
-    if not near(0.09 * t["taxable_adjusted_gross_revenue"], t["tax_due"], 0.02):
-        out.append(f"tax due {t['tax_due']:,.2f} isn't 9% of the taxable AGR")
-    if not near(t["tax_due"], t["tax_collected"]):
-        out.append(f"tax due {t['tax_due']:,.2f}, collected {t['tax_collected']:,.2f}")
-    agr_ = t["taxable_adjusted_gross_revenue"]
-    shares = {"to_state_general_fund": 0.01 * agr_, "to_be_distributed": 0.08 * agr_,
-              "to_tourism": 0.4 * 0.08 * agr_, "to_lawrence_county": 0.1 * 0.08 * agr_,
-              "to_commission_fund": 0.5 * 0.08 * agr_}  # fmt: skip
-    for key, want in shares.items():
-        if key in t and not near(t[key], want, 0.02):
-            out.append(f"{key} {t[key]:,.2f}, its share is {want:,.2f}")
-    return out
+BY_HAND = HERE / "fixes.toml"  # decisions from the review pages (sddocs.review)
 
 
 def read_month(
@@ -129,6 +54,8 @@ def read_month(
     path: Path | None = None,
     month: str | None = None,
     pages: list[int] | None = None,
+    decided: dict | None = None,
+    attempt: dict | None = None,
 ) -> tuple[dict | None, str, list[str]]:
     """A report, how it was read, and what doesn't add up (a scan that fails a check isn't
     used: None). A scan is read from `path` (its `pages` of it: a month in a yearly file)."""
@@ -146,7 +73,7 @@ def read_month(
 
             with pdfplumber.open(path) as pdf:
                 pages = list(range(len(pdf.pages)))
-        return scans.read_scan(path, pages, month)
+        return scans.read_scan(path, pages, month, decided=decided, attempt=attempt)
 
 
 def month_of(text: str) -> str | None:
@@ -193,13 +120,15 @@ def _confirm(reports: list[dict], checks: dict) -> None:
             for field, expected in want.items():
                 tol = 0.06 if field == "handle_year_to_date" else 0.011
                 value = line[field]
-                options = r.get("unconfirmed", {}).get((name, field))
-                if options is not None and value is None:
+                by_engine = r.get("unconfirmed", {}).get((name, field))
+                options = [v for vs in (by_engine or {}).values() for v in vs]
+                hand = f"handle_comparison|{name}|{field}" in r.get("by_hand", {})
+                if by_engine is not None and value is None and not hand:
                     found = [o for o in options if (o is None and expected is None)
                              or near(o, expected, tol)]  # fmt: skip
                     if found:
                         line[field] = found[0]
-                        r.setdefault("confirmed_by_other_months", []).append(f"{name} {field}")
+                        r.setdefault("confirmed_by_other_months", []).append((name, field))
                     continue
                 if (value is None) != (expected is None) or (
                     value is not None and not near(value, expected, tol)
@@ -208,38 +137,59 @@ def _confirm(reports: list[dict], checks: dict) -> None:
                         {"month": r["month"], "section": name, "field": field,
                          "printed": value, "expected": expected,
                          "read": r.get("read")})  # fmt: skip
-                    if scan:
+                    if scan and not hand:  # a figure settled by hand is kept, and noted
                         line[field] = None
 
 
-def build(files: list[dict], read, raw: Path = RAW) -> tuple[dict[str, pd.DataFrame], dict]:
-    checks: dict[str, list] = defaultdict(list)
-    reports = []
+def build(files: list[dict], read, raw: Path = RAW,
+          by_hand: Path = BY_HAND) -> tuple[dict[str, pd.DataFrame], dict]:  # fmt: skip
+    from sddocs import review
 
-    def add(r, how, problems, f, label, pages=None):
+    checks: dict[str, list] = defaultdict(list)
+    reports, queue = [], []
+    decisions: dict[str, dict] = {}
+    for (month, field), d in review.load(by_hand).items():
+        decisions.setdefault(month, {})[field] = d
+
+    def add(r, how, problems, f, label, month, pages, attempt):
         for p in problems:
-            checks["doesn't add up" if r else "left out"].append(
-                {"report": label, "read": how, "problem": p}
-            )
+            kind = ("doesn't add up, settled by hand" if r and r.get("by_hand")
+                    else "doesn't add up" if r else "left out")  # fmt: skip
+            checks[kind].append({"report": label, "read": how, "problem": p})
         if r:
             reports.append({**r, "read": how, "file": f["file"], "source_url": f["url"],
-                            "pages": pages})  # fmt: skip
+                            "pages": ("-".join(str(p + 1) for p in (pages[0], pages[-1]))
+                                      if pages and len(pages) > 1
+                                      else str(pages[0] + 1) if pages else None)})  # fmt: skip
+        elif attempt:
+            shown = pages or list(range(_page_count(raw / f["file"])))
+            queue.append(scans.table_item(
+                month, title=_title(month), subtitle=f"{f['text']}, " + (
+                    f"pages {shown[0] + 1}–{shown[-1] + 1}" if len(shown) > 1
+                    else f"page {shown[0] + 1}"),
+                pdf=str((raw / f["file"]).relative_to(REPO)), pages=shown, url=f["url"],
+                attempt=attempt))  # fmt: skip
 
     for f in files:
         if f["file"].startswith("monthly/"):
+            month, attempt = month_of(f["text"]), {}
             r, how, problems = read_month(read(f["file"]), path=raw / f["file"],
-                                          month=month_of(f["text"]))  # fmt: skip
-            add(r, how, problems, f, f["text"])
+                                          month=month, decided=decisions.get(month),
+                                          attempt=attempt)  # fmt: skip
+            add(r, how, problems, f, f["text"], month, None, attempt)
         elif re.fullmatch(r"annual/Gaming-Statistics-\d{4}\.pdf", f["file"]):
             # a year's monthly summaries, scanned and bound together
             path = raw / f["file"]
             for month, pages in scans.months_in(path).items():
-                r, how, problems = scans.read_scan(path, pages, month)
-                add(r, how, problems, f, f"{f['text']}: {month}",
-                    "-".join(str(p + 1) for p in (pages[0], pages[-1]))
-                    if len(pages) > 1 else str(pages[0] + 1))  # fmt: skip
+                attempt = {}
+                r, how, problems = scans.read_scan(path, pages, month,
+                                                   decided=decisions.get(month),
+                                                   attempt=attempt)  # fmt: skip
+                add(r, how, problems, f, f"{f['text']}: {month}", month, pages, attempt)
     reports.sort(key=lambda r: r["month"])
     _confirm(reports, checks)
+    queue += _unsettled(reports, raw)
+    tables_review = sorted(queue, key=lambda i: i.key)
 
     def rows(key, name_as):
         out = []
@@ -266,7 +216,9 @@ def build(files: list[dict], read, raw: Path = RAW) -> tuple[dict[str, pd.DataFr
             row[f"{slug}_year_to_date"] = hc[name]["handle_year_to_date"]
             row[f"{slug}_change_from_a_year_before"] = hc[name]["change_from_a_year_before"]
         row.update(r["tax"])
-        row.update({"read": r["read"], "source_url": r["source_url"], "pages": r["pages"]})
+        row.update({"read": r["read"], "source_url": r["source_url"], "pages": r["pages"],
+                    "by_hand": "; ".join(f"{f}: {why}" for f, why in
+                                         (r.get("by_hand") or {}).items()) or None})  # fmt: skip
         monthly.append(row)
     monthly_df = pd.DataFrame(monthly)
 
@@ -294,7 +246,50 @@ def build(files: list[dict], read, raw: Path = RAW) -> tuple[dict[str, pd.DataFr
         tables["annual"] = pd.DataFrame(years)
         for found in against_summary(tables, games, years):
             checks["months don't add up to the yearly summary"].append(found)
+    tables["review"] = tables_review
     return tables, dict(checks)
+
+
+def _title(month: str) -> str:
+    return f"{scans.MONTHS[int(month[5:]) - 1]} {month[:4]}"
+
+
+def _page_count(path: Path) -> int:
+    import pdfplumber
+
+    with pdfplumber.open(path) as pdf:
+        return len(pdf.pages)
+
+
+def _unsettled(reports: list[dict], raw: Path) -> list:
+    """The handle comparison figures a scan's engines read differently and no other month
+    settled, for the review page."""
+    from sddocs import review
+
+    out = []
+    for r in reports:
+        for (name, field), by_engine in (r.get("unconfirmed") or {}).items():
+            settled = (name, field) in r.get("confirmed_by_other_months", [])
+            if settled or r["handle_comparison"][name].get(field) is not None or not by_engine:
+                continue
+            readings = {}
+            for engine, values in by_engine.items():
+                for i, v in enumerate(values):
+                    readings[engine if i == 0 else f"{engine} ({i + 1})"] = v
+            pages = [int(p) - 1 for p in r["pages"].split("-")] if r.get("pages") else None
+            shown = (list(range(pages[0], pages[-1] + 1)) if pages
+                     else list(range(_page_count(raw / r["file"]))))  # fmt: skip
+            out.append(review.Item(
+                source="gaming", key=r["month"], kind="pick", title=_title(r["month"]),
+                subtitle=f"handle comparison, read {r['read'][:40]}…",
+                links=[{"label": "the report", "url": r["source_url"]}],
+                image={"pdf": str((raw / r["file"]).relative_to(REPO)), "pages": shown},
+                field=f"handle_comparison|{name}|{field}",
+                label=f"{name}: {field.replace('_', ' ')}", readings=readings,
+                problems=["The engines read it differently, and neither the month before nor "
+                          "the same month a year before settles it."],
+                context={"kind": scans.KINDS[field]}))  # fmt: skip
+    return out
 
 
 SUMMARY = "annual/Gaming-Statistics-1989---2019.pdf"
@@ -341,6 +336,13 @@ def main() -> None:
     files = json.loads((RAW / "files.json").read_text())
     tables, checks = build(files, lambda name: (RAW / name).read_bytes())
     BUILD.mkdir(parents=True, exist_ok=True)
+    from sddocs import review
+
+    items = tables.pop("review")
+    review.queue(BUILD / "review.json", source="gaming", name="Licensed gaming",
+                 decisions=str(BY_HAND.relative_to(REPO)),
+                 check=str((HERE / "checks.py").relative_to(REPO)), items=items)  # fmt: skip
+    print(f"review: {len(items)} waiting (review.json)")
     for name, df in tables.items():
         df.to_parquet(BUILD / f"{name}.parquet", index=False)
         df.to_csv(BUILD / f"{name}.csv", index=False)

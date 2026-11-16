@@ -8,14 +8,15 @@
 <p class="text-sm text-gray-600">{{ first.subtitle }}{% for l in first.links %} · <a class="link" href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>{% endfor %}</p>
 <p class="text-xs text-gray-500 mt-1">Decisions go to <span class="font-mono">{{ provider.decisions.name }}</span> and apply {{ provider.applies }}.</p>
 
-<div class="grid gap-6 mt-4 {% if tables %}xl:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]{% else %}lg:grid-cols-2{% endif %}">
-  <div class="lg:sticky lg:top-4 self-start space-y-3 max-h-[90vh] overflow-auto">
+<div class="grid gap-6 mt-4 {% if tables %}xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]{% else %}lg:grid-cols-2{% endif %}">
+  <div class="lg:sticky lg:top-4 self-start space-y-3 max-h-[92vh] overflow-auto" id="pages">
+    <p class="text-xs text-gray-500">Click a page to zoom in or out.</p>
     {% if first.image.url %}
     <a href="{{ first.image.url }}" target="_blank" rel="noopener" title="Open the image full size"><img src="{{ first.image.url }}" alt="{{ first.title }}" class="w-full border border-gray-200 rounded bg-white"></a>
     {% else %}
     {% for page in first.image.pages %}
     {% url 'review:page_image' as img %}
-    <a href="{{ img }}?pdf={{ first.image.pdf|urlencode }}&page={{ page }}" target="_blank" rel="noopener" title="Open the page full size"><img src="{{ img }}?pdf={{ first.image.pdf|urlencode }}&page={{ page }}" alt="{{ first.title }}, page {{ page|add:1 }}" class="w-full border border-gray-200 rounded bg-white" loading="lazy"></a>
+    <img src="{{ img }}?pdf={{ first.image.pdf|urlencode }}&page={{ page }}" alt="{{ first.title }}, page {{ page|add:1 }}" class="zoom w-full border border-gray-200 rounded bg-white cursor-zoom-in" loading="lazy">
     {% endfor %}
     {% endif %}
   </div>
@@ -34,14 +35,14 @@
         <tr class="align-top">
           <td class="pr-2 py-1 whitespace-nowrap text-gray-500 text-xs w-28">{{ r.key }}</td>
           <td class="py-1">{{ r.marked }}</td>
-          <td class="py-1 pl-2 w-12 text-right">{% if r.value is not None and r.value != "" %}<button type="button" class="btn text-xs use" data-from="{{ r.key }}" data-value="{{ r.value }}">Use</button>{% endif %}</td>
+          <td class="py-1 pl-2 w-12 text-right">{% if r.value %}<button type="button" class="btn text-xs use" data-from="{{ r.key }}" data-value="{{ r.value }}">Use</button>{% endif %}</td>
         </tr>
         {% endfor %}
       </table>
       {% if p.decision %}
-      <p class="text-xs mt-2 rounded bg-green-50 border border-green-200 p-2">Decided: <b>{{ p.decision.value|default:"left empty" }}</b> ({{ p.decision.from }}) · {{ p.decision.reason }} · {{ p.decision.checked }}</p>
+      <p class="text-xs mt-2 rounded bg-green-50 border border-green-200 p-2">Decided: <b>{{ p.decided|default:"left empty" }}</b> ({{ p.decision.from }}) · {{ p.decision.reason }} · {{ p.decision.checked }}</p>
       {% endif %}
-      <textarea name="value" rows="2" class="mt-2 w-full border border-gray-300 rounded p-2 text-sm" placeholder="What the page says">{{ p.decision.value|default:"" }}</textarea>
+      <textarea name="value" rows="2" class="mt-2 w-full border border-gray-300 rounded p-2 text-sm" placeholder="What the page says">{{ p.decided }}</textarea>
       <input name="reason" required class="mt-1 w-full border border-gray-300 rounded p-1.5 text-sm" placeholder="Reason: what settles it (required)" value="{{ p.decision.reason|default:'' }}">
       <div class="mt-2 flex gap-2">
         <button class="btn btn-primary">Save</button>
@@ -71,7 +72,7 @@
               {% for cell in row.cells %}
               <td class="p-1">{% if cell %}
                 <input name="cell:{{ cell.field }}" value="{{ cell.text }}" list="o-{{ forloop.parentloop.counter }}-{{ forloop.counter }}-{{ s.name|slugify }}" title="{{ cell.title }}"
-                  class="w-full min-w-[7rem] text-right tabular-nums rounded border px-1.5 py-0.5 {% if cell.decision %}border-blue-500 ring-1 ring-blue-300{% else %}border-gray-300{% endif %} {% if cell.differs %}bg-amber-50{% endif %}">
+                  class="w-full {% if cell.kind == 'money' %}min-w-[9.5rem]{% elif cell.kind == 'pct' %}min-w-[5.5rem]{% else %}min-w-[4rem]{% endif %} text-right tabular-nums text-sm rounded border px-1.5 py-0.5 {% if cell.decision %}border-blue-500 ring-1 ring-blue-300{% else %}border-gray-300{% endif %} {% if cell.differs %}bg-amber-50{% endif %}">
                 <input type="hidden" name="was:{{ cell.field }}" value="{{ cell.text }}">
                 <datalist id="o-{{ forloop.parentloop.counter }}-{{ forloop.counter }}-{{ s.name|slugify }}">{% for o in cell.options %}<option value="{{ o }}">{% endfor %}</datalist>
               {% endif %}</td>
@@ -101,6 +102,15 @@ document.addEventListener("click", (e) => {
     const form = use.closest("form");
     form.querySelector("textarea[name=value]").value = use.dataset.value;
     form.querySelector("input[name=from]").value = use.dataset.from;
+  }
+});
+document.addEventListener("click", (e) => {
+  const img = e.target.closest("img.zoom");
+  if (img) {
+    const big = img.classList.toggle("max-w-none");
+    img.classList.toggle("w-[220%]", big);
+    img.classList.toggle("w-full", !big);
+    img.classList.toggle("cursor-zoom-out", big);
   }
 });
 document.addEventListener("input", (e) => {
