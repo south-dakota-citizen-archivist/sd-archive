@@ -2,9 +2,10 @@
 still produced and how it would be got come from the rules.) And, from the few pages that
 describe the government's records in prose, the records they name.
 
-Every answer carries a quote; a quote not found in what the model was shown (the
-candidate's evidence, or the page) drops the suggestion. The model is sdllm's default (a
-local one) unless another is given.
+Every answer carries a quote. A review whose quote isn't found in the candidate's evidence is
+kept and marked; a record named on a page whose quote isn't on the page is dropped. Whether a
+candidate is already covered comes from the rules alone, since the model doesn't know what
+the archive holds. The model is sdllm's default (a local one) unless another is given.
 """
 
 from __future__ import annotations
@@ -17,7 +18,7 @@ from .crawl import Page
 from .signals import Candidate
 
 HOW = Literal["scrape the site", "scrape the platform", "download files", "records request",
-              "already covered", "unclear"]  # fmt: skip
+              "unclear"]  # fmt: skip
 
 INSTRUCTIONS = """You review candidate record sets found on a South Dakota local government's
 website, for an archive of public records about what governments do and spend.
@@ -69,6 +70,12 @@ Leave out forms to fill in, general information and services. For each, give a q
 exactly from the page that names it. If the page names none, return an empty list."""
 
 
+def echoed(title: str) -> bool:
+    """A title that is a sentence or more of the instructions, not the candidate's name."""
+    words = " ".join(title.lower().rstrip(".").split())
+    return len(words) > 40 and words in " ".join(INSTRUCTIONS.lower().split())
+
+
 def facts(candidate: Candidate, this_year: int) -> dict:
     """What the rules can say without the model: whether it's still produced (from the years
     its documents name) and how it would be got (from how it was found)."""
@@ -91,8 +98,12 @@ def review(candidate: Candidate, model: str | None = None, this_year: int | None
     found = sdllm.extract(Review, text, model=model, instructions=INSTRUCTIONS,
                           quote_required=False, **params).data  # fmt: skip
     quoted = sdllm.quote_found(found.evidence_quote, text)
+    title = found.title
+    if echoed(title):  # the model gave back its instructions rather than a name
+        title = candidate.name
     return {
         **found.model_dump(),
+        "title": title,
         **facts(candidate, this_year or date.today().year),
         "quote_checked": quoted,
     }

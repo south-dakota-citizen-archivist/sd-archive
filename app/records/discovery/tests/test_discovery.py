@@ -106,3 +106,10 @@ def test_a_review_by_the_model(stand_in):
     assert r["still_produced"] == "yes" and r["how_to_get"] == "download files"
     named = review.prose(found[1], model="standin/test", cache=False)
     assert [n["title"] for n in named] == ["Register of claims"]  # the made-up one is dropped
+    assert "already covered" not in str(review.NamedRecord.model_json_schema())  # rules decide
+
+
+def test_a_title_copied_from_the_instructions_is_not_used():
+    assert review.echoed("A series of records the government produces about its own business, "
+                         "one item after another or year after year.")  # fmt: skip
+    assert not review.echoed("Audit reports") and not review.echoed("Meeting agendas and minutes")
