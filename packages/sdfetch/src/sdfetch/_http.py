@@ -9,6 +9,7 @@ import re
 import threading
 import time
 from collections.abc import Callable, Iterable
+from contextlib import suppress
 from datetime import UTC, datetime
 from email.utils import parsedate_to_datetime
 from pathlib import Path
@@ -24,6 +25,8 @@ from ._pacing import Budget, check_window, jittered
 from ._redact import redact
 from ._store import Store
 from .session import CookieJar, LoginRequired, login_for, looks_logged_out
+
+PLAYWRIGHT_RUNGS = ("stealth", "patchright", "camoufox")  # Playwright's sync API
 
 logger = logging.getLogger(__name__)
 
@@ -340,6 +343,14 @@ class Fetcher:
 
             if not self._browsers:
                 atexit.register(self.close)
+            if rung in PLAYWRIGHT_RUNGS:
+                # Playwright's sync API keeps an event loop running in this thread while a
+                # browser is open, and another Playwright browser can't start beside it: the
+                # open one is closed first, its cookies kept in the jar
+                for other in [k for k in self._browsers if k[0] in PLAYWRIGHT_RUNGS]:
+                    with suppress(Exception):
+                        self.add_cookies(self._browsers[other].cookies())
+                    self._browsers.pop(other).close()
             har = None
             if self.har_dir and rung != "nodriver":  # nodriver has no HAR recorder
                 stamp = datetime.now(UTC).strftime("%Y%m%d%H%M%S")

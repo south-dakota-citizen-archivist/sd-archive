@@ -119,3 +119,14 @@ def test_nodriver_after_a_playwright_browser(server):
         lower.get(f"{server}/data.json")
         with sdfetch.browser("nodriver") as b:
             assert "cf-chl" not in b.get(f"{server}/page").text
+
+
+def test_fetcher_climbs_through_the_playwright_rungs(server, tmp_path):
+    """stealth, patchright and camoufox are all Playwright's sync API, which can't start a
+    browser in a thread where one is open: climbing from one to the next closes the lower
+    one first."""
+    with sdfetch.Fetcher(tmp_path, delay=0, memory=False) as f:
+        for rung in ("stealth", "patchright", "camoufox"):
+            resp = f._browser(rung).get(f"{server}/data.json")
+            assert json.loads(resp.content) == {"rows": 3}, rung
+            assert [k[0] for k in f._browsers] == [rung]
