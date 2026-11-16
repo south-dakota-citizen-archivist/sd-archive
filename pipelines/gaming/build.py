@@ -38,6 +38,8 @@ from pathlib import Path
 import pandas as pd
 import parse  # pipelines/gaming/parse.py (run as a script, so this folder is on the path)
 
+from sddocs.links import with_page_links
+
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 RAW = REPO / ".cache" / "gaming" / "raw"
@@ -211,6 +213,7 @@ def main() -> None:
     files = json.loads((RAW / "files.json").read_text())
     tables, checks = build(files, lambda name: (RAW / name).read_bytes())
     BUILD.mkdir(parents=True, exist_ok=True)
+    tables = {name: with_page_links(df) for name, df in tables.items()}  # PDF rows: #page=
     for name, df in tables.items():
         df.to_parquet(BUILD / f"{name}.parquet", index=False)
         df.to_csv(BUILD / f"{name}.csv", index=False)

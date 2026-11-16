@@ -43,7 +43,20 @@
             {% if d.error %}<div class="text-xs text-red-700 whitespace-pre-wrap">{{ d.error|truncatechars:400 }}</div>{% endif %}
             {% if d.text %}<details class="text-xs"><summary class="cursor-pointer text-gray-600">Text ({{ d.text|length|intcomma }} characters)</summary><pre class="mt-2 whitespace-pre-wrap max-h-96 overflow-y-auto">{{ d.text|truncatechars:20000 }}</pre></details>{% endif %}
             {% for x in d.extractions.all %}
-              <details class="text-xs"><summary class="cursor-pointer text-gray-600">Extracted with {{ x.schema }} ({{ x.get_review_display }})</summary><pre class="mt-2 overflow-x-auto">{{ x.data|pprint }}</pre></details>
+              <details class="text-xs" open><summary class="cursor-pointer text-gray-600">Read with {{ x.schema }} ({{ x.get_review_display }})</summary>
+                <table class="tbl mt-2">
+                  <thead><tr><th>Field</th><th>Value</th><th>Where it says so</th></tr></thead>
+                  {% for f in x.checked_fields %}
+                  <tr>
+                    <td class="font-mono text-gray-500">{{ f.field }}</td>
+                    <td>{{ f.value|default_if_none:"" }}</td>
+                    <td>{% if f.quote %}“{{ f.quote|truncatechars:160 }}”{% endif %}
+                      {% if f.page %} · page {{ f.page }}{% if d.path or d.legacy.prl_file %} (<a class="link" href="{% url 'records:document_file' d.pk %}#page={{ f.page }}">our copy</a>{% if d.url_is_pdf %}, <a class="link" href="{{ d.url }}#page={{ f.page }}" rel="noopener">at the source</a>{% endif %}){% elif d.url_is_pdf %} (<a class="link" href="{{ d.url }}#page={{ f.page }}" rel="noopener">at the source</a>){% endif %}{% endif %}
+                      {% if f.unsupported %}<span class="pill">quote not found in the document</span>{% endif %}</td>
+                  </tr>
+                  {% endfor %}
+                </table>
+              </details>
             {% endfor %}
           </div>
         {% endfor %}

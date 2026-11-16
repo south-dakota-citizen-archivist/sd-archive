@@ -11,6 +11,7 @@ disk, a blocked remote model) are raised, so a batch stops instead of failing ev
 from __future__ import annotations
 
 import logging
+import re
 import tempfile
 from collections.abc import Callable
 from email.message import Message
@@ -271,6 +272,22 @@ def categorize(doc: Document, source: Source, *, model: str | None = None) -> Do
     return doc
 
 
+def quote_page(text: str, quote: str) -> int | None:
+    """The page (from 1) a quote is on: pages are separated by form feeds in a document's
+    text. Spacing doesn't matter (OCR breaks lines differently); None if it isn't there."""
+    if not quote or not text:
+        return None
+    pattern = r"\s+".join(re.escape(w) for w in quote.split())
+    m = re.search(pattern, text, re.IGNORECASE)
+    return text[: m.start()].count("\f") + 1 if m else None
+
+
+def with_pages(text: str, evidence: dict[str, str]) -> dict[str, dict]:
+    """Each field's quote and the page it's on, so a value can be checked at its page."""
+    return {field: {"quote": quote, "page": quote_page(text, quote)}
+            for field, quote in evidence.items()}  # fmt: skip
+
+
 def extract(doc: Document, source: Source, *, model: str | None = None) -> Extraction | None:
     """Read the category's fields from a document, each with its quote. A new reading
     replaces readings not yet reviewed; reviewed ones are never touched."""
@@ -300,7 +317,7 @@ def extract(doc: Document, source: Source, *, model: str | None = None) -> Extra
             schema=schema.__name__,
             schema_version=str(getattr(schema, "VERSION", "")),
             data=result.data.model_dump(mode="json"),
-            evidence=result.evidence,
+            evidence=with_pages(doc.text, result.evidence),
             unsupported=result.unsupported,
             model=result.model,
         )

@@ -33,6 +33,7 @@ from pathlib import Path
 import pandas as pd
 
 import sdplaces
+from sddocs.links import with_page_links
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -166,6 +167,7 @@ def main() -> None:
         rows, sources(HERE / "sources.json"), json.loads((HERE / "elections.json").read_text())
     )
     BUILD.mkdir(parents=True, exist_ok=True)
+    tables = {name: with_page_links(df) for name, df in tables.items()}  # PDF rows: #page=
     for name, df in tables.items():
         df.to_parquet(BUILD / f"{name}.parquet", index=False)
         df.to_csv(BUILD / f"{name}.csv", index=False)

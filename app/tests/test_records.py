@@ -720,7 +720,8 @@ def test_extract_reads_fields_with_quotes(rs, source, llm):
     doc = categorized_doc(rs, source)
     ex = documents.extract(doc, source)
     assert ex.data == {"number": "2026-04", "governor": "Larry Rhoden"}
-    assert ex.evidence == {"number": "EXECUTIVE ORDER 2026-04", "governor": "Larry Rhoden"}
+    assert ex.evidence == {"number": {"quote": "EXECUTIVE ORDER 2026-04", "page": 1},
+                           "governor": {"quote": "Larry Rhoden", "page": 1}}  # fmt: skip
     assert (ex.schema, ex.model, ex.review, ex.unsupported) == ("Order", "fake/source",
                                                                "pending", [])  # fmt: skip
     doc.refresh_from_db()
@@ -958,3 +959,19 @@ def test_status_lists_document_trouble(rs):
     assert "orders: 1 failed document(s)" in out
     assert "1 record(s) stuck" in out
     assert "1 reading(s) waiting on review" in out
+
+
+def test_a_quote_is_found_on_its_page():
+    text = "FIRST PAGE\fthe order\nis signed by\n Larry   Rhoden\fthird"
+    assert documents.quote_page(text, "signed by Larry Rhoden") == 2
+    assert documents.quote_page(text, "third") == 3
+    assert documents.quote_page(text, "not there") is None
+
+
+def test_a_record_page_shows_each_read_value_with_its_page(client, rs, source, llm):
+    llm.answers.append(ORDER_ANSWER)
+    doc = categorized_doc(rs, source)
+    documents.extract(doc, source)
+    page = client.get(doc.record.get_absolute_url()).content.decode()
+    assert "Where it says so" in page and "page 1" in page
+    assert f"/records/documents/{doc.pk}/file/#page=1" in page
