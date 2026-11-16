@@ -46,6 +46,14 @@ repos:
         language: system
         files: ^app/(README\.md|seeds/sources\.toml)$
         pass_filenames: false
+      - id: tailwind-build
+        name: the stylesheet has every class the templates use
+        # rebuilds app/static/css/tailwind.css; fails if that changed it, so stage the new one
+        entry: bash -c 'cd app && npm run --silent build >/dev/null 2>&1 && git diff --quiet -- static/css/tailwind.css || { echo "app/static/css/tailwind.css was out of date and has been rebuilt, so stage it"; exit 1; }'
+        language: system
+        files: ^app/(.*\.(html|js|py)|static/css/input\.css)$
+        exclude: ^app/static/(vendor|css/tailwind\.css)
+        pass_filenames: false
       - id: django-check
         name: django check and missing migrations
         entry: bash -c 'uv run --frozen python app/manage.py check && uv run --frozen python app/manage.py makemigrations --check --dry-run'
