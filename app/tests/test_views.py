@@ -255,3 +255,33 @@ def test_admin_actions(admin_client, dataset, monkeypatch):
 def test_the_gis_pages_old_addresses_redirect(client):
     response = client.get("/sources/add/?url=x")
     assert response.status_code == 302 and response["Location"] == "/gis/sources/add/?url=x"
+
+
+def test_a_place_page_shows_its_records_and_statistics(client, county):
+    from records.models import Record, RecordSet
+
+    rs = RecordSet.objects.create(slug="polling-places", name="Polling places",
+                                  dataset="polling-places")  # fmt: skip
+    from django.utils import timezone
+
+    now = timezone.now()
+    here = Record.objects.create(recordset=rs, key="here", data={"polling_place": "Town Hall"},
+                                 first_seen=now)  # fmt: skip
+    here.places.add(county)
+    Record.objects.create(recordset=rs, key="elsewhere", data={"polling_place": "Fire Hall"},
+                          first_seen=now)  # fmt: skip
+    page = client.get("/places/test-county/").content.decode()
+    assert "Records in Test" in page and "/records/polling-places/table/?place=test-county" in page
+    assert "Voter registration by county and party" in page  # a county-level statistic
+    assert "No GIS layers credited to Test" in page
+    table = client.get("/records/polling-places/table/?place=test-county").content.decode()
+    assert "Town Hall" in table and "Fire Hall" not in table
+
+
+def test_aggregates_cover_their_places_only():
+    from records import catalog
+
+    spearfish = type("P", (), {"kind": "place", "geoidfq": "1600000US4660020"})()
+    elsewhere = type("P", (), {"kind": "place", "geoidfq": "1600000US4659020"})()
+    ids = lambda place: {d["id"] for d in catalog.aggregates_for(place)}  # noqa: E731
+    assert "library-circulation" in ids(spearfish) and "library-circulation" not in ids(elsewhere)

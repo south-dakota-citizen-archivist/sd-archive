@@ -14,6 +14,7 @@ from django.db.models.functions import Cast, Length
 from django.http import FileResponse, Http404, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import get_object_or_404, render
 
+from places.models import Jurisdiction
 from records.models import Document, Record, RecordSet, Run
 
 PAGE_SIZE = 50
@@ -165,6 +166,9 @@ def recordset_table(request: HttpRequest, slug: str) -> HttpResponse:
     desc = request.GET.get("dir") == "desc"
 
     records = Record.objects.filter(recordset=recordset).only("key", "data", "dropped_at")
+    place = Jurisdiction.objects.filter(slug=request.GET.get("place", "")).first()
+    if place:
+        records = records.filter(places=place)
     if show == "current":
         records = records.current()
     elif show == "dropped":
@@ -201,6 +205,7 @@ def recordset_table(request: HttpRequest, slug: str) -> HttpResponse:
         "page": page,
         "rows": [(r, [cell((r.data or {}).get(n)) for n in names]) for r in page],
         "q": q,
+        "place": place,
         "field": field,
         "value": value,
         "show": show,

@@ -4,6 +4,7 @@
 {% include "records/_header.html" %}
 <form class="mb-3 flex flex-wrap gap-2 items-center" hx-get="{% url 'records:recordset_table' recordset.slug %}" hx-target="#table-body" hx-push-url="true" hx-trigger="input changed delay:500ms from:input, change from:select, submit">
   <input type="hidden" name="sort" value="{{ sort }}"><input type="hidden" name="dir" value="{{ dir }}"><input type="hidden" name="cols" value="{{ cols }}">
+  {% if place %}<input type="hidden" name="place" value="{{ place.slug }}"><span class="pill">in <a class="link" href="{{ place.get_absolute_url }}">{{ place.name }}</a> <a class="text-gray-500 hover:text-gray-800" href="{% url 'records:recordset_table' recordset.slug %}" title="All places">×</a></span>{% endif %}
   <input name="q" value="{{ q }}" placeholder="Any field contains…" class="w-80 rounded-md border border-gray-300 px-3 py-1.5 text-sm">
   <select name="field" class="rounded-md border border-gray-300 px-2 py-1.5 text-sm">
     <option value="">— field —</option>

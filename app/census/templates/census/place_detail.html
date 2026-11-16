@@ -5,10 +5,37 @@
 {% block content %}
 <p class="text-sm text-gray-500"><a class="link" href="{% url 'census:place_list' %}">Places</a>{% if place.parent %} · <a class="link" href="{{ place.parent.get_absolute_url }}">{{ place.parent }}</a>{% endif %}</p>
 <h1 class="text-xl font-semibold mt-1">{{ place.name }}</h1>
-<p class="text-sm text-gray-600">{{ place.get_kind_display }} · GEOID {{ place.geoid }} · {{ datasets|length }} dataset{{ datasets|length|pluralize }} found</p>
+<p class="text-sm text-gray-600">{{ place.get_kind_display }} · GEOID {{ place.geoid }} · {{ recordsets|length }} record set{{ recordsets|length|pluralize }} · {{ aggregates|length }} statistical dataset{{ aggregates|length|pluralize }} · {{ datasets|length }} GIS layer{{ datasets|length|pluralize }}</p>
 
 <div class="grid gap-6 lg:grid-cols-3 mt-4">
   <div class="lg:col-span-2 space-y-4">
+    {% if recordsets %}
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Records in {{ place.short_name }} <span class="font-normal text-gray-500">({{ recordsets|length }} record set{{ recordsets|length|pluralize }})</span></div>
+      <ul class="divide-y divide-gray-100 text-sm">
+        {% for rs, n, entry in recordsets %}
+          <li class="px-4 py-2 flex justify-between gap-3">
+            <span><a class="link" href="{% url 'records:recordset_table' rs.slug %}?place={{ place.slug }}">{{ rs.name }}</a>{% if entry.unit %} <span class="text-xs text-gray-500">{{ entry.unit }}</span>{% endif %}</span>
+            <span class="text-gray-500 tabular-nums whitespace-nowrap">{{ n|intcomma }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    {% if aggregates %}
+    <div class="card">
+      <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Statistics about {{ place.short_name }} <span class="font-normal text-gray-500">({{ aggregates|length }})</span></div>
+      <ul class="divide-y divide-gray-100 text-sm">
+        {% for d in aggregates %}
+          <li class="px-4 py-2">
+            <div>{{ d.name }}</div>
+            <div class="text-xs text-gray-500">{{ d.period|default:"" }}{% if d.period and d.source %} · {% endif %}{{ d.source|default:"" }}</div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    {% if by_topic %}<h2 class="text-sm font-medium text-gray-700 pt-2">GIS layers</h2>{% endif %}
     {% for topic, items in by_topic.items %}
     <div class="card">
       <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">{{ topic }} <span class="font-normal text-gray-500">({{ items|length }})</span></div>
@@ -21,20 +48,23 @@
         {% endfor %}
       </ul>
     </div>
-    {% empty %}
+    {% endfor %}
+    {% if not recordsets and not aggregates and not by_topic %}
     <div class="card p-4 text-sm text-gray-600">
-      No datasets credited to {{ place.name }} yet. Either it doesn't publish GIS data on a source in the census, or that source isn't mapped to it.
+      Nothing in the archive is tied to {{ place.name }} yet: no records, statistics or GIS layers.
       {% if place.parent %}See also <a class="link" href="{{ place.parent.get_absolute_url }}">{{ place.parent }}</a>.{% endif %}
     </div>
-    {% endfor %}
+    {% elif not by_topic %}
+    <p class="text-xs text-gray-500">No GIS layers credited to {{ place.short_name }}: either it doesn't publish GIS data on a source in the census, or that source isn't mapped to it.</p>
+    {% endif %}
   </div>
 
   <div class="space-y-4">
     <div class="card overflow-hidden"><div id="map" class="h-64"></div></div>
     {% if datasets %}
     <div class="card p-4 text-sm">
-      <h2 class="font-medium mb-2">Not found here</h2>
-      <p class="text-gray-600 text-xs mb-2">Topics with no datasets credited to {{ place.short_name }}:</p>
+      <h2 class="font-medium mb-2">GIS topics not found here</h2>
+      <p class="text-gray-600 text-xs mb-2">Topics with no GIS layers credited to {{ place.short_name }}:</p>
       <div class="flex flex-wrap gap-1">{% for t in missing_topics %}<span class="pill">{{ t.name }}</span>{% empty %}<span class="text-xs text-gray-500">None: every topic has at least one dataset.</span>{% endfor %}</div>
     </div>
     {% endif %}

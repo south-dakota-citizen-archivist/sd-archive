@@ -26,6 +26,8 @@ from census.models import (
 )
 from core.tasks import start_crawl, start_harvest
 from places.models import Jurisdiction
+from records import catalog
+from records.models import Record, RecordSet
 from sdgis.arcgis import client
 
 PAGE_SIZE = 50
@@ -206,8 +208,28 @@ def place_detail(request: HttpRequest, slug: str) -> HttpResponse:
             n_datasets=Count("datasets", filter=Q(datasets__removed_at=None))
         ).defer("boundary"),
         "boundary": place.boundary.geojson if place.boundary else "null",
+        "recordsets": records_in(place),
+        "aggregates": catalog.aggregates_for(place),
     }
     return render(request, "census/place_detail.html", context)
+
+
+def records_in(place) -> list:
+    """Record sets with current records tied to the place, and how many. Counted once every
+    ten minutes: the state's take seconds (nearly every record is tied to it)."""
+    from django.core.cache import cache
+
+    counts = cache.get_or_set(
+        f"place-record-counts:{place.pk}",
+        lambda: dict(
+            Record.places.through.objects.filter(jurisdiction=place, record__dropped_at=None)
+            .values_list("record__recordset")
+            .annotate(n=Count("id"))
+        ),
+        600,
+    )
+    found = RecordSet.objects.filter(pk__in=counts).order_by("name")
+    return [(rs, counts[rs.pk], catalog.datasets().get(rs.dataset, {})) for rs in found]
 
 
 def coverage(request: HttpRequest) -> HttpResponse:
