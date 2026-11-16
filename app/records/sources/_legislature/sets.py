@@ -119,7 +119,7 @@ def sessions(fetcher=None) -> Found:
                 data["dates"] = {"start": when.get("start_date"), "end": when.get("end_date"),
                                  "from": url}  # fmt: skip
             keep_dropped_session_links(data, sid)
-            yield Item(key=str(sid), data=data, source_url=api_url(f"Sessions/{sid}"),
+            yield Item(key=str(sid), data=data, source_url=f"{SITE}Session/Bills/{sid}",
                        places=[STATE])  # fmt: skip
 
     return _found(build())
@@ -336,7 +336,7 @@ def roll_calls(fetcher=None) -> Found:
             if data:
                 keep_earlier(data, ["PresidentVote"], repo.get(vid, (None, "")))
                 earlier += "earlier" in data
-                yield Item(key=vid, data=data, source_url=api_url(f"Votes/{vid}"),
+                yield Item(key=vid, data=data, source_url=f"{SITE}Session/Vote/{vid}",
                            places=[STATE])  # fmt: skip
 
     items = list(build())

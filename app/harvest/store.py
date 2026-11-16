@@ -1,6 +1,7 @@
 """Turn a layer's download into items for its record set (records.ingest stores them).
 
-Each feature is keyed by its object ID (or, without one, by its content hash).
+Each feature is keyed by its object ID (or, without one, by its content hash), and links to
+itself on the publisher's server: the layer's query for that one object, as an HTML page.
 """
 
 import hashlib
@@ -13,8 +14,13 @@ from records.models import Run
 from records.sources import Item
 
 
-def prepare(df: gpd.GeoDataFrame, oid_field: str | None) -> list[Item]:
-    """Turn a download into JSON-safe items with stable keys and content hashes."""
+def feature_url(layer_url: str, oid) -> str:
+    """One feature on the publisher's server, as the layer's query for it (an HTML page)."""
+    return f"{layer_url.rstrip('/')}/query?objectIds={oid}&outFields=*&f=html"
+
+
+def prepare(df: gpd.GeoDataFrame, oid_field: str | None, layer_url: str = "") -> list[Item]:
+    """Turn a download into JSON-safe items with stable keys, content hashes and links."""
     has_geometry = isinstance(df, gpd.GeoDataFrame) and df._geometry_column_name in df.columns
     attrs = df.drop(columns=df.geometry.name) if has_geometry else df
     # to_json handles NaN → null, numpy scalars and timestamps (ISO 8601) consistently
@@ -29,7 +35,9 @@ def prepare(df: gpd.GeoDataFrame, oid_field: str | None) -> list[Item]:
         content_hash = digest.hexdigest()
         oid = props.get(oid_field) if oid_field else None
         key = str(oid) if oid is not None else content_hash
-        items.append(Item(key=key, data=props, geometry=wkb, content_hash=content_hash))
+        url = feature_url(layer_url, oid) if (layer_url and oid is not None) else layer_url
+        items.append(Item(key=key, data=props, geometry=wkb, content_hash=content_hash,
+                          source_url=url))  # fmt: skip
     return items
 
 
