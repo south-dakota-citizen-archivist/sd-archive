@@ -213,3 +213,77 @@ def test_running_finders_queues_a_job(client, db, monkeypatch):
     client.post("/gis/candidates/find/", {"finder": ["hosts"]})
     (job,) = queued
     assert job.kind == "find" and job.args == {"finders": ["hosts"]}
+
+
+def candidate(url, title="", owners=(), n=1):
+    from census.models import SourceCandidate
+
+    return SourceCandidate.objects.create(
+        url=url, title=title, found_via="ArcGIS Online",
+        evidence={"counts": {"ArcGIS Online": n},
+                  "examples": {"ArcGIS Online": [{"item": "x", "title": "South Dakota roads",
+                                                  "owner": o} for o in owners]}})  # fmt: skip
+
+
+def test_candidates_sorted_by_publisher(db):
+    from census import candidates as triage
+
+    def kind(c):
+        return triage.classify(c)[0]
+
+    assert kind(candidate("https://gis.lincolncountysd.gov/arcgis/rest/services")) == (
+        triage.SD_GOVERNMENT)  # fmt: skip
+    assert kind(candidate("https://dotgis.sd.gov/rest/services")) == triage.SD_GOVERNMENT
+    assert kind(candidate("https://gis.ne.gov/rest/services")) == triage.GOVERNMENT
+    assert kind(candidate("https://services1.arcgis.com/a/arcgis/rest/services", "CityofTea")) == (
+        triage.NAMED)  # fmt: skip
+    assert kind(candidate("https://services1.arcgis.com/b/arcgis/rest/services", "x",
+                          ["BIT.GIS.Dev"])) == triage.NAMED  # fmt: skip
+    # an item's title naming South Dakota says nothing about who publishes it
+    assert kind(candidate("https://services1.arcgis.com/c/arcgis/rest/services", "Esri",
+                          ["mikel2"])) == triage.OTHER  # fmt: skip
+    # "danr" inside a word isn't DANR
+    assert kind(candidate("https://services1.arcgis.com/d/arcgis/rest/services",
+                          "USDA NRCS ArcGIS Online")) == triage.OTHER  # fmt: skip
+
+
+def test_candidate_pages(client, db, monkeypatch):
+    c = candidate("https://gis.example.gov/arcgis/rest/services", "Example", ["owner1"], n=3)
+    other = candidate("https://services1.arcgis.com/z/arcgis/rest/services", "Someone")
+    page = client.get("/gis/candidates/").content.decode()
+    assert page.index("Example") < page.index("Someone")  # governments first
+    c.scan = {"services": [{"name": "Roads", "type": "MapServer", "url": "u", "folder": "",
+                            "error": ""}],
+              "layers": [{"url": f"{c.url}/Roads/MapServer/0", "service": "Roads",
+                          "service_type": "MapServer", "folder": "", "name": "Centerlines",
+                          "kind": "layer", "geometry_type": "Polyline", "count": 5619,
+                          "description": "", "fields": [{"name": "NAME", "type":
+                                                         "esriFieldTypeString", "alias": ""}],
+                          "edited_at": None, "error": ""}],
+              "folder_errors": {}, "timed_out": False, "features": 5619}  # fmt: skip
+    c.scanned_at = c.created_at
+    c.save()
+    detail = client.get(f"/gis/candidates/{c.pk}/").content.decode()
+    assert "Centerlines" in detail and "5,619" in detail and "Map a sample" in detail
+    assert "?f=json" not in detail  # the directory links to its own pages
+    # a sample only from a layer in this directory
+    bad = client.get(f"/gis/candidates/{c.pk}/sample/?url=https://elsewhere.example/x/MapServer/0")
+    assert bad.status_code == 400
+    client.post("/gis/candidates/reject/", {"pk": [other.pk], "notes": "a student's maps"})
+    other.refresh_from_db()
+    assert other.status == "rejected" and other.notes == "a student's maps"
+
+
+def test_scanning_a_candidate(db, monkeypatch):
+    from census import candidates as triage
+    from sdgis.arcgis import directory
+
+    c = candidate("https://gis.example.gov/arcgis/rest/services")
+    found = directory.DirectoryScan(root=c.url, services=[directory.ServiceInfo(
+        name="Roads", type="MapServer", url=f"{c.url}/Roads/MapServer")],
+        layers=[directory.LayerInfo(url=f"{c.url}/Roads/MapServer/0", service="Roads",
+                                    service_type="MapServer", name="Centerlines",
+                                    geometry_type="esriGeometryPolyline", count=12)])  # fmt: skip
+    monkeypatch.setattr(directory, "scan", lambda *a, **k: found)
+    summary = triage.scan(c)
+    assert summary["features"] == 12 and summary["layers"][0]["geometry_type"] == "Polyline"

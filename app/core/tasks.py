@@ -47,6 +47,18 @@ def start_crawl(source) -> Job:
     return enqueue(create_job("crawl", source), crawl_source_task)
 
 
+def start_candidate_scan(candidate) -> Job:
+    """Scan a candidate's directory now, in a thread of this process: someone reviewing it
+    is waiting on it, and no worker need be running. It's a job like any other."""
+    import threading
+
+    from census.tasks import scan_candidate_task
+
+    job = create_job("scan", candidate)
+    threading.Thread(target=scan_candidate_task, args=(job.pk,), daemon=True).start()
+    return job
+
+
 def start_harvest(dataset, force: bool = False) -> Job:
     from harvest.tasks import harvest_dataset_task
 

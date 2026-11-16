@@ -464,16 +464,88 @@ def changes(request: HttpRequest) -> HttpResponse:
 
 
 def candidate_list(request: HttpRequest) -> HttpResponse:
-    """GIS servers the finders turned up, waiting for review."""
+    """GIS servers the finders turned up, waiting for review: South Dakota governments'
+    first, then those whose organization or owners name a South Dakota place or agency, then
+    other governments', then the rest; each by how many South Dakota items point at it."""
+    from census import candidates as triage
+
     status = request.GET.get("status", SourceCandidate.Status.PENDING)
+    kind = request.GET.get("kind", "")
     counts = dict(SourceCandidate.objects.values_list("status").annotate(n=Count("id")))
-    found = sorted(SourceCandidate.objects.filter(status=status).select_related("source"),
-                   key=lambda c: (-c.n_evidence, c.url))  # fmt: skip
+    rows = []
+    for c in SourceCandidate.objects.filter(status=status).select_related("source"):
+        k, why = triage.classify(c)
+        rows.append({"c": c, "kind": k, "why": why, "owners": triage.owners(c)[:4]})
+    kinds = {k: sum(r["kind"] == k for r in rows) for k in triage.ORDER}
+
+    def rank(r):
+        return triage.ORDER[r["kind"]], -r["c"].n_evidence, r["c"].url
+
+    rows = sorted((r for r in rows if not kind or r["kind"] == kind), key=rank)
     return render(request, "census/candidate_list.html", {
-        "candidates": found, "status": status,
+        "rows": rows, "status": status, "kind": kind, "kinds": kinds.items(),
         "tabs": [(v, label, counts.get(v, 0)) for v, label in SourceCandidate.Status.choices],
         "finders": FINDERS,
     })  # fmt: skip
+
+
+def candidate_detail(request: HttpRequest, pk: int) -> HttpResponse:
+    """A candidate with what the finders saw and, once scanned, every service and layer in
+    its directory, each layer's fields and a sample of its features on a map."""
+    from census import candidates as triage
+    from core.models import Job
+
+    c = get_object_or_404(SourceCandidate.objects.select_related("source"), pk=pk)
+    kind, why = triage.classify(c)
+    job = (Job.objects.filter(target_type="census.sourcecandidate", target_id=c.pk, kind="scan")
+           .order_by("-created_at").first())  # fmt: skip
+    scanning = job is not None and job.status in (Job.Status.PENDING, Job.Status.RUNNING)
+    services: dict[str, list] = {}
+    for layer in (c.scan or {}).get("layers", []):
+        services.setdefault(f"{layer['folder'] + '/' if layer['folder'] else ''}"
+                            f"{layer['service'].split('/')[-1]} ({layer['service_type']})",
+                            []).append(layer)  # fmt: skip
+    context = {"c": c, "kind": kind, "why": why, "owners": triage.owners(c), "job": job,
+               "scanning": scanning, "services": sorted(services.items())}  # fmt: skip
+    if request.headers.get("HX-Request"):
+        return render(request, "census/_candidate_scan.html", context)
+    return render(request, "census/candidate_detail.html", context)
+
+
+@require_POST
+def candidate_scan(request: HttpRequest, pk: int) -> HttpResponse:
+    from core.tasks import start_candidate_scan
+
+    start_candidate_scan(get_object_or_404(SourceCandidate, pk=pk))
+    return redirect("census:candidate_detail", pk=pk)
+
+
+def candidate_sample(request: HttpRequest, pk: int) -> JsonResponse:
+    """Up to 200 of a layer's features, as GeoJSON, straight from the candidate's server."""
+    from census import candidates as triage
+
+    c = get_object_or_404(SourceCandidate, pk=pk)
+    url = request.GET.get("url", "")
+    if not triage.layer_belongs(c, url):
+        return JsonResponse({"error": "not a layer in this directory"}, status=400)
+    try:
+        df = client.preview_features(client.make_session(retries=1), url, limit=200)
+    except Exception as e:
+        return JsonResponse({"error": f"{type(e).__name__}: {e}"}, status=502)
+    return JsonResponse(preview_geojson(df), content_type="application/geo+json")
+
+
+@require_POST
+def candidate_bulk(request: HttpRequest) -> HttpResponse:
+    """Reject the candidates ticked on the list (with a note)."""
+    chosen = [int(p) for p in request.POST.getlist("pk") if p.isdigit()]
+    n = SourceCandidate.objects.filter(pk__in=chosen, status=SourceCandidate.Status.PENDING
+                                       ).update(status=SourceCandidate.Status.REJECTED,
+                                                reviewed_at=timezone.now(),
+                                                notes=request.POST.get("notes", ""))  # fmt: skip
+    messages.success(request, f"Rejected {n} candidate{'s' if n != 1 else ''}.")
+    back = request.POST.get("back", "")
+    return redirect(f"{reverse('census:candidate_list')}{'?' + back if back else ''}")
 
 
 @require_POST
@@ -485,6 +557,9 @@ def candidate_review(request: HttpRequest, pk: int) -> HttpResponse:
     else:
         candidate.status, candidate.reviewed_at = SourceCandidate.Status.PENDING, None
     candidate.save(update_fields=["status", "reviewed_at", "notes"])
+    nxt = request.POST.get("next", "")
+    if nxt.startswith("/gis/candidates/"):
+        return redirect(nxt)
     back = request.POST.get("back") or SourceCandidate.Status.PENDING
     return redirect(f"{reverse('census:candidate_list')}?status={back}")
 

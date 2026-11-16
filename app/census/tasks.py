@@ -33,3 +33,26 @@ def find_sources_task(job_id: int) -> dict:
     job = Job.objects.get(pk=job_id)
     run_job(job, lambda: run(job.args.get("finders")))
     return job.result
+
+
+@shared_task(name="census.tasks.scan_candidate_task")
+def scan_candidate_task(job_id: int) -> dict:
+    """List a candidate's services and layers, for review (nothing goes into the census)."""
+    from django.utils import timezone
+
+    from census import candidates
+    from census.models import SourceCandidate
+
+    job = Job.objects.get(pk=job_id)
+    candidate = SourceCandidate.objects.get(pk=job.target_id)
+
+    def work() -> dict:
+        candidate.scan = candidates.scan(candidate)
+        candidate.scanned_at = timezone.now()
+        candidate.save(update_fields=["scan", "scanned_at"])
+        return {"services": len(candidate.scan["services"]),
+                "layers": len(candidate.scan["layers"]),
+                "features": candidate.scan["features"]}  # fmt: skip
+
+    run_job(job, work)
+    return job.result

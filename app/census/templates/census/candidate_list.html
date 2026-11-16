@@ -10,54 +10,78 @@
     <button class="btn btn-primary whitespace-nowrap">Run finders</button>
   </form>
 </div>
-<p class="text-sm text-gray-600 mb-4">Services directories the finders turned up that aren't sources yet: from ArcGIS Online items and web maps inside South Dakota, and from governments' own web domains. <b>Add</b> opens the Add a GIS server form filled in; a rejected candidate stays rejected when a finder sees it again.</p>
+<p class="text-sm text-gray-600 mb-4 max-w-4xl">Services directories the finders turned up that aren't sources yet: from ArcGIS Online items and web maps inside South Dakota, and from governments' own web domains. They're sorted by who publishes them: South Dakota governments first, then organizations and owners that name a South Dakota county, city, school district, tribe or state agency, then other governments, then the rest; within each, by how many South Dakota items point at them. Open one to scan its layers, see their fields and map a sample. <b>Add</b> opens the Add a GIS server form filled in; a rejected candidate stays rejected when a finder sees it again.</p>
 
-<div class="flex gap-4 border-b border-gray-200 mb-4 text-sm">
+<div class="flex gap-4 border-b border-gray-200 mb-3 text-sm">
   {% for value, label, n in tabs %}
   <a href="?status={{ value }}" class="pb-2 -mb-px {% if value == status %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">{{ label|capfirst }} <span class="text-gray-500">{{ n }}</span></a>
   {% endfor %}
 </div>
-
-{% if candidates %}
-<div class="card overflow-x-auto">
-  <table class="tbl">
-    <thead><tr><th>Directory</th><th>Found by</th><th class="text-right">Evidence</th><th>Examples</th><th>Last seen</th><th></th></tr></thead>
-    <tbody>
-      {% for c in candidates %}
-      <tr class="align-top">
-        <td class="max-w-xs">
-          <div class="font-medium">{{ c.title|default:"—" }}</div>
-          <a class="link text-xs break-all" href="{{ c.url }}?f=json" target="_blank" rel="noopener">{{ c.url }}</a>
-          {% if c.source %}<div class="text-xs mt-1">→ <a class="link" href="{{ c.source.get_absolute_url }}">{{ c.source }}</a></div>{% endif %}
-          {% if c.notes %}<div class="text-xs text-gray-500 mt-1">{{ c.notes }}</div>{% endif %}
-        </td>
-        <td class="text-xs whitespace-nowrap">{{ c.found_via }}</td>
-        <td class="text-right tabular-nums">{{ c.n_evidence|intcomma }}</td>
-        <td class="text-xs max-w-md">
-          {% for finder, examples in c.evidence.examples.items %}
-            {% for e in examples|slice:":3" %}
-              <div class="truncate">
-              {% if e.item %}<a class="link" href="https://www.arcgis.com/home/item.html?id={{ e.item }}" target="_blank" rel="noopener">{{ e.title|default:e.item }}</a> <span class="text-gray-500">{{ e.type }}{% if e.owner %} · {{ e.owner }}{% endif %}</span>
-              {% else %}{{ e.host }} <span class="text-gray-500">{{ e.host_from }}; {{ e.domain_from }}{% if e.listed %} · {{ e.listed }} listed{% endif %}</span>{% endif %}
-              </div>
-            {% endfor %}
-          {% endfor %}
-        </td>
-        <td class="whitespace-nowrap text-gray-500 text-xs">{{ c.last_seen_at|naturaltime|default:"" }}</td>
-        <td class="whitespace-nowrap">
-          {% if c.status == "pending" %}
-          <a class="btn btn-primary" href="{% url 'census:source_add' %}?url={{ c.url|urlencode }}&name={{ c.title|urlencode }}&found_via={{ c.found_via|urlencode }}">Add</a>
-          <form method="post" action="{% url 'census:candidate_review' c.pk %}" class="inline">{% csrf_token %}<input type="hidden" name="action" value="reject"><input type="hidden" name="back" value="{{ status }}"><button class="btn">Reject</button></form>
-          {% elif c.status == "rejected" %}
-          <form method="post" action="{% url 'census:candidate_review' c.pk %}" class="inline">{% csrf_token %}<input type="hidden" name="action" value="reopen"><input type="hidden" name="back" value="{{ status }}"><button class="btn">Reopen</button></form>
-          {% endif %}
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="flex flex-wrap gap-2 mb-4 text-sm">
+  <a href="?status={{ status }}" class="px-2 py-0.5 rounded-full border {% if not kind %}bg-blue-600 text-white border-blue-600{% else %}border-gray-300 text-gray-700 hover:border-blue-400{% endif %}">All</a>
+  {% for k, n in kinds %}
+  <a href="?status={{ status }}&kind={{ k|urlencode }}" class="px-2 py-0.5 rounded-full border {% if kind == k %}bg-blue-600 text-white border-blue-600{% else %}border-gray-300 text-gray-700 hover:border-blue-400{% endif %}">{{ k|capfirst }} <span class="{% if kind == k %}text-blue-100{% else %}text-gray-500{% endif %}">{{ n }}</span></a>
+  {% endfor %}
 </div>
+
+{% if rows %}
+<form method="post" action="{% url 'census:candidate_bulk' %}" id="bulk">
+  {% csrf_token %}
+  <input type="hidden" name="back" value="{{ request.GET.urlencode }}">
+  {% if status == "pending" %}
+  <div class="flex flex-wrap items-center gap-2 mb-2 text-sm">
+    <label class="whitespace-nowrap"><input type="checkbox" id="all"> all shown</label>
+    <input name="notes" class="border border-gray-300 rounded px-2 py-0.5 w-72" placeholder="Note for the rejected (optional)">
+    <button class="btn" onclick="return confirm('Reject the ticked candidates?')">Reject ticked</button>
+  </div>
+  {% endif %}
+  <div class="card overflow-x-auto">
+    <table class="tbl">
+      <thead><tr>{% if status == "pending" %}<th></th>{% endif %}<th>Directory</th><th>Publisher</th><th class="text-right">SD items</th><th>Examples</th><th></th></tr></thead>
+      <tbody>
+        {% for r in rows %}{% with c=r.c %}
+        <tr class="align-top">
+          {% if status == "pending" %}<td><input type="checkbox" name="pk" value="{{ c.pk }}" class="pick"></td>{% endif %}
+          <td class="max-w-xs">
+            <a class="link font-medium" href="{% url 'census:candidate_detail' c.pk %}">{{ c.title|default:"(untitled)" }}</a>
+            <div><a class="text-xs text-gray-500 hover:text-blue-700 break-all" href="{{ c.url }}" target="_blank" rel="noopener">{{ c.url }}</a></div>
+            {% if c.scanned_at %}<div class="text-xs text-gray-500 mt-1">scanned: {{ c.scan.layers|length }} layer{{ c.scan.layers|length|pluralize }}, {{ c.scan.features|intcomma }} features</div>{% endif %}
+            {% if c.source %}<div class="text-xs mt-1">→ <a class="link" href="{{ c.source.get_absolute_url }}">{{ c.source }}</a></div>{% endif %}
+            {% if c.notes %}<div class="text-xs text-gray-500 mt-1">{{ c.notes }}</div>{% endif %}
+          </td>
+          <td class="text-xs max-w-[16rem]">
+            <span class="inline-block px-1.5 py-0.5 rounded {% if r.kind == 'South Dakota government' %}bg-green-100 text-green-900{% elif r.kind == 'other' %}bg-gray-100 text-gray-700{% else %}bg-blue-50 text-blue-900{% endif %}">{{ r.kind }}</span>
+            {% if r.why %}<div class="text-gray-600 mt-1">{{ r.why }}</div>{% endif %}
+            {% if r.owners %}<div class="text-gray-500 mt-1 break-all">owners: {{ r.owners|join:", " }}</div>{% endif %}
+            <div class="text-gray-400 mt-1">{{ c.found_via }}</div>
+          </td>
+          <td class="text-right tabular-nums">{{ c.n_evidence|intcomma }}</td>
+          <td class="text-xs max-w-md">
+            {% for finder, examples in c.evidence.examples.items %}
+              {% for e in examples|slice:":3" %}
+                <div class="truncate">
+                {% if e.item %}<a class="link" href="https://www.arcgis.com/home/item.html?id={{ e.item }}" target="_blank" rel="noopener">{{ e.title|default:e.item }}</a> <span class="text-gray-500">{{ e.type }}</span>
+                {% else %}{{ e.host }} <span class="text-gray-500">{{ e.host_from }}; {{ e.domain_from }}{% if e.listed %} · {{ e.listed }} listed{% endif %}</span>{% endif %}
+                </div>
+              {% endfor %}
+            {% endfor %}
+          </td>
+          <td class="whitespace-nowrap"><div class="flex flex-col gap-1">
+            <a class="btn text-center" href="{% url 'census:candidate_detail' c.pk %}">Look</a>
+            {% if c.status == "pending" %}<a class="btn btn-primary text-center" href="{% url 'census:source_add' %}?url={{ c.url|urlencode }}&name={{ c.title|urlencode }}&found_via={{ c.found_via|urlencode }}">Add</a>{% endif %}
+          </div></td>
+        </tr>
+        {% endwith %}{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</form>
+<script>
+document.getElementById("all")?.addEventListener("change", (e) => {
+  document.querySelectorAll("input.pick").forEach((b) => (b.checked = e.target.checked));
+});
+</script>
 {% else %}
-<p class="text-sm text-gray-500">None {{ status }}.{% if status == "pending" %} Run the finders to look for more.{% endif %}</p>
+<p class="text-sm text-gray-500">None {{ status }}{% if kind %} of this kind{% endif %}.{% if status == "pending" %} Run the finders to look for more.{% endif %}</p>
 {% endif %}
 {% endblock %}

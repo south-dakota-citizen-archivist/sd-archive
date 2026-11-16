@@ -1,0 +1,40 @@
+{% load humanize %}
+<div id="scan" {% if scanning %}hx-get="{% url 'census:candidate_detail' c.pk %}" hx-trigger="every 3s" hx-swap="outerHTML"{% endif %}>
+  {% if scanning %}
+  <p class="text-sm text-gray-600">Scanning the directory: listing its services and counting each layer's features ({{ job.get_status_display|lower }}, started {{ job.created_at|naturaltime }}). This page updates when it's done; a big directory can take a few minutes.</p>
+  {% else %}
+  <div class="flex flex-wrap items-center gap-3 mb-2 text-sm">
+    <form method="post" action="{% url 'census:candidate_scan' c.pk %}">{% csrf_token %}<button class="btn {% if not c.scanned_at %}btn-primary{% endif %}">{% if c.scanned_at %}Scan again{% else %}Scan this directory{% endif %}</button></form>
+    {% if c.scanned_at %}
+    <span class="text-gray-600">Scanned {{ c.scanned_at|naturaltime }}: {{ c.scan.services|length }} service{{ c.scan.services|length|pluralize }}, {{ c.scan.layers|length }} layer{{ c.scan.layers|length|pluralize }}, {{ c.scan.features|intcomma }} features{% if c.scan.timed_out %} <b class="text-amber-800">(stopped at the time limit: not everything was listed)</b>{% endif %}</span>
+    <input id="layer-filter" class="border border-gray-300 rounded px-2 py-0.5 ml-auto" placeholder="Filter layers">
+    {% elif not job %}<span class="text-gray-500">Lists every service and layer, with feature counts and fields; nothing is added to the census.</span>{% endif %}
+    {% if job and job.status == "failed" %}<span class="text-red-700">The last scan failed: {{ job.error|truncatechars:200 }}</span>{% endif %}
+  </div>
+  {% if c.scan.folder_errors %}<p class="text-xs text-amber-800 mb-2">Folders that couldn't be read: {{ c.scan.folder_errors|length }}</p>{% endif %}
+  {% for service, layers in services %}
+  <div class="card overflow-x-auto mb-3">
+    <table class="tbl text-sm">
+      <thead><tr><th colspan="6">{{ service }}</th></tr></thead>
+      <tbody>
+      {% for l in layers %}
+        <tr class="layer align-top" data-text="{{ l.name|lower }} {{ service|lower }} {% for f in l.fields %}{{ f.name|lower }} {% endfor %}">
+          <td class="max-w-sm"><a class="link" href="{{ l.url }}" target="_blank" rel="noopener">{{ l.name|default:l.url }}</a>
+            {% if l.description %}<div class="text-xs text-gray-500 line-clamp-2">{{ l.description|striptags }}</div>{% endif %}
+            {% if l.error %}<div class="text-xs text-red-700">{{ l.error|truncatechars:160 }}</div>{% endif %}</td>
+          <td class="whitespace-nowrap text-gray-600">{% if l.kind == "table" %}table{% else %}{{ l.geometry_type|lower|default:"—" }}{% endif %}</td>
+          <td class="text-right tabular-nums whitespace-nowrap">{% if l.count is not None %}{{ l.count|intcomma }}{% else %}<span class="text-gray-400">?</span>{% endif %}</td>
+          <td class="whitespace-nowrap text-xs text-gray-500">{% if l.edited_at %}edited {{ l.edited_at|slice:":10" }}{% endif %}</td>
+          <td class="text-xs">{% if l.fields %}<details><summary class="cursor-pointer text-gray-600">{{ l.fields|length }} field{{ l.fields|length|pluralize }}</summary>
+            <ul class="mt-1 columns-2 gap-4">{% for f in l.fields %}<li class="break-all"><span class="font-mono">{{ f.name }}</span>{% if f.alias and f.alias != f.name %} <span class="text-gray-500">({{ f.alias }})</span>{% endif %} <span class="text-gray-400">{{ f.type|cut:"esriFieldType" }}</span></li>{% endfor %}</ul></details>{% endif %}</td>
+          <td class="whitespace-nowrap">{% if not l.error %}<button type="button" class="btn text-xs sample" data-url="{{ l.url }}" data-name="{{ l.name }}">{% if l.kind == "table" %}Sample rows{% else %}Map a sample{% endif %}</button>{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% empty %}
+  {% if c.scanned_at %}<p class="text-sm text-gray-500">The scan found no layers or tables{% if c.scan.services %} in its {{ c.scan.services|length }} service{{ c.scan.services|length|pluralize }}{% endif %}.</p>{% endif %}
+  {% endfor %}
+  {% endif %}
+</div>

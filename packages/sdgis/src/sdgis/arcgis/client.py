@@ -31,7 +31,57 @@ class ArcGISError(RuntimeError):
     """Raised when an ArcGIS server returns an error payload."""
 
 
-def make_session(retries: int = RETRIES) -> requests.Session:
+# hosts that turned a plain client away with a bot check: asked as Chrome from then on
+IMPERSONATED_HOSTS: set[str] = set()
+
+
+def _challenge(resp) -> bool:
+    if resp.status_code not in (403, 503):
+        return False
+    server = resp.headers.get("server", "").lower()
+    return "cloudflare" in server or "Just a moment" in resp.text[:4000]
+
+
+class _Session(requests.Session):
+    """A requests session that, when a host answers with a bot check, asks it again (and
+    from then on) as Chrome down to the TLS handshake (curl_cffi)."""
+
+    _curl = None
+
+    def _impersonating(self):
+        if self._curl is None:
+            from curl_cffi import requests as curl_requests
+
+            self._curl = curl_requests.Session(impersonate="chrome")
+        return self._curl
+
+    def request(self, method, url, **kwargs):
+        from urllib.parse import urlparse
+
+        host = urlparse(url).hostname or ""
+        if host in IMPERSONATED_HOSTS:
+            return self._impersonating().request(method, url, **_curl_kwargs(kwargs))
+        resp = super().request(method, url, **kwargs)
+        if _challenge(resp):
+            logger.info("%s turned a plain client away; asking as Chrome", host)
+            IMPERSONATED_HOSTS.add(host)
+            return self._impersonating().request(method, url, **_curl_kwargs(kwargs))
+        return resp
+
+
+def _curl_kwargs(kwargs: dict) -> dict:
+    return {k: v for k, v in kwargs.items()
+            if k in ("params", "data", "json", "headers", "timeout", "allow_redirects",
+                     "stream")}  # fmt: skip
+
+
+def make_session(retries: int = RETRIES, impersonate: bool = False) -> requests.Session:
+    """A session for ArcGIS requests, with retries; a host behind a bot check is asked as
+    Chrome (_Session). impersonate: as Chrome from the start, with no retries."""
+    if impersonate:
+        from curl_cffi import requests as curl_requests
+
+        return curl_requests.Session(impersonate="chrome")
     retry = Retry(
         total=retries,
         backoff_factor=2,
@@ -39,7 +89,7 @@ def make_session(retries: int = RETRIES) -> requests.Session:
         allowed_methods=("GET",),
     )
     adapter = HTTPAdapter(max_retries=retry)
-    session = requests.Session()
+    session = _Session()
     session.headers.update(BROWSER_HEADERS)
     session.mount("https://", adapter)
     session.mount("http://", adapter)

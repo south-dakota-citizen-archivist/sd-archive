@@ -21,5 +21,9 @@ urlpatterns = [
     path("gis/changes/", views.changes, name="changes"),
     path("gis/candidates/", views.candidate_list, name="candidate_list"),
     path("gis/candidates/find/", views.candidate_find, name="candidate_find"),
+    path("gis/candidates/reject/", views.candidate_bulk, name="candidate_bulk"),
+    path("gis/candidates/<int:pk>/", views.candidate_detail, name="candidate_detail"),
+    path("gis/candidates/<int:pk>/scan/", views.candidate_scan, name="candidate_scan"),
+    path("gis/candidates/<int:pk>/sample/", views.candidate_sample, name="candidate_sample"),
     path("gis/candidates/<int:pk>/review/", views.candidate_review, name="candidate_review"),
 ]

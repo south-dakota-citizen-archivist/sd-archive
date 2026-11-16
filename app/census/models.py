@@ -348,6 +348,10 @@ class SourceCandidate(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     last_seen_at = models.DateTimeField(null=True, blank=True, help_text="A finder's last sight")
     reviewed_at = models.DateTimeField(null=True, blank=True)
+    scan = models.JSONField(default=dict, blank=True,
+                            help_text="Its services and layers, from a scan for review "
+                                      "(census.candidates.summarize)")  # fmt: skip
+    scanned_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ["-created_at"]
