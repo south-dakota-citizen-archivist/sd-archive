@@ -29,6 +29,7 @@
           {% url 'census:source_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Sources</a>
           {% url 'census:coverage' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Coverage</a>
           {% url 'census:changes' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Changes</a>
+          {% url 'census:candidate_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Candidates</a>
         </div>
       </div>
       {% endif %}

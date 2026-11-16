@@ -52,6 +52,10 @@ manage *args:
 crawl *slugs:
     {{manage}} crawl {{slugs}}
 
+# Look for GIS servers the census doesn't have yet (all finders, or `just find hosts`); review them at /gis/candidates/
+find *finders:
+    caffeinate -i {{manage}} find_sources {{finders}}
+
 # Harvest watched GIS datasets now (all, or by id: `just harvest 641 --force`); kept awake, resumes if stopped
 harvest *args:
     caffeinate -i {{manage}} harvest {{args}}

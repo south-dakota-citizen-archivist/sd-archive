@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}GIS candidates · S.D. Archive{% endblock %}
+{% block content %}
+<div class="flex flex-wrap items-baseline justify-between gap-3 mb-2">
+  <h1 class="text-xl font-semibold">GIS candidates</h1>
+  <form method="post" action="{% url 'census:candidate_find' %}" class="flex flex-wrap items-center gap-3 text-sm">
+    {% csrf_token %}
+    {% for name in finders %}<label class="whitespace-nowrap"><input type="checkbox" name="finder" value="{{ name }}" checked> {{ name }}</label>{% endfor %}
+    <button class="btn btn-primary whitespace-nowrap">Run finders</button>
+  </form>
+</div>
+<p class="text-sm text-gray-600 mb-4">Services directories the finders turned up that aren't sources yet: from ArcGIS Online items and web maps inside South Dakota, and from governments' own web domains. <b>Add</b> opens the Add a GIS server form filled in; a rejected candidate stays rejected when a finder sees it again.</p>
+
+<div class="flex gap-4 border-b border-gray-200 mb-4 text-sm">
+  {% for value, label, n in tabs %}
+  <a href="?status={{ value }}" class="pb-2 -mb-px {% if value == status %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">{{ label|capfirst }} <span class="text-gray-500">{{ n }}</span></a>
+  {% endfor %}
+</div>
+
+{% if candidates %}
+<div class="card overflow-x-auto">
+  <table class="tbl">
+    <thead><tr><th>Directory</th><th>Found by</th><th class="text-right">Evidence</th><th>Examples</th><th>Last seen</th><th></th></tr></thead>
+    <tbody>
+      {% for c in candidates %}
+      <tr class="align-top">
+        <td class="max-w-xs">
+          <div class="font-medium">{{ c.title|default:"—" }}</div>
+          <a class="link text-xs break-all" href="{{ c.url }}?f=json" target="_blank" rel="noopener">{{ c.url }}</a>
+          {% if c.source %}<div class="text-xs mt-1">→ <a class="link" href="{{ c.source.get_absolute_url }}">{{ c.source }}</a></div>{% endif %}
+          {% if c.notes %}<div class="text-xs text-gray-500 mt-1">{{ c.notes }}</div>{% endif %}
+        </td>
+        <td class="text-xs whitespace-nowrap">{{ c.found_via }}</td>
+        <td class="text-right tabular-nums">{{ c.n_evidence|intcomma }}</td>
+        <td class="text-xs max-w-md">
+          {% for finder, examples in c.evidence.examples.items %}
+            {% for e in examples|slice:":3" %}
+              <div class="truncate">
+              {% if e.item %}<a class="link" href="https://www.arcgis.com/home/item.html?id={{ e.item }}" target="_blank" rel="noopener">{{ e.title|default:e.item }}</a> <span class="text-gray-500">{{ e.type }}{% if e.owner %} · {{ e.owner }}{% endif %}</span>
+              {% else %}{{ e.host }} <span class="text-gray-500">{{ e.host_from }}; {{ e.domain_from }}{% if e.listed %} · {{ e.listed }} listed{% endif %}</span>{% endif %}
+              </div>
+            {% endfor %}
+          {% endfor %}
+        </td>
+        <td class="whitespace-nowrap text-gray-500 text-xs">{{ c.last_seen_at|naturaltime|default:"" }}</td>
+        <td class="whitespace-nowrap">
+          {% if c.status == "pending" %}
+          <a class="btn btn-primary" href="{% url 'census:source_add' %}?url={{ c.url|urlencode }}&name={{ c.title|urlencode }}&found_via={{ c.found_via|urlencode }}">Add</a>
+          <form method="post" action="{% url 'census:candidate_review' c.pk %}" class="inline">{% csrf_token %}<input type="hidden" name="action" value="reject"><input type="hidden" name="back" value="{{ status }}"><button class="btn">Reject</button></form>
+          {% elif c.status == "rejected" %}
+          <form method="post" action="{% url 'census:candidate_review' c.pk %}" class="inline">{% csrf_token %}<input type="hidden" name="action" value="reopen"><input type="hidden" name="back" value="{{ status }}"><button class="btn">Reopen</button></form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p class="text-sm text-gray-500">None {{ status }}.{% if status == "pending" %} Run the finders to look for more.{% endif %}</p>
+{% endif %}
+{% endblock %}

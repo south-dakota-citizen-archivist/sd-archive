@@ -7,16 +7,21 @@ from django.db import transaction
 from django.db.models import Case, Count, Q, When
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.utils import timezone
 from django.views.decorators.http import require_POST
 from shapely.geometry import mapping
 
 from census import sources as new_sources
+from census.finders.run import FINDERS
+from census.finders.run import start as start_finders
 from census.models import (
     Crawl,
     Dataset,
     DatasetObservation,
     Publisher,
     Source,
+    SourceCandidate,
     Topic,
 )
 from core.tasks import start_crawl, start_harvest
@@ -315,7 +320,8 @@ def source_add(request: HttpRequest) -> HttpResponse:
             messages.success(request, "Source added and crawl queued. Watch it on the Jobs page.")
             return redirect(source)
     else:
-        form = {"name": new_sources.default_name(found.url)}
+        form = {"name": request.GET.get("name") or new_sources.default_name(found.url),
+                "found_via": request.GET.get("found_via", "")}  # fmt: skip
         rows = [(key, j.slug) for key, (j, _) in found.places.items()]
         errors = []
 
@@ -372,6 +378,11 @@ def create_source(found, form: dict, rows: list[tuple[str, str]]) -> tuple[list,
             folder_jurisdictions=mapping,
             found_via=form["found_via"],
         )
+        rest = found.url.split("://", 1)[1]
+        SourceCandidate.objects.filter(
+            Q(url__iexact=f"https://{rest}") | Q(url__iexact=f"http://{rest}")
+        ).update(status=SourceCandidate.Status.ACCEPTED, source=source,
+                 reviewed_at=timezone.now())  # fmt: skip
     return [], source
 
 
@@ -428,3 +439,37 @@ def changes(request: HttpRequest) -> HttpResponse:
         "census/changes.html",
         {"new": new, "removed": removed, "harvests": harvests, "crawls": crawls},
     )
+
+
+def candidate_list(request: HttpRequest) -> HttpResponse:
+    """GIS servers the finders turned up, waiting for review."""
+    status = request.GET.get("status", SourceCandidate.Status.PENDING)
+    counts = dict(SourceCandidate.objects.values_list("status").annotate(n=Count("id")))
+    found = sorted(SourceCandidate.objects.filter(status=status).select_related("source"),
+                   key=lambda c: (-c.n_evidence, c.url))  # fmt: skip
+    return render(request, "census/candidate_list.html", {
+        "candidates": found, "status": status,
+        "tabs": [(v, label, counts.get(v, 0)) for v, label in SourceCandidate.Status.choices],
+        "finders": FINDERS,
+    })  # fmt: skip
+
+
+@require_POST
+def candidate_review(request: HttpRequest, pk: int) -> HttpResponse:
+    candidate = get_object_or_404(SourceCandidate, pk=pk)
+    if request.POST.get("action") == "reject":
+        candidate.status, candidate.reviewed_at = SourceCandidate.Status.REJECTED, timezone.now()
+        candidate.notes = request.POST.get("notes", candidate.notes)
+    else:
+        candidate.status, candidate.reviewed_at = SourceCandidate.Status.PENDING, None
+    candidate.save(update_fields=["status", "reviewed_at", "notes"])
+    back = request.POST.get("back") or SourceCandidate.Status.PENDING
+    return redirect(f"{reverse('census:candidate_list')}?status={back}")
+
+
+@require_POST
+def candidate_find(request: HttpRequest) -> HttpResponse:
+    chosen = [f for f in request.POST.getlist("finder") if f in FINDERS]
+    start_finders(chosen or None)
+    messages.success(request, "Finders queued. Progress is on the Jobs page.")
+    return redirect("census:candidate_list")

@@ -346,10 +346,15 @@ class SourceCandidate(models.Model):
     source = models.ForeignKey(Source, null=True, blank=True, on_delete=models.SET_NULL)
     notes = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    last_seen_at = models.DateTimeField(null=True, blank=True, help_text="A finder's last sight")
     reviewed_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ["-created_at"]
+
+    @property
+    def n_evidence(self) -> int:
+        return sum(self.evidence.get("counts", {}).values())
 
     def __str__(self) -> str:
         return self.title or self.url

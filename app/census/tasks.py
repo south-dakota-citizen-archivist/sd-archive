@@ -24,3 +24,12 @@ def crawl_source_task(job_id: int) -> dict:
     source = Source.objects.get(pk=job.target_id)
     run_job(job, lambda: crawl_summary(crawl_source(source, job)))
     return job.result
+
+
+@shared_task(name="census.tasks.find_sources_task")
+def find_sources_task(job_id: int) -> dict:
+    from census.finders.run import run
+
+    job = Job.objects.get(pk=job_id)
+    run_job(job, lambda: run(job.args.get("finders")))
+    return job.result
