@@ -232,3 +232,36 @@ def test_a_run(db, sd_counties, monkeypatch, tmp_path):
     run = run_source("gis-data", fetcher=fetcher)
     assert [a["reports_read"] for a in run.checks["apps"].values()] == [0, 0]
     assert len(FakeSession.reports_asked) == 6
+
+
+def test_a_report_page_that_doesnt_load_is_waited_out_like_a_block():
+    from records.sources._map_app.session import Session
+
+    class TimeoutError(Exception):  # the browser library's, by name
+        pass
+
+    class Tab:
+        def __init__(self):
+            self.tries = 0
+
+        def is_closed(self):
+            return False
+
+        def goto(self, url, **kwargs):
+            self.tries += 1
+            if self.tries == 1:
+                raise TimeoutError("Page.goto: Timeout 90000ms exceeded.")
+            return type("Response", (), {"status": 200})()
+
+        def title(self):
+            return "Report"
+
+        def content(self):
+            return page("lawrence-report.html").decode()
+
+    waits = []
+    session = Session("App", "profile", sleep=waits.append, backoff=60.0)
+    session.config, session.tab, session.open_map = CONFIG, Tab(), lambda: None
+    session.accept_terms = lambda tab, wait: True
+    assert b"module-header" in session.report("041657")
+    assert session.tab.tries == 2 and any(w >= 45 for w in waits)  # a back-off, then the page

@@ -84,7 +84,7 @@ class Session:
             locale="en-US", args=["--window-size=1280,900"],
         )  # fmt: skip
         self.map = self._ctx.pages[0] if self._ctx.pages else self._ctx.new_page()
-        self.open_map()
+        self._retrying(self.open_map)
 
     def close(self) -> None:
         for close in (getattr(self._ctx, "close", None), getattr(self._pw, "stop", None)):
@@ -108,7 +108,7 @@ class Session:
 
     def open_map(self) -> None:
         """Open (or reopen) the map page and read its configuration."""
-        response = self.map.goto(self.map_url, wait_until="domcontentloaded", timeout=90000)
+        response = _goto(self.map, self.map_url, "map page")
         if not self._cleared(self.map) or (response and response.status in BLOCK_STATUSES
                                            and not self._has_map()):  # fmt: skip
             raise _BlockPage(f"map page: HTTP {response.status if response else '?'}")
@@ -205,7 +205,7 @@ class Session:
             new_tab = self.tab is None or self.tab.is_closed()
             if new_tab:
                 self.tab = self._ctx.new_page()
-            response = self.tab.goto(url, wait_until="domcontentloaded", timeout=90000)
+            response = _goto(self.tab, url, f"report {key}")
             if not self._cleared(self.tab):
                 raise _BlockPage(f"report {key}: interstitial page didn't go away")
             # the terms come up once per tab (or once per profile, depending on the app)
@@ -223,6 +223,17 @@ class Session:
 
 class _BlockPage(Exception):
     pass
+
+
+def _goto(page, url: str, what: str):
+    """Navigate; a page that doesn't load in time is the site holding back, treated as a
+    block (a pause, then another try) rather than an error."""
+    try:
+        return page.goto(url, wait_until="domcontentloaded", timeout=90000)
+    except Exception as e:
+        if type(e).__name__ == "TimeoutError":  # Playwright's and patchright's alike
+            raise _BlockPage(f"{what}: didn't load in 90 s") from e
+        raise
 
 
 def _is_challenge(text: str) -> bool:
