@@ -17,7 +17,7 @@ from pathlib import Path
 
 import pytest
 
-from records.sources.legislature_blue_book_bios import images, parse, source
+from records.sources.legislature_blue_book_bios import decisions, images, parse, source
 
 FIXTURES = Path(__file__).parent / "fixtures"
 MEMBERS = FIXTURES / "raw" / "legislature" / "api" / "Historical" / "Member"
@@ -141,3 +141,65 @@ def test_readings_agree_only_with_the_same_digits():
     assert source.agree("4605 S. Graceland Court", "4605 S. Graceiand Court")  # a letter slip
     assert not source.agree("13084 385th Avenue", "13034 385th Avenue")  # never a digit
     assert not source.agree("Frank 0", "Frank O. Lockner")
+
+
+def ewing_misread(raw) -> tuple[dict, dict]:
+    """Ewing's page with the legislature's OCR misreading the spouse, so the two readings
+    disagree (no third reading of this page)."""
+    path = raw / "raw" / "legislature" / "api" / "Historical" / "Member" / "3849.json"
+    member = json.loads(path.read_text())
+    pic = member["Pictures"][0]
+    pic["ParsedText"] = pic["ParsedText"].replace("Spouse: Sherry", "Spouse: Sberry")
+    path.write_text(json.dumps(member))
+    return member, pic
+
+
+def test_a_part_settled_by_hand(raw, tmp_path):
+    from sdfetch import Store
+
+    member, pic = ewing_misread(raw)
+    store = Store(raw / "raw" / "legislature")
+    data = source.page_item(member, pic, store, decided={}).data
+    assert data["unconfirmed"] == ["spouse"] and data["spouse"] is None
+    assert data["readings"]["spouse"] == {"legislature": "Sberry", "ours": "Sherry"}
+
+    path = tmp_path / "fixes.toml"
+    decisions.save({"image": "5067", "part": "spouse", "value": 'Sherry "Sher"',
+                    "from": "typed", "reason": "Checked."}, path)  # fmt: skip
+    decided = decisions.load(path)
+    assert decided[("5067", "spouse")]["value"] == 'Sherry "Sher"'  # quotes survive the file
+    data = source.page_item(member, pic, store, decided=decided).data
+    assert data["spouse"] == 'Sherry "Sher"' and data["unconfirmed"] == []
+    assert data["by_hand"]["spouse"]["from"] == "typed"
+    assert data["readings"]["spouse"]["legislature"] == "Sberry"  # the readings are kept
+
+
+def test_the_review_page(raw, tmp_path, db, client, monkeypatch):
+    from records.models import Record, RecordSet
+
+    monkeypatch.setattr(decisions, "PATH", tmp_path / "fixes.toml")
+    monkeypatch.setattr("records.ingest._sync_places", lambda *a: None)
+    member, pic = ewing_misread(raw)
+    rs = RecordSet.objects.create(slug="legislature-blue-book-bios", name="B",
+                                  dataset="legislature")  # fmt: skip
+    from sdfetch import Store
+
+    item = source.page_item(member, pic, Store(raw / "raw" / "legislature"))
+    from django.utils import timezone
+
+    record = Record.objects.create(recordset=rs, key=item.key, data=item.data,
+                                   content_hash=item.content_hash,
+                                   first_seen=timezone.now())  # fmt: skip
+    url = "/records/legislature-blue-book-bios/review/"
+    page = client.get(url).content.decode()
+    assert "Bob Ewing" in page and '<mark class="bg-amber-100 rounded-sm">Sberry</mark>' in page
+    assert client.get("/records/legislature-blue-book-bios/images/5067.webp").status_code == 200
+
+    client.post(f"{url}{record.pk}/",
+                {"part": "spouse", "from": "ours", "value": "Sherry", "reason": ""})  # fmt: skip
+    record.refresh_from_db()
+    assert record.data["spouse"] == "Sherry" and record.data["unconfirmed"] == []
+    assert record.data["by_hand"]["spouse"] == {
+        "from": "ours", "reason": "Checked against the page image.",
+        "checked": record.data["by_hand"]["spouse"]["checked"]}  # fmt: skip
+    assert "Nothing to check" in client.get(url).content.decode()

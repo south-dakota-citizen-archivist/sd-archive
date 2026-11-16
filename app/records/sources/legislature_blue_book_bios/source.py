@@ -10,9 +10,10 @@ counties, address, birth, spouse, children, email, committees, occupation, …; 
 from both readings, and a part's value is kept only where the two readings agree. Where they
 don't, the page is read a third time (Apple Vision) and a part two of the three agree on is
 kept and listed in `two_of_three`. Otherwise the readings are kept under `readings` and the
-part is listed in `unconfirmed`. Before comparing, each reading is cut to the legislator's own
-bio (parse.own_bio): an image can take in the end of the bio above or the start of the one
-below. The Biographical Directory's prose is kept as text.
+part is listed in `unconfirmed`, until someone settles it against the page image (the review
+page; decisions in fixes.toml, listed on the record under `by_hand`). Before comparing, each
+reading is cut to the legislator's own bio (parse.own_bio): an image can take in the end of
+the bio above or the start of the one below. The Biographical Directory's prose is kept as text.
 
 Party and counties are checked against the member's services in the Historical Listing for
 the book's year (`listing_party`, `party_agrees`). Records link to the member's profile
@@ -30,7 +31,7 @@ from entities.mentions import from_text
 from records.sources import Found, Item, Source
 from records.sources._legislature.build import SITE, raw_root
 
-from . import parse
+from . import decisions, parse
 from .images import image_id, image_name
 from .ocr import TIEBREAK, ocr_name
 
@@ -96,7 +97,10 @@ def listing_party(member: dict, year: int | None) -> str | None:
     return None
 
 
-def page_item(member: dict, picture: dict, store) -> Item:
+def page_item(member: dict, picture: dict, store, decided: dict | None = None) -> Item:
+    """One page's record. `decided`: the hand decisions (decisions.load()), by image and
+    part; one settles a part the readings leave unconfirmed."""
+    decided = decisions.load() if decided is None else decided
     mid, title = member["MemberId"], picture["Title"]
     year = int(title[:4]) if title[:4].isdigit() else None
     image = image_id(picture)
@@ -119,7 +123,7 @@ def page_item(member: dict, picture: dict, store) -> Item:
         first = parse.read(picture.get("ParsedText") or "", last[0])
         second = parse.read(ours["text"], last[0]) if ours else {}
         third = parse.read(tiebreak["text"], last[0]) if tiebreak else None
-        readings, unconfirmed, two_of_three = {}, [], []
+        readings, unconfirmed, two_of_three, by_hand = {}, [], [], {}
         for part in PARTS:
             a, b = first.get(part), second.get(part)
             c = third.get(part) if third else None
@@ -134,11 +138,18 @@ def page_item(member: dict, picture: dict, store) -> Item:
                     readings[part] = {"legislature": a, "ours": b}
                     if third:
                         readings[part]["vision"] = c
-                    unconfirmed.append(part)
+                    if (image, part) in decided:  # settled by hand against the image
+                        d = decided[(image, part)]
+                        data[part] = d.get("value")
+                        by_hand[part] = {k: d[k] for k in ("from", "reason", "checked")}
+                    else:
+                        unconfirmed.append(part)
         data["name_as_printed"] = second.get("name") or first.get("name")
         data["readings"], data["unconfirmed"] = readings, unconfirmed
         if two_of_three:  # settled by the third reading; every other kept part, by two
             data["two_of_three"] = two_of_three
+        if by_hand:
+            data["by_hand"] = by_hand
         data["listing_party"] = listing_party(member, year)
         data["party_agrees"] = (data["party"] == data["listing_party"]
                                 if data["party"] and data["listing_party"] else None)  # fmt: skip
@@ -152,19 +163,27 @@ def items(fetcher=None) -> Found:
 
     store = Store(raw_root())
     out = Found()
-    counts = {"pages": 0, "without_image": 0, "without_our_reading": 0, "party_disagrees": []}
+    decided = decisions.load()
+    counts = {"pages": 0, "without_image": 0, "without_our_reading": 0, "party_disagrees": [],
+              "unconfirmed_parts": 0, "by_hand": 0}  # fmt: skip
+    used = set()
     for path in sorted((raw_root() / "api" / "Historical" / "Member").glob("*.json"),
                        key=lambda p: int(p.stem)):  # fmt: skip
         member = json.loads(path.read_text() or "{}")
         for picture in member.get("Pictures") or []:
-            item = page_item(member, picture, store)
+            item = page_item(member, picture, store, decided)
             out.append(item)
             counts["pages"] += 1
             counts["without_image"] += not item.data["image_stored"]
             counts["without_our_reading"] += item.data["ocr_text"] is None
+            counts["unconfirmed_parts"] += len(item.data.get("unconfirmed") or [])
+            counts["by_hand"] += len(item.data.get("by_hand") or {})
+            used |= {(item.key, part) for part in item.data.get("by_hand") or {}}
             if item.data.get("party_agrees") is False:
                 counts["party_disagrees"].append(item.key)
     counts["party_disagrees"] = counts["party_disagrees"][:50]
+    # a decision on a part the readings now agree on (or on a page no longer listed)
+    counts["unused_decisions"] = [f"{i}:{p}" for i, p in sorted(set(decided) - used)]
     out.checks = {k: v for k, v in counts.items() if v}
     return out
 

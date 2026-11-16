@@ -9,5 +9,6 @@
 <div class="flex gap-4 border-b border-gray-200 mt-4 mb-4 text-sm">
   {% url 'records:recordset_detail' recordset.slug as u %}<a href="{{ u }}" class="pb-2 {% if tab == 'overview' %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Overview</a>
   {% url 'records:recordset_table' recordset.slug as u %}<a href="{{ u }}" class="pb-2 {% if tab == 'table' %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Table</a>
+  {% if recordset.slug == "legislature-blue-book-bios" %}{% url 'records:bio_review' as u %}<a href="{{ u }}" class="pb-2 {% if tab == 'review' %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Review readings</a>{% endif %}
   <a href="{% url 'records:recordset_csv' recordset.slug %}" class="pb-2 text-gray-600 hover:text-blue-700">Download CSV</a>
 </div>
