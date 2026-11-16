@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load humanize %}
-{% block title %}Sources · S.D. Archive{% endblock %}
+{% block title %}GIS sources · S.D. Archive{% endblock %}
 {% block content %}
 <div class="flex flex-wrap items-baseline justify-between gap-3 mb-4">
-  <h1 class="text-xl font-semibold">Sources</h1>
+  <h1 class="text-xl font-semibold">GIS sources</h1>
   <form method="get" action="{% url 'census:source_add' %}" class="flex flex-1 max-w-xl gap-2">
     <input name="url" required placeholder="Paste an ArcGIS services URL, e.g. https://gis.example.org/server/rest/services" class="flex-1 rounded-md border border-gray-300 px-3 py-1.5 text-sm">
-    <button class="btn btn-primary whitespace-nowrap">Add a source</button>
+    <button class="btn btn-primary whitespace-nowrap">Add a GIS server</button>
   </form>
 </div>
 {% for g in groups %}

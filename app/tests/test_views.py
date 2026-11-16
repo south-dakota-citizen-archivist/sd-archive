@@ -31,22 +31,22 @@ def test_pages_render(client, harvested):
     second = harvested.harvests.first()
     pages = [
         "/",
-        "/datasets/",
-        "/datasets/?q=town&place=test-county&topic=&status=watched",
-        f"/datasets/{pk}/",
-        f"/datasets/{pk}/map/",
-        f"/datasets/{pk}/table/",
-        f"/datasets/{pk}/table/?sort=OBJECTID&dir=desc&q=town",
-        f"/datasets/{pk}/changes/",
-        f"/datasets/{pk}/download/",
-        f"/datasets/{pk}/features/2/",
-        f"/harvests/{second.pk}/",
+        "/gis/datasets/",
+        "/gis/datasets/?q=town&place=test-county&topic=&status=watched",
+        f"/gis/datasets/{pk}/",
+        f"/gis/datasets/{pk}/map/",
+        f"/gis/datasets/{pk}/table/",
+        f"/gis/datasets/{pk}/table/?sort=OBJECTID&dir=desc&q=town",
+        f"/gis/datasets/{pk}/changes/",
+        f"/gis/datasets/{pk}/download/",
+        f"/gis/datasets/{pk}/features/2/",
+        f"/gis/harvests/{second.pk}/",
         "/places/",
         "/places/test-county/",
-        "/coverage/",
-        "/sources/",
-        "/sources/test-server/",
-        "/changes/",
+        "/gis/coverage/",
+        "/gis/sources/",
+        "/gis/sources/test-server/",
+        "/gis/changes/",
         "/jobs/",
         "/search/",
         "/search/?q=doe+jane",
@@ -58,10 +58,10 @@ def test_pages_render(client, harvested):
 
 
 def test_feature_page_shows_the_latest_record(client, harvested):
-    body = client.get(f"/datasets/{harvested.pk}/features/2/").content.decode()
+    body = client.get(f"/gis/datasets/{harvested.pk}/features/2/").content.decode()
     assert "DOE, JANE" in body and "SMITH, JOHN 2" not in body
     assert "First seen" in body
-    assert client.get(f"/datasets/{harvested.pk}/features/999/").status_code == 404
+    assert client.get(f"/gis/datasets/{harvested.pk}/features/999/").status_code == 404
 
 
 def test_a_dropped_feature_keeps_its_page(client, harvested):
@@ -71,56 +71,58 @@ def test_a_dropped_feature_keeps_its_page(client, harvested):
     Record.objects.filter(recordset__gis_dataset=harvested, key="3").update(
         dropped_at=latest.started_at
     )
-    body = client.get(f"/datasets/{harvested.pk}/features/3/").content.decode()
+    body = client.get(f"/gis/datasets/{harvested.pk}/features/3/").content.decode()
     assert "Gone from the source since" in body
     assert "Dropped records (gone from the source) (1" in client.get(
-        f"/harvests/{latest.pk}/").content.decode()  # fmt: skip
-    geojson = b"".join(client.get(f"/datasets/{harvested.pk}/download.geojson").streaming_content)
+        f"/gis/harvests/{latest.pk}/").content.decode()  # fmt: skip
+    response = client.get(f"/gis/datasets/{harvested.pk}/download.geojson")
+    geojson = b"".join(response.streaming_content)
     assert len(json.loads(geojson)["features"]) == 9
 
 
 def test_harvest_page_lists_changed_records(client, harvested):
     latest = harvested.harvests.first()
-    body = client.get(f"/harvests/{latest.pk}/").content.decode()
+    body = client.get(f"/gis/harvests/{latest.pk}/").content.decode()
     assert "Changed records (1)" in body and "DOE, JANE" in body
 
 
 def test_table_sorts_numerically(client, harvested):
-    response = client.get(f"/datasets/{harvested.pk}/table/?sort=OBJECTID&dir=desc")
+    response = client.get(f"/gis/datasets/{harvested.pk}/table/?sort=OBJECTID&dir=desc")
     keys = [row[0] for row in response.context["rows"]]
     assert keys[:3] == ["89", "55", "34"]
 
 
 def test_htmx_partials(client, harvested):
     hx = {"HTTP_HX_REQUEST": "true"}
-    assert "card" in client.get("/datasets/?q=towns", **hx).content.decode()
+    assert "card" in client.get("/gis/datasets/?q=towns", **hx).content.decode()
     assert "DOE, JANE" in client.get("/search/?q=jane+doe", **hx).content.decode()
 
 
 def test_preview_from_source(client, dataset):
-    data = json.loads(client.get(f"/datasets/{dataset.pk}/preview.geojson").content)
+    data = json.loads(client.get(f"/gis/datasets/{dataset.pk}/preview.geojson").content)
     # One request, so at most the server's maxRecordCount (4 on the fake server)
     assert data["type"] == "FeatureCollection" and len(data["features"]) == 4
-    body = client.get(f"/datasets/{dataset.pk}/table/preview/").content.decode()
+    body = client.get(f"/gis/datasets/{dataset.pk}/table/preview/").content.decode()
     assert "Town 1" in body
 
 
 def test_downloads(client, harvested):
-    geojson = b"".join(client.get(f"/datasets/{harvested.pk}/download.geojson").streaming_content)
+    response = client.get(f"/gis/datasets/{harvested.pk}/download.geojson")
+    geojson = b"".join(response.streaming_content)
     assert len(json.loads(geojson)["features"]) == 10
     csv_text = b"".join(
-        client.get(f"/datasets/{harvested.pk}/download.csv").streaming_content
+        client.get(f"/gis/datasets/{harvested.pk}/download.csv").streaming_content
     ).decode()
     assert csv_text.splitlines()[0] == "_key,OBJECTID,NAME,OWNER_NAM,_geometry_geojson"
     assert len(csv_text.splitlines()) == 11
-    parquet = client.get(f"/datasets/{harvested.pk}/download.parquet")
+    parquet = client.get(f"/gis/datasets/{harvested.pk}/download.parquet")
     assert parquet.status_code == 200
-    assert client.get(f"/datasets/{harvested.pk}/download.xlsx").status_code == 404
+    assert client.get(f"/gis/datasets/{harvested.pk}/download.xlsx").status_code == 404
 
     day = timezone.localdate(harvested.last_harvested_at).isoformat()
     name = f"{day}-test-county-sd-towns"
     assert parquet["Content-Disposition"] == f'attachment; filename="{name}.parquet"'
-    response = client.get(f"/datasets/{harvested.pk}/download.csv")
+    response = client.get(f"/gis/datasets/{harvested.pk}/download.csv")
     assert response["Content-Disposition"] == f'attachment; filename="{name}.csv"'
 
 
@@ -136,11 +138,11 @@ def test_download_slug(dataset, state):
 
 def test_vector_tile(client, harvested):
     # z=6 tile covering the fake features near (-103.1, 44.1)
-    response = client.get(f"/tiles/{harvested.pk}/6/13/23.pbf")
+    response = client.get(f"/gis/tiles/{harvested.pk}/6/13/23.pbf")
     assert response.status_code == 200
     assert response["Content-Type"] == "application/vnd.mapbox-vector-tile"
     assert len(response.content) > 0
-    assert client.get(f"/tiles/{harvested.pk}/6/0/0.pbf").content == b""
+    assert client.get(f"/gis/tiles/{harvested.pk}/6/0/0.pbf").content == b""
 
 
 def test_counties_geojson(client, dataset):
@@ -152,32 +154,32 @@ def test_counties_geojson(client, dataset):
 def test_watch_and_harvest_buttons(client, dataset, no_celery):
     dataset.status = "discovered"
     dataset.save()
-    client.post(f"/datasets/{dataset.pk}/watch/", {"watch": "1"})
+    client.post(f"/gis/datasets/{dataset.pk}/watch/", {"watch": "1"})
     dataset.refresh_from_db()
     assert dataset.is_watched
     assert ("harvest", dataset.pk, False) in no_celery, "first watch queues a harvest"
 
-    client.post(f"/datasets/{dataset.pk}/harvest/", {"force": "1"})
+    client.post(f"/gis/datasets/{dataset.pk}/harvest/", {"force": "1"})
     assert ("harvest", dataset.pk, True) in no_celery
-    client.post("/sources/test-server/crawl/")
+    client.post("/gis/sources/test-server/crawl/")
     assert ("crawl", dataset.source_id) in no_celery
 
 
 def test_api(client, harvested):
     pk = harvested.pk
-    listing = client.get("/api/v1/datasets?q=towns").json()
+    listing = client.get("/api/v1/gis/datasets?q=towns").json()
     assert listing["count"] == 1 and listing["items"][0]["jurisdiction"] == "test-county"
-    assert client.get(f"/api/v1/datasets/{pk}").json()["name_fields"] == ["OWNER_NAM"]
+    assert client.get(f"/api/v1/gis/datasets/{pk}").json()["name_fields"] == ["OWNER_NAM"]
 
-    features = client.get(f"/api/v1/datasets/{pk}/features?limit=3").json()
+    features = client.get(f"/api/v1/gis/datasets/{pk}/features?limit=3").json()
     assert len(features["features"]) == 3
-    boxed = client.get(f"/api/v1/datasets/{pk}/features?bbox=-103.04,44.0,-103.0,44.04").json()
+    boxed = client.get(f"/api/v1/gis/datasets/{pk}/features?bbox=-103.04,44.0,-103.0,44.04").json()
     assert {f["id"] for f in boxed["features"]} == {"1", "2", "3"}
 
-    two = next(f for f in client.get(f"/api/v1/datasets/{pk}/features?limit=50").json()["features"]
-               if f["id"] == "2")  # fmt: skip
+    fifty = client.get(f"/api/v1/gis/datasets/{pk}/features?limit=50").json()["features"]
+    two = next(f for f in fifty if f["id"] == "2")
     assert two["properties"]["OWNER_NAM"] == "DOE, JANE"
-    assert client.get(f"/api/v1/datasets/{pk}/features/2/history").status_code == 404
+    assert client.get(f"/api/v1/gis/datasets/{pk}/features/2/history").status_code == 404
 
     names = client.get("/api/v1/search/names?q=jane+doe").json()
     assert names[0]["name"] == "DOE, JANE" and names[0]["records"][0]["feature_key"] == "2"
@@ -196,7 +198,7 @@ def test_catalog_ranks_name_matches_first(client, dataset):
         first_seen=dataset.first_seen,
         last_seen=dataset.last_seen,
     )
-    names = [d.name for d in client.get("/datasets/?q=towns").context["page"]]
+    names = [d.name for d in client.get("/gis/datasets/?q=towns").context["page"]]
     assert names == ["Towns", other.name]
 
 
@@ -248,3 +250,8 @@ def test_admin_actions(admin_client, dataset, monkeypatch):
     )
     dataset.refresh_from_db()
     assert not dataset.is_watched
+
+
+def test_the_gis_pages_old_addresses_redirect(client):
+    response = client.get("/sources/add/?url=x")
+    assert response.status_code == 302 and response["Location"] == "/gis/sources/add/?url=x"

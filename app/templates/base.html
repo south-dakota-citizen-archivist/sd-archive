@@ -14,16 +14,24 @@
         <a href="{% url 'home' %}" class="font-semibold tracking-tight whitespace-nowrap hover:text-blue-700">S.D. Archive</a>
         {% url 'search:name_search' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if request.path == u %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Name search</a>
         {% url 'records:recordset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Records</a>
-        {% url 'census:dataset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Datasets</a>
+        {% url 'census:dataset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if '/gis/' in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">GIS</a>
         {% url 'census:place_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Places</a>
-        {% url 'census:coverage' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Coverage</a>
-        {% url 'census:source_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Sources</a>
-        {% url 'census:changes' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Changes</a>
         {% url 'job_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Jobs</a>
         <span class="flex-1"></span>
         <a href="/api/v1/docs" class="text-xs text-gray-400 hover:text-gray-600 whitespace-nowrap">API</a>
         <a href="/admin/" class="text-xs text-gray-400 hover:text-gray-600 whitespace-nowrap">Admin →</a>
       </div>
+      {% if '/gis/' in request.path %}
+      <div class="border-t border-gray-100 bg-gray-50">
+        <div class="mx-auto max-w-7xl px-4 flex items-center gap-5 h-9 overflow-x-auto">
+          <span class="text-xs font-medium uppercase tracking-wide text-gray-500 whitespace-nowrap">GIS</span>
+          {% url 'census:dataset_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Layers</a>
+          {% url 'census:source_list' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Sources</a>
+          {% url 'census:coverage' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Coverage</a>
+          {% url 'census:changes' as u %}<a href="{{ u }}" class="text-sm whitespace-nowrap {% if u in request.path %}text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">Changes</a>
+        </div>
+      </div>
+      {% endif %}
     </nav>
 
     {% if messages %}

@@ -20,7 +20,7 @@
     </form>
 
     <form action="{% url 'census:dataset_list' %}" class="card p-4 space-y-2">
-      <label for="ds-q" class="block text-sm font-medium">Find datasets</label>
+      <label for="ds-q" class="block text-sm font-medium">Find GIS layers</label>
       <div class="flex gap-2">
         <input id="ds-q" name="q" placeholder="e.g. parcels, zoning, crashes" class="flex-1 rounded-md border border-gray-300 px-3 py-1.5 text-sm">
         <button class="btn">Search</button>
@@ -31,8 +31,8 @@
     </form>
 
     <dl class="grid grid-cols-3 gap-3">
-      <a href="{% url 'census:source_list' %}" class="card p-3 hover:border-blue-300"><dt class="text-xs text-gray-500">Sources</dt><dd class="text-xl font-semibold">{{ stats.sources }}</dd></a>
-      <a href="{% url 'census:dataset_list' %}" class="card p-3 hover:border-blue-300"><dt class="text-xs text-gray-500">Datasets</dt><dd class="text-xl font-semibold">{{ stats.datasets|intcomma }}</dd></a>
+      <a href="{% url 'census:source_list' %}" class="card p-3 hover:border-blue-300"><dt class="text-xs text-gray-500">GIS sources</dt><dd class="text-xl font-semibold">{{ stats.sources }}</dd></a>
+      <a href="{% url 'census:dataset_list' %}" class="card p-3 hover:border-blue-300"><dt class="text-xs text-gray-500">GIS layers</dt><dd class="text-xl font-semibold">{{ stats.datasets|intcomma }}</dd></a>
       <a href="{% url 'census:coverage' %}" class="card p-3 hover:border-blue-300"><dt class="text-xs text-gray-500">Counties covered</dt><dd class="text-xl font-semibold">{{ stats.counties }} / 66</dd></a>
       <a href="{% url 'census:dataset_list' %}?status=watched" class="card p-3 hover:border-blue-300"><dt class="text-xs text-gray-500">Watched</dt><dd class="text-xl font-semibold">{{ stats.watched }}</dd></a>
       <div class="card p-3"><dt class="text-xs text-gray-500">Features archived</dt><dd class="text-xl font-semibold">{{ stats.features|intcomma }}</dd></div>
@@ -48,7 +48,7 @@
 
     <div class="grid gap-6 md:grid-cols-2">
       <div class="card">
-        <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Watched datasets</div>
+        <div class="px-4 py-2 border-b border-gray-200 text-sm font-medium">Watched GIS layers</div>
         <ul class="divide-y divide-gray-100 text-sm">
           {% for d in watched %}
             <li class="px-4 py-2"><a class="link" href="{{ d.get_absolute_url }}">{{ d.name }}</a> <span class="text-gray-500">· {{ d.jurisdiction|default:"" }} · {{ d.feature_count|intcomma }}</span></li>

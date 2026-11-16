@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Datasets · S.D. Archive{% endblock %}
+{% block title %}GIS layers · S.D. Archive{% endblock %}
 {% block content %}
-<h1 class="text-xl font-semibold mb-4">Datasets</h1>
+<h1 class="text-xl font-semibold mb-4">GIS layers</h1>
 <form class="card p-4 grid gap-3 md:grid-cols-6 items-end"
       hx-get="{% url 'census:dataset_list' %}" hx-target="#results" hx-push-url="true"
       hx-trigger="input changed delay:300ms from:input[name=q], change from:select, change from:input[type=checkbox], submit">

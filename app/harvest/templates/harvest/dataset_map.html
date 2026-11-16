@@ -19,7 +19,7 @@
   const map = hubMap("map", extent ? { bounds: [[extent[0], extent[1]], [extent[2], extent[3]]] } : {});
 
   function showPopup(props, lngLat, key) {
-    const link = key ? `<p class="mt-1"><a class="link" href="/datasets/${datasetId}/features/${encodeURIComponent(key)}/">History →</a></p>` : "";
+    const link = key ? `<p class="mt-1"><a class="link" href="/gis/datasets/${datasetId}/features/${encodeURIComponent(key)}/">History →</a></p>` : "";
     new maplibregl.Popup({ maxWidth: "360px" }).setLngLat(lngLat).setHTML(propsTable(props) + link).addTo(map);
   }
 
@@ -27,13 +27,13 @@
     if (harvested) {
       map.addSource("features", {
         type: "vector",
-        tiles: [`${location.origin}/tiles/${datasetId}/{z}/{x}/{y}.pbf`],
+        tiles: [`${location.origin}/gis/tiles/${datasetId}/{z}/{x}/{y}.pbf`],
         minzoom: 0, maxzoom: 16,
       });
       addFeatureLayers(map, "features", {
         sourceLayer: "features",
         onClick: async (f, lngLat) => {
-          const r = await fetch(`/datasets/${datasetId}/features/${encodeURIComponent(f.properties.key)}.json`);
+          const r = await fetch(`/gis/datasets/${datasetId}/features/${encodeURIComponent(f.properties.key)}.json`);
           if (r.ok) showPopup((await r.json()).properties, lngLat, f.properties.key);
         },
       });

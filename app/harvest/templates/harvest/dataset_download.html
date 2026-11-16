@@ -24,7 +24,7 @@
   <pre class="bg-gray-50 rounded p-3 text-xs overflow-x-auto">import geopandas as gpd
 
 # The records, as GeoJSON
-gdf = gpd.read_file("http://localhost:8000/api/v1/datasets/{{ dataset.pk }}/features?limit=5000")
+gdf = gpd.read_file("http://localhost:8000/api/v1/gis/datasets/{{ dataset.pk }}/features?limit=5000")
 
 # Or all of them as GeoParquet
 gdf = gpd.read_parquet("http://localhost:8000{% url 'harvest:download' dataset.pk 'parquet' %}")</pre>

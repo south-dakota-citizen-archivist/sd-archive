@@ -95,7 +95,7 @@ def search(q: str, limit: int = 50, records_per_name: int = 25) -> list[dict]:
     for r in records:
         bucket = by_name.setdefault(r["normalized"], [])
         if len(bucket) < records_per_name:
-            r["url"] = f"/datasets/{r['dataset_id']}/features/{r['feature_key']}/"
+            r["url"] = f"/gis/datasets/{r['dataset_id']}/features/{r['feature_key']}/"
             bucket.append(r)
     for n in names:
         n["records"] = by_name.get(n["normalized"], [])

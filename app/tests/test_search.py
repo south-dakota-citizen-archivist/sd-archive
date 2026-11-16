@@ -38,7 +38,7 @@ def test_search_groups_by_name(harvested):
     assert top["name"] == "WHARF RESOURCES (U.S.A.) INC"
     assert top["n_records"] == 2
     assert {r["feature_key"] for r in top["records"]} == {"1", "2"}
-    assert top["records"][0]["url"] == f"/datasets/{harvested.pk}/features/1/"
+    assert top["records"][0]["url"] == f"/gis/datasets/{harvested.pk}/features/1/"
 
 
 def test_all_words_rank_above_fuzzy(harvested):
@@ -71,7 +71,7 @@ def test_cross_project_view(harvested):
         "gis_feature",
         "JOHNSON, MARK A",
         "JOHNSON MARK A",
-        f"/datasets/{harvested.pk}/features/3/",
+        f"/gis/datasets/{harvested.pk}/features/3/",
         "OWNER_NAM",
     )
 

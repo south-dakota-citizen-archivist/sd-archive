@@ -138,7 +138,7 @@ def test_crawl_credits_service_name_prefix(county, monkeypatch):
 
 
 def test_add_source_preview(client, new_server, county):
-    response = client.get("/sources/add/", {"url": NEW_ROOT})
+    response = client.get("/gis/sources/add/", {"url": NEW_ROOT})
 
     assert response.status_code == 200
     page = response.content.decode()
@@ -148,7 +148,7 @@ def test_add_source_preview(client, new_server, county):
 
 def test_add_source_creates_and_crawls(client, new_server, county, crawls):
     response = client.post(
-        "/sources/add/",
+        "/gis/sources/add/",
         {
             "url": NEW_ROOT,
             "name": "District X",
@@ -171,7 +171,7 @@ def test_add_source_creates_and_crawls(client, new_server, county, crawls):
 
 def test_add_source_rejects_unknown_place(client, new_server, county, crawls):
     response = client.post(
-        "/sources/add/",
+        "/gis/sources/add/",
         {"url": NEW_ROOT, "name": "District X", "key": ["test"], "place": ["nowhere"]},
     )
 
@@ -181,10 +181,11 @@ def test_add_source_rejects_unknown_place(client, new_server, county, crawls):
 
 
 def test_add_existing_source_redirects(client, new_server, source):
-    response = client.get("/sources/add/", {"url": "http://example.com/arcgis/rest/services"})
+    response = client.get("/gis/sources/add/", {"url": "http://example.com/arcgis/rest/services"})
     assert response.status_code == 302 and response.url == source.get_absolute_url()
 
 
 def test_add_source_bad_url(client, new_server, db):
-    response = client.get("/sources/add/", {"url": "https://elsewhere.example.org"}, follow=True)
+    response = client.get("/gis/sources/add/", {"url": "https://elsewhere.example.org"},
+                          follow=True)  # fmt: skip
     assert "No ArcGIS services directory found" in response.content.decode()

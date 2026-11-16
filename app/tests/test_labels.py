@@ -96,12 +96,13 @@ def test_harvest_refreshes_labels_and_csv_has_them(client, dataset, server):
     dataset.refresh_from_db()
     assert next(f for f in dataset.fields if f["name"] == "NAME")["codes"] == {"Town 1": "First"}
 
-    csv = b"".join(client.get(f"/datasets/{dataset.pk}/download.csv").streaming_content).decode()
+    response = client.get(f"/gis/datasets/{dataset.pk}/download.csv")
+    csv = b"".join(response.streaming_content).decode()
     header, first = csv.splitlines()[:2]
     assert header.startswith("_key,OBJECTID,NAME,NAME_label,OWNER_NAM")
     assert first.startswith("1,1,Town 1,First,")
 
-    page = client.get(f"/datasets/{dataset.pk}/table/").content.decode()
+    page = client.get(f"/gis/datasets/{dataset.pk}/table/").content.decode()
     assert "First" in page and "Town 1" in page
 
 

@@ -95,7 +95,7 @@ class NameMatch(Schema):
     records: list[NameRecord]
 
 
-@api.get("/jurisdictions", response=list[JurisdictionOut], tags=["census"])
+@api.get("/jurisdictions", response=list[JurisdictionOut], tags=["places"])
 def list_jurisdictions(request, kind: str | None = None, former: bool = False):
     """Places in force today, or with former=true, former ones too (Shannon County)."""
     qs = Jurisdiction.objects.defer("boundary")
@@ -103,12 +103,12 @@ def list_jurisdictions(request, kind: str | None = None, former: bool = False):
     return qs.filter(kind=kind) if kind else qs
 
 
-@api.get("/sources", response=list[SourceOut], tags=["census"])
+@api.get("/gis/sources", response=list[SourceOut], tags=["gis"])
 def list_sources(request):
     return Source.objects.all()
 
 
-@api.get("/datasets", response=list[DatasetOut], tags=["census"])
+@api.get("/gis/datasets", response=list[DatasetOut], tags=["gis"])
 @paginate(LimitOffsetPagination)
 def list_datasets(
     request,
@@ -125,14 +125,14 @@ def list_datasets(
     return qs
 
 
-@api.get("/datasets/{dataset_id}", response=DatasetDetailOut, tags=["census"])
+@api.get("/gis/datasets/{dataset_id}", response=DatasetDetailOut, tags=["gis"])
 def get_dataset(request, dataset_id: int):
     return get_object_or_404(
         Dataset.objects.select_related("source", "jurisdiction"), pk=dataset_id
     )
 
 
-@api.get("/datasets/{dataset_id}/features", tags=["harvest"])
+@api.get("/gis/datasets/{dataset_id}/features", tags=["gis"])
 def dataset_features(
     request,
     dataset_id: int,

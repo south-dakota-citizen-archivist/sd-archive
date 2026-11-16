@@ -4,7 +4,7 @@
   <td><a class="link" href="{% url 'job_detail' job.pk %}">{{ job.kind }} #{{ job.pk }}</a></td>
   <td>
     {% if job.target_type == "census.source" %}<a class="link" href="/admin/census/source/{{ job.target_id }}/change/">{{ job.label }}</a>
-    {% elif job.target_type == "census.dataset" %}<a class="link" href="/datasets/{{ job.target_id }}/">{{ job.label }}</a>
+    {% elif job.target_type == "census.dataset" %}<a class="link" href="{% url 'census:dataset_detail' job.target_id %}">{{ job.label }}</a>
     {% else %}{{ job.label }}{% endif %}
   </td>
   <td>

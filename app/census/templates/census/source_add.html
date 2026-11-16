@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load humanize %}
-{% block title %}Add a source · S.D. Archive{% endblock %}
+{% block title %}Add a GIS server · S.D. Archive{% endblock %}
 {% block content %}
-<p class="text-sm"><a class="link" href="{% url 'census:source_list' %}">← Sources</a></p>
-<h1 class="text-xl font-semibold mt-1">Add a source</h1>
+<p class="text-sm"><a class="link" href="{% url 'census:source_list' %}">← GIS sources</a></p>
+<h1 class="text-xl font-semibold mt-1">Add a GIS server</h1>
 <p class="text-sm text-gray-600 break-all"><a class="link" href="{{ found.url }}" target="_blank" rel="noopener">{{ found.url }}</a></p>
 <p class="text-sm text-gray-600">
   {{ found.platform_label }}{% if found.version %} {{ found.version }}{% endif %} ·
