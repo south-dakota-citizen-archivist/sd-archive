@@ -1,290 +1,290 @@
-variable,table,label
-H001001,H001,Total
-PL001001,PL001,Total
-PL001002,PL001,Total!!Population of one race
-PL001003,PL001,Total!!Population of one race!!White alone
-PL001004,PL001,Total!!Population of one race!!Black or African American alone
-PL001005,PL001,Total!!Population of one race!!American Indian and Alaska Native alone
-PL001006,PL001,Total!!Population of one race!!Asian alone
-PL001007,PL001,Total!!Population of one race!!Native Hawaiian and Other Pacific Islander alone
-PL001008,PL001,Total!!Population of one race!!Some other race alone
-PL001009,PL001,Total!!Population of two or more races
-PL001010,PL001,Total!!Population of two or more races!!Population of two races
-PL001011,PL001,Total!!Population of two or more races!!Population of two races!!White; Black or African American
-PL001012,PL001,Total!!Population of two or more races!!Population of two races!!White; American Indian and Alaska Native
-PL001013,PL001,Total!!Population of two or more races!!Population of two races!!White; Asian
-PL001014,PL001,Total!!Population of two or more races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander
-PL001015,PL001,Total!!Population of two or more races!!Population of two races!!White; Some other race
-PL001016,PL001,Total!!Population of two or more races!!Population of two races!!Black or African American; American Indian and Alaska Native
-PL001017,PL001,Total!!Population of two or more races!!Population of two races!!Black or African American; Asian
-PL001018,PL001,Total!!Population of two or more races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander
-PL001019,PL001,Total!!Population of two or more races!!Population of two races!!Black or African American; Some other race
-PL001020,PL001,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Asian
-PL001021,PL001,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL001022,PL001,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Some other race
-PL001023,PL001,Total!!Population of two or more races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander
-PL001024,PL001,Total!!Population of two or more races!!Population of two races!!Asian; Some other race
-PL001025,PL001,Total!!Population of two or more races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some other race
-PL001026,PL001,Total!!Population of two or more races!!Population of three races
-PL001027,PL001,Total!!Population of two or more races!!Population of three races!!White; Black or African American; American Indian and Alaska Native
-PL001028,PL001,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Asian
-PL001029,PL001,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander
-PL001030,PL001,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Some other race
-PL001031,PL001,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Asian
-PL001032,PL001,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL001033,PL001,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Some other race
-PL001034,PL001,Total!!Population of two or more races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander
-PL001035,PL001,Total!!Population of two or more races!!Population of three races!!White; Asian; Some other race
-PL001036,PL001,Total!!Population of two or more races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some other race
-PL001037,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian
-PL001038,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL001039,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some other race
-PL001040,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander
-PL001041,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; Asian; Some other race
-PL001042,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some other race
-PL001043,PL001,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL001044,PL001,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Some other race
-PL001045,PL001,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL001046,PL001,Total!!Population of two or more races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL001047,PL001,Total!!Population of two or more races!!Population of four races
-PL001048,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian
-PL001049,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL001050,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some other race
-PL001051,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander
-PL001052,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Some other race
-PL001053,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some other race
-PL001054,PL001,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL001055,PL001,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some other race
-PL001056,PL001,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL001057,PL001,Total!!Population of two or more races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL001058,PL001,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL001059,PL001,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some other race
-PL001060,PL001,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL001061,PL001,Total!!Population of two or more races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL001062,PL001,Total!!Population of two or more races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL001063,PL001,Total!!Population of two or more races!!Population of five races
-PL001064,PL001,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL001065,PL001,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some other race
-PL001066,PL001,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL001067,PL001,Total!!Population of two or more races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL001068,PL001,Total!!Population of two or more races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL001069,PL001,Total!!Population of two or more races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL001070,PL001,Total!!Population of two or more races!!Population of six races
-PL001071,PL001,Total!!Population of two or more races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL002001,PL002,Total
-PL002002,PL002,Total!!Hispanic or Latino
-PL002003,PL002,Total!!Not Hispanic or Latino
-PL002004,PL002,Total!!Not Hispanic or Latino!!Population of one race
-PL002005,PL002,Total!!Not Hispanic or Latino!!Population of one race!!White alone
-PL002006,PL002,Total!!Not Hispanic or Latino!!Population of one race!!Black or African American alone
-PL002007,PL002,Total!!Not Hispanic or Latino!!Population of one race!!American Indian and Alaska Native alone
-PL002008,PL002,Total!!Not Hispanic or Latino!!Population of one race!!Asian alone
-PL002009,PL002,Total!!Not Hispanic or Latino!!Population of one race!!Native Hawaiian and Other Pacific Islander alone
-PL002010,PL002,Total!!Not Hispanic or Latino!!Population of one race!!Some other race alone
-PL002011,PL002,Total!!Not Hispanic or Latino!!Population of two or more races
-PL002012,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races
-PL002013,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Black or African American
-PL002014,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; American Indian and Alaska Native
-PL002015,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Asian
-PL002016,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander
-PL002017,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Some other race
-PL002018,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; American Indian and Alaska Native
-PL002019,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Asian
-PL002020,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander
-PL002021,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Some other race
-PL002022,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Asian
-PL002023,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL002024,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Some other race
-PL002025,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander
-PL002026,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Asian; Some other race
-PL002027,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some other race
-PL002028,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races
-PL002029,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; American Indian and Alaska Native
-PL002030,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Asian
-PL002031,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander
-PL002032,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Some other race
-PL002033,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Asian
-PL002034,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL002035,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Some other race
-PL002036,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander
-PL002037,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Asian; Some other race
-PL002038,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some other race
-PL002039,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian
-PL002040,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL002041,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some other race
-PL002042,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander
-PL002043,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Asian; Some other race
-PL002044,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some other race
-PL002045,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL002046,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Some other race
-PL002047,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL002048,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL002049,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races
-PL002050,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian
-PL002051,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL002052,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some other race
-PL002053,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander
-PL002054,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Some other race
-PL002055,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some other race
-PL002056,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL002057,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some other race
-PL002058,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL002059,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL002060,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL002061,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some other race
-PL002062,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL002063,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL002064,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL002065,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races
-PL002066,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL002067,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some other race
-PL002068,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL002069,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL002070,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL002071,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL002072,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of six races
-PL002073,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL003001,PL003,Total
-PL003002,PL003,Total!!Population of one race
-PL003003,PL003,Total!!Population of one race!!White alone
-PL003004,PL003,Total!!Population of one race!!Black or African American alone
-PL003005,PL003,Total!!Population of one race!!American Indian and Alaska Native alone
-PL003006,PL003,Total!!Population of one race!!Asian alone
-PL003007,PL003,Total!!Population of one race!!Native Hawaiian and Other Pacific Islander alone
-PL003008,PL003,Total!!Population of one race!!Some other race alone
-PL003009,PL003,Total!!Population of two or more races
-PL003010,PL003,Total!!Population of two or more races!!Population of two races
-PL003011,PL003,Total!!Population of two or more races!!Population of two races!!White; Black or African American
-PL003012,PL003,Total!!Population of two or more races!!Population of two races!!White; American Indian and Alaska Native
-PL003013,PL003,Total!!Population of two or more races!!Population of two races!!White; Asian
-PL003014,PL003,Total!!Population of two or more races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander
-PL003015,PL003,Total!!Population of two or more races!!Population of two races!!White; Some other race
-PL003016,PL003,Total!!Population of two or more races!!Population of two races!!Black or African American; American Indian and Alaska Native
-PL003017,PL003,Total!!Population of two or more races!!Population of two races!!Black or African American; Asian
-PL003018,PL003,Total!!Population of two or more races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander
-PL003019,PL003,Total!!Population of two or more races!!Population of two races!!Black or African American; Some other race
-PL003020,PL003,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Asian
-PL003021,PL003,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL003022,PL003,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Some other race
-PL003023,PL003,Total!!Population of two or more races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander
-PL003024,PL003,Total!!Population of two or more races!!Population of two races!!Asian; Some other race
-PL003025,PL003,Total!!Population of two or more races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some other race
-PL003026,PL003,Total!!Population of two or more races!!Population of three races
-PL003027,PL003,Total!!Population of two or more races!!Population of three races!!White; Black or African American; American Indian and Alaska Native
-PL003028,PL003,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Asian
-PL003029,PL003,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander
-PL003030,PL003,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Some other race
-PL003031,PL003,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Asian
-PL003032,PL003,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL003033,PL003,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Some other race
-PL003034,PL003,Total!!Population of two or more races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander
-PL003035,PL003,Total!!Population of two or more races!!Population of three races!!White; Asian; Some other race
-PL003036,PL003,Total!!Population of two or more races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some other race
-PL003037,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian
-PL003038,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL003039,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some other race
-PL003040,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander
-PL003041,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; Asian; Some other race
-PL003042,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some other race
-PL003043,PL003,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL003044,PL003,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Some other race
-PL003045,PL003,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL003046,PL003,Total!!Population of two or more races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL003047,PL003,Total!!Population of two or more races!!Population of four races
-PL003048,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian
-PL003049,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL003050,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some other race
-PL003051,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander
-PL003052,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Some other race
-PL003053,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some other race
-PL003054,PL003,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL003055,PL003,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some other race
-PL003056,PL003,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL003057,PL003,Total!!Population of two or more races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL003058,PL003,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL003059,PL003,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some other race
-PL003060,PL003,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL003061,PL003,Total!!Population of two or more races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL003062,PL003,Total!!Population of two or more races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL003063,PL003,Total!!Population of two or more races!!Population of five races
-PL003064,PL003,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL003065,PL003,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some other race
-PL003066,PL003,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL003067,PL003,Total!!Population of two or more races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL003068,PL003,Total!!Population of two or more races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL003069,PL003,Total!!Population of two or more races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL003070,PL003,Total!!Population of two or more races!!Population of six races
-PL003071,PL003,Total!!Population of two or more races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL004001,PL004,Total
-PL004002,PL004,Total!!Hispanic or Latino
-PL004003,PL004,Total!!Not Hispanic or Latino
-PL004004,PL004,Total!!Not Hispanic or Latino!!Population of one race
-PL004005,PL004,Total!!Not Hispanic or Latino!!Population of one race!!White alone
-PL004006,PL004,Total!!Not Hispanic or Latino!!Population of one race!!Black or African American alone
-PL004007,PL004,Total!!Not Hispanic or Latino!!Population of one race!!American Indian and Alaska Native alone
-PL004008,PL004,Total!!Not Hispanic or Latino!!Population of one race!!Asian alone
-PL004009,PL004,Total!!Not Hispanic or Latino!!Population of one race!!Native Hawaiian and Other Pacific Islander alone
-PL004010,PL004,Total!!Not Hispanic or Latino!!Population of one race!!Some other race alone
-PL004011,PL004,Total!!Not Hispanic or Latino!!Population of two or more races
-PL004012,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races
-PL004013,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Black or African American
-PL004014,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; American Indian and Alaska Native
-PL004015,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Asian
-PL004016,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander
-PL004017,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Some other race
-PL004018,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; American Indian and Alaska Native
-PL004019,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Asian
-PL004020,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander
-PL004021,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Some other race
-PL004022,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Asian
-PL004023,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL004024,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Some other race
-PL004025,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander
-PL004026,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Asian; Some other race
-PL004027,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some other race
-PL004028,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races
-PL004029,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; American Indian and Alaska Native
-PL004030,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Asian
-PL004031,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander
-PL004032,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Some other race
-PL004033,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Asian
-PL004034,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL004035,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Some other race
-PL004036,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander
-PL004037,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Asian; Some other race
-PL004038,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some other race
-PL004039,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian
-PL004040,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL004041,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some other race
-PL004042,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander
-PL004043,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Asian; Some other race
-PL004044,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some other race
-PL004045,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL004046,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Some other race
-PL004047,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL004048,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL004049,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races
-PL004050,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian
-PL004051,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander
-PL004052,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some other race
-PL004053,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander
-PL004054,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Some other race
-PL004055,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some other race
-PL004056,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL004057,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some other race
-PL004058,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL004059,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL004060,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL004061,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some other race
-PL004062,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL004063,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL004064,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL004065,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races
-PL004066,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander
-PL004067,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some other race
-PL004068,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race
-PL004069,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL004070,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL004071,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
-PL004072,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of six races
-PL004073,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race
+variable,table,label,source_url
+H001001,H001,Total,https://api.census.gov/data/2000/dec/sf1/groups/H001.html
+PL001001,PL001,Total,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001002,PL001,Total!!Population of one race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001003,PL001,Total!!Population of one race!!White alone,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001004,PL001,Total!!Population of one race!!Black or African American alone,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001005,PL001,Total!!Population of one race!!American Indian and Alaska Native alone,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001006,PL001,Total!!Population of one race!!Asian alone,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001007,PL001,Total!!Population of one race!!Native Hawaiian and Other Pacific Islander alone,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001008,PL001,Total!!Population of one race!!Some other race alone,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001009,PL001,Total!!Population of two or more races,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001010,PL001,Total!!Population of two or more races!!Population of two races,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001011,PL001,Total!!Population of two or more races!!Population of two races!!White; Black or African American,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001012,PL001,Total!!Population of two or more races!!Population of two races!!White; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001013,PL001,Total!!Population of two or more races!!Population of two races!!White; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001014,PL001,Total!!Population of two or more races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001015,PL001,Total!!Population of two or more races!!Population of two races!!White; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001016,PL001,Total!!Population of two or more races!!Population of two races!!Black or African American; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001017,PL001,Total!!Population of two or more races!!Population of two races!!Black or African American; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001018,PL001,Total!!Population of two or more races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001019,PL001,Total!!Population of two or more races!!Population of two races!!Black or African American; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001020,PL001,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001021,PL001,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001022,PL001,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001023,PL001,Total!!Population of two or more races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001024,PL001,Total!!Population of two or more races!!Population of two races!!Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001025,PL001,Total!!Population of two or more races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001026,PL001,Total!!Population of two or more races!!Population of three races,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001027,PL001,Total!!Population of two or more races!!Population of three races!!White; Black or African American; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001028,PL001,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001029,PL001,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001030,PL001,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001031,PL001,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001032,PL001,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001033,PL001,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001034,PL001,Total!!Population of two or more races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001035,PL001,Total!!Population of two or more races!!Population of three races!!White; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001036,PL001,Total!!Population of two or more races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001037,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001038,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001039,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001040,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001041,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001042,PL001,Total!!Population of two or more races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001043,PL001,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001044,PL001,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001045,PL001,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001046,PL001,Total!!Population of two or more races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001047,PL001,Total!!Population of two or more races!!Population of four races,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001048,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001049,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001050,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001051,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001052,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001053,PL001,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001054,PL001,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001055,PL001,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001056,PL001,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001057,PL001,Total!!Population of two or more races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001058,PL001,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001059,PL001,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001060,PL001,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001061,PL001,Total!!Population of two or more races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001062,PL001,Total!!Population of two or more races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001063,PL001,Total!!Population of two or more races!!Population of five races,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001064,PL001,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001065,PL001,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001066,PL001,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001067,PL001,Total!!Population of two or more races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001068,PL001,Total!!Population of two or more races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001069,PL001,Total!!Population of two or more races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001070,PL001,Total!!Population of two or more races!!Population of six races,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL001071,PL001,Total!!Population of two or more races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL001.html
+PL002001,PL002,Total,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002002,PL002,Total!!Hispanic or Latino,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002003,PL002,Total!!Not Hispanic or Latino,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002004,PL002,Total!!Not Hispanic or Latino!!Population of one race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002005,PL002,Total!!Not Hispanic or Latino!!Population of one race!!White alone,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002006,PL002,Total!!Not Hispanic or Latino!!Population of one race!!Black or African American alone,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002007,PL002,Total!!Not Hispanic or Latino!!Population of one race!!American Indian and Alaska Native alone,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002008,PL002,Total!!Not Hispanic or Latino!!Population of one race!!Asian alone,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002009,PL002,Total!!Not Hispanic or Latino!!Population of one race!!Native Hawaiian and Other Pacific Islander alone,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002010,PL002,Total!!Not Hispanic or Latino!!Population of one race!!Some other race alone,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002011,PL002,Total!!Not Hispanic or Latino!!Population of two or more races,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002012,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002013,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Black or African American,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002014,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002015,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002016,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002017,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002018,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002019,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002020,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002021,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002022,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002023,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002024,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002025,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002026,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002027,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002028,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002029,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002030,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002031,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002032,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002033,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002034,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002035,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002036,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002037,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002038,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002039,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002040,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002041,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002042,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002043,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002044,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002045,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002046,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002047,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002048,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002049,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002050,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002051,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002052,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002053,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002054,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002055,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002056,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002057,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002058,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002059,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002060,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002061,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002062,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002063,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002064,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002065,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002066,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002067,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002068,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002069,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002070,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002071,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002072,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of six races,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL002073,PL002,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL002.html
+PL003001,PL003,Total,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003002,PL003,Total!!Population of one race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003003,PL003,Total!!Population of one race!!White alone,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003004,PL003,Total!!Population of one race!!Black or African American alone,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003005,PL003,Total!!Population of one race!!American Indian and Alaska Native alone,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003006,PL003,Total!!Population of one race!!Asian alone,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003007,PL003,Total!!Population of one race!!Native Hawaiian and Other Pacific Islander alone,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003008,PL003,Total!!Population of one race!!Some other race alone,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003009,PL003,Total!!Population of two or more races,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003010,PL003,Total!!Population of two or more races!!Population of two races,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003011,PL003,Total!!Population of two or more races!!Population of two races!!White; Black or African American,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003012,PL003,Total!!Population of two or more races!!Population of two races!!White; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003013,PL003,Total!!Population of two or more races!!Population of two races!!White; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003014,PL003,Total!!Population of two or more races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003015,PL003,Total!!Population of two or more races!!Population of two races!!White; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003016,PL003,Total!!Population of two or more races!!Population of two races!!Black or African American; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003017,PL003,Total!!Population of two or more races!!Population of two races!!Black or African American; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003018,PL003,Total!!Population of two or more races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003019,PL003,Total!!Population of two or more races!!Population of two races!!Black or African American; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003020,PL003,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003021,PL003,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003022,PL003,Total!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003023,PL003,Total!!Population of two or more races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003024,PL003,Total!!Population of two or more races!!Population of two races!!Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003025,PL003,Total!!Population of two or more races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003026,PL003,Total!!Population of two or more races!!Population of three races,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003027,PL003,Total!!Population of two or more races!!Population of three races!!White; Black or African American; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003028,PL003,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003029,PL003,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003030,PL003,Total!!Population of two or more races!!Population of three races!!White; Black or African American; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003031,PL003,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003032,PL003,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003033,PL003,Total!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003034,PL003,Total!!Population of two or more races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003035,PL003,Total!!Population of two or more races!!Population of three races!!White; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003036,PL003,Total!!Population of two or more races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003037,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003038,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003039,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003040,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003041,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003042,PL003,Total!!Population of two or more races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003043,PL003,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003044,PL003,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003045,PL003,Total!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003046,PL003,Total!!Population of two or more races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003047,PL003,Total!!Population of two or more races!!Population of four races,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003048,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003049,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003050,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003051,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003052,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003053,PL003,Total!!Population of two or more races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003054,PL003,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003055,PL003,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003056,PL003,Total!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003057,PL003,Total!!Population of two or more races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003058,PL003,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003059,PL003,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003060,PL003,Total!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003061,PL003,Total!!Population of two or more races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003062,PL003,Total!!Population of two or more races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003063,PL003,Total!!Population of two or more races!!Population of five races,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003064,PL003,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003065,PL003,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003066,PL003,Total!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003067,PL003,Total!!Population of two or more races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003068,PL003,Total!!Population of two or more races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003069,PL003,Total!!Population of two or more races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003070,PL003,Total!!Population of two or more races!!Population of six races,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL003071,PL003,Total!!Population of two or more races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL003.html
+PL004001,PL004,Total,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004002,PL004,Total!!Hispanic or Latino,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004003,PL004,Total!!Not Hispanic or Latino,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004004,PL004,Total!!Not Hispanic or Latino!!Population of one race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004005,PL004,Total!!Not Hispanic or Latino!!Population of one race!!White alone,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004006,PL004,Total!!Not Hispanic or Latino!!Population of one race!!Black or African American alone,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004007,PL004,Total!!Not Hispanic or Latino!!Population of one race!!American Indian and Alaska Native alone,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004008,PL004,Total!!Not Hispanic or Latino!!Population of one race!!Asian alone,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004009,PL004,Total!!Not Hispanic or Latino!!Population of one race!!Native Hawaiian and Other Pacific Islander alone,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004010,PL004,Total!!Not Hispanic or Latino!!Population of one race!!Some other race alone,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004011,PL004,Total!!Not Hispanic or Latino!!Population of two or more races,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004012,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004013,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Black or African American,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004014,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004015,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004016,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004017,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!White; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004018,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004019,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004020,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004021,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Black or African American; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004022,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004023,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004024,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004025,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004026,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004027,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of two races!!Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004028,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004029,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; American Indian and Alaska Native,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004030,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004031,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004032,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Black or African American; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004033,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004034,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004035,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004036,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004037,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004038,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!White; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004039,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004040,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004041,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004042,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004043,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004044,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Black or African American; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004045,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004046,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004047,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004048,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of three races!!Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004049,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004050,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Asian,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004051,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004052,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; American Indian and Alaska Native; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004053,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004054,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004055,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Black or African American; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004056,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004057,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004058,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004059,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!White; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004060,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004061,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004062,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004063,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004064,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of four races!!American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004065,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004066,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004067,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Asian; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004068,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; American Indian and Alaska Native; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004069,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; Black or African American; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004070,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!White; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004071,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of five races!!Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004072,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of six races,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
+PL004073,PL004,Total!!Not Hispanic or Latino!!Population of two or more races!!Population of six races!!White; Black or African American; American Indian and Alaska Native; Asian; Native Hawaiian and Other Pacific Islander; Some other race,https://api.census.gov/data/2000/dec/pl/groups/PL004.html
