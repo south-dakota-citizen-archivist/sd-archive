@@ -180,14 +180,14 @@ source = "SD Secretary of State"
 [[dataset]]
 id = "polling-places"
 name = "Polling places"
-project = "south-dakota-polling-places"
+project = "sd-archive"
 grain = "records"
 coverage = ["0400000US46"]
-unit = "polling place"
-entities = ["government", "property"]
-place_link = "address"
-source = "SD Secretary of State, polling place lists (PDF)"
-notes = "Oglala Lakota mapped to Shannon's retired FIPS 46113; correct to 46102."
+unit = "polling place for a precinct in one election (or an absentee satellite site)"
+entities = ["government", "property", "person"]
+place_link = "county"
+source = "SD Secretary of State, polling place lists for each statewide election (PDF), 2016 on"
+notes = "Every statewide election's list since the 2016 general, plus the 2018 and 2024 absentee satellite site lists. Each row is tied to its county (as of the election) and its city. People: the satellite site staff the 2018 list names."
 
 [[dataset]]
 id = "legislature"

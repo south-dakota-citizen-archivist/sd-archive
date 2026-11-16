@@ -14,7 +14,7 @@ repos:
       - id: check-added-large-files
         # the lockfile must be committed, however large, and so must real documents used as
         # test fixtures
-        exclude: ^(uv\.lock|packages/[^/]+/tests/data/.*\.pdf)$
+        exclude: ^(uv\.lock|packages/[^/]+/tests/data/.*\.pdf|app/records/sources/[^/]+/tests/fixtures/.*\.pdf)$
 
   # Keep notebook outputs (maps, plots, data) out of git
   - repo: https://github.com/kynan/nbstripout
