@@ -28,6 +28,7 @@
     <div class="mt-1"><span class="inline-block px-1.5 py-0.5 rounded {% if kind == 'South Dakota government' %}bg-green-100 text-green-900{% elif kind == 'other' %}bg-gray-100 text-gray-700{% else %}bg-blue-50 text-blue-900{% endif %}">{{ kind }}</span></div>
     {% if why %}<div class="text-gray-600 mt-1">{{ why }}</div>{% endif %}
     {% if owners %}<div class="text-gray-500 mt-1 break-all">owners: {{ owners|join:", " }}</div>{% endif %}
+    <div class="mt-2">{% if updated %}<span class="inline-block px-1.5 py-0.5 rounded tabular-nums {% if recency == 'updated this past year' %}bg-green-100 text-green-900{% elif recency == 'over 3 years old' %}bg-gray-100 text-gray-500{% else %}bg-amber-50 text-amber-900{% endif %}">{{ updated }}</span> <span class="text-gray-500">{{ updated_what }}{% if recency %} · {{ recency }}{% endif %}</span>{% else %}<span class="text-gray-400">No date yet: scan it for its layers' last edits.</span>{% endif %}</div>
   </div>
   <div class="card p-3 md:col-span-2">
     <div class="text-xs uppercase tracking-wide text-gray-500">Found by {{ c.found_via }} · {{ c.n_evidence|intcomma }} South Dakota item{{ c.n_evidence|pluralize }}{% if c.last_seen_at %} · last seen {{ c.last_seen_at|naturaltime }}{% endif %}</div>

@@ -119,6 +119,13 @@ def search_all(get: Getter, query: str, start_ms: int = 0, end_ms: int | None = 
     return items
 
 
+def modified(ms) -> str | None:
+    """An item's modified time (epoch milliseconds) as a date."""
+    from datetime import UTC, datetime
+
+    return datetime.fromtimestamp(ms / 1000, UTC).date().isoformat() if ms else None
+
+
 def web_map(get: Getter, item: dict) -> dict:
     """A web map's definition, read once per modified time."""
     path = cache_dir("arcgis-online") / f"webmap-{item['id']}-{item.get('modified', 0)}.json"
@@ -168,7 +175,8 @@ def find(get: Getter | None = None) -> tuple[list[Lead], dict]:
     maps_read = 0
     for item in near:
         about = {"item": item["id"], "title": item.get("title", ""),
-                 "owner": item.get("owner", ""), "type": item["type"]}  # fmt: skip
+                 "owner": item.get("owner", ""), "type": item["type"],
+                 "modified": modified(item.get("modified"))}  # fmt: skip
         if item["type"] in SERVICE_TYPES:
             note(item.get("url"), {**about, "layer": item.get("url")})
         else:

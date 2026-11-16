@@ -92,6 +92,33 @@ def classify(candidate) -> tuple[str, str]:
     return OTHER, ""
 
 
+# how recently a candidate's data changed, as a signal within its publisher group
+CURRENT, AGING, IDLE, UNDATED = "updated this past year", "1–3 years old", "over 3 years old", ""
+RECENCY_ORDER = {CURRENT: 0, AGING: 1, UNDATED: 1, IDLE: 2}
+
+
+def last_updated(candidate) -> tuple[str | None, str]:
+    """(date, what it is): the latest edit to any layer's data, once scanned (the server's
+    own record of when the data last changed); otherwise the latest modified date of the
+    South Dakota items that point at the directory."""
+    edited = [x["edited_at"][:10] for x in (candidate.scan or {}).get("layers", [])
+              if x.get("edited_at")]  # fmt: skip
+    if edited:
+        return max(edited), "data last edited"
+    latest = (candidate.evidence.get("latest") or {}).get("modified")
+    return (latest, "an item last modified") if latest else (None, "")
+
+
+def recency(date: str | None, today=None) -> str:
+    from datetime import date as Date
+
+    if not date:
+        return UNDATED
+    today = today or Date.today()
+    days = (today - Date.fromisoformat(date[:10])).days
+    return CURRENT if days <= 366 else AGING if days <= 3 * 366 else IDLE
+
+
 def owners(candidate) -> list[str]:
     found = []
     for examples in (candidate.evidence.get("examples") or {}).values():

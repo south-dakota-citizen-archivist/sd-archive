@@ -287,3 +287,35 @@ def test_scanning_a_candidate(db, monkeypatch):
     monkeypatch.setattr(directory, "scan", lambda *a, **k: found)
     summary = triage.scan(c)
     assert summary["features"] == 12 and summary["layers"][0]["geometry_type"] == "Polyline"
+
+
+def test_recency_moves_candidates_within_their_group(client, db):
+    from datetime import date
+
+    from census import candidates as triage
+    from census.finders import note_latest
+
+    assert triage.recency("2026-03-01", today=date(2026, 11, 16)) == triage.CURRENT
+    assert triage.recency("2024-03-01", today=date(2026, 11, 16)) == triage.AGING
+    assert triage.recency("2019-03-01", today=date(2026, 11, 16)) == triage.IDLE
+    assert triage.recency(None) == triage.UNDATED
+
+    stale = candidate("https://services1.arcgis.com/s/arcgis/rest/services", "City of Brandon",
+                      n=50)  # fmt: skip
+    fresh = candidate("https://services1.arcgis.com/f/arcgis/rest/services", "City of Tea", n=2)
+    note_latest(stale, [{"item": "a", "modified": "2015-05-01", "title": "Old"}])
+    note_latest(fresh, [{"item": "b", "modified": "2019-01-01"},
+                        {"item": "c", "modified": f"{date.today().year}-01-02"}])  # fmt: skip
+    note_latest(fresh, [{"item": "d", "modified": "2020-01-01"}])  # an older one doesn't win
+    stale.save()
+    fresh.save()
+    assert fresh.evidence["latest"]["item"] == "c"
+    page = client.get("/gis/candidates/").content.decode()
+    # both name a South Dakota place: the one updated this year first, despite fewer items
+    assert page.index("City of Tea") < page.index("City of Brandon")
+    by_items = client.get("/gis/candidates/?order=items").content.decode()
+    assert by_items.index("City of Brandon") < by_items.index("City of Tea")
+
+    # once scanned, the layers' own last edit is the date
+    stale.scan = {"layers": [{"edited_at": "2026-10-01T00:00:00"}]}
+    assert triage.last_updated(stale) == ("2026-10-01", "data last edited")

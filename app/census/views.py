@@ -475,18 +475,34 @@ def candidate_list(request: HttpRequest) -> HttpResponse:
     rows = []
     for c in SourceCandidate.objects.filter(status=status).select_related("source"):
         k, why = triage.classify(c)
-        rows.append({"c": c, "kind": k, "why": why, "owners": triage.owners(c)[:4]})
+        updated, what = triage.last_updated(c)
+        rows.append({"c": c, "kind": k, "why": why, "owners": triage.owners(c)[:4],
+                     "updated": updated, "updated_what": what,
+                     "recency": triage.recency(updated)})  # fmt: skip
     kinds = {k: sum(r["kind"] == k for r in rows) for k in triage.ORDER}
+    order = request.GET.get("order", "priority")
 
     def rank(r):
-        return triage.ORDER[r["kind"]], -r["c"].n_evidence, r["c"].url
+        if order == "updated":
+            return r["updated"] is None, "" if r["updated"] is None else _desc(r["updated"])
+        if order == "items":
+            return -r["c"].n_evidence, r["c"].url
+        # publisher first, then how recently the data changed, then the South Dakota items
+        return (triage.ORDER[r["kind"]], triage.RECENCY_ORDER[r["recency"]],
+                -r["c"].n_evidence, r["c"].url)  # fmt: skip
 
     rows = sorted((r for r in rows if not kind or r["kind"] == kind), key=rank)
     return render(request, "census/candidate_list.html", {
-        "rows": rows, "status": status, "kind": kind, "kinds": kinds.items(),
+        "rows": rows, "status": status, "kind": kind, "kinds": kinds.items(), "order": order,
+        "sorts": [("priority", "priority"), ("updated", "last updated"), ("items", "SD items")],
         "tabs": [(v, label, counts.get(v, 0)) for v, label in SourceCandidate.Status.choices],
         "finders": FINDERS,
     })  # fmt: skip
+
+
+def _desc(date: str) -> str:
+    """A date that sorts newest first."""
+    return "".join(chr(0x7E - ord(ch)) if ch.isdigit() else ch for ch in date)
 
 
 def candidate_detail(request: HttpRequest, pk: int) -> HttpResponse:
@@ -497,6 +513,7 @@ def candidate_detail(request: HttpRequest, pk: int) -> HttpResponse:
 
     c = get_object_or_404(SourceCandidate.objects.select_related("source"), pk=pk)
     kind, why = triage.classify(c)
+    updated, updated_what = triage.last_updated(c)
     job = (Job.objects.filter(target_type="census.sourcecandidate", target_id=c.pk, kind="scan")
            .order_by("-created_at").first())  # fmt: skip
     scanning = job is not None and job.status in (Job.Status.PENDING, Job.Status.RUNNING)
@@ -506,6 +523,8 @@ def candidate_detail(request: HttpRequest, pk: int) -> HttpResponse:
                             f"{layer['service'].split('/')[-1]} ({layer['service_type']})",
                             []).append(layer)  # fmt: skip
     context = {"c": c, "kind": kind, "why": why, "owners": triage.owners(c), "job": job,
+               "updated": updated, "updated_what": updated_what,
+               "recency": triage.recency(updated),
                "scanning": scanning, "services": sorted(services.items())}  # fmt: skip
     if request.headers.get("HX-Request"):
         return render(request, "census/_candidate_scan.html", context)

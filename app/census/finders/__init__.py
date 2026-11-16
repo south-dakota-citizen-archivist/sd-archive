@@ -85,11 +85,26 @@ def record(leads: Iterable[Lead]) -> dict:
                 found.found_via = ", ".join([*vias, lead.found_via])[:255]
             found.title = found.title or lead.title[:500]
         examples = found.evidence.setdefault("examples", {})
-        examples[lead.found_via] = lead.evidence[:EVIDENCE_KEPT]
+        newest = sorted(lead.evidence, key=lambda e: e.get("modified") or "", reverse=True)
+        examples[lead.found_via] = newest[:EVIDENCE_KEPT]  # the most recently modified
         found.evidence.setdefault("counts", {})[lead.found_via] = len(lead.evidence)
+        note_latest(found, lead.evidence)
         found.last_seen_at = now
         found.save()
     return counts
+
+
+def note_latest(candidate, evidence: list[dict]) -> None:
+    """Keep the most recently modified item among a candidate's evidence (all of it, not
+    just the examples kept), across finders: evidence["latest"] = {modified, item, title}."""
+    dated = [e for e in evidence if e.get("modified")]
+    if not dated:
+        return
+    newest = max(dated, key=lambda e: e["modified"])
+    had = candidate.evidence.get("latest") or {}
+    if newest["modified"] > (had.get("modified") or ""):
+        candidate.evidence["latest"] = {k: newest.get(k, "") for k in ("modified", "item",
+                                                                        "title")}  # fmt: skip
 
 
 def cache_dir(name: str) -> Path:

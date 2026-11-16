@@ -10,18 +10,20 @@
     <button class="btn btn-primary whitespace-nowrap">Run finders</button>
   </form>
 </div>
-<p class="text-sm text-gray-600 mb-4 max-w-4xl">Services directories the finders turned up that aren't sources yet: from ArcGIS Online items and web maps inside South Dakota, and from governments' own web domains. They're sorted by who publishes them: South Dakota governments first, then organizations and owners that name a South Dakota county, city, school district, tribe or state agency, then other governments, then the rest; within each, by how many South Dakota items point at them. Open one to scan its layers, see their fields and map a sample. <b>Add</b> opens the Add a GIS server form filled in; a rejected candidate stays rejected when a finder sees it again.</p>
+<p class="text-sm text-gray-600 mb-4 max-w-4xl">Services directories the finders turned up that aren't sources yet: from ArcGIS Online items and web maps inside South Dakota, and from governments' own web domains. They're sorted by who publishes them: South Dakota governments first, then organizations and owners that name a South Dakota county, city, school district, tribe or state agency, then other governments, then the rest. Within each, those updated in the past year come first and those idle more than three years last, then by how many South Dakota items point at them. The date is when a layer's data was last edited, once a candidate is scanned; until then, when the newest South Dakota item pointing at it was modified. Open one to scan its layers, see their fields and map a sample. <b>Add</b> opens the Add a GIS server form filled in; a rejected candidate stays rejected when a finder sees it again.</p>
 
 <div class="flex gap-4 border-b border-gray-200 mb-3 text-sm">
   {% for value, label, n in tabs %}
   <a href="?status={{ value }}" class="pb-2 -mb-px {% if value == status %}border-b-2 border-blue-600 text-blue-700 font-medium{% else %}text-gray-600 hover:text-blue-700{% endif %}">{{ label|capfirst }} <span class="text-gray-500">{{ n }}</span></a>
   {% endfor %}
 </div>
-<div class="flex flex-wrap gap-2 mb-4 text-sm">
+<div class="flex flex-wrap items-center gap-2 mb-4 text-sm">
   <a href="?status={{ status }}" class="px-2 py-0.5 rounded-full border {% if not kind %}bg-blue-600 text-white border-blue-600{% else %}border-gray-300 text-gray-700 hover:border-blue-400{% endif %}">All</a>
   {% for k, n in kinds %}
   <a href="?status={{ status }}&kind={{ k|urlencode }}" class="px-2 py-0.5 rounded-full border {% if kind == k %}bg-blue-600 text-white border-blue-600{% else %}border-gray-300 text-gray-700 hover:border-blue-400{% endif %}">{{ k|capfirst }} <span class="{% if kind == k %}text-blue-100{% else %}text-gray-500{% endif %}">{{ n }}</span></a>
   {% endfor %}
+  <span class="ml-auto text-gray-500">Sort:</span>
+  {% for value, label in sorts %}<a href="?status={{ status }}{% if kind %}&kind={{ kind|urlencode }}{% endif %}&order={{ value }}" class="{% if order == value %}font-medium text-blue-700{% else %}link{% endif %}">{{ label }}</a>{% endfor %}
 </div>
 
 {% if rows %}
@@ -37,7 +39,7 @@
   {% endif %}
   <div class="card overflow-x-auto">
     <table class="tbl">
-      <thead><tr>{% if status == "pending" %}<th></th>{% endif %}<th>Directory</th><th>Publisher</th><th class="text-right">SD items</th><th>Examples</th><th></th></tr></thead>
+      <thead><tr>{% if status == "pending" %}<th></th>{% endif %}<th>Directory</th><th>Publisher</th><th>Updated</th><th class="text-right">SD items</th><th>Examples</th><th></th></tr></thead>
       <tbody>
         {% for r in rows %}{% with c=r.c %}
         <tr class="align-top">
@@ -55,6 +57,9 @@
             {% if r.owners %}<div class="text-gray-500 mt-1 break-all">owners: {{ r.owners|join:", " }}</div>{% endif %}
             <div class="text-gray-400 mt-1">{{ c.found_via }}</div>
           </td>
+          <td class="text-xs whitespace-nowrap">{% if r.updated %}
+            <span class="inline-block px-1.5 py-0.5 rounded tabular-nums {% if r.recency == 'updated this past year' %}bg-green-100 text-green-900{% elif r.recency == 'over 3 years old' %}bg-gray-100 text-gray-500{% else %}bg-amber-50 text-amber-900{% endif %}">{{ r.updated }}</span>
+            <div class="text-gray-500 mt-1">{{ r.updated_what }}</div>{% else %}<span class="text-gray-400">unknown</span>{% endif %}</td>
           <td class="text-right tabular-nums">{{ c.n_evidence|intcomma }}</td>
           <td class="text-xs max-w-md">
             {% for finder, examples in c.evidence.examples.items %}
