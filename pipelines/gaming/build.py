@@ -150,13 +150,16 @@ def build(files: list[dict], read) -> tuple[dict[str, pd.DataFrame], dict]:
             reports.append({**r, "read": how, "file": f["file"], "source_url": f["url"]})
     reports.sort(key=lambda r: r["month"])
 
-    def rows(key, name_as):
+    def rows(key, name_as, page):
+        """A report's table as rows; page: where the report prints it (the summary tables on
+        page 1, the sports detail on page 2)."""
         out = []
         for r in reports:
             for x in r[key]:
                 out.append({"month": r["month"], name_as: x["name"],
                             **{k: v for k, v in x.items() if k != "name"},
-                            "read": r["read"], "source_url": r["source_url"]})  # fmt: skip
+                            "read": r["read"], "source_url": r["source_url"],
+                            "page": page})  # fmt: skip
         return pd.DataFrame(out)
 
     monthly = []
@@ -174,7 +177,7 @@ def build(files: list[dict], read) -> tuple[dict[str, pd.DataFrame], dict]:
             row[f"{slug}_year_to_date"] = hc[name]["handle_year_to_date"]
             row[f"{slug}_change_from_a_year_before"] = hc[name]["change_from_a_year_before"]
         row.update(r["tax"])
-        row.update({"read": r["read"], "source_url": r["source_url"]})
+        row.update({"read": r["read"], "source_url": r["source_url"], "page": 1})
         monthly.append(row)
     monthly_df = pd.DataFrame(monthly)
 
@@ -202,9 +205,9 @@ def build(files: list[dict], read) -> tuple[dict[str, pd.DataFrame], dict]:
         if month not in by_month:
             checks["months missing"].append({"month": month})
     return {
-        "slots": rows("slots", "denomination"),
-        "table_games": rows("table_games", "game"),
-        "sports": rows("sports", "sport"),
+        "slots": rows("slots", "denomination", 1),
+        "table_games": rows("table_games", "game", 1),
+        "sports": rows("sports", "sport", 2),
         "monthly": monthly_df,
     }, dict(checks)
 

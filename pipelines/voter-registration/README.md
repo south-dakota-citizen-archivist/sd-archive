@@ -59,7 +59,10 @@ against 1,827 active voters, kept as reported).
 - `chart.json`: the simplified table by date, statewide and by county, for the page.
 
 Each row has the county's Census GEOID as of the report's date (Shannon is 46113 until
-2015), the election (if any), the report's URL and its archived copy.
+2015), the election (if any), the report's URL and its archived copy. For election days
+1976–2014 the source is the Secretary of State's election history page the figures come
+from, where its archived copy prints the page's address (`history_pages.json`, 23 dates,
+1988–2010); otherwise it's the archived copy.
 
 ## Caveats
 
