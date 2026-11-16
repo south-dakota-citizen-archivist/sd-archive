@@ -1,5 +1,5 @@
 """Build tidy tables of municipal sales tax by city, month and SIC industry from the
-workbooks fetch.py saved.
+workbooks fetch.py saved (and, for 2020–2021, the same report's PDFs).
 
     uv run python pipelines/sales-tax/build.py
 
@@ -11,8 +11,8 @@ Output (in .cache/sales-tax/build/, not committed):
   checks.json              what doesn't add up, for review (also printed)
 
 Each row has the city's GEOID where exactly one South Dakota city or town has its name, and
-names its file and spreadsheet row. "N/A" amounts (fewer than three licenses) stay empty,
-with `suppressed` true.
+names its file and spreadsheet row (or PDF page). "N/A" amounts (fewer than three licenses)
+stay empty, with `suppressed` true.
 
 Checks (only where nothing in the sum is suppressed):
   - a major group's lines add up to its total
@@ -67,10 +67,13 @@ def _sum_check(parts: pd.DataFrame, total: pd.DataFrame, keys: list[str], label:
         for key, row in off.iterrows():
             checks[label].append({**dict(zip(keys, key, strict=True)), "column": col,
                                   "total": row[col], "parts": round(row[f"{col}_parts"], 2),
-                                  "file": row.file, "row": row.row})  # fmt: skip
+                                  "file": row.file, "row": row.row,
+                                  "page": row.get("page")})  # fmt: skip
 
 
-def build(months: dict[str, str], read) -> tuple[dict[str, pd.DataFrame], dict]:
+def build(months: dict[str, str], read, pdf_months: dict[str, str] | None = None,
+          read_pdf=None) -> tuple[dict[str, pd.DataFrame], dict]:  # fmt: skip
+    """months: the workbooks (month → URL); pdf_months: the PDFs, for months without one."""
     checks: dict[str, list] = defaultdict(list)
     rows = []
     for month, url in sorted(months.items()):
@@ -78,7 +81,23 @@ def build(months: dict[str, str], read) -> tuple[dict[str, pd.DataFrame], dict]:
         for r in found:
             r["source_url"] = url
         rows += found
-    df = pd.DataFrame(rows)
+    for month, url in sorted((pdf_months or {}).items()):
+        if month in months:
+            continue
+        found, unread = parse.read_pdf(read_pdf(month), month, f"{month}.pdf")
+        rows += [{**r, "source_url": url} for r in found]
+        checks["SIC report PDF lines not read"] += unread
+    df = pd.DataFrame(rows).sort_values(["month"], kind="stable").reset_index(drop=True)
+    if "page" not in df:
+        df["page"] = None
+    df["row"], df["page"] = df["row"].astype("Int64"), df["page"].astype("Int64")
+    if "note" not in df:
+        df["note"] = None
+    for r in df[df.note.notna()].itertuples():
+        checks["SIC report PDF rows read with a note"].append(
+            {"month": r.month, "city": r.city, "tax": r.tax, "level": r.level,
+             "major_group": r.major_group, "note": r.note, "file": r.file,
+             "page": r.page})  # fmt: skip
     df["city_geoid"] = df.city.map(place_geoid)
 
     def check(level_parts, level_total, keys, label):
@@ -124,7 +143,7 @@ def build(months: dict[str, str], read) -> tuple[dict[str, pd.DataFrame], dict]:
 
     city_taxes = df[df.level.isin(["tax total", "city total"])].assign(
         tax=lambda d: d.tax.fillna("all"))[
-        ["month", "city", "city_geoid", "tax", "taxable", "tax_due", "file", "row",
+        ["month", "city", "city_geoid", "tax", "taxable", "tax_due", "file", "row", "page",
          "source_url"]].reset_index(drop=True)  # fmt: skip
     cols = [
         "month",
@@ -141,6 +160,8 @@ def build(months: dict[str, str], read) -> tuple[dict[str, pd.DataFrame], dict]:
         "suppressed",
         "file",
         "row",
+        "page",
+        "note",
         "source_url",
     ]
     return {"city_sic": df[cols], "city_taxes": city_taxes}, dict(checks)
@@ -276,7 +297,13 @@ def build_city_tax_due(months: dict[str, str], read,
 
 def main() -> None:
     months = json.loads((RAW / "municipal-by-sic.json").read_text())
-    tables, checks = build(months, lambda m: (RAW / "municipal-by-sic" / f"{m}.xlsx").read_bytes())
+    pdfs = json.loads((RAW / "municipal-by-sic-pdf.json").read_text())
+    tables, checks = build(
+        months,
+        lambda m: (RAW / "municipal-by-sic" / f"{m}.xlsx").read_bytes(),
+        pdfs,
+        lambda m: (RAW / "municipal-by-sic-pdf" / f"{m}.pdf").read_bytes(),
+    )
     for kind, fn in (("tourism", build_tourism), ("city-tax-due", build_city_tax_due)):
         listed = json.loads((RAW / f"{kind}.json").read_text())
 

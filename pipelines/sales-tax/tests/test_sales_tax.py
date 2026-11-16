@@ -158,3 +158,84 @@ def test_city_tax_due_build():
     assert "city tax due: the largest cities' table differs between pages" not in checks
     assert table[(table.month == "2020-01")].city.nunique() == len(table[table.month == "2020-01"])
     assert len(table[table.month == "2020-01"]) > 250
+
+
+# --- the SIC report's PDFs (2020–2021): pages cut from the published reports ---------------
+
+FIXTURES = Path(__file__).parent / "fixtures"
+
+
+def _pdf_rows(name: str, month: str) -> list[dict]:
+    rows, unread = parse.read_pdf((FIXTURES / name).read_bytes(), month, name)
+    assert unread == []
+    return rows
+
+
+def _one(rows, **match):
+    found = [r for r in rows if all(r[k] == v for k, v in match.items())]
+    assert len(found) == 1, (match, found)
+    return found[0]
+
+
+def test_sic_pdf_reads_sections_recaps_and_wrapped_descriptions():
+    # Aberdeen, January 2020: page 2 (General), pages 10–11 (its recap, Gross Receipts, the
+    # Gross Receipts recap and the city's recap)
+    rows = _pdf_rows("sic-2020-01-aberdeen.pdf", "2020-01")
+    r = _one(rows, code="0741")  # "0741Veterinary Services…": the code runs into its name
+    assert (r["description"], r["taxable"], r["tax_due"], r["division"], r["major_group"]) == (
+        "Veterinary Services for Livestock",
+        105173.95,
+        2103.48,
+        "A",
+        "07",
+    )
+    r = _one(rows, code="1542")  # a negative amount, and a description wrapped after it
+    assert r["description"] == ("General Contractors - Nonresidential Buildings, Other than "
+                                "Industrial Buildings and Warehouses")  # fmt: skip
+    assert (r["taxable"], r["tax_due"]) == (-71485.90, -1429.29)
+    assert _one(rows, code="No SIC")["suppressed"] is True
+    r = _one(rows, tax="General", level="recap division", code="ZZ")  # the recap's "Other"
+    assert (r["description"], r["taxable"], r["tax_due"]) == ("Other", 4439.00, 88.78)
+    totals = {r["tax"]: (r["taxable"], r["tax_due"]) for r in rows if r["level"] == "tax total"}
+    assert totals == {
+        "General": (89386171.08, 1788519.27),
+        "Gross Receipts": (9724233.60, 97242.42),
+    }
+    r = _one(rows, level="city total")
+    assert (r["city"], r["tax"], r["taxable"], r["tax_due"]) == ("Aberdeen", None, None, 1885761.69)
+    assert _one(rows, level="city recap division", code="ZZ")["tax_due"] == 106.24
+    assert {r["page"] for r in rows} == {1, 2, 3} and all(r["row"] is None for r in rows)
+
+
+def test_sic_pdf_letter_spaced_text():
+    # the PDF spaces this title's letters out with no space characters; pdfium's text has a
+    # space between every letter, and the words are rebuilt from the gaps between glyphs
+    r = _one(_pdf_rows("sic-2021-01-letter-spaced.pdf", "2021-01"), code="5063")
+    assert r["description"] == ("Electrical Apparatus and Equipment, Wiring Supplies and "
+                                "Construction Materials")  # fmt: skip
+    assert (r["taxable"], r["tax_due"]) == (794292.19, 15885.86)
+
+
+def test_sic_pdf_major_group_heading_lost_at_a_page_break():
+    # August 2020: page 2 ends with major group 23's total; page 3 goes on with a line and
+    # "Total for MAJOR GROUP 24", group 24's heading missing
+    rows = _pdf_rows("sic-2020-08-heading-lost.pdf", "2020-08")
+    assert _one(rows, level="major group", code="23")["taxable"] == 8440.77
+    other = _one(rows, level="other", major_group="24")
+    assert (other["taxable"], other["note"]) == (142301.92, parse.HEADING_LOST)
+    total = _one(rows, level="major group", code="24")
+    assert (total["taxable"], total["note"]) == (142301.92, parse.HEADING_LOST)
+    assert total["description"] is None  # no other group 24 heading in these two pages
+
+
+def test_sic_pdf_month_must_match():
+    with pytest.raises(parse.LayoutChanged):
+        parse.read_pdf((FIXTURES / "sic-2020-08-heading-lost.pdf").read_bytes(), "2020-09", "x")
+
+
+def test_sic_pdfs_only_for_months_without_a_workbook():
+    files = [
+        {"report": fetch.MUNICIPAL_BY_SIC, "format": fmt, "month": m, "url": f"{m}.{fmt}"}
+        for m, fmt in (("2021-12", "pdf"), ("2022-01", "pdf"), ("2022-01", "xlsx"))
+    ]
+    assert fetch.sic_pdfs(files) == {"2021-12": "2021-12.pdf"}

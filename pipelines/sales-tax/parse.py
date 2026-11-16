@@ -130,19 +130,197 @@ def read(content: bytes, month: str, file: str) -> list[dict]:
 # --- PDF reports ---------------------------------------------------------------------------
 
 
-def pdf_lines(content: bytes) -> list[tuple[int, str]]:
-    """(page number, line) for each line of a PDF's text, spaces closed up."""
+# the SIC report as a PDF (the only format before 2022): the workbook's lines, one per text
+# line, with the amounts at the end ("$2,921.25", "($71,485.90)", "N/A"); the SIC code can
+# run into its description ("0741Veterinary Services"), and a long description wraps onto
+# the next line, after the amounts
+PDF_AMOUNT = r"\(?-?\$-?[\d,]+\.\d\d\)?|N/A"  # a negative: "($71,485.90)", "$-4,591.57"
+PDF_AMOUNTS = re.compile(rf"^(?P<text>.*?) ?(?P<a>{PDF_AMOUNT})(?: (?P<b>{PDF_AMOUNT}))?$")
+PDF_HEADING = re.compile(r"^(?P<entity>.+?)(?: ?- ?(?P<tax>General|Gross Receipts))?"
+                         r"(?P<recap> Recap)?$")  # fmt: skip
+PDF_INDUSTRY = re.compile(r"^(?P<code>\d{4}|No SIC) ?(?P<name>.*)$")
+PDF_RECAP_DIVISION = re.compile(r"^(?P<code>--|[A-Z]) ?(?P<name>[A-Z].*)$")
+PDF_PAGE = re.compile(r"^SD Dept\. of Revenue\b.* Page \d+ of \d+")  # the date can split
+CONTINUED = " continued..."
+HEADING_LOST = "major group heading missing at a page break; read from its total"
+
+
+def _entity(name: str) -> str:
+    """A heading's city as the workbooks write it: "Sioux Falls- L" is "Sioux Falls - L"."""
+    return re.sub(r"(?<=\S)- ", " - ", name)
+
+
+def _closed(text: str) -> str:
+    return text.replace(" ", "")
+
+
+def read_pdf(content: bytes, month: str, file: str) -> tuple[list[dict], list[dict]]:
+    """The PDF report's lines as rows, as `read` gives the workbook's (with the page in place
+    of the spreadsheet row). Also the lines that weren't read."""
+    out, unread = [], []
+    entity = tax = division = major = None
+    recap = started = notes = False
+    last = None  # what a wrapped line continues: a row, or the division or major group
+
+    def add(page, level, taxable, tax_due, *, code=None, name=None):
+        nonlocal last
+        (t, ts), (d, ds) = money(taxable), money(tax_due)
+        out.append({"month": month, "city": entity, "tax": tax, "level": level,
+                    "division": division[0] if division else None,
+                    "major_group": major[0] if major else None,
+                    "code": code, "description": name, "taxable": t, "tax_due": d,
+                    "suppressed": ts or ds, "file": file, "row": None, "page": page,
+                    "note": None})  # fmt: skip
+        last = out[-1] if name and level in ("industry", "recap division",
+                                             "city recap division") else None  # fmt: skip
+
+    for page, line in pdf_lines(content, respace=True):
+        if m := RETURNS_FILED.search(line):
+            if _month(m[1]) != month:
+                raise LayoutChanged(f"{file}: returns filed {m[1]}, not {month}")
+            continue
+        if line == "Taxable Tax Due":  # the column headings, under each page's title
+            started, notes, last = True, False, None
+            continue
+        if line.startswith("ITEMS OF NOTE"):
+            notes = True
+        if PDF_PAGE.match(line):
+            notes, last = False, None
+            continue
+        if not started or notes or line.startswith("Statistics for ALL Cities"):
+            continue
+        continued = line.endswith(CONTINUED)
+        line = line.removesuffix(CONTINUED)
+        amounts = PDF_AMOUNTS.match(line)
+        text = amounts["text"] if amounts else line
+        a, b = (amounts["a"], amounts["b"]) if amounts else (None, None)
+        if amounts and (m := TOTAL.match(text)):
+            if m["kind"] == "MAJOR GROUP":
+                if m["code"] and (major is None or major[0] != m["code"]):
+                    # a page break dropped this group's heading: its lines are the ones since
+                    # the last total, and the total names it
+                    major = (m["code"], None)
+                    for r in reversed(out):
+                        if r["level"] not in ("industry", "other"):
+                            break
+                        r["major_group"], r["note"] = m["code"], HEADING_LOST
+                add(page, "major group", a, b, code=major[0] if major else None,
+                    name=major[1] if major else None)  # fmt: skip
+                if major and major[1] is None:
+                    out[-1]["note"] = HEADING_LOST
+            elif m["kind"] == "DIVISION":
+                if division and m["code"] and m["code"] != division[0]:
+                    raise LayoutChanged(f"{file} p{page}: {line!r} in division {division[0]}")
+                add(page, "division", a, b, code=division[0] if division else None,
+                    name=division[1] if division else None)  # fmt: skip
+            elif tax is not None and _closed(m["what"]) == _closed(f"{entity}-{tax}") and b:
+                division = major = None
+                add(page, "tax total", a, b)
+            elif tax is None and _closed(m["what"]) == _closed(entity) and b is None:
+                add(page, "city total", None, a)
+            else:
+                raise LayoutChanged(f"{file} p{page}: unknown total {line!r} in {entity} - {tax}")
+            last = None
+            continue
+        if amounts and recap:
+            division = major = None
+            if text == "Other":
+                code, name = "ZZ", "Other"  # the workbook's "ZZ Other"
+            elif r := PDF_RECAP_DIVISION.match(text):
+                code, name = r["code"], r["name"]
+            else:
+                unread.append({"file": file, "page": page, "line": line})
+                continue
+            if tax is None and b is None:  # the city's recap: tax due only
+                add(page, "city recap division", None, a, code=code, name=name)
+            elif tax is not None and b is not None:
+                add(page, "recap division", a, b, code=code, name=name)
+            else:
+                unread.append({"file": file, "page": page, "line": line})
+            continue
+        if amounts:
+            if b is None:
+                unread.append({"file": file, "page": page, "line": line})
+            elif text == "Other":
+                add(page, "other", a, b, name="Other")
+            elif m := PDF_INDUSTRY.match(text):
+                add(page, "industry", a, b, code=m["code"], name=m["name"])
+            else:
+                unread.append({"file": file, "page": page, "line": line})
+            continue
+        if m := DIVISION.match(line):
+            if not (continued and division and division[0] == m["code"]):
+                division, major = (m["code"], m["name"]), None
+            last = "division"
+        elif m := MAJOR_GROUP.match(line):
+            if not (continued and major and major[1] == m["name"]):
+                major = (m["code"] or None, m["name"])
+            last = "major"
+        elif (h := PDF_HEADING.match(line)) and (h["tax"] or h["recap"]):
+            if not (continued and (entity, tax) == (_entity(h["entity"]), h["tax"])):
+                entity, tax, recap = _entity(h["entity"]), h["tax"], bool(h["recap"])
+                division = major = None
+            last = None
+        elif line.startswith("Total for"):
+            raise LayoutChanged(f"{file} p{page}: a total without amounts: {line!r}")
+        elif isinstance(last, dict):  # the rest of a wrapped description
+            last["description"] = f"{last['description']} {line}"
+        elif last == "division":
+            division = (division[0], f"{division[1]} {line}")
+        elif last == "major":
+            major = (major[0], f"{major[1]} {line}")
+        else:
+            unread.append({"file": file, "page": page, "line": line})
+    # a group whose heading was lost has the name the report gives the same code elsewhere
+    names = {r["code"]: r["description"] for r in out
+             if r["level"] == "major group" and r["description"]}  # fmt: skip
+    for r in out:
+        if r["level"] == "major group" and r["description"] is None:
+            r["description"] = names.get(r["code"])
+    return out, unread
+
+
+LETTER_SPACED = re.compile(r"(?:(?<= )\S ){3,}")
+WORD_GAP = 4  # points between glyphs: a word break (letters are about 1.5 apart, words 12)
+
+
+def pdf_lines(content: bytes, respace: bool = False) -> list[tuple[int, str]]:
+    """(page number, line) for each line of a PDF's text, spaces closed up. With `respace`, a
+    page whose text comes out letter-spaced ("App a r a t u s"; the PDF spaces those
+    letters out and has no space characters, so pdfium puts one between each) is read again
+    with a space only where the gap between glyphs is a word's."""
     import pypdfium2 as pdfium
 
     doc = pdfium.PdfDocument(content)
     try:
         out = []
         for i in range(len(doc)):
-            text = doc[i].get_textpage().get_text_bounded().replace("\r", "")
+            page = doc[i].get_textpage()
+            text = page.get_text_bounded().replace("\r", "")
+            if respace and LETTER_SPACED.search(text):
+                text = _respaced(page).replace("\r", "")
             out += [(i + 1, " ".join(x.split())) for x in text.splitlines() if x.strip()]
         return out
     finally:
         doc.close()
+
+
+def _respaced(page) -> str:
+    import pypdfium2.raw as raw
+
+    text = page.get_text_range()
+    kept = []
+    for k, ch in enumerate(text):
+        if ch == " " and raw.FPDFText_IsGenerated(page.raw, k) == 1 and 1 < k < len(text) - 2:
+            before, after = text[k - 1], text[k + 1]
+            # only within a run of single letters ("p a r"), not between words ("GROUP 59")
+            single = text[k - 2] == " " or text[k + 2] == " "
+            if before.strip() and after.strip() and single:
+                gap = page.get_charbox(k + 1)[0] - page.get_charbox(k - 1)[2]
+                if gap < WORD_GAP:
+                    continue
+        kept.append(ch)
+    return "".join(kept)
 
 
 AMOUNT = r"-?[\d,]+\.\d\d"

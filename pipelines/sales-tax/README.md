@@ -13,7 +13,7 @@ Both are **aggregate** datasets: the unit is a place × month (× tax × industr
 
 ```sh
 just sales-tax                                     # both steps
-uv run python pipelines/sales-tax/fetch.py         # the workbooks → .cache/sales-tax/raw/
+uv run python pipelines/sales-tax/fetch.py         # the workbooks and PDFs → .cache/sales-tax/raw/
 uv run python pipelines/sales-tax/build.py         # tables + checks → .cache/sales-tax/build/
 ```
 
@@ -23,7 +23,8 @@ Each report comes out monthly (the month returns were filed), with fiscal- and c
 summaries that aren't read here.
 
 **Municipal tax by city and SIC code.** A PDF from January 2020, and an Excel workbook from
-January 2022. This pipeline reads the workbooks. For each city, and a few other taxing
+January 2022. This pipeline reads the workbooks, and the PDFs for the months without one
+(2020–2021). For each city, and a few other taxing
 entities (the DENR water projects, "Z-Various"), it has a section for each municipal tax
 (General, and Gross Receipts: the municipal gross receipts tax). Each section gives taxable
 sales and tax due by SIC division, major group and four-digit industry, and the total of
@@ -49,8 +50,8 @@ collections. November 2021 isn't on the page.
 
 ## The tables (`build.py`)
 
-- `city_sic` (Parquet): every line of every month's report, one row per month × city × tax ×
-  line, with its `level`:
+- `city_sic` (Parquet): every line of every month's report from January 2020, one row per
+  month × city × tax × line, with its `level`:
   - `industry`, `other`
   - `major group`, `division`
   - `recap division`, `tax total`
@@ -58,9 +59,10 @@ collections. November 2021 isn't on the page.
 
   Each row has the division, major group and SIC code it belongs to, the taxable sales and
   tax due, and `suppressed` for "N/A" (the amounts are left empty). Sum one level; the
-  levels overlap.
+  levels overlap. A row read from a workbook names its spreadsheet `row`, and one read from
+  a PDF its `page`; `note` explains a PDF row read around a gap in the report (below).
 - `city_taxes` (Parquet and CSV): each city's taxable sales and tax due by month for each tax,
-  and its tax due for all taxes (`tax` = `all`), from the workbooks.
+  and its tax due for all taxes (`tax` = `all`), from January 2020.
 - `city_tax_due` (Parquet and CSV): each city's tax due by month from January 2020, and the
   year before's as that report gives it, with the percent change and the list the city is in
   (`largest` or `all`).
@@ -82,9 +84,28 @@ names its file, its row there and the file's URL.
 - **Totals include suppressed amounts.** A major group's total is more than its listed
   lines when one is "N/A". The suppressed amounts aren't worked out from the totals.
 - **The reports agree with each other.** Each city's tax due in the tax-due report equals its
-  total in the SIC workbook for every month both cover (14,465 cities and months), and every
-  "year before" figure equals that month's own report (17,438), so no figure has been
+  total in the SIC report for every month both cover (20,490 cities and months, 2020 on), and
+  every "year before" figure equals that month's own report (17,438), so no figure has been
   revised since.
+- **The SIC PDFs (2020–2021)** have a text layer, and every line is read (971,640 rows). A
+  SIC code can run into its description ("0741Veterinary Services"), a long description
+  wraps onto the next line, negative amounts are written "($71,485.90)" or "$-4,591.57",
+  and one title's letters are spaced apart with no space characters between words, so
+  words are rebuilt from the gaps between letters. The PDF reader was checked against the
+  workbook for months that have both. In June 2022 they agree on every line and amount
+  (40,977 lines). In January 2022 and March 2023 the PDF and workbook are separate runs of
+  the report, and a few hundred lines differ in amount or are in only one.
+- **The PDFs list four statewide entries the workbooks don't:** Tourism, DOR - Motor Vehicle
+  Leasing, Telecom Excise Tax, and Intermediate Care Facilities / IID Tax. They're kept,
+  with no city GEOID, which is why January 2022 has four fewer entities than December 2021.
+  The Tourism entry is close to the Tourism Tax Report's state total but equals it in only
+  5 of 23 months.
+- **Gaps at Aberdeen's first page break** (the PDFs' page 2 to 3). In January, May and August
+  2020 the report leaves out a major group's heading: its lines and total are read as the
+  group the total names, with its name from that group's heading elsewhere in the report,
+  and `note` says so (6 rows). In August and December 2021 the total under group 24 doesn't
+  match its lines (in August it is group 23's amount, and group 23 has no total). Those rows
+  are kept as printed, and the major group check lists them.
 - **Tourism:** every line's tax due is 1.5% of its taxable sales (refunds are negative), and
   no month's counties add up to more than the state total.
 - **Places:** Witten, Dewey, Buffalo Chip, "Sioux Falls - L", "Z-Various" and the DENR water
@@ -92,6 +113,5 @@ names its file, its row there and the file's URL.
 - **The month is the month returns were filed**, from the file name (and the link on the
   page). Some months appear under two years on the page, with the same file.
 - **The March 2024 workbook** repeats a column heading under its header. It's skipped.
-- Not read yet: the SIC workbooks' PDFs for 2020 and 2021, and the page's other reports (state
-  taxable sales by city, contractors' excise tax, the remote sellers' and comparison
-  reports).
+- Not read yet: the page's other reports (state taxable sales by city, contractors' excise
+  tax, the remote sellers' and comparison reports).

@@ -5,9 +5,10 @@ its historical sales tax reports page.
 
 Saves reports.json (every report on the page: the year section, the report, the link's text
 and URL, and the month the file is for), and each month's file of the reports read here
-(KINDS) as .cache/sales-tax/raw/<kind>/<yyyy-mm>.<xlsx|pdf>, with <kind>.json. A month
-already saved isn't fetched again, except the two latest (in case the Department revises
-them).
+(KINDS) as .cache/sales-tax/raw/<kind>/<yyyy-mm>.<xlsx|pdf>, with <kind>.json; and the SIC
+report's PDF for each month it has no workbook for (2020–2021), as municipal-by-sic-pdf/. A
+month already saved isn't fetched again, except the two latest (in case the Department
+revises them).
 """
 
 from __future__ import annotations
@@ -79,14 +80,22 @@ def municipal_by_sic(files: list[dict]) -> dict[str, str]:
     return monthly(files, MUNICIPAL_BY_SIC, "xlsx")
 
 
+def sic_pdfs(files: list[dict]) -> dict[str, str]:
+    """The SIC report's PDF for each month with no workbook."""
+    workbooks = municipal_by_sic(files)
+    return {m: u for m, u in monthly(files, MUNICIPAL_BY_SIC, "pdf").items() if m not in workbooks}
+
+
 def fetch(fetcher) -> dict[str, dict[str, str]]:
     files = listing(fetcher.request("GET", PAGE, timeout=60).text)
     out = {}
-    for kind, (report, fmt) in KINDS.items():
-        months = monthly(files, report, fmt)
+    wanted = {kind: monthly(files, report, fmt) for kind, (report, fmt) in KINDS.items()}
+    wanted["municipal-by-sic-pdf"] = sic_pdfs(files)
+    for kind, months in wanted.items():
         if not months:
-            raise ValueError(f"no {report} files on the page")
-        latest = sorted(months)[-2:]
+            raise ValueError(f"no {kind} files on the page")
+        fmt = "pdf" if kind == "municipal-by-sic-pdf" else KINDS[kind][1]
+        latest = sorted(months)[-2:] if kind != "municipal-by-sic-pdf" else []
         for month, url in months.items():
             name = f"{kind}/{month}.{fmt}"
             if month in latest or not fetcher.store.has(name):
