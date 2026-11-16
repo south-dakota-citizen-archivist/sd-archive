@@ -19,7 +19,8 @@ from pathlib import Path
 from django.core.management.base import BaseCommand
 
 from records.models import Record
-from records.sources._legislature.build import archive_root
+from records.sources._legislature.build import archive_root, iso_day
+from records.sources._legislature.sets import HISTORICAL_FIELDS
 
 CHAMBER = {"H": "House", "S": "Senate"}
 
@@ -126,12 +127,6 @@ def lacking(repository, record) -> list:
     return [x for x in as_set(repository) if x not in have]
 
 
-def iso(day) -> str | None:
-    """A date as the Historical Listing writes it (7-03-1850, 02/07/1916) as ISO."""
-    m = re.fullmatch(r"(\d{1,2})[-/](\d{1,2})[-/](\d{4})", str(day or "").strip())
-    return f"{m[3]}-{int(m[1]):02d}-{int(m[2]):02d}" if m else norm(day)
-
-
 def ids(rows, field: str) -> list:
     """The IDs in a list of objects (or a list of bare IDs, as the repository keeps some)."""
     return as_set(r.get(field) if isinstance(r, dict) else r for r in rows or [])
@@ -182,7 +177,7 @@ class Command(BaseCommand):
                 report.check("legislators", old["legislator_profile_id"], None)
                 continue
             pairs = {
-                "name": (old.get("name"), rec.get("first_last_name")),
+                "name": (old.get("name"), as_listed(rec, "first_last_name")),
                 "chamber": (CHAMBER.get(old.get("chamber"), old.get("chamber")), rec["chamber"]),
                 "session_id": (old.get("session_id"), rec.get("session_id")),
                 "year": (old.get("year"), rec.get("year")),
@@ -205,14 +200,18 @@ class Command(BaseCommand):
             if rec is None:
                 report.check("historical legislators", old["legislator_id_canon"], None)
                 continue
-            listed = rec.get("listed") or {}
+            # the listing's value, or the repository's where the record keeps it in `earlier`
+            # (the listing now gives it differently)
+            earlier = rec.get("earlier") or {}
+            listed = (rec.get("listed") or {}) | {f: v["value"] for f, v in earlier.items()
+                                                  if f in HISTORICAL_FIELDS.values()}  # fmt: skip
             pairs = {
                 "name_first": (old.get("name_first"), listed.get("FirstName")),
                 "name_last": (old.get("name_last"), listed.get("LastName")),
                 "name_middle": (old.get("name_middle"), listed.get("MiddleName")),
                 "gender": (old.get("gender"), listed.get("Gender")),
-                "birthday": (old.get("birthday"), iso(listed.get("Birthdate"))),
-                "deathday": (old.get("deathday"), iso(listed.get("Deathdate"))),
+                "birthday": (iso_day(old.get("birthday")), iso_day(listed.get("Birthdate"))),
+                "deathday": (iso_day(old.get("deathday")), iso_day(listed.get("Deathdate"))),
                 "member_type": (old.get("member_type"), listed.get("MemberType")),
                 "year_start": (old.get("year_start"), listed.get("StartYear")),
                 "year_end": (old.get("year_end"), listed.get("EndYear")),
@@ -353,7 +352,10 @@ class Command(BaseCommand):
             for v in old.get("bill_versions") or []:
                 text = versions.get(str(v["bill_version_id"]))
                 ident = (old["bill_id"], v["bill_version_id"])
-                if text is None:
+                if text is None and not tokens(v.get("bill_text")):
+                    # the repository has no text for it either (the API errors on it)
+                    report.check("bill version text", ident, {"bill_text": ("", "")})
+                elif text is None:
                     report.check("bill version text", ident, None)
                 else:
                     # the repository kept the bill's paragraphs (not its tables); the record

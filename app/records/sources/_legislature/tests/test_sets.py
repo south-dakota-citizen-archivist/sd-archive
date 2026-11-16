@@ -99,3 +99,20 @@ def test_earlier_copies_keep_what_the_api_dropped_or_now_shows_differently():
         "occupation": {"value": "Carpenter/Retired", "from": "repo"},
     }
     assert data["occupation"] == "Retired"  # the API's value stays the record's
+
+
+def test_historical_listing_keeps_the_repositorys_values_where_the_listing_now_differs():
+    from records.sources._legislature.sets import keep_changed_listing
+
+    listed = {"FirstName": "Reford", "LastName": "Smith", "EndYear": None,
+              "Deathdate": "9-09-2017", "Birthdate": "5-05-1950", "Remarks": None}  # fmt: skip
+    data = {"listed": listed}
+    old = {"name_first": "Rexford", "name_last": "Smith", "year_end": 2024,
+           "deathday": "9/9/2017", "birthday": "1950-05-03", "notes": None}  # fmt: skip
+    keep_changed_listing(data, old)
+    assert {f: v["value"] for f, v in data["earlier"].items()} == {
+        "Birthdate": "1950-05-03",  # a corrected date
+        "EndYear": 2024,  # a value the listing no longer gives
+        "FirstName": "Rexford",  # a corrected spelling
+    }  # the same day written another way, and what the repository lacked, aren't kept
+    assert data["listed"]["FirstName"] == "Reford"  # the listing's value stays the record's

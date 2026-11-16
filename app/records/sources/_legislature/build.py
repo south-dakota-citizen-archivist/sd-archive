@@ -13,6 +13,7 @@ wins, and nothing in `earlier` is dropped.
 from __future__ import annotations
 
 import json
+import re
 from collections.abc import Iterable
 from functools import cache
 from pathlib import Path
@@ -93,6 +94,15 @@ def crosswalk() -> dict[int, int]:
 
 def empty(value) -> bool:
     return value is None or value == "" or value == [] or value == "None"
+
+
+def iso_day(day):
+    """A date as the Historical Listing writes it (7-03-1850, 02/07/1916) as ISO; anything
+    else (a year alone, "-1830", a partial date) as it is, spaces collapsed."""
+    m = re.fullmatch(r"(\d{1,2})[-/](\d{1,2})[-/](\d{4})", str(day or "").strip())
+    if m:
+        return f"{m[3]}-{int(m[1]):02d}-{int(m[2]):02d}"
+    return None if empty(day) else " ".join(str(day).split())
 
 
 def keep_earlier(data: dict, fields: Iterable[str], *copies: tuple[dict | None, str],

@@ -32,7 +32,18 @@ from functools import cache
 
 from records.sources import Found, Item
 
-from .build import SITE, STATE, api, api_url, archive, archive_root, archive_url, keep_earlier
+from .build import (
+    SITE,
+    STATE,
+    api,
+    api_url,
+    archive,
+    archive_root,
+    archive_url,
+    empty,
+    iso_day,
+    keep_earlier,
+)
 from .crawl import raw_root
 
 
@@ -135,6 +146,37 @@ def keep_dropped_places(data: dict, old: dict | None) -> None:
             data.setdefault("earlier", {})[ours] = {"value": gone, "from": archive_url(HISTORICAL)}
 
 
+# the repository's Historical Listing field → the listing's
+HISTORICAL_FIELDS = {
+    "name_first": "FirstName", "name_last": "LastName", "name_middle": "MiddleName",
+    "gender": "Gender", "birthday": "Birthdate", "deathday": "Deathdate",
+    "member_type": "MemberType", "year_start": "StartYear", "year_end": "EndYear",
+    "notes": "Remarks",
+}  # fmt: skip
+DAYS = ("Birthdate", "Deathdate")
+
+
+def keep_changed_listing(data: dict, old: dict | None) -> None:
+    """The repository's value for each listing field the listing now gives differently or
+    no longer gives (a corrected spelling or date; an end year a returning legislator no
+    longer has), in `earlier` as the repository wrote it. The record keeps the listing's."""
+    listed = data["listed"]
+    for theirs, ours in HISTORICAL_FIELDS.items():
+        value = (old or {}).get(theirs)
+        if empty(value):
+            continue
+        now = listed.get(ours)
+        if ours in DAYS:
+            same = iso_day(value) == iso_day(now)
+        else:
+            same = not empty(now) and " ".join(str(value).split()) == " ".join(str(now).split())
+        if not same:
+            data.setdefault("earlier", {})[ours] = {"value": value,
+                                                    "from": archive_url(HISTORICAL)}  # fmt: skip
+    if data.get("earlier"):
+        data["earlier"] = dict(sorted(data["earlier"].items()))
+
+
 def historical_legislators(fetcher=None) -> Found:
     listed = {m["MemberId"]: m for m in api("Historical/AllFlatMembers") or []}
     repository = {m["legislator_id_canon"]: m for m in archive(HISTORICAL) or []}
@@ -147,6 +189,7 @@ def historical_legislators(fetcher=None) -> Found:
                 missing.append(mid)
             data = dict(detail or {}) | {"listed": flat}
             keep_dropped_places(data, repository.get(mid))
+            keep_changed_listing(data, repository.get(mid))
             for pic in data.get("Pictures") or []:
                 pic["Url"] = _unsigned(pic.get("Url"))
             yield Item(key=str(mid), data=data, places=[STATE],

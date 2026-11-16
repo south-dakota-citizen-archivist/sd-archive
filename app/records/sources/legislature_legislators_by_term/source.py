@@ -59,8 +59,9 @@ REPO_FIELDS = {  # the repository's name → ours
 PRL_FIELDS = {"phone_capitol": "capitol_phone", "phone_home": "home_phone",
               "phone_cell": "cell_phone", "email": "email"}  # fmt: skip
 # For a past session the API shows a legislator's current occupation, photo, term label and
-# district; the repository has them as listed then (kept in `earlier` where they differ)
-AS_LISTED = ("occupation", "picture", "term", "district")
+# district, and its name as it now spells it; the repository has them as listed then (kept
+# in `earlier` where they differ)
+AS_LISTED = ("occupation", "picture", "term", "district", "first_last_name")
 
 
 def elected(session_year: int) -> date:
@@ -79,7 +80,7 @@ def repo_copy(member_id: int) -> tuple[dict | None, str]:
     if not found:
         return None, ""
     values = {ours: found.get(theirs) for theirs, ours in REPO_FIELDS.items()}
-    values |= {f: found.get(f) for f in AS_LISTED}
+    values |= {f: found.get(f) for f in AS_LISTED} | {"first_last_name": found.get("name")}
     return values, archive_url(name)
 
 
