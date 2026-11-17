@@ -4,7 +4,8 @@
 {% block main %}
 {% import "_parts.html" as parts %}
 <h1>South Dakota vehicle registrations</h1>
-<p class="dek">Vehicles registered each year by type{% endif %}.</p>
+<p class="dek">Vehicles registered by type since
+{{ first_year }}</p>
 
 {{ parts.tiles() }}
 <p class="small so-far" id="so-far" aria-live="polite"></p>
