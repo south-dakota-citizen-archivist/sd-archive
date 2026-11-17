@@ -4,7 +4,8 @@ Engines (register more with register_engine):
 - rapidocr: PaddleOCR's models on ONNX Runtime. CPU only, no system packages, runs anywhere
   including CI. The default. Needs the `ocr` extra.
 - textra: Apple's Vision text recognition through the `textra` command (macOS).
-- tesseract: the `tesseract` command.
+- tesseract: the `tesseract` command, a piece a line; tesseract_words, a piece a word (for
+  reading table columns).
 - vision, livetext: Apple's Vision and LiveText frameworks through ocrmac (macOS; the
   `macos` extra).
 
@@ -147,6 +148,25 @@ def _tesseract(image) -> list[dict]:
     return out
 
 
+def _tesseract_words(image) -> list[dict]:
+    """Words from tesseract's TSV output, each its own piece (for reading table columns)."""
+    with tempfile.TemporaryDirectory() as tmp:
+        png = Path(tmp) / "page.png"
+        image.save(png)
+        tsv = subprocess.run(["tesseract", str(png), "stdout", "tsv"], check=True,
+                             capture_output=True, text=True).stdout  # fmt: skip
+    out = []
+    for row in csv.DictReader(io.StringIO(tsv), delimiter="\t"):
+        if row.get("level") != "5" or not (row.get("text") or "").strip():
+            continue
+        x0, top = int(row["left"]), int(row["top"])
+        conf = float(row["conf"])
+        out.append({"text": row["text"], "conf": round(conf / 100, 3) if conf >= 0 else None,
+                    "x0": x0, "x1": x0 + int(row["width"]), "top": top,
+                    "bottom": top + int(row["height"])})  # fmt: skip
+    return out
+
+
 def _ocrmac(framework: str):
     def run(image) -> list[dict]:
         from ocrmac import ocrmac
@@ -178,6 +198,7 @@ def _has_ocrmac(framework: str) -> Callable[[], bool]:
 register_engine("rapidocr", _rapidocr, _has_rapidocr)
 register_engine("textra", _textra, lambda: textra_path() is not None)
 register_engine("tesseract", _tesseract, lambda: shutil.which("tesseract") is not None)
+register_engine("tesseract_words", _tesseract_words, lambda: shutil.which("tesseract") is not None)
 register_engine("vision", _ocrmac("vision"), _has_ocrmac("vision"))
 register_engine("livetext", _ocrmac("livetext"), _has_ocrmac("livetext"))
 

@@ -595,7 +595,7 @@ source = "SD DANR"
 [[dataset]]
 id = "parole-board-actions"
 name = "Parole board action reports"
-project = "south-dakota-pardons-paroles"
+project = "sd-archive"
 grain = "records"
 coverage = ["0400000US46"]
 unit = "case decision"
