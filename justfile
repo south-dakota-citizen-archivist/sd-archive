@@ -94,7 +94,7 @@ voter-registration:
     uv run python pipelines/voter-registration/fetch.py
     uv run python pipelines/voter-registration/build.py
 
-# Build the public site (from what the pipelines built) and serve it at http://localhost:8001
+# Build the public site (from what the pipelines built: run voter-registration and motor-vehicles first) and serve it at http://localhost:8001
 site:
     uv run python publish/build.py
     uv run python -m http.server 8001 --directory .cache/publish/site

@@ -4,6 +4,8 @@ name: Voter registration
 # fails a check fails the run (nothing is published). A new report's snapshot is committed, its
 # PDF and the rebuilt tables go on their releases, and the site is rebuilt and pushed to the
 # org's GitHub Pages repo. A change to the pipeline or the site also rebuilds and publishes.
+# The site is rebuilt whole, so this builds every page's data: the motor vehicle tables too
+# (fetched from the Department of Revenue each run), and the committed population estimates.
 
 on:
   schedule:
@@ -19,6 +21,8 @@ on:
     paths:
       - "publish/**"
       - "pipelines/voter-registration/**"
+      - "pipelines/motor-vehicles/**"
+      - "pipelines/population/**"
       - ".github/workflows/voter-registration.yml"
 
 permissions:
@@ -69,6 +73,14 @@ jobs:
           gh release upload voter-registration-data "$BUILD/registration.csv" \
             "$BUILD/registration.parquet" "$BUILD/registration-simplified.csv" \
             "$BUILD/registration-simplified.parquet" --clobber
+
+      - name: Build the motor vehicle tables
+        if: >-
+          steps.fetch.outputs.added != 'none' || github.event_name == 'push'
+          || inputs.publish
+        run: |
+          uv run python pipelines/motor-vehicles/fetch.py
+          uv run python pipelines/motor-vehicles/build.py
 
       - name: Build the site
         if: >-

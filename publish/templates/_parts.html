@@ -1,0 +1,91 @@
+{# The pieces data pages share; their behavior is static/sda.js. #}
+
+{# Stat tiles under a heading that names the place and period (filled in by the page). #}
+{% macro tiles(heading="Statewide") %}
+<p class="tiles-heading" id="tiles-heading" aria-live="polite">{{ heading }}</p>
+<div class="tiles" id="tiles"></div>
+{% endmacro %}
+
+{# The controls row: county search, a Statewide button, then whatever the page adds. #}
+{% macro county_controls() %}
+<div class="controls">
+  <div class="field">
+    <label for="county-input" id="county-label">County</label>
+    <div class="combo">
+      <input id="county-input" type="text" autocomplete="off" placeholder="Search counties"
+        role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="county-list"
+        aria-labelledby="county-label">
+      <ul id="county-list" role="listbox" aria-labelledby="county-label" hidden></ul>
+    </div>
+  </div>
+  <button class="button" id="statewide" type="button">Statewide</button>
+  {{ caller() if caller }}
+</div>
+{% endmacro %}
+
+{# A segmented control: options is [(value, label)], the first pressed. #}
+{% macro segmented(id, label, options) %}
+<div class="field">
+  <span class="small muted" id="{{ id }}-label" style="display:block;margin-bottom:4px">{{ label }}</span>
+  <div class="segmented" id="{{ id }}" role="group" aria-labelledby="{{ id }}-label">
+    {% for value, text in options %}<button type="button" data-value="{{ value }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ text }}</button>{% endfor %}
+  </div>
+</div>
+{% endmacro %}
+
+{# A select: options is [(value, label)]. #}
+{% macro select(id, label, options, selected=None) %}
+<div class="field">
+  <label for="{{ id }}">{{ label }}</label>
+  <select class="select" id="{{ id }}">
+    {% for value, text in options %}<option value="{{ value }}"{% if value == selected %} selected{% endif %}>{{ text }}</option>{% endfor %}
+  </select>
+</div>
+{% endmacro %}
+
+{# The chart card: a title (filled in by the page), an optional legend, the chart, a note. #}
+{% macro chart_card(note="") %}
+<section class="card" aria-labelledby="chart-title">
+  <p class="chart-title" id="chart-title"></p>
+  {{ caller() if caller }}
+  <div class="chart" id="chart"></div>
+  {% if note %}<p class="small muted" style="margin:8px 0 0">{{ note }}</p>{% endif %}
+</section>
+{% endmacro %}
+
+{# The map card: the county map, its scale (the caller), a note and a period slider. #}
+{% macro map_card(title, map_svg, periods, first_label, slider_label="Report", note="") %}
+<section class="card map" aria-labelledby="map-title">
+  <p class="chart-title" id="map-title">{{ title }}</p>
+  <p class="when-title" id="map-when" aria-live="polite"></p>
+  <div class="map-chart" id="map-chart">{{ map_svg|safe }}</div>
+  {{ caller() if caller }}
+  {% if note %}<p class="small muted" style="margin:6px 0 0">{{ note }}</p>{% endif %}
+  <div class="scrubber">
+    <label for="report-range"><span>{{ slider_label }}</span><output id="report-out" for="report-range"></output></label>
+    <input type="range" id="report-range" min="0" max="{{ periods - 1 }}" step="1" value="{{ periods - 1 }}">
+    <div class="ends"><span>{{ first_label }}</span><button type="button" id="report-latest">Latest</button></div>
+  </div>
+</section>
+{% endmacro %}
+
+{# A five-step sequential scale: steps are CSS variable names, ticks filled in by the page. #}
+{% macro sequential_scale(name, steps) %}
+<div class="scale" aria-hidden="true">
+  <span class="name">{{ name }}</span>{% for s in steps %}<i style="background:var(--{{ s }})"></i>{% endfor %}
+  <span class="ticks" id="scale-ticks"></span>
+</div>
+{% endmacro %}
+
+{# The table card: the caller writes the header row; the page fills tbody#figures. #}
+{% macro table_card(title) %}
+<h2 id="figures-title">{{ title }}</h2>
+<div class="card table-wrap">
+  <div class="table-scroll">
+    <table aria-labelledby="figures-title">
+      <thead><tr>{{ caller() }}</tr></thead>
+      <tbody id="figures"></tbody>
+    </table>
+  </div>
+</div>
+{% endmacro %}

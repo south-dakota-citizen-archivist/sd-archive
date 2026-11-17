@@ -74,6 +74,18 @@ dimensions = ["registration type"]
 source = "SD Department of Revenue, title and registration statistics (PDF)"
 
 [[dataset]]
+id = "population-estimates"
+name = "Population estimates by county"
+project = "sd-archive (pipelines/population)"
+grain = "aggregate"
+coverage = ["0400000US46"]
+geography = ["state", "county"]
+period = "year (July 1), 2010 on"
+measures = ["population"]
+dimensions = []
+source = "US Census Bureau, Population Estimates Program (API)"
+
+[[dataset]]
 id = "pistol-permits"
 name = "Concealed pistol permits statewide"
 project = "south-dakota-pistol-permit-stats"

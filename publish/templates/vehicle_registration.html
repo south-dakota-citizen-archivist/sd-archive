@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}South Dakota vehicle registrations · {{ site_name }}{% endblock %}
+{% block description %}Vehicles registered in South Dakota and each of its counties by type, from the Department of Revenue's reports, {{ first_year }} to {{ last_year }}.{% endblock %}
+{% block main %}
+{% import "_parts.html" as parts %}
+<h1>South Dakota vehicle registrations</h1>
+<p class="dek">Vehicles registered each year by type, statewide and in each county, from
+{{ first_year }} to {{ last_year }}{% if partial %}, with {{ partial.year }} so far{% endif %}.</p>
+
+{{ parts.tiles() }}
+<p class="small so-far" id="so-far" aria-live="polite"></p>
+
+{% call parts.county_controls() %}
+  {{ parts.select("measure", "Vehicle type", measure_options, "all") }}
+  {{ parts.segmented("mode", "Show", [("count", "Registrations"), ("rate", "Per 1,000 residents")]) }}
+{% endcall %}
+
+<div class="viz">
+  {{ parts.chart_card(note="Registrations recorded in each calendar year: a vehicle registered once a year is counted once a year. Commercial, weight-based and interstate fleet plates, and electric vehicles, are counted within the vehicle types too; \"All registrations\" adds up the ten types (passenger through boats). Titles are titles issued.") }}
+  {% call parts.map_card("Per 1,000 residents by county", map_svg, years|length, first_year, slider_label="Year", note="A darker county has more registrations of this type for its population. Click a county to chart it.") %}
+    {{ parts.sequential_scale("Per 1,000", ["seq-1", "seq-2", "seq-3", "seq-4", "seq-5"]) }}
+  {% endcall %}
+</div>
+
+{% call parts.table_card("Every year") %}
+  <th class="left" scope="col">Year</th>
+  {% for value, text in table_columns %}<th scope="col">{{ text }}</th>{% endfor %}
+  <th class="left" scope="col">Source</th>
+{% endcall %}
+
+<h2>Download the data</h2>
+<div class="prose">
+<ul>
+  <li><a href="{{ downloads.base }}/motor-vehicles-annual.csv">motor-vehicles-annual.csv</a>
+    (<a href="{{ downloads.base }}/motor-vehicles-annual.parquet">Parquet</a>): the state and
+    every county by year and type, {{ first_year }} on.</li>
+  <li><a href="{{ downloads.base }}/motor-vehicles-monthly.csv">motor-vehicles-monthly.csv</a>
+    (<a href="{{ downloads.base }}/motor-vehicles-monthly.parquet">Parquet</a>): the same by
+    month, 2018 on.</li>
+</ul>
+<p class="small">Columns: <code>geography</code> (state or county), <code>area</code>,
+<code>geoid</code> (Census GEOID), <code>year</code> (and <code>month</code>),
+<code>measure</code>, <code>value</code>, <code>report</code>, <code>source_url</code>,
+<code>page</code>; the annual table adds <code>year_to_date</code> and
+<code>through_month</code> for a year still being reported.</p>
+</div>
+
+<h2>Where this comes from</h2>
+<div class="prose">
+<p>The South Dakota Department of Revenue publishes
+<a href="https://sddor.seamlessdocs.com/sc/statistics/">title and registration statistics</a>:
+a report for each calendar year since 2018, with a page for the state and each county and a
+line for each month, and a historical report of each county's yearly totals since 2015. Each
+year here links to the report it comes from. Population is the Census Bureau's July 1
+estimate for each year{% if population_note %} ({{ population_note }}){% endif %}.</p>
+
+<h2>How it's built</h2>
+<p>Each report is read from its PDF by its column headings, which are checked on every page,
+and the months on each page must add up to the page's total.</p>
+<ul>
+  <li>The state's totals are larger than its counties' added up for some types, most of all
+  trucks and interstate fleet (IRP prorate) plates: the state counts registrations no county
+  is credited with. Both are shown as published.</li>
+  <li>The historical report revises earlier years slightly; for the years it covers, its
+  figures are used.</li>
+  <li>{{ partial.year if partial else "The current year" }} is shown only so far
+  ({% if partial %}through {{ partial.month_name }}{% else %}as reported{% endif %}), and
+  compared with the same months of the year before; the chart and map show full years.</li>
+  <li>Oglala Lakota County was Shannon County until 2015; every year here is after the change.</li>
+</ul>
+<p class="small muted">Latest report: {{ latest_label }}.</p>
+</div>
+{% endblock %}

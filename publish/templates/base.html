@@ -59,6 +59,12 @@
       });
     })();
   </script>
+  {% if app %}
+  {# a data page: its script (app.js, a module) imports what pages share as "sda" #}
+  <script type="importmap">{"imports": {"sda": "{{ root }}static/sda.js?v={{ build_id }}"}}</script>
+  <script>window.PAGE_DATA = "data.json?v={{ build_id }}";</script>
+  <script type="module" src="app.js?v={{ build_id }}"></script>
+  {% endif %}
   {% block scripts %}{% endblock %}
 </body>
 </html>

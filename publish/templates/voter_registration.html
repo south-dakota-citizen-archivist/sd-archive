@@ -6,73 +6,33 @@
 <p class="dek">Registered voters by party, statewide and in each county, from {{ first_year }} to
 {{ latest_label }}.</p>
 
-<p class="tiles-heading" id="tiles-heading" aria-live="polite">Statewide</p>
-<div class="tiles" id="tiles"></div>
+{% import "_parts.html" as parts %}
+{{ parts.tiles() }}
 
-<div class="controls">
-  <div class="field">
-    <label for="county-input" id="county-label">County</label>
-    <div class="combo">
-      <input id="county-input" type="text" autocomplete="off" placeholder="Search counties"
-        role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="county-list"
-        aria-labelledby="county-label">
-      <ul id="county-list" role="listbox" aria-labelledby="county-label" hidden></ul>
-    </div>
-  </div>
-  <button class="button" id="statewide" type="button">Statewide</button>
-  <div class="field">
-    <span class="small muted" id="mode-label" style="display:block;margin-bottom:4px">Show</span>
-    <div class="segmented" role="group" aria-labelledby="mode-label">
-      <button type="button" data-mode="count" aria-pressed="true">Voters</button>
-      <button type="button" data-mode="percent" aria-pressed="false">Share of active voters</button>
-    </div>
-  </div>
-</div>
+{% call parts.county_controls() %}
+  {{ parts.segmented("mode", "Show", [("count", "Voters"), ("percent", "Share of active voters")]) }}
+{% endcall %}
 
 <div class="viz">
-  <section class="card" aria-labelledby="chart-title">
-    <p class="chart-title" id="chart-title">Statewide</p>
+  {% call parts.chart_card(note='Active voters only. "Other" is every party and registration besides Republican and Democratic: Libertarian, independent, no party affiliation and the rest. Each point is one report; the reports are monthly from December 2015, and for each election before that.') %}
     <div class="legend" aria-hidden="true">
       {% for p in parties %}<span><i class="swatch" style="background:var(--{{ p }})"></i>{{ p|title }}</span>{% endfor %}
     </div>
-    <div class="chart" id="chart"></div>
-    <p class="small muted" style="margin:8px 0 0">Active voters only. "Other" is every party and
-    registration besides Republican and Democratic: Libertarian, independent, no party
-    affiliation and the rest. Each point is one report; the reports are monthly from December
-    2015, and for each election before that.</p>
-  </section>
-  <section class="card map" aria-labelledby="map-title">
-    <p class="chart-title" id="map-title">Leading party by county</p>
-    <p class="when-title" id="map-when" aria-live="polite"></p>
-    <div class="map-chart" id="map-chart">{{ map_svg|safe }}</div>
+  {% endcall %}
+  {% call parts.map_card("Leading party by county", map_svg, snapshots, first_year, note="A stronger color is a bigger lead: the leading party's share of active voters minus the next party's, in points. Click a county to chart it.") %}
     <div class="scale" aria-hidden="true">
       <span class="name">Republican</span>{% for i in range(1, 6) %}<i style="background:var(--rep-{{ i }})"></i>{% endfor %}
       <span class="name">Democratic</span>{% for i in range(1, 6) %}<i style="background:var(--dem-{{ i }})"></i>{% endfor %}
       <span class="ticks"><span>&lt;10</span><span>10–25</span><span>25–40</span><span>40–55</span><span>55+</span></span>
     </div>
-    <p class="small muted" style="margin:6px 0 0">A stronger color is a bigger lead: the leading party's
-    share of active voters minus the next party's, in points. Click a county to chart it.</p>
-    <div class="scrubber">
-      <label for="report-range"><span>Report</span><output id="report-out" for="report-range"></output></label>
-      <input type="range" id="report-range" min="0" max="{{ snapshots - 1 }}" step="1" value="{{ snapshots - 1 }}">
-      <div class="ends"><span>{{ first_year }}</span><button type="button" id="report-latest">Latest</button></div>
-    </div>
-  </section>
+  {% endcall %}
 </div>
 
-<h2 id="figures-title">Browse reports</h2>
-<div class="card table-wrap">
-  <div class="table-scroll">
-    <table aria-labelledby="figures-title">
-      <thead><tr>
-        <th class="left" scope="col">Report date</th><th class="left" scope="col">Election</th>
-        {% for p in parties %}<th scope="col">{{ p|title }}</th>{% endfor %}
-        <th scope="col">Active voters</th><th class="left" scope="col">Source</th>
-      </tr></thead>
-      <tbody id="figures"></tbody>
-    </table>
-  </div>
-</div>
+{% call parts.table_card("Browse reports") %}
+  <th class="left" scope="col">Report date</th><th class="left" scope="col">Election</th>
+  {% for p in parties %}<th scope="col">{{ p|title }}</th>{% endfor %}
+  <th scope="col">Active voters</th><th class="left" scope="col">Source</th>
+{% endcall %}
 
 <h2>Download the data</h2>
 <div class="prose">
@@ -114,8 +74,4 @@ Each report here links to the Secretary of State's file and to a copy kept with 
 </ul>
 <p class="small muted">Latest report: {{ latest_label }} · {{ snapshots }} reports.</p>
 </div>
-{% endblock %}
-{% block scripts %}
-<script>window.VR_DATA = "data.json?v={{ build_id }}";</script>
-<script src="app.js?v={{ build_id }}" defer></script>
 {% endblock %}

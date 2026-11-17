@@ -3,7 +3,10 @@
 South Dakota motor vehicle titles and registrations by county, from the Department of
 Revenue's [title and registration statistics](https://sddor.seamlessdocs.com/sc/statistics/).
 An **aggregate** dataset in the catalog (`motor-vehicle-registrations`): the unit is area
-(the state or a county) × period × measure.
+(the state or a county) × period × measure. Published at
+[/vehicle-registration/](https://south-dakota-citizen-archivist.github.io/vehicle-registration/)
+(the page is built by `publish/`, from `chart.json` and the population estimates in
+`pipelines/population`).
 
 ```sh
 just motor-vehicles                                     # both steps
@@ -33,6 +36,9 @@ and this year's and last year's are fetched again each run.
   still being reported.
 - `monthly`: one row per area × month × measure, from the calendar-year reports (2018 on),
   without the months not reported yet.
+- `chart.json`: the page's data: each measure by full year for the state and each county,
+  each year's report, and the year still being reported (its months so far, and the same
+  months of the year before).
 
 Every row names its report, the report's URL and the page.
 

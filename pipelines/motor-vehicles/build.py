@@ -7,6 +7,7 @@ Output (in .cache/motor-vehicles/build/, not committed):
   annual.parquet / annual.csv    one row per area × calendar year × measure
   monthly.parquet / monthly.csv  one row per area × month × measure
   checks.json                    what doesn't add up, for review (also printed)
+  chart.json                     the public page's data (chart())
 
 Areas are the state and its 66 counties, each with its Census GEOID (via sdplaces; every
 year here is after Shannon County became Oglala Lakota, so that's 46102). Measures are the
@@ -159,11 +160,63 @@ def build(reports: dict[str, bytes], urls: dict[str, str]) -> tuple[pd.DataFrame
     return annual.reset_index(drop=True), monthly_df.reset_index(drop=True), dict(checks)
 
 
+VEHICLE_TYPES = parse.MEASURES[:10]  # the rest are breakdowns of these (and titles)
+
+
+def chart(annual: pd.DataFrame, monthly: pd.DataFrame) -> dict:
+    """The public page's data: each measure by full year, statewide and in each county, the
+    report each year comes from, and the year still being reported (its months so far, and
+    the same months of the year before) when there is one."""
+    from datetime import date
+
+    full = annual[~annual.year_to_date]
+    years = sorted(int(y) for y in full.year.unique())
+
+    def series(frame: pd.DataFrame) -> dict[str, list]:
+        wide = frame.pivot_table(index="year", columns="measure", values="value", aggfunc="sum")
+        wide = wide.reindex(years)
+        return {m: [None if pd.isna(v) else int(v) for v in wide[m]] if m in wide else
+                [None] * len(years) for m in parse.MEASURES}  # fmt: skip
+
+    def sums(frame: pd.DataFrame) -> dict[str, int]:
+        return {m: int(frame[frame.measure == m].value.sum()) for m in parse.MEASURES}
+
+    counties = full[full.geography == "county"]
+    out = {
+        "updated": date.today().isoformat(),
+        "years": years,
+        "measures": list(parse.MEASURES),
+        "vehicle_types": list(VEHICLE_TYPES),
+        "year_sources": [full[full.year == y].source_url.iloc[0] for y in years],
+        "state": series(full[full.geography == "state"]),
+        "counties": {
+            g: {"name": f.area.iloc[0], **series(f)} for g, f in sorted(counties.groupby("geoid"))
+        },  # fmt: skip
+        "partial": None,
+    }
+    current = annual[annual.year_to_date]
+    if len(current):
+        year, through = int(current.year.iloc[0]), int(current.through_month.iloc[0])
+        before = monthly[(monthly.year == year - 1) & (monthly.month <= through)]
+        now = monthly[(monthly.year == year) & (monthly.month <= through)]
+
+        def by_area(frame):
+            return {"state": sums(frame[frame.geography == "state"]),
+                    "counties": {g: sums(f) for g, f in frame[frame.geography == "county"]
+                                 .groupby("geoid")}}  # fmt: skip
+
+        out["partial"] = {"year": year, "through_month": through,
+                          "source": current.source_url.iloc[0], "current": by_area(now),
+                          "previous": by_area(before) if len(before) else None}  # fmt: skip
+    return out
+
+
 def main() -> None:
     urls = json.loads((RAW / "reports.json").read_text())
     reports = {p.stem: p.read_bytes() for p in sorted((RAW / "reports").glob("*.pdf"))}
     annual, monthly, checks = build(reports, urls)
     BUILD.mkdir(parents=True, exist_ok=True)
+    (BUILD / "chart.json").write_text(json.dumps(chart(annual, monthly), separators=(",", ":")))
     for name, df in (("annual", annual), ("monthly", monthly)):
         df.to_parquet(BUILD / f"{name}.parquet", index=False)
         df.to_csv(BUILD / f"{name}.csv", index=False)

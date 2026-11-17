@@ -76,3 +76,15 @@ def test_the_build():
     assert sorted(monthly[monthly.area == "Aurora"].month.unique()) == list(range(1, 10))
     assert "months don't add up to the Total" not in checks
     assert checks["areas missing"]  # a sample has 2 of 66 counties
+
+
+def test_the_page_data():
+    annual, monthly, _ = build.build({"2026": Y2026, "historical": HIST},
+                                     {"2026": "u2026", "historical": "uh"})  # fmt: skip
+    data = build.chart(annual, monthly)
+    assert data["years"] == list(range(2015, 2026)) and data["year_sources"][-1] == "uh"
+    aurora = data["counties"]["0500000US46003"]
+    assert aurora["name"] == "Aurora" and aurora["pickup_suv_van"][-1] == 3337
+    assert data["partial"]["year"] == 2026 and data["partial"]["through_month"] == 9
+    assert data["partial"]["current"]["counties"]["0500000US46003"]["pickup_suv_van"] == 2811
+    assert data["partial"]["previous"] is None  # no 2025 months in the sample

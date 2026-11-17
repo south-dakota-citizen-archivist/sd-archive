@@ -1,480 +1,193 @@
 // South Dakota voter registration by party: tiles, a line chart (voters or share), a county
 // picker (search, or a map shaded by leading party in any report) and the table of reports.
-(() => {
-  "use strict";
-  const PARTIES = ["republican", "democratic", "other"];
-  const LABEL = { republican: "Republican", democratic: "Democratic", other: "Other" };
-  const ELECTION = { primary: "Primary", general: "General", special: "Special",
-    "presidential primary": "Presidential primary" };
-  const fmt = new Intl.NumberFormat("en-US");
-  const pct = (v) => `${v.toFixed(1)}%`;
-  const $ = (id) => document.getElementById(id);
-  const SVGNS = "http://www.w3.org/2000/svg";
-  const state = { data: null, place: null, mode: "count", report: null };
-  // steps of the leading party's lead (points of active voters), the same for every report
-  const LEAD_STEPS = [10, 25, 40, 55];
-  const RAMP = { republican: "rep", democratic: "dem" };
+import {
+  $, countyMap, countyPicker, fmt, lineChart, longDate, onWidthChange, parseDate, pct,
+  scrubber, setUrlCounty, tiles, urlCounty,
+} from "sda";
 
-  const parseDate = (s) => new Date(`${s}T12:00:00`);
-  const longDate = (s) => parseDate(s).toLocaleDateString("en-US",
-    { year: "numeric", month: "long", day: "numeric" });
+const PARTIES = ["republican", "democratic", "other"];
+const LABEL = { republican: "Republican", democratic: "Democratic", other: "Other" };
+const ELECTION = { primary: "Primary", general: "General", special: "Special",
+  "presidential primary": "Presidential primary" };
+const state = { data: null, place: null, mode: "count", report: null };
+// steps of the leading party's lead (points of active voters), the same for every report
+const LEAD_STEPS = [10, 25, 40, 55];
+const RAMP = { republican: "rep", democratic: "dem" };
+let picker, map;
 
-  function seriesFor(place) {
-    return place ? state.data.counties[place] : state.data.state;
-  }
+const placeName = () => (state.place ? `${state.data.counties[state.place].name} County`
+  : "Statewide");
 
-  function rowsFor(place) {
-    const s = seriesFor(place);
-    return state.data.dates.map((date, i) => {
-      const values = Object.fromEntries(PARTIES.map((p) => [p, s[p][i]]));
-      const known = PARTIES.filter((p) => values[p] !== null);
-      const total = known.length ? known.reduce((a, p) => a + values[p], 0) : null;
-      return { date, i, values, total };
-    });
-  }
+function rowsFor(place) {
+  const s = place ? state.data.counties[place] : state.data.state;
+  return state.data.dates.map((date, i) => {
+    const values = Object.fromEntries(PARTIES.map((p) => [p, s[p][i]]));
+    const known = PARTIES.filter((p) => values[p] !== null);
+    const total = known.length ? known.reduce((a, p) => a + values[p], 0) : null;
+    return { date, i, values, total };
+  });
+}
 
-  // ---- tiles ---------------------------------------------------------------------------
-  function renderTiles(rows) {
-    const last = [...rows].reverse().find((r) => r.total);
-    const tiles = $("tiles");
-    tiles.innerHTML = "";
-    if (!last) return;
-    const add = (label, value, sub, party) => {
-      const el = document.createElement("div");
-      el.className = "card tile";
-      el.innerHTML = `<div class="label">${party
-        ? `<i class="swatch" style="background:var(--${party})"></i>` : ""}${label}</div>
-        <div class="value">${value}</div><div class="sub">${sub}</div>`;
-      tiles.append(el);
-    };
-    // the place and date go in the heading above, so each tile keeps one short line
-    const where = state.place ? `${state.data.counties[state.place].name} County` : "Statewide";
-    $("tiles-heading").innerHTML = `<span>${where}</span> <span class="when"><span class="sep">· `
-      + `</span>latest report, ${longDate(last.date)}</span>`;
-    add("Active voters", fmt.format(last.total), "All parties");
-    for (const p of PARTIES) {
+const shown = (r, p) => {
+  const v = r.values[p];
+  if (v === null) return "n/a";
+  return state.mode === "percent" ? pct((100 * v) / r.total) : fmt.format(v);
+};
+
+// ---- tiles ------------------------------------------------------------------------------
+function renderTiles(rows) {
+  const last = [...rows].reverse().find((r) => r.total);
+  if (!last) { tiles($("tiles"), []); return; }
+  // the place and date go in the heading above, so each tile keeps one short line
+  $("tiles-heading").innerHTML = `<span>${placeName()}</span> <span class="when"><span class="sep">· `
+    + `</span>latest report, ${longDate(last.date)}</span>`;
+  tiles($("tiles"), [
+    { label: "Active voters", value: fmt.format(last.total), sub: "All parties" },
+    ...PARTIES.map((p) => {
       const v = last.values[p] ?? 0;
-      add(LABEL[p], fmt.format(v), `${pct((100 * v) / last.total)} of active voters`, p);
-    }
-  }
+      return { label: LABEL[p], value: fmt.format(v), color: `var(--${p})`,
+        sub: `${pct((100 * v) / last.total)} of active voters` };
+    }),
+  ]);
+}
 
-  // ---- chart ---------------------------------------------------------------------------
-  function niceStep(span, target) {
-    const raw = span / target;
-    const mag = 10 ** Math.floor(Math.log10(raw));
-    const n = raw / mag;
-    return (n >= 5 ? 10 : n >= 2 ? 5 : n >= 1 ? 2 : 1) * mag;
-  }
-
-  function el(name, attrs, parent) {
-    const node = document.createElementNS(SVGNS, name);
-    for (const [k, v] of Object.entries(attrs || {})) node.setAttribute(k, v);
-    if (parent) parent.append(node);
-    return node;
-  }
-
-  let hideChartTip = () => {};  // the current chart's (renderChart sets it)
-
-  function renderChart(rows) {
-    const box = $("chart");
-    box.innerHTML = "";
-    // drawn at the card's own width, so text stays its real size on a phone
-    const W = Math.max(300, Math.round(box.clientWidth));
-    const H = Math.round(Math.min(400, Math.max(260, W * 0.55)));
-    const M = { top: 12, right: 84, bottom: 30, left: W < 480 ? 44 : 60 };
-    const value = (r, p) => {
-      const v = r.values[p];
-      if (v === null || !r.total) return null;
-      return state.mode === "percent" ? (100 * v) / r.total : v;
-    };
-    const times = rows.map((r) => parseDate(r.date).getTime());
-    const x0 = Math.min(...times), x1 = Math.max(...times);
-    const x = (t) => M.left + ((t - x0) / (x1 - x0)) * (W - M.left - M.right);
-    const all = rows.flatMap((r) => PARTIES.map((p) => value(r, p))).filter((v) => v !== null);
-    const yMax = state.mode === "percent" ? Math.max(60, Math.ceil(Math.max(...all) / 10) * 10)
-      : Math.max(...all) * 1.08;
-    const yStep = niceStep(yMax, 5);
-    const yTop = Math.ceil(yMax / yStep) * yStep;
-    const y = (v) => H - M.bottom - (v / yTop) * (H - M.top - M.bottom);
-
-    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: "img",
-      "aria-label": chartSummary(rows) });
-    const grid = el("g", { class: "grid" }, svg);
-    const axis = el("g", { class: "axis" }, svg);
-    for (let v = 0; v <= yTop + 1e-9; v += yStep) {
-      el("line", { x1: M.left, x2: W - M.right, y1: y(v), y2: y(v) }, grid);
-      const t = el("text", { x: M.left - 8, y: y(v) + 4, "text-anchor": "end" }, axis);
-      t.textContent = state.mode === "percent" ? `${v}%` : compact(v);
-    }
-    const firstYear = new Date(x0).getFullYear(), lastYear = new Date(x1).getFullYear();
-    const target = W < 480 ? 3 : 6;
-    const yearStep = Math.max(5, niceStep(lastYear - firstYear, target));
-    for (let yr = Math.ceil(firstYear / yearStep) * yearStep; yr <= lastYear; yr += yearStep) {
-      const t = el("text", { x: x(new Date(`${yr}-01-01T00:00:00`).getTime()), y: H - 8,
-        "text-anchor": "middle" }, axis);
-      t.textContent = yr;
-    }
-
-    const series = el("g", { class: "series" }, svg);
-    const ends = [];
-    for (const p of PARTIES) {
-      let d = "", pen = false, last = null;
-      rows.forEach((r, i) => {
-        const v = value(r, p);
-        if (v === null) { pen = false; return; }
-        d += `${pen ? "L" : "M"}${x(times[i]).toFixed(1)},${y(v).toFixed(1)}`;
-        pen = true;
-        last = { v, y: y(v) };
-      });
-      el("path", { d, stroke: `var(--${p})` }, series);
-      if (last) ends.push({ p, ...last });
-    }
-    // direct labels at the line ends, nudged apart so they don't overlap
-    ends.sort((a, b) => a.y - b.y);
-    for (let i = 1; i < ends.length; i++) {
-      if (ends[i].y - ends[i - 1].y < 15) ends[i].y = ends[i - 1].y + 15;
-    }
-    for (const e of ends) {
-      const t = el("text", { class: "end-label", x: W - M.right + 8, y: e.y + 4 }, svg);
-      t.textContent = LABEL[e.p];
-    }
-
-    // crosshair and tooltip: the nearest report to the pointer (or the arrow keys)
-    const cross = el("line", { class: "crosshair", y1: M.top, y2: H - M.bottom,
-      visibility: "hidden" }, svg);
-    const dots = PARTIES.map((p) => el("circle", { class: "dot", r: 4, fill: `var(--${p})`,
-      visibility: "hidden" }, svg));
-    const tip = document.createElement("div");
-    tip.className = "tooltip";
-    tip.hidden = true;
-    box.append(svg, tip);
-
-    let current = null;
-    const show = (i) => {
-      current = i;
-      const r = rows[i], cx = x(times[i]);
-      cross.setAttribute("x1", cx); cross.setAttribute("x2", cx);
-      cross.setAttribute("visibility", "visible");
-      PARTIES.forEach((p, k) => {
-        const v = value(r, p);
-        dots[k].setAttribute("visibility", v === null ? "hidden" : "visible");
-        if (v !== null) { dots[k].setAttribute("cx", cx); dots[k].setAttribute("cy", y(v)); }
-      });
-      const election = state.data.elections[r.i];
-      tip.innerHTML = `<div class="t-head">${longDate(r.date)}${election
-        ? ` · ${ELECTION[election] || election}` : ""}</div>` + PARTIES.map((p) => {
-        const v = r.values[p];
-        const shown = v === null ? "n/a" : state.mode === "percent"
-          ? pct((100 * v) / r.total) : fmt.format(v);
-        return `<div class="t-row"><i class="swatch" style="background:var(--${p})"></i>
-          ${LABEL[p]}<b>${shown}</b></div>`;
-      }).join("") + `<div class="t-row muted">Active voters<b>${r.total
-        ? fmt.format(r.total) : "n/a"}</b></div>`;
-      tip.hidden = false;
-      const rect = svg.getBoundingClientRect(), k = rect.width / W;
-      const left = cx * k + 12;
-      tip.style.left = `${Math.min(left, rect.width - tip.offsetWidth - 4)}px`;
-      tip.style.top = `${M.top * k}px`;
-    };
-    const hide = () => {
-      current = null; tip.hidden = true; cross.setAttribute("visibility", "hidden");
-      dots.forEach((d) => d.setAttribute("visibility", "hidden"));
-    };
-    const nearest = (clientX) => {
-      const rect = svg.getBoundingClientRect();
-      const t = x0 + ((clientX - rect.left) / (rect.width / W) - M.left)
-        / (W - M.left - M.right) * (x1 - x0);
-      let best = 0;
-      times.forEach((tt, i) => { if (Math.abs(tt - t) < Math.abs(times[best] - t)) best = i; });
-      return best;
-    };
-    svg.addEventListener("pointermove", (e) => show(nearest(e.clientX)));
-    // a tap without a drag moves no pointer: show the report nearest the finger
-    svg.addEventListener("pointerdown", (e) => { if (e.pointerType === "touch") show(nearest(e.clientX)); });
-    // a finger lifting off "leaves" too: on a touch screen the tooltip stays until a tap
-    // elsewhere (below)
-    svg.addEventListener("pointerleave", (e) => { if (e.pointerType !== "touch") hide(); });
-    hideChartTip = hide;
-    svg.tabIndex = 0;
-    // from the keyboard only: a tap focuses the chart too, and nothing would close it
-    svg.addEventListener("focus", () => { if (svg.matches(":focus-visible")) show(rows.length - 1); });
-    svg.addEventListener("blur", hide);
-    svg.addEventListener("keydown", (e) => {
-      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
-      e.preventDefault();
-      const i = current ?? rows.length - 1;
-      show(Math.max(0, Math.min(rows.length - 1, i + (e.key === "ArrowLeft" ? -1 : 1))));
-    });
-  }
-
-  function compact(v) {
-    if (v >= 1e6) return `${(v / 1e6).toFixed(v % 1e6 ? 1 : 0)}M`;
-    if (v >= 1e3) return `${(v / 1e3).toFixed(v % 1e3 ? 1 : 0)}K`;
-    return String(v);
-  }
-
-  function chartSummary(rows) {
-    const known = rows.filter((r) => r.total);
-    const a = known[0], b = known[known.length - 1];
-    const where = state.place ? `${state.data.counties[state.place].name} County` : "South Dakota";
-    const part = (r) => PARTIES.map((p) => `${LABEL[p]} ${fmt.format(r.values[p] ?? 0)}`)
-      .join(", ");
-    return `Line chart of registered voters by party in ${where}, ${longDate(a.date)} to `
-      + `${longDate(b.date)}. First report: ${part(a)}. Latest: ${part(b)}. `
-      + "The table below lists every report.";
-  }
-
-  // ---- table ---------------------------------------------------------------------------
-  function renderTable(rows) {
-    const body = $("figures");
-    body.innerHTML = rows.slice().reverse().filter((r) => r.total).map((r) => {
-      const source = state.data.sources[r.i], copy = state.data.archived[r.i];
-      const election = state.data.elections[r.i];
-      const cells = PARTIES.map((p) => {
-        const v = r.values[p];
-        return `<td>${v === null ? "n/a" : state.mode === "percent"
-          ? pct((100 * v) / r.total) : fmt.format(v)}</td>`;
-      }).join("");
-      const links = source === copy ? `<a href="${copy}">Report</a>`
-        : `<a href="${source}">Report</a> · <a href="${copy}">copy</a>`;
-      return `<tr><td>${longDate(r.date)}</td><td class="left">${election
-        ? ELECTION[election] || election : ""}</td>${cells}<td>${fmt.format(r.total)}</td>
-        <td class="left">${links}</td></tr>`;
-    }).join("");
-  }
-
-  // ---- county picker: search and map -------------------------------------------------
-  const input = $("county-input"), list = $("county-list");
-  let options = [], active = -1;
-
-  function countyOptions(query) {
-    const q = query.trim().toLowerCase();
-    return Object.entries(state.data.counties)
-      .filter(([, c]) => !q || c.name.toLowerCase().includes(q))
-      .sort((a, b) => a[1].name.localeCompare(b[1].name));
-  }
-
-  function openList() {
-    options = countyOptions(input.value);
-    active = options.length ? 0 : -1;
-    list.innerHTML = options.map(([geoid, c], i) => `<li role="option" id="opt-${i}"
-      data-geoid="${geoid}" aria-selected="${i === active}">${c.name}</li>`).join("")
-      || '<li role="option" aria-disabled="true">No county by that name</li>';
-    list.hidden = false;
-    input.setAttribute("aria-expanded", "true");
-    input.setAttribute("aria-activedescendant", active >= 0 ? `opt-${active}` : "");
-  }
-
-  function closeList() {
-    list.hidden = true;
-    input.setAttribute("aria-expanded", "false");
-    input.removeAttribute("aria-activedescendant");
-  }
-
-  function setActive(i) {
-    active = i;
-    [...list.children].forEach((li, k) => li.setAttribute("aria-selected", k === i));
-    const li = list.children[i];
-    if (li) { li.scrollIntoView({ block: "nearest" }); input.setAttribute("aria-activedescendant", li.id); }
-  }
-
-  input.addEventListener("input", openList);
-  input.addEventListener("focus", openList);
-  input.addEventListener("blur", () => setTimeout(closeList, 120));
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-      e.preventDefault();
-      if (list.hidden) openList();
-      if (options.length) setActive((active + (e.key === "ArrowDown" ? 1 : -1) + options.length)
-        % options.length);
-    } else if (e.key === "Enter" && active >= 0 && options[active]) {
-      e.preventDefault(); choose(options[active][0]);
-    } else if (e.key === "Escape") { closeList(); }
-  });
-  list.addEventListener("mousedown", (e) => {
-    const li = e.target.closest("li[data-geoid]");
-    if (li) { e.preventDefault(); choose(li.dataset.geoid); }
-  });
-  $("statewide").addEventListener("click", () => choose(null));
-
-  // Outlines for the hovered and selected counties, drawn over the map and ignoring the
-  // pointer, so the counties themselves never move (moving one under the pointer would
-  // swallow the click)
-  const mapSvg = document.querySelector(".map svg");
-  const makeRing = (cls) => {
-    const r = document.createElementNS(SVGNS, "path");
-    r.setAttribute("class", `ring ${cls}`);
-    r.setAttribute("aria-hidden", "true");
-    r.style.display = "none";
-    return r;
+// ---- chart ------------------------------------------------------------------------------
+function renderChart(rows) {
+  const value = (r, p) => {
+    const v = r.values[p];
+    if (v === null || !r.total) return null;
+    return state.mode === "percent" ? (100 * v) / r.total : v;
   };
-  const hoverRing = makeRing("ring-hover"), selectedRing = makeRing("ring-selected");
-  function ring(r, path) {
-    if (!mapSvg) return;
-    if (!path) { r.style.display = "none"; return; }
-    r.setAttribute("d", path.getAttribute("d"));
-    r.style.display = "";
-  }
-
-  document.querySelectorAll(".map path[data-geoid]").forEach((path) => {
-    path.setAttribute("tabindex", "0");
-    path.setAttribute("role", "button");
-    path.addEventListener("click", () => choose(path.dataset.geoid));
-    path.addEventListener("pointerenter", (e) => { ring(hoverRing, path); showMapTip(path, e); });
-    path.addEventListener("pointermove", (e) => showMapTip(path, e));
-    path.addEventListener("pointerleave", (e) => {
-      if (e.pointerType !== "touch") { ring(hoverRing, null); hideMapTip(); }
-    });
-    path.addEventListener("focus", () => {
-      if (path.matches(":focus-visible")) { ring(hoverRing, path); showMapTip(path); }
-    });
-    // (only its own tooltip: tapping the next county moves focus after showing that one's)
-    path.addEventListener("blur", () => { if (mapTipFor === path) { ring(hoverRing, null); hideMapTip(); } });
-    path.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(path.dataset.geoid); }
-    });
+  const all = rows.flatMap((r) => PARTIES.map((p) => value(r, p))).filter((v) => v !== null);
+  lineChart($("chart"), {
+    times: rows.map((r) => parseDate(r.date).getTime()),
+    series: PARTIES.map((p) => ({ key: p, label: LABEL[p], color: `var(--${p})`,
+      values: rows.map((r) => value(r, p)) })),
+    yMax: state.mode === "percent" ? Math.max(60, Math.ceil(Math.max(...all) / 10) * 10)
+      : undefined,
+    yFormat: state.mode === "percent" ? (v) => `${v}%` : undefined,
+    summary: chartSummary(rows),
+    tip: (i) => {
+      const r = rows[i], election = state.data.elections[r.i];
+      return `<div class="t-head">${longDate(r.date)}${election
+        ? ` · ${ELECTION[election] || election}` : ""}</div>` + PARTIES.map((p) =>
+        `<div class="t-row"><i class="swatch" style="background:var(--${p})"></i>
+          ${LABEL[p]}<b>${shown(r, p)}</b></div>`).join("")
+        + `<div class="t-row muted">Active voters<b>${r.total ? fmt.format(r.total)
+          : "n/a"}</b></div>`;
+    },
   });
+}
 
-  if (mapSvg) mapSvg.append(hoverRing, selectedRing);
+function chartSummary(rows) {
+  const known = rows.filter((r) => r.total);
+  const a = known[0], b = known[known.length - 1];
+  const where = state.place ? placeName() : "South Dakota";
+  const part = (r) => PARTIES.map((p) => `${LABEL[p]} ${fmt.format(r.values[p] ?? 0)}`)
+    .join(", ");
+  return `Line chart of registered voters by party in ${where}, ${longDate(a.date)} to `
+    + `${longDate(b.date)}. First report: ${part(a)}. Latest: ${part(b)}. `
+    + "The table below lists every report.";
+}
 
-  document.querySelectorAll(".segmented button").forEach((b) => {
-    b.addEventListener("click", () => {
-      state.mode = b.dataset.mode;
-      document.querySelectorAll(".segmented button").forEach((o) =>
-        o.setAttribute("aria-pressed", o === b));
-      render();
-    });
+// ---- table ------------------------------------------------------------------------------
+function renderTable(rows) {
+  $("figures").innerHTML = rows.slice().reverse().filter((r) => r.total).map((r) => {
+    const source = state.data.sources[r.i], copy = state.data.archived[r.i];
+    const election = state.data.elections[r.i];
+    const links = source === copy ? `<a href="${copy}">Report</a>`
+      : `<a href="${source}">Report</a> · <a href="${copy}">copy</a>`;
+    return `<tr><td>${longDate(r.date)}</td><td class="left">${election
+      ? ELECTION[election] || election : ""}</td>${PARTIES.map((p) => `<td>${shown(r, p)}</td>`)
+      .join("")}<td>${fmt.format(r.total)}</td><td class="left">${links}</td></tr>`;
+  }).join("");
+}
+
+// ---- map: each county shaded by its leading party in the chosen report ------------------
+function standing(geoid, i) {
+  const c = state.data.counties[geoid];
+  if (!c) return null;
+  const values = Object.fromEntries(PARTIES.map((p) => [p, c[p][i]]));
+  if (PARTIES.some((p) => values[p] === null)) return null;
+  const total = PARTIES.reduce((a, p) => a + values[p], 0);
+  if (!total) return null;
+  const ranked = [...PARTIES].sort((a, b) => values[b] - values[a]);
+  const lead = (100 * (values[ranked[0]] - values[ranked[1]])) / total;
+  return { values, total, leader: ranked[0], lead };
+}
+
+function fillFor(s) {
+  if (!s) return "var(--county-fill)";
+  const ramp = RAMP[s.leader];
+  if (!ramp) return `var(--${s.leader})`;
+  return `var(--${ramp}-${LEAD_STEPS.filter((t) => s.lead >= t).length + 1})`;
+}
+
+const leadText = (s) => `${LABEL[s.leader]} by ${s.lead.toFixed(1)} points`;
+
+function reportLabel(i) {
+  const date = state.data.dates[i], election = state.data.elections[i];
+  return `${longDate(date)}${election ? ` (${ELECTION[election] || election})` : ""}`;
+}
+
+function renderMap() {
+  const i = state.report;
+  $("map-when").textContent = reportLabel(i);
+  map.paint((geoid) => fillFor(standing(geoid, i)), (geoid, name) => {
+    const s = standing(geoid, i);
+    return `${name} County: ${s ? leadText(s) : "no figures in this report"}`;
   });
+}
 
-  // ---- map: each county shaded by its leading party in the chosen report ---------------
-  const mapTip = document.createElement("div");
-  mapTip.className = "tooltip";
-  mapTip.hidden = true;
-  $("map-chart")?.append(mapTip);
+function mapTip(geoid) {
+  const s = standing(geoid, state.report);
+  const name = state.data.counties[geoid]?.name;
+  return `<div class="t-head">${name} County</div>` + (s
+    ? PARTIES.map((p) => `<div class="t-row"><i class="swatch" style="background:var(--${p})">`
+      + `</i>${LABEL[p]}<b>${pct((100 * s.values[p]) / s.total)}</b></div>`).join("")
+      + `<div class="t-row muted">${LABEL[s.leader]} lead<b>${s.lead.toFixed(1)} pts</b></div>`
+    : '<div class="t-row muted">No figures in this report</div>');
+}
 
-  function standing(geoid, i) {
-    const c = state.data.counties[geoid];
-    if (!c) return null;
-    const values = Object.fromEntries(PARTIES.map((p) => [p, c[p][i]]));
-    if (PARTIES.some((p) => values[p] === null)) return null;
-    const total = PARTIES.reduce((a, p) => a + values[p], 0);
-    if (!total) return null;
-    const ranked = [...PARTIES].sort((a, b) => values[b] - values[a]);
-    const lead = (100 * (values[ranked[0]] - values[ranked[1]])) / total;
-    return { values, total, leader: ranked[0], runnerUp: ranked[1], lead };
-  }
+// ---- choosing ---------------------------------------------------------------------------
+function choose(geoid) {
+  state.place = geoid && state.data.counties[geoid] ? geoid : null;
+  picker.show(state.place);
+  setUrlCounty(state.place);
+  render();
+}
 
-  function fillFor(s) {
-    if (!s) return "var(--county-fill)";
-    const ramp = RAMP[s.leader];
-    if (!ramp) return `var(--${s.leader})`;
-    const step = LEAD_STEPS.filter((t) => s.lead >= t).length + 1;
-    return `var(--${ramp}-${step})`;
-  }
+function render() {
+  const rows = rowsFor(state.place);
+  $("chart-title").innerHTML = `<span>${placeName()}</span><span class="what"><span class="sep">: `
+    + `</span>${state.mode === "percent" ? "share of active voters by party"
+      : "active voters by party"}</span>`;
+  map.select(state.place);
+  renderTiles(rows);
+  renderChart(rows);
+  renderTable(rows);
+}
 
-  const leadText = (s) => `${LABEL[s.leader]} by ${s.lead.toFixed(1)} points`;
-
-  function renderMap() {
-    const i = state.report;
-    const date = state.data.dates[i], election = state.data.elections[i];
-    const when = `${longDate(date)}${election ? ` (${ELECTION[election] || election})` : ""}`;
-    $("map-when").textContent = when;
-    $("report-out").textContent = when;
-    $("report-range").setAttribute("aria-valuetext", when);
-    $("report-latest").hidden = i === state.data.dates.length - 1;
-    document.querySelectorAll(".map path[data-geoid]").forEach((path) => {
-      const s = standing(path.dataset.geoid, i);
-      path.style.fill = fillFor(s);
-      path.setAttribute("aria-label", `${path.dataset.name} County: ${s ? leadText(s)
-        : "no figures in this report"}`);
-    });
-  }
-
-  let mapTipFor = null;  // the county the map's tooltip is showing
-
-  function showMapTip(path, e) {
-    mapTipFor = path;
-    const s = standing(path.dataset.geoid, state.report);
-    mapTip.innerHTML = `<div class="t-head">${path.dataset.name} County</div>` + (s
-      ? PARTIES.map((p) => `<div class="t-row"><i class="swatch" style="background:var(--${p})">`
-        + `</i>${LABEL[p]}<b>${pct((100 * s.values[p]) / s.total)}</b></div>`).join("")
-        + `<div class="t-row muted">${LABEL[s.leader]} lead<b>${s.lead.toFixed(1)} pts</b></div>`
-      : '<div class="t-row muted">No figures in this report</div>');
-    mapTip.hidden = false;
-    const box = $("map-chart").getBoundingClientRect();
-    const r = path.getBoundingClientRect();
-    const x = e && e.clientX ? e.clientX - box.left : r.left + r.width / 2 - box.left;
-    const y = e && e.clientY ? e.clientY - box.top : r.top + r.height / 2 - box.top;
-    const w = mapTip.offsetWidth, h = mapTip.offsetHeight;
-    mapTip.style.left = `${Math.max(0, Math.min(x + 12, box.width - w))}px`;
-    mapTip.style.top = `${y + 16 + h > box.height ? Math.max(0, y - h - 12) : y + 16}px`;
-  }
-  const hideMapTip = () => { mapTip.hidden = true; mapTipFor = null; };
-
-  // A touch screen has no pointer to leave, and a tap on the page doesn't move focus off a
-  // county: a tap anywhere but a county (or the chart) closes their tooltips
-  document.addEventListener("pointerdown", (e) => {
-    if (!e.target.closest(".map path[data-geoid]")) { ring(hoverRing, null); hideMapTip(); }
-    if (!e.target.closest("#chart svg")) hideChartTip();
-  });
-
-  $("report-range").addEventListener("input", (e) => {
-    state.report = Number(e.target.value);
-    renderMap();
-  });
-  $("report-latest").addEventListener("click", () => {
-    state.report = state.data.dates.length - 1;
-    $("report-range").value = state.report;
-    renderMap();
-  });
-
-  function choose(geoid) {
-    state.place = geoid && state.data.counties[geoid] ? geoid : null;
-    input.value = state.place ? state.data.counties[state.place].name : "";
-    closeList();
-    const url = new URL(location.href);
-    if (state.place) url.searchParams.set("county", state.place.slice(-5));
-    else url.searchParams.delete("county");
-    history.replaceState(null, "", url);
-    render();
-  }
-
-  function render() {
-    const rows = rowsFor(state.place);
-    const name = state.place ? `${state.data.counties[state.place].name} County` : "Statewide";
-    $("chart-title").innerHTML = `<span>${name}</span><span class="what"><span class="sep">: `
-      + `</span>${state.mode === "percent" ? "share of active voters by party"
-        : "active voters by party"}</span>`;
-    let chosen = null;
-    document.querySelectorAll(".map path[data-geoid]").forEach((p) => {
-      const selected = p.dataset.geoid === state.place;
-      p.classList.toggle("selected", selected);
-      p.setAttribute("aria-pressed", selected);
-      if (selected) chosen = p;
-    });
-    ring(selectedRing, chosen);
-    renderTiles(rows);
-    renderChart(rows);
-    renderTable(rows);
-  }
-
-  let resizing = null, lastWidth = 0;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizing);
-    resizing = setTimeout(() => {
-      const w = $("chart").clientWidth;
-      if (state.data && Math.abs(w - lastWidth) > 8) { lastWidth = w; renderChart(rowsFor(state.place)); }
-    }, 150);
-  });
-
-  fetch(window.VR_DATA).then((r) => r.json()).then((data) => {
-    state.data = data;
-    state.report = data.dates.length - 1;
-    renderMap();
-    const fips = new URLSearchParams(location.search).get("county");
-    const geoid = fips && `0500000US${fips}`;
-    state.place = geoid && data.counties[geoid] ? geoid : null;
-    if (state.place) input.value = data.counties[state.place].name;
+document.querySelectorAll("#mode button").forEach((b) => {
+  b.addEventListener("click", () => {
+    state.mode = b.dataset.value;
+    document.querySelectorAll("#mode button").forEach((o) =>
+      o.setAttribute("aria-pressed", o === b));
     render();
   });
-})();
+});
+
+fetch(window.PAGE_DATA).then((r) => r.json()).then((data) => {
+  state.data = data;
+  picker = countyPicker({ input: $("county-input"), list: $("county-list"),
+    statewide: $("statewide"), counties: data.counties, onChoose: choose });
+  map = countyMap({ box: $("map-chart"), onChoose: choose, tip: mapTip });
+  const slider = scrubber({ range: $("report-range"), output: $("report-out"),
+    latest: $("report-latest"), label: reportLabel,
+    onChange: (i) => { state.report = i; renderMap(); } });
+  slider.set(data.dates.length - 1);
+  state.place = urlCounty(data.counties);
+  picker.show(state.place);
+  render();
+  onWidthChange($("chart"), () => renderChart(rowsFor(state.place)));
+});

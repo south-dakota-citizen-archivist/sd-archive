@@ -21,6 +21,10 @@
   /* leading party's lead over the runner-up, five steps from faint to strong */
   --rep-1: #fbe0dd; --rep-2: #f4b0aa; --rep-3: #ea7a73; --rep-4: #d4423f; --rep-5: #9e2928;
   --dem-1: #dbe8f8; --dem-2: #a9c9ef; --dem-3: #6fa5e3; --dem-4: #2f79d2; --dem-5: #1d4f96;
+  /* one measure: a single line, and a five-step sequential ramp for maps (teal, apart from
+     the party colors) */
+  --accent: #1f8a78;
+  --seq-1: #dcefeb; --seq-2: #a9d9cf; --seq-3: #6dbdad; --seq-4: #2f9583; --seq-5: #1b6a5d;
   --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     sans-serif;
 }
@@ -45,6 +49,8 @@
     --county-outline: #f0efec;
     --rep-1: #5e2c28; --rep-2: #8a3631; --rep-3: #b8403b; --rep-4: #e04a47; --rep-5: #f6948e;
     --dem-1: #22395a; --dem-2: #275389; --dem-3: #2e6fb8; --dem-4: #3d8ae6; --dem-5: #8bbdf5;
+    --accent: #3fb39a;
+    --seq-1: #1c3631; --seq-2: #1f5249; --seq-3: #23705f; --seq-4: #2e937d; --seq-5: #7cccb9;
   }
 }
 :root[data-theme="dark"] {
@@ -65,9 +71,10 @@
   --county-hover: #30302d;
   --county-selected: #4a4a45;
   --county-outline: #f0efec;
-  --county-outline: #f0efec;
   --rep-1: #5e2c28; --rep-2: #8a3631; --rep-3: #b8403b; --rep-4: #e04a47; --rep-5: #f6948e;
   --dem-1: #22395a; --dem-2: #275389; --dem-3: #2e6fb8; --dem-4: #3d8ae6; --dem-5: #8bbdf5;
+  --accent: #3fb39a;
+  --seq-1: #1c3631; --seq-2: #1f5249; --seq-3: #23705f; --seq-4: #2e937d; --seq-5: #7cccb9;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -175,6 +182,15 @@ h2 { font-size: 20px; margin: 40px 0 12px; }
 }
 .combo li { padding: 6px 8px; border-radius: 4px; cursor: pointer; }
 .combo li[aria-selected="true"], .combo li:hover { background: var(--county-fill); }
+.select {
+  font: inherit; font-size: 14px; max-width: 100%;
+  padding: 7px 28px 7px 10px;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface-1); color: var(--text-primary);
+}
+.so-far { color: var(--text-secondary); margin: -4px 0 16px; min-height: 1.5em; }
+.so-far b { color: var(--text-primary); font-weight: 600; }
+tr.partial td { color: var(--text-secondary); }
 .button, .segmented button {
   font: inherit; font-size: 14px;
   padding: 7px 12px;
