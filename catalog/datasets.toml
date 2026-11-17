@@ -604,6 +604,17 @@ place_link = "county"
 source = "SD Board of Pardons and Paroles"
 
 [[dataset]]
+id = "health-board-actions"
+name = "Health licensing board disciplinary actions"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "disciplinary action"
+entities = ["person"]
+place_link = "city"
+source = "SD Department of Health licensing boards"
+
+[[dataset]]
 id = "health-licenses"
 name = "Health professional licenses (Department of Health licensing boards)"
 project = "sd-archive"
