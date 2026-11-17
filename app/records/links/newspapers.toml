@@ -1,0 +1,3 @@
+# Newspaper statement names matched by hand to a paper in the press directory (records/newspaper_links.py;
+# written by the review pages, can be edited by hand). key: the statement name, normalized; value: the directory
+# record's key; no value: the paper isn't in the directory.

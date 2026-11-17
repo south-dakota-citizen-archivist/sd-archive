@@ -10,8 +10,11 @@
 
 <div class="grid gap-6 mt-4 {% if tables %}xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]{% else %}lg:grid-cols-2{% endif %}">
   <div class="lg:sticky lg:top-4 self-start space-y-3 max-h-[92vh] overflow-auto" id="pages">
-    <p class="text-xs text-gray-500">Click a page to zoom in or out.{% if first.image.box %} The row in question is outlined in red.{% endif %}</p>
-    {% if first.image.url %}
+    {% if first.image.pages %}<p class="text-xs text-gray-500">Click a page to zoom in or out.{% if first.image.box %} The row in question is outlined in red.{% endif %}</p>{% endif %}
+    {% if first.image.embed %}
+    <a class="text-xs link" href="{{ first.image.embed }}" target="_blank" rel="noopener">Open it on its own</a>
+    <iframe src="{{ first.image.embed }}" title="{{ first.title }}" class="w-full h-[85vh] border border-gray-200 rounded bg-white"></iframe>
+    {% elif first.image.url %}
     <a href="{{ first.image.url }}" target="_blank" rel="noopener" title="Open the image full size"><img src="{{ first.image.url }}" alt="{{ first.title }}" class="w-full border border-gray-200 rounded bg-white"></a>
     {% else %}
     {% for page in first.image.pages %}
@@ -42,7 +45,7 @@
       {% if p.decision %}
       <p class="text-xs mt-2 rounded bg-green-50 border border-green-200 p-2">Decided: <b>{{ p.decided|default:"left empty" }}</b> ({{ p.decision.from }}) · {{ p.decision.reason }} · {{ p.decision.checked }}</p>
       {% endif %}
-      <textarea name="value" rows="2" class="mt-2 w-full border border-gray-300 rounded p-2 text-sm" placeholder="What the page says">{{ p.decided }}</textarea>
+      <textarea name="value" rows="2" class="mt-2 w-full border border-gray-300 rounded p-2 text-sm" placeholder="{{ p.item.context.placeholder|default:'What the page says' }}">{{ p.decided }}</textarea>
       <input name="reason" required class="mt-1 w-full border border-gray-300 rounded p-1.5 text-sm" placeholder="Reason: what settles it (required)" value="{{ p.decision.reason|default:'' }}">
       <div class="mt-2 flex gap-2">
         <button class="btn btn-primary">Save</button>

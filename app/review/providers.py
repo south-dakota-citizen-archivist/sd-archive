@@ -15,7 +15,7 @@ from django.conf import settings
 from sddocs import review
 
 REPO = Path(settings.BASE_DIR).parent
-RECORD_PROVIDERS = ["records.sources.legislature_blue_book_bios.review"]
+RECORD_PROVIDERS = ["records.sources.legislature_blue_book_bios.review", "records.newspaper_links"]
 
 
 class Provider:

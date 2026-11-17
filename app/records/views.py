@@ -13,6 +13,7 @@ from django.db.models.fields.json import KeyTextTransform
 from django.db.models.functions import Cast, Length
 from django.http import FileResponse, Http404, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import get_object_or_404, render
+from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 from places.models import Jurisdiction
 from records.models import Document, Record, RecordSet, Run
@@ -298,6 +299,7 @@ def record_detail(request: HttpRequest, slug: str, pk: int) -> HttpResponse:
     )
 
 
+@xframe_options_sameorigin  # the review pages show it beside a decision
 def document_file(request: HttpRequest, pk: int) -> FileResponse:
     """A stored document's file, shown in the browser."""
     from records.documents import file_path
