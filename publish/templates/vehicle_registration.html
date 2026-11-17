@@ -4,8 +4,7 @@
 {% block main %}
 {% import "_parts.html" as parts %}
 <h1>South Dakota vehicle registrations</h1>
-<p class="dek">Vehicles registered each year by type, statewide and in each county, from
-{{ first_year }} to {{ last_year }}{% if partial %}, with {{ partial.year }} so far{% endif %}.</p>
+<p class="dek">Vehicles registered each year by type{% endif %}.</p>
 
 {{ parts.tiles() }}
 <p class="small so-far" id="so-far" aria-live="polite"></p>
