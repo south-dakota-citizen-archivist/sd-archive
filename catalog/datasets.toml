@@ -399,6 +399,18 @@ place_link = "city"
 source = "SD Secretary of State"
 
 [[dataset]]
+id = "newspapers"
+name = "Newspapers: the press association's member directory"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "newspaper"
+entities = ["organization", "person"]
+place_link = "city"
+source = "South Dakota NewsMedia Association"
+notes = "Each paper's city and county, website, whether it's a legal newspaper (qualified to print public notices), contact details and publisher. Pairs with the SOS ownership and circulation statements (newspaper-circulation)."
+
+[[dataset]]
 id = "gis-data"
 name = "GIS data: map features with their shapes and details"
 project = "sd-archive/app (gis)"
