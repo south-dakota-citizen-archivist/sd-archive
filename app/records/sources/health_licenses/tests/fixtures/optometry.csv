@@ -1,0 +1,4 @@
+LastName,FirstName,LicenseNumber,Issued,Expiration,Status,Discipline,Type,Address,CityStateZip,Phone,AdvancedProcedures,TotalPageCount
+"Ackerman","Ryan","633","4/1/2007 12:00:00 AM","9/30/2027 12:00:00 AM","Active","None","TPA","502 1st Ave","Rock Rapids, IA, 51246","712-631-5237","","1"
+"Albers-Kleinsasser","Katelin","734","2/20/2017 12:00:00 AM","9/30/2027 12:00:00 AM","Active","None","TPA","PO Box 948","Huron  , SD, 57350","605-352-4181","","1"
+"Anderson","Eva","738","6/14/2017 12:00:00 AM","9/30/2027 12:00:00 AM","Active","None","TPA","5012 South Bur Oak Pl","Sioux Falls, SD, 57108","605-361-1680","","1"

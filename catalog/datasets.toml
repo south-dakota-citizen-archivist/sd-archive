@@ -604,6 +604,17 @@ place_link = "county"
 source = "SD Board of Pardons and Paroles"
 
 [[dataset]]
+id = "health-licenses"
+name = "Health professional licenses (Department of Health licensing boards)"
+project = "sd-archive"
+grain = "records"
+coverage = ["0400000US46"]
+unit = "license"
+entities = ["person", "organization"]
+place_link = "city"
+source = "SD Department of Health licensing boards"
+
+[[dataset]]
 id = "property-sales"
 name = "Property sales reported for the sales ratio study"
 project = "sd-archive"
