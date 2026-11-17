@@ -100,7 +100,34 @@ def test_a_scan_read_by_two_engines(monkeypatch):
     # every field the engines read differently is kept apart, with both readings
     for c in cases:
         for name in c["unconfirmed"]:
-            assert c["fields"][name] is None and set(c["readings"][name]) == set(scanned.ENGINES)
+            if name.startswith("hearing "):  # "hearing 2 review": that part left empty
+                _, n, part = name.split()
+                i, j = int(n) - 1, ("type", "decision", "review").index(part)
+                assert c["fields"]["hearings"][i][j] is None
+                name = "hearings"
+            else:
+                assert c["fields"][name] is None
+            assert set(c["readings"][name]) == set(scanned.ENGINES)
+
+
+def test_review_dates_and_hearings_voted_part_by_part():
+    assert scanned._review("O1-MAY-25") == "01-MAY-25"
+    assert scanned._review("01-MAX-25") == "01-MAY-25"
+    assert scanned._review("01-MAY -25") == "01-MAY-25"
+    assert scanned._review("Wa OF:I") == "Wa OF:I"  # not a date: kept as read
+    first = ("Early Discharge Hearing", "Continue", "01-MAY-24")
+    second = ("Early Discharge Hearing", "Grant Partial Early Discharge", "")
+    # two hearings, the third engine's second decision garbled: both kept, one part empty
+    hearings, unsettled = scanned._hearings({
+        "rapidocr": (first, second),
+        "textra": (first, ("Early Discharge Hearing", "Early Discharge", "")),
+        "tesseract_words": (("Early Discharge Hearing", "Continue", ""), second)})  # fmt: skip
+    assert hearings == (first, ("Early Discharge Hearing", "Grant Partial Early Discharge",
+                                None))  # fmt: skip
+    assert unsettled == []  # no engine read a second review date: printed blank
+    assert scanned._hearings({"rapidocr": (first,), "textra": (first, second),
+                              "tesseract_words": (first, second, second)}) == (
+        None, ["hearings"])  # one, two and three hearings: no count agreed  # fmt: skip
 
 
 def test_county_codes_from_people_in_both_layouts(tmp_path, monkeypatch):

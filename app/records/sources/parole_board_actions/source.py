@@ -220,6 +220,9 @@ def items(fetcher) -> Found:
                     checks["scanned reports not read yet (OCR to finish)"].append(name)
                     continue
                 cases, info = got
+                if info["noise"]:
+                    checks["scan readings set aside (one engine, no name or hearing)"].append(
+                        {"report": name, "pages": [x["page"] for x in info["noise"]]})  # fmt: skip
                 parsed.append((meta, "scanned", cases, offender.summary(info["summary"])))
             else:
                 checks["reports in a layout not read"].append(name)
