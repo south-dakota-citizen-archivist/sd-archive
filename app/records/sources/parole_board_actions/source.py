@@ -16,12 +16,15 @@ by its layout:
   where two read it alike. Nine 2015 reports are scans of the older layout, not read yet.
 
 Each report's last page counts its decisions ("Totals Per Hearing Outcome"); the run checks
-the hearings read against it, report by report. The older reports' county codes are read as
+the hearings read against it, report by report. A report the meetings page stops linking is still
+read, from the copy kept (reports-seen.json lists every report the page has listed, with
+its meeting). The older reports' county codes are read as
 counties by county_codes.py. Records are keyed by report, page, row and hearing.
 """
 
 from __future__ import annotations
 
+import json
 import re
 from collections import Counter, defaultdict
 from datetime import date, datetime
@@ -45,6 +48,7 @@ KNOWN = [
     ("January 2025 SS Public All Action Report", SITE + "bcuploads/January%202025%20SS%20Public"
                                                         "%20All%20Action%20Report.pdf"),
 ]  # fmt: skip
+SEEN = "reports-seen.json"  # every report the meetings page has listed: url → title, meeting
 
 
 def meetings(fetcher, today: date | None = None) -> list[listing.Meeting]:
@@ -162,10 +166,24 @@ def items(fetcher) -> Found:
 
     reports = [(m, d) for m in meetings(fetcher) for d in m.documents if listing.is_report(d)]
     listed = {d.url for _, d in reports}
-    unlisted = listing.Meeting(None, "", "", "", "")  # reports no meeting links any more
-    reports += [(unlisted, listing.Document(title, url, "", "")) for title, url in KNOWN
-                if url not in listed]  # fmt: skip
     found, checks = [], defaultdict(list)
+    # every report ever listed, with its meeting: one the page stops linking is still read
+    # (from the copy kept), so a link taken down doesn't take its hearings with it
+    seen = json.loads(fetcher.store.read(SEEN)) if fetcher.store.has(SEEN) else {}
+    for meeting, doc in reports:
+        seen[doc.url] = {"title": doc.title, "meeting_date":
+                         meeting.date.isoformat() if meeting.date else None}  # fmt: skip
+    for title, url in KNOWN:
+        seen.setdefault(url, {"title": title, "meeting_date": None})
+    for url, info in seen.items():
+        if url in listed:
+            continue
+        when = date.fromisoformat(info["meeting_date"]) if info["meeting_date"] else None
+        reports.append((listing.Meeting(when, "", "", "", ""),
+                        listing.Document(info["title"], url, "", "")))  # fmt: skip
+        checks["reports the meetings page no longer links (read from the copy kept)"].append(
+            report_name(url))  # fmt: skip
+    fetcher.store.save(SEEN, json.dumps(seen, indent=1, sort_keys=True).encode())
     older_codes, newer_counties = defaultdict(set), defaultdict(set)
     parsed = []  # (meta, kind, payload)
     for meeting, doc in reports:

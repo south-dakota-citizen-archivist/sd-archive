@@ -42,10 +42,18 @@ def first_page_text(pdf: Path) -> str | None:
 
 
 def summary_text(pdf: Path, key: str, n: int) -> str:
+    """The summary page as the engine that reads it whole: its outcomes add up to its "Total
+    Inmates" (rapidocr can skip a line, "N/A 10"); failing that, the reading with the most
+    outcomes read."""
     from sddocs import ocr as engines
 
-    found = ocr.pieces(pdf, n - 1, ENGINES[0], key, cached=True) or []
-    return engines.as_text(found)
+    readings = []
+    for engine in ENGINES:
+        text = engines.as_text(ocr.pieces(pdf, n - 1, engine, key, cached=True) or [])
+        s = offender.summary(text)
+        whole = s["total_inmates"] is not None and sum(s["outcomes"].values()) == s["total_inmates"]
+        readings.append((whole, sum(s["outcomes"].values()), text))
+    return max(readings, key=lambda r: (r[0], r[1]))[2] if readings else ""
 
 
 def _decision(text: str) -> str:
