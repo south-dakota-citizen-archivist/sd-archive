@@ -39,6 +39,12 @@ SITE = "https://boardsandcommissions.sd.gov/"
 MEETINGS = SITE + "Meetings.aspx?BoardID=74"
 STATE = "0400000US46"
 FIRST_YEAR = 2015
+# reports still on the site that the meetings page no longer links (from an earlier list of
+# the board's reports); fetched too, so none is lost
+KNOWN = [
+    ("January 2025 SS Public All Action Report", SITE + "bcuploads/January%202025%20SS%20Public"
+                                                        "%20All%20Action%20Report.pdf"),
+]  # fmt: skip
 
 
 def meetings(fetcher, today: date | None = None) -> list[listing.Meeting]:
@@ -155,6 +161,10 @@ def items(fetcher) -> Found:
     import pdfplumber
 
     reports = [(m, d) for m in meetings(fetcher) for d in m.documents if listing.is_report(d)]
+    listed = {d.url for _, d in reports}
+    unlisted = listing.Meeting(None, "", "", "", "")  # reports no meeting links any more
+    reports += [(unlisted, listing.Document(title, url, "", "")) for title, url in KNOWN
+                if url not in listed]  # fmt: skip
     found, checks = [], defaultdict(list)
     older_codes, newer_counties = defaultdict(set), defaultdict(set)
     parsed = []  # (meta, kind, payload)
